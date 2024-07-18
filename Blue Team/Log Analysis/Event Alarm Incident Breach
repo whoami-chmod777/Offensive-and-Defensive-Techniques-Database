@@ -1,0 +1,11 @@
+EVENT
+This is an observed change in normal device / system / process / user behavior. Basically all logs are events.
+
+ALERT
+It is a special, urgent notification about the occurrence of a specific event (or series of events) that is sent to responsible parties to initiate an action. An alert is something that a device (SIEM, firewall, DLP) has to notify you about based on the security rules you have programmed. An alert may be related to several events.
+
+INCIDENT
+This is an event that negatively affects the company’s business activity. Most often, an incident starts with an alert triggered by an analyst or system that qualifies it as an incident. It is possible to raise the rank without raising an alert based on the administrator’s decision. An incident may consist of several events.
+
+BREACH
+This is when an unauthorized actor gains access to data, applications, network, or devices which results in information being stolen or leaked.
