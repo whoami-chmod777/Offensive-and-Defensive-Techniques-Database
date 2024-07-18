@@ -1,0 +1,25 @@
+
+Incident classification involves categorizing incidents based on their nature, impact, and severity. This classification helps in understanding the type of incident and its potential implications. Common categories used for incident classification include
+
+1. Security Incident Types:
+
+• Malware infections
+• Unauthorized access or breaches
+• Denial of service (DoS) attacks
+• Data breaches or leaks
+• Social engineering attacks
+
+
+2. Incident Impact:
+
+• High impact: Incidents with severe consequences, such as widespread service disruptions, data loss, or financial damage.
+• Medium impact: Incidents that have a moderate impact on operations, data integrity, or service availability.
+• Low impact: Incidents with minimal impact on operations, usually limited to individual systems or minor service disruptions.
+
+
+3. Incident Severity:
+
+• Critical: Incidents that pose a significant risk to the organization's security posture, infrastructure, or critical assets.
+• High: Incidents that have the potential to cause considerable harm or disruption.
+• Medium: Incidents with a moderate level of risk and potential impact.
+• Low: Incidents with minimal risk or impact on the organization's operations.
