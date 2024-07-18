@@ -1,0 +1,33 @@
+
+After incident classification, prioritization is done to determine the order in which incidents should be addressed.
+
+Prioritization is based on the potential impact, urgency, and criticality of the incident. Factors considered during incident prioritization may include:
+
+1. Impact Assessment:
+
+• Assess the potential business impact, including financial, operational, reputational, and legal implications.
+• Consider the scope and scale of the incident, such as the number of affected systems, users, or data.
+
+
+2. Urgency:
+
+• Evaluate the urgency to resolve the incident based on time sensitive factors.
+• Consider regulatory or compliance requirements that specify response timeframes.
+
+
+3. Criticality:
+
+• Determine the criticality of the affected systems, assets, or services.
+• Assess the potential for further compromise or escalation if the incident is left unresolved.
+
+
+4. Risk Assessment:
+
+• Evaluate the level of risk associated with the incident, including potential vulnerabilities or weaknesses in the organization's security posture.
+• Consider the likelihood of recurring incidents or similar threats.
+
+
+5. Business and Operational Priorities:
+
+• Consider the organization's business priorities, customer impact, and service level agreements (SLAs).
+• Assess the availability of resources, expertise, or dependencies for incident resolution.
