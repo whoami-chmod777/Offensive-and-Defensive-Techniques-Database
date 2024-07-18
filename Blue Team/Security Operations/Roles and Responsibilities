@@ -1,0 +1,142 @@
+
+-- Roles and Responsibilities --
+
+
+Security Analyst:
+
+1. Monitor and analyze security events and incidents.
+2. Conduct vulnerability assessments and penetration testing.
+3. Develop and implement security policies and procedures.
+4. Respond to and investigate security breaches or incidents.
+5. Stay updated with emerging threats and security trends.
+
+
+Security Engineer:
+
+1. Design, implement, and maintain security systems and controls.
+2. Configure and manage firewalls, intrusion detection/prevention systems, and other security infrastructure.
+3. Conduct risk assessments and develop mitigation strategies.
+4. Collaborate with cross-functional teams to ensure security best practices are followed.
+5. Provide technical guidance and support for security-related projects.
+
+
+Security Architect:
+
+1. Design and plan the overall security architecture of an organization.
+2. Develop security frameworks, standards, and guidelines.
+3. Evaluate and recommend security technologies and solutions.
+4. Conduct security assessments and audits.
+5. Collaborate with stakeholders to align security requirements with business goals.
+
+
+Incident Responder:
+
+1. Respond to and investigate security incidents, breaches, and threats.
+2. Perform analysis of malware, compromised systems, and network traffic.
+3. Develop incident response plans and playbooks.
+4. Coordinate with internal teams and external stakeholders during incident response.
+5. Conduct post-incident analysis and implement preventive measures..
+
+
+Threat Intel Analyst:
+
+1. Collect and analyze threat intelligence from various sources.
+2. Identify emerging threats, vulnerabilities, and attack techniques.
+3. Develop and maintain threat profiles and indicators of compromise.
+4. Collaborate with other security teams to enhance threat detection and response capabilities.
+5. Provide actionable intelligence to support decision-making and incident response.
+
+
+Security Consultant:
+
+1. Assess and evaluate the security posture of organizations.
+2. Conduct security audits and risk assessments.
+3. Develop security strategies and roadmaps.
+4. Provide guidance and recommendations for security improvements.
+5. Deliver security awareness training and workshops.
+
+
+Cryptographer
+
+1. Design and develop cryptographic algorithms and protocols.
+2. Assess the security of cryptographic systems.
+3. Conduct research on encryption, key management, and data protection.
+4. Provide cryptographic solutions for secure communication and data storage.
+5. Stay updated with advancements in cryptography and cryptographic standards.
+
+
+Security Manager
+
+1. Oversee and manage the overall security program of an organization.
+2. Develop and implement security policies, procedures, and guidelines.
+3. Ensure compliance
+
+
+Malware Analyst:
+
+1. Analyze and reverse-engineer malware samples to understand their inner workings.
+2. Identify the functionality, capabilities, and infection vectors of malware.
+3. Determine the methods used by malware to exploit vulnerabilities or compromise systems.
+4. Extract indicators of compromise (IOCs) and signatures for detection and prevention.
+
+
+Forensics Analyst:
+
+1. Identify and collect digital evidence from various sources, such as computers, mobile devices, network logs, and cloud storage.
+2. Follow proper evidence handling procedures to ensure the preservation and integrity of the collected data.
+3. Recover and reconstruct deleted, damaged, or encrypted data from digital devices.
+4. Conduct thorough analysis of acquired data to identify relevant artifacts, files, and activities.
+5. Assist in cybersecurity incident response activities, providing expertise in digital evidence collection and analysis.
+6. Identify and analyze indicators of compromise (IOCs) to determine the extent and impact of a security incident.
+7. Prepare detailed forensic reports and documentation to support legal investigations and court proceedings.
+8. Stay updated with the latest forensic tools, techniques, and industry best practices.
+
+
+GRC Analyst
+
+1. Develop and implement governance frameworks and processes.
+2. Establish policies, procedures, and guidelines to ensure adherence to regulatory requirements.
+3. Collaborate with stakeholders to define and enforce corporate governance objectives.
+4. Monitor and assess the effectiveness of governance practices and recommend improvements.
+5. Facilitate communication and coordination between different departments and stakeholders.
+6. Identify, assess, and prioritize risks associated with business operations and information systems.
+7. Conduct risk assessments and gap analysis to identify vulnerabilities and potential impacts.
+8. Develop risk mitigation strategies and controls to minimize or eliminate identified risks.
+9. Monitor and report on risk exposure, trends, and compliance with risk management frameworks.
+10. Ensure the integration of risk management into decision-making processes.
+11. Interpret and analyze regulatory requirements, industry standards, and legal obligations.
+12. Develop and maintain compliance programs and controls to meet applicable regulations.
+13. Conduct compliance assessments and audits to evaluate adherence to requirements.
+14. Monitor and report on compliance status, issues, and corrective actions.
+15. Coordinate with internal and external stakeholders to ensure compliance with contractual obligations.
+
+
+VA Analyst:
+
+1. Conduct regular vulnerability assessments using automated scanning tools and manual techniques.
+2. Identify and classify vulnerabilities based on severity, impact, and exploitability.
+3. Analyze scan results, prioritize vulnerabilities, and provide recommendations for remediation.
+4. Collaborate with system administrators and IT teams to schedule and perform assessments.
+5. Establish and maintain a vulnerability management program within the organization.
+6. Develop and implement vulnerability management processes and procedures.
+7. Monitor industry sources for new vulnerabilities and security advisories.
+8. Coordinate with stakeholders to ensure timely patching and remediation of identified vulnerabilities.
+9. Collaborate with system administrators and IT teams to develop and implement patch management processes.
+10. Assess the criticality of software patches and prioritize their deployment based on risk levels.
+11. Coordinate with vendors and stakeholders to ensure timely acquisition and application of patches.
+12. Monitor and validate patching activities to ensure compliance with established procedures.
+
+
+PT Analyst
+
+1. Collaborate with stakeholders to define the scope and objectives of penetration testing engagements.
+2. Conduct reconnaissance and gather information about the target systems, networks, and applications.
+3. Identify potential vulnerabilities and attack vectors based on the assessment of the target environment.
+4. Conduct authorized simulated attacks to assess the security controls and defenses of the target environment.
+5. Perform penetration testing activities according to established methodologies and best practices.
+6. Document and maintain a detailed record of the testing process, including findings, techniques, and tools used.
+7. Employ both manual and automated techniques to discover, exploit, and validate vulnerabilities.
+8. Ensure compliance with relevant regulatory requirements and industry standards during penetration testing engagements.
+9. Follow ethical guidelines and legal frameworks governing penetration testing activities.
+10. Stay informed about changes in regulations and standards to ensure adherence during engagements.
+
