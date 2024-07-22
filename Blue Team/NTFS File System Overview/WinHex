@@ -1,0 +1,22 @@
+
+WinHex is in its core a universal hexadecimal editor, particularly helpful in the realm of computer forensics, data recovery, low-level data processing, and IT security.
+
+WinHex enables users to edit binary data directly. This is very useful for examining and modifying binary files, such as executables, DLLs, and disk images.
+WinHex provides tools for analyzing file structures, including support for various file formats. Users can inspect headers, footers, and internal structures of files to understand their organization and content.
+
+
+File Header: Metadata at the beginning of a file essential for identification and interpretation.
+$STANDARD_INFORMATION: Stores metadata about a file, including creation, modification, and access times.
+$SI_BIRTH(B): Timestamp indicating the creation time of the file.
+$SI_CHANGE(C): Timestamp indicating the time of the last change to the file.
+$SI_MODIFICATION(M): Timestamp indicating the last modification time of the file.
+$SI_ACCESS(A): Timestamp indicating the last time the file was accessed.
+FILE_NAME HEADER: Section containing the name and size information of the file.
+FILE_SIZE ALLOCATED: Total size allocated on disk for the file.
+FILE_SIZE REAL: Actual size of the file's content.
+FILE_NAME: Name of the file.
+CONTENT: The actual data stored within the file
+
+
+
+https://www.x-ways.net/winhex/
