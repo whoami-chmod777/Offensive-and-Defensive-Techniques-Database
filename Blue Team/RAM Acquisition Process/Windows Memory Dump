@@ -1,1 +1,14 @@
 
+-- Memory Dump of Live Windows Devices --
+
+If the device to be imaged is powered on it is key that a memory dump is taken before it is powered down. If at all possible, this memory dump should be carried out before any other actions are performed on the machine. This is vital to ensure that as much data in memory as possible is captured for later analysis.
+
+
+- WinPmem -
+
+winpmem-2.1.post4.exe -p c:\pagefile.sys -o output-file.aff4
+
+This will extract the device’s memory and pagefile.sys data and store this to the file output-file.aff4.
+
+
+
