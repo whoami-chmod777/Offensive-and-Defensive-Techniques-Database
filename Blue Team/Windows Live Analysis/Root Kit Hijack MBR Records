@@ -1,0 +1,20 @@
+
+-- How modern Root Kit Hijack MBR Recordss --
+
+• Access to the MBR
+• Backup the Original MBR
+• Modify the MBR
+• Load the Rootkit
+• Stealth Techniques
+• Persistence
+• Bypassing Security Software
+
+
+-- To protect against MBR rootkit attacks --
+
+1. Keep the operating system and security software up-to-date to patch known vulnerabilities.
+2. Use strong, unique passwords to prevent unauthorized access to the system.
+3. Employ full-disk encryption to protect the MBR from modification by unauthorized parties.
+4. Regularly scan for malware and rootkits using reputable security software.
+5. Be cautious when downloading and executing software from untrusted sources, as this is a common way rootkits gain access to a system.
+6. Periodically check the integrity of the MBR to ensure it hasn't been tampered with. Some tools can help with this task.
