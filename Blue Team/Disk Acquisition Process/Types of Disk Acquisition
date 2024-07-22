@@ -1,0 +1,30 @@
+
+-- Bit by Bit Imaging --
+
+• Involves creating an exact copy or replica of the entire disk, including all sectors, regardless of whether they are allocated or empty.
+• Includes deleted files, file system metadata, and unallocated space.
+• Ensures a complete and accurate representation of the original disk, making it a robust method for forensic investigations.
+• Tools Used dd (data duplicator), FTK Imager
+
+
+-- Partition Imaging --
+
+• Only specific partitions or logical volumes are imaged.
+• Useful when the Investigation is only needed in specific partitions.
+• Faster
+
+
+-- File Level Imaging--
+
+• Specific File or directories from the Disk
+• May involve creating logical copies of files, metadata and attributes but may not needed to capture unallocated space or deleted files
+
+
+-- Live System Imaging --
+
+• Live System Analysis
+
+
+-- Network Based Acquisition --
+
+• Remote Acquisition Process
