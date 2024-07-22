@@ -1,0 +1,23 @@
+
+-- Windows native APIs or EXEs which can be used by Malicious Purpose --
+
+• Powershell
+• WMI
+• Regsvr32
+• Schtasks
+• WMIC
+• BITSAdmin
+• Task Scheduler
+• WinRM
+• Netsh
+• Diskpart
+• DISM
+• CertUtil
+• Rundll32
+• CScriptand WScript(Windows Script Host)
+• Event Viewer (Eventvwr)
+• Services.msc
+• Windows Script Host
+• At.exe
+• Windows Management Tools
+• RDP
