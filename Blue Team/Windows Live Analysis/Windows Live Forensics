@@ -1,0 +1,274 @@
+
+-- Unusual Network Usage --
+
+• Look at file shares and make sure each has a defined business purpose. (net view)
+• Look at who has an open session with the machine. (net session)
+• Look at which sessions this machine has opened with other system. (net use)
+• Look at NetBIOS over TCP/IP activity. (netstat -s)
+• Look for unusual listening TCP and UDP Ports. (netstat -naob)
+• Also built-in Windows firewall settings can be inspected
+
+
+-- Unusual Processes --
+
+• tasklist
+• wmic process list full
+• wmic process get name, parentprocessid, processid (To get parent process ID Information)
+• tasklist /m /fi “pid eq [pid]” (To get commandline option and DLLs)
+• wmic process where processid=[pid] get commandline
+
+
+-- Unusual Services --
+
+• To look at unusual services and settings for those services, run the services control panel: services.msc
+• At the command line, a list of services is availabe via: net start
+• Alternatively, we can use sc as well: sc query | more
+• For a mapping of which services are running out of which processes: tasklist /svc
+
+
+-- Unusual Reg Key Entries --
+
+• A system admin can look for strange settings in the registry hive associated with starting programs at system boot or when a user logs in:
+  - HKLM\Software\Microsoft\Windows\CurrentVersion\Run
+  - HKLM\Software\Microsoft\Windows\CurrentVersion\Runonce
+  - HKLM\Software\Microsoft\Windows\CurrentVersion\RunonceEx
+
+• These items should be inspected under both HKLM and HKCU
+• They can be analysed with regedit GUI
+
+• Reg command can be used to query the values of these settings
+  - reg query hklm\software\microsoft\windows\currentversion\run
+
+
+-- Extra Startup Items --
+
+• It’s helpful to check user’s autostart folders
+  - dir /s /b "C:\Documents and Settings\[user_name]\Start Menu"
+  - dir /s /b "C:\Users\[user_name\Start Menu\"
+
+• An admin can also run msconfig to see what is scheduled to run at startup
+  - msconfig.exe
+
+• WMIC can also be used to show some autostart programs
+  - wmic startup list full
+
+
+-- Ususual Accounts --
+
+• Look for new, unexpected accounts in the Administrator group: lusrmgr.msc
+• At commadline, a list of user is available via: net user
+• A list of members of the Admin group can be see with: net localgroup administrators
+
+
+-- Unusual Files --
+
+• Check file space usage for sudden major decrease in space.
+• Look for files larger than 10MB: FOR /R C:\ %i in (*) do @if %~zi gtr 10000000 echo % i %~zi
+
+C:\Users\mirko> FOR /R C:\ %i in (*) do @if %~zi gtr 10000000 echo % i %~zi
+% i 133300408
+% i 336106256
+% i 41055033
+% i 18516094
+% i 16041327
+% i 43666022
+% i 37768104
+% i 16483096
+% i 31204548
+% i 11127447
+% i 23096609
+% i 12723725
+% i 18309365
+% i 174031898
+% i 536870912
+% i 13469406
+% i 51036631
+% i 75560216
+% i 11384512
+
+
+-- Unusual Scheduled Tasks --
+
+• Check the scheduled tasks using the Task Scheduler GUI: Start --> Programs --> Accessories --> System Tools --> Scheduled Tasks
+• Look at scheduled tasks on local host by running: schtasks
+
+C:\Users\mirko>schtasks
+
+Folder: \
+TaskName                                 Next Run Time          Status
+======================================== ====================== ===============
+Adobe Acrobat Update Task                23.06.2024 07:00:00    Ready
+Avira_Security_Systray                   N/A                    Running
+Dell SupportAssistAgent AutoUpdate       28.06.2024 12:50:34    Ready
+iGoAudioTaskSession                      N/A                    Running
+NvDriverUpdateCheckDaily_{B2FE1952-0186- 23.06.2024 12:25:21    Ready
+NVIDIA GeForce Experience SelfUpdate_{B2 N/A                    Ready
+NvNodeLauncher_{B2FE1952-0186-46C3-BAEC- N/A                    Ready
+NvProfileUpdaterDaily_{B2FE1952-0186-46C 23.06.2024 12:25:13    Ready
+NvProfileUpdaterOnLogon_{B2FE1952-0186-4 N/A                    Ready
+NvTmRep_CrashReport1_{B2FE1952-0186-46C3 23.06.2024 12:25:21    Ready
+NvTmRep_CrashReport2_{B2FE1952-0186-46C3 22.06.2024 18:25:21    Ready
+NvTmRep_CrashReport3_{B2FE1952-0186-46C3 23.06.2024 00:25:21    Ready
+NvTmRep_CrashReport4_{B2FE1952-0186-46C3 23.06.2024 06:25:21    Ready
+Optimize Push Notification Data File-S-1 N/A                    Disabled
+
+Folder: \Avira
+TaskName                                 Next Run Time          Status
+======================================== ====================== ===============
+INFO: There are no scheduled tasks presently available at your access level.
+
+
+# Windows Live Forensics
+
+### Unusual Network Usage
+
+• Look at file shares and make sure each has a defined business purpose net view
+• Look at who has an open session with the machine. (net session)
+• Look at which sessions this machine has opened with other system. (net use)
+• Look at NetBIOS over TCP/IP activity. (netstat -s)
+• Look for unusual listening TCP and UDP Ports. (netstat -naob)
+• Also built-in Windows firewall settings can be inspected.
+
+### Unusual Processes
+
+• tasklist
+• wmic process list full
+• wmic process get name, parentprocessid, processid (To get parent process ID Information)
+• tasklist /m /fi “pid eq [pid]” (To get commandline option and DLLs)
+• wmic process where processid=[pid] get commandline
+
+### Unusual Services
+
+• To look at unusual services and settings for those services, run the services control panel: services.msc
+• At the command line, a list of services is availabe via: net start
+• Alternatively, we can use sc as well: sc query | more
+• For a mapping of which services are running out of which processes: tasklist /svc
+
+### Unusual Reg Key Entries
+
+• A system admin can look for strange settings in the registry hive associated with starting programs at system boot or when a user logs in:
+
+- HKLM\Software\Microsoft\Windows\CurrentVersion\Run
+- HKLM\Software\Microsoft\Windows\CurrentVersion\Runonce
+- HKLM\Software\Microsoft\Windows\CurrentVersion\RunonceEx
+
+• These items should be inspected under both HKLM and HKCU
+• They can be analysed with regedit GUI
+
+• Reg command can be used to query the values of these settings
+
+- reg query hklm\software\microsoft\windows\currentversion\run
+
+### Extra Startup Items
+
+• It’s helpful to check user’s autostart folders
+ - dir /s /b “C:\Documents and Settings\[user_name]\Start Menu”
+ - dir /s /b “C:\Users\[user_name\Start Menu\”
+
+• An admin can also run msconfig to see what is scheduled to run at startup
+-  msconfig.exe
+
+• WMIC can also be used to show some autostart programs
+- wmic startup list full
+
+### Ususual Accounts
+
+• Look for new, unexpected accounts in the Administrator group
+- lusrmgr.msc
+• At commadline, a list of user is available via: net user
+• A list of members of the Admin group can be see with: net localgroup administrators
+
+### Unusual Files
+
+• Check file space usage for sudden major decrease in space.
+• Look for files larger than 10MB
+- FOR /R C:\ %i in (*) do @if %~zi gtr 10000000 echo % i %~zi
+
+```jsx
+C:\Users\mirko> FOR /R C:\ %i in (*) do @if %~zi gtr 10000000 echo % i %~zi
+% i 133300408
+% i 336106256
+% i 41055033
+% i 18516094
+% i 16041327
+% i 43666022
+% i 37768104
+% i 16483096
+% i 31204548
+% i 11127447
+% i 23096609
+% i 12723725
+% i 18309365
+% i 174031898
+% i 536870912
+% i 13469406
+% i 51036631
+% i 75560216
+% i 11384512
+```
+
+### Unusual Scheduled Tasks
+
+• Check the scheduled tasks using the Task Scheduler GUI: Start --> Programs --> Accessories --> System Tools --> Scheduled Tasks
+• Look at scheduled tasks on local host by running: schtasks
+
+C:\Users\mirko>schtasks
+
+Folder: \
+TaskName                                 Next Run Time          Status
+======================================== ====================== ===============
+Adobe Acrobat Update Task                23.06.2024 07:00:00    Ready
+Avira_Security_Systray                   N/A                    Running
+Dell SupportAssistAgent AutoUpdate       28.06.2024 12:50:34    Ready
+iGoAudioTaskSession                      N/A                    Running
+NvDriverUpdateCheckDaily_{B2FE1952-0186- 23.06.2024 12:25:21    Ready
+NVIDIA GeForce Experience SelfUpdate_{B2 N/A                    Ready
+NvNodeLauncher_{B2FE1952-0186-46C3-BAEC- N/A                    Ready
+NvProfileUpdaterDaily_{B2FE1952-0186-46C 23.06.2024 12:25:13    Ready
+NvProfileUpdaterOnLogon_{B2FE1952-0186-4 N/A                    Ready
+NvTmRep_CrashReport1_{B2FE1952-0186-46C3 23.06.2024 12:25:21    Ready
+NvTmRep_CrashReport2_{B2FE1952-0186-46C3 22.06.2024 18:25:21    Ready
+NvTmRep_CrashReport3_{B2FE1952-0186-46C3 23.06.2024 00:25:21    Ready
+NvTmRep_CrashReport4_{B2FE1952-0186-46C3 23.06.2024 06:25:21    Ready
+Optimize Push Notification Data File-S-1 N/A                    Disabled
+
+Folder: \Avira
+TaskName                                 Next Run Time          Status
+======================================== ====================== ===============
+INFO: There are no scheduled tasks presently available at your access level.
+
+
+--  Unusual Log Entries --
+
+• To look at logs, run the Event Viewer: eventvwr.msc
+
+• We can also use:
+  - eventquery.vbs /L security
+  - wevtutil qe security /f:text
+
+• Use DeepBLUE CLI and Eric Conrad’s Script To Check Events
+
+• Look for suspicious events
+  - Event log service was stopped
+  - Windows File Protection is not active on the system
+  - The MS Telnet Service has started successfully
+  - Look for large number of failed logon attempts or locked out accounts
+
+
+-- Unusual Log Entries --
+
+• To look at logs, run the Event Viewer: eventvwr.msc
+
+• We can also use:
+  - eventquery.vbs /L security
+  - wevtutil qe security /f:text
+
+• Use DeepBLUE CLI and Eric Conrad’s Script To Check Events
+
+• Look for suspicious events
+  - Event log service was stopped
+  - Windows File Protection is not active on the system
+  - The MS Telnet Service has started successfully
+  - Look for large number of failed logon attempts or locked out accounts
+
+
