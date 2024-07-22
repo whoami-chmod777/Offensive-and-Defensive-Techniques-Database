@@ -1,0 +1,29 @@
+
+-- How OS components can help in Investigation --
+
+• File System
+	- File Metadata
+	- File Recovery
+
+• Event Logs
+	- Security Logs
+	- Application Logs
+
+• Registry
+	- User Activity
+	- Software Artifacts
+
+• Memory
+
+• Network Stack
+	- Network Connection
+	- Packet Capture
+	
+• User Profiles
+• Command Prompt and PowerShell
+• Task Manager
+• Timestamps
+• System Services
+• Security Policies and Settings
+• Windows SysinternalsSuite
+• Hash Values
