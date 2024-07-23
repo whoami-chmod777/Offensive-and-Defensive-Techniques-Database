@@ -1,0 +1,42 @@
+
+-- What is Windows Registry --
+
+• The Windows Registry is a collection of databases that contains the system's configuration data. This configuration data can be about the hardware, the software, or the user's information. It also includes data about the recently used files, programs used, or devices connected to the system. As you can understand, this data is beneficial from a forensics standpoint.
+• You can view the registry using regedit.exe a built in Windows utility to view and edit the registry.
+• The Windows registry consists of Keys and Values.
+• When you open the regedit.exe utility to view the registry, the folders you see are Registry Keys.
+• Registry Values are the data stored in these Registry Keys.
+• A Registry Hive is a group of Keys, subkeys, and values stored in a single file on the disk.
+
+
+-- Structure of the Registry --
+
+The registry on any Windows system contains the following five root keys
+
+• HKEY_CURRENT_USER
+• HKEY_USERS
+• HKEY_LOCAL_MACHINE
+• HKEY_CLASSES_ROOT
+• HKEY_CURRENT_CONFIG
+
+
+-- Accessing Registry Hive Offline --
+
+Most of these hives are in the C: Windows System32 Config directory and are:
+
+1. DEFAULT (mounted on HKEY_USERS DEFAULT)
+2. SAM (mounted on HKEY_LOCAL_MACHINE SAM)
+3. SECURITY (mounted on HKEY_LOCAL_MACHINE Security)
+4. SOFTWARE (mounted on HKEY_LOCAL_MACHINE Software)
+5. SYSTEM (mounted on HKEY_LOCAL_MACHINE System)
+
+Hives containing user information:
+
+Apart from these hives, two other hives containing user information can be found in the User profile directory. For Windows 7 and above, a user’s profile directory is in C:\Users\<username>\ where the hives are:
+
+• NTUSER.DAT (mounted on HKEY_CURRENT_USER when a user logs in)
+• The NTUSER.DAT hive is in the directory C:\Users\<username>\
+• USRCLASS.DAT (mounted on HKEY_CURRENT_USER\Software\CLASSES)
+• The USRCLASS.DAT hive is in the directory C:\Users\<username>\AppData\Local\Microsoft\Windows
+• AmCache hive is in C:\Windows\AppCompat\Programs\Amcache.hve. Windows creates this hive to save information on programs that were recently run on the system.
+
