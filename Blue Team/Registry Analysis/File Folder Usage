@@ -1,0 +1,31 @@
+
+Recent Files: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs
+
+
+- Office Recent Files -
+
+HKEY_CURRENT_USER\Software\Microsoft\Office\VERSION
+HKEY_CURRENT_USER\Software\Microsoft\Office\VERSION\UserMRU\LiveID\FileMRU
+
+
+- ShellBags -
+
+In USRCLASS.DAT
+HKEY_LOCAL_MACHINE\Local Settings\Software\Microsoft\Windows\Shell\Bags
+HKEY_LOCAL_MACHINE\Local Settings\Software\Microsoft\Windows\Shell\BagMRU
+
+In NTUSER.DAT
+HKEY_CURRENT_USER\Software\Microsoft\Windows\Shell\BagMRU
+HKEY_CURRENT_USER\Software\Microsoft\Windows\Shell\Bags
+
+
+- Open/Save and LastVisited Dialog MRUs -
+
+HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\OpenSavePIDlMRU
+HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\LastVisitedPidlMRU
+
+
+- Windows Explorer Address/Search Bars -
+
+HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\TypedPaths
+HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\WordWheelQuery
