@@ -1,0 +1,18 @@
+
+-- How does File System Carving Work--
+
+1. Identificationoffileheaders/signatures
+2. Searchingforfilefragments
+3. Reconstructingfilecontent
+4. Validationandverification
+5. Extractionandrecovery
+
+
+-- File Carving Techniques --
+
+1. Header/Footer Carving
+2. Signature-Based Carving
+3. Carving with File Structure Knowledge
+4. Content-Aware Carving
+5. File Carving with File System Metadata
+6. Smart Carving
