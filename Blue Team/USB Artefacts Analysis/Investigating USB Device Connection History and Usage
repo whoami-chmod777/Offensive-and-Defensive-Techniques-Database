@@ -1,0 +1,23 @@
+
+1. VENDOR: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USBSTOR
+2. PRODUCT: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USBSTOR
+
+3. VERSION: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USBSTOR
+4. DEVICE S/N: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USBSTOR
+
+5. VID (Vendor ID): HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USB
+6. PID (Product ID): HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USB
+
+7. VOLUME NAME: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Portable Devices\Devices
+
+8. DRIVE LETTER: HKEY_LOCAL_MACHINE\SYSTEM\MountedDevices
+9. VOLUME GUID: HKEY_LOCAL_MACHINE\SYSTEM\MountedDevices
+
+10. USER: HKEY_USERS\<UserSID>\Software\Microsoft\Windows\CurrentVersion\Explorer\MountPoints2
+11. USER: NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\MountPoints2
+
+11. VOLUME S/N: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\EMDMgmt
+
+12. FIRST CONNECTED: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USBSTOR\<Ven_Prod_Version>\<USB_Serial>\Properties\{83da6326-97a6-4088-9453-a1923f573b29}\0064
+13. LAST CONNECTED: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USBSTOR\<Ven_Prod_Version>\<USB_Serial>\Properties\{83da6326-97a6-4088-9453-a1923f573b29}\0066
+14. LAST DISCONNECTED: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USBSTOR\<Ven_Prod_Version>\<USB_Serial>\Properties\{83da6326-97a6-4088-9453-a1923f573b29}\0067
