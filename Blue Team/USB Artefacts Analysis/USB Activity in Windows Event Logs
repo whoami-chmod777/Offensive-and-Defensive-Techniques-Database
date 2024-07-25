@@ -1,0 +1,14 @@
+
+1. Enable Object Access Auditing: Local Security Policy -> Advanced Audit Policy Configuration -> Object Access -> Audit Removable Storage
+
+2. Configure Registry for Device Logging (optional for detailed tracking): HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UsbStor
+Create or set the DWORD value Start to 4 to disable USB storage devices or to 3 to enable them
+
+
+Plug and Play (PnP) Activity: Event Viewer -> Applications and Services Logs -> Microsoft -> Windows -> DriverFrameworks-UserMode -> Operational
+
+Device Setup Manager (DSM): Event Viewer -> Applications and Services Logs -> Microsoft -> Windows -> DeviceSetupManager -> Admin
+
+Kernel PnP: Event Viewer -> Windows Logs -> System
+
+Security Log (for auditing USB usage): Event Viewer -> Windows Logs -> Security
