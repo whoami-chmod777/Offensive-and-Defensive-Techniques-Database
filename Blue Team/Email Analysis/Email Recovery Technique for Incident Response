@@ -1,0 +1,13 @@
+
+Recover emails for incident response using server samples, E-Discovery scans, and backups
+
+• Grab Email Sample from Server:
+Always retrieve the email sample directly from the email server instead of the endpoint Mail User Agent (MUA). This ensures that you obtain the original email, unaltered by any client-side modifications or potential malware.
+
+• Run E-Discovery Scan:
+Conduct an E-Discovery scan on the email server to collect comprehensive email evidence. This process involves searching for specific keywords, metadata, or criteria relevant to the incident, ensuring that all pertinent emails are identified and preserved for further analysis.
+
+• Gather Emails from Backup and Recovery Systems:
+Utilize the email backup and recovery systems of the mail server to retrieve the required emails. This step ensures that even if emails have been deleted or altered, the original versions can be recovered from backup archives, providing a reliable source for incident investigation.
+
+By following these steps, you ensure a thorough and accurate recovery of email data necessary for effective incident response.
