@@ -1,5 +1,5 @@
 
-An email header is a hidden section containing detailed information about the email's origin, routing, and delivery, accessible through email client settings.
+An Email Header is a hidden section containing detailed information about the email's origin, routing, and delivery, accessible through email client settings.
 The header contains several fields, each providing specific pieces of information. Here are the key components of an email header:
 
 • From: The email address and optionally the name of the sender.
