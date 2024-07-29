@@ -18,6 +18,7 @@ The header contains several fields, each providing specific pieces of informatio
 • X-Spam Status: The X-Spam Status shows you the spam score of an email message.
 
 
+
 -- Using dig for SPF Verification --
 
 dig (Domain Information Groper) is a command-line tool used for querying DNS (Domain Name System) servers. 
@@ -25,6 +26,7 @@ dig (Domain Information Groper) is a command-line tool used for querying DNS (Do
 $ dig @8.8.8.8 -t txt example.com
 $ dig @8.8.8.8 -t txt spf.protection.outlook.com
 $ dig txt futurepipe.com | grep "v=spf1"
+
 
 
 -- Extract Data --
@@ -43,8 +45,8 @@ ls
 E-Mail Header Analyzer (MHA)
 https://github.com/cyberdefenders/email-header-analyzer
 
+Analyze Email Headers to understand routing, identify issues, and detect potential spam or malicious emails
 https://mha.azurewebsites.net/
-
 
 GitHub Repositorie that contain collections of spam and phishing emails
 https://github.com/rf-peixoto/phishing_pot
