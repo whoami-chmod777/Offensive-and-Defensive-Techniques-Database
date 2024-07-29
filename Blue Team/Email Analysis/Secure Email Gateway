@@ -1,12 +1,15 @@
 
 -- Email Security Gateway Feature --
 
-• Network sandbox
-• Content disarm and reconstruction (CDR)
-• URL rewriting and time of click analysis
-• Display name spoof detection
-• DMARC on Inbound Email
-• Anomaly detection
-• Graymail handling
-• DLP and email encryption
-• Post delivery Protection
+A Secure Email Gateway protect against threats like spam, malware, and phishing
+
+• Network Sandbox: Isolates and analyzes suspicious files in a secure environment.
+• Content Disarm and Reconstruction (CDR): Removes potentially harmful elements from email attachments.
+• URL Rewriting and Time-of-Click Analysis: Checks URLs for malicious content at the time of click.
+• Display Name Spoof Detection: Identifies and blocks emails with spoofed display names.
+• DMARC on Inbound Email: Verifies sender authenticity to prevent email spoofing.
+• Anomaly Detection: Detects unusual email patterns indicating potential threats.
+• Graymail Handling: Manages less critical bulk emails, like newsletters.
+• Data Loss Prevention (DLP) and Email Encryption: Protects sensitive data and secures email content.
+• Post-Delivery Protection: Monitors and mitigates threats after email delivery.
+
