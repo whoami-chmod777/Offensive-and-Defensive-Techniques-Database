@@ -1,0 +1,59 @@
+
+-- OS Components for Investigation --
+
+• Network Stack
+    - Network Connection
+    - Packet Capture
+• User Profiles
+• Command Prompt and PowerShell
+• Task Manager
+• Timestamps
+• System Services
+• Security Policies and Settings
+• Windows Sysinternals Suite
+• Hash Values
+
+
+-- Boot Process for Investigation --
+
+• Timeline Reconstruction
+• Malware Detection
+• Rootkit Detection
+• System Health Assessment
+• Operating System Configuration
+• System Changes
+• Boot-Time Passwords
+
+
+-- Windows native APIs or EXEs which can be used by Malicious Purpose --
+
+• Powershell
+• WMI
+• Regsvr32
+• Schtasks
+• WMIC
+• BITSAdmin
+• Task Scheduler
+• WinRM
+• Netsh
+• Diskpart
+• DISM
+• CertUtil
+• Rundll32
+• CScript and WScript (Windows Script Host)
+• Event Viewer (Eventvwr)
+• Services.msc
+• Windows Script Host
+• At.exe
+• Windows Management Tools
+• RDP
+
+
+-- How to protect against MBR Rootkit Attacks --
+
+1. Keep the operating system and security software up-to-date to patch known vulnerabilities.
+2. Use strong, unique passwords to prevent unauthorized access to the system.
+3. Employ full-disk encryption to protect the MBR from modification by unauthorized parties.
+4. Regularly scan for malware and rootkits using reputable security software.
+5. Be cautious when downloading and executing software from untrusted sources, as this is a common way rootkits gain access to a system.
+6. Periodically check the integrity of the MBR to ensure it hasn't been tampered with. Some tools can help with this task.
