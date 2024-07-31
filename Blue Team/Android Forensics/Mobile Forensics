@@ -1,0 +1,51 @@
+
+-- Mobile Forensics: Key Stages and Tasks --
+
+1. Data Acquisition: The process of capturing data from a mobile device includes methods such as logical, physical, and file system acquisition to extract information stored on the device, memory cards, and SIM cards.
+2. Data Recovery: Techniques used to retrieve deleted, hidden, or lost data from mobile devices. This includes recovering deleted messages, photos, app data, and other files that are not readily accessible through standard means.
+3. Data Analysis: The detailed examination of the acquired data to identify relevant information. This involves parsing file systems, analyzing communication records, and extracting meaningful insights from the data.
+4. Decoding and Interpretation: Converting raw data into a readable and understandable format. This involves decoding data from proprietary formats, interpreting encoded data, and making sense of binary data to present it in a human-readable form.
+5. Application Analysis: Examining the data and activities associated with specific applications installed on the mobile device. This includes analyzing app usage, extracting data from app databases, and understanding the behavior of apps.
+6. Timeline Reconstruction: Creating a chronological sequence of events based on the data extracted from the mobile device. This helps in understanding the sequence of activities and interactions that took place on the device.
+7. Location Analysis: Analyzing location data to determine the geographical movements and locations visited by the device user. This includes examining GPS data, cell tower logs, and Wi-Fi connection records.
+8. Cloud Data Analysis: Investigating data stored in cloud services associated with the mobile device. This involves accessing and analyzing data from cloud backups, synced data, and cloud-based applications.
+9. Metadata Examination: Analyzing metadata associated with files and communications. Metadata includes information such as timestamps, geolocation tags, and file properties that can provide additional context to the data.
+10. Reporting and Documentation: Compiling the findings into a comprehensive report that details the methods used, evidence found, and conclusions drawn. This report must be clear, concise, and suitable for presentation in legal proceedings.
+
+
+-- Basic of Mobile Operating System --
+
+1. User Interface (UI)
+2. Application Management
+3. Memory Management
+4. File System Management
+5. Networking and Connectivity
+6. Security
+7. Multitasking
+
+
+-- Popular Mobile Operating Systems --
+
+1. Android
+2. iOS
+3. Windows
+4. KaliOS
+
+Architecture of Android: Understanding Android's architecture is crucial for mobile hacking as it helps identify and exploit vulnerabilities at various levels, facilitating unauthorized access and control.
+
+
+-- Common Tools Used --
+
+• Cellebrite UFED
+• Oxygen Forensic Detective
+• Magnet AXIOM
+• MOBILedit Forensic
+• XRY by MSAB
+• Belkasoft Evidence Center
+• BlackLight
+• Elcomsoft iOS Forensic Toolkit
+• Paraben Device Seizure
+• AccessData FTK Imager
+• Secure View (SV)
+• Lantern by Katana Forensics
+
