@@ -49,3 +49,14 @@ Architecture of Android: Understanding Android's architecture is crucial for mob
 • Secure View (SV)
 • Lantern by Katana Forensics
 
+
+-- Basic knowledge on Mobile Phone Forensic Hardware --
+
+1. Data Acquisition Tools
+2. JTAG/ISP Equipment
+3. Chip-Off Tools
+4. Faraday Bags
+5. Write Blockers
+6. Power Analysis Tools
+7. Signal Interceptors
+
