@@ -1,1 +1,41 @@
 
+Sysmon complements native Windows event logs by providing detailed information about process creations, network connections, registry tampering and credential dumping, Active Directory database extraction, suspicious command line activity, and Exchange Server exploitation via ProxyLogon.
+
+
+Install Sysmon: Sysmon.exe -i
+Install with Configuration: Sysmon.exe -i sysmonconfig.xml
+Update Sysmon Configuration: Sysmon.exe -c sysmonconfig.xml
+Uninstall Sysmon: Sysmon.exe -u
+Update Sysmon: Sysmon.exe -u sysmon.exe
+Check Sysmon Version: Sysmon.exe -v
+Log to a Different Event Log: Sysmon.exe -i -l <LogName>
+
+
+Important SYSMON Event IDs:
+
+1: Process creation
+2: File creation time changed
+3: Network connection
+4: Sysmon service state changed
+5: Process terminated
+6: Driver loaded
+7: Image loaded
+8: CreateRemoteThread
+10: Process accessed
+11: File created
+12-14: Registry events
+15: File stream created
+16: Sysmon config state change
+17-18: Pipe events
+19-20: WmiEvent
+22: DNS query
+
+
+Basic Search in Splunk: sourcetype="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"
+
+Splunk query retrieves Sysmon event logs for TCP network connections (EventCode=3):
+sourcetype="xmlwineventlog:microsoft-windows-sysmon/operational" EventCode=3 Protocol=tcp Initiated=true | where DestinationIp!="127.0.0.1" AND DestinationHostname!=SourceHostname | table _time User Computer ProcessId ProcessGuid DestinationHostname DestinationPort 
+
+
+A Sysmon configuration file
+https://github.com/SwiftOnSecurity/sysmon-config
