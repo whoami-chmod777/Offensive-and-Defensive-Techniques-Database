@@ -1,4 +1,15 @@
 
+In forensic analysis, the initial step involves gathering system information to establish a foundational understanding of the system's configuration and activities.
+
+- OS Version
+- Current Control set
+- Computer Name
+- Time Zone Information
+- Network Interfaces and Past Networks
+- Autostart Programs (Autoruns)
+- SAM Hive and User Information
+
+
 OS Version: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\NT\CurrentVersion
 
 Current Control Set:
