@@ -1,1 +1,7 @@
 
+ShellBags in Windows are data structures that retain folder settings and view preferences, facilitating personalized folder layouts and offering forensic insights into user activity and file access patterns.
+
+HKEY_CURRENT_USER\Software\Microsoft\Windows\Shell\Bags
+
+Third-party Tools: ShellBags Explorer
+
