@@ -1,1 +1,15 @@
 
+Prefetch Files are Windows system files that store data about how programs are used, facilitating faster application launch times by predicting which files will be needed next and preloading them into memory. They contain information such as file paths, timestamps, and usage statistics, aiding in system optimization and performance enhancement.
+
+C:\Windows\Prefetch: This directory contains prefetch files for 64-bit applications.
+
+
+C:\Windows\SysWOW64\Prefetch: This directory contains prefetch files for 32-bit applications running on a 64-bit operating system.
+
+PECmd.exe -f example.exe-1234.pf
+
+$ vol.py -f Target1-1dd8701f.vmss imageinfo
+$ vol.py -f Target1-1dd8701f.vmss --profile=Win7SP1x86_23418 prefetchparser
+$ vol.py -f Target1-1dd8701f.vmss --profile=Win7SP1x86_23418 prefetchparser | grep PING.EXE-7E94E73E.pf
+
+Third-party Tools: Prefetch Parser, NirSoft WinPrefetchView, Sysinternals Process Monitor, Volatility, PECmd (Prefetch Execution Command) developed by Eric Zimmerman 
