@@ -1,0 +1,25 @@
+
+The 'dd' command in Linux is a powerful tool used to copy and convert files at the byte level, commonly used for disk cloning and data recovery. 
+Its basic syntax is 'dd if=<input file> of=<output file> [options]', where 'if' stands for input file (source) and 'of' stands for output file (destination).
+
+
+Basic Syntax: dd if=<input file> of=<output file> [options]
+
+Create a Disk Image: sudo dd if=/dev/sdX of=/path/to/image.img bs=4M conv=noerror,sync status=progress
+
+Clone a Disk to Another Disk: sudo dd if=/dev/sdX of=/dev/sdY bs=4M conv=noerror,sync status=progress
+
+Create a Backup of a Partition: sudo dd if=/dev/sdX1 of=/path/to/partition_image.img bs=4M conv=noerror,sync status=progress
+
+Restore a Disk Image to a Disk: sudo dd if=/path/to/image.img of=/dev/sdX bs=4M conv=noerror,sync status=progress
+
+Measure Write Speed: dd if=/dev/zero of=/path/to/output/file bs=1M count=100 conv=fdatasync
+
+
+Calculate MD5 Hash:
+sudo md5sum /dev/sdX
+sudo md5sum /path/to/image.img
+
+Calculate SHA-1 Hash:
+sudo sha1sum /dev/sdX
+sudo sha1sum /path/to/image.img
