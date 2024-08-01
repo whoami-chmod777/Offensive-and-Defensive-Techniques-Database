@@ -1,1 +1,36 @@
 
+-- exiftool --
+
+This information are important for understanding the attributes and history of a file including its contents, creators, modification dates, and directory location.
+
+File Name: File_Analysis.pptx
+Application: Microsoft Macintosh PowerPoint
+Type: Presentation
+File Directory: "/home/cetas/Desktop/training/Metadata Analysis 2 - Office Files"
+File Size: 38 kB
+File Modification: 2015:10:23 01:36:00+00:00
+File Access: 2024:04:27 16:37:44+00:00
+File Creation: 2015:10:08 18:33:33Z
+Zip Modify Date: 1980:01:01 00:00:00
+File Type Extension: pptx
+Contents: 2 Paragraphs, 1 Slide, 0 Hidden Slides, "Nifty Presentation, Word"
+Creator: Nancy
+Last Modified By: Jim
+Revision Number: 9
+
+exiftool File_Analysis.pptx
+exiftool -H File_Analysis.pptx
+exiftool -common File_Analysis.pptx
+exiftool File_Analysis.pptx | grep GPS
+exiftool -v File_Analysis.pptx
+exiftool -h File_Analysis.pptx > test.html
+
+
+-- OLE Files Analysis --
+
+$ oledump.py --help
+$ oledump.py maldoc.zip 
+$ oledump.py maldoc.zip --asciidump
+$ oledump.py -v -s 8 maldoc.zip 
+$ oledump.py -v -s 15 maldoc.zip 
+$ oledump.py maldoc.zip --plugindir=./oledump_V0_0_60_lyst3431/ --plugins=plugin_dridex.py
