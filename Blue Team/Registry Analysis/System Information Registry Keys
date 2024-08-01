@@ -1,8 +1,7 @@
 
 OS Version: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\NT\CurrentVersion
 
-- Current Control set -
-
+Current Control Set:
 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet
 HKEY_LOCAL_MACHINE\SYSTEM\Select\Current
 HKEY_LOCAL_MACHINE\SYSTEM\Select\LastKnownGood
@@ -15,8 +14,7 @@ Time Zone Information: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZ
 Network Interfaces and Past Networks: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces
 
 
-- Autostart Programs (Autoruns) -
-
+Autostart Programs (Autoruns):
 HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
 HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunOnce
 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce
