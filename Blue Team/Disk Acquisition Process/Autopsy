@@ -1,1 +1,64 @@
 
+-- Analysis of Data Source Using Autopsy --
+
+1. Open Autopsy and create a new case
+
+2. Add a Data Source
+
+• Disk Image or VM file: Includes images that are an exact copy of a hard drive or media card, or a virtual machine image.
+• Local Disk: Includes Hard disk, Pendrive, memory card, etc.
+• Logical Files. : Includes local folders or files.
+• Unallocated Space Image File: Includes files that do not contain a file system but need to run through ingest.
+
+
+3. Configure Ingest Modules
+
+• Recent Activity: Discover the recent operations performed on the disk, for example, the files that were last viewed.
+• Hash Lookup: Identify files using hash values.
+• File Type Identification: Identify files based on their internal signatures rather than just file .extensions.
+• Extension Mismatch Detector: Identify files whose extensions are tampered with/changed possibly to hide evidence.
+• Embedded File Extractor:  It extracts embedded files such as .zip, .rar, etc. and uses the derived file for analysis.  Another example could be a PNG image saved inside a doc to make it appear as a document and thus hide crucial information.
+• EXIF (Exchangeable Image File Format) Parser: It is used to retrieve metadata about the files, for example, date of creation, geolocation, etc.
+• Keyword Search: Search for a particular keyword/pattern in the data source.
+• Email Parser: If the disk holds any form of email database, for example, pst/ost files of outlook then information from these files can be extracted using an email parser.
+• Encryption Detection: Detects and identifies encrypted / password-protected files.
+• Interesting File Identifier: Let’s set custom rules regarding the filtering of data. Examiner is notified when results pertaining to these rules are found.
+• Correlation Engine: Allows saving properties in and then retrieved from the central repository. It helps in displaying correlated properties.
+• PhotoRec Carver: Recover files, photos, etc. from the unallocated space.
+• Virtual Machine Extractor: Extract and analyze any Virtual machine found on the data source.
+• Data Source Integrity: Calculates the hash values and stores them in the database in case they aren’t already present. Otherwise, it will verify the hash values associated with the database. 
+• Plaso: Extract timestamp for various types of files.
+• Android Analyzer: Analyze SQLite and other files retrieved from an Android device.
+
+
+4. Exploring the Data Source
+
+• Data Sources: Specifies the origins of the data being analyzed. This can include disk images, network captures, specific directories, or other storage media.
+• File Type: Categorizes the types of files identified during the analysis, such as documents, images, videos, and executables.
+• Deleted Files: Identifies files that have been deleted from the storage media but are still recoverable using forensic tools.
+• MB Size Files: Indicates the total size (in megabytes) of the files found during the analysis.
+• Extracted Content: Lists the content extracted from the data sources, including text, images, emails, and other data types.
+• EXIF Metadata: Contains all JPG images associated with EXIF metadata. These metadata can be further analyzed
+• Encryption Detection: Detects files that are password-protected/encrypted.
+• Extension Types Mismatch Detection: Identifies files whose extensions do not match their MIME types and therefore may be suspicious.
+• Installed Programs: Provides details about the software used by the user. This information is extracted using the software registry structure.
+• Operating System Information: Offers information about the operating system using the Windows registry structure and the software registry structure.
+• Operating System User Account: Lists information about all user accounts. For example, accounts associated with the device are extracted from the software hive, and accounts linked to Internet Explorer are retrieved using index.data files.
+• Recent documents: Lists all documents accessed around the time the disk image was captured.
+• Recycle Bin: Displays files temporarily stored on the system before they are permanently deleted.
+• Remote Drive: Shows information about all remote drives accessed through the system.
+• Shell bags: A shell bag is a set of registry keys that store details about a displayed folder, such as its position, icon, and size. All shell bags of the system can be viewed here.
+• USB Device Attached: Displays all information about external devices connected to the system. This data is extracted from the Windows registry, which maintains a database of all activities occurring on the system.
+• Web Cookies: Cookies store user information from websites, providing many details about the user's online activities.
+• Web History: Displays all details about the browser history.
+• Web Searches: Displays details about the web searches conducted.
+• Keyword Hits: Allows searching for specific keywords in the disk image. Multiple data sources can be selected for the search. The search can be restricted to exact matches, substring matches, and regular expressions, e.g., emails/IP addresses, etc
+• HashSet Hits: Shows files that match known hash values from a hash set database, which can indicate known files, such as system files, malware, or files of interest.
+• E-mail Messages: Lists email messages recovered from the data sources, including their metadata and content.xx
+• Interesting Items: Highlights files or data that are deemed significant or unusual and warrant further investigation.
+• Accounts: Provides details about user accounts found in the data, such as usernames, account types, and related information.
+• Reports: Summarizes the findings in a structured format, often including charts, graphs, and detailed narratives of the analysis.
+• Additional Features: Describes any extra functionalities or tools used during the analysis, such as keyword searches, timeline analysis, or specific forensic techniques.
+
+
+https://www.geeksforgeeks.org/analysis-of-data-source-using-autopsy/
