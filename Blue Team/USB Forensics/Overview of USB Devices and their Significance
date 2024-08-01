@@ -1,0 +1,53 @@
+
+-- Overview of USB Devices and their Significance in Digital Forensics --
+
+1. Types of USB Devices
+2. Data Storage Capacity
+3. Data Volatility
+4. Evidence Collection
+5. Data Acquisition
+6. Data Analysis
+7. Chain of Custody
+8. Anti Forensics Techniques
+9. Security Implications
+
+
+-- USB Device Identification and Analysis --
+
+1. Device Identification
+2. Physical Examination
+3. Logical Examination
+4. File Carving
+5. Timeline Analysis
+6. Metadata Analysis
+7. Data Extraction
+8. Keyword Search
+9. Hash Analysis
+10. Reporting and Documentation
+
+
+-- USB Forensics Artifact --
+
+This artifact contains information about the USB devices that have been connected to the system. The details you can view include:
+
+• Computer Name
+• Windows OS Name
+• Volume Name
+• Vendor
+• Product
+• Version
+• Serial Number
+• Parent Prefix ID
+• Vendor ID
+• Product ID
+• Drive Letter
+• Device GUID
+• First Install Date
+• Last Arrival Date
+• Last Removal Date
+• Last Insertion Date
+• User Name
+• MountPoints2 Key Date
+• NTUser.dat Path
+• SetupApiDevLog Dates
+
