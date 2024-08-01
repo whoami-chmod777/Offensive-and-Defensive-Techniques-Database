@@ -1,26 +1,20 @@
 
+
 NetworkList: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList
 
 
 Signatures: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Signatures
-
 Unmanaged: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Signatures\Unmanaged (Record DefaultGatewayMac, DnsSuffix, FirstNetwork (SSID), ProfileGuid for Unmanaged networks.)
-
 Managed: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Signatures\Managed
 
 Nla: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Nla
-
 Cache: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Cache
-
 
 Profiles: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles
 
 0x06 = Wired: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles\<ProfileGuid>
-
 0x17 = Broadband: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles\<ProfileGuid>
-
 0x47 = Wireless: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles\<ProfileGuid>
-
 
 HomeGroup: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\HomeGroup
 
