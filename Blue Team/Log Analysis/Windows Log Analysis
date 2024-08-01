@@ -1,4 +1,11 @@
 
+-- Log Files are Located --
+
+C:\WINDOWS\system32\config\folder
+C:\Windows\System32\Tasks
+C:\Windows\System32>schtasks
+
+
 -- Logon Types --
 
 
