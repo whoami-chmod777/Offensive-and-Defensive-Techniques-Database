@@ -1,4 +1,11 @@
 
+-- Tools for Event Log Analysis --
+
+• Event Viewer: Built-in tool to view and analyze event logs
+• PowerShell: Commands like Get-EventLog and Get-WinEvent for querying event logs
+• ELK Stack: Elasticsearch, Logstash, Kibana for centralized logging and analysis
+
+
 -- Log Files are Located --
 
 C:\WINDOWS\system32\config\folder
@@ -51,4 +58,8 @@ C:\Windows\System32>schtasks
 4776 Domain controller attempted to validate the credentials for an account
 
 
+List all event logs: PS C:\Users\whoami> Get-EventLog -List
 
+Retrieve the most recent 10 events from the System log: PS C:\Users\whoami> Get-EventLog -LogName System -Newest 10
+
+Search for events containing the keyword "error" in the Application log: PS C:\Users\whoami> Get-EventLog -LogName Application | Where-Object { $_.Message -like "*error*" }
