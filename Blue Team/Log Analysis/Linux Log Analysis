@@ -1,0 +1,16 @@
+
+$ ls -lll
+$ cat auth.log | tail 
+
+/var/log/**
+/var/log/auth.log
+/var/log/crown
+/var/log/kern
+
+/var/log/**
+/var/spool/at/**
+/var/spool/cron/**
+/var/spool/anacron/cron.daily
+/var/spool/anacron/cron.hourly
+/var/spool/anacron/cron.weekly
+/var/spool/anacron/cron.monthly
