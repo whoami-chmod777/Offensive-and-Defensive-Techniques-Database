@@ -1,14 +1,20 @@
+Windows maintains a list of recently accessed files for each user, visible in Windows Explorer for quick access.
+
+- Recent Files
+- Office Recent Files
+- ShellBags
+- Open/Save and LastVisited Dialog MRUs
+- Windows Explorer Address/Search Bars
+
 
 Recent Files: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs
 
-
-- Office Recent Files -
-
+Office Recent Files:
 HKEY_CURRENT_USER\Software\Microsoft\Office\VERSION
 HKEY_CURRENT_USER\Software\Microsoft\Office\VERSION\UserMRU\LiveID\FileMRU
 
 
-- ShellBags -
+ShellBags:
 
 In USRCLASS.DAT
 HKEY_LOCAL_MACHINE\Local Settings\Software\Microsoft\Windows\Shell\Bags
@@ -19,13 +25,11 @@ HKEY_CURRENT_USER\Software\Microsoft\Windows\Shell\BagMRU
 HKEY_CURRENT_USER\Software\Microsoft\Windows\Shell\Bags
 
 
-- Open/Save and LastVisited Dialog MRUs -
-
+Open/Save and LastVisited Dialog MRUs:
 HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\OpenSavePIDlMRU
 HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\LastVisitedPidlMRU
 
 
-- Windows Explorer Address/Search Bars -
-
+Windows Explorer Address/Search Bars:
 HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\TypedPaths
 HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\WordWheelQuery
