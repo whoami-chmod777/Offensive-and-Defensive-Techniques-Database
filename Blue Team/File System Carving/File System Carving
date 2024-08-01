@@ -10,9 +10,50 @@
 
 -- File Carving Techniques --
 
-1. Header/Footer Carving
-2. Signature-Based Carving
-3. Carving with File Structure Knowledge
-4. Content-Aware Carving
-5. File Carving with File System Metadata
-6. Smart Carving
+1. Header/Footer Carving: Identifies file boundaries using specific markers at the beginning (header) and end (footer) of files.
+2. Signature-based Carving: Recovers files based on unique signatures or patterns within raw data.
+3. Carving with File Structure Knowledge: Reconstructs files by leveraging understanding of file formats and structures.
+4. Content-Aware Carving: Extracts files based on their content rather than relying solely on signatures or structures.
+5. File Carving with FileSystem Metadata: Utilizes file system metadata to aid in the recovery and reconstruction of files.
+6. Smart Carving: Employs intelligent algorithms to optimize the file carving process, improving accuracy and efficiency.
+
+
+-- Common File Types Recovered --
+
+• Documents (DOC,DOCX, PDF, XLS, XLSX, PPT, PPTX, TXT)
+• Images (JPEG, PNG, GIF, MP, TIFF, RAW)
+• Videos (AVI, MPEG, MP4, MOV, WMV, FLV)
+• Audio (MP3, WAV, AAC, FLAC, OGG)
+• Archives (ZIP, RAR, 7z, TAR, GZIP)
+• Databases (MDB)
+• Emails (PST, OST, MBOX, EML)
+• ExecutableFiles (EXE, DLL's and other program files)
+• WebFiles (HTML Files, CSS Stylesheets, Java Script (JS), and other web-related files)
+• MiscellaneousFiles (Fonts (TTF), Metadata (XML,JSON), configuration files (INI), logfiles and more)
+
+
+-- Magic Numbers --
+
+Magic numbers in digital forensics are unique signatures within file headers used to identify file types and aid in data recovery.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
