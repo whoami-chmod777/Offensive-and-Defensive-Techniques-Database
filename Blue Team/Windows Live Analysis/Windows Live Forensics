@@ -29,28 +29,26 @@
 -- Unusual Reg Key Entries --
 
 • A system admin can look for strange settings in the registry hive associated with starting programs at system boot or when a user logs in:
-  - HKLM\Software\Microsoft\Windows\CurrentVersion\Run
-  - HKLM\Software\Microsoft\Windows\CurrentVersion\Runonce
-  - HKLM\Software\Microsoft\Windows\CurrentVersion\RunonceEx
+HKLM\Software\Microsoft\Windows\CurrentVersion\Run
+HKLM\Software\Microsoft\Windows\CurrentVersion\Runonce
+HKLM\Software\Microsoft\Windows\CurrentVersion\RunonceEx
 
 • These items should be inspected under both HKLM and HKCU
 • They can be analysed with regedit GUI
-
-• Reg command can be used to query the values of these settings
-  - reg query hklm\software\microsoft\windows\currentversion\run
+• Reg command can be used to query the values of these settings: reg query hklm\software\microsoft\windows\currentversion\run
 
 
 -- Extra Startup Items --
 
 • It’s helpful to check user’s autostart folders
-  - dir /s /b "C:\Documents and Settings\[user_name]\Start Menu"
-  - dir /s /b "C:\Users\[user_name\Start Menu\"
+dir /s /b "C:\Documents and Settings\[user_name]\Start Menu"
+dir /s /b "C:\Users\[user_name\Start Menu\"
 
 • An admin can also run msconfig to see what is scheduled to run at startup
-  - msconfig.exe
+msconfig.exe
 
 • WMIC can also be used to show some autostart programs
-  - wmic startup list full
+wmic startup list full
 
 
 -- Ususual Accounts --
@@ -64,6 +62,9 @@
 
 • Check file space usage for sudden major decrease in space.
 • Look for files larger than 10MB: FOR /R C:\ %i in (*) do @if %~zi gtr 10000000 echo % i %~zi
+
+Get-WinEvent -FilterHashtable @{LogName="Security";ID=4720,4722,4724,4738,4732,1102}
+Get-WinEvent -FilterHashtable @{LogName="System";ID=7030,7045,1056,7045,1000,100001,10100,20001,20003,24576,24577,24579}
 
 C:\Users\mirko> FOR /R C:\ %i in (*) do @if %~zi gtr 10000000 echo % i %~zi
 % i 133300408
@@ -133,8 +134,4 @@ INFO: There are no scheduled tasks presently available at your access level.
   - Windows File Protection is not active on the system
   - The MS Telnet Service has started successfully
   - Look for large number of failed logon attempts or locked out accounts
-
-
-
-
 
