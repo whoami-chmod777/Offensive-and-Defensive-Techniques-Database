@@ -1,1 +1,33 @@
 
+Scalpel is a file carving tool in Linux used for data recovery and digital forensics, allowing users to extract specific file types from disk images or other storage media by identifying and reconstructing file fragments based on predefined patterns or headers.
+
+
+scalpel -b -o <output> <disk image file>
+
+# scalpel -b -o /root/Desktop/ScalpelOutput DiskImage1.img
+
+Let’s run the command and watch scalpel recover any JPG image files for us!
+Scalpel identified and retrieved one JPG file, based on the message at the bottom of the terminal "Scalpel is done, files carved = 1, elapsed = 0 seconds"! 
+
+
+# sudo apt-get install scalpel
+
+Configuration File Location: /etc/scalpel/scalpel.conf
+
+
+scalpel imagefile -o output_directory
+
+Specify custom configuration file: scalpel -c /path/to/custom_scalpel.conf imagefile -o output_directory
+
+Enable multi-threading (specify number of threads): scalpel -t 4 imagefile -o output_directory
+
+Enable detailed logging: scalpel -b imagefile -o output_directory
+
+
+Recover JPEG files: jpg y 50000000 \xff\xd8\xff\xe0 \xff\xd9
+Recover PNG files: png y 50000000 \x89\x50\x4e\x47\x0d\x0a\x1a\x0a \x49\x45\x4e\x44\xae\x42\x60\x82
+Recover PDF files: pdf y 100000000 %PDF- \x0a%%EOF
+
+Basic file carving: scalpel disk_image.dd -o /output/directory
+
+Enable detailed logging: scalpel -b disk_image.dd -o /output/directory
