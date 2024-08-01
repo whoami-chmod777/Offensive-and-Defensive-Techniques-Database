@@ -1,9 +1,24 @@
 
 -- OS Components for Investigation --
 
+• File System
+	- File Metadata
+	- File Recovery
+
+• Event Logs
+	- Security Logs
+	- Application Logs
+
+• Registry
+	- User Activity
+	- Software Artifacts
+
+• Memory
+
 • Network Stack
-    - Network Connection
-    - Packet Capture
+	- Network Connection
+	- Packet Capture
+
 • User Profiles
 • Command Prompt and PowerShell
 • Task Manager
