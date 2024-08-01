@@ -31,24 +31,24 @@ C:\Windows\System32>schtasks
 
 -- Common Event IDs --
 
-1: Process Creation
-2: Process Changed a File Creation Time
-3: Network Connections
-7: Image Loaded
-8: CreateRemoteThread
-10: ProcessAccess
-11: File Creation Events
-12, 13, 14: Registry Objects
-15: FileCreateStreamHash
-17 and 18: Pipe Events
-22: DNSEvents
-4624: Successful logon
-4625: Failed logon
-4634: Logoff
-4672: Special privileges assigned to new logon
-4688: A new process has been created
-4719: System audit policy was changed
-4776: Domain controller attempted to validate the credentials for an account
+1 Process Creation
+2 Process Changed a File Creation Time
+3 Network Connections
+7 Image Loaded
+8 CreateRemoteThread
+10 ProcessAccess
+11 File Creation Events
+12, 13, 14 Registry Objects
+15 FileCreateStreamHash
+17 and 18 Pipe Events
+22 DNSEvents
+4624 Successful logon
+4625 Failed logon
+4634 Logoff
+4672 Special privileges assigned to new logon
+4688 A new process has been created
+4719 System audit policy was changed
+4776 Domain controller attempted to validate the credentials for an account
 
 
 
