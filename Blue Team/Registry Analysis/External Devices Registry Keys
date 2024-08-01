@@ -1,21 +1,24 @@
 
-- Device Identification -
+This  locations keep track of USB keys plugged into a system
 
+- Device identification
+- First/Last Times
+- USB device Volume Name
+- HKLM SYSTEM MountedDevices
+
+
+Device Identification:
 USB Storage Devices: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USBSTOR
 USB Devices: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USB
 
-
-- First/Last Time -
-
+First/Last Time:
 USB Storage Device Ven_Prod_Version USBSerial Properties: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USBSTOR\Ven_Prod_Version\USBSerial\Properties\{83da6326-97a6-4088-9453-a19231573b29}
 First Connection: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USBSTOR\Ven_Prod_Version\USBSerial\Properties\{83da6326-97a6-4088-9453-a19231573b29}\0064
 Last Connection: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USBSTOR\Ven_Prod_Version\USBSerial\Properties\{83da6326-97a6-4088-9453-a19231573b29}\0066
 Last Removal: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USBSTOR\Ven_Prod_Version\USBSerial\Properties\{83da6326-97a6-4088-9453-a19231573b29}\0067
 
-
 USB Device Volume Name: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Portable Devices\Devices
 
-Mounted Devices: HKEY_LOCAL_MACHINE\SYSTEM\MountedDevices
-
+Mounted Devices: HKEY_LOCAL_MACHINE\SYSTEM\MountedDevices:
 Serial Number to Obtain the Drive Letter of the USB Device: HKEY_LOCAL_MACHINE\SYSTEM\MountedDevices
 Serial Number to Obtain the Volume GUID of the USB Device: HKEY_LOCAL_MACHINE\SYSTEM\MountedDevices
