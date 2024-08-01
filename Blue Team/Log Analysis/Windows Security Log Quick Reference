@@ -1,1 +1,20 @@
 
+-- Logon Types --
+
+
+
+-- User Account Changes --
+
+4720 Created
+4722 Enabled
+4723 User changed own password
+4724 Privileged User changed this user’s password
+4725 Disabled
+4726 Deleted
+4738 Changed
+4740 Locked out
+4767 Unlocked
+4781 Name change
+
+
+
