@@ -5,9 +5,12 @@ MTA: Mail Transfer Agent, Program for Routing the mails. It accepts mails either
 MDA: Mail Delivery Agent, which performs the actual delivery. eg: mail.local, procmail
 
 
--- Basic Working of Emails
+-- How Email Works --
 
-1. A user composes an Email using MUA and sends it.
-2. The Email is being transferred to the corresponding MTA/MDA. Some of the MTAs available today (Exim, Sendmail, QMail) and will handle the responsibilities of a MDA as well. So based on the headers of the Email, MTA determines the destination address, and it knows how to reach there, the mail is being transferred further to the MDA. The mail is being routed either locally or remote based on the Mail exchanger it is set to.
-3. The MTA at the receiver end identifies the message and pass on the local MDA.
-4. The local MDA hand overs the Email message to the MUA at the receiver end.
+1. User composes an email in their Mail User Agent (MUA (e.g., Outlook, Gmail).
+2. The MUA sends the email to the Mail Transfer Agent (MTA (e.g., SMTP server).
+3. The MTA forwards the email through the Internet to the recipient’s MTA.
+4. The recipient’s MTA stores the email in the Mail Delivery Agent (MDA) (e.g., IMAP/POP server).
+5. The recipient’s MUA retrieves the email from the MDA.
+6. The email is displayed to the recipient in their MUA.
+7. The recipient reads the email.
