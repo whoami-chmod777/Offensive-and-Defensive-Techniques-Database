@@ -1,1 +1,46 @@
 
+Memory forensics is the practice of analyzing a computer's memory dump to investigate and extract information related to cyber incidents, such as malware, unauthorized access, or data breaches. It involves capturing volatile data from a system's RAM to uncover evidence that may not be present on the disk.
+
+Volatility is an open-source memory forensics framework used to analyze and extract digital artifacts from memory dumps of various operating systems. It provides tools to investigate malicious activity, system state, and other relevant information by examining the volatile memory of a computer.
+
+
+Step-by-step process for performing memory forensics using Volatility:
+
+Step 1: Prepare Your Environment
+
+1. Install Volatility
+2. Acquire a Memory Dump using tools like 'procdump', 'DumpIt', 'FTK Imager', or 'WinPMEM'.
+
+
+Step 2: Identify the Profile
+
+1. Run ImageInfo: vol.py -f memory.dmp imageinfo 
+
+
+Step 3: Analyze the Memory Dump
+
+1. List Processes: vol.py -f memory.dmp --profile=Win7SP1x64 pslist
+2. Analyze Process Tree: vol.py -f memory.dmp --profile=Win7SP1x64 pstree
+3. Check DLLs Loaded by a Process: vol.py -f memory.dmp --profile=Win7SP1x64 dlllist -p <PID>
+4. List Open Handles: vol.py -f memory.dmp --profile=Win7SP1x64 handles -p <PID>
+5. Check Network Connections: vol.py -f memory.dmp --profile=Win7SP1x64 netscan
+6. Scan for Malicious Code: vol.py -f memory.dmp --profile=Win7SP1x64 malfind
+7. Find File Objects in Physical Memory: vol.py -f memory.dmp --profile=Win7SP1x64 filescan  
+8. CreCreate a CSV Timeline of Events: vol.py -f memory.dmp --profile=Win7SP1x64 timeliner --output-file=timeline.csv 
+
+
+Step 4: Extract and Analyze Specific Artifacts
+
+1. Dump Process Memory: vol.py -f memory.dmp --profile=Win7SP1x64 procdump -p <PID> -D /output/
+2. List Registry Hives: vol.py -f memory.dmp --profile=Win7SP1x64 hivelist
+3. Extract Registry Keys: vol.py -f memory.dmp --profile=Win7SP1x64 printkey -K "Software\Microsoft\Windows\CurrentVersion\Run"
+4. Command History: vol.py -f memory.dmp --profile=Win7SP1x64 cmdscan
+
+
+Step 5: Report Findings
+
+1. Document Analysis
+2. Create a Timeline
+3. Generate a Report
+
+
