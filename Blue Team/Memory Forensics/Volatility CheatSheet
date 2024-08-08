@@ -1,15 +1,132 @@
 
+-- Volatility 2 --
+
+Imageinfo
+vol.py -f "/path/to/file" imageinfo
+vol.py -f "/path/to/file" kdbgscan
+
+Process Information 
+vol.py -f "/path/to/file" --profile <profile> pslist
+vol.py -f "/path/to/file" --profile <profile> psscan
+vol.py -f "/path/to/file" --profile <profile> pstree
+vol.py -f "/path/to/file" --profile <profile> psxview
+
+Procdump 
+vol.py -f "/path/to/file" --profile <profile> procdump -p <PID> --dump-dir="/path/to/dir"
+
+Memdump
+vol.py -f "/path/to/file" --profile <profile> memdump -p <PID> --dump-dir="/path/to/dir"
+
+Handles 
+vol.py -f "/path/to/file" --profile <profile> handles -p <PID>
+Volatility 2: Offset(V), PID, handle, access, type, details
+
+Dlls
+vol.py -f "/path/to/file" --profile <profile> dlllist -p <PID>
+Volatility 2: PID, command line, base, size, loadcount, loadtime, path
+
+cmdline
+vol.py -f "/path/to/file" --profile <profile> cmdline
+vol.py -f "/path/to/file" --profile <profile> cmdscan
+vol.py -f "/path/to/file" --profile <profile> consoles
+Volatility 2: process name, PID, commandline; cmdscan includes application, flags, process handle; consoles contains C:\ listing, original titles, screen position and command history information
+
+Network Information
+vol.py -f "/path/to/file" --profile <profile> netscan
+vol.py -f "/path/to/file" --profile <profile> netstat
+
+XP/2003 SPECIFIC
+vol.py -f "/path/to/file" --profile <profile> connscan
+vol.py -f "/path/to/file" --profile <profile> connections
+vol.py -f "/path/to/file" --profile <profile> sockscan
+vol.py -f "/path/to/file" --profile <profile> sockets
+
+Registry
+vol.py -f "/path/to/file" --profile <profile> hivescan
+vol.py -f "/path/to/file" --profile <profile> hivelist
+
+Printkey 
+vol.py -f "/path/to/file" --profile <profile> printkey
+vol.py -f "/path/to/file" --profile <profile> printkey -K "Software\Microsoft\Windows\CurrentVersion"
+
+Hivedump
+vol.py -f "/path/to/file" --profile hivedump -o <offset> 
+
+Files
+vol.py -f "/path/to/file" --profile <profile> filescan
+
+Filedump
+vol.py -f "/path/to/file" --profile <profile> dumpfiles --dump-dir="/path/to/dir"
+vol.py -f "/path/to/file" --profile <profile> dumpfiles --dump-dir="/path/to/dir" -Q <offset>
+vol.py -f "/path/to/file" --profile <profile> dumpfiles --dump-dir="/path/to/dir" -p <PID>
+
+Miscellaneous
+vol.py -f "/path/to/file" --profile <profile> malfind
+Volatility 2: PID, process name, address, VAD tags, hexdump, and shellcode
+
+Yarascan
+vol.py -f "/path/to/file" yarascan -y "/path/to/file.yar"
 
 
 
+-- Volatility 3 --
 
+Imageinfo
+vol.py -f "/path/to/file" windows.info
 
+Process Information
+vol.py -f "/path/to/file" windows.pslist
+vol.py -f "/path/to/file" windows.psscan
+vol.py -f "/path/to/file" windows.pstree
+Volatility 3 does not include a direct psxview equivalent
 
+Procdump
+vol.py -f "/path/to/file" -o "/path/to/dir" windows.dumpfiles --pid <PID>
 
+Memdump
+vol.py -f "/path/to/file" -o "/path/to/dir" windows.memmap --dump --pid <PID>
 
+Handles
+vol.py -f "/path/to/file" windows.handles --pid <PID>
+Volatility 3: PID, process, offset, handlevalue, type, grantedaccess, name
 
+Dlls
+vol.py -f "/path/to/file" windows.dlllist --pid <PID>
+Volatility 3: PID, process, base, size, name, path, loadtime, file output
 
+cmdline
+vol.py -f "/path/to/file" windows.cmdline
+Volatility 3: PID, process name, args
 
+Network Information
+vol.py -f "/path/to/file" windows.netscan
+vol.py -f "/path/to/file" windows.netstat
+
+Registry
+vol.py -f "/path/to/file" windows.registry.hivescan
+vol.py -f "/path/to/file" windows.registry.hivelist
+
+Printkey
+vol.py -f "/path/to/file" windows.registry.printkey
+vol.py -f "/path/to/file" windows.registry.printkey --key "Software\Microsoft\Windows\CurrentVersion"
+
+Files
+vol.py -f "/path/to/file" windows.filescan
+
+Filedump
+vol.py -f "/path/to/file" -o "/path/to/dir" windows.dumpfiles
+vol.py -f "/path/to/file" -o "/path/to/dir" windows.dumpfiles --virtaddr <offset>
+vol.py -f "/path/to/file" -o "/path/to/dir" windows.dumpfiles --physaddr <offset>
+
+Miscellaneous
+vol.py -f "/path/to/file" windows.malfind
+Volatility 3: PID, process name, process start, protection, commit charge, privatememory, file output, hexdump disassembly
+
+Yarascan 
+vol.py -f "/path/to/file" windows.vadyarascan --yara-rules <string>
+vol.py -f "/path/to/file" windows.vadyarascan --yara-file "/path/to/file.yar"
+vol.py -f "/path/to/file" yarascan.yarascan --yara-file "/path/to/file.yar"
 
 
 https://blog.onfvp.com/post/volatility-cheatsheet/
+
