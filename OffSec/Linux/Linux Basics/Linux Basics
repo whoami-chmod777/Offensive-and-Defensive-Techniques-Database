@@ -1,4 +1,8 @@
 
+The Linux Operating System forms the basis of a huge number of the applications that we use every day on the internet. Linux servers are configured for uses as varied as high-performance computing, storage, network routing, and web servers. This flexibility has meant that the management of a Linux server is a complex subject with plenty of room for error. A large number of deployments and configurations has also led to new vulnerabilities being discovered almost every day. To protect a deployment on Linux, a system administrator must ensure that the Linux servers are always up to date with the latest security patches; a single vulnerable service or a minor mistake in configuration could leave the server, and the data residing on it, vulnerable to attack. 
+
+As a pentester, it is important to know how to scout for vulnerabilities and the ways they can be exploited.
+
 The objective of the Linux Basics section is to familiarize students with the Linux concepts and commands/tools required to interact with various services and applications.
 
 What will you learn?
