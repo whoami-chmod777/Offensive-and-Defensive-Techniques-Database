@@ -1,0 +1,10 @@
+
+The objective of the Linux Basics section is to familiarize students with the Linux concepts and commands/tools required to interact with various services and applications.
+
+What will you learn?
+
+- Understanding the Linux filesystem and users
+- Understanding the system and user crontabs
+- Learning the important Linux commands and tools
+- Fingerprinting web applications and network services such as FTP and SSH
+- Creating bi-directional connections with socat
