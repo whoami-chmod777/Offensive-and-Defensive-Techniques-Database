@@ -1,0 +1,22 @@
+
+Objective: Analyse the scheduled cron jobs on the provided machine and answer questions.
+
+Cron jobs are used to schedule tasks on the system.
+
+Objective: Analyse the scheduled cron jobs on the provided machine and answer the following questions:
+
+1. Is the cron service running?
+2. How many cron jobs are scheduled for the root user?
+3. Which binary is supposed to run 10 minutes after midnight, every day?
+4. Which binary is supposed to run at 2:10 PM on the first of every month?
+5. Which binary is supposed to run 10 minutes after midnight, 2 AM, 4 AM …, every day?
+6. Which binary is supposed to run at 8 PM on weekdays?
+7. Which binary is supposed to run at 10 after 4 every Saturday?
+8. On which email address the output of the schedules command/script will be sent?
+9. Cron job for which binary will not trigger an email?
+
+
+
+
+
+
