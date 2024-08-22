@@ -1,1 +1,35 @@
 
+-- Virtual Box --
+
+Virtual Box: https://www.virtualbox.org/wiki/Downloads
+Install VirtualBox on Mac: https://cs.hofstra.edu/docs/pages/guides/vbox_mac.html
+Install VirtualBox on Linux: https://phoenixnap.com/kb/install-virtualbox-on-ubuntu
+
+
+-- Configuring Windows --
+
+Commands:
+
+Disable real-time protection
+Set-MpPreference -DisableRealtimeMonitoring $true
+
+Disable the scanning of network files
+Set-MpPreference -DisableScanningNetworkFiles $true
+
+Disable the blocking of files at first sight
+Set-MpPreference -DisableBlockAtFirstSeen $true
+
+Disable Windows Defender AntiSpyware
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 1 /f
+
+Clone the course repository
+git clone https://github.com/MalwareCube/SOC101.git
+
+Next, extract each of the course ZIP files onto the desktop using the password below:
+
+ZIP file password: nucleus-faucet-rockslide
+
+
+References
+https://git-scm.com/
+https://github.com/MalwareCube/SOC101
