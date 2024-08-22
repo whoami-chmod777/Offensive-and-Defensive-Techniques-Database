@@ -9,12 +9,15 @@ Import a bookmarks file (Safari): https://support.apple.com/en-ca/guide/safari/i
 SOC Bookmarks file: https://github.com/MalwareCube/SOC101/blob/main/resources/bookmarks/soc_bookmarks.html
 
 
-
 -- Virtual Box --
 
 Virtual Box: https://www.virtualbox.org/wiki/Downloads
 Install VirtualBox on Mac: https://cs.hofstra.edu/docs/pages/guides/vbox_mac.html
 Install VirtualBox on Linux: https://phoenixnap.com/kb/install-virtualbox-on-ubuntu
+
+
+-- Operating Systems --
+
 Windows 10: https://www.microsoft.com/en-us/evalcenter/download-windows-10-enterprise
 Linux Ubuntu: https://ubuntu.com/download/desktop
 24.04 LTS Download: https://ubuntu.com/download/desktop/thank-you?version=24.04&architecture=amd64
@@ -49,3 +52,9 @@ ZIP file password: nucleus-faucet-rockslide
 References
 https://git-scm.com/
 https://github.com/MalwareCube/SOC101
+
+
+
+-- Configuring Ubuntu --
+
+
