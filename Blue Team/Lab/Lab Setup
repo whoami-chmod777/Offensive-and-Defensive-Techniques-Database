@@ -57,4 +57,15 @@ https://github.com/MalwareCube/SOC101
 
 -- Configuring Ubuntu --
 
+sudo apt update
+sudo apt install bzip2 tar gcc make perl git
+sudo apt install linux-headers-generic
+sudo apt install linux-headers-$(uname -r)
+
+
+sudo apt install git
+git clone https://github.com/MalwareCube/SOC101.git
+chmod +x ./install.sh
+./install.sh
+
 
