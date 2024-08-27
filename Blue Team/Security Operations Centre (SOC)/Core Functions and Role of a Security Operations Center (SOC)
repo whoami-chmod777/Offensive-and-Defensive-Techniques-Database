@@ -1,0 +1,41 @@
+
+This summary encapsulates the key concepts and functions described in the content about Security Operations Centers (SOC).
+
+- Monitor: Continuous observation for unusual activity using tools like IDS and SIEM to detect potential security threats early.
+- Detect: Confirm and identify security events using threat detection techniques and indicators of compromise (IOCs).
+- Analyze: Conduct in-depth investigations of security incidents, build timelines, and trace TTPs (Tactics, Techniques, and Procedures).
+- Respond: Develop response plans, contain and mitigate threats, restore operations, and collaborate with internal teams.
+
+
+Evolution of the SOC:
+- Availability Monitoring: Ensures systems are up and running.
+- Reactive Monitoring: Responds to events after they occur.
+- Proactive Monitoring: Anticipates and addresses potential issues before they become incidents.
+- Proactive Automation: Implements automated processes to enhance security measures.
+
+
+Key Components: People, Process, and Technology:
+- People: Includes analysts, responders, and engineers.
+- Process: Involves Incident Response (IR) plans and playbooks.
+- Technology: Utilizes tools such as SIEM, IDS, and EDR.
+
+
+Core Security Principles:
+- Confidentiality
+- Integrity
+- Availability
+
+
+Key Functions of a SOC:
+
+> Reactive Functions:
+- Monitoring and Detection: Analyzing logs and alerts from systems using SIEM and IDS, performing alert triage.
+- Incident Response: Investigating, containing, and mitigating threats, collecting evidence, and engaging with stakeholders.
+- Forensic Analysis: Performing in-house or third-party analysis, sandboxing, reverse engineering malware, and collecting IOCs.
+  
+> Proactive Functions:
+- Threat Intelligence: Gathering and analyzing intelligence, studying emerging threats, and feeding intel into detection tools.
+- Threat Hunting: Searching for malicious activity using logs, network traffic, and endpoint telemetry, informed by threat intelligence.
+- Vulnerability Management: Identifying and addressing vulnerabilities through scanning, assessment, patching, and coordinating remediation.
+- Security Awareness Training: Promoting awareness and educating the organization on best practices, policies, and procedures.
+
