@@ -1,0 +1,59 @@
+
+Information Security Refresher: Strengthening Your Security Foundations
+
+In the ever-evolving landscape of cybersecurity, it’s crucial to revisit and reinforce the fundamentals that protect our information systems. Here’s a quick refresher on some core concepts:
+
+-- CIA Triad --
+
+• Confidentiality: Protect sensitive data from unauthorized access.
+• Integrity: Ensure data remains accurate and trustworthy.
+• Availability: Make sure data and resources are accessible when needed.
+
+-- AAA Framework --
+
+• Authentication: Verify who’s accessing your systems.
+• Authorization: Define what actions are allowed based on roles and permissions.
+• Accounting: Track and log activities for monitoring and auditing.
+
+-- Understanding Security Risks --
+
+• Vulnerabilities: Weak points that could be exploited by threats.
+• Threats: Potential dangers like malware, phishing, and DDoS attacks.
+• Risk: The likelihood and potential impact of a threat exploiting a vulnerability.
+
+-- Logs, Events, and Incidents --
+
+• Logs: Records of system activities, crucial for troubleshooting and security.
+• Security Events: Observations that might impact security.
+• Security Incidents: Events that actually harm or compromise your systems.
+
+-- Security Controls --
+
+• Defense in Depth: Implement multiple layers of security.
+• Administrative Controls: Policies, incident response plans, and change management.
+• Technical Controls: Firewalls, EDR, IDS, and two-factor authentication.
+• Physical Controls: Access control systems, cameras, and biometrics.
+
+-- Control Functions --
+
+• Preventative: Stop attacks before they happen (e.g., firewalls, ACLs).
+• Detective: Identify intrusions (e.g., IDS, SIEM).
+• Corrective: Limit damage from attacks (e.g., backups, patch management).
+• Deterrent: Discourage attackers (e.g., physical barriers, signage).
+
+-- Risk Control Strategies --
+
+• Risk Transference: Shift risk to third parties (e.g., insurance, cloud services).
+• Risk Acceptance: Tolerate known risks.
+• Risk Avoidance: Eliminate exposure to risks (e.g., limit data storage).
+• Risk Mitigation: Reduce the likelihood or impact of risks.
+
+-- Key Security Policies --
+
+• Acceptable Use Policy (AUP): Define what’s allowed within your organization.
+• Password Policy: Set rules for password creation and management.
+• Data Classification Policy: Categorize data by sensitivity.
+• Change Management Policy: Plan and control system changes.
+• Disaster Recovery Policy: Prepare for recovering systems and data after incidents.
+
+Staying sharp on these fundamentals helps ensure that our security posture remains strong in the face of evolving threats.
