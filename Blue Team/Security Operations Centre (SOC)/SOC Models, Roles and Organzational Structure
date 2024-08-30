@@ -1,7 +1,6 @@
 
 -- Roles and Responsibilities --
 
-
 Security Analyst:
 
 1. Monitor and analyze security events and incidents.
@@ -9,7 +8,6 @@ Security Analyst:
 3. Develop and implement security policies and procedures.
 4. Respond to and investigate security breaches or incidents.
 5. Stay updated with emerging threats and security trends.
-
 
 Security Engineer:
 
@@ -19,7 +17,6 @@ Security Engineer:
 4. Collaborate with cross-functional teams to ensure security best practices are followed.
 5. Provide technical guidance and support for security-related projects.
 
-
 Security Architect:
 
 1. Design and plan the overall security architecture of an organization.
@@ -27,7 +24,6 @@ Security Architect:
 3. Evaluate and recommend security technologies and solutions.
 4. Conduct security assessments and audits.
 5. Collaborate with stakeholders to align security requirements with business goals.
-
 
 Incident Responder:
 
@@ -37,7 +33,6 @@ Incident Responder:
 4. Coordinate with internal teams and external stakeholders during incident response.
 5. Conduct post-incident analysis and implement preventive measures..
 
-
 Threat Intel Analyst:
 
 1. Collect and analyze threat intelligence from various sources.
@@ -45,7 +40,6 @@ Threat Intel Analyst:
 3. Develop and maintain threat profiles and indicators of compromise.
 4. Collaborate with other security teams to enhance threat detection and response capabilities.
 5. Provide actionable intelligence to support decision-making and incident response.
-
 
 Security Consultant:
 
@@ -55,7 +49,6 @@ Security Consultant:
 4. Provide guidance and recommendations for security improvements.
 5. Deliver security awareness training and workshops.
 
-
 Cryptographer
 
 1. Design and develop cryptographic algorithms and protocols.
@@ -64,13 +57,11 @@ Cryptographer
 4. Provide cryptographic solutions for secure communication and data storage.
 5. Stay updated with advancements in cryptography and cryptographic standards.
 
-
 Security Manager
 
 1. Oversee and manage the overall security program of an organization.
 2. Develop and implement security policies, procedures, and guidelines.
 3. Ensure compliance
-
 
 Malware Analyst:
 
@@ -78,7 +69,6 @@ Malware Analyst:
 2. Identify the functionality, capabilities, and infection vectors of malware.
 3. Determine the methods used by malware to exploit vulnerabilities or compromise systems.
 4. Extract indicators of compromise (IOCs) and signatures for detection and prevention.
-
 
 Forensics Analyst:
 
@@ -90,7 +80,6 @@ Forensics Analyst:
 6. Identify and analyze indicators of compromise (IOCs) to determine the extent and impact of a security incident.
 7. Prepare detailed forensic reports and documentation to support legal investigations and court proceedings.
 8. Stay updated with the latest forensic tools, techniques, and industry best practices.
-
 
 GRC Analyst
 
@@ -110,7 +99,6 @@ GRC Analyst
 14. Monitor and report on compliance status, issues, and corrective actions.
 15. Coordinate with internal and external stakeholders to ensure compliance with contractual obligations.
 
-
 VA Analyst:
 
 1. Conduct regular vulnerability assessments using automated scanning tools and manual techniques.
@@ -125,7 +113,6 @@ VA Analyst:
 10. Assess the criticality of software patches and prioritize their deployment based on risk levels.
 11. Coordinate with vendors and stakeholders to ensure timely acquisition and application of patches.
 12. Monitor and validate patching activities to ensure compliance with established procedures.
-
 
 PT Analyst
 
