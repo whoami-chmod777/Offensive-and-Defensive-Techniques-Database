@@ -1,0 +1,155 @@
+
+-- SOC Tools --
+
+Security Information and Event Management (SIEM)
+A comprehensive solution that centralizes log management, real-time monitoring, and threat detection to enhance security visibility and incident response.
+
+- Log Management
+- Real-time Monitoring
+- Alerting and Notification
+- Incident Response
+- Dashboards, Reports, and Visualization
+- Threat Intelligence Integration
+
+Tools: LogRhythm, Splunk, IBM Radar, solarwinds, Elastic Security, graylog
+
+***********************************************************************************************
+
+Security Orchestration, Automation, and Response (SOAR)
+Automates security operations and incident response processes, allowing for faster and more coordinated actions across various security tools.
+
+- Orchestration
+	- Workflows
+	- Collaboration
+- Automation
+	- Alert triage
+	- Artifact collection
+	- Data enrichment
+- Incident Response
+	- Assess and prioritize
+- Integration
+	- TIPS, EDR, firewalls, etc.
+- Analytics and Intelligence
+- Reporting
+
+Tools: Splunk SOAR, IBM Radar, LogRhythm, tines, blink, sumo logic
+
+***********************************************************************************************
+
+Incident Management Tools
+Facilitate the tracking, management, and resolution of security incidents, ensuring a structured and timely response.
+
+- Incident Ticketing
+	- Documentation
+	- Tracking
+	- Assigning
+- Alert Management
+- Workflow Automation
+- Collaboration
+
+Tools: ATLASSIAN, servicenow, freshworks, ONPAGE
+
+***********************************************************************************************
+
+Network Security Monitoring (NSM)
+Monitors network traffic for signs of malicious activity, providing visibility into potential threats across the network.
+
+- Packet Capture and Analysis
+	- Real time, or with captures
+- Network Traffic Analysis
+	- Statistical analysis
+	- Machine learning
+	- Behavior analysis
+- Intrusion Detection
+	- IDS functionality
+- Integration with SIEM
+	- Correlate network events with endpoint telemetry
+
+Tools: Snort, Suricata, Wireshark, Zeek, Nagios
+
+***********************************************************************************************
+
+Intrusion Detection and Prevention Systems (IDS/IPS)
+Detect and prevent unauthorized access or attacks on the network, acting as a critical defense layer.
+
+- Passive or active monitoring
+- Generate alerts
+- Actively block and prevent threats Logging and reporting
+- Logging and Reporting
+
+Tools: Zeek, Snort, Suricata
+
+***********************************************************************************************
+
+Endpoint Detection and Response (EDR) 
+Focuses on detecting and responding to threats on individual endpoints, ensuring that devices like laptops and servers are protected.
+
+- Real-time Endpoint Monitoring
+- User Entity Behavior Analytics (UEBA)
+- Threat Detection and Prevention
+- Incident Investigation
+- Remediation and Response
+- Integration with SIEM
+
+CROWDSTRIKE, Sophpos, Carbon Black, SentinelOne
+
+***********************************************************************************************
+
+Firewalls
+Network Firewalls: Protect the perimeter by controlling incoming and outgoing traffic based on security rules.
+Next-Generation Firewalls (NGFW): Advanced firewalls that offer deeper inspection capabilities, such as application-level filtering.
+Web Application Firewall (WAF): Protects web applications by filtering and monitoring HTTP traffic between a web application and the Internet.
+
+- Network Firewalls
+	- Examine packets
+	- Layer 3
+	- Make decisions based on rules
+- Next-Generation Firewalls (NGFW)
+	- Stateful packet inspection
+	- Deep packet inspection
+	- Layer 7
+- Web Application Firewalls
+	- Inspect HTTP(S) traffic
+	- Protect web applications from attacks
+	- Layer 7
+
+Tools: paloalto, SONIC Wall, pfsense, Juniper Networks, F5, Cloudflare
+
+***********************************************************************************************
+
+Threat Intelligence Platforms (TIP)
+Aggregate and analyze threat data from various sources to help identify and mitigate potential security risks proactively.
+
+- Data Aggregation and Enrichment
+- Indicators of Compromise (IOCs)
+- Normalization and Standardization
+- Analysis and Prioritization Integration with SIEM
+- Intergration with SIEM
+
+Tools: OPENCTI, MISP, Maltego, Recorded Future
+
+***********************************************************************************************
+
+Forensic Analysis Tools 
+Used to investigate and analyze security breaches, providing detailed insights into how an attack occurred and its impact.
+
+- Data Acquisition and Imaging
+- File System Analysis
+- Memory Forensics
+- Registry Forensics
+- Network Traffic Forensics
+
+Tools: Autopsy, Volatility, EZ Tools, EnCase
+
+***********************************************************************************************
+
+Malware Analysis Tools
+Specialized tools for analyzing and understanding malware behavior, crucial for developing countermeasures and improving defenses.
+
+- Dynamic Analysis
+- Static Analysis
+- Behavioral Analysis
+- Signature and Pattern Matching
+- Integration with TIPS
+
+Tools: Any Run, Hybrid Analysis, Joe Sandbox, cuckoo, Ghidra
