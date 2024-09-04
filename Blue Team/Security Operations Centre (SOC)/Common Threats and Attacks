@@ -1,0 +1,140 @@
+
+Cybersecurity risks that exploit system vulnerabilities, including social engineering, malware, ransomware, and data breaches, posing significant harm to organizations.
+
+-- Social Engineering --
+
+Cyberattacks that exploit human vulnerabilities through deception.
+
+• Exploiting humans
+• Spoofing
+• Phishing: Spear Phishing, Whaling
+• Vishing
+• SMiShing (SMS Phishing)
+• Quishing (QR Code Phishing)
+
+
+-- Worm --
+
+Self-replicating malware that spreads across networks, without user interaction.
+
+• Self replicating
+• Infect and propagate
+• Spreads across networks: Often without requiring user interaction
+• Stuxnet, Blaster
+
+
+-- Spyware/Adware --
+
+Malware designed to monitor user activity and display unwanted advertisements.
+
+• Monitor user activity
+• Display unwanted advertisements
+
+
+-- Trojan --
+
+Malware disguised as legitimate software, used for malicious purposes.
+
+• Disguised malware
+• Acting as legitimate software: Games, Extensions, Productivity Applications
+• RAT - Remote Access Trojan
+• Botnets
+• Deliver Ransome
+
+
+-- Ransomware --
+
+Malware that locks data or systems, demanding payment for restoration.
+
+• Infection
+• Demand
+• Payment
+• Decryption (If you're lucky)
+
+
+-- Botnet --
+
+A network of compromised systems (zombies) controlled by an attacker to coordinate large-scale cyberattacks.
+
+• Network of compromised "zombies" 
+• Controlled by a remote attacker
+• Used to coordinate attacks: DDoS, Spam Campaingns, Spread Malware
+
+
+-- Fileless Malware --
+Memory-based malware that leaves no trace on disk, making it harder to detect.
+
+• Memory-based malware
+• No traces on disk
+• Evade detection and logging 
+• Living Off the Land: PowerShell, WMI, Code Injection
+
+
+-- Identity and Account Compromise --
+
+The theft or misuse of credentials (usernames, passwords) and personal information.
+
+• Usernames, passwords, SSN, PII
+• Impersonation, fraud, theft
+• Methods include: Phishing, Brute Force, Credential Stuffing, Social Engineering, Malware
+
+
+-- Insider Threats --
+
+Threats originating from within an organization, often from employees, contractors, or partners.
+
+• Threats from the "inside": Current or Former Employees, Contractors, Partners
+• Malicious, careless, or compromised
+• Can lead to severe exposure and damage: Data breaches, IP Theft, Reputational Damage, Legal issues
+
+
+-- Advanced Persistent Threats (APTS) --
+
+Highly skilled adversaries using sophisticated techniques for long-term, targeted attacks.
+
+• Highly skilled, well funded adversaries
+• Sophisticated
+• Persistent: Long-term, quiet, and undetected access
+• Targeted
+• Strategic Objectives
+
+https://www.crowdstrike.com/adversaries/
+
+
+-- Denial-of-Service Attacks --
+
+Attacks aimed at disrupting the availability of systems by overwhelming them with traffic.
+
+• Disrupt the availability of systems
+• Flood of traffic and requests: Exhaust a system's resources and bandwidth
+• Intentional or Accidental
+• Distributed Denial-Of-Service (DDoS): Utilize multiple compromised systems, Amplification, Hard to defend and block
+
+
+-- Data Breaches --
+
+Incidents involving the exposure, theft, or compromise of sensitive data.
+
+• Data exposure, theft, or compromise
+• PII, credentials, financial records, IP
+• Malicious actions and human error: Misconfiguration, Inadequate security controls
+• Reputational Damage, Regulatory Trouble
+
+
+-- Zero-Days --
+
+Exploits targeting vulnerabilities that are unknown and unpatched by the vendor.
+
+• Vulnerabilities previously unknown to a vendor
+• No patches, no mitigations: Zero days to patch, Zero days to protect
+• Risk mitigation, risk avoidance
+
+
+-- Supply Chain Attacks --
+
+Cyberattacks targeting vulnerabilities in third-party suppliers or vendors, affecting downstream systems.
+
+• Exploits up the chain: Compromises security downstream 
+• Suppliers, vendors, partners
+• Malware propagates down: Hard to detect, Malware from "trusted" entities
+
