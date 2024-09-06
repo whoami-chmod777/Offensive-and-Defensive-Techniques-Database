@@ -1,0 +1,27 @@
+
+-- Display Filters Example --
+
+tcp
+ip.src == 192.168.1.1
+http
+tcp.port == 80
+ip.addr == 10.0.0.1
+dns
+tcp.flags.syn == 1
+icmp
+frame.number == 100
+udp && ip.dst == 192.168.1.5
+
+
+-- Display Filters for IP Addresses and Subnets --
+
+ip.addr == 192.168.1.1
+ip.src == 10.0.0.1
+ip.dst == 172.16.0.5
+ip.addr != 192.168.1.100
+ip.src != 10.1.1.1
+ip.addr == 192.168.1.0/24
+ip.src == 10.0.0.0/8
+ip.dst == 172.16.0.0/16
+ip.addr == 192.168.0.0/16
+ip.addr == 10.0.0.0/24
