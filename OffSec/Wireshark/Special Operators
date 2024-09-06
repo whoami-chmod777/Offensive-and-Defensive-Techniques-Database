@@ -1,0 +1,99 @@
+
+-- Special Operators - contains, matches, in and exists --
+
+
+- 'contains' Operator (Field contains a specific value) -
+
+http.user_agent contains "Mozilla"
+tcp contains "GET"
+http.request.uri contains "login"
+dns contains "example.com"
+icmp contains "ping"
+ftp.request.command contains "USER"
+smtp contains "password"
+http.cookie contains "session"
+ssl.handshake.extensions contains "server_name"
+tcp contains "POST"
+http.request.uri contains "admin"
+dns.qry.name contains "google"
+tcp.payload contains "SSH"
+http.referer contains "refer"
+ip.src contains "192.168"
+dhcp.option.hostname contains "client"
+dns.flags.rcode contains "NOERROR"
+tcp.options.mss contains "1460"
+sip contains "INVITE"
+radius contains "username"
+
+
+- 'matches' Operator (Regular expression match) -
+
+http.request.uri matches "^/images/.*"
+dns.qry.name matches ".*\.com$"
+http.user_agent matches ".*Firefox.*"
+http.host matches "^www\..*"
+ip.addr matches "^192\.168\..*"
+http.request.uri matches "^/api/v[0-9]+/.*"
+dns.qry.name matches "^[a-z0-9]+\.example\.com$"
+http.request.method matches "^GET|POST$"
+sip.request.uri matches "^sip:.*@example\.com"
+ssl.handshake.extensions matches ".*google.*"
+http.cookie matches ".*session.*"
+ftp.request.command matches "^(USER|PASS)$"
+dns.qry.name matches ".*\.org$"
+http.referer matches ".*facebook.*"
+smtp.mail_from matches ".*@gmail\.com"
+tcp.flags matches ".*SYN.*"
+radius.username matches "^user[0-9]{3}$"
+ip.addr matches "^10\..*"
+http.request.uri matches "^/admin/.*"
+http.content_type matches ".*json.*"
+
+
+- 'in' Operator (Value is within a range) -
+
+ip.src in {192.168.1.1, 192.168.1.2, 192.168.1.3}
+tcp.port in {80, 443, 8080}
+ip.dst in {10.0.0.1, 10.0.0.2, 10.0.0.3}
+udp.port in {53, 123, 67}
+ip.addr in {192.168.0.0/16, 10.0.0.0/8}
+tcp.srcport in {1024..65535}
+ip.src in {172.16.0.1, 172.16.0.2, 172.16.0.3}
+icmp.type in {0, 8}
+ip.src in {192.168.1.100..192.168.1.110}
+tcp.flags in {0x02, 0x12}
+ip.addr in {192.168.1.1, 10.0.0.1}
+ip.dst in {172.16.0.0/12, 10.0.0.0/8}
+tcp.seq in {1000..2000}
+ip.addr in {192.168.0.1, 192.168.0.5}
+tcp.flags.syn in {0, 1}
+udp.srcport in {10000..20000}
+ip.src in {192.168.2.1, 192.168.2.2}
+ip.addr in {10.0.0.1..10.0.0.10}
+dns.qry.name in {"example.com", "test.com"}
+ip.dst in {192.168.10.1..192.168.10.5}
+
+
+- 'exists' Operator (Checks if a field exists) -
+
+ip.src exists
+tcp.flags.syn exists
+http.cookie exists
+ssl.handshake.extensions exists
+dns.qry.name exists
+icmp.seq exists
+tcp.options.mss exists
+ftp.request.command exists
+http.referer exists
+smtp.mail_from exists
+radius.username exists
+tcp.ack exists
+http.request.uri exists
+dns.flags.response exists
+tcp.payload exists
+sip.request.uri exists
+dhcp.option.hostname exists
+tcp.window_size exists
+http.user_agent exists
+http.authorization exists
+
