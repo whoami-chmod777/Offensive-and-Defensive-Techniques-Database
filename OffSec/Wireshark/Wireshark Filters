@@ -1,0 +1,6 @@
+
+Capture Filters: Applied before data is captured, limiting which packets are recorded, saving resources but cannot be changed after capture.
+Display Filters: Applied after data is captured, allowing you to view specific packets from the full capture without altering the original data.
+
+
+
