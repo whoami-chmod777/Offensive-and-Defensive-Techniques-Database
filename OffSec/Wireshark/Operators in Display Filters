@@ -12,11 +12,13 @@ Here are some commonly used Operators in Wireshark Display Filters:
 && : Logical AND
 || : Logical OR
 ! : Logical NOT
-contains : Field contains a specific value
-matches : Regular expression match
+
+contains : Field contains a specific value (e.g., http.user_agent contains "Mozilla")
+matches : Regular expression match (e.g., http.request.uri matches "^/images/.*")
 in : Value is within a range (e.g., ip.src in {192.168.1.1 192.168.1.2})
 exists : Checks if a field exists (e.g., ip.src exists)
 frame.number == 100 : Specific frame number
+
 ip.addr != 192.168.1.1 : Negating a condition
 tcp.port == 80 : Filters for specific port
 ip.addr == 192.168.0.0/16 : Filters within a subnet
