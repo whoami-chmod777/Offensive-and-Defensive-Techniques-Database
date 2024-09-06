@@ -1,1 +1,13 @@
 
+-- Capture Filter Examples --
+
+tcp
+host 192.168.1.1
+port 80
+net 192.168.1.0/24
+tcp port 443
+udp
+host 10.0.0.1 and port 53
+not arp
+icmp
+dst net 10.0.0.0/8
