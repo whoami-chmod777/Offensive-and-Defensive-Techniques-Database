@@ -1,0 +1,54 @@
+
+How is Email works
+The Sender composes an email, which is sent using SMTP to the sender’s mail server. The email is then routed to the Recipient's mail server via SMTP. The recipient retrieves the email using POP3 or IMAP protocols. The email is now available for the recipient to read on their device.
+
+
+Email Headers
+Email headers are lines of metadata attached to an email and contain critical information such as the sender's and recipient's email addresses, the mail servers involved in the transmission, timestamps, IP addresses, and authentication data. These headers provide valuable insights for analysts and investigators when tracking the source of the email, identifying potential security risks, or investigating phishing or spam activities.
+
+Email Body
+The email body is the primary content of an email message, visible to the recipient. It includes the message the sender wishes to communicate, often consisting of text, images, hyperlinks, and attachments. The body is separate from the email header, which contains metadata, and serves as the main section that delivers the sender's intended information or request.
+
+
+Email Addresses
+An email address is a unique identifier used to send and receive electronic messages across the internet.
+
+bob.smith@example.com
+
+-> bob.smith = Local Part
+-> @ = Separator
+-> example.com = Domain Part
+-> .com = Top-Level Domain (TLD)
+
+
+Email Protocols
+These protocols handle different aspects of email communication, from sending (SMTP) to retrieving and syncing emails (POP3 and IMAP).
+
+SMTP (Simple Mail Transfer Protocol): 
+- Used to send outgoing emails.
+- Ports: 25 (or 465, 587 for secure transmission).
+
+POP3 (Post Office Protocol v3):
+- Downloads emails to the local device and typically deletes them from the server.
+- Ports: 110 (or 995 for secure POP3S).
+
+IMAP (Internet Message Access Protocol):
+- Allows advanced email synchronization across multiple devices, keeping emails on the server.
+- Ports: 143 (or 993 for secure IMAPS).
+
+
+Mail Agents
+A mail agent is a software component that facilitates the process of sending, receiving, managing, and routing emails. It interacts with mail servers using specific protocols (such as SMTP, POP3, and IMAP) to ensure that email messages are correctly routed from the sender to the recipient, moving through multiple mail servers as necessary before final delivery.
+
+Types of Mail Agents:
+
+- Mail User Agent (MUA):
+	The client application used by the sender or recipient to compose, read, and manage emails (e.g., Gmail, Outlook).
+- Mail Transfer Agent (MTA):
+	Responsible for transferring emails between mail servers using SMTP (e.g., Gmail's mail server).
+- Mail Delivery Agent (MDA):
+	Handles the final delivery of the email from the recipient's mail server to their inbox (e.g., Yahoo's mail server using POP3 or IMAP).
+- Mail Submission Agent (MSA)
+	The MSA receives outgoing emails from the user and forwards them to the mail server using SMTP for delivery.
+- Mail Retrieval Agent (MRA)
+	The MRA retrieves incoming emails from the mail server and delivers them to the user's email client via POP3 or IMAP.
