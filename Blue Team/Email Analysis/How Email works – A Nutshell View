@@ -7,6 +7,8 @@ MDA: Mail Delivery Agent, which performs the actual delivery. eg: mail.local, pr
 
 -- How Email Works --
 
+Emails travel through MUAs, MTAs, and MDAs for seamless communication
+
 1. User composes an email in their Mail User Agent (MUA (e.g., Outlook, Gmail).
 2. The MUA sends the email to the Mail Transfer Agent (MTA (e.g., SMTP server).
 3. The MTA forwards the email through the Internet to the recipient’s MTA.
