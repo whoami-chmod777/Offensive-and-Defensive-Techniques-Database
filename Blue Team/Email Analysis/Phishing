@@ -1,5 +1,10 @@
 
+-- Phishing Definitions --
+
 Phishing is a social engineering tactic designed to trick individuals into giving away sensitive information through email, SMS, phone calls, or websites. It’s a growing threat that preys on human emotions and psychology.
+
+Phishing is a cyberattack that uses deceptive messages to trick individuals into revealing sensitive information, such as passwords or financial details, often by impersonating trusted entities.
+
 
 Key Phishing Tactics :
 
@@ -19,3 +24,90 @@ How Phishing Works :
 • Familiarity: Establishing recognition to gain trust
 
 🚨 Don’t fall victim! Always double-check unexpected requests for sensitive information and be wary of urgent, emotionally charged messages.
+
+
+-- Phishing Attack Types --
+
+1. Information Gathering
+Collecting data through reconnaissance to verify accounts and craft credible phishing attempts.
+
+2. Credential Harvesting
+Obtain login credentials from victims
+
+3. Malware Delivery
+Delivering malware via malicious attachments, links, or drive-by downloads.
+
+4. Vishing, SMiShing, and Quishing
+Attempting to obtain information through phone calls, SMS with malicious URLs, or QR codes leading to malicious sites.
+
+5. Business Email Compromise (BEC):
+Compromising legitimate email accounts for unauthorized wire transfers or invoice scams.
+
+6. Spam
+Unsolicited and irrelevant emails, typically not malicious but a nuisance.
+
+7. Spear Phishing
+Targeted, customized attacks aimed at specific individuals or organizations using detailed research.
+
+8. Whaling
+Phishing targeting high-profile individuals, such as CEOs or executives.
+
+
+-- Phishing Attack Techniques --
+
+Pretexting
+- Creating a fabricated backstory to manipulate victims under false pretense.
+
+Spoofing and Impersonation
+- Email Address Spoofing
+- Domain Spoofing
+
+URL Manipulation
+- URL Shortening
+- Subdomain Spoofing
+- Homograph Attacks
+- Typo squatting
+
+Encoding
+- Obfuscating to evade detection
+- Techniques: Base64, URL encoding, HTML encoding
+- Obscuring malicious JavaScript
+
+Attachments
+- Malicious attachments that download and execute harmful software
+
+Abuse of Legitimate Services
+- Using trusted services like Google Drive or Dropbox to send malware
+
+Pharming
+A two-step technique:
+- Malware-based Pharming
+- DNS Server Poisoning
+
+
+-- Phishing Analysis Methodology --
+
+1. Initial Triage
+Quickly assess and prioritize the phishing threat.
+
+2. Header and Sender Examination
+Investigate email headers, MTAs, IPs, and addresses to identify the true origin.
+
+3. Content Examination
+Analyze email language, formatting, and spot social engineering red flags.
+
+4. Web and URL Examination
+Collect web artifacts and inspect URLs/domains using specialized tools.
+
+5. Attachment Examination
+Securely extract and analyze attachments, checking file reputation and sandboxing.
+
+6. Contextual Examination
+Consider the broader context of current incidents and assess patterns.
+
+7. Defense Measures
+Take reactive and proactive defense actions, and communicate with users and stakeholders.
+
+8. Documentation and Reporting
+Record findings, actions, and outcomes through detailed reports. Close out alerts and tickets.
+
