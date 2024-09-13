@@ -1,0 +1,33 @@
+
+Commonly Used Options:
+
+-i : Select the interface to capture from.
+-w : Write output to a file.
+-D : List available interfaces.
+-s : Snap length (limits the packet size to capture).
+-b : Capture buffer and file size/duration options.
+-f : Apply a capture filter (BPF syntax).
+-c : Stop capturing after a specific number of packets.
+-a duration:NNN : Automatically stop after N seconds.
+-q : Quiet mode (no output).
+-z : Display real-time packet statistics.
+
+
+dumpcap -i [interface] -w [output_file]
+
+dumpcap -D
+dumpcap -i eth0 -w capture_file.pcap
+dumpcap -i eth0 -b filesize:100000 -w capture_file
+dumpcap -i eth0 -b files:10 -w capture_file
+dumpcap -i eth0 -b duration:3600 -w capture_file
+dumpcap -i eth0 -s 128 -w capture_file
+dumpcap -i eth0 -f "tcp port 80" -w capture_file
+dumpcap -i eth0 -w capture_file -b duration:600 &
+dumpcap -i eth0 -z
+dumpcap -i eth0 -B 4 -w capture_file
+dumpcap -i eth0 -q -w capture_file
+dumpcap -i eth0 -w capture_file -F pcap -W 600
+dumpcap -i eth0 -b filesize:10000 -b files:5 -w capture_file
+dumpcap -i eth0 -c 10000 -w capture_file
+dumpcap -i eth0 -a duration:3600 -w capture_file  
+  
