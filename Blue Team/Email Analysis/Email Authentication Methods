@@ -1,1 +1,124 @@
 
+Key Email Authentication Methods: SPF, DKIM, and DMARC
+To protect against email spoofing, phishing, and other malicious activities, three primary email authentication methods are used: SPF, DKIM, and DMARC. Each of these serves a unique role in validating the authenticity of email messages.
+
+
+-- Sender Policy Framework (SPF) --
+
+SPF is used to verify that the sending mail server is authorized to send email on behalf of the domain in the email's "From" field.
+
+How it works:
+
+- The domain owner publishes a list of allowed mail servers in a DNS record
+- When an email is received, the recipient’s mail server checks the sender's IP address against the SPF record
+- If the sender's IP is in the list, the email passes SPF; otherwise, it fails.
+
+-- Example SPF Record --
+
+nslookup -type=txt shodan.io | grep -i spf 
+shodan.io	text = "v=spf1 ip4:216.117.2.180 ip4:69.72.37.146 include:_spf.google.com -all" 
+
+nslookup -type=txt _spf.google.com | grep -i spf
+_spf.google.com	text = "v=spf1 include:_netblocks.google.com include:_netblocks2.google.com include:_netblocks3.google.com ~all"
+
+v=spf1: version of the SPF
+ip4:216.117.2.180 and ip4:69.72.37.146: specific IP addresses that are explicitly authorized to send email on behalf of shodan.io
+include:_spf.google.com: tells the recipient's mail server to include Google's SPF records 
+-all: indicates a "hard fail" policy. This means that only emails from the listed IP addresses or those authorized by Google's SPF records should be accepted.
+~all: indicates a "soft fail" policy. Emails failing the SPF check may be marked as suspicious or treated differently but they won't be rejected outright.
+
+
+nslookup -type=txt shodan.io | grep -i spf 
+nslookup -type=txt _spf.google.com | grep -i spf
+$ dig TXT shodan.io | grep -i spf
+
+
+
+-- Domain Identified Mail (DKIM)--
+
+DKIM verifies the authenticity of an email by enabling the recipient to confirm whether any part of the email, such as the body or attachments, has been modified during its journey.
+
+How it works:
+
+- The sender's domain signs the email with a private cryptographic key
+- The recipient’s mail server uses the public key (published in the sender's DNS record) to verify the signature
+- If the signature matches, the email passes DKIM; if not, it fails.
+
+-- Example DKIM Record --
+
+v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC1LfA...
+
+This record specifies the public key used to verify the DKIM signature.
+
+
+
+-- Domain-Based (DMARC) --
+
+DMARC ties SPF and DKIM together and provides instructions to the receiving mail server on how to handle emails that fail authentication. It also offers reporting capabilities to help domain owners monitor their email traffic.
+
+SPF: 📧 Verifies the sending server’s authorization
+DKIM: 🔒 Confirms the email's authenticity
+DMARC: 🛡️ Enforces authentication and provides reporting
+
+How it works:
+
+- DMARC requires that either SPF or DKIM (or both) pass and align with the domain in the “From” header.
+- The domain owner sets a DMARC policy in their DNS record that tells the receiving server what action to take if authentication fails: none (monitor), quarantine (mark as spam), or reject.
+
+DMARC provides complete insight into Email as a channel and answers some of these important questions:
+
+- Who sent emails on your behalf?
+- How many were genuine?
+- How many were spoofing attempts?
+- Who sent them (Which IP)?
+- Is your Email properly configured?
+- Are SPF and DKIM aligned properly?
+- Who are we sending emails to?
+- Where are the attackers located?
+- Who are our Shadow IT providers?
+…among many other important questions
+
+-- Example DMARC Record --
+
+v=DMARC1; p=reject; rua=mailto:dmarc-reports@yourdomain.com
+
+This DMARC policy specifies that emails failing SPF/DKIM should be rejected, and reports should be sent to dmarc-reports@yourdomain.com.
+
+
+-- How They Work Together --
+
+- SPF checks whether the server sending the email is authorized to do so.
+- DKIM ensures that the email content has not been tampered with during transit.
+- DMARC enforces alignment between the domain in the "From" field and the domains used for SPF and DKIM, and it instructs receiving mail servers on what to do if SPF or DKIM checks fail.
+
+
+-- Benefits of Implementing SPF, DKIM, and DMARC --
+
+- Prevent Email Spoofing: These methods protect against attackers sending emails that appear to come from your domain.
+- Increase Trust: Verified emails are less likely to be flagged as spam or phishing, improving deliverability and trust.
+- Visibility into Attacks: DMARC reporting gives you visibility into unauthorized attempts to use your domain for malicious purposes.
+
+
+
+-- Commands --
+
+SPF
+nslookup -type=txt example.com | grep -i spf 
+nslookup -type=txt _spf.google.com | grep -i spf 
+dig example.com TXT | grep -i spf
+
+DKIM
+nslookup -type=TXT selector._domainkey.example.com
+dig selector._domainkey.example.com TXT
+
+DMARC
+nslookup -type=TXT _dmarc.example.com
+dig _dmarc.example.com TXT
+
+
+https://mxtoolbox.com/EmailHeaders.aspx
+https://mxtoolbox.com/dkim.aspx
+https://mxtoolbox.com/dmarc.aspx
+https://defang.me/
+
+
