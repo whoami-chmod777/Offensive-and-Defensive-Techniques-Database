@@ -59,6 +59,16 @@ MTU Mismatch: ping <destination> -f -l <packet_size>
 Path MTU Discovery (PMTUD) Issues: icmp.type == 3 && icmp.code == 4
 
 
+-- IP Flags --
+
+IP Flags are 3-bit fields in the IP header that control or indicate fragmentation of a packet, including Don't Fragment (DF) to prevent fragmentation, More Fragments (MF) to indicate more fragments follow, and one reserved bit.
+
+The Don't Fragment (DF) flag in the IP header is crucial because it prevents the packet from being fragmented along its route. If a router encounters a packet larger than the network's Maximum Transmission Unit (MTU) and the DF flag is set, the router will drop the packet instead of fragmenting it and send back an ICMP "Fragmentation Needed" message to the sender. 
+
+Filter for Packets with the DF Flag Set: ip.flags.df == 1
+Filter for Packets without the DF Flag: ip.flags.df == 0
+Filter for ICMP "Fragmentation Needed" Messages (indicating DF is set but packet exceeds MTU): icmp.type == 3 && icmp.code == 4
+Filter for Fragmented Packets (without DF, and being fragmented): ip.flags.mf == 1 or ip.frag_offset > 0
 
 
 
