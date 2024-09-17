@@ -38,6 +38,53 @@ Misconfigured Devices: Look for unexpected TTL behavior (e.g., not decrementing 
 DNS Query TTL Debugging: Use TTL values in DNS queries to monitor the path and detect anomalies in routing.
 
 
--- 
+-- IP Fragmentation --
+
+IP Fragmentation occurs when a packet is too large to be transmitted over a network segment that has a smaller Maximum Transmission Unit (MTU) than the packet size. To handle this, the original packet is broken into smaller fragments, each of which is sent separately and reassembled at the destination.
+
+MTU: Maximum packet size that can be transmitted without fragmentation.
+IP ID: Unique identifier for reassembling fragments of the same packet.
+Fragment Offset: Indicates where each fragment belongs in the original packet.
+More Fragments (MF) Flag: Set for all fragments except the last one.
+Fragmentation Troubleshooting: Use Wireshark filters to detect missing, fragmented, or excessive fragmentation issues.
+
+Detect Fragmented Packets: ip.flags.mf == 1 or ip.frag_offset > 0
+Track a Specific Fragment by IP ID: ip.id == <ip_id> && (ip.flags.mf == 1 or ip.frag_offset > 0)
+Identify Missing Fragments: ip.id == <ip_id>
+Find Last Fragment: ip.flags.mf == 0 && ip.frag_offset > 0
+Check Fragment Reassembly Issues: ip.reassembled.in == 0
+Track Fragmented Packets from a Host: ip.src == <source_ip> && (ip.flags.mf == 1 or ip.frag_offset > 0)
+
+MTU Mismatch: ping <destination> -f -l <packet_size>
+Path MTU Discovery (PMTUD) Issues: icmp.type == 3 && icmp.code == 4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
