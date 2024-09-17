@@ -1,0 +1,65 @@
+
+"Defanging" a URL or "URL obfuscation" is a common technique used to make URLs non-clickable or inactive in order to prevent users from accidentally clicking on potentially malicious links. By altering the URL, such as changing www.example.com to www[.]example[.]com, the link is no longer functional, reducing the risk of accidentally visiting a harmful website while still allowing the recipient to recognize the original URL.
+
+
+1. Using a Command Line Script (Python)
+
+import re
+
+def defang_url(text):
+    # Replace dots (.) with [.] and colons (:) with [:]
+    defanged_text = re.sub(r'\.', '[.]', text)
+    defanged_text = re.sub(r':', '[:]', defanged_text)
+    return defanged_text
+
+# Example usage
+url = "https://www.example.com/path?query=value"
+print(defang_url(url))
+
+
+How to Run:
+
+- Copy and paste the script into a Python file (e.g., defang.py).
+- Run the script by typing python defang.py in the command line.
+
+This will replace all periods (.) and colons (:) with [.] and [:] to defang the URL.
+
+
+2. Using an Online Tool (Website):
+
+There are also online tools that allow you to defang URLs automatically:
+
+Defang.me: A simple online tool where you can paste a URL, and it will defang it by replacing the periods and colons with [.] and [:].
+
+Steps:
+- Go to Defang.me.
+- Paste your URL into the box.
+- Click "Defang."
+- Copy the defanged URL from the output.
+
+https://defang.me/
+
+
+3. Using sed Command (Linux/macOS):
+
+You can use the sed command in Linux/macOS to replace characters in a URL to defang it.
+
+Example Command:
+echo "https://www.example.com" | sed 's/\./[.]/g' | sed 's/:/[;]/g'
+
+This will defang the URL by replacing periods (.) with [.] and colons (:) with [;].
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
