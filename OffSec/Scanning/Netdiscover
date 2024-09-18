@@ -1,0 +1,38 @@
+
+This repository provides a beginner's guide to using Netdiscover, a network address discovery tool primarily used in ethical hacking and penetration testing. Originally designed for discovering wireless networks during wardriving, Netdiscover can also scan network addresses on switched networks using ARP packets. It's included by default in Kali Linux, and is widely used in Hack the Box challenges and real-world penetration testing.
+
+Key Features & Commands:
+
+• Basic Scan: Simply run netdiscover to start scanning for network addresses.
+• Help Option (-h): View all available options and detailed usage instructions.
+• Fast Mode: Use the -f option to speed up the scanning process.
+• Interface Mode: Use the -i option to scan a specific network interface (e.g., eth0).
+• Range Scan: Use the tool to scan a specific IP range, such as 192.168.248.0/24.
+• Printable Form: The -p option formats the output for easy printing.
+
+
+-- Netdiscover Options --
+
+Basic Scan	
+Scan for all network addresses on the default interface.	
+netdiscover
+
+Help Option (-h)	
+Show all available options and detailed usage instructions.	
+netdiscover -h
+
+Fast Mode	
+Perform a faster scan of network addresses.	
+netdiscover -f
+
+Interface Mode	
+Scan a specific network interface (e.g., eth0).	
+netdiscover -i eth0
+
+Range Scan	
+Scan a specific IP range (e.g., 192.168.248.0/24).	
+netdiscover -r 192.168.248.0/24
+
+Printable Form	
+Output the results in a format suitable for printing.	
+netdiscover -p
