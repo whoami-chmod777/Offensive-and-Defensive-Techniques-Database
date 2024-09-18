@@ -1,0 +1,3 @@
+
+WhatWeb is a versatile web scanner that identifies the technologies used by a website. It helps answer the question, “What is that website?” by detecting various components such as web servers, CMS platforms, JavaScript libraries, SQL errors, and more. WhatWeb comes pre-installed in Kali Linux and has over 1800 plugins for identifying different technologies.
+
