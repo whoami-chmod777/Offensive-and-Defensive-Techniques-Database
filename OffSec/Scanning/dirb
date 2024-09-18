@@ -15,7 +15,7 @@ Key Features & Commands:
 • Search Multiple Extensions: The -x option allows you to search for multiple file extensions from a list in a text file.
 
 
--- dirb Guide --
+-- Dirb Options --
 
 Basic Scan	
 Perform a default scan on a specified target web server using the pre-configured wordlist.	
