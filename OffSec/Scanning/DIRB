@@ -1,0 +1,63 @@
+
+This repository provides a beginner's guide to using DIRB, an open-source web content and directory scanner primarily used in website footprinting for ethical hacking. DIRB works by using a pre-configured wordlist to perform dictionary attacks on a specified target web server, allowing it to discover hidden web objects such as files and directories. It is included by default in Kali Linux and is widely used in real-world penetration testing.
+
+Key Features & Commands:
+
+• Basic Scan: Simply run dirb to scan a website or web server.
+• Ignore Warnings: Use the -w option to scan inside listable directories that are usually ignored.
+• Case-Insensitive Search: The -i option allows you to perform case-insensitive searches.
+• Save Output: The -o option saves the scan output to a file.
+• Proxy Scan: Use the -p option to scan via a proxy server.
+• Stop Recursive Searches: The -r option prevents recursive directory scanning.
+• Interactive Recursion: The -R option allows for interactive recursion while scanning.
+• Show Non-Existent Pages: The -v option shows both existing and non-existent pages or directories.
+• Search Specific Extensions: The -X option lets you search for files with a particular extension, like .txt.
+• Search Multiple Extensions: The -x option allows you to search for multiple file extensions from a list in a text file.
+
+
+-- DIRB Guide --
+
+Basic Scan	
+Perform a default scan on a specified target web server using the pre-configured wordlist.	
+dirb <target_URL>
+
+Ignore Warnings (-w)	
+Scan inside directories even if they are listable, avoiding warnings about non-testable directories.	
+dirb -w <target_URL>
+
+Case-Insensitive Search (-i)	
+Perform a case-insensitive search (default searches are case-sensitive).	
+dirb -i <target_URL>
+
+Save Output (-o)	
+Save the scan output to a file for later review.	
+dirb -o <output_file> <target_URL>
+
+Scan Using a Proxy (-p)	
+Perform the scan through a proxy to reduce noise and avoid detection on the target side.	
+dirb -p <proxy_URL> <target_URL>
+
+Stop Recursive Searches (-r)	
+Prevent DIRB from scanning directories recursively.	
+dirb -r <target_URL>
+
+Interactive Recursion (-R)	
+Enable interactive recursion to control the scanning process during directory traversal.	
+dirb -R <target_URL>
+
+Show Non-Existent Pages (-v)	
+Show both existing and non-existent pages or directories on the target server.	
+dirb -v <target_URL>
+
+Search for Specific Extensions (-X)	
+Search for files with a specific extension, e.g., text files (.txt).	
+dirb -X .txt <target_URL>
+
+Search Multiple Extensions (-x)	
+Search for files with multiple extensions by specifying them in a text file, e.g., search extensions from ext_text file.	
+dirb -x ext_text <target_URL>
+
+
+
+
+
