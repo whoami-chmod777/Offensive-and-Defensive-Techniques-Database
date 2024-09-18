@@ -1,0 +1,92 @@
+
+-- Wireshark Filters for Detecting Suspect Scan Activities --
+
+TCP SYN Scan	
+Detects scans using SYN packets to initiate connections (common Nmap scan type).
+tcp.flags.syn == 1 && tcp.flags.ack == 0 && tcp.flags.fin == 0 && tcp.flags.rst == 0 && tcp.flags.urg == 0 && tcp.flags.psh == 0
+
+TCP SYN-ACK Scan	
+Detects SYN-ACK responses, indicating responses to SYN scans.	
+tcp.flags.syn == 1 && tcp.flags.ack == 1
+
+TCP FIN Scan	
+Detects scans where only FIN flags are sent to attempt stealth scans.	
+tcp.flags.fin == 1 && tcp.flags.urg == 0 && tcp.flags.psh == 0 && tcp.flags.ack == 0 && tcp.flags.rst == 0 && tcp.flags.syn == 0
+
+TCP NULL Scan	
+Detects NULL scans where no TCP flags are set, trying to bypass firewalls.	
+tcp.flags == 0x000
+
+TCP XMAS 
+Scan	Detects scans using FIN, PSH, and URG flags (XMAS scan).	
+tcp.flags.fin == 1 && tcp.flags.urg == 1 && tcp.flags.psh == 1
+
+UDP Scan	
+Detects UDP-based scans (usually no response if ports are closed).	
+udp
+
+ICMP Echo Requests	
+Detects ICMP ping sweeps (host discovery scans).	
+icmp.type == 8
+
+Port Sweep	
+Detects connections to multiple different ports on the same host (indicates port scanning).	
+tcp.flags.syn == 1 && ip.dst == <target_ip> or ip.dst == <target_ip> && tcp
+
+Host Sweep	
+Detects connection attempts to many different IP addresses (host discovery).	
+ip.src == <scanner_ip> && ip.dst != <scanner_ip>
+
+ARP Scan	
+Detects ARP sweeps used to discover hosts in the local network.	
+arp
+
+
+-- Wireshark Filters for Nmap Firewall Evasion Scans --
+
+TCP ACK Scan	
+Detects open ports by sending TCP ACK packets. Firewalls usually don't block ACK packets.	
+tcp.flags.ack == 1 && tcp.flags.syn == 0 && tcp.flags.fin == 0 && tcp.flags.rst == 0 && tcp.flags.psh == 0 && tcp.flags.urg == 0
+
+TCP Window Scan	
+Similar to the ACK scan but checks window size to determine if ports are open.	
+tcp.flags.ack == 1 && tcp.window_size > 0
+
+TCP Maimon Scan	
+Uses FIN/ACK flags, trying to bypass some firewalls that block SYN scans.	
+tcp.flags.fin == 1 && tcp.flags.ack == 1 && tcp.flags.syn == 0 && tcp.flags.rst == 0
+
+Fragmented Packets Scan	
+Breaks packets into small fragments to bypass firewalls that don't reassemble small packets.	
+ip.flags.mf == 1 or ip.frag_offset > 0
+
+Idle Scan	
+An advanced stealth scan that uses a third-party zombie host to send packets to the target.	
+> Check for unusual packet sequences, especially with IP ID values that increase at irregular rates.
+
+Custom TTL Scan	
+Manipulates the TTL field to evade detection by firewalls by using non-standard TTL values.	
+ip.ttl == <custom_value> (check for unusual TTL values, e.g., very low or very high values)
+
+Bouncing Scans (Proxy)	
+Detects scans using proxy servers or relays to avoid direct detection by firewalls.	
+> Look for unusual source IP addresses that are known proxies or third-party hosts.
+
+Decoy Scan	
+Nmap sends packets using decoy IP addresses to hide the real scanner.	
+> Multiple different source IP addresses targeting the same destination, often in rapid sequence.
+
+TCP Null Scan	
+Sends packets with no TCP flags set, attempting to bypass some firewalls.	
+tcp.flags == 0x000
+
+XMAS Scan	
+Sends packets with FIN, PSH, and URG flags set, aiming to confuse firewalls.	
+tcp.flags.fin == 1 && tcp.flags.urg == 1 && tcp.flags.psh == 1
+
+FIN Scan	
+Uses only FIN packets to detect open ports, bypassing certain firewalls.	
+tcp.flags.fin == 1 && tcp.flags.ack == 0 && tcp.flags.syn == 0 && tcp.flags.rst == 0 && tcp.flags.urg == 0 && tcp.flags.psh == 0
+
+
+
