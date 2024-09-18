@@ -89,4 +89,56 @@ Uses only FIN packets to detect open ports, bypassing certain firewalls.
 tcp.flags.fin == 1 && tcp.flags.ack == 0 && tcp.flags.syn == 0 && tcp.flags.rst == 0 && tcp.flags.urg == 0 && tcp.flags.psh == 0
 
 
+-- Nmap Firewall Scan Detection Filters for IPv6 --
 
+TCP SYN Scan (IPv6)	
+Detects SYN scans (common Nmap scan) over IPv6.	
+tcp.flags.syn == 1 && tcp.flags.ack == 0 && ipv6
+
+TCP FIN Scan (IPv6)	
+Detects FIN scans on IPv6 networks.	
+tcp.flags.fin == 1 && tcp.flags.ack == 0 && ipv6
+
+TCP NULL Scan (IPv6)	
+Detects NULL scans (no TCP flags) targeting IPv6.	
+tcp.flags == 0x000 && ipv6
+
+TCP XMAS Scan (IPv6)	
+Detects XMAS scans (FIN, PSH, URG flags set) on IPv6 networks.	
+tcp.flags.fin == 1 && tcp.flags.urg == 1 && tcp.flags.psh == 1 && ipv6
+
+UDP Scan (IPv6)	
+Detects UDP scans targeting IPv6 addresses.	
+udp && ipv6
+
+ICMPv6 Echo Requests	
+Detects ICMPv6 ping sweeps (host discovery scans using IPv6).	
+icmpv6.type == 128
+
+IPv6 Router Solicitation	
+Detects IPv6 router solicitation messages (can be used to discover routers).	
+icmpv6.type == 133
+
+IPv6 Neighbor Solicitation	
+Detects IPv6 neighbor solicitation messages (used for IPv6 host discovery).	
+icmpv6.type == 135
+
+IPv6 Neighbor Advertisement	
+Detects neighbor advertisements, which could reveal IPv6 hosts in the network.	
+icmpv6.type == 136
+
+Port Sweep (IPv6)	
+Detects attempts to scan multiple ports on the same IPv6 target.	
+tcp.flags.syn == 1 && ipv6 && ip.dst == <target_ipv6_address>
+
+Host Sweep (IPv6)	
+Detects scanning attempts across multiple IPv6 addresses.	
+ipv6.src == <scanner_ipv6> && ipv6.dst != <scanner_ipv6>
+
+IPv6 Hop Limit Exceeded	
+Detects ICMPv6 hop limit exceeded messages (can reveal probing activity in IPv6 networks).	
+icmpv6.type == 3 && icmpv6.code == 0
+
+IPv6 Fragmentation	
+Detects fragmented IPv6 packets (often a sign of evasion techniques used by Nmap scans).	
+ipv6.nxt == 44
