@@ -1,3 +1,61 @@
 
 WhatWeb is a versatile web scanner that identifies the technologies used by a website. It helps answer the question, “What is that website?” by detecting various components such as web servers, CMS platforms, JavaScript libraries, SQL errors, and more. WhatWeb comes pre-installed in Kali Linux and has over 1800 plugins for identifying different technologies.
 
+
+-- WhatWeb Guide --
+
+Basic Scan	
+Scan a website by specifying the target website or IP address.	
+whatweb <target_website_or_IP>
+
+Aggression Level 1 (Default)	
+Stealthy scan with one HTTP request per target.	
+whatweb <target_website_or_IP>
+
+Aggression Level 3	
+Aggressive scan with additional requests sent after detecting technologies.	
+whatweb -a 3 <target_website_or_IP>
+
+Aggression Level 4	
+Heavy scan with many HTTP requests, attempting URLs from all plugins.	
+whatweb -a 4 <target_website_or_IP>
+
+List Plugins	
+View all available plugins for WhatWeb.	
+whatweb -l
+
+Plugin Information	
+Get detailed information about each plugin.	
+whatweb --info-plugins
+
+Search Plugins	
+Search for a specific plugin, e.g., webdav.	
+whatweb --search-plugins webdav
+
+Use Specific Plugin	
+Use a specific plugin, e.g., webdav, during the scan.	
+whatweb -p webdav <target_website_or_IP>
+
+Verbose Output	
+Display more detailed output during the scan.	
+whatweb -v <target_website_or_IP>
+
+Quiet Mode	
+Run a scan without displaying output to the terminal (silent scan).	
+whatweb --quiet <target_website_or_IP>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
