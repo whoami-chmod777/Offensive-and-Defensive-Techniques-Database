@@ -1,0 +1,72 @@
+
+All IPv6 Traffic	
+Shows all IPv6 traffic (regardless of protocol).	
+ipv6
+
+TCP over IPv6	
+Displays all TCP packets over IPv6.	
+tcp && ipv6
+
+UDP over IPv6	
+Displays all UDP packets over IPv6.	
+udp && ipv6
+
+ICMPv6 Traffic	
+Shows all ICMPv6 messages (used for IPv6 error handling, discovery, etc.).	
+icmpv6
+
+IPv6 Fragmented Packets	
+Shows fragmented IPv6 packets (can be used to identify evasion or fragmentation issues).	
+ipv6.nxt == 44
+
+IPv6 Neighbor Solicitation	
+Detects Neighbor Solicitation messages (used for IPv6 host discovery).	
+icmpv6.type == 135
+
+IPv6 Neighbor Advertisement	
+Detects Neighbor Advertisement messages (IPv6 equivalent of ARP reply).	
+icmpv6.type == 136
+
+IPv6 Router Solicitation	
+Detects Router Solicitation messages (used for finding routers in IPv6 networks).	
+icmpv6.type == 133
+
+IPv6 Router Advertisement	
+Detects Router Advertisement messages (used by routers to announce themselves).	
+icmpv6.type == 134
+
+ICMPv6 Echo Requests (Ping)	
+Shows all IPv6 Ping requests (ICMPv6 echo requests, used for IPv6 host discovery).	
+icmpv6.type == 128
+
+ICMPv6 Echo Replies (Ping Response)	
+Shows all IPv6 Ping replies (ICMPv6 echo replies, response to pings).	
+icmpv6.type == 129
+
+IPv6 Hop Limit Exceeded	
+Shows ICMPv6 hop limit exceeded messages (similar to TTL exceeded in IPv4, useful for path discovery).	
+icmpv6.type == 3 && icmpv6.code == 0
+
+IPv6 Traffic with Hop-by-Hop Extension Headers	
+Shows IPv6 packets with Hop-by-Hop extension headers (can indicate special handling or scanning).	
+ipv6.nxt == 0
+
+IPv6 Traffic with Destination Option Headers	
+Detects packets with destination option extension headers.	
+ipv6.nxt == 60
+
+IPv6 Multicast Traffic	
+Displays all traffic sent to IPv6 multicast addresses.	
+ipv6.dst[0] == 0xFF
+
+IPv6 Anycast Traffic	
+Displays all traffic sent to an anycast address (common in load balancing).	
+ipv6.dst == <anycast_address>
+
+TCP SYN Scan over IPv6	
+Detects SYN scans over IPv6 (similar to common Nmap scans).	
+tcp.flags.syn == 1 && tcp.flags.ack == 0 && ipv6
+
+DNS over IPv6	
+Displays DNS queries over IPv6.	
+dns && ipv6
