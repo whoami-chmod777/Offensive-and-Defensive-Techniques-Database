@@ -1,0 +1,56 @@
+
+Understanding the anatomy of a URL is critical for threat detection, incident analysis, and forensic investigations. Malicious actors often manipulate URLs to deliver phishing attacks, malware, or redirect users to malicious sites.
+
+Anatomy of the URL for Analysis
+
+https://login.bank-security.com/login/validate.php?user=jdoe&session=abcd1234
+
+
+- Protocol (https://): Specifies the communication protocol (e.g., HTTPS, HTTP, FTP, SFTP, SMTP, IMAP, POP3, TELNET).
+- Subdomain (login): Specifies a specific section of a domain, often used for different services (e.g., login for authentication).   
+- Domain (bank-security): Identifies the core domain name.
+- Top-Level Domain (TLD) (.com): The highest level of a domain name (e.g., .com, .org, .net).    
+- Subdirectory (/login/): Specifies a directory or folder within the domain.
+- File (validate.php): Specifies the file being accessed, often a script like .php or .html.
+- Parameters (Query String) (?user=jdoe&session=abcd1234): Contains data sent to the server, such as user information or session IDs.
+
+
+-- How to Use this Information --
+
+1. Phishing Detection: Malicious actors often manipulate domains and subdomains to create legitimate-looking URLs. Analyze these elements for typo-squatting or fake login pages.
+2. Malware Delivery: Attackers may hide malware behind files with deceptive names or extensions. By dissecting the file part of the URL, can detect harmful downloads.
+3. Credential Theft: URLs with parameters like ?user=admin&password=1234 may expose sensitive information or be part of a malicious script to steal credentials.
+4. Incident Response: Use URL analysis to track the flow of an attack, identify its origin, and block malicious domains or paths from further compromising the network.
+
+*******************************************************************************************************************
+
+An Example of a complete URL with all the parts you're asking for
+
+https://docs.example.com/resources/images/logo.png?version=2.1&lang=en
+
+| Protocol     | Subdomain | Domain  | TLD  | Subdirectory       | File    | Parameters                     |
+  https://      docs.        example   .com  /resources/images/    logo.png  ?version=2.1&lang=en
+
+Hostname: docs.example.com
+Path: /resources/images/logo.png
+
+*******************************************************************************************************************
+
+
+Breakdown of the URL Anatomy
+
+- Protocol (https://): Specifies the communication protocol used.
+- Subdomain (docs): Points to a specific section of a website.
+- Domain (example): The main part of the domain name.
+- Top-Level Domain (TLD) (.com): Specifies the top-level domain.
+- Subdirectory (Path) (/resources/images/): Represents the folder structure within the domain.
+- File (logo.png): The actual file or page being accessed.
+- Query Parameters (Query String) (?version=2.1&lang=en): Additional data passed to the server for dynamic content or tracking.
+
+
+Additional Info
+
+- Hostname: docs.example.com
+- Path: /resources/images/logo.png
+
+This URL points to a file (logo.png) located in the /resources/images/ subdirectory on the docs.example.com subdomain. The parameters version=2.1 and lang=en provide additional information, such as the version and language to be used when accessing the file.
