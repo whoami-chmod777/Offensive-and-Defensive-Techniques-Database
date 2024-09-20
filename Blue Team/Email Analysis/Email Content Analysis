@@ -1,1 +1,72 @@
 
+Email Content Analysis: Key Elements to Watch
+
+When reviewing emails for potential threats, analyzing the content structure and looking for common red flags can help identify phishing attempts or other malicious activities.
+
+MIME Analysis (Multipurpose Internet Mail Extensions):
+
+- MIME-Version: Defines the version of MIME protocol used.
+- Content-Type: Specifies the format of the email (plain text, HTML, attachments).
+- Content-Transfer-Encoding: Shows how the email content is encoded (e.g., Base64).
+
+
+MIME Boundary:
+Emails often contain both plain text and HTML versions, indicated by the presence of two boundary strings.
+
+Red Flags:
+
+- Organization name mismatch
+- Awkward greetings or phrasing
+- Social engineering techniques, such as creating urgency
+- Poor grammar and multiple spelling errors
+
+
+Encoding Types:
+
+- Base64 Encoding: Used to encode attachments or obscure content (e.g., Content-Transfer-Encoding: base64).
+- HTML Entities Encoding: Encodes special characters within the HTML content.
+- URL Encoding: Hides malicious URLs within legitimate-looking links or encodes them in the email.
+
+
+CyberChef is a powerful tool for decoding and analyzing email content:
+
+- Decode Base64 strings to reveal hidden content.
+- Analyze and deobfuscate encoded URLs or HTML entities.
+- Visualize complex email headers and encoded data in an easy-to-understand format.
+
+
+-- Hiding Malicious URLs within Legitimate-Looking Links Example --
+
+<a href="https://malicious-site.com">https://legitimate-site.com</a>
+
+
+-- URL Encoding Example --
+
+https://malicious-site.com/badstuff
+https://malicious-site.com/%62%61%64%73%74%75%66
+
+
+-- Base64 Encoding Example --
+
+https://malicious-site.com/badstuff
+aHR0cHM6Ly9tYWxpY2lvdXMtc2l0ZS5jb20vYmFkc3R1ZmY=
+
+
+-- Combining Both Techniques – Hidden and Encoded Link Example --
+
+<a href="https://malicious-site.com/%62%61%64%73%74%75%66">Click here to update your account</a>
+https://malicious-site.com/%62%61%64%73%74%75%66
+
+
+-- Using CyberChef to Decode Encoded URLs --
+
+aHR0cHM6Ly9tYWxpY2lvdXMtc2l0ZS5jb20vYmFkc3R1ZmY=
+
+- Go to CyberChef (https://gchq.github.io/CyberChef/).
+- Use "From Base64" 
+- Paste the Base64-encoded URL and click "Bake!"
+```
+
+
+https://gchq.github.io/CyberChef/
+https://www.w3schools.com/html/html_entities.asp
