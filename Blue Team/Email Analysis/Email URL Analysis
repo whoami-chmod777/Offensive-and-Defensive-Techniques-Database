@@ -10,8 +10,63 @@ Use the "Sublime Text" editor for analyzing email headers or URLs. In the contex
 - CyberChef -
 Use CyberChef for email analysis tasks such as decoding quoted-printable strings, extracting URLs, and defanging malicious links. The "From Quoted Printable" operation helps decode encoded content, while the "Extract URLs" function identifies all URLs. To prevent accidental clicks on malicious links, use the "Defang URL" operation, which modifies URLs to render them safe for analysis without activating the link.
 
+
 - Email IOC Extractor -
 Email IOC Extractor is a Python script used for email forensic analysis, designed to automatically extract Indicators of Compromise (IOCs) from email files. It captures critical components such as IP addresses, URLs, email headers, and attachments.
+
+Usage: python3 eioc.py <file_path>
+
+$ python3 eioc.py sample1.eml 
+Extracted IP Addresses:
+====================================
+209[.]85[.]128[.]170 - Atlanta, Georgia, US, ISP: AS15169 Google LLC
+10[.]13[.]153[.]59
+
+Extracted URLs:
+====================================
+hxxps[://]drive[.]google[.]com/file/d/1sdzd_hr-_bEt_tJabjINZfvYiOvEJjSJ
+hxxps[://]apply-submite[.]vercel[.]app/
+
+Extracted Headers:
+====================================
+Date: Mon, 31 Oct 2022 11:53:21 +0300
+Subject: [Action required] Verify your info to continue using your account
+To: undisclosed-recipients:;
+From: Ropo12g Gaming <jodykrier60@gmail.com>
+Return-Path: jodykrier60@gmail.com
+Message-ID: <CANEy_Dj91bGpyHqz1fkK81s=JK9HDxUgYmg+2doKL01ZwbJaSg@mail.gmail.com>
+X-Sender-IP: 209.85.128.170
+Authentication-Results: spf=pass (sender IP is 209.85.128.170)
+
+Extracted Attachments:
+====================================
+Filename: 3spyWy0D.pdf
+MD5: 42f1cb17cee1027608917094c3fe99b9
+SHA1: 5c8d32e624ec8074e3b6e97f48b3839faeacd7ee
+SHA256: 6bd89500da5666a9444d2cd9af7a1fe4c945ea9fb31562d97018fdb2799dbda3
+
+
+- Python Script for IOC Extraction -
+
+import re
+
+def extract_iocs(email_text):
+    ip_pattern = r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
+    url_pattern = r'(https?|ftp):\/\/[^\s\/$.?#].[^\s]*'
+    email_pattern = r'[\w\.-]+@[\w\.-]+\.\w+'
+    ips = re.findall(ip_pattern, email_text)
+    urls = re.findall(url_pattern, email_text)
+    emails = re.findall(email_pattern, email_text)
+    return {"IPs": ips, "URLs": urls, "Emails": emails}
+
+Useful Regex Patterns:
+
+IP Addresses: \b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b
+URLs: (https?|ftp):\/\/[^\s\/$.?#].[^\s]*
+Email Addresses: [\w\.-]+@[\w\.-]+\.\w+
+MD5 Hash: [a-fA-F0-9]{32}
+SHA1 Hash: [a-fA-F0-9]{40}
+SHA256 Hash: [a-fA-F0-9]{64}
 
 
 - Analyze URL Reputation Check -
