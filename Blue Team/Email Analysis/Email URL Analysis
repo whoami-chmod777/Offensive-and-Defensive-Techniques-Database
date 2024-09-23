@@ -1,0 +1,78 @@
+
+Email URL Analysis is the process of inspecting and evaluating URLs within emails to identify potential threats, such as phishing links or malware.
+
+- Link -
+When analyzing suspicious emails, it’s crucial to handle links carefully. Instead of clicking, right-click the link and choose "Copy Link Location" to inspect the URL without interacting. This prevents the risk of activating potential malware embedded in the link. Always analyze URLs in a safe environment before further action.
+
+- Sublime Text -
+Use the "Sublime Text" editor for analyzing email headers or URLs. In the context of email URL analysis, search for "HTTP" (or "HTTPS") to identify and inspect embedded links. Also, search for the <a> tag, which is used for hyperlinks. This allows you to view the full URL without clicking, providing a safe method to identify potential phishing or malicious sites.
+
+- CyberChef -
+Use CyberChef for email analysis tasks such as decoding quoted-printable strings, extracting URLs, and defanging malicious links. The "From Quoted Printable" operation helps decode encoded content, while the "Extract URLs" function identifies all URLs. To prevent accidental clicks on malicious links, use the "Defang URL" operation, which modifies URLs to render them safe for analysis without activating the link.
+
+- Email IOC Extractor -
+Email IOC Extractor is a Python script used for email forensic analysis, designed to automatically extract Indicators of Compromise (IOCs) from email files. It captures critical components such as IP addresses, URLs, email headers, and attachments.
+
+
+- Analyze URL Reputation Check -
+When performing URL reputation checks, it's important not to blindly trust the results of automated tools. Each tool has its advantages and disadvantages, and understanding the methodology behind them is crucial for making informed decisions during threat analysis.
+
+Tools and Their Use Cases:
+
+URL2PNG: Captures screenshots of a webpage for visual inspection.
+- Advantage: Helps visually identify phishing sites.
+- Disadvantage: Does not analyze the page content.
+
+urlscan.io: Provides detailed scans of URLs, including resource loading and script behavior.
+- Advantage: In-depth behavior analysis of websites.
+- Disadvantage: Limited to known malicious signatures.
+
+VirusTotal: Aggregates results from multiple antivirus engines.
+- Advantage: Quick, multi-engine analysis.
+- Disadvantage: May produce false positives or negatives.
+
+URLVoid: Checks URL reputation across multiple databases.
+- Advantage: Broad reputation analysis.
+- Disadvantage: Does not provide detailed behavior insights.
+
+wannabrowser: Mimics various browsers to test how a URL responds to different user agents.
+- Advantage: Tests how a website behaves in different browsers.
+- Disadvantage: Does not analyze content for threats.
+
+Unshorten: Expands shortened URLs for full visibility.
+- Advantage: Exposes hidden links.
+- Disadvantage: Provides no further analysis beyond unshortening.
+
+PhishTank: Identifies phishing websites through a community-driven database.
+- Advantage: Community-sourced database for phishing.
+- Disadvantage: May miss new phishing sites.
+
+URLHaus: Focuses on malicious URLs, specifically for distributing malware.
+- Advantage: Specialized in identifying malware.
+- Disadvantage: Limited focus on non-malware threats.
+
+Google Safe Browsing: Protects against malicious sites by warning users.
+- Advantage: Built into many browsers, regularly updated.
+- Disadvantage: May miss less common threats.
+
+JoeSandbox: Performs in-depth dynamic analysis of URLs and attached files.
+- Advantage: Thorough behavior analysis of URL and content.
+- Disadvantage: Resource-intensive and slower.
+
+Before relying on any of these tools, understanding the methodology behind them is essential to avoid false confidence in results and ensure a thorough, multi-layered analysis.
+
+
+References:
+
+https://gchq.github.io/CyberChef/
+https://github.com/MalwareCube/Email-IOC-Extractor
+https://phishtank.org/
+https://www.url2png.com/
+https://urlscan.io/
+https://www.virustotal.com/gui/home/upload
+https://www.urlvoid.com/
+https://www.wannabrowser.net/
+https://unshorten.it/
+https://urlhaus.abuse.ch/
+https://transparencyreport.google.com/safe-browsing/search
+https://www.joesandbox.com/
