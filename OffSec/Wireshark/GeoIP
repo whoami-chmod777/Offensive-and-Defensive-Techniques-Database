@@ -1,0 +1,43 @@
+
+To use GeoIP features in Wireshark, you need to have the GeoLite2 database configured. Once it's set up, Wireshark can map IP addresses to countries, cities, or ASNs (Autonomous System Numbers) using GeoIP data
+
+Filters like ip.geoip.country_iso can be adjusted for IPv6 by using ipv6.geoip.country_iso if you're analyzing IPv6 traffic.
+
+
+-- Wireshark GeoIP Display Filters --
+
+Filter by Country (Name)	
+Show traffic from a specific country by name (e.g., United States).	
+ip.geoip.country == "United States"
+
+Filter by Country (Code)	
+Show traffic from a specific country using country code (e.g., US).	
+ip.geoip.country_iso == "US"
+
+Filter by City	
+Show traffic from a specific city (e.g., New York).	
+ip.geoip.city == "New York"
+
+Filter by Continent	
+Show traffic from a specific continent (e.g., Europe).	
+ip.geoip.continent == "Europe"
+
+Filter by ASN (Autonomous System)	
+Show traffic from a specific ASN (e.g., ASN12345).	
+ip.geoip.asn == 12345
+
+Filter by ISP	
+Show traffic from a specific Internet Service Provider (ISP).	
+ip.geoip.isp == "Comcast"
+
+Filter by Latitude/Longitude	
+Show traffic from specific geographic coordinates (latitude/longitude).	
+ip.geoip.latitude == <value> && ip.geoip.longitude == <value>
+
+Filter by Organization	
+Show traffic from a specific organization (if available).	
+ip.geoip.org == "Google LLC"
+
+Filter for Unknown GeoIP	
+Show traffic without associated GeoIP information.	
+!ip.geoip
