@@ -1,0 +1,134 @@
+
+What are Email Attachments? Email attachments are files sent alongside an email message. They can contain documents, images, videos, or even executable files. Attachments are used to share additional information, files, or media directly within an email, making them an essential part of communication.
+
+
+-- Types of Email Attachments --
+
+Documents:
+	- Common formats: .pdf, .docx, .xlsx, .pptx
+	- Usage: Sharing reports, contracts, presentations, etc.
+	- Risk: Documents can contain macros or embedded scripts that execute malicious code.
+
+Images:
+	- Common formats: .jpg, .png, .gif
+	- Usage: Sending visual content like pictures or graphs.
+	- Risk: May hide steganography or malware.
+
+Videos:
+	- Common formats: .mp4, .avi, .mov
+	- Usage: Sharing video files for presentations, media, etc.
+	- Risk: Video files can contain hidden malicious payloads.
+
+Compressed Archives:
+	- Common formats: .zip, .rar, .7z
+	- Usage: Compressing large files for easier sharing.
+	- Risk: Can hide multiple malicious files or executables.
+
+Executables:
+	- Common formats: .exe, .bat, .sh, .msi
+	- Usage: Sending software or installation packages.
+	- Risk: High risk of malware, trojans, or ransomware infections.
+
+Scripts:
+	- Common formats: .js, .vbs, .ps1
+	- Usage: Running automation or tasks via scripts.
+	- Risk: These files can execute dangerous scripts once opened.
+
+Emails (Forwarded/Attached):
+	- Common formats: .eml, .msg
+	- Usage: Forwarding or attaching previous email threads.
+	- Risk: Can contain phishing content or malicious links.
+
+Multimedia:
+	- Common formats: .mp3, .wav, .mkv
+	- Usage: Sharing audio files, songs, or multimedia.
+	- Risk: Like video, these files could contain hidden malware.
+
+Risk Factors with Email Attachments:
+- Phishing: Emails with attachments can contain malicious content designed to trick users into opening files.
+- Malware Delivery: Attachments are a common way to deliver malware, ransomware, or spyware.
+- Social Engineering: Attackers often use attachments to lure victims, claiming they contain important documents (e.g., invoices, reports).
+
+
+-- elmdump.py Script --
+
+The elmdump.py script is a Python tool typically used for parsing and analyzing .eml files (email messages) to extract useful data, such as email headers, attachments, and the body content. It can be used for email forensic analysis, extracting key indicators of compromise (IOCs) and other useful information that can assist in threat detection.
+
+$ elmdump.py sample.eml
+$ elmdump.py sample.eml -s 4 -d > quotation.iso
+
+
+-- File Analysis --
+
+File Hashing:
+- Uses cryptographic algorithms (like MD5, SHA-1, SHA-256) to generate a unique identifier (hash) for a file.
+- File hashes are used to check file integrity and match files against known malware databases.
+- Tools: md5sum, sha256sum, HashMyFiles.
+
+whoami@soc101-ubuntu:~/Desktop/01_Phishing_Analysis/04_Attachment_Analysis$ sha256sum quotation.iso 
+75fdb848eac332b4ca7d88f497e7ba7ebbb9a798d825b28cf1f87b9d7149e87f  quotation.iso
+
+whoami@soc101-ubuntu:~/Desktop/01_Phishing_Analysis/04_Attachment_Analysis$ sha1sum quotation.iso 
+3fe45f8cd20cd7c63e55e3918dac1d3a0d7fb05a  quotation.iso
+
+whoami@soc101-ubuntu:~/Desktop/01_Phishing_Analysis/04_Attachment_Analysis$ md5sum quotation.iso 
+6aef1d7f88e8aa450a0c604b4caee5ba  quotation.iso
+
+
+-- Eioc Scrypt --
+
+$ python3 eioc.py sample1.eml
+
+
+-- Microsoft Powershell --
+
+The PowerShell command you're using, Get-FileHash, computes the hash value of a file. This is typically used for verifying the integrity or authenticity of files, especially after downloading or receiving them.
+
+PS C:\Users\mirko\Downloads\SOC101> Get-FileHash .\quotation.iso
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          75FDB848EAC332B4CA7D88F497E7BA7EBBB9A798D825B28CF1F87B9D7149E87F       C:\Users\mirko\Downloads\SOC101\quotation.iso
+
+
+PS C:\Users\mirko\Downloads\SOC101> Get-FileHash -Algorithm md5 .\quotation.iso
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+MD5             6AEF1D7F88E8AA450A0C604B4CAEE5BA                                       C:\Users\mirko\Downloads\SOC101\quotation.iso
+
+
+PS C:\Users\mirko\Downloads\SOC101> Get-FileHash -Algorithm sha1 .\quotation.iso
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA1            3FE45F8CD20CD7C63E55E3918DAC1D3A0D7FB05A                               C:\Users\mirko\Downloads\SOC101\quotation.iso
+
+
+PS C:\Users\mirko\Downloads\SOC101> Get-FileHash -Algorithm sha256 .\quotation.iso
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          75FDB848EAC332B4CA7D88F497E7BA7EBBB9A798D825B28CF1F87B9D7149E87F       C:\Users\mirko\Downloads\SOC101\quotation.iso
+
+
+PS C:\Users\mirko\Downloads\SOC101> Get-FileHash -Algorithm md5 .\quotation.iso; Get-FileHash -Algorithm sha1 .\quotation.iso; Get-FileHash -Algorithm sha256 .\quotation.iso
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+MD5             6AEF1D7F88E8AA450A0C604B4CAEE5BA                                       C:\Users\mirko\Downloads\SOC101\quotation.iso
+SHA1            3FE45F8CD20CD7C63E55E3918DAC1D3A0D7FB05A                               C:\Users\mirko\Downloads\SOC101\quotation.iso
+SHA256          75FDB848EAC332B4CA7D88F497E7BA7EBBB9A798D825B28CF1F87B9D7149E87F       C:\Users\mirko\Downloads\SOC101\quotation.iso
+
+
+
+-- File Reputation Services --
+
+File reputation services are tools that assess the trustworthiness of files based on their behavior, origin, or known associations with malware.
+
+https://github.com/DidierStevens/DidierStevensSuite/blob/master/emldump.py
+https://github.com/MalwareCube/Email-IOC-Extractor
+https://www.virustotal.com/gui/home/upload
+https://talosintelligence.com/
+https://any.run
+
