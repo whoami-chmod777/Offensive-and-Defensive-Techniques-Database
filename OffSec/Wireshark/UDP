@@ -1,0 +1,300 @@
+
+-- Basic UDP Filters --
+
+All UDP Traffic	
+Displays all UDP packets in the capture.	
+udp
+
+UDP Traffic from Specific IP	
+Filters for UDP traffic from a specific source IP (e.g., 192.168.1.10).	
+ip.src == 192.168.1.10 && udp
+
+UDP Traffic to Specific IP	
+Filters for UDP traffic to a specific destination IP (e.g., 8.8.8.8).	
+ip.dst == 8.8.8.8 && udp
+
+UDP Traffic from Specific Port	
+Filters for UDP packets from a specific source port (e.g., port 53 for DNS queries).	
+udp.srcport == 53
+
+UDP Traffic to Specific Port	
+Filters for UDP packets to a specific destination port (e.g., port 53 for DNS responses).	
+udp.dstport == 53
+
+UDP Traffic for Specific Ports	
+Filters for UDP packets from or to a range of ports (e.g., between ports 1000 and 2000).	
+udp.port >= 1000 && udp.port <= 2000
+
+DNS Traffic (UDP)	
+Filters for DNS traffic, which typically uses UDP over port 53.	
+udp.port == 53
+
+DHCP Traffic	
+Filters for DHCP traffic, which uses UDP over ports 67 and 68.	
+udp.port == 67
+
+UDP Packets Larger than MTU	
+Filters for large UDP packets that might cause fragmentation issues.	
+udp && frame.len > 1500
+
+Multicast UDP Traffic	
+Filters for UDP traffic sent to multicast addresses.	
+udp && ip.dst[0] == 0xE0
+
+Broadcast UDP Traffic	
+Filters for UDP traffic sent as a broadcast.	
+udp && eth.dst == ff:ff:ff:ff:ff:ff
+
+
+-- Advanced UDP Filters --
+
+UDP Traffic with Specific Length	
+Filters UDP packets with a specific length (e.g., 500 bytes).	
+udp.length == 500
+
+Check UDP Checksum Errors	
+Filters UDP packets with invalid checksums (to detect possible packet corruption or network errors).	
+udp.checksum_bad == 1
+
+Fragmented UDP Packets	
+Filters for fragmented UDP packets (which may cause performance issues or be part of a DoS attack).	
+ip.frag_offset > 0 && udp
+
+UDP Conversations	
+Use the Statistics > Conversations menu to see all UDP conversations.	
+N/A (Use Wireshark's GUI)
+
+
+-- Special Protocols over UDP --
+
+VoIP (SIP over UDP)	
+Filters for SIP packets that are used in VoIP communication.	
+sip && udp
+
+RTP (Real-Time Transport Protocol)	
+Filters for RTP streams, often used in voice and video communication.	
+rtp && udp
+
+SNMP (Simple Network Management Protocol)	
+Filters for SNMP traffic, which typically uses UDP over port 161.	
+udp.port == 161
+
+TFTP Traffic	
+Filters for TFTP traffic, which uses UDP over port 69.	
+udp.port == 69
+
+
+-- UDP Errors --
+
+ICMP Unreachable for UDP	
+Filters for ICMP Destination Unreachable messages, which might indicate issues with UDP traffic.	
+icmp.type == 3 && icmp.code == 3
+
+
+-- Basic DHCP Filters --
+
+All DHCP Traffic	Displays all DHCP traffic (both requests and responses).	`udp.port == 67
+
+DHCP Requests from Client	Filters for DHCP Discovery and Request packets (client to server on port 67).	udp.srcport == 68 && udp.dstport == 67
+
+DHCP Responses from Server	Filters for DHCP Offer, ACK, or NAK packets (server to client on port 68).	udp.srcport == 67 && udp.dstport == 68
+
+DHCP Discover Messages	Filters for DHCP Discover messages sent from the client (initial request for IP).	bootp.option.type == 53 && bootp.option.dhcp == 1
+
+DHCP Offer Messages	Filters for DHCP Offer messages from the server to client (server offers IP address).	bootp.option.type == 53 && bootp.option.dhcp == 2
+
+DHCP Request Messages	Filters for DHCP Request messages from the client to server (client requests offered IP).	bootp.option.type == 53 && bootp.option.dhcp == 3
+
+DHCP ACK Messages	Filters for DHCP ACK messages from the server (server acknowledges the lease).	bootp.option.type == 53 && bootp.option.dhcp == 5
+
+DHCP NAK Messages	Filters for DHCP NAK (negative acknowledgment, server denies request).	bootp.option.type == 53 && bootp.option.dhcp == 6
+
+DHCP Release Messages	Filters for DHCP Release messages (client releases IP back to the server).	bootp.option.type == 53 && bootp.option.dhcp == 7
+
+DHCP Decline Messages	Filters for DHCP Decline messages (client declines IP offered by the server).	bootp.option.type == 53 && bootp.option.dhcp == 4
+
+
+-- Advanced DHCP Filters --
+
+DHCP Traffic with Specific MAC Address	Filters DHCP traffic for a specific MAC address (e.g., a specific client or server).	`eth.addr == aa:bb:cc:dd:ee
+&& (udp.port == 67
+
+DHCP Traffic with Specific IP Address	Filters DHCP traffic for a specific IP address (client’s or server’s IP).	`ip.addr == 192.168.1.100 && (udp.port == 67
+
+DHCP Traffic with Specific Hostname	Filters DHCP traffic for a specific hostname (if visible in the DHCP options).	bootp.option.hostname == "<hostname>"
+
+DHCP Traffic with Specific Vendor Class	Filters DHCP packets based on the vendor class option, which indicates the client's vendor type.	bootp.option.vendor_class_id == "<vendor_class>"
+
+DHCP Traffic with Lease Time	Filters DHCP responses that include a specific lease time.	bootp.option.lease_time == <time_in_seconds>
+
+
+-- Key DHCP Message Types (with filters for option 53) --
+
+DHCP Discover
+Client broadcasts a request for IP configuration.
+bootp.option.type == 53 && bootp.option.dhcp == 1
+
+DHCP Offer
+Server offers an IP address to the client.
+bootp.option.type == 53 && bootp.option.dhcp == 2
+
+DHCP Request
+Client requests the offered IP address.
+bootp.option.type == 53 && bootp.option.dhcp == 3
+
+DHCP ACK
+Server acknowledges the IP address lease to the client.
+bootp.option.type == 53 && bootp.option.dhcp == 5
+
+
+-- Troubleshooting VoIP and Video Streams --
+
+Troubleshooting VoIP (Voice over IP) and Video Streams can be complex, as it involves real-time communication protocols such as SIP, RTP, and RTCP, along with network factors like latency, packet loss, jitter, and QoS (Quality of Service). Below are some key areas and Wireshark filters to help troubleshoot VoIP and video streaming issues:
+
+1. Key Protocols in VoIP and Video Streaming
+
+- SIP (Session Initiation Protocol): Manages signaling and session control for VoIP calls (setup, management, teardown).
+- RTP (Real-Time Transport Protocol): Handles the actual media (audio/video) transmission in real time.
+- RTCP (RTP Control Protocol): Monitors the quality of the RTP stream and provides feedback about the transmission.
+
+2. Common Issues in VoIP/Video Streaming
+
+- Latency: Delayed packets affect the real-time aspect of communication, causing voice or video delays.
+- Packet Loss: Dropped packets can lead to poor audio or video quality (choppy calls).
+- Jitter: Inconsistent packet arrival times lead to jitter, which causes voice or video stuttering.
+- QoS (Quality of Service): Insufficient prioritization of voice or video traffic leads to degradation during periods of high network usage.
+
+3. Wireshark Filters for VoIP and Video Troubleshooting
+
+- SIP (Session Initiation Protocol) Filters -
+
+
+All SIP Traffic	
+Shows all SIP signaling traffic (used for call setup, teardown, and management).
+sip	
+
+SIP INVITE Messages	
+Filters for INVITE messages (used to initiate a VoIP call).
+sip.Method == "INVITE"	
+
+SIP Response Codes (e.g., 200 OK)	
+Filters for SIP response codes (e.g., 200 OK, 404 Not Found, 403 Forbidden) to track call status.
+sip.Status-Code == 200	
+
+SIP Call from Specific IP
+Shows all SIP traffic originating from a specific IP address.	
+ip.src == <source_ip> && sip	
+
+SIP Call to Specific IP	
+Shows all SIP traffic destined for a specific IP address.
+ip.dst == <destination_ip> && sip	
+
+SIP User/Caller	
+Filters for SIP traffic from a specific user (based on the From field in the SIP headers).
+sip.From contains "<username>"	
+
+
+- RTP (Real-Time Transport Protocol) Filters -
+
+All RTP Traffic	
+Filters for all RTP packets carrying audio or video media streams.
+rtp	
+
+RTP Traffic from Specific IP	
+Shows all RTP traffic from a specific source IP address (for tracking media).
+ip.src == <source_ip> && rtp	
+
+RTP Traffic to Specific IP	
+Shows all RTP traffic destined for a specific IP address.
+ip.dst == <destination_ip> && rtp	
+
+RTP Stream Analysis	
+Wireshark’s RTP Stream analysis tool helps assess jitter, delay, and other key metrics.
+Use Telephony > RTP > RTP Streams	
+
+RTP Packet Loss	
+Analyze packet loss in RTP streams (look at lost packets and sequence numbers).
+Use Telephony > RTP > Stream Analysis	
+
+RTP Jitter and Latency	
+Jitter and latency statistics can be viewed under the RTP stream analysis section.
+Use Telephony > RTP > Stream Analysis	
+
+
+- RTCP (RTP Control Protocol) Filters -
+
+All RTCP Traffic	
+Filters for RTCP packets (provides feedback on the quality of RTP streams).
+rtcp	
+
+RTCP Sender Reports
+Filters for RTCP Sender Reports, which provide transmission statistics like packet count and bytes.
+rtcp.pt == 200	
+
+RTCP Receiver Reports	
+Filters for RTCP Receiver Reports, which provide feedback about packet loss, jitter, and delay.
+rtcp.pt == 201	
+
+RTCP Traffic from Specific IP	
+Shows RTCP traffic from a specific source IP (used to monitor media quality from that source).
+ip.src == <source_ip> && rtcp	
+
+
+4. Analyzing Jitter, Latency, and Packet Loss
+
+Jitter: Variation in the arrival times of packets.
+- Use RTP Stream Analysis to assess jitter.
+- Look for values exceeding 20-30 ms, which may affect call quality.
+
+Latency: The delay between packet transmission and reception.
+- Look at the delta time between packets. Latency beyond 150-200 ms may cause noticeable delays in VoIP.
+
+Packet Loss: Dropped packets can degrade audio or video quality.
+- Use RTP Stream Analysis to view packet loss (missing sequence numbers or statistics in RTCP reports).
+
+
+5. Quality of Service (QoS) Filters 
+
+Filter for DSCP Values	
+Filters for packets with specific DSCP (Differentiated Services Code Point) values to monitor QoS policies.
+ip.dsfield == <dscp_value>	
+
+VoIP Traffic with EF (Expedited Forwarding)	
+Shows VoIP traffic marked for high-priority (Expedited Forwarding) treatment in QoS.
+ip.dsfield == 0x2e	
+
+Video Traffic with AF Class (Assured Forwarding)	
+Filters video traffic marked with Assured Forwarding in DSCP for video prioritization.
+ip.dsfield.dscp == 0x0a	
+
+
+6. Miscellaneous VoIP and Video Filters
+
+All VoIP Traffic	
+sip	
+
+All Video Streaming Traffic	
+Shows all RTP-based video traffic (commonly carried over UDP).
+rtp && udp	
+
+Multicast RTP Traffic	
+Filters for RTP packets sent to a multicast address (used in video streaming scenarios).
+rtp && ip.dst[0] == 0xE0	
+
+STUN (Session Traversal Utilities for NAT)	
+Displays STUN traffic, often used in NAT traversal for VoIP calls.
+stun	
+
+
+7. Tools in Wireshark for VoIP Analysis
+
+Telephony > VoIP Calls: This tool allows you to view, analyze, and play back captured VoIP calls. It shows all SIP call sessions and allows you to drill into the details of each call.
+Telephony > RTP > RTP Streams: This tool helps analyze RTP streams, showing jitter, packet loss, and stream quality.
+Telephony > RTP > Stream Analysis: Use this to dig deeper into jitter, latency, and packet loss for each RTP stream.
+
+
+Key Metrics for Troubleshooting VoIP and Video
+
+Latency: < 150-200 ms -> Latency beyond this causes noticeable delays in real-time communication.
+Jitter:	< 20-30 ms -> Higher jitter leads to stuttering or choppy audio/video.
+Packet Loss: < 1% -> Even a small percentage of lost packets can cause degraded audio or video quality.
