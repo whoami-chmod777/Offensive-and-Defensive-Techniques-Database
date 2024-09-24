@@ -93,39 +93,68 @@ icmp.type == 3 && icmp.code == 3
 
 -- Basic DHCP Filters --
 
-All DHCP Traffic	Displays all DHCP traffic (both requests and responses).	`udp.port == 67
+All DHCP Traffic	
+Displays all DHCP traffic (both requests and responses).	
+udp.port == 67
 
-DHCP Requests from Client	Filters for DHCP Discovery and Request packets (client to server on port 67).	udp.srcport == 68 && udp.dstport == 67
+DHCP Requests from Client	
+Filters for DHCP Discovery and Request packets (client to server on port 67).	
+udp.srcport == 68 && udp.dstport == 67
 
-DHCP Responses from Server	Filters for DHCP Offer, ACK, or NAK packets (server to client on port 68).	udp.srcport == 67 && udp.dstport == 68
+DHCP Responses from Server	
+Filters for DHCP Offer, ACK, or NAK packets (server to client on port 68).	
+udp.srcport == 67 && udp.dstport == 68
 
-DHCP Discover Messages	Filters for DHCP Discover messages sent from the client (initial request for IP).	bootp.option.type == 53 && bootp.option.dhcp == 1
+DHCP Discover Messages	
+Filters for DHCP Discover messages sent from the client (initial request for IP).	
+bootp.option.type == 53 && bootp.option.dhcp == 1
 
-DHCP Offer Messages	Filters for DHCP Offer messages from the server to client (server offers IP address).	bootp.option.type == 53 && bootp.option.dhcp == 2
+DHCP Offer Messages	
+Filters for DHCP Offer messages from the server to client (server offers IP address).	
+bootp.option.type == 53 && bootp.option.dhcp == 2
 
-DHCP Request Messages	Filters for DHCP Request messages from the client to server (client requests offered IP).	bootp.option.type == 53 && bootp.option.dhcp == 3
+DHCP Request Messages	
+Filters for DHCP Request messages from the client to server (client requests offered IP).	
+bootp.option.type == 53 && bootp.option.dhcp == 3
 
-DHCP ACK Messages	Filters for DHCP ACK messages from the server (server acknowledges the lease).	bootp.option.type == 53 && bootp.option.dhcp == 5
+DHCP ACK Messages	
+Filters for DHCP ACK messages from the server (server acknowledges the lease).	
+bootp.option.type == 53 && bootp.option.dhcp == 5
 
-DHCP NAK Messages	Filters for DHCP NAK (negative acknowledgment, server denies request).	bootp.option.type == 53 && bootp.option.dhcp == 6
+DHCP NAK Messages	
+Filters for DHCP NAK (negative acknowledgment, server denies request).	
+bootp.option.type == 53 && bootp.option.dhcp == 6
 
-DHCP Release Messages	Filters for DHCP Release messages (client releases IP back to the server).	bootp.option.type == 53 && bootp.option.dhcp == 7
+DHCP Release Messages	
+Filters for DHCP Release messages (client releases IP back to the server).	
+bootp.option.type == 53 && bootp.option.dhcp == 7
 
-DHCP Decline Messages	Filters for DHCP Decline messages (client declines IP offered by the server).	bootp.option.type == 53 && bootp.option.dhcp == 4
+DHCP Decline Messages	
+Filters for DHCP Decline messages (client declines IP offered by the server).	
+bootp.option.type == 53 && bootp.option.dhcp == 4
 
 
 -- Advanced DHCP Filters --
 
-DHCP Traffic with Specific MAC Address	Filters DHCP traffic for a specific MAC address (e.g., a specific client or server).	`eth.addr == aa:bb:cc:dd:ee
-&& (udp.port == 67
+DHCP Traffic with Specific MAC Address	
+Filters DHCP traffic for a specific MAC address (e.g., a specific client or server).	
+eth.addr == aa:bb:cc:dd:ee && (udp.port == 67
 
-DHCP Traffic with Specific IP Address	Filters DHCP traffic for a specific IP address (client’s or server’s IP).	`ip.addr == 192.168.1.100 && (udp.port == 67
+DHCP Traffic with Specific IP Address	
+Filters DHCP traffic for a specific IP address (client’s or server’s IP).	
+ip.addr == 192.168.1.100 && (udp.port == 67
 
-DHCP Traffic with Specific Hostname	Filters DHCP traffic for a specific hostname (if visible in the DHCP options).	bootp.option.hostname == "<hostname>"
+DHCP Traffic with Specific Hostname	
+Filters DHCP traffic for a specific hostname (if visible in the DHCP options).	
+bootp.option.hostname == "<hostname>"
 
-DHCP Traffic with Specific Vendor Class	Filters DHCP packets based on the vendor class option, which indicates the client's vendor type.	bootp.option.vendor_class_id == "<vendor_class>"
+DHCP Traffic with Specific Vendor Class	
+Filters DHCP packets based on the vendor class option, which indicates the client's vendor type.	
+bootp.option.vendor_class_id == "<vendor_class>"
 
-DHCP Traffic with Lease Time	Filters DHCP responses that include a specific lease time.	bootp.option.lease_time == <time_in_seconds>
+DHCP Traffic with Lease Time	
+Filters DHCP responses that include a specific lease time.	
+bootp.option.lease_time == <time_in_seconds>
 
 
 -- Key DHCP Message Types (with filters for option 53) --
