@@ -50,12 +50,12 @@ Risk Factors with Email Attachments:
 - Social Engineering: Attackers often use attachments to lure victims, claiming they contain important documents (e.g., invoices, reports).
 
 
--- elmdump.py Script --
+-- emldump.py Script --
 
-The elmdump.py script is a Python tool typically used for parsing and analyzing .eml files (email messages) to extract useful data, such as email headers, attachments, and the body content. It can be used for email forensic analysis, extracting key indicators of compromise (IOCs) and other useful information that can assist in threat detection.
+The emldump.py script is a Python tool typically used for parsing and analyzing .eml files (email messages) to extract useful data, such as email headers, attachments, and the body content. It can be used for email forensic analysis, extracting key indicators of compromise (IOCs) and other useful information that can assist in threat detection.
 
-$ elmdump.py sample.eml
-$ elmdump.py sample.eml -s 4 -d > quotation.iso
+$ emldump.py sample.eml
+$ emldump.py sample.eml -s 4 -d > quotation.iso
 
 
 -- File Analysis --
