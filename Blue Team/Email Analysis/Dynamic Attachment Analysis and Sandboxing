@@ -1,0 +1,50 @@
+
+Sandboxing is a security mechanism used to isolate and analyze potentially malicious files in a controlled, virtual environment. It allows to safely execute suspicious attachments or files without risking the actual network or system. By observing how the file behaves within the sandbox, we can detect malicious intent or behavior patterns.
+
+What Are We Looking For in Sandboxing?
+
+Process Activity:
+- Tracks processes spawned by the attachment.
+- Identifies suspicious or unexpected processes.
+- Monitors the process tree and memory usage.
+- Monitor the creation of new processes that could signal the execution of malware.
+- Identify unusual process hierarchies or behavior that might indicate privilege escalation or system compromise.
+
+Registry Activity:
+- Observes modifications to the Windows Registry.
+- Flags unauthorized changes to critical registry keys.
+- Detects persistence mechanisms (e.g., auto-run entries).
+- Detect registry entries related to known malicious activities.
+
+Network Activity:
+- Observe any outbound network connections, especially to suspicious IP addresses or domains.
+- Identify communication with potential Command-and-Control (C2) servers.
+- Looks for unusual traffic patterns, DNS queries, or connections to known bad IPs/domains.
+- Detect  attempts to download additional malware payloads.
+
+File Activity:
+- Tracks file system changes, such as file creation, deletion, or modification.
+- Watches for encrypted files or dropped malware.
+- Identify the creation of executables, or attempts to encrypt files (ransomware behavior).
+- Look for the generation of hidden or temporary files commonly used in malicious activities.
+
+Benefits of Sandboxing:
+- Isolation: Ensures that the potential threat is contained within the sandbox, without affecting the main system.
+- Behavioral Analysis: Provides insights into how malware operates in real-time, offering deeper detection capabilities compared to traditional signature-based detection.
+- Automated Reports: Many sandboxes generate detailed reports on the behavior of the file, aiding faster response.
+
+
+Tools for Sandboxing:
+- Cuckoo Sandbox: Open-source platform for automated malware analysis.
+- Any.Run: Interactive malware analysis service.
+- Joe Sandbox: Comprehensive malware analysis with in-depth behavioral insights.
+- Hybrid Analysis: A cloud-based sandbox that provides free malware analysis reports, leveraging both static and dynamic analysis techniques for detecting threats.
+
+
+https://hybrid-analysis.com/
+https://cuckoo.cert.ee/
+https://joesandbox.com
+https://app.any.run
+
+
+
