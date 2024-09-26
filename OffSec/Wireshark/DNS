@@ -1,0 +1,173 @@
+
+When troubleshooting DNS (Domain Name System) traffic in Wireshark, there are several common issues to look for, such as failed name resolutions, delayed responses, or unusual DNS traffic.
+
+-- Key DNS Filters for Wireshark --
+
+All DNS Traffic	
+Shows all DNS queries and responses.
+dns	
+
+DNS Queries Only	
+Filters only DNS query packets (from client to server)
+dns.flags.response == 0	
+
+DNS Responses Only	
+Filters only DNS response packets (from server to client)
+dns.flags.response == 1	
+
+DNS Queries for a Specific Domain	
+Shows DNS queries for a specific domain (e.g., google.com)
+dns.qry.name == "<domain_name>"	
+
+DNS Response Code (e.g., No Error)	
+Filters DNS responses with a specific response code (e.g., 0 for "No Error")
+dns.flags.rcode == 0	
+
+DNS Response with Error	
+Shows all DNS responses with an error (e.g., NXDOMAIN, SERVFAIL)
+dns.flags.rcode > 0	
+
+DNS A Record Queries
+Filters DNS queries requesting an A (IPv4) record	
+dns.qry.type == 1	
+
+DNS AAAA Record Queries (IPv6)	
+Filters DNS queries requesting an AAAA (IPv6) record
+dns.qry.type == 28	
+
+DNS TXT Record Queries	
+Filters DNS queries requesting a TXT record (commonly used in email verification, SPF)
+dns.qry.type == 16	
+
+DNS PTR Record Queries (Reverse DNS)	
+Filters DNS queries for PTR records (reverse DNS lookup)
+dns.qry.type == 12	
+
+DNS MX Record Queries (Mail Exchange)	
+Filters DNS queries for MX records (used for email delivery)
+dns.qry.type == 15	
+
+DNS Queries from a Specific IP	
+Shows DNS queries originating from a specific IP address
+ip.src == <ip_address> && dns.flags.response == 0	
+
+DNS Responses from a Specific Server	
+Filters DNS responses from a specific DNS server
+ip.src == <dns_server_ip> && dns.flags.response == 1	
+
+
+-- Analyzing DNS Performance --
+
+Slow DNS Response Time	
+Shows DNS responses that took longer than 1 second (indicates potential delay in name resolution)
+dns.time > 1	
+
+Retransmitted DNS Queries	
+Displays DNS queries that were retransmitted due to no initial response
+dns.flags.response == 0 && dns.retransmission	
+
+Unusually Large DNS Responses	
+Shows DNS packets larger than 512 bytes, which may indicate DNS over TCP or DNSSEC responses
+dns && frame.len > 512	
+
+DNS Queries with No Responses	
+Displays DNS queries that did not receive a response (possible DNS server issue)
+dns.flags.response == 0 && !dns.response_in	
+
+
+-- Advanced DNS Filters --
+
+DNS over TCP (instead of UDP)	
+Filters for DNS traffic that is using TCP instead of the usual UDP (often for large DNS messages)
+tcp.port == 53	
+
+DNS over UDP	
+Shows all DNS traffic over UDP (the default DNS transport protocol)
+udp.port == 53	
+
+DNSSEC Traffic	
+Filters for DNSSEC traffic, which provides additional security for DNS responses
+dns.flags.dnssec == 1	
+
+Non-Standard DNS Ports	
+Filters DNS traffic on non-standard ports (anything other than port 53)
+dns && udp.port != 53	
+
+Capture DNS Traffic for a Specific Protocol	
+Filters DNS traffic for a specific IP protocol (such as TCP, UDP, etc.)
+dns && ip.proto == <protocol_number>	
+
+
+-- DNS Error Codes (Response Codes) --
+
+Wireshark can help you analyze DNS issues by filtering for DNS response codes. These can include
+
+No Error (0): Normal response
+dns.flags.rcode == 0
+
+Format Error (1): Malformed query 
+dns.flags.rcode == 1
+
+Server Failure (2): Server problem, can't process the query
+dns.flags.rcode == 2
+
+NXDOMAIN (3): Non-existent domain (name resolution failure).
+dns.flags.rcode == 3
+
+Not Implemented (4): Query type not supported by the server.
+dns.flags.rcode == 4
+
+Refused (5): Query refused by the DNS server (e.g., due to ACL or policy).
+dns.flags.rcode == 5
+
+
+-- DNS Packet Timing and Performance Analysis -
+
+DNS Response Time: This shows how long it took for a DNS server to respond to a query. Slow DNS responses can result in noticeable delays in web browsing or other services relying on DNS
+
+DNS Response Time
+Shows DNS queries that took longer than 1 second
+dns.time > 1
+
+
+-- Miscellaneous DNS Filters --
+
+Malicious DNS Activity	
+Filters for DNS queries or responses related to known malicious domains
+dns.qry.name contains "badsite"	
+
+DNS Traffic with Specific TTL Value	
+Filters DNS responses that contain a specific TTL value (useful for cache-related analysis)
+dns.resp.ttl == <value>	
+
+DNS Traffic with Specific Opcode	
+Filters DNS traffic based on opcode (e.g., 0 for a standard query, 5 for a dynamic update)
+dns.flags.opcode == <value>	
+
+
+-- Common DNS Opcodes --
+
+Standard Query (0): Standard DNS query for resolving names
+dns.flags.opcode == 0
+
+Inverse Query (1): Reverse lookups
+dns.flags.opcode == 1
+
+Status (2): Server status request
+dns.flags.opcode == 2
+
+
+-- Troubleshooting DNS with Wireshark --
+
+Unresponsive DNS Server: 
+dns.flags.response == 0 && !dns.response_in
+
+Slow DNS Resolution: 
+dns.time > 1
+
+DNS Server Errors: 
+dns.flags.rcode > 0
+
+DNS Overload: High volume of DNS queries with retransmissions might indicate a DNS server overload or DoS attack
+
+
