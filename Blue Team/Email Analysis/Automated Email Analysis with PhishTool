@@ -1,0 +1,14 @@
+
+PhishTool is a powerful tool designed to help reverse engineer phishing emails.
+
+- Automated Phishing Analysis: Simplifies the extraction of email headers, URLs, attachments, and other Indicators of Compromise (IOCs) for deeper analysis.
+- Real-Time Threat Intelligence: Leverages threat intelligence feeds to quickly assess whether a suspicious email contains known malware or phishing indicators.
+- Collaboration-Friendly: Supports collaboration between SOC teams, making it easier to document and respond to phishing incidents.
+- Custom Workflows: Automate routine tasks and integrate PhishTool into your incident response workflow for increased efficiency.
+- Detailed Reports: Generate comprehensive, easy-to-understand reports that provide clarity on the severity of a phishing attack.
+
+Why PhishTool? 
+PhishTool helps analysts reduce manual effort in phishing investigations, enabling faster, more accurate detection and response to threats. It’s an essential tool for any SOC team looking to improve its phishing response capabilities.
+
+
+https://www.phishtool.com/
