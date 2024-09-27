@@ -1,0 +1,80 @@
+
+-- Analyzing TCP Options with Window Size & TCP Options --
+
+TCP Options and the TCP Window Size play crucial roles in the performance and behavior of TCP connections. They allow for efficient data transmission, flow control, and enhancements to the basic TCP functionality, especially in high-performance or long-distance networks.
+
+
+-- TCP Window Size --
+
+The TCP Window Size controls the flow of data between the sender and receiver by limiting how much data the sender can transmit before needing an acknowledgment (ACK) from the receiver. It is crucial for optimizing network performance and preventing the sender from overwhelming the receiver with too much data at once.
+
+• Window Size: The maximum number of bytes that the receiver is willing to accept without acknowledging.
+• Window Scaling: An extension of the TCP window size to allow for larger values, especially useful in high-bandwidth, high-latency networks.
+
+
+-- TCP Options --
+
+TCP Options provide additional information or features beyond the standard TCP header. Some of the most common TCP options are used to improve performance, manage congestion, and ensure reliable data transmission. 
+
+1. Maximum Segment Size (MSS):
+Negotiates the largest segment of data (payload) that can be sent in a single TCP packet.
+Typically set during the 3-way handshake to avoid fragmentation.
+
+2. Window Scaling:
+Expands the window size beyond the 16-bit TCP header field limit (65,535 bytes), useful for high-speed networks.
+
+3. Selective Acknowledgment (SACK):
+Allows the receiver to acknowledge non-contiguous blocks of data, enabling faster recovery from packet loss.
+Helps in high-latency networks or networks prone to packet loss.
+
+4. Timestamp
+Provides a timestamp for each packet to measure round-trip time and help with PAWS (Protection Against Wrapped Sequence numbers).
+
+5. No-Operation (NOP):
+Padding option used to align other options to 32-bit boundaries.
+
+6. End of Option List (EOL):
+Marks the end of the TCP options field.
+
+
+-- Wireshark Filters for TCP Options --
+
+TCP Window Size		
+The TCP Window Size limits how much data the sender can transmit before needing an acknowledgment (ACK) from the receiver, controlling the flow of data.		
+tcp.window_size_value == 1024
+
+MSS (Maximum Segment Size)	
+Negotiates the maximum segment size for the connection.	
+tcp.options.mss
+
+Window Scaling	
+Expands the TCP window size beyond the default 65,535 bytes.	
+tcp.options.window_scale
+
+SACK (Selective Acknowledgment)	
+Acknowledges non-contiguous blocks of data for faster recovery.	
+tcp.options.sack
+
+Timestamp	Provides timestamps 
+for each packet to measure round-trip time.	
+tcp.options.timestamp
+
+NOP (No-Operation)	
+Padding option used for aligning TCP options to 32-bit boundaries.	
+tcp.options.nop
+
+End of Option List (EOL)	
+Marks the end of the TCP options field.	
+tcp.options.eol
+
+
+-- Using Wireshark to Analyze TCP Options --
+
+Wireshark Feature
+Observe the TCP options negotiated during the handshake and throughout the connection
+Analyze > Follow > TCP Stream
+
+Wireshark Statistics
+See how window sizes evolve during the connection and analyze their impact on throughput
+Statistics > Conversations
+
