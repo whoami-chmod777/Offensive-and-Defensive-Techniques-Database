@@ -1,0 +1,33 @@
+
+Static PDF Analysis refers to the process of examining a PDF document without executing or interacting with it. This type of analysis helps identify potentially malicious content, such as embedded scripts, JavaScript, hidden links, or other exploits, in a PDF file. Analysts review the PDF structure, objects, metadata, and embedded content for indicators of compromise (IOCs) and other threats.
+
+
+-- What is pdf-parser --
+
+pdf-parser is a Python tool designed for static analysis of PDF files. It allows analysts to inspect the structure of the PDF, including objects, streams, and embedded elements like links or JavaScript. It helps detect malicious content by providing a deeper view into the internal elements of a PDF file.
+
+whoami@soc101-ubuntu:~$ python3 ./pdf-parser.py pdf-doc-vba-eicar-dropper.pdf
+whoami@soc101-ubuntu:~$ python3 ./pdf-parser.py pdf-doc-vba-eicar-dropper.pdf | more
+whoami@soc101-ubuntu:~$ python3 ./pdf-parser.py book04-02.4422136363.pdf -s "/URI"
+whoami@soc101-ubuntu:~$ python3 ./pdf-parser.py book04-02.4422136363.pdf -s "/JavaScript"
+whoami@soc101-ubuntu:~$ python3 ./pdf-parser.py pdf-doc-vba-eicar-dropper.pdf --object 8 --filter --raw --dump eicar-dropper.doc
+
+
+-- What is pdfid --
+
+pdfid is another Python tool for PDF analysis. It provides an overview of the PDF's structure by displaying common elements and potentially suspicious indicators, such as embedded JavaScript, launch actions, or file attachments. pdfid is used to quickly assess whether a PDF has suspicious content or objects that could signify an exploit.
+
+whoami@soc101-ubuntu:~$ python3 ./pdfid.py pdf-doc-vba-eicar-dropper.pdf
+
+
+-- Other Commands for Static PDF Analysis --
+
+file <file.pdf>: Shows general information about the PDF file, including its type and encoding.
+oledump: Typically used for analyzing OLE files, but in the context of PDFs, it can help analyze any embedded OLE objects within the PDF file.
+
+whoami@soc101-ubuntu:~$ file eicar-dropper.doc
+whoami@soc101-ubuntu:~$ python3 oledump.py eicar-dropper.doc
+
+
+https://github.com/DidierStevens/DidierStevensSuite/blob/master/pdf-parser.py
+https://github.com/DidierStevens/DidierStevensSuite/blob/master/pdfid.py
