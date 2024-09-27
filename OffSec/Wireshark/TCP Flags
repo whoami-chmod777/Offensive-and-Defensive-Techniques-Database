@@ -1,0 +1,84 @@
+
+TCP uses several flags (control bits) in its header to manage the state of the connection and data flow. Each flag serves a specific purpose in the connection process.
+
+
+SYN (Synchronize): 
+Initiates a connection (first step in the TCP handshake).
+Used to request a connection and synchronize sequence numbers between client and server.
+
+ACK (Acknowledge): 
+Acknowledges the receipt of data or control information.
+Used to confirm receipt of a segment and synchronize communication during the connection.
+
+FIN (Finish): 
+Indicates the sender has finished sending data.
+Used to initiate connection termination (part of the four-way termination process).
+
+RST (Reset): 
+Abruptly terminates a connection.
+Used to forcefully close a connection, typically in response to an error or unexpected condition.
+
+PSH (Push): 
+Instructs the receiver to process the data immediately, without buffering.
+Ensures that data is pushed to the application layer without delay.
+
+URG (Urgent): 
+Marks a portion of the data as urgent, requiring immediate attention.
+Informs the receiver to prioritize specific data within a packet.
+
+ECE (Explicit Congestion Notification Echo): 
+Used for congestion control in TCP (ECN-capable networks).
+Indicates that the TCP peer has received an ECN-Echo flag to reduce traffic rate.
+
+CWR (Congestion Window Reduced): 
+Signals that congestion has been detected, and the sender is reducing its transmission rate.
+Part of the congestion control mechanism in ECN-enabled networks.
+
+
+-- Filter for 3-Way Handshake --
+
+The 3-way handshake involves the following steps: SYN, SYN-ACK, and ACK.
+
+Step 1: SYN from the client
+tcp.flags.syn == 1 && tcp.flags.ack == 0   
+
+Step 2: SYN-ACK from the server
+tcp.flags.syn == 1 && tcp.flags.ack == 1   
+
+Step 3: ACK from the client
+tcp.flags.ack == 1 && tcp.flags.syn == 0   
+
+
+-- TCP 4-Way Termination Filter --
+
+The 4-way termination process involves FIN, ACK, FIN, and ACK.
+
+Step 1: FIN from one side (client or server)
+tcp.flags.fin == 1 && tcp.flags.ack == 0   
+
+Step 2: ACK in response to the FIN
+tcp.flags.ack == 1 && tcp.flags.fin == 0   
+
+Step 3: FIN from the other side (server or client)
+tcp.flags.fin == 1 && tcp.flags.ack == 0   
+
+Step 4: ACK in response to the second FIN
+tcp.flags.ack == 1 && tcp.flags.fin == 0   
+
+
+-- Explanation --
+
+3-Way Handshake:
+- First, the client sends a SYN.
+- The server responds with SYN-ACK.
+- Finally, the client sends an ACK to establish the connection.
+
+4-Way Termination:
+- One side sends a FIN to signal it's done sending data.
+- The other side responds with an ACK and sends its own FIN.
+- The first side then replies with an ACK to close the connection.
+
+
+
+
+
