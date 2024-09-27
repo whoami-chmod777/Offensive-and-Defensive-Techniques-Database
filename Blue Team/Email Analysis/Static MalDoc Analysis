@@ -1,1 +1,83 @@
 
+Static MalDoc Analysis refers to the process of analyzing a malicious document (MalDoc) without executing it. This method is used to examine the structure, content, and embedded code in documents like Word, Excel, or PDF files, in order to identify malicious components such as macros, scripts, or hidden exploits.
+
+
+-- Key aspects of Static MalDoc Analysis include --
+
+- Examining Metadata: Review file properties like creation date, author, and modification history for suspicious changes.
+- Inspecting Macros: Extract and analyze VBA macros embedded in the document using tools like oledump.py.
+- Identifying OLE Streams: Parse the OLE (Object Linking and Embedding) structure for hidden scripts or content.
+- Looking for Embedded Objects: Find any malicious executables, scripts, or links hidden in the document.
+- Analyzing Obfuscated Code: Detect and decode obfuscated code used to hide malicious behavior.
+
+
+-- What is OLE? --
+
+Object Linking and Embedding (OLE) is a technology developed by Microsoft that allows embedding and linking to documents and other objects. In the context of Office documents, OLE can be used to embed various types of objects, including images, spreadsheets, and even executable content, which may be exploited to deliver malware.
+
+
+-- oledump.py --
+
+oledump.py is a program to analyze OLE files (Compound File Binary Format). These files contain streams of data. oledump allows you to analyze these streams. Many applications use this file format, the best known is MS Office.  .doc, .xls, .ppt, … are OLE files (docx, xlsx, … is the new file format:  XML inside ZIP).
+
+
+-- Example Use Case --
+
+whoami@soc101-ubuntu:~$ python3 oledump.py --help
+whoami@soc101-ubuntu:~$ python3 oledump.py sample1.xlsm #List all streams in an OLE document
+whoami@soc101-ubuntu:~$ python3 oledump.py sample1.xlsm -s 4 #Extract a macro from stream 4
+whoami@soc101-ubuntu:~$ python3 oledump.py sample1.xlsm -s 4 -S #Extract and analyze readable strings from the macro
+whoami@soc101-ubuntu:~$ python3 oledump.py sample1.xlsm -s 4 --vbadecompresscorrupt #Analyze the macro content (decompress, decode, etc.)
+
+1. List all streams in an OLE document
+- Lists all available streams in the document.
+- Streams that contain macros are typically highlighted with an "M" next to them, indicating a potential threat.
+
+2. Extract a macro from stream 4
+- Extracts the macro content from stream 4
+
+3. Extract and analyze readable strings from the macro
+- Extracts and displays the readable strings (including potentially malicious ones) from stream 4 in the Excel macro file (sample1.xlsm). This can help quickly spot malicious URLs, file paths, or PowerShell commands.
+
+4. Extract and analyze readable strings from the macro
+- Decompresses obfuscated or compressed VBA macro code in stream 4, revealing potentially hidden commands or malicious code.
+
+
+-- oledump.py Cheat Sheet --
+
+Show the list of available commands and options:
+oledump.py --help
+
+List all streams within the OLE file (e.g., sample1.xlsm):
+oledump.py <file>
+
+Extract and display content of a specific stream:
+oledump.py <file> -s <stream>
+
+Display the structure of a stream as a hex dump:
+oledump.py <file> -s <stream> -S
+
+Decompress and analyze corrupted VBA macros in the stream:
+oledump.py <file> -s <stream> --vbadecompresscorrupt
+
+Show file metadata, including authorship and modification timestamps:
+oledump.py <file> -i
+
+Show the detailed structure of an OLE file:
+oledump.py <file> -S
+
+
+
+https://blog.didierstevens.com/programs/oledump-py/
+https://github.com/DidierStevens/DidierStevensSuite/blob/master/oledump.py
+
+
+
+
+
+
+
+
+
+
+
