@@ -1,0 +1,37 @@
+
+-- How Sequence and Acknowledgment Numbers Work in TCP --
+
+Sequence numbers and acknowledgment numbers are essential for tracking data transmission in a TCP connection to ensure reliable delivery of data.
+
+Sequence Number:
+- The sequence number indicates the position of the first byte of data in the current TCP segment.
+- The initial sequence number (ISN) is chosen randomly when the connection is established.
+- As data is transmitted, the sequence number increases by the number of bytes sent in each segment.
+
+ Acknowledgment Number:
+- The acknowledgment number indicates the next expected byte from the other side, confirming that all previous data has been received.
+- It acknowledges receipt by indicating the next sequence number the receiver expects.
+
+
+Example of Sequence and Acknowledgment Flow:
+
+1. Client sends data:
+- Client sends a segment with sequence number = 1000.
+- The segment contains 500 bytes of data.
+
+2. Server acknowledges:
+- Server receives the data and responds with an acknowledgment number = 1500, indicating it has received all bytes up to 1499 and is expecting the next byte to be 1500.
+
+3. Next data transmission:
+- Client sends more data with sequence number = 1500, based on the server's acknowledgment.
+
+
+-- Summary of TCP Sequence and Acknowledgment Numbers --
+
+Sequence Number: 
+Indicates the byte position of the first data byte in the segment being transmitted.
+
+Acknowledgment Number:
+Confirms receipt of data by indicating the next expected byte from the other side.
+
+
