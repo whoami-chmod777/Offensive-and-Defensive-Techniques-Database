@@ -1,0 +1,83 @@
+
+TCP Retransmissions occur when a sender doesn't receive an acknowledgment (ACK) for the data it has sent within a certain timeframe, or when the receiver detects missing or corrupted packets. Retransmissions help ensure reliable data delivery in the event of packet loss, delay, or corruption in the network.
+A TCP Duplicate ACK is sent when the receiver receives a packet but notices that a previous packet is missing
+
+
+-- Key Concepts of TCP Retransmissions --
+
+Timeout-Based Retransmission:
+	- If a sender doesn't receive an acknowledgment (ACK) within a defined period (based on the Retransmission Timeout (RTO)), it retransmits the data.
+	- The sequence number of the retransmitted packet remains the same as the original.
+
+Fast Retransmission:
+	- When the sender receives three duplicate ACKs (ACKs with the same acknowledgment number), it assumes a packet was lost and retransmits it immediately, before the timeout.
+
+Selective Acknowledgment (SACK):
+	- If enabled, SACK allows the receiver to inform the sender about specifically received blocks of data, helping reduce unnecessary retransmissions by only resending the missing segments.
+
+
+-- Common Causes of Retransmissions --
+
+• Network Congestion: High traffic can delay or drop packets, causing retransmissions.
+• Packet Loss: Packets may be dropped due to physical issues, such as interference or bad routing.
+• Corrupted Packets: Errors during transmission may lead to corrupted packets that the receiver rejects, prompting retransmission.
+• Delays in ACKs: If ACKs are delayed or lost, the sender may assume the data was lost and initiate a retransmission.
+
+
+-- TCP Analysis Flags --
+
+All TCP Analysis Flags
+This filter shows all TCP events, such as retransmissions, duplicate ACKs, zero window, etc.
+tcp.analysis.flags
+
+Retransmission
+Indicates that a packet has been retransmitted because the original packet was not acknowledged.
+tcp.analysis.retransmission
+
+Fast Retransmission
+Indicates that a packet was retransmitted before the retransmission timeout (due to duplicate ACKs).
+tcp.analysis.fast_retransmission
+
+Out-of-Order
+A packet has arrived out of the expected sequence (usually due to reordering in the network).
+tcp.analysis.out_of_order
+
+Spurious Retransmission
+A retransmission that might have occurred unnecessarily (due to timing issues or duplicate ACKs).
+tcp.analysis.spurious_retransmission
+
+Duplicate ACK
+An acknowledgment for the same sequence number is sent multiple times, often indicating packet loss.
+tcp.analysis.duplicate_ack
+
+Duplicate ACK Seen
+Indicates that the capture contains duplicate acknowledgments.
+tcp.analysis.duplicate_ack_frame
+
+Zero Window
+Indicates that the receiver’s TCP window size is zero, meaning it cannot receive any more data.
+tcp.analysis.zero_window
+
+Window Update
+Indicates that the TCP window size has been updated, allowing the sender to resume data transmission.
+tcp.analysis.window_update
+
+Lost Segment
+Indicates that a TCP segment was not received or is missing.
+tcp.analysis.lost_segment
+
+ACKed Unseen Segment
+An acknowledgment was received for data that was never captured (likely due to packet loss in the capture).
+tcp.analysis.ack_lost_segment
+
+Keep-Alive
+A keep-alive packet is used to maintain an idle connection.
+tcp.analysis.keep_alive
+
+Keep-Alive ACK
+Acknowledgment of a keep-alive packet.
+tcp.analysis.keep_alive_ack
+
+Retransmission Timeout (RTO)
+Indicates that the retransmission occurred after the Retransmission Timeout (RTO) expired.
+tcp.analysis.rto
