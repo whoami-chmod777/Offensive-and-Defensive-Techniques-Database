@@ -1,0 +1,42 @@
+
+Wireshark Filter
+tcp.flags.fin == 1
+tcp.flags.reset == 1
+
+Purpose
+FIN: Gracefully close a connection when both sides have finished data transmission.
+RST: Abruptly terminate a connection due to an error, misconfiguration, or unexpected packet.
+
+TCP Handshake
+FIN: Requires a 4-way handshake (FIN, ACK, FIN, ACK) to close the connection.
+RST: No handshake; the connection is instantly terminated.
+
+Impact on Data Transfer
+FIN: Allows both sides to ensure all data has been transmitted and acknowledged.
+RST: Terminates the session immediately, causing possible data loss.
+
+Normal Usage
+FIN: Used during a 4-way termination process to cleanly close a connection.
+RST: Used to immediately close a connection when something goes wrong (e.g., unexpected SYN packet, or application error).
+
+Handshake Process
+FIN: Initiates a 4-way termination with a sequence of FIN and ACK packets.
+RST: Does not follow any handshake process; instantly terminates the connection.
+
+Acknowledge Data?
+FIN: Yes, FIN acknowledges all data received up to that point.
+RST: No, RST is used to reject or terminate the connection, with no acknowledgment of data.
+
+Acknowledge Required
+FIN: Requires the receiver to respond with an ACK to confirm the connection closure.
+RST: No acknowledgment is required; the connection is closed instantly.
+
+Effect on Connection
+FIN: After both sides exchange FIN packets and ACKs, the connection is fully closed.
+RST: Immediately resets the connection, discarding all pending data and unacknowledged packets.
+
+Example Scenario
+FIN: Client and server both finish sending data and close the connection normally.
+RST: A server receives a SYN packet on a port where no service is listening, resulting in an immediate RST.
+
+
