@@ -1,0 +1,162 @@
+
+Phishing attacks can strike at any time, so having a clear, reactive defense strategy is critical to minimize damage. Here’s a breakdown of the key steps involved in a Reactive Phishing Defense:
+
+
+-- Detection and Reactive Response --
+
+Quick identification and response are vital.
+
+> Containment
+- Scope the Threat: Identify the extent of the phishing attack.
+- Quarantine and Block Sender Artifacts:
+	- Block email addresses, domains, and sender IPs.
+	- Block emails by subject or content.
+- Block Web Artifacts: Stop emails with malicious URLs.
+- Block File Artifacts: Prevent malicious attachments by filename.
+
+> Eradication:
+- Remove Malicious Emails:
+	- Use content search and eDiscovery.
+	- Exchange delivery reports.
+	- PowerShell’s get-messagetrackinglog for email traces.
+- Remove Malicious Files: Eradicate harmful attachments.
+- Abuse Form Submissions: Submit reports to services to blacklist phishing domains.
+- Credential Changes: Initiate password resets for impacted users.
+
+> Recovery
+- Restore Systems: Recover compromised systems to a safe state.
+
+> Communication
+- Notify Affected Users: Ensure users are aware and taking action.
+- Update Stakeholders: Keep internal teams and leadership informed.
+
+> User Education
+- End-User Training: Continuous education to recognize and avoid phishing attempts.
+
+Proactive training and a reactive plan can significantly reduce the impact of phishing attacks.
+
+
+-- GoDaddy Report Abuse --
+
+GoDaddy Report Abuse is a service provided by GoDaddy for reporting domain misuse, phishing, malware, or policy violations. To report issues like phishing, malware, or copyright infringement, visit their official abuse report page. GoDaddy handles domain misuse, website abuse, and other violations on their platform.
+
+
+-- Powershell Get-MessageTrackingLog --
+
+PS>Get-MessageTrackingLog -Sender "attacker@attacker.com"
+PS>Get-MessageTrackingLog -Recipients "victim@victim.com"
+PS>Get-MessageTrackingLog -MessageSubject "Hello"
+PS>Get-MessageTrackingLog -Start "MM/DD/YYYY HH:MM:SS" -End "MM/DD/YYYY HH:MM:SS"
+
+
+-- Useful Examples --
+
+Find All Emails from a Sender
+Get-MessageTrackingLog -Start "10/01/2024 00:00:00" -End "10/03/2024 23:59:59" -Sender "user@example.com"
+
+Track an Email to a Specific Recipient
+Get-MessageTrackingLog -Start "10/01/2024 00:00:00" -End "10/03/2024 23:59:59" -Recipients "recipient@example.com"
+
+Find Emails with a Specific Subject
+Get-MessageTrackingLog -Start "10/01/2024 00:00:00" -End "10/03/2024 23:59:59" -MessageSubject "Invoice Due"
+
+Search for Specific Event Types (e.g., Received Emails)
+Get-MessageTrackingLog -Start "10/01/2024 00:00:00" -End "10/03/2024 23:59:59" -EventId "RECEIVE"
+
+Find Messages by Message ID
+Get-MessageTrackingLog -MessageId "<messageid@domain.com>"
+
+Filter Logs by Client IP Address
+Get-MessageTrackingLog -Start "10/01/2024 00:00:00" -End "10/03/2024 23:59:59" -ClientIp "192.168.1.10"
+
+Find the Last 100 Emails
+Get-MessageTrackingLog -Start "10/01/2024 00:00:00" -End "10/03/2024 23:59:59" -ResultSize 100
+
+
+-- Common Parameters --
+
+-Start
+Start time for the search (required).
+-Start "10/03/2024 00:00:00"
+
+-End
+End time for the search (required).
+-End "10/03/2024 23:59:59"
+
+-Sender
+Specify the sender email address to filter logs.
+-Sender "user@example.com"
+
+-Recipients
+Specify the recipient email address to filter logs.
+-Recipients "recipient@example.com"
+
+-MessageSubject
+Search for a specific message subject.
+-MessageSubject "Invoice Due"
+
+-EventId
+Filter by specific event types like RECEIVE, SEND, FAIL, or DELIVER.
+-EventId "RECEIVE"
+
+-MessageId
+Specify a message ID for tracking a particular message.
+-MessageId "<messageid@domain.com>"
+
+-Server
+Specify the Exchange server for searching logs.
+-Server "EXCHANGESERVER1"
+
+-ResultSize
+Limit the number of results returned.
+-ResultSize 1000
+
+-ClientIp
+Filter logs based on client IP address.
+-ClientIp "192.168.1.10"
+
+-LogonType
+Filter by logon type (Admin, Owner, Delegate).
+-LogonType "Admin"
+
+
+-- Common EventId Values --
+
+SEND: A message was sent from the server.
+RECEIVE: The server received a message.
+DELIVER: The server delivered the message to the mailbox.
+FAIL: The message failed to be delivered or sent.
+TRANSFER: The message was transferred to another server.
+DEFER: Delivery of the message was deferred.
+
+
+-- Get-MessageTrackingLog CheatSheet --
+
+–ResultSize Unlimited
+
+Get-MessageTrackingLog | Out-Host –Paging
+Get-MessageTrackingLog | Format-Table –AutoSize
+Get-TransportServer | Get-MessageTrackingLog
+
+
+Get-MessageTrackingLog -Start (Get-Date).AddHours(-24) -ResultSize unlimited | where {[string]$_.recipients -like "*@gmail.com"}
+
+Get-MessageTrackingLog -ResultSize unlimited –Sender "cmansion@woshub.com” –server rome-hub-01 -Start "11/30/2019 06:00:00" -End "12/13/2019 22:00:00" |select-object Timestamp,Sender,Recipients,MessageSubject,EventId|ft
+
+Get-MessageTrackingLog -Sender "cmansion@woshub.com" -Recipients "amorato@woshub.com" -ResultSize unlimited –server rome-hub-01| Select-Object Timestamp,Sender,{$_.recipients},MessageSubject | Export-Csv -Path "C:\Export\exchange\exchange_tracking_logs.csv" -Encoding Default -Delimiter ";"
+
+Get-MessageTrackingLog -MessageSubject "test" -ResultSize unlimited –server rome-hub-01| Select-Object Timestamp,Sender, {$_.recipients}, MessageSubject | out-gridview
+
+Get-MessageTrackingLog -messageID "41A4321C3543314FFFFF23122F2BDB7ABD00342@rome-hub-01.woshub.com" -ResultSize unlimited –server rome-hub-01| Select-Object Timestamp,Sender, {$_.recipients}, MessageSubject
+
+(Get-MessageTrackingLog -EventID "RECEIVE" -Recipients "amorato@woshub.com" -ResultSize unlimited).Count
+
+Get-MessageTrackingLog -EventId "Receive" -Start (Get-Date).AddDays(-5) -ResultSize Unlimited | Where-Object {$_.Sender -like "*@gmail.com"} | Group-Object Sender | Sort-Object Count -Descending | Format-Table *
+
+
+References:
+
+https://learn.microsoft.com/en-us/exchange/monitoring/trace-an-email-message/message-trace-modern-eac
+https://learn.microsoft.com/en-us/purview/ediscovery-content-search-overview
+https://learn.microsoft.com/en-us/purview/ediscovery-content-search
+https://supportcenter.godaddy.com/abusereport/phishing?plid=1
