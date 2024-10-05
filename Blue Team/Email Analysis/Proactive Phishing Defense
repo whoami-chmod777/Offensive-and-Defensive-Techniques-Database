@@ -1,1 +1,29 @@
 
+Phishing attacks remain one of the most common and dangerous threats in today’s digital landscape. A proactive defense strategy is essential to mitigate these risks and strengthen your organization’s email security.
+
+Here’s how to build a robust proactive phishing defense:
+
+Email Filtering
+- Implement email security appliances from trusted vendors
+- Mark external emails to raise awareness
+
+URL Scanning and Blocking
+- Real-time inspection of embedded URLs
+- Block access to recently registered or suspicious domains
+
+Attachment Filtering
+- Block risky file extensions (e.g., .exe, .vbs, ps1, .iso, .bat,  .js)
+- Use attachment sandboxing to analyze suspicious files in a secure environment
+
+Email Authentication Methods
+- Ensure proper SPF, DKIM, and DMARC policies are in place to protect against email spoofing
+
+User Training
+- Conduct regular security awareness training sessions
+- Run phishing simulation exercises to test user awareness
+- Provide easy-to-use phishing reporting functionality for end users
+
+Being proactive can significantly reduce your risk of phishing attacks. Equip your organization with these strategies to stay ahead of threats!
+
+
+https://whois.domaintools.com/
