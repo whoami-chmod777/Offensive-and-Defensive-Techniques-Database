@@ -1,0 +1,113 @@
+
+When investigating slow application response times in Wireshark, you need to identify where delays occur in the network or application communication. The slowness could be related to various factors such as network latency, packet loss, or delays on the server itself. Here's how you can troubleshoot slow response times using Wireshark:
+
+
+1. Measure Time Between Request and Response
+
+- The most straightforward way to check for slow application response time is to measure the time between the client's request and the server's response.
+- Wireshark Filter: Use a filter to display only traffic between the client and server: ip.addr == <client_ip> && ip.addr == <server_ip>
+- Look for the client’s request (e.g., an HTTP GET request, DNS query, or other application-specific request) and note the time.
+- Then find the corresponding response (e.g., HTTP response, DNS response, etc.) and note the response time.
+
+You can measure the time difference by:
+- Right-clicking on the request packet, then selecting "Set Time Reference".
+- Finding the corresponding response packet, then check the "Delta Time" in the packet details to see how long it took.
+
+
+2. Look for Network Latency or Delays
+
+- Use TCP or UDP traffic to analyze potential network delays between packets.
+- Wireshark Filter for TCP Traffic: tcp
+- Check the Time to Live (TTL) values or the Round-Trip Time (RTT) between the client and server to determine if network delays are causing slowness.
+- Wireshark Filter for High RTT: Use this filter to check for higher RTT times, which might indicate latency: tcp.analysis.ack_rtt > 0.2
+	This example checks for RTTs greater than 200 ms.
+
+
+3. Analyze Application Layer Protocols
+
+- For specific applications like HTTP, DNS, or MySQL, analyze the application-layer traffic for slowness.
+- HTTP: Look for slow server responses after the client request (e.g., high response time for GET requests).
+- Wireshark Filter for HTTP traffic: http
+- Measure the time difference between the HTTP request (e.g., http.request.method == "GET") and the HTTP response (e.g., http.response.code).
+- DNS: Use DNS query and response times to check for delays in domain resolution.
+- Wireshark Filter for DNS traffic: dns
+
+4. Identify TCP Issues
+
+- If the application uses TCP, issues like retransmissions, out-of-order packets, or zero window events can cause delays.
+- Wireshark Filter for Retransmissions: tcp.analysis.retransmission
+- Wireshark Filter for Zero Window** (when the server or client is not ready to receive more data): tcp.analysis.zero_window
+
+
+5. Check for Server Processing Delays
+
+- If the network latency is low but the response is still slow, the issue might be with the server’s application processing.
+- To identify this, look for a significant delay between the client’s request and the server’s response, even when there is no retransmission or packet loss.
+
+
+-- Wireshark Filters for Common Delays --
+
+Measure Time Between Client Request and Server Response
+Check the delta time between request and response packets.
+N/A (Right-click and use "Set Time Reference").
+
+TCP Retransmissions
+Show packets that were retransmitted due to missing acknowledgments.
+tcp.analysis.retransmission
+
+TCP Zero Window
+Show when the receiver can’t accept more data, causing delays.
+tcp.analysis.zero_window
+
+Slow DNS Response
+Show DNS queries that take more than 1 second to get a response.
+dns.time > 1
+
+HTTP Slow Response
+Filter for HTTP requests and responses to measure response time.
+http
+
+High Round-Trip Time (RTT)
+Show packets with high RTT (time between sending a packet and receiving the ACK).
+tcp.analysis.ack_rtt > 0.2 (e.g., RTT > 200 ms).
+
+
+-- Identifying the Cause of Slow Response Times --
+
+1. High Network Latency:
+	- If the delay is caused by network latency, you will see high RTT or long delays between request and response even without retransmissions.
+	- Use RTT filters or check TTL values.
+	  
+2. Packet Loss or Retransmissions:
+	- If there are multiple retransmissions or duplicate ACKs, it can indicate packet loss, causing delays in communication.
+	  
+3. Application-Level Slowness:
+	- If the network is performing well but the delay occurs after the request reaches the server, the issue could be slow server processing or application inefficiency.
+	  
+4. Congestion or Zero Window:
+	- Zero Window or Window Full events suggest that the sender is waiting for the receiver to be ready to accept more data, which can cause noticeable delays.
+
+By analyzing time intervals and applying the right filters, you can pinpoint whether the slow response times are caused by the network, the server, or the application itself.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
