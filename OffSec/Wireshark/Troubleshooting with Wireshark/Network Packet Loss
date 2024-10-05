@@ -1,0 +1,128 @@
+
+Network Packet Loss occurs when packets of data traveling across a network fail to reach their destination. This can result in degraded application performance, increased latency, or even failed connections, depending on the severity. Packet loss can be caused by congestion, hardware issues, or faulty network links.
+
+How to Detect Packet Loss Using Wireshark
+Wireshark can help identify packet loss by tracking events such as retransmissions, duplicate ACKs, and lost segments. Here's how to analyze and troubleshoot packet loss using various Wireshark filters.
+
+-- Key Wireshark Filters for Detecting Packet Loss --
+
+TCP Retransmissions
+Shows packets that were retransmitted because the original packet was not acknowledged.
+tcp.analysis.retransmission
+
+TCP Fast Retransmissions
+Shows packets that were retransmitted quickly due to receiving duplicate ACKs.
+tcp.analysis.fast_retransmission
+
+TCP Duplicate ACKs
+Shows duplicate ACKs that indicate packet loss or out-of-order packets.
+tcp.analysis.duplicate_ack
+
+TCP Lost Segments
+Shows packets marked as "lost" by Wireshark, indicating that a segment in the sequence is missing.
+tcp.analysis.lost_segment
+
+TCP Out-of-Order Packets
+Displays packets that arrived out of sequence, which could indicate network reordering or packet loss.
+tcp.analysis.out_of_order
+
+ICMP Destination Unreachable
+Shows ICMP packets indicating that the destination was unreachable, possibly due to packet loss.
+icmp.type == 3 && icmp.code == 1
+
+
+-- Explanation of Common Packet Loss Indicators --
+
+TCP Retransmissions:
+- When a packet is lost, the sender doesn’t receive an acknowledgment (ACK), and after a timeout, the packet is retransmitted.
+- Wireshark Filter: tcp.analysis.retransmission
+
+Fast Retransmissions:
+- If the receiver detects packet loss by receiving three duplicate ACKs (ACKs for the same sequence number), the sender will retransmit the missing packet before the retransmission timeout.
+- Wireshark Filter: tcp.analysis.fast_retransmission
+
+Duplicate ACKs:
+- When the receiver detects a missing packet, it keeps acknowledging the last received packet, leading to duplicate ACKs. A series of duplicate ACKs often precedes retransmissions.
+- Wireshark Filter: tcp.analysis.duplicate_ack
+
+Lost Segments:
+- If Wireshark detects a gap in the sequence numbers, it marks the packets as lost segments. These segments likely never reached their destination and are causing delays due to retransmissions.
+- Wireshark Filter: tcp.analysis.lost_segment
+
+Out-of-Order Packets:
+- Packets may arrive out of order, leading to perceived packet loss. This can happen due to reordering in the network, which may still lead to retransmissions.
+- Wireshark Filter: tcp.analysis.out_of_order
+
+ICMP Destination Unreachable:
+- In networks using ICMP, you may see Destination Unreachable messages indicating that a packet failed to reach its destination, possibly due to packet loss along the route.
+- Wireshark Filter: icmp.type == 3 && icmp.code == 1
+
+
+-- How to Analyze Packet Loss in Wireshark --
+
+Filter by TCP Issues:
+	- Start by applying the tcp.analysis.flags filter to show all potential TCP-related issues, such as retransmissions, duplicate ACKs, and lost segments: tcp.analysis.flags
+
+Track Sequence Numbers:
+- When analyzing packet loss, look at the sequence numbers in the TCP segments. Missing sequence numbers indicate that a packet was lost in transit.
+- Wireshark will often flag these as "TCP Previous Segment Not Captured" or "TCP Out-Of-Order".
+
+Follow TCP Streams:
+- Use "Follow TCP Stream" to get a holistic view of the communication between client and server. Right-click on any packet and select "Follow" > "TCP Stream" to see all packets in sequence.
+- Look for gaps in sequence numbers or retransmissions.
+
+Use I/O Graphs to Visualize Packet Loss:
+- Go to "Statistics > I/O Graph" and plot TCP retransmissions over time to see spikes in packet loss.
+- Add multiple graphs to compare overall traffic and retransmissions:
+	- Create one graph for all TCP traffic: tcp
+	- Add another graph for retransmissions: tcp.analysis.retransmission
+
+Look for Timing Issues:
+- Packet loss often introduces delays in communication, so check for time deltas between packets. Large delays between retransmissions can also point to network issues.
+- Wireshark Filter for large time deltas: frame.time_delta > 1
+
+
+-- What Causes Packet Loss --
+
+- Network Congestion: When the network is overwhelmed with traffic, packets may be dropped.
+- Faulty Hardware: Issues with routers, switches, or cables can result in dropped packets.
+- Poor Signal (Wireless Networks): In Wi-Fi networks, weak signals or interference can cause packet loss.
+- Routing Issues: Misconfigured routing tables can lead to dropped packets if packets are sent to the wrong destination.
+
+
+-- Impact of Packet Loss --
+
+- Increased Latency: The time taken to retransmit lost packets increases overall latency.
+- Reduced Throughput: Retransmissions lower the effective data throughput as the same data is sent multiple times.
+- Application Performance Issues: Real-time applications like VoIP, video conferencing, or online gaming suffer significant performance degradation with even small amounts of packet loss.
+
+
+By using the filters and analysis techniques provided, you can effectively diagnose and mitigate network packet loss using Wireshark.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
