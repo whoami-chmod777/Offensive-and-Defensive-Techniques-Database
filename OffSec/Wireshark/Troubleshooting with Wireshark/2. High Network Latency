@@ -1,0 +1,82 @@
+
+To detect high network latency in Wireshark, you can use filters that highlight delays in packet transmission, such as high round-trip times (RTT) or time delays between requests and responses.
+Here are some specific Wireshark filters for identifying high network latency:
+
+1. Filter for High Round-Trip Time (RTT)
+The round-trip time (RTT) is the time it takes for a packet to be sent from the client, reach the server, and receive an acknowledgment (ACK) in return. High RTT values can indicate network latency.
+Filter for RTT Greater than a Certain Threshold (e.g., 200 ms): tcp.analysis.ack_rtt > 0.2
+This filter shows TCP packets where the ACK RTT (round-trip time) is greater than 200 ms.
+
+2. Filter for High Time Delta Between Packets
+You can filter for packets where the time difference between consecutive packets (frame delta time) is larger than expected, which could indicate network delays.
+Filter for High Time Delta Between Packets (e.g., > 1 second): frame.time_delta > 1
+This filter shows packets where the time between this packet and the previous one exceeds 1 second.
+
+3. Filter for Delays Between Client Request and Server Response
+If you suspect latency between requests and responses, you can filter for specific application-layer protocols (like HTTP, DNS, etc.) and check the time difference between the request and its corresponding response.
+HTTP Request and Response Time Delays: http && frame.time_delta > 1
+This filter displays HTTP packets where the time difference between the request and response is greater than 1 second.
+DNS Query and Response Delays: dns.time > 1
+
+4. Filter for TCP Retransmissions and Duplicate ACKs
+High retransmissions or duplicate ACKs could indicate that packets are being lost or delayed, leading to increased latency.
+Filter for TCP Retransmissions: tcp.analysis.retransmission
+This filter shows all TCP retransmissions, which could indicate packet loss or delays.
+Filter for TCP Duplicate ACKs: tcp.analysis.duplicate_ack
+This filter displays duplicate acknowledgments, which may point to missing or out-of-order packets, contributing to latency.
+
+5. Filter for TCP Zero Window
+If the receiver's buffer is full and can't accept more data, it will send a Zero Window message, potentially leading to delays.
+Filter for TCP Zero Window: tcp.analysis.zero_window
+This filter shows packets where the TCP receiver’s buffer window size is 0, which could cause delays.
+
+
+-- Summary of Filters for High Network Latency --
+
+High Round-Trip Time (RTT)
+Shows TCP packets with RTT values greater than 200 ms.
+tcp.analysis.ack_rtt > 0.2
+
+High Time Delta Between Packets
+Displays packets where the time difference between consecutive packets is greater than 1 second.
+frame.time_delta > 1
+
+HTTP Request and Response Delays
+Shows HTTP traffic where the time difference between request and response is greater than 1 second.
+http && frame.time_delta > 1
+
+DNS Query and Response Delays
+Shows DNS queries that took more than 1 second to receive a response.
+dns.time > 1
+
+TCP Retransmissions
+Shows all TCP retransmissions, which may indicate packet loss or delays in communication.
+tcp.analysis.retransmission
+
+TCP Duplicate ACKs
+Displays TCP duplicate acknowledgments, which may indicate out-of-order or lost packets.
+tcp.analysis.duplicate_ack
+
+TCP Zero Window
+Shows packets where the receiver’s window size is 0, potentially causing delays in communication.
+tcp.analysis.zero_window
+
+Filter for Lost Segments
+This filter helps identify if there are missing TCP segments, which can be a cause of slow performance or packet loss in the network.
+tcp.analysis.lost_segment
+
+
+-- Analyzing Latency in Wireshark --
+
+Step 1: Start by filtering traffic between the client and server using IP addresses.
+
+ip.addr == <client_ip> && ip.addr == <server_ip>
+
+Step 2: Apply filters for RTT, retransmissions, or time delays to identify potential latency issues.
+Step 3: Measure the time differences between packets to see where the delays are occurring, whether it's network-related or an application issue.
+
+These filters should help you effectively diagnose high latency and pinpoint the cause of slow communication between devices or applications.
+
+
+
+
