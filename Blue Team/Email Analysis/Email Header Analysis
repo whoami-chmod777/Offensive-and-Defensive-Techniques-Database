@@ -42,6 +42,69 @@ ls
 
 
 
+
+
+
+
+
+
+
+
+
+
+-- Bounced Emails --
+
+Receiving bounced emails, also known as "bounce-back emails" or "Non-Delivery Reports" (NDRs), happens when an email you send cannot be delivered to the recipient. These emails are returned to you with a message explaining why the delivery failed. There are two types of bounces:
+
+1. Soft Bounce: This is a temporary issue. The email reaches the recipient's server but is rejected due to reasons such as:
+   - The recipient's mailbox is full.
+   - The server is down or busy.
+   - The email message is too large for the recipient's inbox.
+
+2. Hard Bounce This is a permanent issue, where the email cannot be delivered because:
+   - The recipient's email address is invalid or no longer exists.
+   - The domain of the recipient’s email address doesn’t exist.
+
+The bounce-back message usually contains a reason for the failure, which helps identify the cause. If you are receiving these emails, it means that messages you sent could not be delivered to their intended recipients.
+
+
+
+-- SPF (Sender Policy Framework --
+
+SPF (Sender Policy Framework) is an email authentication method that helps verify whether a mail server is authorized to send emails on behalf of a domain. During email header analysis, the **SPF check** involves validating the sender's IP address against the domain's SPF record to prevent email spoofing and phishing attacks.
+
+When analyzing an email header, the SPF check works as follows:
+
+1. DNS Lookup The receiving mail server performs a DNS query to check the SPF record of the domain found in the "MAIL FROM" field (the envelope sender address). The SPF record lists the IP addresses or domains authorized to send emails for that domain.
+
+2. Sender IP Validation The mail server compares the sender's IP address (the IP address from which the email was sent) to the list of authorized IP addresses in the domain's SPF record.
+
+3. SPF Result The mail server then returns one of several SPF results in the email header:
+   - Pass: The sender’s IP address is authorized to send email for the domain.
+   - Fail: The sender’s IP address is not authorized to send email for the domain, indicating potential email spoofing.
+   - SoftFail: The sender’s IP address is not authorized, but the policy allows delivery with a warning.
+   - Neutral: No clear pass or fail, usually when the domain owner does not define an SPF policy.
+   - None: No SPF record found for the domain.
+
+### Example of SPF Check in an Email Header:
+
+Received-SPF: Pass (mail.protection.outlook.com: domain of example.com designates 192.168.1.1 as permitted sender) receiver=protection.outlook.com; client-ip=192.168.1.1; helo=mail.example.com;
+
+- Pass: Indicates that the sender’s IP address is authorized according to the SPF record.
+- domain of example.com: The domain being checked (from the "MAIL FROM" field).
+- client-ip=192.168.1.1: The IP address of the sender.
+- helo=mail.example.com: The server that claimed to send the email.
+
+In summary, the SPF check helps detect whether an email's source is legitimate by cross-referencing the sending IP with the domain's published SPF records. This validation is included in the email header as part of anti-spam and anti-phishing efforts.
+
+
+
+
+
+
+
+-- Links --
+
 E-Mail Header Analyzer (MHA)
 https://github.com/cyberdefenders/email-header-analyzer
 
