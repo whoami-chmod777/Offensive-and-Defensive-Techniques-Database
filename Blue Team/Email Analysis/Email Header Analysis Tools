@@ -1,0 +1,54 @@
+
+A brief overview and example for each tool:
+
+
+1. eioc.py: Extracts Indicators of Compromise (IOCs) from various file formats.
+
+Example: python eioc.py sample.pdf
+
+python eioc.py sample.pdf # Extracts IOCs from a PDF file.
+python eioc.py malware.exe # Extracts IOCs from an executable file.
+python eioc.py archive.zip # Extracts IOCs from an archive.
+python eioc.py network.pcap # Extracts IOCs from a network capture file.
+
+
+2. emldump.py: Analyzes and extracts attachments, headers, and other details from .eml email files.
+
+Example: python emldump.py email.eml
+
+python emldump.py email.eml # Displays details of an .eml email file.
+python emldump.py -a email.eml # Extracts all attachments from the email.
+python emldump.py -d email.eml # Decodes and shows base64-encoded parts of the email.
+python emldump.py -H email.eml # Shows full email headers for detailed analysis.
+
+
+3. oledump.py: Analyzes OLE (Object Linking and Embedding) files to detect malicious embedded objects in MS Office files.
+
+Example: python oledump.py document.doc
+
+python oledump.py document.doc # Lists OLE streams in a .doc file.
+python oledump.py -s 4 document.doc # Dumps stream 4 for inspection.
+python oledump.py -p plugin document.doc # Uses a specific plugin to analyze the file.
+python oledump.py -a document.doc # Displays all OLE objects with automatic analysis.
+
+
+4. pdfid.py: Scans PDFs for signs of malicious content (e.g., suspicious keywords or obfuscation).
+
+Example: python pdfid.py document.pdf
+
+python pdfid.py document.pdf # Scans for potential malicious content in the PDF.
+python pdfid.py -a document.pdf # Shows all detected objects and suspicious content.
+python pdfid.py -e document.pdf # Extracts and examines embedded files in the PDF.
+python pdfid.py -s document.pdf # Analyzes a stream from the PDF for further inspection.
+
+
+5. pdf-parser.py: Parses and extracts contents (streams, objects, etc.) from PDF files for detailed analysis.
+
+Example: python pdf-parser.py document.pdf
+
+python pdf-parser.py document.pdf # Parses the PDF and lists all objects.
+python pdf-parser.py -o 6 document.pdf # Dumps object 6 from the PDF for review.
+python pdf-parser.py -f /JS document.pdf # Searches the PDF for JavaScript-related objects.
+python pdf-parser.py -c document.pdf # Displays statistics about the contents of the PDF.
+
+
