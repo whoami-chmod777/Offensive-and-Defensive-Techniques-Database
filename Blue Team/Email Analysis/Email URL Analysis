@@ -69,6 +69,92 @@ SHA1 Hash: [a-fA-F0-9]{40}
 SHA256 Hash: [a-fA-F0-9]{64}
 
 
+-- Extracted URLs --
+
+To extract the first and second URLs from an email during the process of email header analysis, follow these steps:
+
+1. Access the Email Source (Raw Email Content):
+You'll need to open the email in its raw format to view both the header and the body content. Here's how:
+
+- Gmail: Open the email > Click the three dots (more) in the top-right corner > Select "Show original."
+- Outlook (Web): Open the email > Click the three dots (more actions) > Select "View message source."
+- Yahoo Mail: Open the email > Click the three dots next to reply > Select "View raw message."
+- Apple Mail: Open the email > Click "View" in the menu > Select "Message" > "Raw Source."
+
+2. Search for URLs:
+- Open the raw email message and manually search for URLs by looking for any instances of "http" or "https." The URLs can appear either in the email headers or the body content.
+- Use the search function (Ctrl + F or Cmd + F) and type "http" to find all URLs.
+
+3. Check for URLs in the Email Body:
+- The body of the email may contain links in anchor tags (`<a href="URL">`). These URLs can sometimes be hidden behind text.
+- Look for lines containing links, for example:
+
+html
+<a href="https://first-url-example.com">Click here</a>
+<a href="https://second-url-example.com">Click here</a>
+     
+4. Identify URLs in Encoded Formats:
+If the email content is Base64 encoded, you may need to decode it first to access the links. You can use tools like CyberChef or command-line tools to decode the content.
+
+Example:
+bash
+echo "<Base64 encoded string>" | base64 --decode
+   
+5. Extract URLs from Headers:
+Sometimes, URLs may also appear in headers like Received, Return-Path, or References, but these are more related to email routing and less likely to be user-facing URLs.
+
+Tools for Extracting URLs:
+- Email URL extraction tools: You can use tools like PhishTool, CyberChef, or MIME tools to automatically extract URLs from the email content.
+- Manual Search: Use a text editor like Sublime Text or Notepad++ to search for URLs by looking for "http" or "https".
+
+
+Example Output:
+
+After searching the raw email content:
+1. First URL found:
+   text
+   https://first-url-example.com  
+
+2. Second URL found:
+   text
+   https://second-url-example.com   
+
+By following this process, you can find the first and second URLs embedded in an email for further analysis.
+
+
+--> If the steps above are not helpful try this
+
+To extract the URLs from the email, we would typically focus on two main sources:
+
+1. From the email headers (specifically looking for links in header fields such as "Return-Path", "From", or "Received")
+2. From the email body (encoded in the base64 or any other encoding formats)
+
+Given the data you provided, here’s an analysis process:
+
+Step 1: Look at the email headers
+From the headers you've shared, there are no explicit URLs visible in standard header fields, so the next step would be analyzing the body content.
+
+Step 2: Decode the email body
+The body of the email is base64-encoded, as indicated by the 'Content-Transfer-Encoding: base64'. To extract URLs, you would first decode this content. The encoded string starts with:
+
+"PG1ldGEgaHR0cC1lcXVpdj0iQ29udGVudC1UeXBlIiBjb250ZW50PSJ0ZXh0L2h0bWw7..."
+
+This content represents the HTML portion of the email, and decoding this will reveal the underlying text or links.
+
+Step 3: Decode and extract URLs
+After decoding the base64 content, any links embedded in the HTML of the email body would become visible.
+
+Sample Result (Explanation)
+In this case, the second extracted URL could be similar to a phishing site or an external website embedded in the email body, potentially designed to trick the user into clicking it. To identify the second URL, the complete decoded content would be needed, after which you would look for any '<a href="URL">' or other link tags.
+
+Without performing the actual decoding step here, I can't provide the precise second URL, but this is the general process that would be followed to find it.
+
+Explanation
+In phishing emails, attackers often hide malicious URLs in either the email headers or the body of the message. By decoding the message body and extracting the URLs, security analysts can determine if the email contains links that redirect to known phishing or malicious websites. This is a critical step in identifying and mitigating phishing attempts.
+
+If you want to proceed with the exact URL extraction, you'll need a decoding tool like 'CyberChef' or use a script to decode the base64 string to plain HTML and find the second URL.
+
+
 - Analyze URL Reputation Check -
 When performing URL reputation checks, it's important not to blindly trust the results of automated tools. Each tool has its advantages and disadvantages, and understanding the methodology behind them is crucial for making informed decisions during threat analysis.
 
