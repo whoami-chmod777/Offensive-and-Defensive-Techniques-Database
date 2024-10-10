@@ -1,0 +1,66 @@
+
+In the context of email header analysis, using nslookup can help you gather useful information about domains, mail servers, and other DNS records. Below are some nslookup commands that can assist in analyzing email headers:
+
+1. Lookup SPF Records
+To verify the SPF (Sender Policy Framework) records of a domain:
+
+nslookup -type=txt <domain>
+
+Example: nslookup -type=txt example.com
+
+This will return the SPF record, helping to verify if the domain allows certain IP addresses to send emails on its behalf.
+
+2. Lookup MX (Mail Exchange) Records
+To identify which mail servers are responsible for receiving emails for a domain:
+
+nslookup -type=mx <domain>
+
+Example: nslookup -type=mx example.com
+
+This shows the mail servers that handle incoming emails for the domain.
+
+3. Lookup DKIM Records
+To verify the DKIM (DomainKeys Identified Mail) public key used to authenticate email messages:
+
+nslookup -type=txt selector._domainkey.<domain>
+
+Example: nslookup -type=txt dkim._domainkey.example.com
+
+This checks if the domain has a DKIM record for email authentication.
+
+4. Lookup DMARC Records
+To check if a domain uses DMARC (Domain-based Message Authentication, Reporting & Conformance):
+
+nslookup -type=txt _dmarc.<domain>
+
+Example: nslookup -type=txt _dmarc.example.com
+
+This will show the DMARC policy used by the domain.
+
+5. Reverse DNS Lookup
+To resolve an IP address to a domain name:
+
+nslookup <IP address>
+
+Example: nslookup 192.168.1.1
+
+This will resolve an IP address (from the email header) back to its corresponding domain, helping to trace the email origin.
+
+6. Query CNAME Records
+To find Canonical Name (CNAME) records, which show if a domain is an alias for another:
+
+nslookup -type=cname <domain>
+
+Example: nslookup -type=cname mail.example.com
+
+
+7. Lookup SOA (Start of Authority) Records
+To get information about the authoritative DNS server for a domain:
+
+nslookup -type=soa <domain>
+
+Example: nslookup -type=soa example.com
+
+This shows the DNS server responsible for the domain’s records.
+
+These commands are particularly helpful in verifying domain authenticity and identifying malicious or spoofed emails during email header analysis.
