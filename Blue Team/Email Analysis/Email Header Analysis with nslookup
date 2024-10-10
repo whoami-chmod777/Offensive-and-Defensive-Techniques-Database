@@ -1,7 +1,6 @@
 
 In the context of email header analysis, using nslookup can help you gather useful information about domains, mail servers, and other DNS records. Below are some nslookup commands that can assist in analyzing email headers:
 
-
 1. Lookup SPF Records
 
 To verify the SPF (Sender Policy Framework) records of a domain:
@@ -71,3 +70,61 @@ This shows the DNS server responsible for the domain’s records.
 
 
 These commands are particularly helpful in verifying domain authenticity and identifying malicious or spoofed emails during email header analysis.
+
+
+
+-- Check SPF, DKIM and DMARC Records --
+
+Helpful 'nslookup' Commands for Email Header Analysis:
+
+1. Check SPF Records:
+
+You can use 'nslookup' to retrieve SPF (Sender Policy Framework) records from a domain. SPF records help verify whether an email was sent from an authorized mail server.
+
+nslookup -type=txt <domain>
+Example: nslookup -type=txt example.com | grep -i spf
+
+nslookup -type=txt <v=spf1 include:xxx>*
+
+*
+Example: nslookup -type=txt social.helwan.edu.eg
+
+Non-authoritative answer:
+social.helwan.edu.eg	text = "v=spf1 include:spf.protection.outlook.com -all"
+
+nslookup -type=txt social.helwan.edu.eg
+   
+
+2. Check DKIM (DomainKeys Identified Mail) Records:
+
+Use 'nslookup' to check DKIM records for verifying the email signature.
+
+nslookup -type=txt <selector>._domainkey.<domain>
+Example: nslookup -type=txt dkim._domainkey.example.com
+   
+
+3. Check DMARC Records:
+
+DMARC (Domain-based Message Authentication, Reporting & Conformance) records can be retrieved to see how the domain handles email authentication.
+
+nslookup -type=txt _dmarc.<domain>
+Example: nslookup -type=txt _dmarc.example.com
+   
+
+4. Resolve an IP Address:
+
+If you want to resolve an IP address found in an email header to a hostname, you can use the following 'nslookup' command:
+
+nslookup <ip-address>
+Example: nslookup 192.168.1.1
+   
+
+When Analyzing Email Headers:
+
+- SPF (Sender Policy Framework): Use 'nslookup' to check the SPF record of the sending domain. This helps verify if the sender’s IP is allowed to send emails for that domain.
+- DKIM (DomainKeys Identified Mail): Use 'nslookup' to check if the domain has DKIM configured, ensuring the email was signed by the sending domain.
+- DMARC: Helps you determine how the domain instructs mail servers to handle authentication failures.
+
+Would you like more specific guidance on 'nslookup' usage or examples for a particular domain?
+
+
