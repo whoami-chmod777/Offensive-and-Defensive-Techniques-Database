@@ -1,17 +1,21 @@
 
 Email URL Analysis is the process of inspecting and evaluating URLs within emails to identify potential threats, such as phishing links or malware.
 
+
 - Link -
 When analyzing suspicious emails, it’s crucial to handle links carefully. Instead of clicking, right-click the link and choose "Copy Link Location" to inspect the URL without interacting. This prevents the risk of activating potential malware embedded in the link. Always analyze URLs in a safe environment before further action.
 
+
 - Sublime Text -
 Use the "Sublime Text" editor for analyzing email headers or URLs. In the context of email URL analysis, search for "HTTP" (or "HTTPS") to identify and inspect embedded links. Also, search for the <a> tag, which is used for hyperlinks. This allows you to view the full URL without clicking, providing a safe method to identify potential phishing or malicious sites.
+
 
 - CyberChef -
 Use CyberChef for email analysis tasks such as decoding quoted-printable strings, extracting URLs, and defanging malicious links. The "From Quoted Printable" operation helps decode encoded content, while the "Extract URLs" function identifies all URLs. To prevent accidental clicks on malicious links, use the "Defang URL" operation, which modifies URLs to render them safe for analysis without activating the link.
 
 
 - Email IOC Extractor -
+
 Email IOC Extractor is a Python script used for email forensic analysis, designed to automatically extract Indicators of Compromise (IOCs) from email files. It captures critical components such as IP addresses, URLs, email headers, and attachments.
 
 Usage: python3 eioc.py <file_path>
@@ -69,7 +73,7 @@ SHA1 Hash: [a-fA-F0-9]{40}
 SHA256 Hash: [a-fA-F0-9]{64}
 
 
--- Extracted URLs --
+-- Extract URLs --
 
 To extract the first and second URLs from an email during the process of email header analysis, follow these steps:
 
@@ -156,6 +160,7 @@ If you want to proceed with the exact URL extraction, you'll need a decoding too
 
 
 - Analyze URL Reputation Check -
+
 When performing URL reputation checks, it's important not to blindly trust the results of automated tools. Each tool has its advantages and disadvantages, and understanding the methodology behind them is crucial for making informed decisions during threat analysis.
 
 Tools and Their Use Cases:
