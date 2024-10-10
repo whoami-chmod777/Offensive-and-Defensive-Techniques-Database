@@ -12,7 +12,7 @@ The header contains several fields, each providing specific pieces of informatio
 • Content-Type: Specifies the format of the email (e.g., text/plain, text/html, multipart).
 • MIME-Version: Indicates the version of the MIME protocol used.
 • DKIM-Signature: Digital signature added by the sending server to verify the email's authenticity and integrity.
-• SPF: Sender Policy Framework record, used to verify that the email was sent from an authorized server.
+• SPF: Sender Policy Framework record, used to verify that the email was sent from an authorized server (Check the Received-SPF or the Authentication-Results header).
 • DMARC: Domain-based Message Authentication, Reporting, and Conformance policy that uses SPF and DKIM to determine the legitimacy of an email.
 • ARC-Seal, ARC-Message-Signature, ARC-Authentication-Results: Authenticated Received Chain (ARC) headers used to verify email authentication and preserve results across trusted intermediaries.
 • X-Spam Status: The X-Spam Status shows you the spam score of an email message.
