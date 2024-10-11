@@ -1,0 +1,30 @@
+
+A first look at Wireshark installation and initial settings.
+
+Wireshark is a network packet analyzer to capture network packets and display their details. It is similar to a measuring device for examining what's happening inside a network cable. Wireshark is open source, free, and available for almost all operating systems. 
+
+Wireshark is great for:
+
+- Troubleshooting network problems Examining security problems
+- Verifying network applications
+- Debugging protocol implementations
+- Learning about the internal functioning of network protocols
+
+Obtain the latest version of Wireshark. Download the latest stable version of Wireshark for your operating system.
+
+Install the downloaded version on your PC by following the steps of the default configuration wizard.
+Verify the physical connection between the PC (equipped with Wireshark) and the network router connected to a network.
+Open Wireshark, and in the main window, double-click the capture interface that you are using as a connection with the router. In my case the interface is "Killer E2600 Gigabit Ethernet", cable interface.
+
+The capture starts, and the packets are displayed in real time.
+Stop the live capture by clicking the Stop button (RED square shown in the figure below) and save the capture in a file (such as FirstTraceFile.pcap) by using the File menu. 
+
+You can also download free sample capture file http.cap to your PC from the Wireshark Wiki SampleCaptures site and open this file. To open the file in Wireshark, on the main menu, select File > Open.
+The Open Capture File dialog box displays a list of supported file types that can be opened.
+
+
+The wireshark wiki website contains a lot of captures.
+
+https://wiki.wireshark.org/
+https://www.wireshark.org/download.html
+https://gitlab.com/wireshark/wireshark/-/wikis/SampleCaptures
