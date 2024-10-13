@@ -99,6 +99,116 @@ In summary, the SPF check helps detect whether an email's source is legitimate b
 
 
 
+-- DKIM --
+
+
+
+
+-- DMARC --
+
+
+
+
+-- X-Header --
+
+An X-Header is a custom header field in an email that provides additional information about the message, its routing, or how it was processed.
+
+- Purpose of X-Headers -
+
+- Tracking: X-Headers can be used to track the progress of an email through various systems, providing details about the servers or security tools that processed the message.
+- Filtering: Security systems may add X-Headers to indicate whether an email passed or failed spam or malware checks.
+- Custom Information: Organizations or services may include X-Headers for internal purposes, such as identifying campaigns or specific users.
+- Debugging: X-Headers can help system administrators diagnose delivery issues or security problems.
+
+
+- Common X-Headers for Email Analysis -
+
+X-Spam-Flag:
+Indicates whether the email was flagged as spam.
+Example: X-Spam-Flag: YES
+
+X-Spam-Status:
+Provides detailed information on the spam evaluation of the email, including the spam score and required threshold.
+Example: X-Spam-Status: No, score=-2.6 required=5.0
+
+X-Spam-Score:
+The numerical score representing the spam level of the email.
+Example: X-Spam-Score: 4.2
+
+X-Spam-Level:
+A visual indicator of the spam score, typically represented with asterisks or other symbols.
+Example: X-Spam-Level: ****
+
+X-Originating-IP:
+Reveals the original IP address from which the email was sent.
+Example: X-Originating-IP: [192.168.1.10]
+
+X-Received:
+Lists additional information about intermediate mail servers involved in routing the email.
+Example: X-Received: by 2002:a05:612c:fd0:b0:46b:1f60:44ff with SMTP
+
+X-Mailer:
+Specifies the email client or software used to send the message.
+Example: X-Mailer: Microsoft Outlook 16.0
+
+X-Authentication-Results:
+Shows the results of authentication checks like SPF, DKIM, or DMARC.
+Example: X-Authentication-Results: dkim=pass; spf=pass
+
+X-Priority:
+Indicates the priority or urgency of the email as set by the sender.
+Example: X-Priority: 1 (Highest)
+
+X-MSMail-Priority:
+Microsoft-specific header indicating the message priority.
+Example: X-MSMail-Priority: High
+
+X-Sender:
+Contains the sender’s email address or domain name.
+Example: X-Sender: john@example.com
+
+X-Forwarded-For:
+Indicates the original IP address when the email has been forwarded.
+Example: X-Forwarded-For: 192.168.1.5
+
+X-MailFrom:
+Specifies the original sender’s email address or the bounce address.
+Example: X-MailFrom: bounce@example.com
+
+X-SES-Outgoing:
+Used by Amazon SES to indicate the outgoing server details.
+Example: X-SES-Outgoing: 2024.05.12-54.240.60.143
+
+X-MimeOLE:
+Specifies which version of Microsoft’s MIME encoder was used to compose the message.
+Example: X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5579
+
+X-Content-Filtered-By:
+Shows what content filtering or security tools processed the email.
+Example: X-Content-Filtered-By: Barracuda Email Security Service
+
+X-DKIM-Signature:
+Indicates the DKIM signature for verifying the integrity and origin of the email.
+Example: X-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=example.com; s=default
+
+X-Virus-Scanned:
+Confirms whether the email was scanned for viruses and what antivirus service was used.
+Example: X-Virus-Scanned: by ClamAV
+
+X-Dropbox-Message-ID:
+A unique identifier for tracking messages sent via Dropbox's email system.
+Example: X-Dropbox-Message-ID: 15848236649165401982
+
+X-CID (X-cid):
+A custom header added by the sender to track messages for internal or campaign purposes, sometimes used for unique identifiers.
+Example: X-CID: 8337
+
+X-ClientProxiedBy:
+Indicates that the email client was proxied by another server or service, providing information about the intermediary server.
+Example: X-ClientProxiedBy: SMTP2.example.com via SMTP3.proxy.com
+
+
+These X-Headers are useful for tracking the origin and journey of an email, identifying security risks, and understanding how emails were processed and delivered through various services.
 
 
 
