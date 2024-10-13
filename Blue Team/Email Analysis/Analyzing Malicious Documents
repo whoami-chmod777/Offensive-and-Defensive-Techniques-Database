@@ -1,1 +1,76 @@
 
+This cheat sheet outlines tips and tools for analyzing malicious documents, such as Microsoft Office, RTF and Adobe Acrobat (PDF) files
+
+
+-- General Approach to Document Analysis --
+
+1. Examine the document for anomalies, such as risky tags, scripts, or other anomalous aspects.
+2. Locate embedded code, such as shellcode, VBA macros, JavaScript or other suspicious objects.
+3. Extract suspicious code or object from the file.
+4. If relevant, deobfuscate and examine JavaScript or macro code.
+5. If relevant, disassemble and/or debug shellcode.
+6. Understand the next steps in the infection chain.
+
+
+-- Microsoft Office Format Notes --
+
+- Binary document files supported by Microsoft Office use the OLE2 (a.k.a. Structured Storage) format.
+- SRP streams in OLE2 documents sometimes store a cached version of earlier macro code.
+- OOXML documents (.docx, .xlsm, etc.) supported by MS Office use zip compression to store contents.
+- Macros embedded in OOXML files are stored inside the OLE2 binary file, which is within the zip archive.
+- RTF documents don’t support macros, but can contain other files embedded as OLE1 objects.
+
+
+**** -- Useful MS Office File Analysis Commands --
+
+...
+...
+...
+
+
+-- Risky PDF Format Tags --
+
+...
+...
+...
+
+
+
+-- Useful PDF File Analysis Commands --
+
+...
+...
+...
+
+
+
+-- Shellcode and Other Analysis Commands --
+
+...
+...
+...
+
+
+
+-- Additional Document Analysis Tools --
+
+
+...
+...
+...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
