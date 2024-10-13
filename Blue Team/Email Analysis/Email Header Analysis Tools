@@ -33,7 +33,7 @@ python oledump.py document.doc # Lists OLE streams in a .doc or .xlsm file.
 python oledump.py -s 4 document.doc # Extract and display the content of a specific stream.
 python oledump.py -s 4 -S document.doc # Show the structure of a stream as a hex dump.
 python oledump.py -s 4 --raw document.doc # View raw content of the selected stream to manually inspect data.
-python oledump.py -s 4 --plugin_http document.doc # Extract all URLs from the OLE file.
+python oledump.py -s 4 --plugins_http document.doc # Extract all URLs from the OLE file.
 python oledump.py -s 4 --vbadecompresscorrupt document.doc # Decompress and analyze corrupted VBA macros.
 
 python oledump.py -a document.doc # Displays all OLE objects with automatic analysis.
