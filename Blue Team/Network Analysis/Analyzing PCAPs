@@ -34,18 +34,16 @@ Follow SSL Stream: Follow > SSL Stream
 
 3. Viewing Capture Statistics
 
-Wireshark provides various statistics about the traffic in the capture file:
+Wireshark provides various statistics about the traffic in the capture file.
 
 Protocol Hierarchy: Displays the percentage of packets or bytes used by each protocol in relation to the total traffic.
 
 Conversations: Offers details on communications between hosts, including:
-
 - Source and destination hosts
 - Ports used
 - Total bytes and packets exchanged
 
 Endpoints: Lists all unique hosts in the capture, along with:
-
 - Packets sent and received
 - Bytes sent and received
 
