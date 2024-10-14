@@ -1,0 +1,39 @@
+
+-- Important Ports and Services for SOC Analysts --
+
+Here’s a list of important ports and services specifically relevant for a Security Operations Center (SOC) analyst:
+
+Important Ports and Services for SOC Analysts:
+
+Port 20, 21 – File Transfer Protocol (FTP)
+Port 22 – Secure Shell (SSH)
+Port 23 – Telnet
+Port 25 – Simple Mail Transfer Protocol (SMTP)
+Port 53 – Domain Name System (DNS)
+Port 67, 68 – Dynamic Host Configuration Protocol (DHCP)
+Port 80 – Hypertext Transfer Protocol (HTTP)
+Port 110 – Post Office Protocol version 3 (POP3)
+Port 143 – Internet Message Access Protocol (IMAP)
+Port 443 – Hypertext Transfer Protocol Secure (HTTPS)
+Port 445 – Server Message Block (SMB)
+Port 514 – Syslog (for log management)
+Port 3389 – Remote Desktop Protocol (RDP)
+Port 3306 – MySQL Database
+Port 5432 – PostgreSQL Database
+Port 8080 – Alternative HTTP (often used for web proxies)
+Port 3128 – Commonly used for web proxies (e.g., Squid)
+Port 554 – Real-Time Streaming Protocol (RTSP)
+Port 5431 – Custom applications and services (often used in enterprise environments)
+Port 5000 – UPnP (Universal Plug and Play) and some custom applications
+
+Additional Ports of Interest for Security Monitoring:
+
+Port 1521 – Oracle Database Listener
+Port 9200 – Elasticsearch
+Port 27017 – MongoDB
+Port 6379 – Redis
+Port 161, 162 – Simple Network Management Protocol (SNMP)
+Port 8443 – Secure HTTP (HTTPS Alternative)
+Port 10000 – Webmin and some custom applications
+
+This list should help to monitor relevant traffic and services in a SOC environment.
