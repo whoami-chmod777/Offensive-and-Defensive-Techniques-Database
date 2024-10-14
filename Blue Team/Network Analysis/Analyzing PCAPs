@@ -27,9 +27,9 @@ NTP or UDP Traffic on Port 20000: ntp or udp.port == 20000
 To analyze the flow of packets between hosts:
 
 Follow TCP Stream: Follow > TCP Stream
+Follow HTTP Stream: Follow > HTTP Stream
 Follow UDP Stream: Follow > UDP Stream
 Follow SSL Stream: Follow > SSL Stream
-Follow HTTP Stream: Follow > HTTP Stream
 
 
 3. Viewing Capture Statistics
