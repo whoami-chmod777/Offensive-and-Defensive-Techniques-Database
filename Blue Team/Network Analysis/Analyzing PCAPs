@@ -1,0 +1,67 @@
+
+-- Essential techniques for analyzing PCAP files using Wireshark --
+
+- Overview -
+
+1. Display Filters
+2. Following Streams
+3. Viewing Capture Statistics
+4. Accessing Statistics
+5. Tips for Effective Analysis
+
+
+1. Display Filters
+
+Use display filters to isolate specific traffic in the capture file. Here are some useful examples:
+
+General UDP Traffic: udp
+HTTP Requests: http.request
+TCP Traffic on Port 80: tcp.port == 80
+TCP Window Size Greater Than or Equal to 8000: tcp.window_size_value >= 8000
+Destination IP and TCP Traffic: ip.dst_host == 192.168.1.7 && tcp
+NTP or UDP Traffic on Port 20000: ntp or udp.port == 20000  
+
+
+2. Following Streams
+
+To analyze the flow of packets between hosts:
+
+Follow TCP Stream: Follow > TCP Stream
+Follow UDP Stream: Follow > UDP Stream
+Follow SSL Stream: Follow > SSL Stream
+Follow HTTP Stream: Follow > HTTP Stream
+
+
+3. Viewing Capture Statistics
+
+Wireshark provides various statistics about the traffic in the capture file:
+
+Protocol Hierarchy: Displays the percentage of packets or bytes used by each protocol in relation to the total traffic.
+
+Conversations: Offers details on communications between hosts, including:
+
+- Source and destination hosts
+- Ports used
+- Total bytes and packets exchanged
+
+Endpoints: Lists all unique hosts in the capture, along with:
+
+- Packets sent and received
+- Bytes sent and received
+
+
+4. Accessing Statistics
+
+To access statistics in Wireshark: Navigate to the Statistics menu for:
+
+- Protocol Hierarchy: 'Statistics > Protocol Hierarchy'
+- Conversations: 'Statistics > Conversations'
+- Endpoints: 'Statistics > Endpoints'
+
+
+5. Tips for Effective Analysis
+
+- Save Filters: Create and save frequently used filters for quick access.
+- Color Rules: Use coloring rules to differentiate between types of traffic.
+- Capture Options: Adjust capture options to focus on specific protocols or ports.
+- Export Data: Export specific data or statistics for reporting or further analysis.
