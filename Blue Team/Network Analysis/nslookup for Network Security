@@ -16,6 +16,14 @@ nslookup example.com 8.8.8.8
 Query a specific DNS server for domain information	
 nslookup google.com 8.8.8.8
 
+nslookup -type=a example.com	
+Query the A record (IPv4 address) for a domain	
+nslookup -type=a example.com
+
+nslookup -type=txt example.com	
+Query TXT (Text) records (e.g., SPF, DKIM) for a domain	
+nslookup -type=txt google.com
+
 nslookup -type=mx example.com	
 Query MX (Mail Exchange) records for a domain	
 nslookup -type=mx gmail.com
@@ -23,10 +31,6 @@ nslookup -type=mx gmail.com
 nslookup -type=ns example.com	
 Query NS (Name Server) records for a domain	
 nslookup -type=ns example.com
-
-nslookup -type=txt example.com	
-Query TXT (Text) records (e.g., SPF, DKIM) for a domain	
-nslookup -type=txt google.com
 
 nslookup -type=soa example.com	
 Query SOA (Start of Authority) record for a domain	
@@ -36,6 +40,3 @@ nslookup -type=cname example.com
 Query CNAME (Canonical Name) records for alias domains	
 nslookup -type=cname www.example.com
 
-nslookup -type=a example.com	
-Query the A record (IPv4 address) for a domain	
-nslookup -type=a example.com
