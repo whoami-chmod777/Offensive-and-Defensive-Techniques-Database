@@ -1,0 +1,120 @@
+
+tcpdump is a powerful command-line tool used to capture and analyze network traffic. It allows users to intercept packets sent or received over a network and inspect their contents.
+
+Key features of tcpdump:
+
+- Capture Packets: It captures packets in real-time and displays detailed packet information, including source and destination IP addresses, ports, protocols, and flags.
+- Filtering Traffic: You can filter traffic by IP, port, or protocol to focus on specific network activity using expressions like tcp, udp, or specific IP addresses.
+
+- Display Formats: tcpdump can display captured packets in different formats, such as:
+	- Default packet view.
+	- Hexadecimal and ASCII format (-X option).
+	- ASCII format only (-A option).
+
+- Save Captures: It supports saving the captured traffic into a .pcap file for later analysis with tools like Wireshark.
+
+- Useful Options:
+	- -i to specify the interface (e.g., tcpdump -i eth0).
+	- -w to write the capture to a file.
+	- -n to disable DNS name resolution and display IP addresses directly.
+
+
+Useful tcpdump command examples:
+
+
+man tcpdump | less
+sudo tcpdump -i enp0s3 -n
+
+Capture Traffic without DNS Resolution (Display IP Addresses or Hostname):
+sudo tcpdump -i enp0s3 -n host example.com
+sudo tcpdump -i enp0s3 -n host 93.184.215.14
+sudo tcpdump -i enp0s3 -n src 93.184.215.14
+sudo tcpdump -i enp0s3 -n dst 93.184.215.14
+
+Capture Traffic Based on Network Segments:
+sudo tcpdump -i enp0s3 -n net 192.168.199.0/24
+sudo tcpdump -i enp0s3 -n src net 192.168.199.0/24 
+sudo tcpdump -i enp0s3 -n dst net 192.168.199.0/24 
+
+Capture Traffic Based on on Portnumber:
+sudo tcpdump -i enp0s3 -n port 3389
+sudo tcpdump -i enp0s3 -n src port 3389
+sudo tcpdump -i enp0s3 -n dst port 3389
+
+Capture Traffic Based on Logical Operators: 'and', 'or', 'not':
+sudo tcpdump -i enp0s3 -n  src 10.0.2.10 and dst port 3389
+sudo tcpdump -i enp0s3 -n  'src 10.0.2.10 and not port 22'
+sudo tcpdump -i enp0s3 -n  'src 10.0.2.15 and dst 40.123.123.124 and not (port 443 or port 22)'
+
+Capture Traffic Based on Protocols:
+sudo tcpdump -i enp0s3 -n tcp
+sudo tcpdump -i enp0s3 -n icmp
+sudo tcpdump -i enp0s3 -n not arp
+
+Save Capture into a File:
+sudo tcpdump -i enp0s3 -n -w /path/filename
+
+Read from a CaptureFile:
+sudo tcpdump -i enp0s3 -n -r /path/filename
+
+
+-- Useful tcpdump command examples --
+
+Capture all network traffic on the default interface.
+sudo tcpdump
+
+Capture traffic on the specified interface (e.g., eth0).
+sudo tcpdump -i eth0
+
+Capture only 10 packets and stop.
+sudo tcpdump -c 10
+
+Save the captured packets to a file (capture.pcap).
+sudo tcpdump -w capture.pcap
+
+Read packets from a file for analysis.
+sudo tcpdump -r capture.pcap
+
+Capture traffic without DNS resolution (display IP addresses).
+sudo tcpdump -n
+
+Capture traffic on the loopback interface (lo).
+sudo tcpdump -i lo
+
+Capture only traffic on port 80 (HTTP traffic).
+sudo tcpdump port 80
+
+Capture only traffic to/from the specified host.
+sudo tcpdump host 192.168.1.10
+
+Capture only TCP traffic.
+sudo tcpdump tcp
+
+Capture only UDP traffic.
+sudo tcpdump udp
+
+Capture packets and display in hex and ASCII.
+sudo tcpdump -X
+
+Capture packets and display in ASCII format only.
+sudo tcpdump -A
+
+Capture traffic from the source IP 192.168.1.10.
+sudo tcpdump src 192.168.1.10
+
+Capture traffic destined to the IP 192.168.1.10.
+sudo tcpdump dst 192.168.1.10
+
+Capture with maximum verbosity for detailed packet information.
+sudo tcpdump -vvv
+
+Capture only SYN packets (part of TCP handshake).
+sudo tcpdump 'tcp[13] & 2 != 0'
+
+Capture only ICMP (ping) traffic.
+sudo tcpdump icmp
+
+Capture traffic for a specific network (e.g., 192.168.1.0/24).
+sudo tcpdump net 192.168.1.0/24
+
+
