@@ -1,0 +1,193 @@
+
+-- Analysis with tcpdump --
+
+tcpdump -r capture.pcap
+tcpdump -r capture.pcap --count
+tcpdump -r capture.pcap -c <number of packets>
+
+tcpdump -r capture.pcap -t
+tcpdump -r capture.pcap -tt
+tcpdump -r capture.pcap -ttt
+tcpdump -r capture.pcap -tttt
+
+
+-- tcpdump Analysis Step-by-Step --
+
+tcpdump -r capture.pcap 
+tcpdump -r capture.pcap --count
+tcpdump -tt -r capture.pcap
+
+tcpdump -tt -r capture.pcap port 80 --count
+tcpdump -tt -r capture.pcap port 80
+
+tcpdump -tt -r capture.pcap port 80 and host 10.0.0.168
+tcpdump -tt -r capture.pcap port 80 and host 10.0.0.168 | grep -E "GET|POST"
+
+tcpdump -tt -r capture.pcap | grep "audio.exe"
+tcpdump -tt -r capture.pcap -A | grep "audio.exe" -A 500 | less
+
+
+-- tcpdump Analysis Step-by-Step Example --
+
+tcpdump -r capture.pcap --count
+tcpdump -tt -r capture.pcap -n tcp
+
+tcpdump -tt -r capture.pcap -n tcp | cut -d " " -f 3
+tcpdump -tt -r capture.pcap -n tcp | cut -d " " -f 3 | cut -d "." -f 1-4
+tcpdump -tt -r capture.pcap -n tcp | cut -d " " -f 3 | cut -d "." -f 1-4 | sort
+tcpdump -tt -r capture.pcap -n tcp | cut -d " " -f 3 | cut -d "." -f 1-4 | sort | uniq
+tcpdump -tt -r capture.pcap -n tcp | cut -d " " -f 3 | cut -d "." -f 1-4 | sort | uniq -c
+tcpdump -tt -r capture.pcap -n tcp | cut -d " " -f 3 | cut -d "." -f 1-4 | sort | uniq -c | sort -nr
+
+tcpdump -tt -r capture.pcap -n tcp | cut -d " " -f 5 | cut -d "." -f 1-4 | sort | uniq -c | sort -nr
+
+tcpdump -tt -r capture.pcap -n tcp and src 10.4.18.169 and dst 85.239.53.211 --count 
+tcpdump -tt -r capture.pcap -n tcp and src 10.4.18.169 and dst 85.239.53.211 | cut -d " " -f 3
+tcpdump -tt -r capture.pcap -n tcp and src 10.4.18.169 and dst 85.239.53.211 | cut -d " " -f 3 | cut -d "." -f 5
+
+tcpdump -tt -r capture.pcap -n tcp and src 10.4.18.169 and dst 85.239.53.211 | cut -d " " -f 3 | cut -d "." -f 5 | sort | uniq -c | sort -nr
+
+tcpdump -tt -r capture.pcap -n tcp and dst 10.4.18.169 and src 85.239.53.211 | cut -d " " -f 3 | cut -d "." -f 5 | sort | uniq -c | sort -nr
+
+tcpdump -tt -r capture.pcap src 10.4.18.169 and dst 85.239.53.211 | grep -E "GET|POST"
+tcpdump -tt -r capture.pcap src 10.4.18.169 and dst 85.239.53.211 -c 5
+tcpdump -tt -r capture.pcap src 10.4.18.169 and dst 85.239.53.211 -c 5 -A
+
+tcpdump -tt -r capture.pcap host 85.239.53.211
+tcpdump -tt -r capture.pcap host 85.239.53.211 -A | grep -i 'user\|pass\|login'
+tcpdump -tt -r capture.pcap host 85.239.53.211 -A | grep -i 'user\|pass\|login' | grep -v "User-Agent"
+tcpdump -tt -r capture.pcap host 85.239.53.211 -A | grep "filename"
+
+tcpdump -tt -r capture.pcap | grep t.me 
+tcpdump -tt -r capture.pcap host t.me -n
+
+tcpdump -tt -r capture.pcap | grep dll
+tcpdump -tt -r capture.pcap -A | grep dll -A 50 | less
+
+
+-- tcpdump Commands Cheat Sheet for network Traffic Analysis --
+
+Capture all traffic on the interface enp0s3.
+sudo tcpdump -i enp0s3
+
+Capture traffic without DNS resolution, displaying IP addresses.
+sudo tcpdump -i enp0s3 -n
+
+Capture traffic to and from the host example.com.
+sudo tcpdump -i enp0s3 -n host example.com
+
+Capture traffic coming from the source IP 192.168.1.1.
+sudo tcpdump -i enp0s3 -n src 192.168.1.1
+
+Capture traffic going to the destination IP 192.168.1.1.
+sudo tcpdump -i enp0s3 -n dst 192.168.1.1
+
+Capture traffic on port 80 (typically HTTP traffic).
+sudo tcpdump -i enp0s3 -n port 80
+
+Save captured traffic to a file for later analysis.
+sudo tcpdump -i enp0s3 -n -w /path/capture.pcap
+
+Read and analyze a previously saved capture file.
+sudo tcpdump -i enp0s3 -n -r /path/capture.pcap
+
+Display packet contents in ASCII format for easier reading.
+sudo tcpdump -i enp0s3 -n -A
+
+Display packet contents in both hex and ASCII for detailed analysis.
+sudo tcpdump -i enp0s3 -n -X
+
+
+-- Cheat Sheet for the cut Commands --
+
+cut -d ' ' -f 1: Cut the first field using a space as a delimiter. Useful for extracting IPs or timestamps.
+cut -d ' ' -f 1 access.log
+
+cut -d ',' -f 2: Cut the second field using a comma as a delimiter. Ideal for CSV files.
+cut -d ',' -f 2 email.csv
+
+cut -f 3: Cut the third tab-delimited field. Common for system-generated logs.
+cut -f 3 system.log
+
+cut -c 1-10: Extract characters from position 1 to 10. Use this for fixed-width logs or specific data positions.
+cut -c 1-10 logs.txt
+
+cut -d ':' -f 1,3: Cut the first and third fields using a colon delimiter. Useful in analyzing logs with colon separators (e.g., system logs).
+cut -d ':' -f 1,3 /etc/passwd
+
+cut -d ' ' -f 4-6: Extract a range of fields (from 4 to 6) using a space as the delimiter. Handy for extracting date and time ranges from logs.
+cut -d ' ' -f 4-6 syslog
+
+cut -d '=' -f 2: Extract the value after an equal sign, useful in key-value pairs (e.g., query parameters).
+cut -d '=' -f 2 params.txt
+
+cut -d ' ' -f 2-: Extract everything starting from the second field onward. Useful for skipping irrelevant data in logs.
+cut -d ' ' -f 2- security_events.log
+
+
+-- Cheat Sheet for sort Commands --
+
+sort: Sort lines alphabetically (default behavior). Useful for organizing log entries.
+sort access.log
+
+sort -r: Sort lines in reverse order. Useful for seeing the latest entries first.
+sort -r syslog
+
+sort -n: Sort numerically (based on numbers). Useful for sorting based on IP addresses, port numbers, or counts.
+sort -n error_count.log
+
+sort -k 2: Sort based on the second field (default space delimiter). Useful for sorting by IP addresses or timestamps.
+sort -k 2 access.log
+
+sort -t ':' -k 2: Sort based on the second field, using a colon : as the delimiter. Useful for system logs like /etc/passwd.
+sort -t ':' -k 2 /etc/passwd
+
+sort -u: Sort and remove duplicate lines. Useful for unique log entries or alerts.
+sort -u alerts.log
+
+sort -M: Sort by month name. Useful for logs with month names like Jan, Feb, etc.
+sort -M syslog
+
+sort -o output.log: Sort and write the result to a file.
+sort access.log -o sorted_access.log
+
+
+-- Cheat Sheet for uniq Commands --
+
+uniq: Removes duplicate lines from the output. Often used with sort to ensure unique results.
+sort access.log
+
+uniq -c: Count the number of occurrences of each unique line. Useful for identifying patterns in log files.
+sort access.log
+
+uniq -d: Only show duplicate lines (i.e., lines that appear more than once). Useful for identifying recurring events.
+sort access.log
+
+uniq -u: Only show unique lines (i.e., lines that appear exactly once). Useful for filtering out repeated events.
+sort access.log
+
+uniq -i: Ignore case when determining unique lines. Useful when log entries or emails might have case variations.
+sort alerts.log
+
+uniq -w 10: Compare only the first 10 characters to determine uniqueness. Useful for logs where only a part of the line is relevant for uniqueness (e.g., timestamps).
+sort access.log
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
