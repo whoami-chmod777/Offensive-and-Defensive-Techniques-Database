@@ -1,9 +1,9 @@
 
-TCPDump is a command-line tool that, like Wireshark, can be used to capture network traffic and view and analyze PCAP capture files. TCPDump has the benefit of not needing GUI access to a host in order to use it. Additionally, in some ways, TCPDump provides even more granular analysis and filtering capabilities, with the ability to have the output piped to other commands.
-
+TCPDump is a command-line tool that, like Wireshark, can be used to capture network traffic and view and analyze PCAP capture files. 
+TCPDump has the benefit of not needing GUI access to a host in order to use it. Additionally, in some ways, TCPDump provides even more granular analysis and filtering capabilities, with the ability to have the output piped to other commands.
 You can see the available options with tcpdump -h or read the manual with man tcpdump.
-
 Note that you will have to append sudobefore each TCPDump command if you are not the root user.
+
 
 1. Installation & Setup:
 - Install tcpdump: sudo apt-get install tcpdump
