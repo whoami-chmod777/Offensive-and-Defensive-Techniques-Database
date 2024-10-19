@@ -21,9 +21,17 @@ Key features of tcpdump:
 
 Useful tcpdump command examples:
 
-
 man tcpdump | less
+sudo tcpdump -i enp0s3
 sudo tcpdump -i enp0s3 -n
+
+Capture and display packets in hex and ASCII:
+sudo tcpdump -i enp0s3 -X
+sudo tcpdump -i enp0s3 -A
+sudo tcpdump -n -r magnitude_1hr.pcap host 192.168.99.52 and port 80 -A
+sudo tcpdump -n -r magnitude_1hr.pcap host 192.168.99.52 and port 80 -AX
+sudo tcpdump -n -r magnitude_1hr.pcap host 192.168.99.52 and port 80 -AX | less
+sudo tcpdump -r taildooe_traffic_no_interaction.pcap -X -A host 10.0.2.15 and port 80
 
 Capture Traffic without DNS Resolution (Display IP Addresses or Hostname):
 sudo tcpdump -i enp0s3 -n host example.com
@@ -87,11 +95,17 @@ sudo tcpdump port 80
 Capture only traffic to/from the specified host.
 sudo tcpdump host 192.168.1.10
 
+Capture only IP traffic.
+sudo tcpdump ip
+
 Capture only TCP traffic.
 sudo tcpdump tcp
 
 Capture only UDP traffic.
 sudo tcpdump udp
+
+Capture only IPv6 traffic.
+sudo tcpdump ip6
 
 Capture packets and display in hex and ASCII.
 sudo tcpdump -X
