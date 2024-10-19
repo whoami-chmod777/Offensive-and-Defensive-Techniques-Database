@@ -25,7 +25,7 @@ man tcpdump | less
 sudo tcpdump -i enp0s3
 sudo tcpdump -i enp0s3 -n
 
-Capture and display packets in hex and ASCII:
+Capture and display packets in HEX and ASCII:
 sudo tcpdump -i enp0s3 -X
 sudo tcpdump -i enp0s3 -A
 sudo tcpdump -n -r magnitude_1hr.pcap host 192.168.99.52 and port 80 -A
