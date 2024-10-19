@@ -29,6 +29,7 @@ Ubuntu, Debian and Linux Mint
 
 -- Protocols --
 
+Ether, fddi, icmp ,ip, ip6 , ppp, radio, rarp, slip, tcp , udp, wlan
 
 
 -- Common Commands with Protocols for Filtering Captures --
