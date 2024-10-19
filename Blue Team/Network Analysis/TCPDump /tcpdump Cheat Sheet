@@ -1,0 +1,76 @@
+
+-- tcpdump Cheat Sheet --
+
+• Installation Commands
+• Display / Output Options
+• Protocols
+• Common Commands with Protocols for Filtering Captures
+• Logical Operators
+• Packet Capturing Options
+
+
+-- Installation Commands --
+
+CENT OS and REDHAT 
+$ sudo yum install tcpdump
+
+Fedora 
+$ dnf install tcpdump
+
+Ubuntu, Debian and Linux Mint 
+#apt-get install tcpdump
+
+
+-- Display / Output Options --
+
+
+
+
+
+-- Protocols --
+
+
+
+-- Common Commands with Protocols for Filtering Captures --
+
+
+
+-- Logical Operators --
+
+Operator	Syntax		Example											Description
+
+AND 		and, && 	tcpdump -n src 192.168.1.1 and dst port 21 		Combine filtering options
+OR 			or, || 		tcpdump dst 10.1.1.1 && !icmp 					Either of the condition can match
+EXCEPT 		not, ! 		tcpdump dst 10.1.1.1 and not icmp 				Negation of the condition
+LESS 		  < 		tcpdump <32 									Shows packets size less than 32
+GREATER 	  > 		tcpdump >=32 									Shows packets size greater than 32
+
+-- Packet Capturing Options --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://cdn.comparitech.com/wp-content/uploads/2019/06/tcpdump-cheat-sheet-1.pdf
