@@ -23,8 +23,17 @@ Ubuntu, Debian and Linux Mint
 
 -- Display / Output Options --
 
-
-
+Quite and less verbose mode display less details: -q 
+Do not print time stamp details in dump: -t 
+Little verbose output: -v 
+More verbose output: -vv 
+Most verbose output: -vvv 
+Print data and headers in HEX format: -x 
+Print data with link headers in HEX format: -xx 
+Print output in HEX and ASCII format excluding link headers: -X 
+Print output in HEX and ASCII format including link headers: -XX 
+Print Link (Ethernet) headers: -e 
+Print sequence numbers in exact format: -S 
 
 
 -- Protocols --
