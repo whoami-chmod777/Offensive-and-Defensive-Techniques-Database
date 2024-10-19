@@ -43,6 +43,26 @@ Ether, fddi, icmp ,ip, ip6 , ppp, radio, rarp, slip, tcp , udp, wlan
 
 -- Common Commands with Protocols for Filtering Captures --
 
+Filter by source or destination IP address or host: 
+src/dst host (host name or IP)
+
+Ethernet host filtering by source or destination: 
+ether src/dst host (ethernet host name or IP)
+
+Filter by subnet: 
+src/dst net (subnet mask in CIDR) 
+
+Filter TCP or UDP packets by source or destination port: 
+tcp/udp src/dst port ( port number) 
+
+Filter TCP or UDP packets by source or destination port range: 
+tcp/udp src/dst port range ( port number range)
+
+Filter for Ethernet or IP broadcasts: 
+ether/ip broadcast 
+
+Filter for Ethernet or IP multicasts: 
+ether/ip multicast 
 
 
 -- Logical Operators --
