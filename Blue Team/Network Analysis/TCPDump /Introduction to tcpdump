@@ -1,0 +1,110 @@
+
+TCPDump is a command-line tool that, like Wireshark, can be used to capture network traffic and view and analyze PCAP capture files. TCPDump has the benefit of not needing GUI access to a host in order to use it. Additionally, in some ways, TCPDump provides even more granular analysis and filtering capabilities, with the ability to have the output piped to other commands.
+
+You can see the available options with tcpdump -h or read the manual with man tcpdump.
+
+Note that you will have to append sudobefore each TCPDump command if you are not the root user.
+
+1. Installation & Setup:
+- Install tcpdump: sudo apt-get install tcpdump
+- Show network interfaces: ip link show
+- List available network interfaces for capture: tcpdump -D
+
+2. Basic Usage:
+- Start capturing on interface 2: sudo tcpdump -i 2
+- Capture traffic on a specific interface (e.g., enp0s3): sudo tcpdump -i enp0s3
+
+3. Using netcat for Testing:
+- Set up a listener on port 4321: nc -lvp 4321
+- Connect to the listener: nc 127.0.0.1 -v 4321
+
+4. Using Python HTTP Server and curl for Testing:
+- Set up a simple Python HTTP server on port 80: sudo python3 -m http.server 80
+- Test a non-existent file request with curl: curl http://127.0.0.1/thisfiledoesntexists.php
+
+5. tcpdump Output Formats:
+- Capture and display packets in standard format (default output): sudo tcpdump -i enp0s3
+- Capture and display packets in hex and ASCII: sudo tcpdump -i enp0s3 -X
+- Capture and display packets in ASCII only: sudo tcpdump -i enp0s3 -A
+
+
+Let's break down the provided 'tcpdump' line by line and then create a full example output with a variety of information, including fake outputs to show possible variations.
+
+18:36:02.472941 IP localhost.38230 > 146.75.123.52.https: Flags [P.], seq 3658750560:3658750661, ack 127669, win 65535, length 101
+
+1. Timestamp: '18:36:02.472941' - The exact time the packet was captured.
+2. Protocol: 'IP' - Indicates this is an IPv4 packet.
+3. Source: 'localhost.38230' - The source IP ('localhost' or '127.0.0.1') and the source port ('38230').
+4. The > in tcpdump output shows the direction of packet flow, indicating the source on the left is sending data to the destination on the right.
+5. Destination: '146.75.123.52.https' - The destination IP ('146.75.123.52') and the destination port ('https', which is port '443').
+
+6. Flags: '[P.]' - TCP flags:
+- S (SYN): Synchronize – Initiates a TCP connection.
+- F (FIN): Finish – Gracefully closes a TCP connection.
+- R (RST): Reset – Abruptly closes a TCP connection.
+- P (PSH): Push – Sends data immediately without waiting to fill the buffer.
+- . (ACK): Acknowledgment – Acknowledges received data.
+- U (URG): Urgent – Indicates that some data has priority and should be processed immediately.
+
+7. Sequence number: 'seq 3658750560:3658750661' - This shows that the packet contains data for byte sequence numbers '560' to '661'.
+8. Acknowledgment number: 'ack 127669' - The sender is acknowledging receipt of data up to byte '127669' from the other side.
+9. Window size: 'win 65535' - This is the flow control window size, indicating how much more data the sender can accept.
+10. Length: '101' - This packet has '101' bytes of payload data.
+
+
+-- tcpdump Output Formats Examples --
+
+whoami@soc101-ubuntu:~$ sudo tcpdump -i enp0s3
+[sudo] password for whoami: 
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on enp0s3, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+19:17:45.407885 IP localhost.55494 > 173.31.36.34.bc.googleusercontent.com.https: Flags [P.], seq 1266937047:1266937102, ack 221589, win 62712, length 55
+19:17:45.500963 IP localhost.34743 > fritz.box.domain: 27301+ PTR? 173.31.36.34.in-addr.arpa. (43)
+19:17:45.506705 IP 173.31.36.34.bc.googleusercontent.com.https > localhost.55494: Flags [.], ack 55, win 32202, length 0
+19:17:45.540590 IP fritz.box.domain > localhost.34743: 27301 1/0/0 PTR 173.31.36.34.bc.googleusercontent.com. (94)
+19:17:45.541097 IP localhost.56476 > fritz.box.domain: 23251+ PTR? 5.1.168.192.in-addr.arpa. (42)
+19:17:45.556910 IP fritz.box.domain > localhost.56476: 23251 1/0/0 PTR localhost. (65)
+19:17:45.580000 IP 173.31.36.34.bc.googleusercontent.com.https > localhost.55494: Flags [P.], seq 1:52, ack 55, win 32202, length 51
+
+
+whoami@soc101-ubuntu:~$ sudo tcpdump -i enp0s3 -X
+[sudo] password for whoami: 
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on enp0s3, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+19:00:23.655054 IP 173.31.36.34.bc.googleusercontent.com.https > localhost.48110: Flags [P.], seq 303823:303860, ack 3610222465, win 31582, length 37
+	0x0000:  4500 004d 32d3 0000 ff06 8559 2224 1fad  E..M2......Y"$..
+	0x0010:  c0a8 0105 01bb bbee 0004 a2cf d72f 9f81  ............./..
+	0x0020:  5018 7b5e 4113 0000 1703 0300 2017 5342  P.{^A.........SB
+	0x0030:  94d2 f006 ae16 dda5 ccd7 a087 d546 5b01  .............F[.
+	0x0040:  7aea 052e 2f12 1230 c86e 6b24 e8         z.../..0.nk$.
+19:00:23.656501 IP localhost.48110 > 173.31.36.34.bc.googleusercontent.com.https: Flags [.], ack 37, win 65535, length 0
+	0x0000:  4500 0028 6403 4000 4006 d34e c0a8 0105  E..(d.@.@..N....
+	0x0010:  2224 1fad bbee 01bb d72f 9f81 0004 a2f4  "$......./......
+	0x0020:  5010 ffff 0399 0000                      P.......
+19:00:23.661185 IP localhost.48110 > 173.31.36.34.bc.googleusercontent.com.https: Flags [P.], seq 1:42, ack 37, win 65535, length 41
+
+
+whoami@soc101-ubuntu:~$ sudo tcpdump -i enp0s3 -A
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on enp0s3, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+19:01:23.865193 IP 173.31.36.34.bc.googleusercontent.com.https > localhost.48110: Flags [P.], seq 308782:308967, ack 3610225090, win 32039, length 185
+E...4......."$.............../..P.}'...........Aq.....a...'z..%F.......	."A.Za.%..W..<I.m....d..T...C.U..8kGB.7...j...].1...~.`...j.........=..F.O.{.$.3..6s.......^............qLu...N4..T..$...G.6...:....,.e..P........CEq....
+19:01:23.865269 IP localhost.48110 > 173.31.36.34.bc.googleusercontent.com.https: Flags [.], ack 185, win 65535, length 0
+E..(dD@.@......."$......./......P.......
+19:01:23.868220 IP localhost.48110 > 173.31.36.34.bc.googleusercontent.com.https: Flags [P.], seq 1:190, ack 185, win 65535, length 189
+E...dE@.@..O...."$......./......P....V.......$....P....n.N....[.....Q..zT.QM<9
+E.>&i.}..N........O\/.@A0,./.|$sNX=n
+.8X.).QS.m.R...zm..L..._~........81;.!..G...li.}2?D..
+..N..t>.t.4.......Q.b\......A\5W...^m.j`......+l.J..H....m.
+19:01:23.919034 IP localhost.52791 > fritz.box.domain: 32016+ PTR? 173.31.36.34.in-addr.arpa. (43)
+E..GzU..@............7.5.3I.}............173.31.36.34.in-addr.arpa.....
+
+
+
+https://www.tcpdump.org/index.html
+https://danielmiessler.com/p/tcpdump/
+https://github.com/the-tcpdump-group/tcpdump
+https://cdn.comparitech.com/wp-content/uploads/2019/06/tcpdump-cheat-sheet-1.pdf
+
+
+
