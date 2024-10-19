@@ -12,7 +12,7 @@ Note that you will have to append sudobefore each TCPDump command if you are not
 
 2. Basic Usage:
 - Start capturing on interface 2: sudo tcpdump -i 2
-- Capture traffic on a specific interface (e.g., enp0s3): sudo tcpdump -i enp0s3
+- Capture traffic on a specific interface (e.g., enp0s3): sudo tcpdump -i enp0s3, sudo tcpdump -i eth0, sudo tcpdump -i lo
 
 3. Using netcat for Testing:
 - Set up a listener on port 4321: nc -lvp 4321
