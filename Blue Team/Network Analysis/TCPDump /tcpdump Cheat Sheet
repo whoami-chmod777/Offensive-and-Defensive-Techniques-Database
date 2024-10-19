@@ -90,29 +90,86 @@ tcpdump >=32
 
 -- Packet Capturing Options --
 
+Capture from all interfaces: -i any 
+tcpdump -i any 
 
+Capture from specific interface ( Ex Eth0): -i eth0
+tcpdump -i eth0 
 
+Capture first 10 packets and exit: -c 
+tcpdump -i eth0 -c 10 
 
+Show available interfaces: -D 
+tcpdump -D 
 
+Print in ASCII: -A 
+tcpdump -i eth0 -A
 
+To save capture to a file: -w 
+tcpdump -i eth0 -w tcpdump.txt 
 
+Read and analyze saved capture file: -r 
+tcpdump -r tcpdump.txt 
 
+Do not resolve host names: -n 
+tcpdump -n -I eth0 
 
+Stop Domain name translation and lookups (Host names or port names): -nn
+tcpdump -nn -i eth0 
 
+Capture TCP packets only: tcp 
+tcpdump -i eth0 -c 10 -w tcpdump.pcap tcp 
 
+Capture traffic from a defined port only: port 
+tcpdump -i eth0 port 80 
 
+Capture packets from specific host: host 
+tcpdump host 192.168.1.100 
 
+Capture files from network subnet: net 
+tcpdump net 10.1.1.0/16 
 
+Capture from a specific source address: src 
+tcpdump src 10.1.1.100 
 
+Capture from a specific destination address: dst 
+tcpdump dst 10.1.1.100 
 
+Filter traffic based on a port number for a service: <service> 
+tcpdump http
 
+Filter traffic based on a service: <port> 
+tcpdump port 80 
 
+Filter based on port range: port range 
+tcpdump portrange 21-125 
 
+Display entire packet: -S 
+tcpdump -S http 
 
+Show only IPV6 packets: ipv6 
+tcpdump -ipv6 
 
+Display human readable form in standard output: -d 
+tcpdump -d tcpdump.pcap 
 
+Use the given file as input for filter: -F 
+tcpdump -F tcpdump.pcap 
 
+Set interface as monitor mode: -I 
+tcpdump -I eth0 
 
+Display data link types for the interface: -L 
+tcpdump -L 
+
+Not printing domian names: -N 
+tcpdump -N tcpdump.pcap 
+
+Do not verify checksum: -K 
+tcpdump -K tcpdump.pcap 
+
+Not capturing in promiscuous mode: -p 
+tcpdump -p -i eth0 
 
 
 
