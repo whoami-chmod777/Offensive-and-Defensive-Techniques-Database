@@ -1,0 +1,90 @@
+
+The File Transfer Protocol is a standard communication protocol used for the transfer of computer files from a server to a client on a computer network. FTP is built on a client–server model architecture using separate control and data connections between the client and the server.
+
+The file transfer protocol takes in a USER and a PASS command as authentication.
+
+
+-- Searching for Valid Credentials --
+
+tcpdump -tt -r tcpdump_challenge.pcap -A | grep -i 'user\|pass\|login' | grep -v "User-Agent"
+
+tcpdump -nn -r tcpdump_challenge.pcap -A port 21 | grep -E 'USER|PASS'
+tcpdump -nn -r tcpdump_challenge.pcap -A port 21 | grep -E 'USER|PASS|230|530'
+tcpdump -nn -r tcpdump_challenge.pcap -X port 21 | grep -E 'USER|PASS|230|530'
+tcpdump -nn -r tcpdump_challenge.pcap -AX port 21 | grep -E 'USER|PASS|230|530'
+
+tcpdump -A -r tcpdump_challenge.pcap 'port http or port ftp or port telnet' | grep -i 'user\|pass\|login'
+
+
+Summary of Valid Credentials:
+
+Username: admin
+Password: admin
+
+USER admin
+PASS admin
+
+------------------------
+
+Username: root
+Password: pass123
+
+USER root
+PASS pass123
+
+------------------------
+
+Username: administrator
+Password: password
+
+USER administrator
+PASS password
+
+------------------------
+
+Username: admin
+Password: password123
+
+USER admin
+PASS password123
+
+------------------------
+
+Username: demo
+Password: password
+
+USER demo
+PASS password
+
+
+Each time you see the USER followed by PASS it indicates an attempt to log in using FTP. 
+
+
+These are the credentials captured from the tcpdump:
+
+admin/admin
+root/pass123
+administrator/password
+admin/password123
+demo/password
+
+
+Look for Server Response Codes in the Full FTP Session
+
+230: User logged in successfully (valid credentials).
+530: Authentication failed (invalid credentials).
+
+Valid Credentials: Look for a 230 response code after the PASS command.
+Invalid Credentials: Look for a 530 response code after the PASS command.
+
+
+
+-- What could be the name of the file that was retrieved from the file sharing server --
+
+tcpdump -nn -A -r tcpdump_challenge.pcap port 21 | grep 'RETR'
+
+
+
+
+
+
