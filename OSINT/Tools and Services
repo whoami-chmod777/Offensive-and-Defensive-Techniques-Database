@@ -13,17 +13,83 @@ Tools and Services
 
 -- The Harvester --
 
+The Harvester is a command-line information-gathering tool that utilizes OSINT sources to gather information about the target domain and retrieves information such as hostnames, IP addresses, employees (and their positions), email addresses, and much more.
+
+(tool) (target domain = google.com) (list 100 results max) (source = google)
+
+$ theharvester [help sheet]
+
+$ theharvester -d google.com -l 100 -b google
+$ theharvester -d google.com -l 100 -b linkedin
+
 
 -- Maltego --
+
+Maltego is a high-level data mining and information gathering tool, capable of obtaining real-time data on different types of entities (companies, people, websites, etc.), and representing them graphically through nodes, showing all the connections that the program was able to obtain over the Internet, about the subject under investigation.
+
+maltego
+
+Once started, you will see that there are 5 different versions of the software. Some are paid versions, while others are not.
+Once you have selected your version, all you have to do is accept the license terms, create an account (you will then receive an API key that will allow you to use Maltego), and select the settings you prefer.
+Once all the above is done, select the option “Open a blank graph” and finish the process.
+
+The next thing we should do to perform our first search would be to go to the "Transforms" tab and "Transform Hub".
+This will display the catalog of Transform Tools that can be installed in Maltego.
+For this example, install the tools "CaseFile Entities", "HaveIBeenPwned?", "Social Links CE" and "Shodan" (In the case of Shodan you must enter an API Key. To do this simply create an account on their website www.shodan.io and go to your account)
+Once you have installed all the Transfer Tools, go back to the blank tab we created earlier and in the "Entity Palette" select "Domain" (you can use the search bar located in the same section), and drag it to the screen.
+
+Once you’re done with it, right-click on the entity, and click on the arrow next to “All transforms”, this will start the scan.
+Once the scan is complete, you should obtain a graph, displaying all the information obtained by Maltego during the scan.
+
+And that’s it, you’re ready to use Maltego, now start exploring all its functions and analyze all the information you got. The rest is up to you!
+
+
+https://www.maltego.com/
+https://academy.maltego.com/
+https://www.maltego.com/blog/
 
 
 -- Tweetdeck --
 
+TweetDeck makes it a lot easier to monitor trends, follow hashtags, and perform live searches. This is a useful tool for security professionals, as it allows us to monitor for events in real-time, such as cyber-attacks, vulnerabilities being released, or even tracking malicious actors' activity
 
--- Google Dorks --
+Example columns are monitoring for the following activity:
+
+1. "bluekeep" OR #bluekeep OR cve-2019-0708
+CVE-2019-0708, dubbed ‘BlueKeep’ was a Zero-Day vulnerability in Remote Desktop Protocol (RDP) that could allow an unauthenticated, remote attacker to bypass authentication. I was keeping an eye on this to see how it developed.
+
+2. #firefox OR #chrome OR #internetexplorer OR #IE
+Following vulnerabilities in Firefox, Chrome, and Internet Explorer.
+
+3. #vulnerability OR #vulnerabilities OR #CVE
+Broad search term for vulnerabilities (does bring back a lot of non-security tweets due to common language).
+
+4. "Windows 10" and "vulnerability"
+Monitoring for Windows 10 vulnerabilities.
+
+5. #0day OR #zeroday
+Monitoring for zero-day vulnerabilities that are publicly announced on Twitter.
 
 
--- Defending Against Google Dorks --
+- How to Use -
+
+To add a search column, click on the "+" icon on the left-hand side.
+A pop-up will allow us to choose what type of column you want to add to the Deck. In this case, we’re going to be using the "Search" column type, in the top right.
+This gives us a blank column, where we can enter in our own search queries. A quick example would be monitoring for tweets using the hashtag "#cybersecurity".
+
+We can start to build out these searches to look for specific activity. In the example below, I’m looking for the following:
+
+• Mention of the string "vulnerability" AND the string "apache"
+• OR the hashtag "#vulnerability" AND the string “apache”
+
+This will show me tweets such as "Wow – just discovered a new vulnerability in apache, can’t wait to exploit it!", or "CRITICAL #VULNERABILITY announced in apache v1.5 – Patch your systems now!"
+We can then click on these Tweets to see them individually, allowing us to comment, like, or retweet if we wanted to!
+
+We can create our search queries in Twitter’s platform, by using their Advanced Search tools. To get to these, open up Twitter, search for anything in the search bar, click the gear con, and choose "Advanced Search".
+From here, we’re able to create complex search queries. In this example, I’m looking for the strings "cyber" and "attack", and the tweet must also contain one of the following; "apt28", "turla", or "apt32" (well-known threat actors).
+We can now copy the result and paste this search string into our TweetDeck, allowing us to continually monitor for this specific activity.
+
+And there you have it! A quick walkthrough of TweetDeck, and using it as a monitoring platform. It doesn’t just have to be cyber attacks or vulnerabilities, it can also be used to track geopolitical news, terror attacks, specific accounts, and anything else you may want to follow.
 
 
 -- OSINT Framework --
