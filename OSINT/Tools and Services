@@ -4,8 +4,7 @@ Tools and Services
 • The Harvester
 • Maltego
 • Tweetdeck
-• Google Dorks
-• Defending Against Google Dorks
+• Google Dorks (see in Google Dorks Folder)
 • OSINT Framework 
 • TinyEye
 • Google Image Search
@@ -94,9 +93,78 @@ And there you have it! A quick walkthrough of TweetDeck, and using it as a monit
 
 -- OSINT Framework --
 
+This website is a hub for hundreds of OSINT sources and tools, and is easily sorted so you can find the tool that you need quickly. 
+
+Use Case: Social Engineering Attacks
+Say I wanted to create a fake persona so I could launch some social-engineering attacks during a red team engagement at my company. By opening the OpSec arm, and then Persona Creation, I’m provided with 5 links to online tools that can help me with the task I’m trying to complete. This can help me build a rich and more authentic profile, than if I was just filling out details off the top of my head.
+
+Use Case: Are Target Emails Compromised?
+Without diving down the rabbit-hole that is Threat Intelligence, we can quickly get a sense of whether a target email address has been mentioned in a data breach. Why is this useful? Because if we get an indication it has been leaked before, we can then start to explore paths such as finding data breach dumps on the dark web, and seeing if the email address has been linked with any passwords – then we can use these for password or social-engineering attacks. If we visit the Email Address branch, then the Data Breach sub-branch, we are provided with a number of online services that allow us to enter email addresses in, to see if they have been breached.
+
+Use Case: Boosting OSINT Skills And Knowledge
+OSINT Framework offers a good selection of OSINT training resources, so if you’re looking to further your skills then check these out. These are available under the Training branch.
+
+https://osintframework.com/
+
 
 -- TinyEye --
 
+TinEye is an image search and recognition company, which offers customers the ability to receive alerts when their images are identified on the internet. 
+Anyone can use TinEye to conduct reverse image searches, which is where we upload an image and see where else it is present on the internet. 
+
+Using TinEye:
+Head over to https://tineye.com/ and you’ll see the below search bar at the top of the page. You have the option of uploading an image, or using a URL that takes you to a hosted image. 
+
+
+Use Case: Identifying Social-Media Fakes
+When people create fake social-media accounts, it’s extremely likely that they’re not using a unique photo. Chances are they’ve google something along the lines of “profile photo generator” and used one of them. These are usually really easy to identify just by looking at them (no one smiles that much), however using TinEye we can quickly identify fakes by seeing how common the profile photo is. We should expect to see anywhere between 0-10 results, depending on how much the photo subject loves using that specific photo. If we reverse search a profile picture and it has hundreds of thousands of hits, this should immediately throw red flags. We can then start to look at the websites the image features on (we can see this on the screenshot above). If we see stock photo sites or similar, we know that it’s pretty likely this is a fake account, using someone else’s photo. This doesn’t just apply to profile pictures – if an account is posting some pretty generic photos, we can also check how common they are. It’s virtually impossible for two people to take the exact some photo unintentionally, so if their images have even a low number of hits, this could be classed as suspicious.
+
+Use Case: Brand Reputation Monitoring
+Whilst there are better ways to do this, using the TinEye Alerts service, you can be notified every time one of your images is identified on the internet. This can be useful for monitoring the use of logos, especially trademarked ones.
+
+https://tineye.com/
+
 
 -- Google Image Search --
+
+Google Image Search is very similar to TinEye as they share the core functionality. 
+
+Using Google Image Search:
+Simply head over to https://images.google.com and you’re able to search for an image URL, or upload an image manually.
+Scrolling down the results page (second screenshot) we can see that Google is showing us any pages that include complete matches of the image we searched for.
+
+
+https://images.google.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
