@@ -1,7 +1,67 @@
 
+-- Securing Yourself Online --
+
+• Online Tracking
+• Anonymization
+
+
+--- Online Tracking ---
+
+A common thought that exists in the security community is that OSINT operations are completely invisible and at no time will the individual or organization you are investigating realize who you are. This is why  this kind of investigation is called a “passive operation”.
+However, something you should know at this point is that nothing is private on the Internet; and since the moment you enter into your trusted search engine, your browser is giving your information to the websites you  visit. After all, every time you interact with your browser (either by  accessing a website or downloading a file), it delivers a small amount  of information about itself, data that not only allows the website to  know what type of configuration it should use to display well on your  screen but also data that can be used to identify you.
+
+-- Fingerprinting --
+
+Do  you remember that first moment when, after visiting an article in a web  store, you surfed to your social networks and found an ad that  displayed it again on the screen?
+Well,  this didn’t happen simply because the Internet is omniscient. It  happened because, as you will understand, there are programs that can  identify “little traces” that you leave behind with your internet  browsing, and they are usually used to follow you through the websites  you visit hoping to generate a model that helps identify your interests  and give you recommendations (they practically know who you are, what  you like and where you have been all along).
+These  “little traces” are usually not a problem if you are not very  skeptical, but imagine how they can impact your work as an OSINT  researcher while trying to stay hidden from your targets… It would be a  disaster!
+It not only would allow the  targets to know of your existence but could also let them use those  “little traces” to find out who you are, putting you at risk.
+Without further ado, let’s start with our list of “little traces” that you may know as Fingerprints.
+
+
+-- IP Addresses --
+
+Yup, what allows us to communicate is also what betrays us.
+As  you know, every time you use the Internet, your public IP address is  sent through your router. This not only allows you to communicate with a  website, but also tells it who to contact back, who to send X resource  to, and how long it will take to reach that address.
+And  yes, we know that you know that the IP address is the most public thing  that can exist and many websites don’t even bother to store this data.  But, even so, you should always remember that this small element can be  the first one that reveals who you are.
+
+
+-- Cookies --
+
+“Would you like a cookie, my dear?” This  is practically the question you always find while surfing the Internet,  and the reason is that, nowadays, practically all websites use these  elements to operate in an “optimal and user-friendly” way.
+Cookies  store your login information, your personalized settings, and even help  you remember what was in your shopping cart. But some of these items  are the main reason why websites know more about you. These are the “Third-party persistent cookies” (also known as “tracking cookies”)
+These  elements are stored on your computer’s Hard Drive and seek to obtain  information about your activity, providing data to the website they come  from and helping them to identify your likings, making them able to  give you a “better user experience”.
+Some of the websites that use this kind of cookies are the following:
+
+Note: (These links will redirect you to “TheGuardian.com” website)
+- Doubleclick
+- Facebook
+- Google
+- and more…
+
+On the following websites, you can learn more about the different cookie varieties and how they allow websites to track you:
+- https://www.theguardian.com/technology/2012/apr/23/cookies-and-web-tracking-intro
+- https://privacy.net/stop-cookies-tracking/
+- https://www.cookieyes.com/how-cookies-track-you-on-the-web-and-what-to-do-about-it/
+ 
+
+-- Browser Fingerprinting --
+
+And  finally, we have digitally generated fingerprints through the browser.  This is actually the most dangerous and intrusive element we can find.
+These  are logs created by the browser, which use a variety of data available  on your computer providing information to websites about the settings  you are using, the machine you are on, etc.This results in the creation of a unique identifier that allows your computer to be recognized from the rest.
+This  identifier contains information about the version of the browser you  use, the operating system from which you are currently browsing, your  screen resolution, the font type you have active at this time, among  many other things. Making it practically impossible for your navigation  to be private.
+In fact, there are several  pages that you can use to check out the information provided by your  web browser. Here we will provide you 2 of them so that you can evaluate  how “anonymous” you are while surfing on the Internet.
+ 
+https://coveryourtracks.eff.org
+https://browserleaks.com
+
+
+--- Anonymization ---
+
 After what you have just read you must be asking yourself: “but, if every time I use the Internet, I have to give information to the website I access, how can you talk to me about anonymity?”
 And it’s true, we can’t talk to you about anonymity, because you can never really be 100% anonymous while using the internet. However, this does not mean that you cannot make use of some techniques and tools that allow you to look like someone else so that neither social networks nor big brother (Google, please don’t hate us </3) can know who you are while using the internet.
 To do this, you just need to be aware of the elements mentioned earlier and install a few tools that will help you to be a little more protected than the rest of your fellow mortals.
+
 
 -- Add Extra Layers --
 
