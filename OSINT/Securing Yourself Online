@@ -1,0 +1,79 @@
+
+After what you have just read you must be asking yourself: “but, if every time I use the Internet, I have to give information to the website I access, how can you talk to me about anonymity?”
+And it’s true, we can’t talk to you about anonymity, because you can never really be 100% anonymous while using the internet. However, this does not mean that you cannot make use of some techniques and tools that allow you to look like someone else so that neither social networks nor big brother (Google, please don’t hate us </3) can know who you are while using the internet.
+To do this, you just need to be aware of the elements mentioned earlier and install a few tools that will help you to be a little more protected than the rest of your fellow mortals.
+
+-- Add Extra Layers --
+
+Before mentioning that the best thing you can do when surfing is to use a VPN  or use TOR, we think it is good that you know the benefits of Virtual  Machines, and that you know that they not only help you virtualize  operating systems but also allow you to add an extra layer of privacy to  your activities.
+One of the best  exponents of OSINT (Michael Bazzell) mentions in his book “Open-Source Intelligence Techniques” that the best practice that an OSINT researcher  can do is: Use a Linux operating system (either by USB as a Live ISO or  using a VM), do your research and finally erase all trace of you by  simply rebooting the system (either by using a Snapshot, or the USB  live).
+With this, you not only did your research and were able to get all the information you needed, but you  also deleted your trace, since any records that might have existed on  the system were immediately removed by rebooting the system.
+For this purpose, you can use some existing OSINT specialized machines like Trace Lab Osint VM, or you can create your own OSINT Linux Distribution (you will find an excellent guide for DIY Machines in one of the following links).
+
+• TL OSINT VM: https://www.tracelabs.org/initiatives/osint-vm
+• DIY OSINT VM Guide: https://nixintel.info/tag/diy-buscador/
+
+
+-- Hide Your Public IP Address --
+
+As  you well know your IP is the “face” that you present to the Internet  world, making this the first thing that computers receive when they  communicate with you. For this reason, being able to use a tool that  changes your IP will be a decision that will not only help you keep your  online identity protected, but will also allow you to navigate the  Internet a little more privately. For this, you can use tools such as TOR Browser (covered in our Introduction To Dark Web Operations course), or a VPN.
+
+Virtual Private Networks (VPN)
+VPNs  are an essential tool for anyone who wants to conduct an investigation.  Not only does it allow you to hide your IP address from strangers, but  it also adds a layer of encryption to all your communications, which  helps a lot to maintain your privacy.
+
+To give you a better insight into the VPN selection process, here is an excellent guide for choosing your own VPN provider:
+https://www.secjuice.com/how-to-choose-a-virtual-private-network-vpn-provider/
+
+
+-- Extensions For The Win! --
+
+Another tip you can use to reduce the amount of information that websites obtain about you is to install extensions that block this activity. That will practically close the possibility that websites can track you or run unwanted scripts on your computer.
+Some of the most recommended extensions for this purpose are the following: 
+
+User-Agent Switcher and Manager
+“spoof your browser “user-agent” string to a custom designation.”
+
+No Script
+“Allows JavaScript, Java, Flash, and other plugins to be executed only by trusted web sites of your choice”
+
+Privacy Badger
+“Stops advertisers and other third-party trackers from secretly tracking where you go and what pages you look at on the web”
+
+Ublock Origin
+“Filters requests to display adverts and prevents your browser from retrieving and displaying marketing content.”
+
+Cookie AutoDelete
+“Automatically delete unwanted cookies from your closed tabs while keeping the ones you want.”
+
+
+-- Sock Puppetry --
+
+And finally, the best way to keep your real person separate from your digital person is by using Sock Puppets. These tools are practically the best friend of the intelligence team.
+Give or take a word or two, sock puppets are alter-egos created specifically to carry out various types of projects or research. The purpose of these accounts is nothing more than being a false identity that can come into contact with research subjects, or simply to conduct OSINT research without directly linking your social networks.
+Below, you will find some of the best guides on the Internet to build your own Sock Puppet and the best advice on how to NOT build one.
+
+Creating Sock Puppet Accounts: 
+https://www.youtube.com/watch?v=Zf155HW5Qp0 
+
+The Art of The Sock: 
+https://www.secjuice.com/the-art-of-the-sock-osint-humint/
+
+Creating an Effective Sock Puppet for OSINT Investigations: 
+https://web.archive.org/web/20210125191016/https://jakecreps.com/2018/11/02/sock-puppets/
+
+Sock puppet Account Creation – My Process: 
+https://garrettmickley.com/sockpuppet-account-creation/
+
+The World’s Best Sock Puppet…Not!: 
+https://keyfindings.blog/2019/01/21/the-worlds-best-sock-puppet-not/
+
+
+
+
+
+
+
+
+
+
+
