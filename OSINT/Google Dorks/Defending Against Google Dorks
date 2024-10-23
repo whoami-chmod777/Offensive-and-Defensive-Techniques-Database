@@ -1,0 +1,88 @@
+
+We know that Google Dorks can be incredibly powerful – they can exposure admin login portals, usernames and passwords, IP cameras and webcams, and much more. But how exactly do we protect against them?
+
+-- Geofencing and IP Whitelisting -- 
+
+There are a number of ways we can use IP-based controls to restrict who can access web content, such as unauthorized users or google’s crawlers (programs that search the internet, indexing every publicly-accessible page they can find).
+
+Geofencing is a method of blocking entire IP ranges associated with countries so that only access from a specific location will be allowed. For example, if a UK business wanted to only allow connections to their site from UK IP addresses, they could do this. Can you see the security flaw in this? If someone from America had a VPN, they could set it to exit from the UK, and now they are able to access the site. Netflix uses IP geofencing as they have different versions of the USA and the UK. VPNs were used to access the American version, but soon after Netflix caught on, and started to disallow VPN connections and proxies to access Netflix (you’ll see an error page asking you to turn off your routed connection before being able to access content).
+
+IP whitelisting works in a similar way, but instead it only allows specified IP addresses to access resources, and blocks everything else. This is great if you have a development environment or site that is present on the internet, but you don’t want anyone accessing it. You can set the whitelisted IPs to the public range of the organization so that only IPs belonging to the company can actually view the site.
+
+
+-- Crawler Restrictions --
+
+A very effective method of preventing content being present on Google is to block their crawlers from being able to access any of the content present on the internet. This can be achieved by creating a robots.txt file that disallows any crawlers from indexing any part of your website, preventing it from showing on Google’s search engine.
+
+User-agent: *
+Disallow: /
+
+
+1. Disallow Sensitive Directories
+
+User-agent: *
+Disallow: /admin/
+Disallow: /config/
+Disallow: /includes/
+Disallow: /backup/
+Disallow: /private/
+
+2. Disallow Specific File Types
+
+User-agent: *
+Disallow: /*.config$
+Disallow: /*.sql$
+Disallow: /*.log$
+Disallow: /*.bak$
+Disallow: /*.json$
+
+
+3. Disallow URL Parameters
+
+User-agent: *
+Disallow: /*?secret=
+Disallow: /*?secret=
+Disallow: /*?admin=
+Disallow: /*?config=
+Disallow: /*?backup=
+
+
+-- Requesting Content Removal --
+
+If you run google dorks against your company and find results that could be used by a malicious actor (such as a login portal or sensitive files) you can make a request to Google asking them to temporarily remove the content from their search engine (90 days) or permanently remove it. You must provide sufficient evidence that you own the site in order to have anything removed.
+
+Information about temporary and permanent URL removals can be requested here
+https://support.google.com/webmasters/answer/9689846?hl=en&visit_id=638653098344770776-1890277174&rd=1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
