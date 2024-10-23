@@ -1,0 +1,29 @@
+
+Google Dorks are search hacks where we can use special arguments in a normal Google query to find specific information. Dorks come in the format operator:keyword, an example of this would be filetype:pdf.
+
+#Finding Files:
+
+Cyber Security filetype:pdf
+
+
+#Subdomain Enumeration:
+
+site:Facebook.com -site:www.Facebook.com 
+
+
+#Keyword Searching:
+
+inurl: admin
+
+
+
+
+
+
+
+
+
+
+Google Search Console
+https://search.google.com/search-console/welcome
+
