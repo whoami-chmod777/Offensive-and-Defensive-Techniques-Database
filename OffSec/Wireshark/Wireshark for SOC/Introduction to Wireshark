@@ -1,0 +1,67 @@
+
+-- Wireshark Latest Installation (Ubuntu) --
+
+sudo add-apt-repository ppa:wireshark-dev/stable
+sudo apt update
+sudo apt install wireshark
+
+
+-- Main windows in Wireshark --
+
+1. Packet List Pane: Displays all captured packets in sequence.
+2. Packet Details Pane: Shows the hierarchical breakdown of the selected packet.
+3. Packet Bytes Pane: Displays raw data (hex and ASCII) of the selected packet.
+4. Filter Bar: Allows for applying display filters to narrow down packet view.
+5. Toolbar: Provides quick access to common functions like start/stop capture.
+
+
+-- CLI Commands to Start Wireshark and Perform Various Tasks --
+
+Launch Wireshark GUI:
+wireshark
+
+Capture traffic on eth0 with a filter for TCP traffic on port 80 (HTTP):
+wireshark -i eth0
+
+Open an existing capture file file.pcap in Wireshark:
+wireshark file.pcap
+
+Start capturing on eth0 and save output to capture_output.pcap:
+wireshark -i eth0 -k -w capture_output.pcap
+
+Display the current version of Wireshark installed:
+wireshark -v
+
+Show help for Wireshark command-line options:
+wireshark -h
+
+Read and analyze a capture file without launching the capture interface:
+wireshark -r file.pcap
+
+Start Wireshark in fullscreen mode:
+wireshark -S
+
+Capture traffic on eth0 and apply a display filter for HTTP requests:
+wireshark -i eth0 -Y "http.request"
+
+
+https://wireshark.org
+https://www.wireshark.org/docs/wsug_html_chunked/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
