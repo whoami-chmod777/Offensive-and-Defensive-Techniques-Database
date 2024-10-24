@@ -1,0 +1,87 @@
+
+-- Here’s a table explaining the Wireshark Statistics features and their functions --
+
+
+Summary
+Provides an overview of the capture, including traffic volume and duration.
+Quickly assess traffic behavior, spot abnormal traffic bursts or unexpected protocols.
+
+Protocol Hierarchy
+Shows the distribution of protocols used in the capture.
+Identify unusual protocols that may indicate malicious activity (e.g., uncommon protocols used in lateral movement).
+
+Conversations
+Displays communication between IP/MAC endpoints.
+Detect unauthorized or unusual communication patterns between devices.
+
+Endpoints
+Lists all the unique endpoints involved in the capture (IP, MAC, etc.).
+Track down compromised or unauthorized endpoints communicating on the network.
+
+Resolved Addresses
+Maps IP addresses to domain names (if available).
+Useful for identifying legitimate vs. suspicious domains communicating with internal assets.
+
+IO Graphs
+Visual representation of traffic over time.
+Detect traffic spikes or drops indicative of DDoS attacks, data exfiltration, or other network anomalies.
+
+Flow Graph
+Visualizes the flow of communication between endpoints.
+Identify attack paths, lateral movement, and the progression of attacks.
+
+Packet Lengths
+Shows the distribution of packet sizes in the capture.
+Large packets might indicate file transfers (exfiltration), while small ones might suggest reconnaissance.
+
+Service Response Time
+Measures response times for specific services like DNS and HTTP.
+Identify slow response times that may indicate network performance degradation due to malicious activity.
+
+TCP Stream Graphs
+Visualizes TCP stream data, including round-trip time and throughput.
+Diagnose slow or abnormal performance, potentially caused by attacks affecting availability.
+
+Following Streams
+Enables inspection of specific TCP, UDP, or HTTP streams.
+Track specific communication streams for deep packet analysis, such as reviewing an entire connection or exchange.
+
+HTTP Statistics
+Provides detailed statistics on HTTP requests and responses.
+Detect abnormal HTTP traffic (e.g., excessive POST requests, large uploads, exfiltration).
+
+DNS Statistics
+Displays details of DNS queries and responses.
+Identify DNS tunneling or malicious domain resolution attempts.
+
+Exporting Objects
+Allows exporting files, images, or other content transferred via HTTP, SMB, or other protocols.
+Recover malware samples, images, or files that were transferred during an attack.
+
+frame.marked == 1
+Filter for specifically marked packets in Wireshark.
+Highlight and focus on key packets flagged during the investigation, ensuring important events are analyzed.
+
+
+
+-- Wireshark Statistics for SOC Analysis --
+
+• Resolved Addresses are useful for SOC analysts to quickly identify if an IP address maps to a well-known domain or a suspicious domain, helping to determine if a connection is benign or malicious.
+• Endpoints allow analysts to quickly get an inventory of all devices involved in the traffic, helping spot unusual or unauthorized devices.
+• Following Streams enables in-depth review of a specific TCP, UDP, or HTTP conversation, providing context for potential command-and-control (C2) traffic or data exfiltration.
+• frame.marked == 1 is particularly useful in SOC environments where analysts collaborate to flag critical packets for review by others.
+• Exporting Objects lets analysts extract malicious payloads, making it easier to assess what kind of data is being transmitted and whether sensitive information is compromised.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
