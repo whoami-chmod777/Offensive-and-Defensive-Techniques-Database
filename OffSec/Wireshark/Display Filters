@@ -1,16 +1,15 @@
 
 -- Display Filters Example --
 
-tcp
-ip.src == 192.168.1.1
-http
-tcp.port == 80
-ip.addr == 10.0.0.1
-dns
-tcp.flags.syn == 1
-icmp
+== | != | > | < | >= | <=
+
+frame.len > 10
+frame.len < 128
+frame.len ge 0x100
+frame.len <= 0x20
+frame.time < "2022-01-01"
+frame.time == "Sep 26, 2004 23:18:04.954975"
 frame.number == 100
-udp && ip.dst == 192.168.1.5
 
 
 -- Display Filters for IP Addresses and Subnets --
@@ -26,6 +25,13 @@ ip.dst == 172.16.0.0/16
 ip.addr == 192.168.0.0/16
 ip.addr == 10.0.0.0/24
 
+ip.src != xxx.xxx.xxx.xxx && ip.dst != xxx.xxx.xxx.xxx && sip
+ip.src == 192.168.0.0/16 and ip.dst == 192.168.0.0/16
+ip.src == 10.43.54.65 or ip.dst == 10.43.54.65
+ip.src != 10.43.54.65 or ip.dst != 10.43.54.65
+! (ip.addr == 10.43.54.65)
+! (ip.src == 10.43.54.65 or ip.dst == 10.43.54.65)
+
 
 -- Display Filters for Protocols and Port Numbers --
 
@@ -37,9 +43,12 @@ icmp
 arp
 not arp
 
+udp && ip.dst == 192.168.1.5
+
 tcp.port == 80
 tcp.port == 443
 udp.port == 53
+tcp.port eq 25 or icmp
 tcp.srcport == 8080
 udp.dstport == 53
 
@@ -49,6 +58,7 @@ tcp.flags.syn == 1
 tcp.flags.fin == 1
 tcp.flags.ack == 1
 tcp.flags.rst == 1
+tcp.flags.syn == True
 
 tls
 ftp
@@ -61,6 +71,10 @@ eth.addr == 00:00:5e:00:53:00
 eth.type == 0x0806
 eth.addr == ff:ff:ff:ff:ff:ff
 
+eth.dst == ff:ff:ff:ff:ff:ff
+eth.dst == ff-ff-ff-ff-ff-ff
+eth.dst == ffff.ffff.ffff
+
 ip.addr == 192.0.2.1
 ip.addr != 192.0.2.1
 ip.addr == 192.0.2.1 and tcp.port not in {80, 25}
@@ -72,25 +86,46 @@ tcp.port == 80 || udp.port == 80
 !(udp.port == 53 || tcp.port == 53)
 
 http
-not arp and not dns
+http.request
+http.request.uri == "https://www.wireshark.org/"
+http.request.uri == "/service/"
+http.request.method == "GET"
+http.request.method == "POST"
+http.request.uri matches "gl=se$"
+http.host matches "acme\\.(org|com|net)"
+
+
+
+-- TCP Buffer --
+
+tcp.window_size == 0 && tcp.flags.reset != 1
+smb || nbns || dcerpc || nbss || dns
+ls_ads.opnum==0x09
+
+udp[8:3]==81:60:03
+eth.addr[0:3]==00:06:5B
+
+
+-- 'Contains' --
+
+http contains "login"
+http contains "service"
+http contains "audiodg.exe"
+http.request.uri contains "/login"
+http.request.uri contains "audiodg"
+http.host matches "acme\\.(org|com|net)"
+
+udp contains 81:60:03
+sip.To contains "a1762"
+dns.qry.name contains "www.\x77\x69\x72\x65\x73\x68\x61\x72\x6b.org"
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+https://wiki.wireshark.org/CaptureFilters
+https://www.wireshark.org/docs/wsug_html_chunked/ChCapCaptureFilterSection
+https://wiki.wireshark.org/DisplayFilters
+https://www.wireshark.org/docs/wsug_html_chunked/ChWorkBuildDisplayFilterSection.html
 
 
 
