@@ -1,0 +1,83 @@
+
+-- Detailing steps for Analyzing Network Traffic in Wireshark --
+
+1. Set Time Step (UTC)
+Adjust Wireshark’s time settings to UTC for consistency in analysis.
+Using UTC helps standardize timestamps, especially when correlating with logs from other systems.
+
+2. Check File Properties
+Review file metadata, such as capture duration and file size.
+Basic info on the capture file helps understand the scope and potential impact of captured events.
+
+3. Analyze Conversations (IPv4)
+View top talkers and communication patterns for IPv4 packets.
+Identifying top talkers can reveal unusual or unauthorized devices communicating on the network.
+
+4. Protocol Hierarchy
+Check the protocol hierarchy for an overview of protocols used.
+Analyzing the distribution of protocols can highlight abnormal use of high-risk protocols like HTTP or SMB.
+
+5. Apply Display Filter (HTTP)
+Filter for HTTP packets to focus on web traffic.
+Focusing on HTTP traffic helps narrow down analysis to possible web-based threats or data exfiltration.
+
+6. Follow HTTP Stream
+Follow HTTP streams to view full conversations between client and server.
+This reveals the exact content exchanged, which may show compromised credentials or data leaks.
+
+7. Follow TCP Stream
+Follow TCP streams for detailed TCP-based communication analysis.
+Following TCP streams can uncover details of suspicious connections, like C2 communication.
+
+8. HTTP Statistics
+Review HTTP statistics for traffic volume, methods, and responses.
+Helps identify unusual activity, like a high volume of HTTP POST requests potentially indicating exfiltration.
+
+9. Export Objects (HTTP)
+Export HTTP objects (like files) sent over HTTP for deeper analysis.
+Extracting files allows further inspection for malware or sensitive data leakage.
+
+10. Export Objects (SMB)
+Export SMB objects to examine files shared over the network.
+Useful for analyzing potential lateral movement or malware propagation over SMB shares.
+
+11. Filter for ARP and Broadcast Traffic
+Use arp and eth.dst == ff:ff:ff:ff:ff:ff to see ARP and broadcast packets.
+Broadcast traffic can indicate network discovery or scanning attempts.
+
+12. Filter for ICMP Traffic
+Filter icmp to view ping and error messages.
+ICMP traffic can reveal network mapping attempts or misconfigurations.
+
+13. IP Address Filter
+Use ip.addr == 10.0.0.1 to filter traffic from a specific IP.
+Filtering by IP isolates traffic from a specific source or destination, making it easier to track specific devices.
+
+14. SMTP Filter
+Filter for smtp to review email-related traffic.
+Analyzing SMTP traffic can reveal unauthorized email exfiltration or phishing attempts.
+
+15. Analyze Suspicious File (86607.dat)
+Export and analyze file 86607.dat if flagged or suspicious.
+Exporting the file allows deeper inspection for malware or further analysis in external tools.
+
+16. Calculate File Hash (SHA-256)
+Use sha256sum on 86607.dat to generate its SHA-256 hash for verification.
+A hash value helps uniquely identify the file, useful for malware detection and validation.
+
+17. Submit to VirusTotal
+Upload the SHA-256 hash or file to VirusTotal for threat intelligence analysis.
+VirusTotal scans against multiple antivirus engines to check if the file is flagged as malicious.
+
+18. Submit to Malware Bazaar
+Upload or check file on Malware Bazaar for malware information.
+Malware Bazaar provides insights into known malware samples, which can assist in threat identification.
+
+19. Analyze with CyberChef
+Use CyberChef for further decoding, deobfuscation, or extraction from suspicious data.
+CyberChef offers a variety of tools for transforming, decoding, or analyzing raw data and malicious code.
+
+
+References
+https://en.wikipedia.org/wiki/List_of_file_signatures
+https://www.garykessler.net/library/file_sigs.html
