@@ -2,7 +2,7 @@
 -- Here’s a table explaining the Wireshark Statistics features and their functions --
 
 
-Summary
+Capture File Properties
 Provides an overview of the capture, including traffic volume and duration.
 Quickly assess traffic behavior, spot abnormal traffic bursts or unexpected protocols.
 
