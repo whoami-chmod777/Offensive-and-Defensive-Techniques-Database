@@ -1,0 +1,30 @@
+
+📊 Intrusion Detection and Prevention Systems (IDS/IPS): Enhancing Cyber Defense 🚨
+The core functions of IDS and IPS for building robust network and endpoint security. Here’s a breakdown of the main components:
+
+🔍 Intrusion Detection Systems (IDS)
+- IDS solutions provide passive monitoring, logging, and alert generation without interrupting traffic.
+- Ideal for situations needing out-of-band threat awareness without active interference.
+
+🚫 Intrusion Prevention Systems (IPS)
+- IPS actively inspects traffic, blocks malicious packets, and can terminate suspicious connections in real-time.
+- Deployed inline for instant prevention and mitigation, with comprehensive logging for auditing.
+
+🌐 Network-Based IDS/IPS (NIDS/NIPS)
+- Operate at the network level, monitoring traffic flows and flagging/blocking harmful activities across network appliances.
+
+🖥️ Host-Based IDS/IPS (HIDS/HIPS)
+- Deployed on individual endpoints to monitor host activities (file access, logins, apps) and mitigate potential threats directly on the device.
+
+🔍 Detection Methods
+1. Signature-Based Detection: Matches activities against known attack patterns; excellent for known threats.
+2. Behavior-Based Detection: Detects anomalies by comparing against a baseline; valuable for catching new threats.
+3. Rule-Based Detection: Uses custom policies for violation detection; effective but requires frequent updates.
+
+🧩 The JoHari Window Model: Identifies different types of knowledge in security analysis:
+- Known Known: Threats we are aware of and understand.
+- Known Unknown: Threats we are aware of but do not fully understand.
+- Unknown Known: Insights we have but haven’t actively recognized.
+- Unknown Unknown: Completely unforeseen threats that pose unique challenges.
+
+Implementing a combination of IDS and IPS strategies is key for comprehensive detection, alerting, and proactive defense against evolving cyber threats.
