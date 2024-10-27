@@ -1,0 +1,29 @@
+
+-- Gain access to the site --
+
+Visit  the URL. When presented with a login screen, right-click and select "Inspect Element". Select the 'Console' tab and enter in the command: generateUserCredentials(). 
+Decode the  answer and you’re good to go! ;-)
+
+DWebsite:  5xdv6dqxv2bsbmlgttsq3ma3nw6ffa2zhqbl7o4w46p32wsqulzrtsqd.onion
+
+generateUserCredentials()
+VVNSOktGN3lidUQxICwgUEFTUzogQUl5aGZvdDBWOVZJV202Vw==
+
+USR:KF7ybuD1 , PASS: AIyhfot0V9VIWm6W
+
+Username: KF7ybuD1
+Password: AIyhfot0V9VIWm6W
+
+
+Check the type of encoding has been used on the site content
+
+For Example: Hexadecimal
+
+-- ASCII Code --
+34 38 20 36 35 20 37 39 20 32 30 20 36 34 20 37 35 20 36 34 20 36 35 20 32 45 20 32 45 20 32 45 20 32 30 20 37 37 20 36 31 20 36 45 20 36 45 20 36 31 20 32 30 20 36 33 20 36 31 20 36 45 20 36 34 20 37 39 20 33 46 20 32 30 20 32 38 20 35 34 20 36 38 20 36 35 20 32 30 20 37 32 20 36 35 20 36 31 20 36 43 20 32 30 20 34 34 20 32 30 20 36 42 20 36 39 20 36 45 20 36 37 20 32 31 20 32 39
+
+-- String --
+34 34 20 36 35 20 36 43 20 36 39 20 37 36 20 36 35 20 37 32 20 32 30 20 37 34 20 36 38 20 36 35 20 32 30 20 37 30 20 36 31 20 36 33 20 36 42 20 36 31 20 36 37 20 36 35 20 32 43 20 32 30 20 36 33 20 36 46 20 36 43 20 36 43 20 36 35 20 36 33 20 37 34 20 32 30 20 37 34 20 36 38 20 36 35 20 32 30 20 36 44 20 36 46 20 36 45 20 36 35 20 37 39 20 32 30 20 36 31 20 36 45 20 36 34 20 32 30 20 36 43 20 36 39 20 37 36 20 36 35 20 32 30 20 36 43 20 36 39 20 36 42 20 36 35 20 32 30 20 36 31 20 32 30 20 36 42 20 36 39 20 36 45 20 36 37 20 32 31
+
+Hey dude... wanna candy? (The real D king!)
+Deliver the package, collect the money and live like a king!
