@@ -17,6 +17,15 @@ Snort is a flexible and powerful tool for network intrusion detection and preven
 • Verify Configuration: Test setup with sudo snort -T -c /etc/snort/snort.conf
 
 
+⚙️ Edit Configuration
+• Open snort.conf: sudo snort -T -c /etc/snort/snort.conf
+• Step #1: Set Network Variable
+  - Set your internal network's address range in the HOME_NET variable to define which network Snort will monitor.
+• Step #7: Customize Rule Set
+  - Customize your Snort rules by locating the $RULE_PATH in snort.conf. Comment out any rules you want to disable to tailor detection.
+• Verify Configuration: Test setup with sudo snort -T -c /etc/snort/snort.conf
+
+
 🛠 Common Snort Commands
 
 Sniffer Mode:
