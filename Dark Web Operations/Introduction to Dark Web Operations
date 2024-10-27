@@ -8,9 +8,10 @@
 
 -- What is the ClearWeb --
 
-This  part of the internet has many names, such as; The Clear Web, Surface Web, and Indexed Web. These are the sites that you access daily, such as  Facebook, Google, YouTube, Reddit, and so on. These websites and web  pages are indexed on a mass scale by search engines such as Google and  Bing, which is why we can find them when using search engines.
-If you query Google for “security blue team” you’ll find our website – that’s because we have allowed Google’s crawlers to index our web pages. Crawlers are a type of software that searches the internet for publicly available webpages so that search engines can offer them as results. These bots go from site to site, link to link, finding every page that they’re allowed to view, and reporting back.
-The Clear Web consists of legal sites that are generally designed for use  by the public, and tend not to have obscure methods of gaining access, such as a special key or IP whitelisting. Looking at the below diagram we see that normal sites are at the Surface Web layer and these are publicly available (although some may require registration). 
+This part of the internet has many names, such as; The Clear Web, Surface Web, and Indexed Web. These are the sites that you access daily, such as Facebook, Google, YouTube, Reddit, and so on. These websites and web pages are indexed on a mass scale by search engines such as Google and Bing, which is why we can find them when using search engines.
+If you query Google for “security blue team” you’ll find our website – that’s because we have allowed Google’s crawlers to index our web pages. 
+Crawlers are a type of software that searches the internet for publicly available webpages so that search engines can offer them as results. These bots go from site to site, link to link, finding every page that they’re allowed to view, and reporting back.
+The Clear Web consists of legal sites that are generally designed for use by the public, and tend not to have obscure methods of gaining access, such as a special key or IP whitelisting. The normal sites are at the Surface Web layer and these are publicly available (although some may require registration). 
 
 
 -- What is the DeepWeb --
