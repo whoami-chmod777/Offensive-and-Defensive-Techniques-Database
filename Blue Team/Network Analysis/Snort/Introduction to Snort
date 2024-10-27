@@ -30,7 +30,7 @@ curl google.com
 
 __________________________________________________
 
-Packet Logging:
+Packet Logging Mode:
 sudo snort -i enp0s3 -l /var/log/snort
 sudo snort -i enp0s3 -l .
 
