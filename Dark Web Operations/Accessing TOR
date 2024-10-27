@@ -1,7 +1,38 @@
 
+-- Accessing TOR --
+
+• Clear Web vs Dark Web Browsing 
+• Downloading the TOR Browser 
+• Browsing Clear Web Sites 
+• Browsing Dark Web Sites 
 
 
+To  access the dark web, we are going to be using the TOR browser. This lesson will cover what it is, how it works, and we’ll show you how to  access both clear web and dark web sites.
 
+-- Clear Web vs Dark Web Browsing --
+
+How is this different than normal internet browsing? When you use a normal browser, such as Google’s Chrome or Mozilla’s Firefox, you send a request which goes from your network’s router to your internet service provider (ISP), which means they have the potential to read your request and log what sites you’re visiting. When using TOR, your request is encrypted, sent to your ISP, then moves on to TOR nodes, systems that are used to bounce requests around. After a number of bounces, your request will be decrypted and sent to the intended destination so that it is impossible to track where the original request actually came from.
+
+
+-- Downloading the TOR Browser -- 
+
+Visit the TOR Project’s website (https://www.torproject.org/) and download the TOR Browser for your OS. The browser supports Windows, OS X, Linux and Android.
+Now that you have TOR Browser downloaded run it. That's all ;-)
+
+
+-- Browsing Clear Web Sites -- 
+
+We can use the TOR Browser to view ‘normal’ websites, nothing changes except we have more privacy, sites aren’t able to track us using cookies, and the browser will automatically clear our browsing history.  For example, we can use the default pro-privacy search engine Duck Duck Go to search for “BBC” and view their site as expected.
+
+
+-- Browsing Dark Web Sites -- 
+
+Now, what you’ve all come here for, is how to access dark websites using the TOR Browser. In the following examples we are going to be visiting known-safe sites. We highly recommend that you DO NOT attempt to visit any known bad or illegal sites. Law enforcement entities around the world monitor connections to these sites, and whilst accessing them is a grey area, you may view illegal, disturbing, or explicit material. Malicious sites may also attempt to attack your browser in order to compromise your host system. Ensure that all software products you run are updated, and you only visit sites you know  are safe. SBT is not responsible for any actions of students that  deviate from the examples we provide.
+
+Before continuing, ensure you have the following:
+- You have read the "TOR Warning and Disclaimer".
+- You are running an up-to-date operating system and anti-virus program (Free: Malwarebytes, Paid: BitDefender)
+- Optional but highly advised: You are running a VPN (Such as NordVPN or BitDefender VPN)
 
 
 
