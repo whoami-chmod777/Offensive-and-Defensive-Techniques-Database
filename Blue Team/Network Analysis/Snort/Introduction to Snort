@@ -1,0 +1,44 @@
+
+Snort is a flexible and powerful tool for network intrusion detection and prevention (IDS/IPS). It operates in multiple modes and helps to monitor, log, and prevent suspicious activities across networks.
+
+🔑 Key Snort Modes
+1. Sniffer Mode: Monitors and displays network packets in real-time.
+2. Packet Logger Mode: Logs packets to files for deeper analysis.
+3. IDS/IPS Mode: Detects and prevents suspicious activities by analyzing packets against predefined rules.
+
+
+⚙️ Installation and Configuration
+• Install Snort: sudo apt install snort
+• Identify Your Network Range: Use ifconfig or ip a s to set up HOME_NET.
+• Rules and Configuration:
+	- Configuration file location: /etc/snort/snort.conf
+	- Back up your config file: sudo cp snort.conf snort.conf.bak
+	- Open config for editing: sudo nano snort.conf
+• Verify Configuration: Test setup with sudo snort -T -c /etc/snort/snort.conf
+
+
+🛠 Common Snort Commands
+
+Sniffer Mode:
+
+sudo snort -i enp0s3
+sudo snort -i enp0s3 -e
+sudo snort -i enp0s3 -d
+sudo snort -i enp0s3 -X
+
+curl google.com
+
+__________________________________________________
+
+Packet Logging:
+sudo snort -i enp0s3 -l /var/log/snort
+sudo snort -i enp0s3 -l .
+
+snort.log.17179612212
+
+__________________________________________________
+
+Read Packet Logs:
+
+sudo snort -r snort.log.17179612212
+tcpdump -r snort.log.17179612212
