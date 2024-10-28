@@ -1,4 +1,7 @@
 
+-- Snort Cheat Sheet on Sniffer Mode, Packet Logging Mode, and for Reading and Analyzing Traffic --
+
+
 -- Snort in Sniffer Mode --
 
 Sniffer mode captures packets in real-time and displays them in the console. Use this mode to monitor network traffic actively.
