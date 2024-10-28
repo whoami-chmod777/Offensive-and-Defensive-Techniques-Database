@@ -1,0 +1,60 @@
+
+Triggers on any ICMP packet (useful for detecting ping sweeps or ICMP-related attacks).
+alert icmp any any -> any any (msg:"ICMP Test"; sid:1000001; rev:1;)
+
+Detects HTTP GET requests on port 80, commonly used in web-based attacks.
+alert tcp any any -> any 80 (msg:"HTTP GET request"; content:"GET"; sid:1000002; rev:1;)
+
+Identifies TLS handshakes, useful for analyzing encrypted traffic patterns.
+alert tcp any any -> any 443 (msg:"TLS Handshake"; content:"ClientHello"; sid:1000003; rev:1;)
+
+Detects FTP login attempts by identifying the USER command.
+alert tcp any any -> any 21 (msg:"FTP login attempt"; content:"USER"; sid:1000004; rev:1;)
+
+Detects Telnet connections, which are often risky due to plaintext transmission.
+alert tcp any any -> any 23 (msg:"Telnet Connection Attempt"; sid:1000005; rev:1;)
+
+Logs any DNS query, helping track DNS usage and possible data exfiltration.
+alert udp any any -> any 53 (msg:"DNS Query Detected"; sid:1000006; rev:1;)
+
+Detects login attempts on MySQL, with a focus on root logins.
+alert tcp any any -> any 3306 (msg:"MySQL Login Attempt"; content:"root"; sid:1000007; rev:1;)
+
+Logs email traffic, useful for detecting spam or email-based attacks.
+alert tcp any any -> any 25 (msg:"SMTP Mail Detected"; sid:1000008; rev:1;)
+
+Detects SSH connection attempts, useful for monitoring secure shell access.
+alert tcp any any -> any 22 (msg:"SSH Connection Attempt"; sid:1000009; rev:1;)
+
+Detects Remote Desktop Protocol (RDP) connections.
+alert tcp any any -> any 3389 (msg:"RDP Connection Attempt"; sid:1000010; rev:1;)
+
+Detects Microsoft SQL Server connection attempts.
+alert tcp any any -> any 1433 (msg:"MSSQL Connection Attempt"; sid:1000011; rev:1;)
+
+Detects TFTP traffic, which is often used in firmware updates and network attacks.
+alert udp any any -> any 69 (msg:"TFTP Traffic Detected"; sid:1000012; rev:1;)
+
+Detects traffic to port 8080, often used by proxy servers.
+alert tcp any any -> any 8080 (msg:"Web Proxy Access"; sid:1000013; rev:1;)
+
+Detects a basic SQL injection attempt in HTTP traffic.
+alert tcp any any -> any 80 (msg:"Possible SQL Injection"; content:"SELECT * FROM"; sid:1000014; rev:1;)
+
+Detects cross-site scripting (XSS) attempts in HTTP traffic.
+alert tcp any any -> any 80 (msg:"Cross-Site Scripting Attempt"; content:"<script>"; sid:1000015; rev:1;)
+
+Detects directory traversal attempts, which can be used to access unauthorized files.
+alert tcp any any -> any 80 (msg:"Directory Traversal"; content:"/../../"; sid:1000016; rev:1;)
+
+Detects attempts to access a known PHP shell script.
+alert tcp any any -> any 80 (msg:"PHP Shell Access"; content:"/shell.php"; sid:1000017; rev:1;)
+
+Detects login attempts on WordPress sites.
+alert tcp any any -> any 80 (msg:"WordPress Login Attempt"; content:"wp-login"; sid:1000018; rev:1;)
+
+Detects file uploads on FTP, which can be useful for monitoring sensitive file movements.
+alert tcp any any -> any 21 (msg:"FTP Data Transfer Detected"; content:"STOR"; sid:1000019; rev:1;)
+
+Detects email traffic with attachments, useful for spotting malware attachments.
+alert tcp any any -> any 25 (msg:"Email with Attachment"; content:"Content-Disposition:"; sid:1000020; rev:1;)
