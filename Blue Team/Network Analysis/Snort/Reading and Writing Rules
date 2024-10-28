@@ -1,0 +1,108 @@
+
+-- Snort Rule Syntax --
+
+Snort rules are written with specific syntax to detect and respond to potential network threats. Each rule is structured to match certain traffic patterns and specify actions when those patterns are found. Below is a breakdown of the components of a Snort rule and the general syntax:
+
+alert icmp any any -> 8.8.8.8 any (msg:"ICMP traffic to 8.8.8.8 detected"; sid:1000001; rev:1;)
+
+Rule Header: alert icmp any any -> 8.8.8.8 any
+Source: any any
+Dest: 8.8.8.8 any
+Rule Options: (msg:"ICMP traffic to 8.8.8.8 detected"; sid:1000001; rev:1;)
+
+
+1. Basic Snort Rule Structure
+
+action protocol source_ip source_port -> destination_ip destination_port (options)
+
+- Action: Specifies what Snort should do if the rule is triggered (e.g., 'alert', 'log', 'pass', 'drop', 'reject').
+- Protocol: Defines the protocol to match (e.g., 'tcp', 'udp', 'icmp', 'ip').
+- Source IP and Port: Specifies the source IP address and port (can be 'any' for all addresses or ports).
+- Direction Operator: Specifies the direction of traffic. ('->' for unidirectional or '<->' for bidirectional).
+- Destination IP and Port: Specifies the destination IP address and port.
+
+
+2. Options Field
+
+Options provide specific conditions that must be met within a packet for a rule to trigger. The options field is enclosed in parentheses and consists of 'keyword:value;' pairs. Common keywords include:
+
+- msg: A message describing the alert.
+- sid: A unique rule identifier.
+- rev: The revision number of the rule.
+- content: Specifies the content to search for within the packet (can use binary or ASCII data).
+- nocase: Used with 'content' to make the search case-insensitive.
+- depth: Specifies how far into the packet Snort should search.
+- offset: Specifies where to start searching within the packet.
+- within: Specifies the distance from the beginning of the 'content' match.
+- ttl, tos, id, seq: Match IP header values.
+
+
+3. Example Snort Rules
+
+1) Basic Rule - Detect ICMP Traffic (Ping)   
+
+alert icmp any any -> any any (msg:"ICMP ping detected"; sid:1000001; rev:1;)
+
+- alert: Action to trigger an alert.
+- icmp: Protocol (ICMP is used for ping traffic).
+- any any -> any any: Source and destination IP and ports (any IP and any port).
+- msg: Describes the alert.
+- sid: Unique identifier for the rule.
+
+2) Rule with Content Match - Detect HTTP GET Request  
+
+alert tcp any any -> any 80 (msg:"HTTP GET request detected"; content:"GET"; http_method; sid:1000002; rev:1;)
+
+- content: Matches the string "GET".
+- http_method: Limits 'content' search to HTTP methods.
+
+3) Detect SSH Connection on Non-Standard Port   
+
+alert tcp any any -> any !22 (msg:"SSH connection on non-standard port"; content:"SSH"; depth:4; sid:1000003; rev:1;)
+
+- !22: Destination port is not 22 (the standard SSH port).
+- depth:4: Limits the 'content' search to the first 4 bytes.
+
+4) Custom Rule to Detect SQL Injection Attempt 
+
+alert tcp any any -> any 80 (msg:"SQL Injection attempt"; content:"union select"; nocase; sid:1000004; rev:1;)
+
+- nocase: Makes 'content' search case-insensitive to catch variations in capitalization.
+
+
+4. Rule Header Fields
+
+- action: Defines the response, such as 'alert', 'log', 'pass', 'drop', 'reject'.
+- protocol: Matches 'tcp', 'udp', 'icmp', or 'ip'.
+- source/destination IP and port: Defines specific IP/port ranges.
+
+
+5. Important Options to Know
+
+- gid: Group ID (default for Snort rules is '1').
+- sid: Snort rule identifier, must be unique for each rule.
+- rev: Rule revision number, updated with each modification.
+
+Example:
+
+local.rules > alert icmp any any -> 8.8.8.8 any (msg: "ICMP traffic to 8.8.8.8 detected"; sid: 1000001; rev:1;)
+sudo snort -A console -l /var/log/snort -i enp0s3 -c /etc/snort/snort.conf -q
+
+local.rules > alert tcp any any -> any 4444 (msg: "Connection to Remote IP Port 4444"; sid: 1000002; rev:1;)
+sudo snort -A console -l /var/log/snort -i enp0s3 -c /etc/snort/snort.conf -q
+
+hping3 -c 1 -p 4444 -S example.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
