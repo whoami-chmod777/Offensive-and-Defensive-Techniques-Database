@@ -1,0 +1,92 @@
+
+Snort Variables & Rules
+
+• Snort Variables
+• Snort Rules
+• Rule Keywords & Arguments
+
+
+-- Snort Variables --
+
+Snort rules work on variables rather than actual IPs/ports:
+• Allows to use rules in any environment without modifying them
+• Located under Objects -> Object Management -> Variable Set
+
+Variable Types:
+• $*_NET (Network/subnet addresses, such as $HOME_NET)
+• $*_SERVERS (Individual server IPs, e.g. $DNS_SERVERS)
+• $*_PORTS (TCP/UDP ports, like $HTTP_PORTS)
+
+
+Correct variable definition is critical to proper NGIPS operations:
+
+• Always tune $HOME_NET and $EXTERNAL_NET values
+  > Setting $EXTERNAL_NET to !$HOME_NET won’t always work
+    >> May leave trusted segments unprotected
+
+• Best Practices
+  > Set $HOME_NET to all protected subnets & public ranges you own
+  > Leave $EXTERNAL_NET as "any"
+
+• Tune all used $*_SERVERS and appropriate
+  > If in doubt, set $*_SERVERS to $HOME_NET
+
+
+-- Snort Rules --
+
+Each Snort Rule consists of a Header and a Body
+
+• Rule Header
+  > Tells what traffic to look at (L3/L4), Source/destination IPs/ports, protocol & flow direction
+  > Defines an action to take (Alert, pass, disabled, generate events, drop and generate event)
+
+• Rule Body (Rule Options)
+  > Describes the attack (Payload) (Keywords, arguments & patterns, a match triggers the rule action)
+  > Contains Event Message
+
+
+- Snort Rule Example -
+
+• Rule Header: alert tcp $EXTERNAL_NET any -> $HTTP_SERVERS $HTTP_PORTS
+
+• Rule Body: 
+(msg:“Test rule fires”; flow:to_server,established; \
+uricontent: “cgi/main/malware.exe”; reference:cve-1991-1345; \
+classtype:web-application-activity; sid:9991; rev:1;)
+
+
+• Rule Body is formed with the aid of keywords & arguments
+  > The Body always starts with "(" and ends with ")"
+    >> If multiple lines are needed, separate them with “\”
+  > Keywords end with ":" and the last argument/option end with ";"
+    >> Arguments/options are separated by commas (msg:"Test rule fires"; flow:to_server,established;)
+
+
+-- Rule Keywords & Arguments --
+
+• Keyword : content
+  > Describes the string to look for in a packet
+  > ASCII, hex characters (surrounded by "|") or both ("|28|C|29|/bin/sh" matches (C)/bin/sh)
+  > Sample Arguments (nocase, offset, depth, distance)
+
+• Keyword : pcre
+  > Allows to use Perl-compatible regular expressions to look for content
+  > Regular expression must be enclosed within "//" (/mail(file|seek)\.cgi/)
+  > Optional modifiers follow the regex (/regex/ismxAEGRBUIPHDMCKSY)
+
+• Keyword : flow
+  > Allows to specify the direction of the traffic
+  > Sample Arguments (to client, from client, to server, established, stateless)
+
+
+
+- Snort documentation - 
+
+www.snort.org
+http://snorpy.cyb3rs3c.net/
+https://docs.snort.org/welcome
+http://manual-snort-org.s3-website-us-east-1.amazonaws.com/
+
+
+
+
