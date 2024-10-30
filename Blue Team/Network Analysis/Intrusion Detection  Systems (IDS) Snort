@@ -1,0 +1,111 @@
+
+-- Introduction to IDS --
+
+• What is IDS? 
+• Types of IDS 
+• Monitoring and Analysis
+• Detection Mechanisms 
+• Response and Mitigation
+
+-- Introduction to snort --
+
+• What is snort? 
+• Using snort
+• Snort Rules
+• Overview of Snort config file
+
+-- Examples --
+
+• ICMP ping attempts
+• 
+
+
+Objective 1: Introduction to IDS and Snort.
+
+Introduction to IDS - What is IDS? - Monitoring and Analysis - Detection Mechanisms - Response and Mitigation
+Introduction to snort - What is snort? - Snort Rules - Snort rule syntax. - Overview of Snort config file - Example 
+
+Objective 2: Create a custom rule and generate the alerts.
+
+
+--- Introduction to IDS ---
+
+What is IDS?:
+An Intrusion Detection System (IDS) is a security software that observes network traffic for malicious activities and promptly alerts administrators. It monitors networks or systems for policy violations. IDS safeguards against unauthorized access, even from insider threats, by distinguishing between malicious and normal connections. The primary task of an IDS is to build a predictive model, such as a classifier, to identify and respond to potential intrusions or attacks.
+
+Types of IDS:
+- Network Intrusion Detection System (NIDS): Network Intrusion Detection Systems (NIDS) are strategically placed within a network to analyze traffic from all devices. They observe traffic across the entire subnet, comparing it to a database of known attacks. Upon detecting an attack or abnormal behavior, NIDS sends alerts to administrators.
+- Host Intrusion Detection System (HIDS): Host Intrusion Detection Systems (HIDS) operate on individual hosts within a network. They monitor incoming and outgoing packets specifically for the host they are installed on and notify administrators of suspicious or malicious activities. HIDS takes snapshots of system files, comparing them to previous snapshots, and issues alerts if changes are detected. HIDS is often deployed on mission-critical machines where stable configurations are expected.
+- Protocol-based Intrusion Detection System (PIDS): A Protocol-based Intrusion Detection System (PIDS) is a security mechanism located at the server's front end, overseeing and interpreting communication protocols between users/devices and the server. Specifically designed for securing web servers, it continuously monitors the HTTPS protocol stream and accepts the associated HTTP protocol. Given that HTTPS is encrypted, PIDS operates in the interface between the encrypted HTTPS and the unencrypted HTTP, providing an additional layer of security.    
+- Application Protocol-based Intrusion Detection System (APIDS): An Application Protocol-based Intrusion Detection System (APIDS) is a security system or agent typically located among a group of servers. It specializes in identifying intrusions by monitoring and interpreting communication on application-specific protocols. For instance, it might focus on monitoring the SQL protocol between middleware and the database in a web server to detect potential intrusions.   
+- Hybrid Intrusion Detection System: A Hybrid Intrusion Detection System combines two or more intrusion detection approaches, integrating host agent or system data with network information to gain a comprehensive view of the network system. It is considered more effective than other intrusion detection systems. An example of a Hybrid  IDS is Prelude.
+
+Monitoring and Analysis:
+- Purpose: IDS continuously monitors network or system activities, analyzing data to identify patterns or behaviors that may indicate a security incident.   
+- How It Works: IDS collects and analyzes network traffic, log files, and system events to identify anomalies or patterns associated with known attack signatures.
+
+Detection Mechanisms:
+- Signature-Based Detection: Signature-based Intrusion Detection Systems (IDS) identify attacks by matching specific patterns, such as byte counts or sequences of 1s and 0s, in network traffic. They also recognize known malicious instruction sequences used by malware. These identified patterns are termed "signatures." While effective at detecting known attacks with existing signatures, signature-based IDS faces challenges in detecting new malware attacks, as their patterns are not yet known.
+- Anomaly-based Method: Anomaly-based Intrusion Detection Systems (IDS) were developed to identify unknown malware attacks that emerge rapidly.  This approach employs machine learning to establish a trustworthy activity model. Incoming data is compared to this model, and anything deviating from it is flagged as suspicious. Machine learning-based methods in anomaly-based IDS offer improved adaptability compared to signature-based IDS, as the models can be trained based on specific  applications and hardware configurations, enhancing their ability to  detect novel threats.
+
+Response and Mitigation:
+- Purpose: IDS provides information to facilitate a response to security  incidents.
+- How It Works: While IDS itself does not take direct actions to block  or prevent attacks, it can provide information to security personnel for  mitigation efforts.
+
+
+--- Introduction to snort ---
+
+What is snort?: 
+Snort is the foremost Open Source Intrusion Prevention System (IPS) in the world. Snort IPS uses a series of rules that help define malicious network activity and uses those rules to find packets that match against them and generates alerts for users. Snort can be deployed inline to stop these packets, as well. Snort has three primary uses: As a packet sniffer like tcpdump, as a packet logger - which is useful for network traffic debugging, or it can be used as a full-blown network intrusion prevention system. Snort can be downloaded  and configured for personal and business use alike.
+Using snort The default folder for Snort, when installed on a Linux system, is typically in the /etc/snort/ directory. Snort generates various log files that are often stored in the /var/log/snort/ directory. These logs include alert logs, packet logs, and others, depending on the configuration. We mainly discuss on rules direcotry and  snort.conf file.
+
+Snort Rules: The rules folder in the /etc/snort/ directory is a crucial component of Snort, containing the rulesets that  define conditions under which Snort should generate alerts. Each rule within these sets specifies patterns, signatures, or characteristics  associated with malicious activities. When network traffic matches these patterns, Snort generates an alert. The rules folder contains multiple Snort rule files, and each file may be associated with specific types of attacks or network behaviors. Rule files within the rules folder have names like local.rules, attack-responses.rules, backdoor.rules, etc. 
+- Local Rules (local.rules): Users often add their own custom rules to this file. It's a place to include rules specific to the  local network or to customize Snort's behavior. 
+- Attack Responses (attack-responses.rules): Contains rules related to responses against detected attacks. 
+- Backdoor Rules (backdoor.rules): Contains rules associated with backdoor activities.
+
+Snort rule syntax: Snort uses a specific syntax for its rules, which are used to define the conditions under which Snort should generate an alert. Here is a basic structure of a Snort rule: 
+
+<action protocol source_ip source_port -> destination_ip destination_port>
+
+Let's break down the components of a Snort rule: 
+- Action: Specifies the action to be taken when the rule matches. Common actions include alert, log, pass, and activate. 
+- Protocol: Specifies the protocol to be examined (e.g., TCP, UDP, ICMP). 
+- Source IP: Defines the source IP address or IP range. 
+- Source Port: Specifies the source port or port range. 
+- Direction Arrow (->): Indicates the direction of traffic. 
+- Destination IP: Defines the destination IP address or IP range. 
+- Destination Port: Specifies the destination port or port range.
+
+Overview of Snort config file 
+The snort.conf file is the central configuration file for Snort, a powerful intrusion detection system. This file is organized into different sections, each responsible for configuring specific aspects of Snort's behavior. One crucial section involves setting network variables, where administrators define the network or subnet to be monitored using the home_net variable. Typically, the external_net variable is left flexible to monitor any external network.
+The configuration file also allows for the inclusion of specific hosts like DNS servers within the critical infrastructure. Moving beyond  network variables, the file specifies the path to the rules file, pointing to the default rule path. Rule customization is a significant aspect, with users defining rules in a user-specific file, often named local.rules.
+In the rules section, the snort.conf file provides the flexibility to include or exclude rule files, allowing users to manage community-contributed rules easily. The organizational structure encourages a clear distinction between user-defined rules and those developed by the Snort community. When Snort is executed, it loads two categories of rules: user-defined rules from local.rules  and community rules from separate files, covering various threat  categories. This organizational approach enhances the clarity and effectiveness of Snort's intrusion detection capabilities, offering a tailored and modular configuration for network security.
+
+
+-- Examples --
+
+In this demonstration, a custom rule has been crafted to monitor ICMP ping attempts
+
+1) Check the IP address of the machine: ifconfig
+2) Check for the status of snort with the following command: systemctl status snort
+3) Disabled all community rules in the /etc/snort/snort.conf by commenting them out
+4) Validate the conf file changes: snort -T -i ens5 -c /etc/snort/snort.conf
+5) Open the local.rules file: nano /etc/snort/rules/local.rules 
+6) Write the following rule to alert for an SSH attempt and Save the file. 
+7) Run the following command to start monitoring in quiet mode: snort -q -i ens5 -A console -c /etc/snort/snort.conf
+This command starts Snort in quiet mode (-q), uses the network interface ens5 (-i ens5), logs alerts to the console (-A console), and specifies the configuration file location as /etc/snort/snort.conf (-c /etc/snort/snort.conf).
+8) Started Snort to monitor for alerts: snort -q -i ens5 -A console -c /etc/snort/snort.conf
+8) Switch back to the Attacker machine and test the reachability of the Target machine by pinging it: ping x.x.x.x -c 4
+7) Write the following rule to alert for an SSH attempt and Save the file: alert tcp any any -> $HOME_NET 22 (msg:"SSH attempt"; sid:1001; rev:1;) 
+
+2) 
+3) Attempted to ping from the Attacker machine. No logs were generated. This is expected because no rules are implemented for alerting.
+4) Created a custom rule in the local.rules file located at /etc/snort/rules/local.rules.
+5) Restarted Snort
+6) Attempted to ping from the Attacker machine again.
+7) This time, alert messages are visible on the Target machine.
+
+
+
+
