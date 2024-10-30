@@ -42,6 +42,7 @@ __________________________________________________
 Packet Logging Mode:
 
 sudo snort -i enp0s3 -l /var/log/snort
+sudo snort -i enp0s3 -l /var/log/snort -K ASCII
 sudo snort -i enp0s3 -l .
 
 snort.log.17179612212
