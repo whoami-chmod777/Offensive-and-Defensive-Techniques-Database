@@ -17,8 +17,9 @@
 -- Examples --
 
 • ICMP ping attempts
-• 
+• SSH attempt
 
+*******************************************************************************************************************************************
 
 Objective 1: Introduction to IDS and Snort.
 
@@ -85,23 +86,45 @@ In the rules section, the snort.conf file provides the flexibility to include or
 
 -- Examples --
 
-In this demonstration, a custom rule has been crafted to monitor ICMP ping attempts
+A custom rule that has been crafted to monitor ICMP ping attempts and SSH connection attempt
 
-1) Check the IP address of the machine: ifconfig
-2) Check for the status of snort with the following command: systemctl status snort
+
+1) Check the IP address of the machine: 
+ifconfig
+
+2) Check for the status of snort with the following command: 
+systemctl status snort
+
 3) Disabled all community rules in the /etc/snort/snort.conf by commenting them out
-4) Validate the conf file changes: snort -T -i ens5 -c /etc/snort/snort.conf
-5) Open the local.rules file: nano /etc/snort/rules/local.rules 
-6) Write the following rule to alert for an SSH attempt and Save the file. 
-7) Run the following command to start monitoring in quiet mode: snort -q -i ens5 -A console -c /etc/snort/snort.conf
-This command starts Snort in quiet mode (-q), uses the network interface ens5 (-i ens5), logs alerts to the console (-A console), and specifies the configuration file location as /etc/snort/snort.conf (-c /etc/snort/snort.conf).
-8) Started Snort to monitor for alerts: snort -q -i ens5 -A console -c /etc/snort/snort.conf
-8) Switch back to the Attacker machine and test the reachability of the Target machine by pinging it: ping x.x.x.x -c 4
-7) Write the following rule to alert for an SSH attempt and Save the file: alert tcp any any -> $HOME_NET 22 (msg:"SSH attempt"; sid:1001; rev:1;) 
 
-2) 
-3) Attempted to ping from the Attacker machine. No logs were generated. This is expected because no rules are implemented for alerting.
-4) Created a custom rule in the local.rules file located at /etc/snort/rules/local.rules.
-5) Restarted Snort
-6) Attempted to ping from the Attacker machine again.
-7) This time, alert messages are visible on the Target machine.
+4) Validate the conf file changes: 
+snort -T -i ens5 -c /etc/snort/snort.conf
+
+5) Open the local.rules file: 
+nano /etc/snort/rules/local.rules 
+
+6) Write the following rule to alert for an Ping attempt from the Attacker machine and Save the file: 
+alert icmp any any -> $HOME_NET any (msg:"ICMP Ping Detected"; sid:1000001; rev:1;)
+
+The Snort rule is configured to generate an alert for any ICMP traffic originating from any IP address and directed towards any IP address within the monitored network (`$HOME_NET`). This rule is specifically designed to detect ICMP traffic, which includes ping requests commonly used for network diagnostics or reconnaissance. The alert message is "ICMP Ping Detected," and the rule is assigned an ID of `1000001` with revision `1`. This setup allows detection of potential probing or scanning attempts initiated by an attacker.
+
+7) Run the following command to start monitoring in quiet mode: 
+snort -q -i ens5 -A console -c /etc/snort/snort.conf
+
+This command starts Snort in quiet mode (-q), uses the network interface ens5 (-i ens5), logs alerts to the console (-A console), and specifies the configuration file location as /etc/snort/snort.conf (-c /etc/snort/snort.conf).
+
+8) Switch back to the Attacker machine and test the reachability of the Target machine by pinging it: 
+ping x.x.x.x -c 4
+
+9) Write the following rule to alert for an SSH attempt and Save the file: 
+alert tcp any any -> $HOME_NET 22 (msg:"SSH attempt"; sid:1000002; rev:1;) 
+
+The Snort rule is designed to generate an alert for any TCP traffic, regardless of source IP and port, directed towards any destination IP within the monitored network. Specifically, it looks for traffic on destination port 22, commonly associated with SSH. The alert message is "SSH attempt," and the rule has an ID of 1000002 with revision 1.
+
+10) Run the following command to start monitoring in quiet mode: 
+snort -q -i ens5 -A console -c /etc/snort/snort.conf
+
+11) Initiate an SSH connection attempt from the Attacker machine using the following command: 
+ssh root@x.x.x.x
+
+12) Switch to the Target machine and you will see the alerts. The message "SSH attempt". The SSH connection Attempt from "source_IP" to "target_IP".
