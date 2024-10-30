@@ -1,6 +1,10 @@
 
+Snort Rule Syntax: action protocol source_ip source_port -> destination_ip destination_port
+
+
 Triggers on any ICMP packet (useful for detecting ping sweeps or ICMP-related attacks).
 alert icmp any any -> any any (msg:"ICMP Test"; sid:1000001; rev:1;)
+alert icmp any any -> $HOME_NET any (msg:"ICMP Ping Detected"; sid:1000001; rev:1;)
 
 Detects HTTP GET requests on port 80, commonly used in web-based attacks.
 alert tcp any any -> any 80 (msg:"HTTP GET request"; content:"GET"; sid:1000002; rev:1;)
@@ -25,6 +29,7 @@ alert tcp any any -> any 25 (msg:"SMTP Mail Detected"; sid:1000008; rev:1;)
 
 Detects SSH connection attempts, useful for monitoring secure shell access.
 alert tcp any any -> any 22 (msg:"SSH Connection Attempt"; sid:1000009; rev:1;)
+alert tcp any any -> $HOME_NET 22 (msg:"SSH attempt"; sid:1000009; rev:1;)
 
 Detects Remote Desktop Protocol (RDP) connections.
 alert tcp any any -> any 3389 (msg:"RDP Connection Attempt"; sid:1000010; rev:1;)
