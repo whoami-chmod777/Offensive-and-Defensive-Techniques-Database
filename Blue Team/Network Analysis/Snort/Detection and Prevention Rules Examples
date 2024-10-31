@@ -63,3 +63,50 @@ alert tcp any any -> any 21 (msg:"FTP Data Transfer Detected"; content:"STOR"; s
 
 Detects email traffic with attachments, useful for spotting malware attachments.
 alert tcp any any -> any 25 (msg:"Email with Attachment"; content:"Content-Disposition:"; sid:1000020; rev:1;)
+
+
+
+
+
+******************************************************************************************************************************
+
+Examine The First 5 Packets Of The First PCAP File
+snort -r example.com-7.pcap -n 5
+snort -r example.com-7.pcap -n 5 -d (examine the payload of the packets)
+
+Get Quick Statistical Overview
+snort -r example.com-7.pcap
+
+Trying The Sniffing Mode
+sudo snort -vv -i eth0
+
+Create a ICMP detection rule
+alert icmp any any -> any any (msg:"ICMP Packet Detected"; sid:100001;)
+
+Create a telnet detection rule
+alert tcp any any -> any 23 (msg: "Policy Violation: someone is using telnet in our network!";sid:100005;)
+
+Run Snort In Logging Mode
+sudo snort -v -i eth0 -l logdir -K ASCII
+
+Extract The UDP Traffic
+sudo snort -r example.com-7.pcap udp -l logdir2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
