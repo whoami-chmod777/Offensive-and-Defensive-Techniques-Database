@@ -61,7 +61,7 @@ Displays help information for using Steghide.
 steghide -h
 
 Get info
-steghide info hawking
+steghide info hawking.jpeg
 steghide info -sf stego.jpg
 
 
