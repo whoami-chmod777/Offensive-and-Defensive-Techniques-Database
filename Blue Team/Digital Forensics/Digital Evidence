@@ -1,0 +1,42 @@
+
+-- Digital Evidence --
+
+Evidence including mobile devices, IoT, games consoles, personal servers, micro-computers, and many more, any of these devices has the potential to be used in an illegal or unintended matter. 
+But what is digital evidence? It’s information or data that is related to an investigation, which is stored on, transmitted, or received by an electronic device During the first stage of the digital forensics process, identification, we are looking to identify evidence, where it is stored, and what format it is in. To make it easy, we’ll split the origin of evidence into three categories; network, computers, and mobiles.
+
+
+-- Types of Evidence --
+
+This section will cover what evidence is. With an ever-increasing amount of devices, including mobile devices, IoT, games consoles, personal servers, micro-computers, and many more, any of these devices has the potential to be used in an illegal or unintended matter. 
+But what is digital evidence? It’s information or data that is related to an investigation, which is stored on, transmitted, or received by an electronic device During the first stage of the digital forensics process, identification, we are looking to identify evidence, where it is stored, and what format it is in. To make it easy, we’ll split the origin of evidence into three categories; network, computers, and mobiles.
+
+• Evidence via Computers
+
+Most of the time, evidence will be files and other data on electronic storage media, such as hard drives in desktops, laptops, and mobile devices. We could be looking at an individual who was found to have a folder of inappropriate images on his work laptop. This folder and all of its contents is evidence and needs to be preserved so that it can be used for disciplinary action within the company, or used for prosecution depending on the nature of the images. 
+Other types of evidence found on standalone computers can include saved emails or saved chat logs, images, text files, videos, audio files, and more. There are certain places on a computer where data can be hidden from immediate view, and this is a popular tactic for criminals or individuals engaged in illegal activities. Files and data can be hidden in slack space on hard drives, and hidden inside legitimate files using steganography. 
+
+• Evidence via Network
+
+When moving away from physical storage and looking at networking, there are a number of evidence types we can collect and use. Browser history is a big one, by working as a record book of what sites the user has visited, we can use this to understand what resources have been accessed online, and when. This is beneficial when dealing with events where an employee may be breaching the company’s Acceptable Use Policy by inappropriately browsing the internet during work hours (too much time on social media, gaming, inappropriate or pornographic sites, illegal sites, working on a personal business whilst at work). 
+We don’t need to rely on the browser either – network devices such as a web proxy or router will also hold information about requested sites online, as everything will likely go through these systems. 
+In recent years, social media posts have been used as digital evidence in court, provided there is a reasonable belief that they were posted by the intended account owner. 
+This can also extend to other sites where posts can be made, such as forums and blogs. Instant messaging conversations can also be used as evidence, such as Facebook’s Messenger, Whatsapp, and other chat-based applications. Learn more about network forensics and tools here (Network Forensics Concepts Link).
+
+• Evidence via Mobiles
+
+How often do you use your phone? It’s like you use it every day. We all do. The wealth of information on our phones can be very useful to investigators. Evidence such as call history (incoming/outgoing/number/duration), text messages, contacts, web history, images, videos, apps, GPS location, notes, and much more can be retrieved if appropriate. 
+Deleted files can be restored, old app data can be retrieved, and much more using specialist mobile forensics tools.
+
+
+
+https://www.infosecinstitute.com/resources/digital-forensics/network-forensics-concepts/
+
+
+
+
+
+
+
+
+
+ 
