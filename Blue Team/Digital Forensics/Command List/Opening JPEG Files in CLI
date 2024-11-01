@@ -1,0 +1,18 @@
+
+xdg-open image.jpg
+Opens the file with the default image viewer for your desktop environment.	
+
+eog image.jpg
+Eye of GNOME - a simple image viewer for GNOME desktop.	
+
+feh image.jpg
+A lightweight image viewer for X11. (You may need to install it using your package manager.)	
+
+display image.jpg
+Part of ImageMagick - a powerful image manipulation tool that can also display images.	
+
+imgcat image.jpg
+A command from iTerm2 that can display images directly in the terminal (works in compatible terminal emulators).	
+
+fbi -a image.jpg
+A framebuffer image viewer for Linux (works from the console).	
