@@ -19,6 +19,8 @@ When prompted, enter a passphrase to secure the embedded data, ensuring that onl
 
 
 Embed a file:
+steghide embed -cf laptop.jpg -ef secret.zip
+steghide embed -cf laptop.jpg -ef secret.zip -sf laptop2.jpg
 steghide embed -cf laptop.jpg -ef secret.zip -p password
 
 Extract a file:
