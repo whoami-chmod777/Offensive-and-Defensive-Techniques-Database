@@ -1,0 +1,76 @@
+
+-- Digital Forensics Explained --
+
+Digital forensics, also known as computer forensics, is a specialized field within the realm of forensic science that deals with the investigation, preservation, analysis, and presentation of digital evidence. that will be used in an investigation.
+The primary goal is to establish the authenticity and integrity of the evidence, enabling it to be admissible in court, and ultimately, to assist in solving cyber crimes, intellectual property theft, fraud, and other digital-related offences. As technology evolves, digital forensics remains crucial in ensuring the integrity of digital evidence and upholding justice in the digital age.
+
+
+-- Types of Digital Forensics --
+
+• Computer Forensics – Identifying, collecting, and preserving evidence taken from desktops, laptops, and other computer systems and storage media to aid investigations or legal proceedings.
+• Network Forensics – The monitoring, collection, and analysis of network activities such as visited websites and connected IPs, usually associated with incident response and intrusion detection.
+• Memory Forensics – The process of recovering evidence from the RAM of a running system (also known as live acquisition or live response).
+• Mobile Forensics – The process of recovering evidence from mobile phones, SIM cards, PDAs, tablets, and other mobile devices.
+
+
+-- Benefits of Digital Forensics --
+
+Supporting Incident Response Capabilities
+Having a better incident response capability can be achieved by having additional team members with strong technical backgrounds and skills that can help when responding to escalated security events. When dealing with an incident, it is important to correctly gather and preserve evidence so it can be used for analysis, intelligence sharing, and potential prosecution. Digital Forensics analysts can be a great asset when it comes to analysing malicious activities, from a malware infection to an insider threat, using their deep technical knowledge, analysis techniques, and monitoring capabilities.
+
+Legal Prosecution
+Chain of Custody, this is a procedure to follow for digital evidence to be submitted in court. If this evidence is not kept secure, accounted for, and unmodified at all times, it will not be valid and hold no weight in court. Forensics experts will be familiar with how to collect and handle evidence appropriately, keeping it secure.
+
+Monitoring Employees
+Sometimes employees need to be monitored closely due to suspicious or malicious behaviour. This could include inappropriate internet browsing on work systems, breaches of an Acceptable Use Policy, downloading malicious or inappropriate files, or any other scenario that requires intervention from the security team. Forensics Analysts will likely be trained to monitor for insider threats, and covertly collect evidence which can be used by the Human Resources department as justification for firing an employee, or handing over to law enforcement if the user’s activity breaks any laws.
+
+
+-- Associated Roles --
+
+Tier 1 SOC Analyst
+T1 Analysts will generally conduct initial investigations, mainly first-line incident response, and collect evidence that will be added to an investigation case. This evidence is then used as justification for taking defensive measures, such as blocking an IP, domain, or email sender. Here an analyst will need to understand that these artefacts (IPs, emails, domains) are considered evidence for the investigation. 
+
+Tier 2/3 SOC Analyst
+T2/T3 Analysts will typically handle escalated/more critical investigations that require more technical expertise, or access to additional tools or sensors. Due to the nature of critical and higher-priority investigations, the related evidence is likely to be collected and handled under more strict conditions.
+
+Malware Analyst
+Within the security operations domain, Digital Forensics can also be used as a term to refer to the process of malware analysis. Taking a sample of malware and using different techniques to discover what its purpose is, and how to detect it in the future by gathering IOCs.
+
+Digital Forensics Analyst
+Digital Forensics Analysts will work on high-profile investigations, escalated cases, employee monitoring, working with the Security Incident Response Team (SIRT), and other tasks that require trusted and highly-technical individuals. 
+
+Insider Threat Analyst
+Security professionals that focus on detecting and monitoring insider threats will utilize their extensive digital forensics skills to ensure that no stone is left unturned and that any and all evidence against an individual is collected in the appropriate manner.
+
+Threat Hunter
+Threat Hunters are expert technical defenders that have a deep understanding of both offensive and defensive practices. To be able to effectively hunt these individuals need to truly understand how computers and networks work and also understand key artefacts that can be found and used as evidence of an intrusion.
+
+Incident Responder
+Incident responders are top-tier security analysts who typically poses skills across a wide range of blue-team disciplines, forensics being one of them. This allows them to conduct deeper more in-depth investigations in order to understand how the system was compromised and the behaviour of the device. 
+An Incident Responder sometimes works closely with Forensic Examiners, especially on tasks such as retrieving data from physical media such as laptops and phones and using specialist tools to process and analyse the data to find indicators of malicious activity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
