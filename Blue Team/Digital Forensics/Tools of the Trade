@@ -1,0 +1,29 @@
+
+Security professionals that work involve digital forensics have an incredible range of tools at their disposal. This is a brief introduction to some of the most popular and well-known tools, but remember, there are a lot more out there!
+
+
+-- Evidence Collection 
+
+KAPE
+KAPE ((Kroll Artifact Parser and Extractor) is a free and open-source digital forensics tool developed by Eric Zimmerman). Designed to automate the collection and parsing of forensic artefacts from a computer's file system and memory. KAPE can be deployed locally or on remote systems to quickly gather key data. This allows analysts to begin investigating while the lengthy process of taking a disk image is being conducted. KAPE can retrieve artefacts relating to browser usage, program execution, the filesystem, logs, and much more.
+
+FTK Imager
+FTK Imager is a massive tool that allows us to create hard drive images, but also memory images, which can be analyzed in other programs for analysis. It's also possible to import disk images into FTKi, allowing us to navigate through the file system as if we were on a live device!
+
+EnCase
+Just like FTK, EnCase is a suite of tools that has a wide range of functionality for digital forensics and e-Discovery. EnCase can be used to take forensic images of computers, mobile phones, and internet-of-things devices, which can then be analyzed to collect digital evidence.
+
+Cellebrite
+Cellebrite is a suite of tools designed primarily for mobile forensics, which allows easy acquisition of data from a mobile device so it can be processed in the tools covered in the section below.
+
+
+-- Evidence Analysis
+
+Autopsy
+Autopsy is an open-source digital forensics tool that helps investigators analyze and extract evidence from various data sources, such as hard drives and mobile devices. It works by creating a forensic image of the target storage media and then running in-depth searches to quickly retrieve key information, such as recently used programs, deleted files, emails, visited websites, and much.
+Autopsy provides a user-friendly interface and a wide range of features to aid in the examination and reporting of digital evidence.
+
+Volatility
+Volatility is a python-based memory forensics framework that enables the analysis of memory dumps or memory images. It captures a snapshot of a computer's memory, allowing users to search for valuable information. This data aids in understanding the computer's past activities and uncovering potential evidence of malicious actions.
+Volatility's versatility extends to analyzing memory from various operating systems, including Windows, Linux, and Mac OS, making it suitable for a wide range of scenarios. Moreover, it can recover deleted files that might be inaccessible through other means, enhancing its utility in digital investigations.
+
