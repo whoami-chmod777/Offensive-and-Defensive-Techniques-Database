@@ -85,6 +85,13 @@ steghide extract -sf stegoFile -xf outputFile
 steghide extract -sf StegoCat.jpg -xf extractSecret.txt
 
 
+Embed & Extract the Hidden Data
+
+sudo steghide embed -ef secretmessage.txt -cf coverfile.jpg -sf hiddenmessage.jpg
+sudo steghide extract -sf hiddenmessage.jpg
+
+
+
 https://null-byte.wonderhowto.com/how-to/steganography-hide-secret-data-inside-image-audio-file-seconds-0180936/
 
 
