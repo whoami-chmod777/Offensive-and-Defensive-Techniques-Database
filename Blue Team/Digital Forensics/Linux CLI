@@ -1,0 +1,53 @@
+
+-- Linux CLI – Navigation --
+
+Ctrl+T
+Open a new terminal tab in some terminal emulators.	
+
+ls
+List directory contents.	
+	
+cd
+Change directory.	
+
+cd ..
+Move up one directory level.	
+
+cd Images
+Navigate to the Images directory within the current folder.	
+
+cd /root/Desktop/DesktopFolder	
+Navigate to a specific directory using an absolute path.	
+
+find	
+Search for files and directories in a specified location.	
+
+find /root/ -name "findme.txt"	
+Search for a file named "findme.txt" starting from the /root directory.	
+
+find /Elise/ -name "secret"	
+Search for files with "secret" in their names in the /Elise directory.	
+
+find / -type f -name "*.jpg"	
+Find all JPEG files on the entire filesystem.	
+
+find /home/user/ -type f -mtime -7	
+Find files modified in the last 7 days in a specified directory.	
+
+find /mnt/usb/ -type f -exec md5sum {} +	
+Calculate MD5 checksums for all files on a USB drive.
+
+
+-- Linux CLI – Reading Files --
+
+
+
+
+
+
+
+
+
+
+Find all log files in the /var/log directory, commonly used in forensic investigations.	
+find /var/log/ -name "*.log"	
