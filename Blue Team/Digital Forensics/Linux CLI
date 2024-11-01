@@ -37,17 +37,46 @@ Find files modified in the last 7 days in a specified directory.
 find /mnt/usb/ -type f -exec md5sum {} +	
 Calculate MD5 checksums for all files on a USB drive.
 
+find /var/log/ -name "*.log"	
+Find all log files in the /var/log directory, commonly used in forensic investigations.	
+
 
 -- Linux CLI – Reading Files --
 
+strings: Extract and display printable strings from binary files.	
+strings TextFile.txt
+strings /dev/sda
+
+cat: Concatenate and display the contents of files.	
+cat file.txt
+cat /etc/passwd
+
+head: Display the first few lines of a file (default is 10).	
+head -n 20 file.txt 
+head -n 50 /var/log/auth.log
+
+less: View the contents of a file one screen at a time, allows scrolling.	
+less largefile.log
+less /var/log/syslog
+
+
+-- Linux CLI – Identifying Incorrect File Extensions --
+
+file babyyoda2.zip
+Displays the actual file type of babyyoda2.zip, revealing whether it is a ZIP file or something else entirely. Determines if the file type matches its extension.
+
+mv babyyoda2.zip babyyoda2.jpeg
+Renames babyyoda2.zip to babyyoda2.jpeg, which could indicate a potential file extension mismatch.
+
+mv suspiciousfile.zip suspiciousfile.doc
+Rename a file with the wrong extension to test if it can be opened with another application
+
+ls -l
+ls -la
+ls -lah
+Lists files in the current directory, showing thei
 
 
 
 
 
-
-
-
-
-Find all log files in the /var/log directory, commonly used in forensic investigations.	
-find /var/log/ -name "*.log"	
