@@ -30,39 +30,39 @@ steghide extract -sf file.jpg -p "secret"
 
 -- Cheat Sheet for using Steghide --
 
-steghide	
 Launches the Steghide tool.	
+steghide	
 
-sudo apt-get install steghide
 Installs Steghide if not already installed.	
+sudo apt-get install steghide
 
-steghide embed -cf cover.jpg -ef secret.zip
 Embeds a file into a cover document.	
+steghide embed -cf cover.jpg -ef secret.zip
 
--cf laptop.jpg
 Specifies the cover file (image/audio) for embedding.	
+-cf laptop.jpg
 
--ef secret.zip
 Specifies the file to embed within the cover file.	
+-ef secret.zip
 
--sf new_laptop.jpg
 Outputs the new stego file to a specified file.	
+-sf new_laptop.jpg
 
-steghide extract -sf stego.jpg
 Extracts embedded files from a stego file.	
+steghide extract -sf stego.jpg
 
--sf laptop2.jpg	
 Specifies the stego file from which to extract data.	
+-sf laptop2.jpg	
 
--p password
 Sets or provides the passphrase for extracting data.	
+-p password
 
-steghide -h
 Displays help information for using Steghide.	
+steghide -h
 
+Get info
 steghide info hawking
 steghide info -sf stego.jpg
-Get info.
 
 
 
