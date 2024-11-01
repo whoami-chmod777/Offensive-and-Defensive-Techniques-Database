@@ -1,6 +1,9 @@
 find
 Search for files and directories in a specified location.
 
+find . -name ".*"
+Find All Hidden Files Recursively
+
 find /root/ -name "findme.txt"
 Search for a file named "findme.txt" starting from the /root directory.
 
