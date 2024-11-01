@@ -1,0 +1,17 @@
+
+-- Find Hidden Files --
+
+find . -name ".*"
+Find All Hidden Files Recursively
+
+ls -a | grep "^\."
+Filter Hidden Files with grep
+
+find . -type f -name ".*"
+Find Only Hidden Regular Files
+
+locate ".*"
+Using locate to Find Hidden Files
+
+du -ah | grep "^\."
+Check Disk Usage Including Hidden Files
