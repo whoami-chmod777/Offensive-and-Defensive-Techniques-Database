@@ -52,21 +52,31 @@ $ fcrackzip -b BruteForceAttack.zip -u -c a1 -l 4
 
 -- Dictionary Attacks --
 
+Dictionary (password list) attacks use wordlists, which are collections of thousands of passwords, each on their own separate line in a text document. These are fed into tools, which will attempt to use each password one after the other, until it receives the correct password, or runs out of entries to try.
+
+- What are the PROS of using a dictionary attack? -
+
+This attack method can be really quick. At the end of the day, you’re trying to find a password that a human has set, and humans are usually predictable. By trying known passwords, you’re more likely to find the password than if you were cracking it using brute force due to the nature of the entries you are trying.
+
+- What are the CONS of using a dictionary attack? -
+
+If the password you’re looking for isn’t in the wordlist you’re using, then you won’t get into the entity you’re trying to gain access to. You could leave your computer running for 3 days trying different wordlists, but if it’s not in there, you will never gain access.
 
 
+- rockyou.txt wordlist -
 
+$ locate rockyou.txt
+$ gunzip rockyou.txt.gz
+$ gunzip /usr/share/wordlists/rockyou.txt.gz
 
+$ fcrackzip -D -u -p /usr/share/wordlists/rockyou.txt DictionaryAttack.zip
 
-
-
-
-
-
-
-
-
-
-
+• fcrackzip – Selecting the tool we want to use.
+• -D – Selecting the option for a dictionary attack.
+• -u – This makes sure fcrackzip actually tries to unzip the file, without this we won’t actually get the right password.
+• -p – Use strings as password.
+• /usr/share/wordlists/rockyou.txt – This is the location of our wordlist, required to perform a dictionary attack.
+• DictionaryAttack.zip – The file we want to crack.
 
 
 
