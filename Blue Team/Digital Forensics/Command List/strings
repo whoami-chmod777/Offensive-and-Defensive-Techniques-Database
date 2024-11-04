@@ -2,8 +2,11 @@
 strings file.txt	
 Extracts readable strings from file.txt.	strings file.txt
 
-strings -n <number> file.txt	
+strings -n 5 file.txt	
 Sets the minimum length of strings to display.	strings -n 6 file.txt
+
+strings -t d example.bin
+Precede each string with its offset in the specified format: d for decimal, x for hexadecimal.	
 
 strings -o file.txt	
 Shows the offset (position) in the file where each string is found.	strings -o file.txt
@@ -20,11 +23,20 @@ Searches all sections of a binary (used with executables).	strings -a file.txt
 strings -e <encoding> file.txt	
 Specifies encoding (e.g., s for UTF-16).	strings -e s file.txt
 
+strings -e s example.bin	
+Specify the character encoding (e.g., s for single-byte, u for Unicode).
+
+strings -v example.bin
+Enable verbose mode; prints additional information.
+
 strings /dev/sda
 Retrieves strings from the raw disk, potentially revealing remnants of deleted files
 
 strings * > output.txt 
 
+
+strings -f file1.bin file2.bin
+Print the name of the file before each string when processing multiple files.	
 
 strings * | grep "keyword"
 If you expect a particular keyword or pattern in the message, you can use grep to filter results
