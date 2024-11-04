@@ -1,11 +1,12 @@
 
 strings file.txt	
-Extracts readable strings from file.txt.	strings file.txt
+Extracts readable strings from file.txt
 
 strings -n 5 file.txt	
-Sets the minimum length of strings to display.	strings -n 6 file.txt
+Sets the minimum length of strings to display
 
 strings -t d example.bin
+strings -t x example.bin
 Precede each string with its offset in the specified format: d for decimal, x for hexadecimal.	
 
 strings -o file.txt	
@@ -15,13 +16,13 @@ strings -f *.txt
 Scans multiple files, showing filenames with output.	strings -f *.txt
 
 strings -t x file.txt	
-Displays the offset of each string in hexadecimal format.	strings -t x file.txt
+Displays the offset of each string in hexadecimal format.	
 
 strings -a file.txt	
-Searches all sections of a binary (used with executables).	strings -a file.txt
+Searches all sections of a binary (used with executables).	
 
 strings -e <encoding> file.txt	
-Specifies encoding (e.g., s for UTF-16).	strings -e s file.txt
+Specifies encoding (e.g., s for UTF-16).	
 
 strings -e s example.bin	
 Specify the character encoding (e.g., s for single-byte, u for Unicode).
