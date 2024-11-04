@@ -10,10 +10,10 @@ strings -t x example.bin
 Precede each string with its offset in the specified format: d for decimal, x for hexadecimal.	
 
 strings -o file.txt	
-Shows the offset (position) in the file where each string is found.	strings -o file.txt
+Shows the offset (position) in the file where each string is found.	
 
 strings -f *.txt	
-Scans multiple files, showing filenames with output.	strings -f *.txt
+Scans multiple files, showing filenames with output.	
 
 strings -t x file.txt	
 Displays the offset of each string in hexadecimal format.	
