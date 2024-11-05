@@ -26,6 +26,7 @@ steghide embed -cf laptop.jpg -ef secret.zip -p password
 Extract a file:
 steghide extract -sf laptop2.jpg -p password
 steghide extract -sf file.jpg -p "secret"
+steghide extract -sf file.jpg
 
 
 -- Cheat Sheet for using Steghide --
