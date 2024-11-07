@@ -1,0 +1,5 @@
+
+detects 10 failed login attempts (HTTP 401 response codes) from the same IP address within a 30-second period:
+alert tcp any any -> any any (msg:"Possible Brute Force Attack - 10 failed login attempts"; flow:to_client, established; content:"HTTP/1.1 401 Unauthorized"; http_header; threshold:type threshold, track by_src, count 10, seconds 30; sid:1000001; rev:1;)
+
+
