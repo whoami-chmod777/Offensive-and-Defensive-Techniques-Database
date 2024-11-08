@@ -98,6 +98,7 @@ systemctl status snort
 3) Disabled all community rules in the /etc/snort/snort.conf by commenting them out
 
 4) Validate the conf file changes: 
+snort -T -c /etc/snort/snort.conf
 snort -T -i ens5 -c /etc/snort/snort.conf
 
 5) Open the local.rules file: 
