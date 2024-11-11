@@ -25,6 +25,7 @@ View the properties pane: right-click > properties > Name value
 ls
 
 Get-Item TextFile1.txt | Select-Object Name, Length
+Get-ChildItem TextFile1.txt | Select-Object Name, Length
 
 
 
