@@ -14,13 +14,18 @@ There are two ways we can get a file’s size; using the GUI, or using the comma
 Retrieving File Size Property:
 
 View the properties pane: right-click > properties > size value
-# ls -lh 
-# ls -lha
+ls -lh 
+ls -lha
+
+Get-Item TextFile1.txt | Select-Object Name, Length
 
 Retrieving File Name Property:
 
 View the properties pane: right-click > properties > Name value
-# ls
+ls
+
+Get-Item TextFile1.txt | Select-Object Name, Length
+
 
 
 -- File Hash Indicators --
@@ -36,6 +41,7 @@ sha256sum TextFile3.txt
 Get-FileHash TextFile1.txt
 Get-FileHash -algorithm md5 TextFile1.txt
 Get-FileHash -algorithm sha256sum TextFile1.txt
+
 
 
 -- Mandiant IOC Editor --
