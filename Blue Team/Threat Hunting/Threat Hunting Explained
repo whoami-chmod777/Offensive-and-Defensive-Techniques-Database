@@ -1,0 +1,13 @@
+
+Definition: Threat hunting is the practice of proactively searching for cyber threats that are lurking undetected in a network.
+
+
+-- The Importance of This Career Field --
+
+Organizations across the world face threats every day! Instead of peacefully sitting in the security operations centers (SOC) for alerts to funnel through a ticketing system, professionals need to actively detect and isolate these advanced attacks before grave damages can occur. This is called Threat Hunting.
+Threat hunting is an aggressive approach that is built to unhide threats that are hidden in a network or system, evading more standard security tools. Standard tools like firewalls, intrusion detection systems, and SIEMS all rely on alerts to stimulate actions. Alerts are not perfect and they can lead analysts into embarking on a time-consuming and resource-draining chase. These false positives can make any SOC analyst susceptible to alert fatigue—which can lead to stress and burnout.
+By contrast, threat hunters utilize an approach that is less reliant on detection technology (SIEM & Firewalls). They focus more on the attacker’s technique rather than the volatile indicators. This aggressive approach pushes away from the traditional dependence on rules or signatures to trigger alerts. Threat hunters also experience far less mental fatigue than SOC analysts.
+
+To conclude, threat hunting is a research-focused and innovative detection approach that is completely different from the traditional SOC Analyst—which happens to be more technology-focused. The proactive mindset of tagging interesting techniques, and formulating hypotheses for the new attack techniques is imperative for organizations in the 21st Century.
+
+
