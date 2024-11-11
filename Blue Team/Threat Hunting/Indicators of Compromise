@@ -1,0 +1,14 @@
+
+Indicators of Compromise, also referred to as IOCs are a method of information sharing, so that organisations can determine whether they have come into contact with similar attacks. These are some examples of common IOCs:
+
+● IP Addresses: If an IP is behaving maliciously, it can be considered an IOC. Example: If Organisation A is suffering from a distributed denial-of service attack by 5 IPs, they could tell Organisation B to look out for the 5 IPs that are attacking them, and they are now considered indicators of compromise. This means Org B can setup alerts for these IPs, so if they attempt to do the same thing they can immediately block them if needed.
+
+● Email Addresses: If an email address is sending out malicious emails, it can be considered an IOC. Example: Organisation A is targeted by a phishing campaign from the email address purelyanexample@googlemail.com. Org A can share this with other organisations, and tell them to be on the lookout for emails coming from this sender.
+
+● File Sizes Value: It’s pretty unlikely that a large number of files will have the exact same number of bytes. If we have a piece of malware, we can see the file size, and use this as an indicator to then search through all files, looking for ones that match.
+
+● MD5/SHA-1 Hashes: Hashing is a one-way cryptographic function that allows us to create a signature represented by a string value, known as a checksum. If the file is modified in any way, the hash value will be completely different. So if we have two identical files on a system, and we know the hash of one, we can find the other using this value as an IOC.
+
+● Strings: We can retrieve strings from a file, and use them as an IOC for searching. In the below example, I have used the command strings on a random .exe file, which will output all human-readable strings to the terminal. When selecting an appropriate strings IOC we want something that is not common, otherwise we will detect too many false positives when searching. An example would be a piece of malware that contains the string “0wNeD BY #Lun4rSqUAD”, in this case we would use “Lun4rSqUAD” as a string-based IOC, as it is extremely unique.
+
+
