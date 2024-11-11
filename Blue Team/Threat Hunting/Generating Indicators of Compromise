@@ -3,6 +3,7 @@
 
 ● File Property Indicators
 ● File Hash Indicators
+● Mandiant IOC Editor
 
 
 
@@ -29,12 +30,46 @@ A hash is a unique string value that corresponds to the contents of the file. Th
 Generating a Checksum
 
 md5sum TextFile1.txt
-sha256sum TextFile1.txt
+sha1sum TextFile3.txt
+sha256sum TextFile3.txt
 
 Get-FileHash TextFile1.txt
 Get-FileHash -algorithm md5 TextFile1.txt
 Get-FileHash -algorithm sha256sum TextFile1.txt
 
+
+-- Mandiant IOC Editor --
+
+Mandiant IOC Editor is a “free tool that provides an interface for managing data and manipulating the logical structures of IOCs”. FireEye, a threat intelligence company, has provided this tool for free to the public, and it’s a great piece of software to learn about creating IOCs, which are essentially XML files that can “capture diverse information about threats, including attributes of malicious files, characteristics of registry changes and artifacts in memory”. Mandiant IOCe is only designed for Windows OS
+
+Installation
+Download the .zip archive from FireEye’s website, extract it, and run the .msi file to install IOCe. Once it has finished, launch the program.
+Don’t click anything just yet. We need to create a folder where we will export our IOC files to. Go anywhere you want, and create a folder called IOCs. 
+Select your newly-created folder, and you’re good to go!
+
+Creating an IOC File
+Navigate to File > New > Indicator so we can start to create our first IOC file. Once created, click on the entry.
+We have everything ready to start populating our IOC file and create a useful resource for either threat intelligence or threat hunting. 
+
+Populating an IOC File
+The next task is for us to populate this entry with some values so that it actually means something.
+Right-click anywhere in the bottom pane and go to Add Item > FileItem > Sha1sum (SHA-1 Hash)
+Right-click anywhere in the bottom pane and go to Add Item > FileItem > MD5 (MD5 Hash)
+Right-click anywhere in the bottom pane and go to Add Item > FileItem > File Name 
+Right-click anywhere in the bottom pane and go to Add Item > FileItem > File Size
+
+
+
+
+
+
+
+
+
+
+
+
+https://fireeye.market/apps/S7cWpi9W
 
 
 
