@@ -1,0 +1,24 @@
+
+-- So you’re interested in Threat Hunting? --
+ 
+Great – this role is becoming more popular over time, and we at SBT believe that security professionals who act as a hybrid between security analysts and penetration testers can be an extremely valuable resource for any organization. This course is aimed at security enthusiasts/students, and we will be releasing an advanced course in the future, covering this role in much more detail.
+Until then, we can provide some suggestions on how to start developing your skills and knowledge so you can build a career in threat hunting (with enough work, anything is possible!). You’ll need to develop both blue-team and red-team skills in order to understand how to defend systems, how to identify unusual or malicious network traffic, and also how attackers would think to try and outsmart them and uncover their presence.
+
+ 
+-- Developing Blue-Team Skills -- 
+
+Let’s start off with some non-shameful self-promotion. If you’re looking to develop general blue-team skills, then our “Introduction to” courses are a free way to develop skills and gain knowledge surrounding defensive security topics. Courses that would be of value to a Threat Hunter include:
+
+● Introduction to Network Analysis – FREE (Because you need to know networking basics, how to use tools like Wireshark to capture live traffic or read PCAPs, and how to identify unusual and suspicious network activity)
+● Introduction to Digital Forensics – FREE (Knowing how to navigate the Linux file system using the command-line interface is a very fundamental skill, and this course also teaches analysis and evidence documentation techniques)
+
+If you really want to boost your career and learn advanced practical skills, consider taking our Blue Team Level 1 certification, which has 5 different domains and 300 lessons, videos, tests, and 18 practical labs. The most useful domains from this course would be SIEM, Incident Response, and Threat Intelligence.
+Don't forget to check out our gamified blue team platform, Blue Team Labs Online. This has lots of free content, plus 70+ labs across different blue team disciplines, and has varying difficulty levels. While this is not a training website and relies on a player's existing skills and knowledge, some of our top players don't even work in security! This shows that Google and some research can go a long way.
+
+ 
+-- Developing Red-Team Skills -- 
+
+As mentioned above, Threat Hunting is a mix of both defensive and offensive cyber roles. A great way to learn red-team skills such as penetration testing and vulnerability assessment would be to sign up for a free platform, such as Hack The Box. This site allows you to connect to a virtual network where you are able to attack virtual systems, increasing your ability and knowledge around a number of red-team principles. Creating a blog where you post your write-ups (once systems have been retired, as to not breach HTB’s terms and conditions), is also a huge benefit when applying for jobs or talking in interviews, as it shows dedication and passion for security!
+Don’t think you’re ready to start hacking just yet? Take our FREE course on Vulnerability Management. Although this course is focused on the blue-team side of things, it can easily be applied to scanning systems for vulnerabilities and security flaws with malicious intent. Thank you and enjoy the course!
+
+
