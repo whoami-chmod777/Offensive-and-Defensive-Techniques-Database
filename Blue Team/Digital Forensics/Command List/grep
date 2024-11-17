@@ -1,0 +1,7 @@
+
+grep -oP '<Content type="int">[0-9]+</Content>' f527691b-dd1f-4398-804f-5bc262baf456.ioc | awk -F'[<>]' '{print $3}'
+Extract file size information
+
+
+
+
