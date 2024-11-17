@@ -22,3 +22,6 @@ Calculate MD5 checksums for all files on a USB drive.
 
 find /var/log/ -name "*.log"
 Find all log files in the /var/log directory, commonly used in forensic investigations.
+
+find . -type f -size 144557c
+Search for a file with a size of 144557 bytes
