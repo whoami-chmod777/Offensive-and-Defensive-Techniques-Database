@@ -1,6 +1,18 @@
 
+Extract file size information:
 grep -oP '<Content type="int">[0-9]+</Content>' f527691b-dd1f-4398-804f-5bc262baf456.ioc | awk -F'[<>]' '{print $3}'
-Extract file size information
+
+Search for all <Content> tags:
+grep -o '<Content[^>]*>' f527691b-dd1f-4398-804f-5bc262baf456.ioc
+grep -o '<Content[^>]*>' f527691b-dd1f-4398-804f-5bc262baf456.ioc | wc -l
+
+Search for specific Content types:
+grep -o '<Content[^>]*>' f527691b-dd1f-4398-804f-5bc262baf456.ioc | grep -E 'md5|int'
+grep -o '<Content[^>]*>' f527691b-dd1f-4398-804f-5bc262baf456.ioc | grep -E 'md5|int' | wc -l
+
+Alternative check:
+grep -o 'md5' f527691b-dd1f-4398-804f-5bc262baf456.ioc | wc -l
+grep -o 'int' f527691b-dd1f-4398-804f-5bc262baf456.ioc | wc -l
 
 
 
