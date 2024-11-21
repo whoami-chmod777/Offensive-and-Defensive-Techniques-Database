@@ -173,11 +173,81 @@ IP Address is the ID of the device's network address. Connection operations are 
 ● IPv4: 192.168.4.1
 ● IPv6: 2001:0db8:85a3:0000:0000:8a2e:0370:7334
 
+Structure of IP Address
+The IP address consists of 4 bytes (32 bits). A period is placed between each byte and is expressed in decimal notation.
+
+11000000 10101000 00000001 00000001
+
+11000000 (1st octet)
+10101000 (2nd octet)
+00000001 (3rd octet)
+00000001 (4th octet)
+
+1st Octet: 11000000
+=(1×27)+(1×26)+(0×25)+(0×24)+(0×23)+(0×22)+(0×21)+(0×20)=128+64+0+0+0+0+0+0=192
+=(1×27)+(1×26)+(0×25)+(0×24)+(0×23)+(0×22)+(0×21)+(0×20)=128+64+0+0+0+0+0+0=192
+
+2nd Octet: 10101000
+=(1×27)+(0×26)+(1×25)+(0×24)+(1×23)+(0×22)+(0×21)+(0×20)=128+0+32+0+8+0+0+0=168
+=(1×27)+(0×26)+(1×25)+(0×24)+(1×23)+(0×22)+(0×21)+(0×20)=128+0+32+0+8+0+0+0=168
+
+3rd Octet: 00000001
+=(0×27)+(0×26)+(0×25)+(0×24)+(0×23)+(0×22)+(0×21)+(1×20)=0+0+0+0+0+0+0+1=1
+=(0×27)+(0×26)+(0×25)+(0×24)+(0×23)+(0×22)+(0×21)+(1×20)=0+0+0+0+0+0+0+1=1
+
+4th Octet: 00000001
+=(0×27)+(0×26)+(0×25)+(0×24)+(0×23)+(0×22)+(0×21)+(1×20)=0+0+0+0+0+0+0+1=1
+=(0×27)+(0×26)+(0×25)+(0×24)+(0×23)+(0×22)+(0×21)+(1×20)=0+0+0+0+0+0+0+1=1
+
+Combine Decimals: Place a period (.) between the decimal values: 192.168.1.1
+
+Classes of IP Address
+IP addresses are divided into 5 classes. In order to learn the class of the IP address, the first byte of the IP address is checked. According to the decimal value of the first byte, it is understood which of the classes the IP address belongs to in 
+
+Class	  First Byte Range (Decimal)	Binary Prefix	  Use
+A	      0–127	                      0xxxxxxx	      Large networks
+B	      128–191	                    10xxxxxx	      Medium-sized networks
+C	      192–223	                    110xxxxx	      Small networks
+D	      224–239	                    1110xxxx	      Multicast
+E	      240–255	                    1111xxxx	      Experimental
+
+It is possible to find out which network the device with that IP address is included in via its IP address. In order to learn this information, first of all, it should be known which class the IP address belongs to. Then, the “Network Bits” fields in the table below are checked. 
+
+For example, let's find out which class the IP address "192.168.4.1" belongs to and which bytes are the network bits: 
+
+Step 1: Check the decimal value of the first byte: "192"
+Step 2: According to the table, it is learned which class the value “192” belongs to: “Class C”
+Step 3: According to the table, it is checked which bytes of an IP address belonging to the "C" class belong to the network bits: "first 3 bytes"
+
+According to the information we have obtained, it can be said that the IP addresses with the same first 3 bytes belong to the devices in the same network. For example, the IP address “192.168.4.1” and the IP Address “192.168.4.2” are on the same network. Because there is a change only on the byte where the host bits are located. Network bits have the same value: 192.168.4.X 
+
+What is IPv6?
+Today, the number of devices connected to the internet network is quite high. Considering that all these devices have an IP address, IPv4 is no longer sufficient. For this reason, some technologies (NAT) and IPv6 have been developed to solve this problem. With IPv6, the use of IPv4, which has a limited number of addresses, has begun to decline and leaves its place to IPv6.
+
+Private IP Addresses
+Some of the IP addresses are reserved for special purposes. These reserved IP addresses are IP addresses used in private networks. Private networks are networks that are not directly connected to the Internet and are connected to the Internet with an intermediary network device. For example, home networks and on-premises networks. In-home networks, the modem device provides a connection to the Internet and manages the packet flow. The modem device has a network interface facing the home network and a network interface facing the internet side. The part called the private network is the part where the home network interface of the modem device is located. The IP addresses of the devices in this section are reserved IP addresses that are not used in the internet environment.
+
+Class	Private   IP Range	                      Subnet Mask	            Purpose
+A	              10.0.0.0 – 10.255.255.255	      255.0.0.0 (8 bits)	    Large private networks
+B	              172.16.0.0 – 172.31.255.255	    255.240.0.0 (12 bits)	  Medium-sized private networks
+C	              192.168.0.0 – 192.168.255.255	  255.255.0.0 (16 bits)	  Small private networks
+
+What is a Localhost?
+Localhost is the IP address range that specifies the device's own network address. It is used to access services running locally on the device. It is commonly known as the "127.0.0.1" IP address. However, any IP address in the range “127.0.0.1 - 127.255.255.255” can be used for this purpose. Another name is the "loopback" address. 
 
 
+-- Network Address Translation  --
+
+Network Address Translation(NAT) is a method that converts private IP addresses to public IP addresses. Since private IP addresses are non-routing IP addresses, these IP addresses cannot be used on the internet. These IP addresses allow communication in the local network only. Thanks to NAT, limited IPv4 addresses are used more sparingly. In addition, a kind of network segmentation is provided thanks to NAT. It is beneficial in controlling and securing the connections coming from outside the network into the network. In order to use the NAT method, a device with a gateway must perform packet routing. This device has a NAT table and IP address conversions are performed by looking at this table. 
+
+NAT Advantages and Disadvantages
+Although NAT is often used as a solution to running out of IPv4 addresses, it also has some disadvantages. 
+
+Example of NAT
+When the device with an IP address of 10.6.1.2 goes to the Internet, it must first transmit the packet to the gateway device that provides the Internet output. The gateway device receiving the packet determines the network to which it will forward the packet and the destination address by looking at the information fields in the packet. After seeing that it has an IP address belonging to the Internet, it makes changes to the packet by using the information in the NAT table, in other words, it performs NAT conversion. After conversion, it forwards the packet to the next network device to forward the packet to the destination IP address. When the incoming response packet arrives, it redirects the packet to the relevant device in the internal network by performing the reverse of similar operations, and packet transmissions are performed together with NAT transformations. 
 
 
-
+-- Basic Concepts --
 
 
 
