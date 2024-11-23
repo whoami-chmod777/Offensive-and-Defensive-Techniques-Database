@@ -328,40 +328,42 @@ Features of VLANs
 
 -- Virtual Private Network (VPN) --
 
+What is Virtual Private Network (VPN)?
+Virtual Private Network (VPN) is a technology that allows connecting to different networks through remote access. In networks connected using VPN, resources belonging to the network can be used just as if they are physically connected to that network. For example, a person working remotely joins the network by using the VPN service of the company in order to be included in the corporate network of the company he works for. In this way, it can benefit from the services offered by the devices that are physically connected to the corporate network. In addition, it can carry out joint activities on the same network with an employee who has a physical connection to the corporate network.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+The structure of VPN
+In order to use the VPN, a VPN client application is needed first. The user is included in the remote network by connecting to the VPN server with the VPN client application. While connecting to the VPN server with the VPN client application, authentication processes are applied and a secure connection is ensured. In addition, the network traffic in between is provided in an encrypted way.
 
 
 -- Network Protocols --
 
+What is Network Protocol?
+Network protocol is a set of rules that determine how to format, transmit and receive data transmitted between devices in order to ensure network communication regardless of the structure of network devices. In other words, network protocol is the common language for a flawless communication used by network devices within same network as well as among different networks. Communication between different network devices can only be carried out through the network protocols.
+Knowing the structure and operation of network protocols is important in terms of security. For example, knowing the technical details of some important network protocols can be helpful when detecting threats.
+
+Types of Network Protocols
+Network protocols can be divided into 3 groups:
+
+Communication Protocols
+- Address Resolution Protocol (ARP)
+- Internet Protocol (IP)
+- Transmission Control Protocol (TCP)
+- User Datagram Protocol (UDP)
+- Border Gateway Protocol (BGP)
+- Dynamic Host Control Protocol (DHCP)
+
+Management Protocols
+- Internet Control Message Protocol (ICMP)
+- Simple Network Management Protocol (SNMP)
+- File Transfer Protocol (FTP)
+- Post Office Protocol 3 (POP3)
+- Teletype Network (Telnet)
+
+Security Protocols
+- Secure Sockets Layer (SSL)
+- Transport Layer Security (TLS)
+
+You can find all the network protocols at the following link: https://en.wikipedia.org/wiki/List_of_network_protocols_(OSI_model) 
 
 
 -- OSI Reference Model --
