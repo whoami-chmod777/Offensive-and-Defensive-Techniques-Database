@@ -635,38 +635,96 @@ As shown in the image above, the IP addresses of the network devices which are p
 
 -- Routing --
 
+What is Routing?
+The transmission from a network to different networks and the determination of the transmission path is named “routing”. Routers are the devices with the main task of routing. There are at least 2 network interfaces on router devices.
 
+Routing Table
+The routing table is where the information of the routes that network  may go on the devices. The devices use these tables in routing. For example, let's see the routing table for IPv4 on Windows:
 
+C:\>route print -4
+===========================================================================
+Interface List
+  6...4c 56 df 1e fc 09 ......Realtek USB GbE Family Controller #2
+ 69...00 15 5d 30 01 00 ......Hyper-V Virtual Ethernet Adapter
+ 15...04 bf 1b 20 5d 20 ......Killer E2600 Gigabit Ethernet Controller
+  8...0a 00 27 00 00 08 ......VirtualBox Host-Only Ethernet Adapter
+  7...00 ff 43 16 74 29 ......Phantom TAP-Windows Adapter V9
+  9...c4 75 ab be 48 e0 ......Microsoft Wi-Fi Direct Virtual Adapter
+ 22...c6 75 ab be 48 df ......Microsoft Wi-Fi Direct Virtual Adapter #2
+ 25...00 50 56 c0 00 01 ......VMware Virtual Ethernet Adapter for VMnet1
+ 18...00 50 56 c0 00 08 ......VMware Virtual Ethernet Adapter for VMnet8
+ 21...c4 75 ab be 48 df ......Intel(R) Wi-Fi 6 AX201 160MHz
+  1...........................Software Loopback Interface 1
+===========================================================================
 
+IPv4 Route Table
+===========================================================================
+Active Routes:
+Network Destination        Netmask          Gateway       Interface  Metric
+          0.0.0.0          0.0.0.0    192.168.199.1   192.168.199.24     50
+        127.0.0.0        255.0.0.0         On-link         127.0.0.1    331
+        127.0.0.1  255.255.255.255         On-link         127.0.0.1    331
+  127.255.255.255  255.255.255.255         On-link         127.0.0.1    331
+      169.254.0.0      255.255.0.0         On-link   169.254.213.147    281
+  169.254.213.147  255.255.255.255         On-link   169.254.213.147    281
+  169.254.255.255  255.255.255.255         On-link   169.254.213.147    281
+     172.19.192.0    255.255.240.0         On-link      172.19.192.1    271
+     172.19.192.1  255.255.255.255         On-link      172.19.192.1    271
+   172.19.207.255  255.255.255.255         On-link      172.19.192.1    271
+     192.168.42.0    255.255.255.0         On-link      192.168.42.1    291
+     192.168.42.1  255.255.255.255         On-link      192.168.42.1    291
+   192.168.42.255  255.255.255.255         On-link      192.168.42.1    291
+     192.168.48.0    255.255.255.0         On-link      192.168.48.1    291
+     192.168.48.1  255.255.255.255         On-link      192.168.48.1    291
+   192.168.48.255  255.255.255.255         On-link      192.168.48.1    291
+    192.168.199.0    255.255.255.0         On-link    192.168.199.24    306
+   192.168.199.24  255.255.255.255         On-link    192.168.199.24    306
+  192.168.199.255  255.255.255.255         On-link    192.168.199.24    306
+        224.0.0.0        240.0.0.0         On-link         127.0.0.1    331
+        224.0.0.0        240.0.0.0         On-link   169.254.213.147    281
+        224.0.0.0        240.0.0.0         On-link    192.168.199.24    306
+        224.0.0.0        240.0.0.0         On-link      172.19.192.1    271
+        224.0.0.0        240.0.0.0         On-link      192.168.42.1    291
+        224.0.0.0        240.0.0.0         On-link      192.168.48.1    291
+  255.255.255.255  255.255.255.255         On-link         127.0.0.1    331
+  255.255.255.255  255.255.255.255         On-link   169.254.213.147    281
+  255.255.255.255  255.255.255.255         On-link    192.168.199.24    306
+  255.255.255.255  255.255.255.255         On-link      172.19.192.1    271
+  255.255.255.255  255.255.255.255         On-link      192.168.42.1    291
+  255.255.255.255  255.255.255.255         On-link      192.168.48.1    291
+===========================================================================
+Persistent Routes:
+  None
 
+C:\>
 
+As shown in the image above, the routing table has been displayed successfully with the “route PRINT -4” command.
 
+Types of Routing
+There are 3 different types of Routing
 
+Static Routing
+Static Routing is network administrators’ manual routing entries that allows a fixed route to be added into the routing tables. This record will never change over time. The change can happen only if the network manager makes changes to the routing tables.
 
+Dynamic Routing
+Contrary to Static Routing, Dynamic Routing is the routing type that can vary depending on time and situation. There are routing protocols in charge of managing the Dynamic Routing.
 
+Default Routing
+Devices that determine that other routes are not suitable for themselves use default routing. Also, default routing is added to the routing table when there is only one direction in communication.
 
+IP Routing Algorithm
+The devices in communication must make certain decisions in order for the packets to be transmitted. It should be known by the device which packet will go to which destination. One of the most important mechanisms that ensures this is the IP Routing Algorithm. IP Routing Algorithm basically works as follows:
+1. The target IP address information is obtained through the incoming IP packet.
+2. It is determined by calculating the network address which network the obtained IP address information belongs to.
+3. If the network address is indeed the network located in the device, it means it is the MAC address of the target and communication is carried out.
+4. If the network address shows an address other than the network located in the device, it is determined which device the packet is to be sent by analyzing the routing table.
+5. If there is no appropriate route on the routing table the packet is sent to the Default Gateway.
+6. If the packet transmission to the Default Gateway does not occur, ICMP error message is produced.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Routing Protocols
+There are routing protocols with many different algorithms. Different routing protocols can be used on routers if needed. Below are some routing protocols:
+- RIP (Routing Information Protocol)
+- OSPF (Open Shortest Path First)
+- IGRP (Interior Gateway Routing Protocol)
+- EIGRP (Enhanced Interior Gateway Routing Protocol)
 
