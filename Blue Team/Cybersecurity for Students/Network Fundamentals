@@ -573,16 +573,64 @@ Data field is the field where the total data from the lower layer is located.
 
 -- Internet Control Message Protocol (ICMP) --
 
+What is Internet Control Message Protocol (ICMP)?
+The ICMP is the protocol that sends the errors, warnings, and control messages during the transmission of packets to the sender device.
 
+Features of the ICMP Protocol
+- Works with the IP protocol.
+- The ICMP messages are usually created in the following cases:
+	- When the IP packets cannot reach their target.
+	- When the gateway devices are too busy to transmit packets.
+	- When there is a shorter way for the packets to go.
+- The ICMP protocol does not make the IP protocol more secure.
+- All applications using the IP protocol must support the ICMP protocol.
+- Not all of the ICMP messages provide information about error control. Some ICMP messages are used to obtain computer network tests and network information.
+- The ICMP protocol produces error messages only for the IP packets. The ICMP protocol does not produce error messages in case of errors related to transmission of ICMP messages.
+- ICMP messages do not contain information about what to do to fix the error even though they show the error messages. This is a situation that is determined by the computer that receives the error message.
 
+ICMP Applications
 
+Ping
+Ping is an application used to find out if the device in the network is communicated by using ICMP messages. For example, let's apply the ping command on Windows:
 
+C:\>ping -n 1 8.8.8.8
 
+Pinging 8.8.8.8 with 32 bytes of data:
+Reply from 8.8.8.8: bytes=32 time=31ms TTL=59
 
+Ping statistics for 8.8.8.8:
+    Packets: Sent = 1, Received = 1, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 31ms, Maximum = 31ms, Average = 31ms
 
+C:\>
 
+As shown in the image above, ICMP Ping Request was sent with "1" Packet with the parameter "-n". As we see the reply packet comes back to the sent packet there is a network communication with the target address.
+Note: In some networks, ICMP messages are blocked through the firewall configurations in terms of security. Therefore, there will be no response to the Ping command in such a network, but the network communication should still be ongoing with the target device.
 
+Traceroute
+Traceroute is an application used to determine the route that the packets follow until they reach to their destinations. All the details of the roadmap that the packets follow are revealed through this application. For example, let's see the application on Windows:
 
+C:\>tracert google.com
+
+Tracing route to google.com [2a00:1450:4001:80b::200e]
+over a maximum of 30 hops:
+
+  1     4 ms    12 ms     8 ms  fritz.box [2a02:8071:60e0:a940:d624:ddff:fede:5fd]
+  2    18 ms    16 ms    14 ms  2a02:908:f000:a4::d6
+  3    31 ms    17 ms   108 ms  7211a-mx960-01-ae10-2068.gie.unity-media.net [2a02:908:0:3f8::1]
+  4     *        *        *     Request timed out.
+  5     *        *        *     Request timed out.
+  6    50 ms    26 ms    24 ms  2a00:1450:8154::1
+  7    37 ms    82 ms    45 ms  2001:4860:0:1::500c
+  8    27 ms    35 ms    25 ms  2001:4860:0:1::157f
+  9    21 ms    32 ms    21 ms  fra15s28-in-x0e.1e100.net [2a00:1450:4001:80b::200e]
+
+Trace complete.
+
+C:\>
+
+As shown in the image above, the IP addresses of the network devices which are passed until reaching to "Google.com" have been displayed successfully through the "Tracert" command.
 
 
 -- Routing --
