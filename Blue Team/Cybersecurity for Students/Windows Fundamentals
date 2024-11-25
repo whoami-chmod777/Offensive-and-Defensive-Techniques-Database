@@ -1,1 +1,185 @@
 
+--- Windows Fundamentals ---
+
+● Introduction to Windows
+● Windows Filesystems
+● Directory Structure
+● Windows Command Line
+● 
+● 
+● 
+● 
+
+
+-- Introduction to Windows --
+
+What is Windows?
+Windows is the name of the operating system family that has many different versions developed by Microsoft. The Windows operating system was first released in 1985. Many versions of Windows have been released since the day it was released. It has been continuously improved in every version and it still continues to be developed. Today, it is possible to come across a Windows product in every environment where technology is available. 
+
+Usage Areas of Windows
+The Windows operating system and its family are widely used. It is frequently used in the industrial field and mobile devices, especially in the IT sector. Different windows versions have been released according to needs and usage areas. 
+
+
+-- Windows Filesystems --
+
+What is File System?
+A file system is a data structure that maintains the order of digital storage areas, and whose unit is a file. The operating system cannot make sense of the spaces on the disk without the file system. It cannot know which data group is on the disk as a file. So the file system is a very important component for running the operating system. File systems have different types and data structures. This data structure can be different for each file system
+
+File Systems Used in Windows
+File systems have also been developed, like every technology that has developed from the past to the present. With the development of technology, the need for new file systems has emerged due to increased processing power and storage capacity. Therefore, different file systems have been developed continuously and released to the market. Some of these file systems used in Windows operating systems are given below. 
+
+1. FAT
+The File Allocation Table (FAT) file system was developed and released for personal computers in 1977. Although the purpose of its emergence was to be used on floppy disks, it was adapted to be used in hard drives and other devices over time. The FAT file system is not the default file system for Microsoft Windows operating systems today. Today, it is used in USB flash drives, flash drives, and other embedded systems. 
+
+2. exFAT
+exFAT (Extensible File Allocation Table) is a file system introduced by Microsoft in 2006 and optimized for flash memory such as USB flash drives and SD cards. (Source: Wikipedia) 
+
+3. NTFS
+New Technology File System (NTFS) was announced and started to be used with the Windows NT 3.1 version in 1993. It was used as the default file system within the Windows operating system with this version and it still is. It replaced FAT file system as it is a more advanced file system that is suitable for new technologies. In addition, the NTFS file system also supports Linux and BSD systems. 
+
+It is of great importance for SOC analysts to know the technical details of the NTFS file system considering that it is predominantly used in Windows operating systems as the latest technology today. Knowing the structure of the file system ensures that the security-oriented inferences to be obtained in the analyses are more and more consistent for analysts who perform host analysis. In order to have further information on this topic, detailed information can be obtained by conducting research under the name of "Filesystem Forensics". 
+
+
+-- Directory Structure --
+
+What is Directory Structure?
+As in every operating system, the folder and file structure in Windows takes place in a certain order from the first installation. This order is determined by the company/person that developed the operating system. 
+Although windows versions have similar folder structures in general, some folders and files may differ depending on the version of the operating system. The examples in this training are shown on the "Windows Server 2019 Datacenter". 
+In Windows, the root directory is "drive:\", for example, the root directory is usually "C:\". The directory separator is usually a "\", but the operating system also internally recognizes a "/". Physical and virtual drives are named by a drive letter, as opposed to being combined as one.
+
+Directories in Windows
+The directory structure is created as follows when Windows is first installed. 
+- PerfLogs
+- Program Files
+- Program Files (x86)
+- ProgramData
+- Users
+- Windows
+
+1. PerfLogs
+It is the folder created to keep Windows performance logs. It is found as an empty folder because the logging option is turned off by default. 
+
+2. ProgramData
+The ProgramData folder is located as a hidden folder under the root of the disk where the Windows operating system is installed. The "Hidden Items" option must be activated under the "View" menu first to be able to see the folder. There are data belonging to the programs installed in the system, independent from the user accounts in this folder. 
+
+3. Program Files
+All the programs installed in the system are located under the "Program Files" folder in a Windows operating system installed as 32-bit. In Windows operating systems installed as 64-bit, only 64-bit programs are installed under this folder. 
+
+4. Program Files (x86)
+This folder is only available on Windows operating systems installed as "64-bit". There are programs installed on the system as "32-bit" under this folder. Programs installed as "64-bit" are stored in another folder named “Program Files” with a similar name.
+
+5. Users
+The Users folder contains the personal folder of each user who has logged on to the system at least once. Folders and documents such as desktop folder, downloaded files, and documents are stored under this folder that belongs to each user on the system. 
+
+6. Windows
+The Windows folder is where the entire operating system is installed. It has its own structure and it contains many systemic information in a certain order. For example, the database where users' passwords are kept is located under this folder. 
+
+
+-- Windows Command Line --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
