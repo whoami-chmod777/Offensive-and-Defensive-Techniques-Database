@@ -1,1 +1,67 @@
 
+-- Basic Commands --
+
+In Windows, many operations can be done through the command line. Below are some commands that are basically used in the Windows operating system. 
+
+> help dir
+> dir
+> cd
+
+> date /t
+> time /t
+> date /t && time /t
+
+> echo "BlueTeam"
+
+> hostname
+> 
+
+
+-- Network Commands --
+
+> ipconfig 
+> ipconfig /all
+> ipconfig /renew
+> ipconfig /release 
+
+> ipconfig /displaydns 
+> ipconfig /flushdns 
+> ipconfig /registerdns
+
+> netstat -ano
+> nslookup letsdefend.io
+> ping -n 3 letsdefend.io
+
+> systeminfo
+
+
+-- File Operations Commands --
+
+> type file.txt
+> copy file.txt copyfile.txt
+> mkdir incident
+> rename file.txt file2.txt
+> file2.txt file2.txt incident
+
+> tree 
+> rmdir /S incident
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
