@@ -255,20 +255,68 @@ mkdir metasploitable3-win2k8
 2. "Copy" Command
 The "copy" is the command that is used in file copy operations. The first parameter in the "copy" command is the path of the file to be copied. The second parameter is the target path. For example, let's copy the file "file.txt" with a copy in the same directory: 
 
+C:\Users\mirko>type file.txt copyfile.txt
 
+The image above shows that the file "file.txt" was successfully copied and a new file named "copyfile.txt" was created. 
 
+3. "Mkdir" Command
+The "mkdir" is the command that is used to create a new directory. It stands for "make directory". 
 
+4. "Rename" Command
+The "rename" is the command to rename files. For example, let's rename the file "file.txt" to "file2.txt": 
 
+C:\Users\mirko>rename file.txt file2.txt
 
+5. "Move" Command
+The "move" is the command that is used to move files. For example, let's move the "file2.txt" file under the directory named "incident": 
 
+C:\Users\mirko>move file.txt incident\
 
+6. "Tree" Command
+The "tree" is the command that allows listing nested directories with a single command. For example, let's list the folders under the "C:\Users\LetsDefend" directory: 
 
+C:\Users\mirko>tree
+Folder PATH listing for volume OS
+Volume serial number is 44D2-A202
+C:.
+├───.gem
+│   └───specs
+│       ├───api.rubygems.org%443
+│       │   └───quick
+│       │       └───Marshal.4.8
+│       └───gems.hashicorp.com%443
+│           └───quick
+│               └───Marshal.4.8
+├───.Icecream Screen Recorder
+│   └───log
+├───.icesoft
+│   └───icepdf-viewer
+│       └───_syslock
+├───.local
+│   └───share
+│       └───gem
+│           └───specs
+│               ├───gems.hashicorp.com%443
+│               │   └───quick
+│               │       └───Marshal.4.8
+│               ├───index.rubygems.org%443
+│               │   └───quick
+│               │       └───Marshal.4.8
+│               └───rubygems.org%443
+...
+...
+...
+...
 
+8. "Rmdir" Command
+The "rmdir" is the command that is used to delete directories. For example, let's delete the directory named "incident": 
+When "rmdir" command is run without parameters, directory deletion is not performed because the directory to be deleted must be empty in order for "rmdir" command to work without parameters. Therefore, it is necessary to use the command with a parameter. When the command is run, a warning will be prompted and if confirmed, the directory will be deleted. 
 
+Note: "/S" parameter: Removes all directories and files in the specified directory in addition to the directory itself. It is used to remove a directory tree.
+We covered what the command line is, the importance of the command line in terms of security, and some of the basic commands in this part of the training. You can find other helpful commands and further detailed information on the Windows command line at the following addresses:
 
-
-
-
+https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands
+https://ss64.com/nt/
 
 
 
