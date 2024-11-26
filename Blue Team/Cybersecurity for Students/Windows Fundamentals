@@ -77,48 +77,183 @@ The Windows folder is where the entire operating system is installed. It has its
 
 -- Windows Command Line --
 
+What is the "Command Line"?
+The command line is an intermediary program that receives the commands from the user via the keyboard and transfers them to the operating system for execution. 
+
+- Basic Commands -
+Basic Commands
+In Windows, many operations can be done through the command line. Below are some commands that are basically used in the Windows operating system. 
+
+1. "Help" Command
+The "Help" is the command that provides detailed information about the commands used on the command line. We can see the parameters of the commands that we need to get information with the "Help" command. 
+
+C:\Users\mirko>help dir
+Displays a list of files and subdirectories in a directory.
+
+DIR [drive:][path][filename] [/A[[:]attributes]] [/B] [/C] [/D] [/L] [/N]
+  [/O[[:]sortorder]] [/P] [/Q] [/R] [/S] [/T[[:]timefield]] [/W] [/X] [/4]
+
+  [drive:][path][filename]
+              Specifies drive, directory, and/or files to list.
+
+  /A          Displays files with specified attributes.
+  attributes   D  Directories                R  Read-only files
+               H  Hidden files               A  Files ready for archiving
+               S  System files               I  Not content indexed files
+               L  Reparse Points             O  Offline files
+               -  Prefix meaning not
+  /B          Uses bare format (no heading information or summary).
+  /C          Display the thousand separator in file sizes.  This is the
+              default.  Use /-C to disable display of separator.
+  /D          Same as wide but files are list sorted by column.
+  /L          Uses lowercase.
+  /N          New long list format where filenames are on the far right.
+  /O          List by files in sorted order.
+  sortorder    N  By name (alphabetic)       S  By size (smallest first)
+               E  By extension (alphabetic)  D  By date/time (oldest first)
+               G  Group directories first    -  Prefix to reverse order
+  /P          Pauses after each screenful of information.
+  /Q          Display the owner of the file.
+  /R          Display alternate data streams of the file.
+  /S          Displays files in specified directory and all subdirectories.
+  /T          Controls which time field displayed or used for sorting
+  timefield   C  Creation
+              A  Last Access
+              W  Last Written
+  /W          Uses wide list format.
+  /X          This displays the short names generated for non-8dot3 file
+              names.  The format is that of /N with the short name inserted
+              before the long name. If no short name is present, blanks are
+              displayed in its place.
+  /4          Displays four-digit years
+
+Switches may be preset in the DIRCMD environment variable.  Override
+preset switches by prefixing any switch with - (hyphen)--for example, /-W.
+
+C:\Users\mirko>
+
+2. "Dir" Command
+The "Dir" is the command that lists the files and the folders under the current directory. For example, let's see the files and folders under "C:\Users\LetsDefend": 
+
+3. "Cd" Command
+The "Cd" is the command that is used for directory transitions. For example, let's switch from the "C:\Windows" directory to the "C:\Windows\system32" directory: 
+
+4. "Date" Command
+The "Date" is the command that is used to view and change the system's date information. For example, let's see the date information with the "date /t" command:
+
+C:\Users\mirko>date /t
+26.11.2024
+
+5. "Echo" Command
+The "Echo" is the command that is used to print to the screen. For example, let's print "BlueTeam" to the screen with the echo command: 
+
+C:\Users\mirko>echo "Hi all there ;-)"
+"Hi all there ;-)"
+
+C:\Users\mirko>
+
+6. "Hostname" Command
+The "Hostname" is the command that is used to see the hostname information of the system.
+
+C:\Users\mirko>hostname
+cyberpunk
+
+7. "Time" Command
+The "Time" is the command that is used to see the system time. For example, let's see the system time with the command "time /t": 
+
+C:\Users\mirko>time /t
+20:38
+
+- Network Commands -
+
+1. "Ipconfig" Command
+The "Ipconfig" is the command that allows viewing information about network interfaces on the system via the command line.
+Note: In order to get detailed information about all network interfaces, the "ipconfig" command should be used with the "/all" parameter.
+
+2. "Netstat" Command
+It is possible to view the current network connections and their statuses via the netstat command. 
+
+Note: Since the output of the netstat command is too long, only the first part is displayed in the above image.
+
+- "-a" parameter : Displays all connections and listening ports.
+- "-n" parameter : Displays addresses and port numbers in numerical form.
+- "-o" parameter : Displays the owning process ID associated with each connection.
+
+3. "Nslookup" Command
+Devices communicate with each other through numerical values in the IT world. Therefore, values that do not correspond to numerical values need to find their numerical equivalents. For example, when trying to access the "letsdefend.io" domain, the IP address of the target DNS server must be known or learned. In this case, an intermediary should perform a domain name and IP address resolution and report the IP address of the DNS server of the desired domain. It is the Domain Name System (DNS) protocol that carries out this task. There are some tools and commands used for this. For example, let's find the DNS server IP address of the "letsdefend.io" address with the "nslookup" tool: 
+
+C:\Users\mirko>nslookup letsdefend.io
+Server:  fritz.box
+Address:  fd00::d624:ddff:fede:5fd
+
+Non-authoritative answer:
+Name:    letsdefend.io
+Addresses:  18.102.16.191
+          35.152.119.144
+          35.152.104.113
 
 
+C:\Users\mirko>
 
+4. "Ping" Command
+It may be needed to test the network communication of two different devices within the same network. It is possible to find out whether the target is accessed with the "ping" command on the command line. Network packet(s) are sent to the destination and awaited for the response with the "ping" command. In this way, it can be tested whether there is network communication with the destination address. 
 
+Note: As a security measure, the target system may be configured to not to respond to the "ping" command to prevent attackers from conducting network and host discovery. The examples below assume that this is not the case.
 
+Note: "-n" parameter: Number of echo requests to send.
 
+C:\Users\mirko>ping -n 5 google.com
 
+Pinging google.com [2a00:1450:4001:828::200e] with 32 bytes of data:
+Reply from 2a00:1450:4001:828::200e: time=36ms
+Reply from 2a00:1450:4001:828::200e: time=21ms
+Reply from 2a00:1450:4001:828::200e: time=20ms
+Reply from 2a00:1450:4001:828::200e: time=59ms
+Reply from 2a00:1450:4001:828::200e: time=39ms
 
+Ping statistics for 2a00:1450:4001:828::200e:
+    Packets: Sent = 5, Received = 5, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 20ms, Maximum = 59ms, Average = 35ms
 
+C:\Users\mirko>
 
+5. "Systeminfo" Command
+The "Systeminfo" is the command that provides detailed information about the system.
+Note : Since the output of the "systeminfo" command is too long, only the first part is displayed in the image.
 
+- File Operations Commands -
 
+File Operations Commands
+This section covers commands for operations performed on files. 
 
+1. "Type" Command
+ The "type" is the command that is used to print the file content to the screen. 
 
+C:\Users\mirko>type .bash_history
+ls
+pwd
+cd
+pwd
+cd ..
+pwd
+cd ..
+ls -l
+clear
+fsutil fsinfo drive
+cleae
+clear
+fsutil fsinfo drives
+pwd
+mkdir metasploitable3-win2k8
+rm metasploitable3-win2k8/
+rm -rf metasploitable3-win2k8/
+mkdir vagrantvms
+cd vagrantvms/
+mkdir metasploitable3-win2k8
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+2. "Copy" Command
+The "copy" is the command that is used in file copy operations. The first parameter in the "copy" command is the path of the file to be copied. The second parameter is the target path. For example, let's copy the file "file.txt" with a copy in the same directory: 
 
 
 
