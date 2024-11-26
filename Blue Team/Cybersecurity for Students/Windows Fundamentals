@@ -5,7 +5,7 @@
 ● Windows Filesystems
 ● Directory Structure
 ● Windows Command Line
-● 
+● Windows Users and Groups
 ● 
 ● 
 ● 
@@ -319,24 +319,135 @@ https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/
 https://ss64.com/nt/
 
 
+-- Windows Users and Groups --
+
+About the Users and Groups
+There are users and groups on the Windows operating system. The privileges and duties of users and groups on the system may differ. Attackers want to capture the most authorized user on the system. Therefore, the users and the groups they belong to are important from a security point of view. Attackers targeting Windows operating systems want to know what user privileges they have when they are able to send commands to the operating system because what they can do with a lower user profile may be limited. The attacker will attempt to attack back to increase the user authority after he/she figures out that he/she has access to the system with a low user profile. On the defensive side, what the analysts should do is to monitor user activities and detect anything suspicious within a short period of time.
+
+"Whoami" Command
+"whoami" is the command that shows which user account accessing the system.
+
+C:\Users\mirko>whoami
+cyberpunk\mirko
+
+Note: The format in the whoami command output is "domain\username". If the host that’s making this search is not included in the domain, then the hostname information is displayed instead of the domain.
+
+1. "net user" command
+"net user" is the command that displays the usernames within the system. For example, let's see the usernames in the system by executing the command: 
+
+C:\Users\mirko>net user
+
+User accounts for \\CYBERPUNK
+
+-------------------------------------------------------------------------------
+Administrator            DefaultAccount           Guest
+mirko                    WDAGUtilityAccount
+The command completed successfully.
+
+If detailed information is desired for a user in the system, a username should be given as a parameter to the "net user" command. For example, let's see the information of the user "Administrator": 
+
+C:\Users\mirko>net user Administrator
+User name                    Administrator
+Full Name
+Comment                      Built-in account for administering the computer/domain
+User's comment
+Country/region code          000 (System Default)
+Account active               No
+Account expires              Never
+
+Password last set            26.11.2024 21:19:52
+Password expires             Never
+Password changeable          26.11.2024 21:19:52
+Password required            Yes
+User may change password     Yes
+
+Workstations allowed         All
+Logon script
+User profile
+Home directory
+Last logon                   16.10.2022 03:52:29
+
+Logon hours allowed          All
+
+Local Group Memberships      *Administrators
+Global Group memberships     *None
+The command completed successfully.
+
+C:\Users\mirko>
+
+2. "net accounts" command
+"net accounts" command allows users to see the configurations related to password usage and logon restrictions on the system. For example, let's see the command by executing it: 
+
+C:\Users\mirko>net accounts
+Force user logoff how long after time expires?:       Never
+Minimum password age (days):                          0
+Maximum password age (days):                          42
+Minimum password length:                              0
+Length of password history maintained:                None
+Lockout threshold:                                    10
+Lockout duration (minutes):                           10
+Lockout observation window (minutes):                 10
+Computer role:                                        WORKSTATION
+The command completed successfully.
+
+C:\Users\mirko>
+
+As seen in the image above, some configurations related to all of the users on the system have been successfully displayed on the screen. 
+
+3. "net localgroup" command
+"net localgroup" is the command that allows us to perform operations related to groups on the system. If it is used with parameters, different operations can be executed on groups. When used without parameters, it only displays the list of groups on the system. For example, let's see the groups on the system by executing the command without parameters: 
+
+C:\Users\mirko>net localgroup
+
+Aliases for \\CYBERPUNK
+
+-------------------------------------------------------------------------------
+*__vmware__
+*Access Control Assistance Operators
+*Administrators
+*Backup Operators
+*Cryptographic Operators
+*Device Owners
+*Distributed COM Users
+*Event Log Readers
+*Guests
+*Hyper-V Administrators
+*IIS_IUSRS
+*Network Configuration Operators
+*Performance Log Users
+*Performance Monitor Users
+*Power Users
+*Remote Desktop Users
+*Remote Management Users
+*Replicator
+*System Managed Accounts Group
+*Users
+The command completed successfully.
+
+C:\Users\mirko>
+
+If you want to see the information of a group in the system, the group name should be added as a parameter to the "net localgroup" command. For example, let's see the information for the "Administrators" group: 
+
+C:\Users\mirko>net localgroup Administrators
+Alias name     Administrators
+Comment        Administrators have complete and unrestricted access to the computer/domain
+
+Members
+
+-------------------------------------------------------------------------------
+Administrator
+mirko
+The command completed successfully.
+
+C:\Users\mirko>
 
 
+User and Group Management via Graphical User Interface (GUI)
+- lusrmgr.msc
+- gpedit.msc
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-- Permissions Management on Windows --
 
 
 
