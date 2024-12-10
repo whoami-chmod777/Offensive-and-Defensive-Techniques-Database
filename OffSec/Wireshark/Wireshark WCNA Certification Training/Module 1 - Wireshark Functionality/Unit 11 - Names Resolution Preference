@@ -1,0 +1,94 @@
+
+Wireshark is a network packet analyzer tool with the possibility to customize the names resolution settings and to save them.
+
+Name Resolution in Wireshark is a powerful tool that provides clarity and context to network traffic, making it critical for effective analysis, but it must be used with awareness of its potential performance and privacy implications.
+
+The Name Resolution settings in Wireshark can be critical for the following reasons:
+
+1. Easier Understanding of Network Traffic
+Without Name Resolution:
+- You see raw IP addresses (e.g., 192.168.1.1) or port numbers (e.g., 80) in packet captures.
+- This can make it difficult to understand which devices, services, or domains are involved in the communication.
+With Name Resolution:
+- IP addresses can be resolved to meaningful domain names (e.g., example.com), and port numbers can be resolved to service names (e.g., HTTP instead of 80).
+- This makes it easier to interpret the traffic and identify potentially suspicious hosts or services.
+
+2. Faster Threat Detection
+Name resolution can help security analysts quickly recognize malicious domains, C2 servers, or known-bad IPs during analysis.
+For example:
+- Unresolved: 93.184.216.34 (What is this?)
+- Resolved: `malicious.example.com` (Clearly suspicious)
+  
+This helps to correlate traffic with threat intelligence feeds.
+
+3. Context for Forensic Analysis
+When reviewing PCAPs for forensic analysis, name resolution provides a clearer understanding of the context, such as:
+- Identifying specific services in use (e.g., DNS, HTTPS).
+- Recognizing external communication with unusual or suspicious domains.
+
+4. Efficient Workflow in SOCs
+- Resolving IPs and ports directly in Wireshark saves time compared to manually looking up this information elsewhere.
+
+Risks and Drawbacks of Name Resolution
+- Performance Impact: Enabling live name resolution (like DNS queries during capture) can slow down analysis.
+- Privacy Issues: Name resolution may send DNS queries for captured traffic, potentially exposing information to external servers.
+- False Positives: DNS-based name resolution may map IPs to incorrect or outdated domain names.
+
+When is it Critical
+- When analyzing DNS-based attacks: Name resolution helps identify malicious domains or DNS tunneling activity.
+- When analyzing unknown traffic: Resolving ports and services can help uncover unusual activity.
+- During incident response: Quickly identifying hostile IPs or domains speeds up containment and mitigation.
+
+
+-- LinkedIn Post --
+
+Name Resolution in Wireshark is a powerful tool that provides clarity and context to network traffic. It’s critical for effective analysis but must be used with awareness of potential performance and privacy implications
+
+Name Resolution translates raw addresses (like MAC, IP, or ports) into human-readable names, making it easier to understand network traffic. For example:
+- MAC Address → Vendor name
+- Port Numbers → Protocol names
+- IP Addresses → Hostnames
+
+How to Customize Name Resolution Settings
+
+MAC Address Resolution:
+	- Go to Edit > Preferences from the main menu.
+	- Select Name Resolution in the left tree view.
+	- Check the box for Resolve MAC Addresses.
+	- Click OK to save the changes.
+	- 🟢 Result: In the Packet Details pane, MAC addresses are translated into vendor names when possible.
+
+Port Name Resolution:
+	- Go to Edit > Preferences from the main menu.
+	- Select Name Resolution in the left tree view.
+	- Check the box for Resolve transport names.
+	- Click OK to activate port resolution.
+	- 🟢 Result: In the Packet List and Details panes, port numbers are replaced with protocol names (e.g., 80 → HTTP).
+
+IP Address Resolution:
+	- Go to Edit > Preferences from the main menu.
+	- Select Name Resolution in the left tree view.
+	- Check the box for Resolve network (IP) addresses.
+	- Click OK to enable IP name resolution.
+	- 🟢 Result: IP addresses in the Packet List pane are translated into hostnames when possible.
+
+Why Enable Name Resolution?
+- Simplifies Analysis: Instead of raw numbers, you see recognizable names.
+- Faster Troubleshooting: Quickly identify devices, services, and hosts in the network traffic.
+- Enhanced Context: Understand the relationship between packets at a glance.
+
+Why Enable Name Resolution?
+Faster Threat Detection: Recognize malicious domains or C2 servers quickly.
+- Unresolved: 93.184.216.34
+- Resolved: malicious.example.com
+Enhanced Forensic Analysis: Identify services in use (e.g., DNS, HTTPS) and track suspicious hosts.
+
+Risks and Drawbacks
+- Performance Impact: Enabling live name resolution (like DNS queries during capture) can slow down analysis.
+- Privacy Issues: Name resolution may send DNS queries for captured traffic, potentially exposing information to external servers.
+- False Positives: DNS-based name resolution may map IPs to incorrect or outdated domain names.
+
+When is it Critical
+- When analyzing DNS-based attacks: Name resolution helps identify malicious domains or DNS tunneling activity.
+- When analyzing unknown traffic: Resolving ports and services can help uncover unusual activity.
+- During incident response: Quickly identifying hostile IPs or domains speeds up containment and mitigation.
