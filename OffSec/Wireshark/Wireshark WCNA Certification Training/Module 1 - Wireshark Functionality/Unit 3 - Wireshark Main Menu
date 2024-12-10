@@ -1,0 +1,55 @@
+
+Wireshark's Main Menu 🖥️
+The main menu in Wireshark provides access to a Collection of functions and features, ranging from basic file management and display controls to advanced analysis and statistics. Each menu contains specialized tools to manage, visualize, and analyze captured network traffic effectively.
+
+Wireshark Main Menu Breakdown:
+
+File Menu:
+The File menu contains items to open, merge, and close capture files; import from Hex dump; save, print, or export capture files in whole or in part by selecting specific packets; and quit Wireshark.
+
+Edit Menu:
+The Edit menu contains items to copy packets (as Plain Text, CSV, or YAML), find a packet, set or unset time reference, set time shift of specific packets, mark and comment on one or more packets, handle configuration profiles, and set your preferences.
+
+View Menu:
+
+The View menu contains items to do the following:
+- Control the display of captured data.
+- Hide or show the Packet List, Packet Details, and Packet Bytes panes.
+- Define coloring rules for packet displays.
+- Specify whether to colorize the packets.
+- Specify the format for time display.
+- Zoom into the font of packets.
+
+Go Menu:
+The Go menu contains items to go to a specific packet by entering the packet number or go to the first, last, next, or previous packet. It also allows you to enable auto-scroll in live capture.
+
+Capture Menu:
+The Capture menu allows you to switch to a different capture interface; start, stop, and restart captures; edit or create capture filters; and refresh capture interfaces.
+
+Analyze Menu:
+
+The Analyze menu contains items to:
+- Edit or create display filters.
+- Create display filter macros for complex filtering scenarios.
+- Apply a filter for selected packets and specify the not/or/and criteria for selected packets.
+- Prepare a filter for selected packets and specify the not/or/and criteria for selected packets.
+- Apply a conversation filter, based on the protocol, IP, or Ethernet, to enable or disable the dissection of protocols.
+- Configure user-specified decodes.
+- Follow a TCP/UDP stream.
+
+Statistics Menu:
+The Statistics menu contains items to display capture file properties, various statistics windows based on criteria such as IP, protocol—including a summary of the packets that have been captured, protocol hierarchy statistics, statistics graphs, and much more.
+
+Telephony Menu:
+The Telephony menu contains items to display various telephony-related statistics windows for VoIP calls, GSM, ANSI, media analysis, flow diagrams, protocol hierarchy statistics, and much more.
+
+Wireless Menu:
+The Wireless menu contains items to display Bluetooth and IEEE 802.11 wireless statistics.
+
+Tools Menu:
+The Tools menu displays a complete list of available items like Firewall ACL & Rules Lua.
+
+Help Menu:
+The Help menu contains items to search a topic, access basic help, access manual pages for the different command-line tools, and some of the online webpages. It also contains the About Wireshark option that provides detailed information about the software.
+
+
