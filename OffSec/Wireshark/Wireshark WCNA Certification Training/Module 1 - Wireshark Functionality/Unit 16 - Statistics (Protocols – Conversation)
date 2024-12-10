@@ -1,0 +1,18 @@
+
+Understand the basic statistics information contained in the statistic page in order to identify protocols, applications and conversations.
+
+Wireshark's Statistics
+Wireshark’s Statistics Page is a treasure of detailed information to identify protocols, applications, and conversations in a network capture. This functionality provides findings for analyzing and troubleshooting network traffic.
+
+The Protocol Hierarchy tool provides an view of which protocols dominate your network traffic, making it easier to spot unusual activity.
+The Conversations window is necessary for understanding communication flows between devices, including identifying potential bottlenecks or suspicious activity.
+
+🛠️ Protocol Hierarchy:By selecting Statistics > Protocol Hierarchy, I visualized a detailed tree of protocols, displaying:
+- Packet count and total bytes for each protocol.
+- A structured view of traffic distribution.
+
+🛠️ Conversations:Accessing Statistics > Conversations revealed granular details about network conversations, including:
+- IP addresses and ports involved.
+- Packet and byte counts for each conversation, broken down into directions (A → B, B → A).
+- Relative start times and durations of conversations.
+- Bit rate calculations for each communication direction.
