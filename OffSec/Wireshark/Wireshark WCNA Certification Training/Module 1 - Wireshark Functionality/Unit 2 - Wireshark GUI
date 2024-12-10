@@ -1,1 +1,23 @@
 
+Learn Wireshark start page, main menu and toolbar in order to get confidence with the basic functionalities.
+
+Wireshark Main Window Overview 🖥️
+An overview of the components of the main window of Wireshark to help you get started with network analysis.
+The main window, menu, and toolbar of Wireshark are designed to easily navigate and utilize its core functionalities.
+
+Wireshark Main Window Components:
+
+1. Main Menu: Allows you to initiate various actions and features
+2. Main Toolbar: Provides quick access to frequently used functions from the menu.
+3. Packet List Pane: Displays an overview of all captured packets. Selecting a packet here controls what is displayed in the other panes.
+4. Packet Details Pane: Shows detailed information about the selected packet from the Packet List Pane.
+5. Packet Bytes Pane: Displays raw data for the selected packet and highlights the byte corresponding to the selected field in the Packet Details Pane.
+6. Status Bar: Provides information on the current program state and captured data.
+
+Wireshark Functionality in Action:
+
+1. Select a different packet in the Packet List Pane (e.g., packet #29) and observe how the details change in the Packet Details Pane (like packet number and length).
+2. Click on a field in the Packet Details Pane (e.g., Flags) to see the corresponding byte highlighted in the Packet Bytes Pane.
+3. Select a byte in the Packet Bytes Pane to automatically highlight the related field in the Packet Details Pane.
+
+Notes: You can modify menu items and toolbar buttons to create an interface tailored to your needs.
