@@ -1,0 +1,92 @@
+
+Set appropriate settings on Wireshark capture interface options in  order to identify the most appropriate capture interface, to capture on  multiple interfaces simultaneously and to capture traffic remotely..
+
+Wireshark Basic Capture Setup
+To effectively capture network traffic using Wireshark, it's important to understand how your network is configured and how to properly set up your capture environment based on the traffic you want to analyze. 
+
+Where to Capture Packets
+
+1. Locally on a PC
+- Capture traffic that is being sent to or from the PC where Wireshark is installed.
+- Ideal for troubleshooting issues specific to a single machine, such as application problems or local network traffic.
+   
+Example: 
+- Capturing traffic between PC A and Wireshark installed on the same machine.
+
+How to Capture:
+- Start Wireshark on the machine, select the appropriate network interface, and begin the capture. Wireshark will capture all traffic originating from or destined for this device.
+
+
+2. On a Network Device (Switch or Router)
+- Capture traffic across multiple devices by configuring port mirroring (SPAN) on a switch or by capturing on a router.
+- Useful for analyzing traffic between multiple devices or monitoring a particular segment of the network.
+
+Example:
+- Capturing traffic between PC A and PC B via a switch with a mirror port configured to forward traffic to the Wireshark PC.
+
+How to Capture:
+- Configure the switch to mirror traffic from the desired port (or VLAN) to the port where Wireshark is connected. Start the capture on the Wireshark PC.
+
+
+3. With a Network Tap
+- Use a network tap to intercept traffic between two devices without interfering with the communication.
+- This is ideal for capturing traffic between two devices when you can't install Wireshark directly on either device.
+
+Example:
+- Monitoring traffic between a server and a client in a data center or between devices on a critical link.
+
+How to Capture:
+- Connect the tap between the two devices and attach Wireshark to the tap's monitoring port to start capturing traffic.
+
+
+4. Using a Hub
+- Use an old Ethernet hub to capture all traffic on a network segment. Unlike modern switches, hubs broadcast all traffic to all connected devices.
+- This method is mostly outdated but can still be used in some legacy network setups.
+
+Example:
+- Capturing all traffic between multiple devices on the same hub.
+
+How to Capture:
+- Connect your PC running Wireshark to the hub and capture all traffic passing through it.
+
+
+5. Wireless Capture
+- Capture traffic on a Wi-Fi network using a wireless adapter that supports monitor mode.
+- Useful for analyzing wireless communication, troubleshooting Wi-Fi issues, or monitoring traffic between wireless devices.
+
+Example:
+- Capturing Wi-Fi traffic between laptops and access points.
+
+How to Capture:
+- Use a Wi-Fi adapter that supports monitor mode. Select the adapter in Wireshark, enable monitor mode, and start capturing traffic on the desired wireless channel.
+
+
+Configuring Port Mirroring (SPAN) on a Cisco Switch
+
+# enable
+# configure terminal
+# monitor session 1 source interface Gi1/0/1
+# monitor session 1 destination interface Gi1/0/10
+# end
+
+
+Explanation
+
+- monitor session 1: Defines a SPAN session.
+- source interface Gi1/0/1: The port you want to monitor (e.g., traffic from GigabitEthernet1/0/1).
+- destination interface Gi1/0/10: The port where the mirrored traffic will be sent (e.g., GigabitEthernet1/0/10 connected to the machine running Wireshark).
+
+Summary of Methods for Capturing Packets with Wireshark
+
+Method -> Use Case -> How to Capture
+
+Locally on a PC -> Capturing traffic to/from a single device -> Start Wireshark on the PC, select the appropriate network interface, and begin capturing.
+
+On a Network Device -> Capturing traffic across multiple devices via a switch/router -> Configure port mirroring (SPAN) or capture traffic on the router. Start capturing on Wireshark.
+
+Network Tap -> Capturing traffic between two devices without installing Wireshark -> Install the network tap and connect Wireshark to the monitoring port to start capturing.
+
+Using a Hub -> Capturing all traffic on a legacy network segment -> Connect Wireshark to the hub and start capturing traffic passing through it.
+
+Wireless Capture -> Capturing Wi-Fi traffic -> Use a wireless adapter in monitor mode to capture wireless traffic on the selected channel.
+
