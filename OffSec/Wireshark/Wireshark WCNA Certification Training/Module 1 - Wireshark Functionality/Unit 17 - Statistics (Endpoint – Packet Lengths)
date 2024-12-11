@@ -1,0 +1,57 @@
+
+Understand how to view the endpoint list and generate a map on the Earth and how to evaluate packet lengths.
+
+Visualizing Network Traffic with Wireshark: Endpoints, Packet Lengths, and GeoLocation 🌐
+
+Wireshark is a powerful tool for network analysis, it's provide endpoint maps and packet length statistics takes your troubleshooting and monitoring to the next level. 
+
+• GeoLocation: Quickly identify the geographic origin and destination of traffic for anomaly detection or compliance checks.
+• Packet Length Statistics: Analyze traffic efficiency, detect anomalies, and understand the nature of the traffic (e.g., small packets for control, large packets for data transfer).
+
+1. Capture Network Traffic
+
+Open a terminal window and run:
+
+ping -4 example.com /n 50
+
+For Windows, use the /n switch to specify the ping count.
+For Linux, you can simply run the command without additional switches.
+
+
+2. Enable GeoLocation in Wireshark
+
+To visualize endpoint locations:
+
+- Download the GeoIP2 or GeoLite2 City database from MaxMind.
+- Extract the database contents to a folder on your PC and note the location.
+- In Wireshark:
+	- Go to Edit > Preferences > Name Resolution > MaxMind Database Paths.
+	- Click the add button (+) to specify the database location.
+	- Click OK, then restart Wireshark to enable GeoLocation.
+
+
+3. View Endpoint Maps
+
+- Open your saved capture file in Wireshark.
+- Go to Statistics > Endpoints from the main menu.
+- In the Endpoints dialog box, click Map > Open in browser.
+- A browser window will open, displaying the locations of all endpoints on a map. Hover over the points to see related IP addresses.
+
+
+4. Evaluate Packet Lengths
+
+- From the main menu, select Statistics > Packet Lengths.
+- The Packet Lengths dialog box will show:
+	- Count of packets within predefined length ranges.
+	- Statistics like average, minimum, and maximum for each range.
+	- The rate (ms) and percentage of packets in each range over the total.
+
+
+
+
+
+
+
+
+
+
