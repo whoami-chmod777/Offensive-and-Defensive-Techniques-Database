@@ -631,7 +631,7 @@ Note: Event logs will be explained in the following parts of the training.
 
 - Managing Windows Services with a Graphical User Interface (GUI) -
 
-Windows + R + services.msc
+(Windows + R) + services.msc
 The status of the services can be seen and the services can be started and stopped
 The "Path to executable" section contains the command that will run after the service is activated. This command may have essential hints about the attacker.
 
@@ -644,6 +644,43 @@ Get information about the service: sc query wuauserv
 Starting and Stopping the Service: sc start wuauserv | sc stop wuauserv
 
 The most important thing we should pay attention here is that the command line must be opened with administrator privileges before executing the service stop command. If the command line is not opened with administrator privileges, the service stop command will not work and will result in an authorization error
+
+
+
+-- Task Scheduler Windows --
+
+What is a scheduled task?
+A scheduled task is the execution of certain operations on the system at certain time intervals or at certain times. For example, we may need to check the system information at certain time intervals. Scheduled tasks implement these types of tasks in the Windows operating system. Once an attacker gains access to the Windows system, he/she can utilize the scheduled tasks to ensure persistence by making the system send connection requests to his/her own system in order not to lose access to the system. This requires adding a new task to the scheduled tasks. When detecting threats, the SOC analyst should monitor the scheduled tasks closely to be able to detect suspicious scheduled tasks. 
+
+- Managing Scheduled Tasks with the GUI -
+
+Manage scheduled tasks: (Windows + R) + taskschd.msc
+
+Creating a new scheduled task: 
+- Click on the "Create Task" button
+- Fill the name and description of the task
+- Go to the "Actions" tab and add the action that the scheduled task will do. If there is no "action" in this section adding a task cannot be completed
+- To run the scheduled task, we can right click and select "Run"
+
+View scheduled tasks: schtasks
+Getting information about the scheduled task: schtasks /Query /TN TrainingTask
+Enable the Scheduled Task: schtasks /Change /ENABLE /TN TrainingTask
+Running the scheduled task via command line: schtasks /Run /TN TrainingTask
+Terminating the scheduled task via the command line: schtasks /End /TN TrainingTask
+Deleting scheduled task via command line: schtasks /Delete /TN TrainingTask
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
