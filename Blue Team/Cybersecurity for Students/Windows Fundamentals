@@ -624,6 +624,36 @@ C:\Users\mirko>taskkill /PID 33492
 
 -- Windows Services --
 
+What are Services?
+Services are programs that have their own processes running in the background on Windows. Services can run without interacting with the user and needing to open a window on the screen. Each service has its own reason for running. As the system has its own services, there may also be services belonging to the programs installed later in the system. Services running on Windows are important from the security aspect. Attackers can gather information about the system through running services or use services to infiltrate the system. If there is an incident or suspicious activity, the SOC analysts should monitor the processes of all services, including the services added to the system through the event logs to be able to detect any suspicious activities. A newly created service with a potentially suspicious name may indicate an attacker's activity. In this part of the training, we will cover the Windows services.
+
+Note: Event logs will be explained in the following parts of the training. 
+
+- Managing Windows Services with a Graphical User Interface (GUI) -
+
+Windows + R + services.msc
+The status of the services can be seen and the services can be started and stopped
+The "Path to executable" section contains the command that will run after the service is activated. This command may have essential hints about the attacker.
+
+- Managing Windows Services with Command Line -
+
+Manage Windows services from the command line: sc
+Display all running services: sc query
+View all services: sc query type=service state=all
+Get information about the service: sc query wuauserv
+Starting and Stopping the Service: sc start wuauserv | sc stop wuauserv
+
+The most important thing we should pay attention here is that the command line must be opened with administrator privileges before executing the service stop command. If the command line is not opened with administrator privileges, the service stop command will not work and will result in an authorization error
+
+
+
+
+
+
+
+
+
+
 
 
 
