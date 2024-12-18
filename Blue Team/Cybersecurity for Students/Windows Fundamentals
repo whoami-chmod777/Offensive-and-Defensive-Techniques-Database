@@ -531,9 +531,9 @@ The hierarchical representation of parent processes and child processes is calle
 The "Process Hacker" tool displays the processes in Windows in hierarchical order. 
 
 As seen for example "explorer.exe" is the parent process with the following 3 child processes: 
-- Tvnserver.exe
-- ProcessHacker.exe
-- SnippingTool.exe
+• Tvnserver.exe
+• ProcessHacker.exe
+• SnippingTool.exe
 
 Although all of these processes are totally different processes, there is a parent-child relationship between all these. In this window, it is clearly seen that there are processes with or without child processes and even some with no child processes. 
 
@@ -646,7 +646,6 @@ Starting and Stopping the Service: sc start wuauserv | sc stop wuauserv
 The most important thing we should pay attention here is that the command line must be opened with administrator privileges before executing the service stop command. If the command line is not opened with administrator privileges, the service stop command will not work and will result in an authorization error
 
 
-
 -- Task Scheduler Windows --
 
 What is a scheduled task?
@@ -657,10 +656,10 @@ A scheduled task is the execution of certain operations on the system at certain
 Manage scheduled tasks: (Windows + R) + taskschd.msc
 
 Creating a new scheduled task: 
-- Click on the "Create Task" button
-- Fill the name and description of the task
-- Go to the "Actions" tab and add the action that the scheduled task will do. If there is no "action" in this section adding a task cannot be completed
-- To run the scheduled task, we can right click and select "Run"
+• Click on the "Create Task" button
+• Fill the name and description of the task
+• Go to the "Actions" tab and add the action that the scheduled task will do. If there is no "action" in this section adding a task cannot be completed
+• To run the scheduled task, we can right click and select "Run"
 
 View scheduled tasks: schtasks
 Getting information about the scheduled task: schtasks /Query /TN TrainingTask
@@ -668,6 +667,107 @@ Enable the Scheduled Task: schtasks /Change /ENABLE /TN TrainingTask
 Running the scheduled task via command line: schtasks /Run /TN TrainingTask
 Terminating the scheduled task via the command line: schtasks /End /TN TrainingTask
 Deleting scheduled task via command line: schtasks /Delete /TN TrainingTask
+
+
+-- Windows Registry --
+
+What is Windows Registry?
+Windows Registry is a hierarchical database that contains the operating system and system configurations related to the programs installed in the system. It keeps the information and settings of programs and hardware in this database. For example, when a program is installed on Windows, the program may choose to keep the expiry date of its license in the Windows Registry.
+Windows Registry is an important component in Windows for attackers. The registry contains a lot of information about the Windows operating system. For example, information about programs that were installed on the system and uninstalled later may still remain in the registry. The information that the attackers want to obtain through the system is usually the information necessary for the continuation of the attack. For example, when the attackers seize the user accounts with limited privileges, they will probably keep hunting for those with higher privileges by collecting information about other users in the system.
+The Registry contains important configurations and information about the system, as well as information about other programs installed on the system. Attackers may also want to add their own entries to the registry to be able to ensure persistence in the system. The SOC analyst should monitor suspicious changes to the registry to be able to detect any suspicious activities and behaviors of the attacker. 
+
+Accessing the Registry: (Windows + R) + regedit
+
+- Registry Structure -
+
+Windows registry entries are located at "%SystemRoot%\System32\Config".
+
+The registry contains two essential elements: "keys" and "values". Registry keys are container objects similar to folders. Registry values ​​are non-container objects similar to files. Keys may contain values ​​and subkeys.
+
+E.g. HKEY_LOCAL_MACHINE\Software\Microsoft\Windows refers to the subkey "Windows" of the subkey "Microsoft" of the subkey "Software" of the HKEY_LOCAL_MACHINE root key.
+
+There are seven predefined root keys :
+
+HKEY_LOCAL_MACHINE or HKLM
+HKEY_CURRENT_CONFIG or HKCC
+HKEY_CLASSES_ROOT or HKCR
+HKEY_CURRENT_USER or HKCU
+HKEY_USERS or HKU
+HKEY_PERFORMANCE_DATA (only in Windows NT, but invisible in the Windows Registry Editor)
+HKEY_DYN_DATA (only in Windows 9x, and visible in the Windows Registry Editor)
+
+HKEY_LOCAL_MACHINE or HKLM
+It is the section where computer-specific hardware and software configuration information is kept. Settings applicable to each logged-in user are maintained in this section. There are some important subkeys below this key: 
+
+• HARDWARE This section contains information about the hardware devices connected to the system.
+• SAM This section contains the encrypted versions of the passwords of the users.
+• SECURITY It is the section that contains the security policies in the system.
+• SOFTWARE This section contains the configurations of the operating system services as well as the programs installed in the system.
+• SYSTEM It is the section where the configuration information of the system is kept. 
+
+HKEY_CURRENT_CONFIG or HKCC
+It is the section that keeps the hardware configurations during the operation of the system.
+
+HKEY_CLASSES_ROOT or HKCR
+It contains software settings, shortcuts, and all other user interface-related information. If this partition is deleted, none of the files will open, even if Windows is running.
+
+HKEY_CURRENT_USER or HKCU
+This is the section where the configurations of the logged-in user are kept.
+
+HKEY_USERS or HKU
+It is the section where the configurations of all users registered to the system are kept. 
+
+Reg extension files
+Files with the “Reg” extensions are the file format saved when exporting the registry files. The structure of the “Reg” extension which is a text-based file type, is as follows: [<Hive name>\<Key name>\<Subkey name>] "Value name"=<Value type>:<Value data>
+
+- Registry Operations on the Command Line -
+
+Computer Name: reg query HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\ComputerName\ComputerName
+Find User Run Programs: reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Run /s
+Find System Run Programs: reg query HKLM\Software\Microsoft\Windows\CurrentVersion\Run /s
+Check Startup Locations: reg query HKLM\SYSTEM\CurrentControlSet\Services /s
+Audit Recently Opened Files: reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs /s
+Find Installed Programs: reg query HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall /s
+Identify User NTUSER Hive: reg query HKCU\Software\Microsoft\Windows\CurrentVersion
+Retrieve Network Configurations: reg query HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters /s
+Check USB Device History: reg query HKLM\SYSTEM\CurrentControlSet\Enum\USBSTOR /s
+Find Mapped Drives: reg query HKCU\Network /s
+Identify Auto-Login Credentials: reg query HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
+Extract Shell Bags: reg query HKCU\Software\Microsoft\Windows\Shell\BagMRU /s
+Review RunOnce Keys: reg query HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce /s
+Find Cached Credentials: reg query HKLM\SECURITY\Policy\Secrets /s
+Check Firewall Rules: reg query HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile /s
+Audit Proxy Settings: reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings /v ProxyServer
+Analyze User Typed URLs: reg query HKCU\Software\Microsoft\Internet Explorer\TypedURLs /s
+Investigate RDP History: reg query HKCU\Software\Microsoft\Terminal Server Client\Default /s
+Find Scheduled Tasks: reg query HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks /s
+Check Installed Drivers: reg query HKLM\SYSTEM\CurrentControlSet\Control\Class /s
+Look for Malware Persistence: reg query HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run /s
+
+
+Reg Command: https://ss64.com/nt/reg.html 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
