@@ -226,6 +226,31 @@ C:\Users\mirko>
 The "Systeminfo" is the command that provides detailed information about the system.
 Note : Since the output of the "systeminfo" command is too long, only the first part is displayed in the image.
 
+C:\Windows\System32>systeminfo
+
+Host Name:                 CYBERPUNK
+OS Name:                   Microsoft Windows 11 Pro
+OS Version:                10.0.22631 N/A Build 22631
+OS Manufacturer:           Microsoft Corporation
+OS Configuration:          Standalone Workstation
+OS Build Type:             Multiprocessor Free
+Registered Owner:          mirkolerch@hotmail.de
+Registered Organization:   N/A
+Product ID:                00331-10000-00001-AA871
+Original Install Date:     15.01.2023, 12:41:45
+System Boot Time:          17.12.2024, 23:23:20
+System Manufacturer:       Dell Inc.
+System Model:              Dell G15 5520
+System Type:               x64-based PC
+Processor(s):              1 Processor(s) Installed.
+                           [01]: Intel64 Family 6 Model 154 Stepping 3 GenuineIntel ~2300 Mhz
+BIOS Version:              Dell Inc. 1.28.0, 09.09.2024
+Windows Directory:         C:\Windows
+System Directory:          C:\Windows\system32
+Boot Device:               \Device\HarddiskVolume1
+System Locale:             de;German (Germany)
+
+
 - File Operations Commands -
 
 File Operations Commands
