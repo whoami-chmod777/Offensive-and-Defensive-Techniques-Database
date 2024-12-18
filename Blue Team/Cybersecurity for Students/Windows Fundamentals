@@ -926,6 +926,7 @@ Audit system drives: wmic logicaldisk get name,description,freespace,filesystem
 Query system uptime: wmic os get lastbootuptime
 List local groups: wmic group get name
 Check user group memberships: wmic group where (name="Administrators") get sid
+Find the "BuildNumber" value of the Windows system using WMI: wmic os get BuildNumber
 
 - WMIC Commands for Network Information -
 
