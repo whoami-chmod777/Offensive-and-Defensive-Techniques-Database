@@ -8,7 +8,7 @@
 ● Windows Users and Groups
 ● Permissions Management on Windows
 ● 
-● 
+● Windows Firewall
 
 
 -- Introduction to Windows --
@@ -748,11 +748,57 @@ Look for Malware Persistence: reg query HKLM\Software\Microsoft\Windows\CurrentV
 Reg Command: https://ss64.com/nt/reg.html 
 
 
+-- Windows Firewall --
+
+What is Windows Firewall?
+Windows Firewall is a security tool that allows blocking or allowing incoming network packets to the host machine and outgoing network packets from the host machine within the framework of certain rules. This will easily block the malicious connections with rules created on the Windows firewall. At the same time, destinations that are verified as secure connections can be added to the allowed network connections through new rules. 
+
+Inbound And Outbound Rules
+An inbound rule filters traffic that passes from a network to a local computer based on the rules’ parameters. For outbound rules, traffic sent from local computers to the network should be filtered according to the filtering rules. 
+
+Firewall Rules Management with the Graphical User Interface (GUI): wf.msc
+
+- Retrieve Firewall Rules -
+
+Show all firewall rules: netsh advfirewall firewall show rule name=all
+Show specific rule details: netsh advfirewall firewall show rule name="RuleName" 
+Show inbound rules: netsh advfirewall firewall show rule name=all dir=in
+Show outbound rules: netsh advfirewall firewall show rule name=all dir=out
+Show rules by group: netsh advfirewall firewall show rule name=all group="GroupName"
+Check blocked ports: netsh advfirewall firewall show state
+Show currently active rules: netsh advfirewall monitor show firewall
+
+- Adjusting Firewall Rules -
+
+Enable a firewall rule: netsh advfirewall firewall set rule name="RuleName" new enable=yes
+Disable a firewall rule: netsh advfirewall firewall set rule name="RuleName" new enable=no
+Delete a firewall rule: netsh advfirewall firewall delete rule name="RuleName"
+Block a specific port: netsh advfirewall firewall add rule name="BlockPort" dir=in action=block protocol=TCP localport=1234
+Allow a specific port: netsh advfirewall firewall add rule name="AllowPort" dir=in action=allow protocol=TCP localport=1234
+Block outbound traffic to IP: netsh advfirewall firewall add rule name="BlockOutboundIP" dir=out action=block remoteip=192.168.1.100
+Allow inbound traffic from IP: netsh advfirewall firewall add rule name="AllowInboundIP" dir=in action=allow remoteip=192.168.1.100
+Block traffic by program: netsh advfirewall firewall add rule name="BlockApp" dir=in action=block program="C:\App.exe"
+Allow traffic by program: netsh advfirewall firewall add rule name="AllowApp" dir=in action=allow program="C:\App.exe"
+
+- Firewall Profiles -
+
+Show current profiles: netsh advfirewall show currentprofile
+Disable a firewall profile: netsh advfirewall set currentprofile state off
+Enable a firewall profile: netsh advfirewall set currentprofile state on
+Disable all profiles: netsh advfirewall set allprofiles state off
+Enable all profiles: netsh advfirewall set allprofiles state on
+
+- Pentester-Focused Commands -
+
+Search for Any "Allow All" Rules: netsh advfirewall firewall show rule name=all | findstr "Allow"
+Check for Inbound Traffic Allowed on Common Ports: netsh advfirewall firewall show rule name=all | findstr "Port"
+Review Exceptions to Firewall Rules: netsh advfirewall firewall show allowedprograms
+
+Export firewall rules: netsh advfirewall export "C:\FirewallConfig.wfw"
+Import firewall rules: netsh advfirewall import "C:\FirewallConfig.wfw"
 
 
-
-
-
+Netsh Command: https://ss64.com/nt/netsh.html 
 
 
 
