@@ -898,20 +898,69 @@ Wevtutil: https://ss64.com/nt/wevtutil.html
 
 -- Windows Management Instrumentation (WMI) --
 
+What is Windows Management Instrumentation (WMI)?
+Windows Management Instrumentation (WMI) is a feature used to access components of the Windows operating system. WMI allows local and remote access. That's why it's one of the Windows features that attackers often use. Attackers can use WMI for reconnaissance as well as for "Lateral Movement" purposes. 
+
+Using WMI: wmic
+Information about the operating system: wmic os list brief
+Users names in the system: wmic useraccount get name
+
+- Key WMIC Commands for Pentesters -
+
+List running processes: wmic process list brief
+Detailed process information: wmic process where name="ProcessName.exe" get /format:list
+Terminate a process: wmic process where name="ProcessName.exe" call terminate
+List startup programs: wmic startup get caption,command
+Query installed software: wmic product get name,version
+Retrieve network adapter info: wmic nicconfig get description,ipaddress
+Get MAC addresses: wmic nic get MACAddress,description
+View system information: wmic computersystem get model,name,manufacturer,systemtype
+Check logged-in users: wmic computersystem get username
+Enumerate user accounts: wmic useraccount get name,sid
+View shared folders: wmic share get name,path
+List running services: wmic service list brief
+Check for specific service: wmic service where name="ServiceName" get state,startmode
+List scheduled tasks: wmic job get name,command
+Retrieve BIOS information: wmic bios get manufacturer,version,serialnumber
+Audit system drives: wmic logicaldisk get name,description,freespace,filesystem
+Query system uptime: wmic os get lastbootuptime
+List local groups: wmic group get name
+Check user group memberships: wmic group where (name="Administrators") get sid
+
+- WMIC Commands for Network Information -
+
+Get DNS configuration: wmic nicconfig get dnsserversearchorder
+List active connections: wmic netconnection get caption,description
+Retrieve ARP table: wmic nicconfig where IPEnabled=true get DNSServerSearchOrder
+Get default gateway: wmic nicconfig where IPEnabled=true get DefaultIPGateway
+Check firewall state: wmic /namespace:\\root\StandardCimv2 path MSFT_NetFirewallProfile get Enabled
+
+- WMIC for Security and Audit -
+
+Check for antivirus software: wmic /namespace:\\root\SecurityCenter2 path AntivirusProduct get displayName,pathToSignedProductExe
+List system patches: wmic qfe list brief
+Check BitLocker status: wmic logicaldisk where drivetype=3 get deviceid,volumename,providername
+Audit admin accounts: wmic useraccount where (privileges='4') get name,sid
+Check for auto-logon credentials: wmic computersystem get AutomaticManagedBy
+
+- Modify System Settings with WMIC -
+
+Change IP address: wmic nicconfig where index=1 call enablestatic "192.168.1.100", "255.255.255.0"
+Change DNS server: wmic nicconfig where index=1 call setdnsserversearchorder ("8.8.8.8", "8.8.4.4")
+Enable/Disable a service: wmic service where name="ServiceName" call change startmode "Disabled"
+Kill a process: wmic process where "name='ProcessName.exe'" delete
+
+- Combining Commands -
+
+Find Active Administrator Accounts: wmic useraccount where (privileges='4' and status='OK') get name,sid
+Audit Security Logs: wmic nteventlog where "logfilename='Security'" get numberofrecords
+Track System Uptime: wmic os get lastbootuptime
+
+WMIC: https://ss64.com/nt/wmic.html 
 
 
 
-
-
-
-
-
-
-
-
-
-
-Windows Security Event Logs: my own cheatsheet
+-- Windows Security Event Logs: my own cheatsheet --
 
 Windows 2000/XP and Windows Server 2003
 
