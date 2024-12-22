@@ -1,6 +1,7 @@
 
 --- Linux for Blue Team ---
 
+• Introduction to Linux
 • Linux File System Hierarchy
 • Basic Terminal Commands - 1
 • Basic Terminal Commands - 2
@@ -14,7 +15,50 @@
 • Scheduled Tasks
 
 
+-- Introduction to Linux --
+
+What is Linux
+Linux is one of the kernel software, which is the most basic part of computer operating systems. It is a free software project released under the GNU General Public License version 2 and developed under the umbrella of the Linux Foundation. The name Linux was given by its first developer, Linus Torvalds, in 1991.
+
+Benefits of Linux 
+Linux is famous for its command line. The power of the command line is an opportunity for cybersecurity professionals working in the cybersecurity industry because the use of Linux's command line can make many things easier and provide flexibility in application practice in cyber security projects and operations. It can save time. SOC analysts usually work on high dimensional data and Linux can easily handle the use of high dimensional data with the command line. 
+
+Common Linux distributions 
+• Ubuntu
+• CentOS
+• Fedora
+• Debian
+• Red Hat Enterprise Linux
+• Linux Mint
+• Open SUSE
+• Manjaro
+
+
 -- Linux File System Hierarchy --
+
+What is Filesystem Hierarchy
+As in every operating system, Linux has a filing system as well. Everything in the Linux operating system consists of files. When all the files come together, they form all the components of the operating system. Files are in a grouped order by directories. In Linux, directories are in a hierarchical order. Hierarchical order means that one directory can be above or below another. In the Linux operating system, the directory structure must conform to a certain standard.
+
+
+"/" - Root Directory
+The directory used as the top directory in the entire file hierarchy in Linux is the "Root Directory". The root directory is expressed with “/” and each directory to be written to the right is under the root directory. For example, the “/bin” directory means the directory named "bin” under the “/” directory. In other words, a parent directory of the "bin" directory is the "/"(root directory). 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
