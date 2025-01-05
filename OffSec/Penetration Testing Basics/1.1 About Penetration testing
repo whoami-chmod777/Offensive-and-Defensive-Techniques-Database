@@ -1,6 +1,12 @@
 
 -- About Penetration testing --
 
+• The Objectives & Scope
+• Rules of engagement
+• Results
+• Black, Grey & White box penetration testing
+
+
 Penetration testing, also called pentesting or a pen test, is the process of identifying weaknesses and vulnerabilities in software and systems. Companies employ penetration testers to discover those vulnerabilities and to make recommendations for securing their I.T. assets and protecting their business assets. But what exactly are those assets that companies are so desperate to protect? Let’s name a few:
 
 • Sensitive data such as customer data, medical records, legal documents, financial data and credit card information;
