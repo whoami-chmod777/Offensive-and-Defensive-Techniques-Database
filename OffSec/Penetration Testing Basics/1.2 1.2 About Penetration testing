@@ -1,0 +1,61 @@
+
+-- About Penetration testing --
+
+Penetration testing, also called pentesting or a pen test, is the process of identifying weaknesses and vulnerabilities in software and systems. Companies employ penetration testers to discover those vulnerabilities and to make recommendations for securing their I.T. assets and protecting their business assets. But what exactly are those assets that companies are so desperate to protect? Let’s name a few:
+
+• Sensitive data such as customer data, medical records, legal documents, financial data and credit card information;
+• Monetary assets such as the funds in a company account;
+• Intellectual property such as blueprints or formulations for newly developed products;
+• Information such as newspaper articles that are going to press.
+
+This list contains assets that are valuable enough to protect at all cost. Some of them apply to all companies, such as financial data and monetary assets, and some to only a few specific companies such as manufacturing companies (blueprints). One way of protecting these assets is to solve the vulnerabilities in the infrastructure, systems, services and people to prevent attackers from accessing these assets.
+A penetration test is usually part of a full security audit and helps to determine if a system is vulnerable. It can be conducted locally from inside the network and/or remotely from beyond (e.g. via the Internet). The penetration tester will use specialist tools and social engineering attacks (i.e. manipulating the human component) not only to discover vulnerabilities in software and services, but also to identify misconfigured software or firmware that can result in malicious actors gaining unauthorised access to data and/or taking control of the system.
+Constantly evolving technology, the increasing proliferation of networked devices (such as the Internet of Things) and globalization mean that the number of attack vectors is greater than ever. Attackers may be 1,000 miles away in a foreign country, lurking around in the networks of trusted 3rd parties or sitting in the next cubical at the office with a certain level of access. Performing penetration tests on a regular basis, both internal and external, is an effective strategy for protecting systems and data.
+In the following sections we’ll briefly walk through the objectives and scope of a penetration test, the rules of engagement and the reporting of results.
+
+The Objectives & Scope
+Every penetration test begins with a formal written agreement with the client detailing its scope and objectives. This agreement is the legal authorisation for the penetration tester/ethical hacker to undertake actions which might otherwise constitute criminal offences. Broadly speaking, the purpose of the penetration test is to find possible security errors on the client’s corporate network or systems that could lead to unauthorized access, damage and/or data theft. Successful attacks can typically result from human error such as misconfigurations, unpatched services, obsolete firmware or operating systems as well as inherent weaknesses in the software applications used. In other words, a pen test seeks to identify security weaknesses in an organization’s network/systems before a hacker can exploit them.
+
+Rules of engagement
+Another important aspect included in the agreement are the penetration test’s rules of engagement. Whereas the scope defines ‘what’ will be tested, the rules of engagement define ‘how’ it will be tested and will set limits to the depth of the test. For example, a penetration test may attempt to access certain sensitive information (such as a personnel’s medical records), but the rules of engagement may prohibit the penetration tester from viewing or downloading such documents. The rules can also define when the test may be conducted. Some companies, for instance, require tests to be done outside of office hours in order to minimize impact on business processes. This can be an important precaution if a denial-of-service (DoS) situation unexpectedly arises resulting in data corruption or network downtime.
+
+Results
+The main output of any penetration test is the report. A penetration tester’s report should contain every detail about any vulnerabilities found and make recommendations on how to fix them. It should contain enough information for the client’s IT staff to reproduce the security issues and correct them.
+
+Black, Grey & White box penetration testing
+We can distinguish 3 types of penetration testing approaches:
+
+• Black box test
+• Grey box test
+• White box test
+
+The differences lie in: (a) the starting point of the test; and, (b) how much prior knowledge the penetration tester is given about the targeted systems.
+Let’s have a look at each of these approaches in more detail.
+
+Black box testing
+When a black box penetration test is carried out the penetration tester is given little or no prior information except for the name of the client and maybe a public IP address. Because of the little information that is given to the penetration tester, this type of approach duplicates the kind of external attack typically performed by a malicious hacker. Black Box Testing tends to be the more expensive option since it requires a lot of reconnaissance work which can be extremely labour intensive.
+Malicious attackers can generally afford to spend as much time as it takes to successfully attack a target, but penetration testers are subject to time and cost constraints and therefore need to work much more effectively and efficiently.
+One option can be to combine different testing styles to maximize effectiveness. Black box testing can be combined with grey and/or white box testing to cover a larger attack surface, for example, through the client supplying credentials of a web application to short circuit the reconnaissance required.
+
+Grey box testing
+From an efficiency perspective one can also opt for a grey box penetration test which combines elements of both black box and white box testing. During a grey box penetration test, the penetration tester is provided with limited information about the targeted systems. There is no single definition of how a grey box penetration test is organized or guidelines on what information is given to the penetration tester. The information provided may include internal IP addresses, credentials for web applications, diagrams or, indeed, anything else depending on the test goals and objectives.
+Imagine that a client wants a penetration test performed on a custom web application that supports multiple roles. The web application has a very effective authentication mechanism that cannot be easily bypassed in a technical way. If the client supplies the user credentials in advance, the attack surface for the test is significantly increased and costs are reduced thereby allowing the penetration tester to test for vulnerabilities in the authenticated area of the application that might otherwise be inaccessible.
+
+White box testing
+In a white box test the penetration tester has full knowledge of the target system’s internal structure, infrastructure and applications. This may include anything from access credentials, source code and any other information about the company and targets. The white box approach allows the penetration tester to perform more rigorous and comprehensive testing because the tester does not have to dedicate time and resources to acquiring such knowledge.
+
+
+
+Links
+http://www.pentest-standard.org/index.php/Main_Page
+
+
+
+
+
+
+
+
+
+
+
