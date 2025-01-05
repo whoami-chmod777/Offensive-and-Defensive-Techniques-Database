@@ -1,6 +1,14 @@
 
 -- The Penetration process explained --
 
+• Information gathering
+• Vulnerability identification
+• Exploitation
+• Clean-up
+• Reporting
+• Elimination or mitigation of vulnerabilities
+
+
 A penetration test generally consists of the following phases:
 
 • Information gathering
