@@ -1,0 +1,42 @@
+
+-- The Penetration process explained --
+
+A penetration test generally consists of the following phases:
+
+• Information gathering
+• Vulnerability identification
+• Exploitation
+• Clean-up
+• Reporting
+• Elimination or mitigation of vulnerabilities
+
+Let’s take a brief look at the goals, activities performed and expected results in each phase of a penetration test.
+
+Information gathering
+This process typically starts with information gathering, both passive and active, and focuses on getting as much information about the target as possible. Passive information gathering focuses on information which is publicly available such as company information, whois information (a resource which may now have been blocked due to the EU’s GDPR legislation) and company e-mail addresses mentioned on the website. Active information gathering collects information about the target by actually connecting and interacting with services on the target. Examples of active information gathering are port scans and the enumeration of services such as SMTP, SMB and SNMP.
+This phase is probably the most important phase in the penetration test. The information collected here will be the basis for all following phases and, for this reason it must be conducted thoroughly, diligently and with great attention to detail.
+
+Vulnerability identification
+The vulnerability identification phase is all about using the information already gathered under phase one to identify potential vulnerabilities that can be exploited to gain access to a system. The process of identifying, quantifying, and prioritizing vulnerabilities in a system is also called a vulnerability assessment (please note that in the VHL course this is limited to vulnerabilities that are present in technical assets only and does not involve the use of social engineering). Vulnerability assessments can be performed both manually and with automated tools such as Nessus and Open-VAS. The outcome is a list of vulnerabilities found in software and services, network protocols, misconfigurations and anything else which could possibly lead to exploitation. The results of the vulnerability assessment are the input for the exploitation phase where the vulnerabilities are tested.
+
+Exploitation
+In the exploitation phase the vulnerabilities that have been identified are tested and exploited as far as the rules of engagement allow. The penetration tester will break into the target using exploits, zero days, social engineering attacks, physical attacks, malware, password attacks, eavesdropping and anything else permitted by the agreement with the client. This phase is the practical side of exploitation where exploits are analysed, modified and executed against the target system. The best possible outcome is a ‘root’ or ‘system shell’ with administrative privileges on the target system (a ‘shell’ is a command line or terminal interface for executing commands on a computer). Best info-sec practice is for a user account to run software and services with the lowest possible privilege level. That way, if the user account is compromised, an attacker’s access to other areas of the system will be limited. For this reason, shells obtained by exploiting software and services are often without administrative privileges and the user privileges have to be ‘escalated’ to a higher level to gain sufficient control over the target system. This is done by performing a further vulnerability assessment to identify what can be done to escalate the standard user privileges to those of a systems administrator.
+
+IMPORTANT: The rules of engagement will determine which exploits can be run against which targets. In general, you will never run kernel exploits on production servers because of the risks involved, but when a client has cloned the production environment and created a separate testing or staging environment, this can be within scope.
+
+Clean-up
+In the clean-up phase any uploaded files, exploits, malicious data, any user accounts created and anything else introduced to the system during the penetration test will be removed from the compromised host. This is an important task since penetration testers often deal with live production systems and any residual malicious software or rogue data may lead to the client’s system being corrupted, damaged or vulnerable to other misuse.
+
+Reporting
+In the reporting phase the penetration tester documents the findings from the different phases, informs the client about the results and suggests solutions for any vulnerabilities found. As a minimum a penetration test report should contain:
+
+• A high-level executive summary detailing the objectives, goals and agreement and an outline of the findings;
+• An overview of the targeted systems and the methodology;
+• A description of any vulnerabilities found and the results from the exploitation phase;
+• Recommendations about possible fixes and solutions for the vulnerabilities discovered.
+
+The report should contain all the information necessary for eliminating or mitigating vulnerabilities and weaknesses in the client’s system.
+
+Elimination or mitigation of vulnerabilities
+Eliminating or mitigating vulnerabilities is not normally part of a penetration test, but is the ultimate end-goal and could, therefore, be considered the most important phase of the overall penetration testing process from the client’s perspective. In this phase vulnerabilities will be fixed by updating software, installing patches, hardening security configurations or even by training staff. These tasks are often carried out by system administrators based on the technical findings in the penetration testing report.
+
