@@ -200,44 +200,88 @@ If you want to keep the old text by adding to the end of the existing file conte
 For example: echo BlueTeam, echo "Hello Linux" > note, echo "Hello My Friend" >> note
 
 more Command
-The more command is a command that allows reading the contents of long files. 
-For example: more wordlist
+The more command is a command that allows reading the contents of long files. The expression “%” in the lower-left indicates which part of the file is read as a percentage. 
+There are two conveniences for reading in this interactive environment. These are the "Enter" and "Space" keys on the keyboard. The file can be read by scrolling down line by line with the "Enter" key. A new page comes up with the "Space" button. 
+Pressing the "q" key is sufficient to exit the interactive environment that opens with the application of “more” command. 
+For example: more wordlist.txt
 
+wc Command
+The wc command is a command that counts the number of lines, the number of words and the number of characters in the file content. 
+We learn the total number of lines in the file content by using the wc command with the "-l" parameter. 
+We learn the total number of words in the file content by using the wc command with the "-w" parameter
+We learn the total number of characters in the file content by using the wc command with the "-m" parameter. 
+For example: wc -l, wc -w, wc -m
 
+head Command
+The head command is the command used to see the lines at the beginning of the file. The “-n” parameter of the head command allows to see any number of lines. 
+For example: head wordlist.txt, head -n 5 wordlist.txt
 
+tail Command
+The tail command is the command used to see the lines at the end of the file. The "-n" parameter of the tail command allows to see the desired number of lines. 
+For example: tail wordlist, tail -n 10 wordlist
 
+grep Command
+The grep command is a command to search within a file. The word/words to be searched are given as parameters. 
+For example: grep letsdefend wordlist.txt
 
+sort Command
+The sort command is the command to sort the contents of the file alphabetically. 
+For example: sort list
 
+uniq Command
+The uniq command is used to reduce successive same values ​​to a single value in the file content. 
+If all repetitive words, including all non-sequential words in the file content, are wanted to be printed on the screen once, sorting should be done first by applying the sort command, and then the uniq command should be applied. 
+It is possible to do all these operations with a single command. "|"(pipe) sign should be used to perform this operation with a single command. 
+The pipe(“|”) sign allows you to give the output of one command as input to another command. Pipe(“|”) gives the output of the command on the left as input to the command on the right.
+For example: uniq list, sort list | uniq
 
+date Command
+The date command is the command that displays the system's date and time
 
+uptime Command
+The uptime command is the command that shows how long the system has been up
 
+history Command
+The history command is the command that shows the history of commands executed on the command line. 
+While the History command is running, it reads the list of commands executed from a file and prints it to the screen. This file is the ".bash_history" file that is hidden under the user's home directory. 
 
+find Command
+The find command is the command used in file searches. With the find command, you can find out whether the searched file exists under a certain directory. 
+For example: find ../training/ -name attack, find . -type d -name letsdefend
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+file Command
+The file command is the command that shows the file type. In Linux, file extensions are represented. It is the header information of the file that determines the file type. The file command determines the file type according to the header information and prints it to the screen.
+For example: file letsdefend.txt
 
 
 -- Permissions Management --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
