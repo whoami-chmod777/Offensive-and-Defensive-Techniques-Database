@@ -102,6 +102,118 @@ The /var directory is known as the variable directory and contains system logs, 
 What is the Command Line
 The command line is an intermediary program that receives commands from the user via the keyboard and transfers the commands to the operating system for execution. The command line in Linux is called "shell". There are many types of shells supported on Linux. 
 
+Command Line Structure
+When the command line window is opened, we see a structure with a cursor waiting for a command from the user. This structure is as follows: username@hostname:current_directory$
+In this structure, the part before the "@" sign represents the username. The part from the "@" sign to the ":" sign represents the hostname. The part from the “:” to the “$” sign indicates which directory it is being worked on. The "$" sign on the far right is the last element in this structure. In the command line of the root user, who is the most authorized user in the system, the "#" sign is used instead of the "$" sign at the end of this structure. 
+
+whatis Command
+The whatis command allows us to view a single line of brief information about commands running on the command line. For example, let's execute the whatis command itself together with the whatis command.
+For example: whatis whatis
+It printed the one-line description of the whatis command to the screen
+
+help Command
+The help command is one of the information commands that gives a more detailed output than the whatis command. 
+For example help cd
+
+man Command
+The man command is the command that provides the most detailed information about the commands and programs on the command line. It has a specific writing format. It offers very detailed content from descriptions to parameters. 
+For example: man whatis
+
+pwd Command
+The pwd command stands for "print working directory". It is the command that shows the working directory. For example
+For example: pwd
+
+cd Command
+The cd command is the command to switch between directories. It stands for "change directory". When switching between directories with the cd command, the path of the target directory must be specified. 
+
+a. Absolute Path
+Absolute path is a notation written to indicate all subdirectories from the root directory ("/") to the current directory. 
+
+b. Relative Path
+Relative path, unlike absolute path, is to write the part after the current directory instead of typing the full path of the directory to be traversed from the root directory(“/”)
+
+Changing directory with current directory (".") sign
+The "." sign indicates the current directory. For example: xs ./letsdefend/
+
+d. Changing directory with parent directory ("..") sign
+With the ".." (parent directory) sign, we can switch to a parent directory of the current directory. 
+
+e. Switching to the home directory with the home directory ("~") sign
+With the "~" (home directory) sign, it is possible to switch to the home directory of the current user. For example: cd ~
+
+f. Switching to the last directory with the Previous directory sign ("-")
+With the "-" (previous directory) sign, it is possible to switch to the previous directory, regardless of which directory it is. For example: cd -
+
+ls Command
+The ls command is the command to list directories and files. With this command, directories and files under a directory can be viewed. It is one of the most important commands. It can have a very functional use with its parameters. 
+For example: ls
+
+a. Viewing hidden files and directories with the ls command
+The ls command does not show hidden files when used without parameters. In order to see hidden files, the ls command must be given the "-a" parameter.
+The difference between the display of hidden files and normal files is the "." sign in the beginning. As seen in the image above, hidden files were not displayed when the ls command was used without the "-a" parameter. 
+
+b. Getting detailed information about directories and files with the ls command
+When the ls command is used with the "-l" parameter, it provides detailed information about the files/directories it lists. This information includes the permissions of the file/directory, the owner of the file/directory the name of the user, the owner of the file/directory the name of the group, the size of the file/directory, the date the file/directory was last modified, and the name of the file/directory. 
+For example: ls -a
+
+c. Using multiple parameters with the ls command
+It is possible to obtain the desired output by using more than one parameter while executing the ls command. 
+For example: ls -al, ls -lah
+
+touch Command
+The touch command is the command to create a new empty file via the command line. 
+For example: touch testfile.txt
+
+mkdir Command
+The mkdir command is the command to create a new directory. It is possible to create multiple directories at once with the mkdir command.
+For example: mkdir dir1, mkdir dir2 dir3 dir4
+
+mv Command
+The mv command is the command used to rename and move files. With the mv command, we can change the file name as follows
+For example: mv oldfile newfile
+First, the old file name is written as a parameter after the mv command. As the second parameter, the new file name is written.
+
+In file transfer operations with the mv command, after the mv command, the path where the source file is located is given as the first parameter, and the destination path is given as the second parameter. 
+For example: mv movedfile ../incident
+
+cp Command
+The cp command is the command used in file/directory copy operations. The first parameter in the cp command is the path of the file/directory to be copied. The second parameter is the target path. 
+For example: cp copyfile ../SOC/
+
+It is possible to copy nested directories with the cp command. The "-r" parameter should be used for this operation. 
+For example,: cp -r '../soc/directory4/'
+
+rm Command
+The rm command is the command used to delete files and directories. When deleting directories with the rm command, the "-r" parameter should be used additionally. 
+For example: rm file1, rm -r directory1
+
+cat Command
+The cat command is the command used for reading from the file. The path of the file to be read is given as a parameter.
+
+echo Command
+The echo command is the command used for printing to the screen. 
+When the echo command and redirection operators are used together, printing to the file can be done. These operators are the “>” and “>>” operators. The “>” operator prints the value of the parameter given to the echo command to the file in the parameter that follows 
+If the target file content is full, the “>” operator deletes the existing text and prints the specified new expression to the file.
+When printing to a file with the “>” operator, if the target file does not exist, it is created and the content is saved in the created file.
+If you want to keep the old text by adding to the end of the existing file content, the “>>” operator should be used.
+
+For example: echo BlueTeam, echo "Hello Linux" > note, echo "Hello My Friend" >> note
+
+more Command
+The more command is a command that allows reading the contents of long files. 
+For example: more wordlist
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
