@@ -410,9 +410,57 @@ For example: unrar e rarfile.rar
 
 -- Process Management --
 
+What is Process?
+The process is the functioning units of the commands/programs running on the operating system. While performing a live Linux host review, mainly processes are examined. Examination and analysis of memory essentially mean the analysis of processes. In Linux, each process has its own identification number. This identification number is called "Process ID" (PID). This identification number is used in the operations of the processes. 
+
+Listing Running Processes
+The "ps" command is used to see the running processes. Information about processes is stored in virtual files under the "/proc" directory. The “ps” command provides output by reading the information in these files. 
+The first column contains the user who owns the process. 
+The second column contains the PID value, which is the identification number of the process. 
+The last column contains the name of the command/program that was run
+
+For example: ps, ps aux, ps -aux
+
+Listing Running Processes with Realtime Information
+With the "top" command, processes can be viewed instantly. 
+For example: top
+
+Killing Processes
+In some cases, it may be necessary to intervene in processes. 
+The "kill" command is used to end the process. 
+For example: kill -9 43215
 
 
 -- Network Management --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
