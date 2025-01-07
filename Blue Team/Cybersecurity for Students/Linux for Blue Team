@@ -256,33 +256,53 @@ For example: file letsdefend.txt
 
 -- Permissions Management --
 
+File permissions
+On Linux, each file has permissions. With these permissions, users are authorized to access related files. Management of file permissions is very important for security. The permissions of the files that each user needs to access and the permissions of the user-specific files are different.
+The "ls -l" command is used to see the permissions of the files.
 
+File permissions are shown in the leftmost column. File permissions have a unique representation. This display is divided into 4 areas: file type, user permissions, group permissions, and other permissions, respectively. For example: d | rwx | rwx | rwx
+On the far left, the file type is expressed first. If it says "d" in this section, it means that it is a directory. If there is a "-" sign, it means that the file exists. The representation of the remaining 3 fields consists of the expressions "r,w,x,-". The meanings of these expressions are as follows:
 
+r : readable
+w : writable
+x : executable
+- : empty
 
+There is also a numerical representation of file permissions. The expression "rwx" consists of 3 bits. In this notation, each r,w,x expression has a numerical equivalent:
 
+4: read permission(r)
+2: write permission(w)
+1: execute permission(x)
 
+Both letter and numeric notation can be used to change file permissions. 
 
+Changing File Permissions
+The "chmod" command is used when changing file permissions. The chmod command basically needs two parameters. The first of these is the parameter that contains information about the permission change. This parameter specifies which permission will be changed and whose permission will be changed. The second parameter is the file that the permissions need to be changed. 
+For example: chmod u+x letsdefend.jpg
 
+The first parameter in the command is the "u+x" parameter. In this section, the letter "u" indicates that the privileges of the user will be changed. The "+" sign indicates the change type. The "+" sign is used to authorize, if the "-" sign was used, it would mean revoking the existing authorization. The "x" sign indicates which type of authorization is used.
+Instead of "x"(execute), it could be changed to "w"(write) or "r"(read). 
 
+r w - r - - r - - : 6 4 4
+r w x r - - r - - : 7 4 4
 
+Ownership Permissions
+In Linux, each file has an owner as user and group. Ownership information can be viewed with the "ls -l" command.
+The "chown" command is used to change the owner of the file. 
 
+The owner of the file is the "debian" user. 
 
+-rw-r--r-- 1 debian debian 16243 Apr 2 09:02 Letsdefend.jpg 
 
+For example: sudo chown letsdefend letsdefend.jpg
 
+-rw-r--r-- 1 letsdefend debian 16243 Apr 2 09:02 Letsdefend.jpg 
 
+The one on the right represents the owner group. If we want to change the owner group, the command we need to apply is the "chgrp" command. 
 
+For example: sudo chgrp letsdefend letsdefend.jpg
 
-
-
-
-
-
-
-
-
-
-
-
+-rw-r--r-- 1 letsdefend debian 16243 Apr 2 09:02 Letsdefend.jpg 
 
 
 -- User Management and Groups --
