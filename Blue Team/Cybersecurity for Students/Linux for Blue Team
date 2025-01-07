@@ -222,7 +222,7 @@ For example: tail wordlist, tail -n 10 wordlist
 
 grep Command
 The grep command is a command to search within a file. The word/words to be searched are given as parameters. 
-For example: grep letsdefend wordlist.txt
+For example: grep letsdefend wordlist.txt, grep -o "d" grepme.txt | wc -l
 
 sort Command
 The sort command is the command to sort the contents of the file alphabetically. 
