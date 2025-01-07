@@ -373,41 +373,39 @@ For example: su letsdefend, sudo su -
 
 -- Archive File Formats --
 
+Compressing files with gzip
+gzip is one of the tools to save storage space by compressing files. When compressing with the gzip command, “.gz” is added to the file extension.
+For example: gzip wordlist.txt
 
+Decompressing gzip files
+The "gunzip" command is used to open gzip-compressed files. 
+For example: gunzip wordlist.txt
 
+Creating archives with tar
+The tar command allows multiple files to be archived as a single file. When the tar command is used alone, it doesn't compress, it just makes a single archive file. 
+The extension of files archived with the tar command is specified as ".tar"
 
+The "c" parameter in the command indicates that there is an archive creation operation. 
+The "v" (verbose) parameter provides information to the user about whether the operation was successful or not. 
+The "f" parameter is used to specify the name of the archive file to be created.
 
+For example: tar cvf tarfile.tar wordlist1.txt wordlist2.txt
 
+Creating zip files
+In Linux it is possible to create zip files on the command line. 
+For example: zip zipfile.zip wordlist.txt wordlist2.txt
 
+Unzip files
+We can open zip files with the "unzip" command on the Linux command line. 
+For example: unzip zipfile.zip
 
+Creating rar files
+It is possible to archive files as rar in Linux. 
+For example: rar a rarfile.rar wordlist1.txt wordlist2.txt
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Unrar files
+In the Linux command line, we can open rar files with the "unrar" command. 
+For example: unrar e rarfile.rar
 
 
 -- Process Management --
