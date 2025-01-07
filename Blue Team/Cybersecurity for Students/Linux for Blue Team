@@ -307,9 +307,106 @@ For example: sudo chgrp letsdefend letsdefend.jpg
 
 -- User Management and Groups --
 
+Users and Groups
+In order to be able to perform any operation on Linux, it is absolutely necessary to have a user. That's why Linux users are very important. The target of the attacker trying to take over the target Linux system is to seize the most authorized user account. The most authorized user on Linux is the "root" user. The root user has no restrictions on the system. The root user should be very careful while running commands on the system because if the root user runs a wrong command, it may have irreversible results that impact the system in a negative way. 
+The target for attackers is always to have the privileges of the root user. 
+
+whoami command
+The whoami command is the command that shows which user is operating on the command line being worked on. 
+
+The Concept of UID (User ID) ve GID (Group ID)
+In Linux, each user and group has its own identification number. The identification number for users is called UID (user id) and GID (group ID) for groups.Id values ​​are used in definitions for operations on the system. 
+In Linux-based operating systems, the "root" user has a UID of "0" by default. Users newly added to the operating system usually start from the "1000" UID value and increase with the increments of 1. Generally, service users have a UID value between "1" and "999"
+For example: id -u
+
+Finding out the groups the user belongs to
+The "id" command can be used to see the groups that the user belongs to. 
+
+/etc/shadow File
+"/etc/shadow" file is an important file on the system that keeps the encrypted versions of the passwords of the users. 
+
+Looking at the file permissions, read permission is not granted for other. So the file contents could not be read by the debian user. In such cases, there are some methods to read files that are accessible to the root user.
+One of these methods is to apply the sudo command, which allows to act as the root user. The sudo command stands for "superuser do". The sudo command is a command that allows normal users to act as root. The user must be in the sudo group to be able to execute this command. In order to use the sudo command, it is necessary to know the password of the current user because this password information will be requested when the sudo command is executed. 
+For example: sudo cat /etc/shadow
+
+The "/etc/shadow" file contains the following information, respectively:
+
+• Username.
+• Encrypted password.
+• Date of the last password changed - expressed as the number of days since Jan 1, 1970. If there is a 0 that means the user should change their password the next time they log in.
+• Minimum password age - Days that a user will have to wait before being able to change their password again.
+• Maximum password age - Maximum number of days before a user has to change their password.
+• Password warning period - Number of days before a password is going to expire.
+• Password inactivity period - Number of days after a password has expired to allow login with their password.
+• Account expiration date - the date that the user will not be able to log in.
+• Reserved field for future use.
+
+/etc/passwd File
+The /etc/passwd file is a file where the entire user list in the system can be seen. It contains detailed information about users. Unlike the shadow file, the “/etc/passwd” file can be read by normal users.
+
+The "/etc/passwd" file contains the following information, respectively:
+
+• Username
+• User's password - the password is not really stored in this file, it's usually stored in the /etc/shadow file. You can see many different symbols that are in this field, if you see an "x" that means the password is stored in the /etc/shadow file, a "*" means the user doesn't have login access, and if there is a blank field that means the user doesn't have a password.
+• The user ID - as you can see root has the UID of 0
+• The group ID
+• GECOS field - This is used to generally leave comments about the user or account such as their real name or phone number, it is comma-delimited.
+• User's home directory
+• User's shell - you'll probably see a lot of users defaulting to bash for their shell
+
+To Create a New User
+It is possible to create a new user with the "useradd" command 
+For example: sudo useradd tempuser
+
+To Delete an Existing User
+It is possible to delete an existing user with the command "userdel"
+For example: sudo userdel tempuser
+
+Changing User Password
+It is possible to change users' passwords with the "passwd" command. 
+For example: sudo passwd letsdefend_user
+
+User Switch in Command Line
+It is possible to switch the user on the command line with the "su" command. The name of the user to be actively used is entered as a parameter with the "su" command.
+For example: su letsdefend, sudo su -
 
 
 -- Archive File Formats --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
