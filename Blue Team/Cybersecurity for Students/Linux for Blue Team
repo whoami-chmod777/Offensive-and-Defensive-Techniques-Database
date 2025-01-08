@@ -419,7 +419,7 @@ The first column contains the user who owns the process.
 The second column contains the PID value, which is the identification number of the process. 
 The last column contains the name of the command/program that was run
 
-For example: ps, ps aux, ps -aux
+For example: ps, ps aux, ps -aux, ps --pid 36726 
 
 Listing Running Processes with Realtime Information
 With the "top" command, processes can be viewed instantly. 
