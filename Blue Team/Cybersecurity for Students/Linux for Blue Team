@@ -433,38 +433,120 @@ For example: kill -9 43215
 
 -- Network Management --
 
+What is “Network” and Why is it Important?
+The network is the path to the target systems for the attackers. This path is divided into 2 parts: the path inside the organization and the interface facing outside of the organization. The network connections of the devices facing the external interface of the organization and the network connections of the devices within the organization are critical for attack detection and prevention.
 
+To Have Knowledge About the Network Interfaces in the System
+On Linux, it is possible to see which network interfaces are active and which IP address they are using from the command line.
+The "-a"(all) parameter is used to get detailed information and to see all interfaces
+For example: ifconfig, ifconfig -a
 
+Assigning Dynamic IP Addresses to Network Interfaces
+The DHCP server is responsible for assigning IP addresses to all devices in the network. The command that enables obtaining an IP address from the DHCP server on Linux is the "dhclient" command.
+For example: dhclient ens33
 
+Disabling/Enabling Network Interfaces 
+On Linux, it is possible to disable network interfaces from the command line
+For example: ifconfig ens33 down, ifconfig ens33 up
 
+Assigning a Static IP Address to the Network Interface 
+Assign fixed IP addresses to interfaces in the Linux.
+For example: ifconfig ens33 down, ifconfig ens33 192.168.199.250, ifconfig ens33 up
 
+Viewing the Network Connections
+View the current network connections and their status via the command line using the "netstat" command.
+For example: netstat, netstat -atnp, netstat -ano
 
+The "-a"(all) parameter is the parameter used to show all the connections.
+The "-t" parameter is used to show only TCP connections.
+The "-n" parameter is used to show addresses numerically without resolving domain names.
+The "-p" parameter is used to show the program name and PID number of the connection.
 
+Viewing the Packet Flow Instantly
+Monitor incoming and outgoing network packets from the command line.
+For example: tcpdump -i ens33
 
+Access Control to the Destination IP Address
+We may need to check the network communication of a system using another system within the same network. 
+For example: ping -c 1 heise.de
 
+Resolving the DNS Server IP Address of the Domain to be Accessed 
+DNS servers as intermediaries perform the domain name and IP address resolution and report back to our system so we can connect to the target systems easily
+For example: dig letsdefend.io, nslookup letsdefend.io
 
+/etc/resolv.conf File 
+In the Linux operating system, the IP address of the DNS server to which the domain name resolution requests will be sent can be determined. This configuration is done in the "/etc/resolv.conf" file. 
+Note: Changes made in the "/etc/resolv.conf" file are deleted after rebooting the system. If permanent changes are desired, changes should be made in the "/etc/systemd/resolved.conf" file
+For example: cat /etc/resolv.conf
 
+/etc/hosts File
+When trying to access to a domain in Linux, the IP address of the target must be resolved first. In this IP address resolution process, local records are checked first. If the IP address of the target is known and registered on the system, the IP address of the target is obtained before a request is sent to the DNS server. These records are located in the "/etc/hosts" file in Linux. For example
+For example: cat /etc/hosts
 
+debian@debian:~/blueteam$ cat /etc/hosts
+127.0.0.1  localhost
+127.0.1.1  debian
 
+If localhost is desired to be accessed, "127.0.0.1" will be used as the IP address. In this section, new records can be added to the file content in accordance with the format. 
+For example, if the google.com domain is to be added to the records along with letsdefend.io IP address, requests made to google.com on the system will go to the letsdefend.io IP address instead of the google.com IP address, because google.com has been recorded as the letsdefend.io IP address. 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+File sharing with Python HTTP Server
+If file transfer between devices within the same network is needed, file sharing can be opened easily by using "python"
+For example: python3 -m http.server
 
 
 -- Package Management --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
