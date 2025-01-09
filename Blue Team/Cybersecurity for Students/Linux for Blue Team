@@ -567,35 +567,29 @@ For example: systemctl start apache2.service
 
 -- Scheduled Tasks --
 
+What is a Scheduled Task?
+A scheduled task is the execution of certain operations on the system at certain times or time intervals. A “Scheduled Task” will implement this type of task in Linux. 
+Scheduled tasks are called "cron jobs" in Linux. It is essentially the "cron" service that enables scheduled tasks to run. So if attackers accessed the target Linux system they may task the system to perform certain operations at certain time intervals by taking the advantage of cronjobs. 
+The attackers establish persistence by adding the malware and reverse shell commands to the scheduled tasks. 
+
+Listing All Your Cron Jobs
+The "crontab -l" command is used to view the available scheduled tasks. 
+
+Structure of Scheduled Tasks (Syntax of crontab)
+Scheduled tasks have the following spelling format: 
+
+Example: 30 08 * * * /home/pete/scripts/change_wallpaper
+
+The fields are as follows from left to right: 
+
+• Minute - (0-59)
+• Hour - (0-23)
+• Day of the month - (1-31)
+• Month - (1-12)
+• Day of the week - (0-7). 0 and 7 are denoted as Sunday
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Adding, Deleting, and Editing New Scheduled Tasks
+The "crontab -e" command is used for adding, deleting scheduled tasks, and changing the existing tasks
+For example: crontab -e
 
