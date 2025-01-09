@@ -166,7 +166,7 @@ For example: touch testfile.txt
 
 mkdir Command
 The mkdir command is the command to create a new directory. It is possible to create multiple directories at once with the mkdir command.
-For example: mkdir dir1, mkdir dir2 dir3 dir4
+For example: mkdir dir1, mkdir dir2 dir3 dir4, mkdir -p
 
 mv Command
 The mv command is the command used to rename and move files. With the mv command, we can change the file name as follows
