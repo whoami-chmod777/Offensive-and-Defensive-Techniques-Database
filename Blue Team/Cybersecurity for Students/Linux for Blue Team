@@ -497,63 +497,105 @@ For example: python3 -m http.server
 
 -- Package Management --
 
+Package and Package Management
+The package is the downloadable files in the repositories of the distribution to install an application on Linux from the command line or the Graphical User Interface (GUI). The repositories contain installable packages of applications. It is almost the easiest way to install applications on Linux. Each Linux distribution can have a different repository. The desired application can be installed with the package manager installed on Linux, as well as the removal of applications from the system can be done with package managers. To install the application with the package manager, the installable file of the relevant application must be found in the system's repository. Applications that are not included in the repository must be downloaded and installed into the system. 
+Linux distributions such as Debian, Ubuntu, and Linux Mint use the same package manager. Linux distributions such as Red Hat Enterprise Linux, Fedora, and CentOS use a different package manager. 
+Redhat-like distributions use the "RPM (RPM Package Manager)" package manager. Debian-based distributions use the "APT" package manager. The file extension for the RPM package manager is ".rpm". The file extension for the APT package manager is ".deb". 
 
+APT Source List
+When installing packages on Linux, it downloads the file from a specific source. Linux has to know where to download the file. The APT package manager has a source list that it uses to download files. This list, which is saved in a file on Linux, is located in "/etc/apt/sources.list". 
+The addresses from which the packages will be downloaded are written in the "/etc/apt/sources.list" file on the system. 
 
+Updating Packages for a Repository
+Packages in the repositories are constantly updated. In order to install the newly added packages to the system, the packages in the repository must first be updated. When the command is executed, a list of packages that need to be updated is displayed. 
+For example: sudo apt-get update
 
+Installing a package from a repository with APT Package Manager
+Packages can be installed on the system with the APT package manager. 
+For example: sudo apt-get install chromium
 
+List Installed Packages on the System
+The "dpkg" command is used to see the packages installed on the system. 
+For example: sudo dpkg -l
 
+Remove a Package with APT Package Manager
+It is possible to delete the packages installed on the system with the APT package manager.
+For example: sudo apt-get remove chromium
 
+Getting information about an installed package
+It is possible to get detailed information about the packages installed in the system in Linux. 
+For example: apt show firefox
 
+Installing a Package with dpkg
+It is possible to download and install packages on Linux externally. The extension of such files should be ".deb". Files with the ".deb" extension can be uploaded to the system with "dpkg". 
+First of all, the relevant package is downloaded from the website. Then, the installation is carried out with the "dpkg" command in the directory where the downloaded file is located.
+For example: sudo dpkg -i hwinfo_21.72-1_amd64.de
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Removing a package with dpkg
+It is possible to remove the packages installed on the system with "dpkg". 
+When deleting a package from the system with "dpkg", the name of the package should be written as it is in the "dpkg -l" output
+For example: sudo dpkg -r hwinfo
 
 
 -- Service Management --
 
+What is Service?
+Services are programs that run or wait to run in the background in Linux. Many services can be offered as services in Linux.
+Services are often important to cybersecurity because services that are turned on have the risk of creating security vulnerabilities.
+Therefore, any service that is not needed in the system should be turned off or disabled. Security hardening of the system is vital and should be implemented to ensure the security of our systems. 
+
+Listing All Services Available in the System
+It is necessary to know how to manage the services when working with these services on Linux. 
+For example: systemctl list-units --type=service
+
+Listing All the Running Services in the System
+How to be able to list all the running services in the system.
+For example: systemctl list-units --type=service --state=running
+
+Viewing the Status of a Particular Service
+We can display the status of a single service.
+For example: systemctl status apache2.service
+
+Stopping the Service
+The "systemctl" command is used to stop the running service.
+For example: systemctl stop apache2.service
+
+Starting the Service
+The "systemctl" command is used to start the running service.
+For example: systemctl start apache2.service
 
 
 -- Scheduled Tasks --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
