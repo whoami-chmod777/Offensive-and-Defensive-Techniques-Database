@@ -1,0 +1,26 @@
+
+In the information gathering phase of a penetration test you gather as much information as possible about the targets, networks and the connected hosts. In general, more information means a better understanding of the systems and a wider attack surface which, in turn, leads to better vulnerability assessments and better penetration testing results. 
+Passive information gathering or OSINT (Open-Source Intelligence) focuses on gathering information from publicly available sources, such as search engines, WHOIS databases, company websites and social media accounts, while active information gathering techniques involve a direct connection to and contact with the target to collect information about it. Examples of active information gathering techniques include ports scans, banner grabbing, protocol enumeration (SMB/SNMP/FTP/HTTP etc.) and vulnerability scans. 
+
+Passive information gathering
+• Domain names
+• Company locations
+• Employees
+• Departments
+• E-mail addresses
+• Job openings
+• Company reviews
+• Partners (Business and technology)
+• Remote access
+• Certificates
+• Social Media
+
+Active information gathering
+• Network maps
+• Network blocks
+• IP addresses
+• DNS servers
+• Live hosts
+• Operating systems
+• Open ports
+• Service information
