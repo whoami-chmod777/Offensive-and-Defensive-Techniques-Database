@@ -101,6 +101,130 @@ google.com mail is handled by 10 smtp.google.com.
 
 
 Zone transfers
+DNS is regarded as a very critical component for applications and services to function properly. For this reason, DNS servers are frequently set up to be highly-available and when the one DNS server goes down a secondary will take over. In order to have this setup function properly we have to make sure that both DNS servers contain the same data and therefore multiple DNS servers need to ‘synchronize’ data with each other on a regular basis. A mechanism to replicate DNS databases (containing DNS records) across a set of DNS servers is called a zone transfer, the replicated database is called a ‘DNS zone’. A zone transfer occurs when the information from the primary DNS server is replicated on one or more secondary DNS servers. While DNS zone transfers are perfectly fine between DNS servers that are intended to share zones, they can unintentionally leak sensitive information to an attacker that would otherwise not be available. While DNS records itself are not sensitive, a DNS zone may reveal a complete list of all hosts for a given zone. This zone may contain sensitive data, such as hostnames, and can provide a larger attack surface for attackers – especially when a company uses a lot of custom sub-domains that are hard to discover using brute force techniques. This misconfiguration can lead to an attack surface consisting of less secure staging servers, business applications with a web interface, VOIP setups and references to every local branch of an organization. Good security practice (which is typical on most DNS servers) is to turn off zone transfers for the public.
+
+
+Dig
+Dig, short for Domain Information Groper, is another tool to query DNS servers.
+
+dig -t mx google.com
+dig -t any google.com @8.8.8.8
+dig axfr @nsztm1.digi.ninja zonetransfer.me
+
+
+Fierce
+Fierce is a reconnaissance tool written in Perl to locate non-contiguous IP space and hostnames using DNS. This tool helps to locate likely targets both inside and outside corporate networks.
+The first thing that Fierce does is locating the name servers for the given domain. Next it tries to perform a zone transfer on every name server, checks for a wildcard DNS record and finally brute forces subdomains using an internal wordlist. Once the scan is finished Fierce will show any subdomains found at the bottom of the output. By default, Fierce uses its own wordlist to scan for subdomains, but you can also use your own wordlist by specifying it in the subdomain-file
+
+fierce --domain google.com
+fierce --domain google.com --subdomain-file subdomains.txt
+
+
+Wildcard domains
+A Wildcard DNS record is a DNS record that will match any request when there is no record available that explicitly matches that request. The Wildcard DNS record is usually defined using an asterisk as the first label: *.domain.com. 
+
+www.domain.com     A      1.1.1.1
+vpn.domain.com     A      1.1.1.2
+test.domain.com    A      1.1.1.3
+*.domain.com       A      1.1.1.1
+
+If we request the IP address for ‘www.domain.com’ we will be given the IP 1.1.1.1. If we request the IP address for ‘vpn.domain.com’ we will get 1.1.1.2 and so on. When we request the IP for a domain that is not explicitly defined, such as 8u1fc.domain.com, we will get the wildcard response of 1.1.1.1.
+
+So, what exactly is the purpose of checking for a Wildcard DNS record? Many DNS and subdomain enumeration tools use wordlists to test for common subdomains, like in the last step of the Fierce scan. As you can see from the Fierce example above, the tool first makes a request for a subdomain that is very unlikely to exist (98081238656.google.com for example) before brute forcing common names. If the request for this domain doesn’t match any of the explicitly defined records it will finally match against the wildcard DNS record and return the default IP associated with the wildcard DNS record. Practically this means that every brute force attempt would come back as successful, either with a real result or the default wildcard record. When Fierce requests the non-existing subdomain and the default IP is returned, it is able to distinguish a wildcard result from real results. Any request that does not result in the wildcard IP address must be explicitly defined on the name server.
+
+
+DNSenum
+DNSenum is a Perl script that can be used to enumerate the DNS information of a domain and to discover non-contiguous IP blocks. This tool will also attempt zone transfers on all the related domain name servers and searches for subdomains.
+
+dnsenum [domainname]
+
+
+DNSrecon
+DNSrecon is another automated tool that can be used to query DNS records, check for zone transfers and other DNS related information. This tool shows more or less the same output as we’ve already seen in the other (automated) DNS reconnaissance tools.
+
+dnsrecon -d google.com
+
+
+Sublist3r
+The next tool we will look at is Sublist3r which is a tool written in Python for enumerating subdomains using data from publicly available sources. Sublist3r utilises popular search engines such as Google, Bing, Yahoo and Baidu to discover subdomains for a selected domain name. There is also an option to brute force subdomains using an integrated tool named Subbrute. Subbrute is a DNS meta-query spider that uses an extensive wordlist to enumerate DNS records and subdomains. 
+To apply brute-forcing with Subbrute we add the -b option to the command. We can also specify the number of additional threads to use with the -t option, the search engine to use with the -e option and the -v option for verbose output.
+
+sublist3r -h
+sublist3r -d google.com
+sublist3r -d google.com -b -t 100 -e google -v
+
+
+E-mail harvesting
+E-mail harvesting is the process of collecting (company) e-mail addresses from multiple sources that can be used for future attacks. E-mail addresses often expose information about naming conventions. A very common naming convention for example is the use of the first letter of the first name followed by the surname, but it is not so unusual for organizations to apply multiple naming conventions. In many situations the same naming conventions used for e-mail addresses are also applied to usernames for login credentials (think of usernames used to access networked devices). E-mail addresses, then, can also be a potential list of valid usernames and can be compared with usernames collected in later phases of the penetration test. 
+
+The Harvester
+The Harvester is used for e-mail harvesting and uses several different search engines to search for e-mail addresses automatically. It is a quick and easy to use tool which will save you a lot of time compared to manually searching e-mail addresses using search engines. 
+
+theHarvester -h
+
+Let’s see if we can find any e-mail addresses for the cisco.com domain using the Yahoo search engine. We will specify the domain to search for with -d, the data source with -b and limit the results for this search to 100 results by adding -l 100 to the command 
+
+theHarvester -d cisco.com -b google -l 100
+theHarvester -d cisco.com -b yahoo -l 100
+
+
+Recon-ng
+Another great tool that I would like to demonstrate here is called Recon-ng. Recon-ng is a reconnaissance framework used in a similar way to Metasploit. One of the modules can be used in the e-mail harvesting process to see if any passwords have been dumped in (recent) data breaches. 
+
+recon-ng --version
+
+recon-ng
+marketplace refresh
+arketplace search
+arketplace search hibp
+marketplace install recon/contacts-credentials/hibp_breach
+keys add hibp_api [API key]
+modules load recon/contacts-credentials/hibp_breach
+> info
+options set SOURCE info@microsoft.com
+run
+
+
+WWW and Social Media
+There are many websites that can assist in the passive information gathering process. The most important search engine for publicly available information about specific targets is probably Google.
+The same applies to social media which is used by many companies to actively seek commercial opportunities. Some companies are very organized and have strict policies for social media usage while many others don’t have any (written) policies at all. The lack of policies and rules on how to share business-related information via social media may result in exposing more information than desirable from a security standpoint.
+
+https://www.google.com
+https://www.google.com/maps
+https://www.exploit-db.com/google-hacking-database/
+https://www.shodan.io
+https://www.tineye.com
+https://www.netcraft.com
+https://pastebin.com
+https://haveibeenpwned.com
+
+
+Company information
+
+LinkedIn
+Perhaps the most well-known source is LinkedIn, where many companies provide information that may be useful to the penetration test. This includes information about employees, products, processes, technologies and processes used. LinkedIn can also be used to see with which relationships are maintained with other companies. If you have ever worked for a manufacturing company, you are familiar with the fact that extensive research is done on suppliers and customers of competitors to gain a business advantage. While LinkedIn is an excellent starting point for this, so is penetration testing where you want to know who the software vendors are and which technologies are being procured. LinkedIn also shows which employees a company employs. On LinkedIn profiles of employees, you can usually find a lot of information about processes, current and completed projects and used technologies. This information can also be important at some point in the penetration test.
+
+Company registrations
+Many companies are also required to make certain information about their company publicly available, because they are required by law and regulations due to their legal form or because certain registrations are required to do business with, for example, a government organization. An example of this is a DUNS or CAGE number that is mandatory for companies that want to do business with the US government. 
+
+Financial information and documents
+Many companies are required to disclose financial information and certain documents due to their legal form or laws and regulations. For example, publicly-traded companies must file their financial information with U.S. Securities and Exchange Commission (SEC) through EDGAR (the Electronic Data Gathering, Analysis, and Retrieval system) where it is publicly available for free.
+
+OpenCorporates.com
+OpenCorporates is a public database with interesting information such as the company number (can be used to search for further information), directors, the status and incorporation date and the company type. 
+Another very useful piece of information provided by OpenCorporates is a link to the page where the company is officially registered. Here you can view the documents and filings that companies are required to register and are often publicly available.
+
+Crunchbase
+Crunchbase is an online database of business information about private and public companies. On Crunchbase, you can find investment and financing information, mergers and acquisitions, as well as the founding members of an organization and individuals in leadership positions.
+
+
+
+
+
+
+
+
+
 
 
 
