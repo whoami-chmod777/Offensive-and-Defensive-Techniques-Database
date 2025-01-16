@@ -1,4 +1,5 @@
 
+Passive Information Gathering
 Passive information gathering is the process of collecting information about a specific target from publicly available sources that can be accessed by anyone. They include search engine data, social media, online databases and even the company website. This kind of information gathering is all about ‘getting to know your target’ and is usually performed before starting the actual penetration test because it may yield valuable information for later use. 
 Some of this information can be important and, when combined with other data, may become a serious security threat. Think of how employee names can be combined with company naming conventions to generate real and useable account names. This kind of data can be used to perform more effective password attacks for hackers to gain an initial beachhead on the company network.
 
