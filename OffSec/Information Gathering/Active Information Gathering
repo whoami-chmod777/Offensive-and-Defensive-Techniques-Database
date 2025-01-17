@@ -57,3 +57,125 @@ netdiscover -P
 
 # Custom MAC Vendor File for Resolving Vendors
 netdiscover -m /path/to/mac_vendor_file.txt
+
+
+Nmap host discovery
+This option tells Nmap to perform host discovery only without any additional port scanning and prints out details of any hosts that responded
+
+# Ping Sweep (No Port Scan)
+nmap -sn 192.168.1.0/24
+
+# Skip Host Discovery (Scan All IPs)
+nmap -Pn 192.168.1.0/24
+
+# Custom TCP SYN Ping
+nmap -PS22 192.168.1.0/24
+
+# TCP ACK Ping to Multiple Ports
+nmap -PA80,443 192.168.1.0/24
+
+# UDP Ping on Specific Ports
+nmap -PU53,161 192.168.1.0/24
+
+# ICMP Echo Request Ping
+nmap -PE 192.168.1.0/24
+
+# Disable ARP/ND Ping
+nmap --disable-arp-ping 192.168.1.0/24
+
+# SCTP INIT Ping
+nmap -PY22,80,5060 192.168.1.0/24
+
+# IP Protocol Ping
+nmap -PO1,2,4 192.168.1.0/24
+
+# ICMP Timestamp and Address Mask Request
+nmap -PP -PM 192.168.1.0/24
+
+# Disable ARP/ND Ping
+nmap --disable-arp-ping 192.168.1.0/24
+
+# Ignore RST Responses During Discovery
+nmap --discovery-ignore-rst 192.168.1.0/24
+
+# Perform Traceroute
+nmap --traceroute 192.168.1.0/24
+
+
+Nmap port scanning
+Nmap offers a lot of different scanning methods to determine open, filtered and closed ports and to fingerprint services and operating systems. 
+
+# TCP SYN Scan (Half-Open)
+nmap -sS 192.168.1.0/24
+
+# TCP Connect Scan (Full Connection)
+nmap -sT 192.168.1.0/24
+
+# UDP Scan
+nmap -sU 192.168.1.0/24
+
+# SCTP INIT Scan
+nmap -sY 192.168.1.0/24
+
+# Null Scan (No TCP Flags Set)
+nmap -sN 192.168.1.0/24
+
+# FIN Scan (Only FIN Flag Set)
+nmap -sF 192.168.1.0/24
+
+# Xmas Scan (FIN, PSH, and URG Flags Set)
+nmap -sX 192.168.1.0/24
+
+# TCP ACK Scan (Firewall Rule Mapping)
+nmap -sA 192.168.1.0/24
+
+# TCP Window Scan
+nmap -sW 192.168.1.0/24
+
+# TCP Maimon Scan
+nmap -sM 192.168.1.0/24
+
+# Custom TCP Scan Flags
+nmap --scanflags SYNURGACK 192.168.1.0/24
+
+# SCTP COOKIE ECHO Scan
+nmap -sZ 192.168.1.0/24
+
+# Idle (Zombie) Scan
+nmap -sI zombie_host:probeport 192.168.1.0/24
+
+# IP Protocol Scan
+nmap -sO 192.168.1.0/24
+
+# FTP Bounce Scan
+nmap -b user:pass@ftpserver 192.168.1.0/24
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
