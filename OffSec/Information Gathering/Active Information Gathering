@@ -1,12 +1,14 @@
 
-Active information gathering
+-- Active information gathering --
+
 Enumeration in the ethical hacking and penetration testing context is the process of retrieving usernames, shares, services, web directories, groups, and computers on a network. This is also called network enumeration. During this process we also collect any other network-related information that may be useful for conducting a penetration test
 An important part of the enumeration process involves port scanning and fingerprinting services and applications. Each computer has a number of (physical and software) endpoints that are called ports. We all know physical computer ports, such as USB and HDMI ports, that serves as an interface between the computer and external devices such as storage devices and peripheral devices. Ports in networking are pretty similar to physical ports, except that they are not particularly an interface between the computer and a physical device but between the network service and a client computer program. The computer program or network service that is listening on the port has control over the port and is associated with an IP address making it available for network communication. Communication with the network service takes place by addressing the IP address over the listening port and by following a protocol that the network service is able to understand. The protocol is a pre-defined set of rules that have to be followed by both parties in order to establish successful communication between the client and the server. The sending party has to be aware of the instructions that the receiving party (server) is able to understand so that the server can respond accordingly with information that the sending party (client) is able to understand.
 A good example to explain this concept is the web server that is serving a website and the web browser that is able to display the website. If the communication between the server and the client correctly follows the Hypertext Transfer Protocol (often abbreviated to HTTP) it will result in web content successfully delivered to the web browser. This example refers to a web server and the HTTP protocol but there are a lot more protocols, such as the Simple Mail Transfer Protocol (SMTP) to transfer e-mails between computers or the File Transfer Protocol (FTP) to transfer files between computers. But how do we know if a network service is running on a specific port, what software it is and finally what protocol to adhere to? For this we’ll use port scanning and fingerprinting techniques.
 Port scanning is used to probe a server or host for open TCP and UDP ports. Fingerprinting is the process of identifying the services connected to those ports and their version numbers. Perhaps the most popular tool for network enumeration, port scanning and fingerprinting is Nmap (which stands for Network Mapper).
 
 
-Host discovery
+-- Host discovery --
+
 Host discovery is the process of finding live hosts on a network and is one of the first steps in network reconnaissance. As a penetration tester we want to be able to identify as many live hosts as possible on the network, even those that try to hide their presence. There are several tools for host discovery that use a variety of techniques. 
 It is always best to use multiple tools for host discovery because different tools have more success under different scenarios and circumstances. Results are dependent on variables such as the network environment and configuration-specific parameters on individual hosts and a single technique cannot always guarantee accuracy. 
 Netdiscover uses ARP messages, but ARP is not designed to cross network boundaries which means it only works if performed on the same network. An ICMP (ping) scan on the other hand sends ICMP packets, but many host-based firewalls drop ICMP packets by default. This means ping scans are not 100% reliable in host discovery because any host that drops ICMP packets will go unnoticed.
@@ -22,3 +24,36 @@ All responses are then collected and stored in a small database known as the ARP
 Netdiscover actively searches for live hosts on the network by broadcasting ARP requests as a router does. It calls out to all connected devices asking them to respond by IP address and any host that responds is a live host. This is why this technique is called ‘active ARP reconnaissance’ because the tool actively broadcasts requests to generate replies from live hosts. By default, Netdiscover runs in active mode, but we can also use Netdiscover in passive mode by using the -p option, it will then passively listen on the network and not broadcast anything at all.
 
 netdiscover -r 10.11.1.0/24
+
+# Basic Scan on Default Network
+netdiscover
+
+# Scan a Specific IP Range (e.g., 192.168.0.0/24)
+netdiscover -r 192.168.0.0/24
+
+# Use a Specific Network Interface (e.g., eth0)
+netdiscover -i eth0
+
+# Enable Passive Mode Only (no active ARP requests)
+netdiscover -p
+
+# Perform Fast Scanning
+netdiscover -f
+
+# Limit the Number of ARP Requests Sent to Each Host (e.g., 5 requests)
+netdiscover -c 5
+
+# Scan and Display Unique Hosts Only
+netdiscover -d
+
+# Show All Available Network Interfaces
+netdiscover -L
+
+# Scan a Range with a Specific Interface (e.g., eth0 on 192.168.1.0/24)
+netdiscover -i eth0 -r 192.168.1.0/24
+
+# Use Passive Mode and Suppress Active Discovery
+netdiscover -P
+
+# Custom MAC Vendor File for Resolving Vendors
+netdiscover -m /path/to/mac_vendor_file.txt
