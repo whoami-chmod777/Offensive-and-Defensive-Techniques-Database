@@ -151,8 +151,50 @@ nmap -sO 192.168.1.0/24
 nmap -b user:pass@ftpserver 192.168.1.144
 
 
+Fingerprinting Services and Operating Systems
+To identify services Nmap uses an extensive database of known services and their common ports. Certain ports are reserved for particular services. Port 22, for example, is used for SSH and port 80 for HTTP webservers.
 
+1. Service Fingerprinting
 
+# Basic Service Version Detection
+nmap -sV 10.11.1.2
+sudo nmap -sV -O 10.11.1.2
+
+# Aggressive Service Detection (The A stands for 'Aggressive' scan options and enables OS detection, version detection, script scanning and traceroute)
+sudo nmap -A 10.11.1.2
+sudo nmap -A -p- 10.11.1.2
+
+# Aggressive Service Detection
+nmap -sV --version-intensity 5 10.11.1.2
+
+# Combine Port Scan with Service Detection
+nmap -sS -sV 10.11.1.2
+
+# Identify Services on a Specific Port
+nmap -p 80 -sV 10.11.1.2
+
+# Attempt All Service Probes
+nmap -sV --allports 10.11.1.2
+
+2. OS Fingerprinting
+
+# Enable OS Detection
+nmap -O 10.11.1.2
+
+# Enable OS Detection with Aggressive Scanning
+nmap -O -A 10.11.1.2
+
+# OS Detection with Specific Ports
+nmap -p 22,80 -O 10.11.1.2
+
+# Combine OS Detection with Service Detection
+nmap -O -sV 10.11.1.2
+
+# Guess OS if Detection is Inconclusive
+nmap -O --osscan-guess 10.11.1.2
+
+# Perform Remote OS Detection Only
+nmap -sn -O 10.11.1.2
 
 
 
