@@ -63,92 +63,92 @@ Nmap host discovery
 This option tells Nmap to perform host discovery only without any additional port scanning and prints out details of any hosts that responded
 
 # Ping Sweep (No Port Scan)
-nmap -sn 192.168.1.0/24
+nmap -sn 192.168.1.144
 
 # Skip Host Discovery (Scan All IPs)
-nmap -Pn 192.168.1.0/24
+nmap -Pn 192.168.1.144
 
 # Custom TCP SYN Ping
-nmap -PS22 192.168.1.0/24
+nmap -PS22 192.168.1.144
 
 # TCP ACK Ping to Multiple Ports
-nmap -PA80,443 192.168.1.0/24
+nmap -PA80,443 192.168.1.144
 
 # UDP Ping on Specific Ports
-nmap -PU53,161 192.168.1.0/24
+nmap -PU53,161 192.168.1.144
 
 # ICMP Echo Request Ping
-nmap -PE 192.168.1.0/24
+nmap -PE 192.168.1.144
 
 # Disable ARP/ND Ping
-nmap --disable-arp-ping 192.168.1.0/24
+nmap --disable-arp-ping 192.168.1.144
 
 # SCTP INIT Ping
 nmap -PY22,80,5060 192.168.1.0/24
 
 # IP Protocol Ping
-nmap -PO1,2,4 192.168.1.0/24
+nmap -PO1,2,4 192.168.1.144
 
 # ICMP Timestamp and Address Mask Request
-nmap -PP -PM 192.168.1.0/24
+nmap -PP -PM 192.168.1.144
 
 # Disable ARP/ND Ping
-nmap --disable-arp-ping 192.168.1.0/24
+nmap --disable-arp-ping 192.168.1.144
 
 # Ignore RST Responses During Discovery
-nmap --discovery-ignore-rst 192.168.1.0/24
+nmap --discovery-ignore-rst 192.168.1.144
 
 # Perform Traceroute
-nmap --traceroute 192.168.1.0/24
+nmap --traceroute 192.168.1.144
 
 
 Nmap port scanning
 Nmap offers a lot of different scanning methods to determine open, filtered and closed ports and to fingerprint services and operating systems. 
 
 # TCP Connect Scan (Full Connection)
-nmap -sT 192.168.1.0/24
+nmap -sT 192.168.1.144
 
 # TCP SYN Scan (Half-Open)
-sudo nmap -sS 192.168.1.0/24
+sudo nmap -sS 192.168.1.144
 
 # UDP Scan
-nmap -sU 192.168.1.0/24
+nmap -sU 192.168.1.144
 
 # SCTP INIT Scan
-nmap -sY 192.168.1.0/24
+nmap -sY 192.168.1.144
 
 # Null Scan (No TCP Flags Set)
-nmap -sN 192.168.1.0/24
+nmap -sN 192.168.1.144
 
 # FIN Scan (Only FIN Flag Set)
-nmap -sF 192.168.1.0/24
+nmap -sF 192.168.1.144
 
 # Xmas Scan (FIN, PSH, and URG Flags Set)
 nmap -sX 192.168.1.0/24
 
 # TCP ACK Scan (Firewall Rule Mapping)
-nmap -sA 192.168.1.0/24
+nmap -sA 192.168.1.144
 
 # TCP Window Scan
-nmap -sW 192.168.1.0/24
+nmap -sW 192.168.1.144
 
 # TCP Maimon Scan
-nmap -sM 192.168.1.0/24
+nmap -sM 192.168.1.144
 
 # Custom TCP Scan Flags
-nmap --scanflags SYNURGACK 192.168.1.0/24
+nmap --scanflags SYNURGACK 192.168.1.144
 
 # SCTP COOKIE ECHO Scan
-nmap -sZ 192.168.1.0/24
+nmap -sZ 192.168.1.144
 
 # Idle (Zombie) Scan
-nmap -sI zombie_host:probeport 192.168.1.0/24
+nmap -sI zombie_host:probeport 192.168.1.144
 
 # IP Protocol Scan
 nmap -sO 192.168.1.0/24
 
 # FTP Bounce Scan
-nmap -b user:pass@ftpserver 192.168.1.0/24
+nmap -b user:pass@ftpserver 192.168.1.144
 
 
 
