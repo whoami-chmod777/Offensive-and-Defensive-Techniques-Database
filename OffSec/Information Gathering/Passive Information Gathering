@@ -1,5 +1,6 @@
 
-Passive Information Gathering
+-- Passive Information Gathering --
+
 Passive information gathering is the process of collecting information about a specific target from publicly available sources that can be accessed by anyone. They include search engine data, social media, online databases and even the company website. This kind of information gathering is all about ‘getting to know your target’ and is usually performed before starting the actual penetration test because it may yield valuable information for later use. 
 Some of this information can be important and, when combined with other data, may become a serious security threat. Think of how employee names can be combined with company naming conventions to generate real and useable account names. This kind of data can be used to perform more effective password attacks for hackers to gain an initial beachhead on the company network.
 
@@ -16,11 +17,13 @@ There are numerous sources that can be used for passive enumeration including:
 • Data Breaches
 
 
-Semi-passive information gathering
+-- Semi-passive information gathering --
+
 When passive information gathering methods do connect to (company) servers to obtain intelligent by behaviours and activities that appear normal, we are talking about semi-passive information gathering. An example would, for instance, be visiting the target’s company website to collect information about staff or technology that is in use by the target. During this visit the pentester mimics the behaviour of a regular visitor and only clicks visible links, access public locations and behave as any regular visitor would do without drawing attention. In such a case any intrusion detection system (IDS) or systems technician will be unable to distinguish the pentester’s traffic from other regular traffic and the activity will pass unnoticed.
 
 
-DNS Enumeration
+-- DNS Enumeration --
+
 DNS enumeration is the process of identifying the DNS servers and the corresponding DNS records. DNS stands for Domain Name System which is a database containing information about domain names and their corresponding IP addresses. The DNS system is responsible for translating human-readable hostnames into machine-readable IP addresses.
 
 • A (address) records containing the IP address of the domain.
@@ -35,6 +38,7 @@ The information retrieved during DNS enumeration will consist of details about n
 Some tools used for DNS enumeration included with Kali Linux are: whois, nslookup, dig, host and automated tools like Fierce, DNSenum and DNSrecon.
 
 Note: Performing DNS enumeration with tools like whois, host and nslookup without prior permission of the domain owner is not illegal because they use information that is publicly available.
+
 
 Whois
 A Whois lookup can be used to get general information about the domain such as the registrar, domain owner, their contact information and the DNS server used. 
@@ -200,7 +204,7 @@ https://pastebin.com
 https://haveibeenpwned.com
 
 
-Company information
+-- Company information --
 
 LinkedIn
 Perhaps the most well-known source is LinkedIn, where many companies provide information that may be useful to the penetration test. This includes information about employees, products, processes, technologies and processes used. LinkedIn can also be used to see with which relationships are maintained with other companies. If you have ever worked for a manufacturing company, you are familiar with the fact that extensive research is done on suppliers and customers of competitors to gain a business advantage. While LinkedIn is an excellent starting point for this, so is penetration testing where you want to know who the software vendors are and which technologies are being procured. LinkedIn also shows which employees a company employs. On LinkedIn profiles of employees, you can usually find a lot of information about processes, current and completed projects and used technologies. This information can also be important at some point in the penetration test.
