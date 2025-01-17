@@ -206,11 +206,34 @@ sudo nmap -p netbios*,microsoft-ds 10.11.1.235
 sudo nmap -sU -sS -p U:137-139,T:137-139,445 10.11.1.235
 sudo nmap -sU -sS -p netbios*,microsoft-ds 10.11.1.235
 
-
 Nmap Scripting Engine (NSE)
 The Nmap scripting engine is both powerful and flexible and scripts can be used to automate a variety of tasks from network discovery to vulnerability detection.
 
+Nmap script help
+nmap --script-help ftp-anon
+Nmap script execution
+nmap --script=[scriptname] [target host]
 
+nmap --script http-title 10.11.12.13
+nmap --script http-title,ftp-anon 10.11.12.13
+nmap --script vuln 10.11.12.13
+nmap --script ftp-anon --script-args ftp.user=anonymous,ftp.pass=test 10.11.12.13
+
+nmap --script=http-robots.txt 10.11.12.13
+
+nmap --script vuln 10.11.12.13
+nmap --script ftp-brute 10.11.12.13
+nmap --script ssl-enum-ciphers 10.11.12.13
+nmap --script dns-brute 10.11.12.13
+nmap --script http-malware-host 10.11.12.13
+
+nmap -p 22,80,443 --script http-title 10.11.12.13
+nmap -v --script vuln 10.11.12.13
+
+nmap --script snmp-sysdescr --script-args creds.snmp=admin 10.11.12.13
+nmap --script-help "afp-* and discovery"
+
+nmap --script ssh-hostkey -d2 10.11.12.13
 
 
 
