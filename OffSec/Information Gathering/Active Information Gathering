@@ -105,11 +105,11 @@ nmap --traceroute 192.168.1.0/24
 Nmap port scanning
 Nmap offers a lot of different scanning methods to determine open, filtered and closed ports and to fingerprint services and operating systems. 
 
-# TCP SYN Scan (Half-Open)
-nmap -sS 192.168.1.0/24
-
 # TCP Connect Scan (Full Connection)
 nmap -sT 192.168.1.0/24
+
+# TCP SYN Scan (Half-Open)
+sudo nmap -sS 192.168.1.0/24
 
 # UDP Scan
 nmap -sU 192.168.1.0/24
