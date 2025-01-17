@@ -197,9 +197,18 @@ nmap -O --osscan-guess 10.11.1.2
 nmap -sn -O 10.11.1.2
 
 
+Scanning port ranges with Nmap
+By default, Nmap will only scan the 1.000 most common ports, but if you want to override the default range you can set a custom range by using the -p option followed by a port range.
+
+nmap -p 1-100 10.11.1.235
+nmap -p 137-139,445 10.11.1.235
+sudo nmap -p netbios*,microsoft-ds 10.11.1.235
+sudo nmap -sU -sS -p U:137-139,T:137-139,445 10.11.1.235
+sudo nmap -sU -sS -p netbios*,microsoft-ds 10.11.1.235
 
 
-
+Nmap Scripting Engine (NSE)
+The Nmap scripting engine is both powerful and flexible and scripts can be used to automate a variety of tasks from network discovery to vulnerability detection.
 
 
 
