@@ -20,6 +20,10 @@ Port scanning is used to probe a server or host for open TCP and UDP ports. Fing
 • RID Cycling
 • Enum4linux
 • Nmap SMB Scripts
+• Nikto
+• DIRB
+• Dirbuster
+• Netcat
 
 
 -- Host Discovery --
@@ -528,6 +532,8 @@ Nmap also contains a lot of scripts that target the SMB protocol. The Nmap scrip
  8 -rw-r--r-- 1 root root  4400 Nov  1  2023 /usr/share/nmap/scripts/smb-vuln-regsvc-dos.nse
  8 -rw-r--r-- 1 root root  6586 Nov  1  2023 /usr/share/nmap/scripts/smb-vuln-webexec.nse
  8 -rw-r--r-- 1 root root  5084 Nov  1  2023 /usr/share/nmap/scripts/smb-webexec-exploit.nse
+
+nmap --script-updatedb
                                                                                                                                                                                          
 # Check SMB Protocol Version	
 nmap --script smb-protocols -p 139,445 10.11.12.83
@@ -575,3 +581,181 @@ Download the script with the following command: wget https://svn.nmap.org/nmap/s
 
 
 -- Web Servers --
+
+Web servers are a very common attack vector and can be found on many different devices from clients and servers to routers, NAS and firewalls
+
+
+-- Nikto --
+
+Nikto is a very popular and easy to use webserver assessment tool to find potential problems and vulnerabilities quickly
+
+nikto -H
+
+# Scan a Single Target	
+nikto -h http://10.11.12.83
+
+# Specify a Target Host and Port	
+nikto -h http://10.11.12.83 -p 8080
+
+# Scan multiple ports
+nikto -h http://10.11.12.83 -p 80-445
+nikto -h http://10.11.12.83 -p 80,88,443
+
+# Scan HTTPS	
+nikto -h https://10.11.12.83
+
+# Save Results to a File (TXT)	
+nikto -h http://10.11.12.83 -o results.txt
+
+# Save Results to a File (HTML)	
+nikto -h http://10.11.12.83 -o results.html -Format html
+
+# Scan a List of Hosts from a File	
+nikto -h hosts.txt
+
+# Perform a Thorough Scan	
+nikto -h http://10.11.12.83 -Tuning x 2>&1
+
+# Test Specific Vulnerabilities	
+nikto -h http://10.11.12.83 -Tuning 2
+
+# Exclude Specific Tests	
+nikto -h http://10.11.12.83 -Tuning 0
+
+# Enable Debug Mode	
+nikto -h http://10.11.12.83 -d
+
+# Scan Using a Proxy	
+nikto -h http://10.11.12.83 -useproxy http://proxy.example.com:8080
+
+# Specify Authentication	
+nikto -h http://10.11.12.83 -id admin:password123
+
+# Test Specific Plugins	
+nikto -h http://10.11.12.83 -Plugins plugin_name
+
+# Limit Number of Requests per Second	
+nikto -h http://10.11.12.83 -max_parallelism 10
+
+# Output Verbose Scan Logs	
+nikto -h http://10.11.12.83 -v
+
+Scan Tuning
+Another nice feature of Nikto is the option to define exactly what to test on the target host using the -Tuning parameter
+
+0 – File Upload
+1 – Interesting File / Seen in logs
+2 – Misconfiguration / Default File
+3 – Information Disclosure
+4 – Injection (XSS/Script/HTML)
+5 – Remote File Retrieval – Inside Web Root
+6 – Denial of Service
+7 – Remote File Retrieval – Server Wide
+8 – Command Execution / Remote Shell
+9 – SQL Injection
+a – Authentication Bypass
+b – Software Identification
+c – Remote Source Inclusion
+x – Reverse Tuning Options (i.e., include all except specified)
+
+
+-- DIRB --
+
+DIRB is a web content scanner that looks for web objects using a dictionary with known web objects. By default, it comes with preconfigured wordlists, but you can also use your own customized wordlists
+
+# Basic Directory Scan	
+dirb http://10.11.12.83
+
+# Specify a Custom Wordlist	
+dirb http://10.11.12.83 /path/to/wordlist.txt
+
+# Scan HTTPS Website	
+dirb https://10.11.12.83
+
+# Save Results to a File	
+dirb http://10.11.12.83 -o results.txt
+
+# Recursive Scan	
+dirb http://10.11.12.83 -r
+
+# Follow Redirects Automatically	
+dirb http://10.11.12.83 -z 10
+
+# Limit Number of Threads	
+dirb http://10.11.12.83 -t 5
+
+# Add File Extensions to Search	
+dirb http://10.11.12.83 -X .php,.html,.txt
+
+# Exclude Specific File Extensions	
+dirb http://10.11.12.83 -x .png,.jpg
+
+# Scan with Proxy	
+dirb http://10.11.12.83 -p http://proxy.example.com:8080
+
+# Ignore Non-Existing Paths (No Errors)	
+dirb http://10.11.12.83 -w
+
+# Use Default Wordlist Only	
+dirb http://10.11.12.83
+
+
+-- Dirbuster --
+
+Dirbuster is multi-threaded, has a nice GUI and includes more wordlists.
+
+- Key Options -
+
+Target URL: Specify the target URL (e.g., http://10.11.12.83).
+Port: Define the port (default: 80 for HTTP, 443 for HTTPS).
+Wordlist: Load a custom or default wordlist for brute-forcing (e.g., /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt).
+Extensions: Add extensions to test specific file types (e.g., .php, .html, .txt, .js, .asp).
+Recursive Scanning: Enable recursive directory enumeration for deeper discovery.
+Threads: Set the number of concurrent threads (default: 10, increase for faster scans).
+Proxy: Configure proxy settings to route traffic through a proxy.
+Save Results: Export the results to a file (e.g., CSV, XML).
+HTTP Authentication: Use basic or digest authentication by providing credentials.
+Follow Redirects: Automatically follow HTTP redirects.
+Custom User-Agent: Set a specific User-Agent string to mimic different clients (e.g., browser).
+
+
+-- Netcat --
+
+Netcat can also be used to interact with webservers by issuing HTTP requests. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
