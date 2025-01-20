@@ -20,7 +20,6 @@ Port scanning is used to probe a server or host for open TCP and UDP ports. Fing
 • RID Cycling
 • Enum4linux
 • Nmap SMB Scripts
-• 
 
 
 -- Host Discovery --
