@@ -53,9 +53,7 @@ Ports are the communication points that applications use to communicate with eac
 • IP Address
 • Port Number
 
-
 Default TCP Ports
-
 • FTP : 21
 • SSH : 22
 • Telnet : 23
@@ -64,6 +62,56 @@ Default TCP Ports
 • HTTP : 80
 • POP3 : 110
 • SMB : 445
+
+TCP Protocol Header
+There are many protocol-specific data fields in the header of the TCP protocol. These data fields contain all the information required by the TCP protocol.
+
+Source Port Number
+“Source Port Number ” is the field that the port number of the sender is included. It is “16 bits” long.
+
+Destination Port Number
+“Destination Port Number ” is the field that the port number of the recipient is included. It is “16 bits” long.
+
+Sequence Number
+“Sequence Number” field is the number used to track the transmissions of TCP segments. If the "SYN" flag is set in the TCP segment, this number is the "Initial Sequence Number" value. It is "32 bits" long.
+
+Acknowledgement Number
+“Acknowledgement Number ” field is a value that indicates up to which byte the transmission of the sent segments is made. It is "32 bits" long.
+
+Header Length (HLEN)
+“Header Length” is the field that holds the value of the TCP header length. It is “4 bits” long.
+
+Reserved
+It is the field reserved for future use. It is “3 bits” long.
+
+Control Flags
+
+“Control Flags” is the field where the values ​​of the flags are kept. Each flag is "1 bit" long. Setting a flag means that it takes the value "1" in binary. In total, this field is “9 bits” long.
+
+• SYN: It is the flag used to initiate TCP connections.
+• ACK: It is the confirmation flag that indicates that the packets are transmitted. It also indicates to confirm the connection setup.
+• FIN: It is the flag used to terminate the TCP connection in a controlled manner.
+• RST: It is the flag used to terminate the TCP connection unilaterally and abruptly. It is used to reset the connection.
+• PSH: It is the flag set in the packets where the data is sent to the target application.
+• URG: It is the flag used to notify that there is urgent and priority data.
+
+Window Size
+“Window Size” field is where the maximum data size of the recipient’s buffer capacity is defined. It is “16 bits” long.
+
+Checksum
+“Checksum” is the field that controls whether the integrity of the TCP segment is intact during the transmission. It has hexadecimal value and it is “16 bits” long.
+
+Urgent Pointer
+The “Urgent Pointer” field is a value that indicates up to which data the urgent bytes are. It indicates up to which data the urgent bytes are. In order to use this field, the "URG" flag must be set. It is “16 bits” long.
+
+Options
+“Options” is the field created to use various TCP protocol additional features. There is no obligation to use. It has no fixed length.
+
+
+Establishing a TCP Connection with Netcat
+
+sudo nc 192.168.216.128 5555
+
 
 
 
