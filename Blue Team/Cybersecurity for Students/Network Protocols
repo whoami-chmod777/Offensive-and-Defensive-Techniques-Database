@@ -1,0 +1,99 @@
+
+If you want to investigate suspicious network activities, you need to know how network protocols work and what evidence you can extract. Learn how it works and how you can use it as an analyst.
+
+• Transmission Control Protocol (TCP)
+
+
+
+
+
+
+-- Transmission Control Protocol (TCP) --
+
+Transmission Control Protocol (TCP) is a network protocol that provides reliable and steady data transmission between applications. According to the OSI model, it is located in the 4th layer.
+
+• Ensures the data transmission between the two applications.
+• Allows multiple connections.
+• There is no data transfer before the connection is established.
+• Priority and security definitions can be made for the data sent.
+• Makes an error control.
+• Provides flow control.
+
+Establishing the TCP Connection (Three-way Handshake)
+TCP connection must be established in order to transfer data through the TCP protocol. The establishment of the TCP connection indicates that the sender and the recipient are both ready for the data transfer.
+
+The TCP connection established before the data transfer is called “Three-Way Handshake“. 
+
+Three-Way Handshake consists of the following steps:
+• The sender party who wants to establish the TCP connection sends the TCP segment set to the “SYN” flag to the recipient side.
+• After receiving this segment, the recipient party transmits a TCP segment set to the “SYN” and “ACK” flags to the sender.
+• As a final stage, the sender part of this segment sends the TCP segment set to the “ACK” flag back to the recipient and the connection is established.
+
+TCP Data Flow and Transmission Reliability
+Transmission reliability is further supported by mechanisms like the three-way handshake and systematic confirmation of each segment. In case of errors or lost segments, the protocol resends the affected data until successful delivery is achieved, ensuring robust and dependable communication.
+
+
+Terminating TCP Connections
+
+Terminating TCP connections takes place in 4 steps:
+• The party that wants to terminate the TCP connection sends the TCP segment with the “FIN” flag set to the target device.
+• After receiving the TCP segment, the target device sees that the "FIN" flag is set and sends the TCP segment with the "ACK" flag set in response.
+• The target device sends the TCP segment with the “FIN” flag set to the device that wants to terminate the connection.
+• As the last step, the device that wants to terminate the connection sends the TCP segment with the "ACK" flag set in response to the incoming TCP segment and the TCP connection is terminated.
+
+Note: FIN and ACK flags are 1-bit fields in the TCP protocol header. TCP connections can also be terminated with the “RST” flag. TCP connection terminated using the RST flag is an immediate and one-sided connection termination. In other words, the “RST” flag is used to reset the connection.
+
+
+TCP Connections
+TCP connections are frequently used by applications that transmit TCP-based transmission on the device. Some information about the protocol is used so that applications can connect with the TCP protocol. Each TCP connection consists of “Source IP Address-Source Port Number”, “Destination IP Address-Destination Port Number” information.
+
+What is Port?
+Ports are the communication points that applications use to communicate with each other. Many services can exist on a server at the same time. Port numbers make the incoming requests clear and tell us which services they belong to. The port is essentially a number which can take a value between “0-65535”. Some port numbers are used by some protocols by default. 
+
+• IP Address
+• Port Number
+
+
+Default TCP Ports
+
+• FTP : 21
+• SSH : 22
+• Telnet : 23
+• SMTP : 25
+• DNS : 53
+• HTTP : 80
+• POP3 : 110
+• SMB : 445
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
