@@ -1,0 +1,833 @@
+
+--- Information Gathering ---
+
+• Passive Information Gathering
+• Active Information Gathering
+
+
+--- Passive Information Gathering ---
+
+• Google, Bing, Yahoo, Shodan, Netcraft and other search engines
+• Social media such as LinkedIn, Twitter, Facebook & Instagram
+• Company websites
+• Press releases
+• Discussion forums
+• Whois databases
+• Data Breaches
+
+
+-- DNS Enumeration --
+
+• A (address) records containing the IP address of the domain.
+• MX records, which stands for Mail Exchange, contain the mail exchange servers.
+• CNAME records used for aliasing domains. CNAME stands for Canonical Name and links any sub-domains with existing domain DNS records.
+• NS records, which stands for Name Server, indicates the authoritative (or main) name server for the domain.
+• SOA records, which stands for State of Authority, contain important information about the domain such as the primary name server, a timestamp showing when the domain was last updated and the party responsible for the domain.
+• PTR or Pointer Records map an IPv4 address to the CNAME on the host. This record is also called a ‘reverse record’ because it connects a record with an IP address to a hostname instead of the other way around.
+• TXT records contain text inserted by the administrator (such as notes about the way the network has been configured).
+
+
+-- whois --
+
+whois [domain]
+whois google.com
+
+
+-- nslookup --
+
+nslookup [domain]
+nslookup -type=[Record type] [domain]
+
+nslookup google.com
+nslookup -type=mx google.com 
+nslookup -type=txt google.com 
+nslookup -type=any google.com 8.8.8.8
+
+
+-- host --
+
+host google.com 
+host -t ns google.com
+host -t axfr -l google.com ns1.google.com
+
+
+-- dig --
+
+dig -t mx google.com
+dig -t any google.com @8.8.8.8
+dig axfr @nsztm1.digi.ninja zonetransfer.me
+
+
+-- fierce --
+
+fierce --domain google.com
+fierce --domain google.com --subdomain-file subdomains.txt
+
+
+-- Wildcard domains --
+
+www.domain.com     A      1.1.1.1
+vpn.domain.com     A      1.1.1.2
+test.domain.com    A      1.1.1.3
+*.domain.com       A      1.1.1.1
+
+
+-- DNSEnum --
+
+dnsenum google.com
+
+
+-- DNSrecon --
+
+dnsrecon -h
+dnsrecon -d google.com
+
+
+-- sublist3r --
+
+sublist3r -h
+sublist3r -d google.com
+sublist3r -d google.com -b -t 100 -e google -v
+
+
+-- theHarvester --
+
+theHarvester
+theHarvester -h
+theHarvester -d cisco.com -b google -l 100
+theHarvester -d cisco.com -b yahoo -l 100
+
+
+-- recon-ng --
+
+recon-ng --version
+
+$ recon-ng
+> marketplace refresh
+> arketplace search
+> arketplace search hibp
+> marketplace install recon/contacts-credentials/hibp_breach
+> keys add hibp_api [API key]
+> modules load recon/contacts-credentials/hibp_breach
+[recon-ng][default][hibp_breach] > show credentials
+> info
+> options set SOURCE info@microsoft.com
+> run
+
+
+-- WWW and Social Media --
+
+https://www.google.com
+https://www.google.com/maps
+https://www.exploit-db.com/google-hacking-database/
+https://www.shodan.io
+https://www.tineye.com
+https://www.netcraft.com
+https://pastebin.com
+https://haveibeenpwned.com
+
+
+-- Company information --
+
+LinkedIn
+Company registrations
+OpenCorporates.com
+Crunchbase
+
+
+
+--- Active information gathering ---
+
+-- netdiscover --
+
+Who has 192.168.1.116? Tell 192.168.100.2 --> The ARP reply from 192.168.100.116 contains the MAC address and looks as follows:
+'192.168.100.116 is at aa:bb:cc:dd:ee'
+
+# Basic Scan on Default Network
+netdiscover
+
+# Scan a Specific IP Range (e.g., 192.168.0.0/24)
+netdiscover -r 192.168.0.0/24
+
+# Use a Specific Network Interface (e.g., eth0)
+netdiscover -i eth0
+
+# Enable Passive Mode Only (no active ARP requests)
+netdiscover -p
+
+# Perform Fast Scanning
+netdiscover -f
+
+# Limit the Number of ARP Requests Sent to Each Host (e.g., 5 requests)
+netdiscover -c 5
+
+# Scan and Display Unique Hosts Only
+netdiscover -d
+
+# Show All Available Network Interfaces
+netdiscover -L
+
+# Scan a Range with a Specific Interface (e.g., eth0 on 192.168.1.144)
+netdiscover -i eth0 -r 192.168.1.144
+
+# Use Passive Mode and Suppress Active Discovery
+netdiscover -P
+
+# Custom MAC Vendor File for Resolving Vendors
+netdiscover -m /path/to/mac_vendor_file.txt
+
+
+-- Host discovery --
+
+# Ping Sweep (No Port Scan)
+nmap -sn 192.168.1.144
+
+# Skip Host Discovery (Scan All IPs)
+nmap -Pn 192.168.1.144
+
+# Custom TCP SYN Ping
+nmap -PS22 192.168.1.144
+
+# TCP ACK Ping to Multiple Ports
+nmap -PA80,443 192.168.1.144
+
+# UDP Ping on Specific Ports
+nmap -PU53,161 192.168.1.144
+
+# ICMP Echo Request Ping
+nmap -PE 192.168.1.144
+
+# Disable ARP/ND Ping
+nmap --disable-arp-ping 192.168.1.144
+
+# SCTP INIT Ping
+nmap -PY22,80,5060 192.168.1.144
+
+# IP Protocol Ping
+nmap -PO1,2,4 192.168.1.144
+
+# ICMP Timestamp and Address Mask Request
+nmap -PP -PM 192.168.1.144
+
+# Disable ARP/ND Ping
+nmap --disable-arp-ping 192.168.1.144
+
+# Ignore RST Responses During Discovery
+nmap --discovery-ignore-rst 192.168.1.144
+
+# Perform Traceroute
+nmap --traceroute 192.168.1.144
+
+
+-- Nmap port scanning --
+
+# TCP SYN Scan (Half-Open)
+nmap -sS 192.168.1.144
+
+# TCP Connect Scan (Full Connection)
+nmap -sT 192.168.1.144
+
+# UDP Scan
+nmap -sU 192.168.1.144
+
+# SCTP INIT Scan
+nmap -sY 192.168.1.144
+
+# Null Scan (No TCP Flags Set)
+nmap -sN 192.168.1.144
+
+# FIN Scan (Only FIN Flag Set)
+nmap -sF 192.168.1.144
+
+# Xmas Scan (FIN, PSH, and URG Flags Set)
+nmap -sX 192.168.1.144
+
+# TCP ACK Scan (Firewall Rule Mapping)
+nmap -sA 192.168.1.144
+
+# TCP Window Scan
+nmap -sW 192.168.1.144
+
+# TCP Maimon Scan
+nmap -sM 192.168.1.144
+
+# Custom TCP Scan Flags
+nmap --scanflags SYNURGACK 192.168.1.144
+
+# SCTP COOKIE ECHO Scan
+nmap -sZ 192.168.1.144
+
+# Idle (Zombie) Scan
+nmap -sI zombie_host:probeport 192.168.1.144
+
+# IP Protocol Scan
+nmap -sO 192.168.1.144
+
+# FTP Bounce Scan
+nmap -b user:pass@ftpserver 192.168.1.144
+
+
+-- Fingerprinting services and operating systems --
+
+1. Service Fingerprinting
+
+# Basic Service Version Detection
+nmap -sV 10.11.1.2
+sudo nmap -sV -O 10.11.1.2
+
+# Aggressive Service Detection (The A stands for 'Aggressive' scan options and enables OS detection, version detection, script scanning and traceroute)
+sudo nmap -A 10.11.1.2
+sudo nmap -A -p- 10.11.1.2
+
+# Aggressive Service Detection
+nmap -sV --version-intensity 5 10.11.1.2
+
+# Combine Port Scan with Service Detection
+nmap -sS -sV 10.11.1.2
+
+# Identify Services on a Specific Port
+nmap -p 80 -sV 10.11.1.2
+
+# Attempt All Service Probes
+nmap -sV --allports 10.11.1.2
+
+2. OS Fingerprinting
+
+# Enable OS Detection
+nmap -O 10.11.1.2
+
+# Enable OS Detection with Aggressive Scanning
+nmap -O -A 10.11.1.2
+
+# OS Detection with Specific Ports
+nmap -p 22,80 -O 10.11.1.2
+
+# Combine OS Detection with Service Detection
+nmap -O -sV 10.11.1.2
+
+# Guess OS if Detection is Inconclusive
+nmap -O --osscan-guess 10.11.1.2
+
+# Perform Remote OS Detection Only
+nmap -sn -O 10.11.1.2
+
+
+-- Scanning port ranges with Nmap --
+
+nmap -p 1-100 10.11.1.235
+nmap -p 137-139,445 10.11.1.235
+sudo nmap -p netbios*,microsoft-ds 10.11.1.235
+sudo nmap -sU -sS -p U:137-139,T:137-139,445 10.11.1.235
+sudo nmap -sU -sS -p netbios*,microsoft-ds 10.11.1.235
+
+
+-- Nmap Scripting Engine (NSE) --
+
+/usr/share/nmap/scripts
+ls -l /usr/share/nmap/scripts/ftp*
+
+sudo nmap --script-updatedb
+
+HTTP: ls -l /usr/share/nmap/scripts/http*
+SMTP: ls -l /usr/share/nmap/scripts/smtp*
+SMB: ls -l /usr/share/nmap/scripts/smb*
+MySQL: ls -l /usr/share/nmap/scripts/mysql*
+WordPress: ls -l /usr/share/nmap/scripts/http-wordpress*
+Drupal: ls -l /usr/share/nmap/scripts/http-drupal*
+Citrix: ls -l /usr/share/nmap/scripts/citrix*
+
+nmap --script-help ftp-anon
+
+nmap --script=[scriptname] [target host]
+
+nmap --script http-title 10.11.12.13
+nmap --script http-title,ftp-anon 10.11.12.13
+nmap --script vuln 10.11.12.13
+nmap --script ftp-anon --script-args ftp.user=anonymous,ftp.pass=test 10.11.12.13
+
+nmap --script=http-robots.txt 10.11.12.13
+
+nmap --script vuln 10.11.12.13
+nmap --script ftp-brute 10.11.12.13
+nmap --script ssl-enum-ciphers 10.11.12.13
+nmap --script dns-brute 10.11.12.13
+nmap --script http-malware-host 10.11.12.13
+
+nmap -p 22,80,443 --script http-title 10.11.12.13
+nmap -v --script vuln 10.11.12.13
+
+nmap --script snmp-sysdescr --script-args creds.snmp=admin 10.11.12.13
+nmap --script-help "afp-* and discovery"
+
+nmap --script ssh-hostkey -d2 10.11.12.13
+
+
+-- SNMP Enumeration --
+
+-- Onesixtyone --
+
+onesixtyone --help
+
+# Scan a Single IP with a Community String	
+onesixtyone public 192.168.1.1
+
+# Scan Multiple IPs Using a File	
+onesixtyone public -i targets.txt
+
+# Use Multiple Community Strings	
+onesixtyone -c communities.txt 192.168.1.0/24
+
+# Specify the Number of Threads	
+onesixtyone -t 16 public 192.168.1.0/24
+
+# Scan on a Non-Default Port	
+onesixtyone -p 1610 public 192.168.1.1
+
+# Save Results to a File	
+onesixtyone public 192.168.1.0/24 -w results.txt
+
+# Combine Community and Target Files	
+onesixtyone -c communities.txt -i targets.txt
+
+
+-- SNMPwalk --
+
+snmpwalk --help
+
+# Retrieve All SNMP Information from a Device	
+snmpwalk -v2c -c public 192.168.1.1
+
+# Specify an OID for Targeted Information	
+snmpwalk -v2c -c public 192.168.1.1 .1.3.6.1.2.1.1
+
+# Use SNMPv1 Protocol	
+snmpwalk -v1 -c public 192.168.1.1
+
+# Use SNMPv3 with Authentication	
+snmpwalk -v3 -l authNoPriv -u user -a MD5 -A password 192.168.1.1
+
+# Use SNMPv3 with Authentication and Privacy	
+snmpwalk -v3 -l authPriv -u user -a SHA -A authpass -x AES -X privpass 192.168.1.1
+
+# Retrieve System Uptime	
+snmpwalk -v2c -c public 192.168.1.1 sysUpTimeInstance
+
+# Specify a Different SNMP Port	
+snmpwalk -v2c -c public -p 1610 192.168.1.1
+
+# Save Results to a File	
+snmpwalk -v2c -c public 192.168.1.1 > results.txt
+
+
+-- Nmap SNMP Scripts --
+
+ls -l /usr/share/nmap/scripts/snmp*
+-rw-r--r-- 1 root root  7816 Nov  1  2023 /usr/share/nmap/scripts/snmp-brute.nse
+-rw-r--r-- 1 root root  4388 Nov  1  2023 /usr/share/nmap/scripts/snmp-hh3c-logins.nse
+-rw-r--r-- 1 root root  5216 Nov  1  2023 /usr/share/nmap/scripts/snmp-info.nse
+-rw-r--r-- 1 root root 28644 Nov  1  2023 /usr/share/nmap/scripts/snmp-interfaces.nse
+-rw-r--r-- 1 root root  5978 Nov  1  2023 /usr/share/nmap/scripts/snmp-ios-config.nse
+-rw-r--r-- 1 root root  4156 Nov  1  2023 /usr/share/nmap/scripts/snmp-netstat.nse
+-rw-r--r-- 1 root root  4431 Nov  1  2023 /usr/share/nmap/scripts/snmp-processes.nse
+-rw-r--r-- 1 root root  1857 Nov  1  2023 /usr/share/nmap/scripts/snmp-sysdescr.nse
+-rw-r--r-- 1 root root  2570 Nov  1  2023 /usr/share/nmap/scripts/snmp-win32-services.nse
+-rw-r--r-- 1 root root  2739 Nov  1  2023 /usr/share/nmap/scripts/snmp-win32-shares.nse
+-rw-r--r-- 1 root root  4713 Nov  1  2023 /usr/share/nmap/scripts/snmp-win32-software.nse
+-rw-r--r-- 1 root root  2016 Nov  1  2023 /usr/share/nmap/scripts/snmp-win32-users.nse
+
+
+-- SMB Enumeration --
+
+• netbios-ns 137/tcp # NETBIOS Name Service
+• netbios-ns 137/udp
+• netbios-dgm 138/tcp # NETBIOS Datagram Service
+• netbios-dgm 138/udp
+• netbios-ssn 139/tcp # NETBIOS session service
+• netbios-ssn 139/udp
+• microsoft-ds 445/tcp # if you are using Active Directory
+
+
+-- Null Session with rpcclient --
+
+# Connect to a Target with Null Session	
+rpcclient -U "" -N <IP>
+
+# List Available Shares	
+rpcclient -U "" -N <IP> -c "netshareenumall"
+
+# Enumerate Domain Users	
+rpcclient -U "" -N <IP> -c "enumdomusers"
+
+# Get User Information	
+rpcclient -U "" -N <IP> -c "queryuser <user-rid>"
+
+# List Domain Groups	
+rpcclient -U "" -N <IP> -c "enumdomgroups"
+
+# Retrieve Group Memberships	
+rpcclient -U "" -N <IP> -c "querygroupmem <group-rid>"
+
+# Dump Password Policies	
+rpcclient -U "" -N <IP> -c "getdompwinfo"
+
+# Enumerate Built-in Policies	
+rpcclient -U "" -N <IP> -c "lsaquery"
+
+# Query System Information	
+rpcclient -U "" -N <IP> -c "srvinfo"
+
+# Enumerate User RIDs	
+rpcclient -U "" -N <IP> -c "lookupnames <username>"
+
+
+rpcclient -U '' 10.11.1.17
+rpcclient $> querydominfo
+rpcclient $> enumdomusers
+
+rpcclient $> queryuser [username]
+
+rpcclient $> enum <TAB><TAB>
+enumalsgroups      enumdomgroups      enumjobs           enumprinters       enumtrust
+enumdata           enumdomusers       enumkey            enumprivs         
+enumdataex         enumdrivers        enummonitors       enumprocdatatypes 
+enumdomains        enumforms          enumports          enumprocs
+
+
+-- RID Cycling --
+
+RID	Account/Group
+500	Default Administrator account
+501	Guest account
+512	Domain Admins group
+513	Domain Users group
+514	Domain Guests group
+1000+	Regular user accounts
+
+rpcclient -U '' 10.11.1.17
+lookupnames pbx
+rpcclient $> lookupsids S-1-5-21-532510730-1394270290-3802288464-500
+rpcclient $> lookupnames administrator
+
+
+-- Enum4linux --
+
+enum4linux 10.11.2.12
+
+# Show Help Menu	
+enum4linux -h
+
+# Basic Enumeration	
+enum4linux 192.168.1.1
+
+# Perform All Enumeration Steps	
+enum4linux -a 192.168.1.1
+
+# Verbose Output	
+enum4linux -v 192.168.1.1
+
+# Enumerate Users	
+enum4linux -U 192.168.1.1
+
+# Enumerate Shared Resources	
+enum4linux -s 192.168.1.1
+
+# Enumerate Groups	
+enum4linux -G 192.168.1.1
+
+# Enumerate Password Policies	
+enum4linux -P 192.168.1.1
+
+# Get OS Information	e
+num4linux -o 192.168.1.1
+
+# Perform RID Cycling	
+enum4linux -r 192.168.1.1
+
+# Authenticated Scan (Specify User/Password)	
+enum4linux -U admin -P password123 192.168.1.1
+
+# Save Results to a File	
+enum4linux 192.168.1.1 > results.txt
+
+
+-- Nmap SMB Scripts --
+
+└─$ ls -ls /usr/share/nmap/scripts/smb*
+ 4 -rw-r--r-- 1 root root  3753 Nov  1  2023 /usr/share/nmap/scripts/smb2-capabilities.nse
+ 4 -rw-r--r-- 1 root root  2689 Nov  1  2023 /usr/share/nmap/scripts/smb2-security-mode.nse
+ 4 -rw-r--r-- 1 root root  1408 Nov  1  2023 /usr/share/nmap/scripts/smb2-time.nse
+ 8 -rw-r--r-- 1 root root  5269 Nov  1  2023 /usr/share/nmap/scripts/smb2-vuln-uptime.nse
+48 -rw-r--r-- 1 root root 45061 Nov  1  2023 /usr/share/nmap/scripts/smb-brute.nse
+ 8 -rw-r--r-- 1 root root  5289 Nov  1  2023 /usr/share/nmap/scripts/smb-double-pulsar-backdoor.nse
+ 8 -rw-r--r-- 1 root root  4840 Nov  1  2023 /usr/share/nmap/scripts/smb-enum-domains.nse
+ 8 -rw-r--r-- 1 root root  5971 Nov  1  2023 /usr/share/nmap/scripts/smb-enum-groups.nse
+ 8 -rw-r--r-- 1 root root  8043 Nov  1  2023 /usr/share/nmap/scripts/smb-enum-processes.nse
+28 -rw-r--r-- 1 root root 27274 Nov  1  2023 /usr/share/nmap/scripts/smb-enum-services.nse
+12 -rw-r--r-- 1 root root 12017 Nov  1  2023 /usr/share/nmap/scripts/smb-enum-sessions.nse
+ 8 -rw-r--r-- 1 root root  6923 Nov  1  2023 /usr/share/nmap/scripts/smb-enum-shares.nse
+16 -rw-r--r-- 1 root root 12527 Nov  1  2023 /usr/share/nmap/scripts/smb-enum-users.nse
+ 8 -rw-r--r-- 1 root root  4418 Nov  1  2023 /usr/share/nmap/scripts/smb-flood.nse
+ 8 -rw-r--r-- 1 root root  7471 Nov  1  2023 /usr/share/nmap/scripts/smb-ls.nse
+12 -rw-r--r-- 1 root root  8758 Nov  1  2023 /usr/share/nmap/scripts/smb-mbenum.nse
+12 -rw-r--r-- 1 root root  8220 Nov  1  2023 /usr/share/nmap/scripts/smb-os-discovery.nse
+ 8 -rw-r--r-- 1 root root  4982 Nov  1  2023 /usr/share/nmap/scripts/smb-print-text.nse
+ 4 -rw-r--r-- 1 root root  1833 Nov  1  2023 /usr/share/nmap/scripts/smb-protocols.nse
+64 -rw-r--r-- 1 root root 63596 Nov  1  2023 /usr/share/nmap/scripts/smb-psexec.nse
+ 8 -rw-r--r-- 1 root root  5190 Nov  1  2023 /usr/share/nmap/scripts/smb-security-mode.nse
+ 4 -rw-r--r-- 1 root root  2424 Nov  1  2023 /usr/share/nmap/scripts/smb-server-stats.nse
+16 -rw-r--r-- 1 root root 14159 Nov  1  2023 /usr/share/nmap/scripts/smb-system-info.nse
+ 8 -rw-r--r-- 1 root root  7524 Nov  1  2023 /usr/share/nmap/scripts/smb-vuln-conficker.nse
+ 8 -rw-r--r-- 1 root root  6402 Nov  1  2023 /usr/share/nmap/scripts/smb-vuln-cve2009-3103.nse
+24 -rw-r--r-- 1 root root 23154 Nov  1  2023 /usr/share/nmap/scripts/smb-vuln-cve-2017-7494.nse
+ 8 -rw-r--r-- 1 root root  6545 Nov  1  2023 /usr/share/nmap/scripts/smb-vuln-ms06-025.nse
+ 8 -rw-r--r-- 1 root root  5386 Nov  1  2023 /usr/share/nmap/scripts/smb-vuln-ms07-029.nse
+ 8 -rw-r--r-- 1 root root  5688 Nov  1  2023 /usr/share/nmap/scripts/smb-vuln-ms08-067.nse
+ 8 -rw-r--r-- 1 root root  5647 Nov  1  2023 /usr/share/nmap/scripts/smb-vuln-ms10-054.nse
+ 8 -rw-r--r-- 1 root root  7214 Nov  1  2023 /usr/share/nmap/scripts/smb-vuln-ms10-061.nse
+ 8 -rw-r--r-- 1 root root  7344 Nov  1  2023 /usr/share/nmap/scripts/smb-vuln-ms17-010.nse
+ 8 -rw-r--r-- 1 root root  4400 Nov  1  2023 /usr/share/nmap/scripts/smb-vuln-regsvc-dos.nse
+ 8 -rw-r--r-- 1 root root  6586 Nov  1  2023 /usr/share/nmap/scripts/smb-vuln-webexec.nse
+ 8 -rw-r--r-- 1 root root  5084 Nov  1  2023 /usr/share/nmap/scripts/smb-webexec-exploit.nse
+
+nmap --script-updatedb
+
+# Check SMB Protocol Version	
+nmap --script smb-protocols -p 139,445 10.11.12.83
+
+# Enumerate SMB Shares	
+nmap --script smb-enum-shares -p 139,445 10.11.12.83
+
+# Enumerate SMB Users	
+nmap --script smb-enum-users -p 139,445 10.11.12.83
+
+# Enumerate SMB Groups	
+nmap --script smb-enum-groups -p 139,445 10.11.12.83
+
+# Enumerate SMB Sessions	
+nmap --script smb-enum-sessions -p 139,445 10.11.12.83
+
+# Identify SMB Security Mode	
+nmap --script smb-security-mode -p 139,445 10.11.12.83
+
+# Brute Force SMB Accounts	
+nmap --script smb-brute -p 139,445 10.11.12.83
+
+# Check SMB OS Information	
+nmap --script smb-os-discovery -p 139,445 10.11.12.83
+
+# Detect Vulnerabilities (SMBv1, EternalBlue)	
+nmap --script smb-vuln-* -p 139,445 10.11.12.83
+
+ # Check SMB Signing Configuration	
+nmap --script smb2-security-mode -p 445 10.11.12.83
+
+# Enumerate SMBv2 and SMBv3 Features	
+nmap --script smb2-capabilities -p 445 10.11.12.83
+
+# Enumerate Domain Policies	
+nmap --script smb-enum-domains -p 139,445 10.11.12.83
+
+# SMB vulnerability, for instance MS08-067
+nmap -p 139,445 --script=smb-vuln-ms08-067 [target ip]
+
+# SMB vulnerability, for instance MS17-010
+nmap -p 139,445 --script=smb-vuln-ms17-010
+
+
+-- Nikto --
+
+nikto -H
+
+# Scan a Single Target	
+nikto -h http://10.11.12.83
+
+# Specify a Target Host and Port	
+nikto -h http://10.11.12.83 -p 8080
+
+# Scan multiple ports
+nikto -h http://10.11.12.83 -p 80-445
+nikto -h http://10.11.12.83 -p 80,88,443
+
+# Scan HTTPS	
+nikto -h https://10.11.12.83
+
+# Save Results to a File (TXT)	
+nikto -h http://10.11.12.83 -o results.txt
+
+# Save Results to a File (HTML)	
+nikto -h http://10.11.12.83 -o results.html -Format html
+
+# Scan a List of Hosts from a File	
+nikto -h hosts.txt
+
+# Perform a Thorough Scan	
+nikto -h http://10.11.12.83 -Tuning x 2>&1
+
+# Test Specific Vulnerabilities	
+nikto -h http://10.11.12.83 -Tuning 2
+
+# Exclude Specific Tests	
+nikto -h http://10.11.12.83 -Tuning 0
+
+# Enable Debug Mode	
+nikto -h http://10.11.12.83 -d
+
+# Scan Using a Proxy	
+nikto -h http://10.11.12.83 -useproxy http://proxy.example.com:8080
+
+# Specify Authentication	
+nikto -h http://10.11.12.83 -id admin:password123
+
+# Test Specific Plugins	
+nikto -h http://10.11.12.83 -Plugins plugin_name
+
+# Limit Number of Requests per Second	
+nikto -h http://10.11.12.83 -max_parallelism 10
+
+# Output Verbose Scan Logs	
+nikto -h http://10.11.12.83 -v
+
+Scan Tuning
+Another nice feature of Nikto is the option to define exactly what to test on the target host using the -Tuning parameter
+
+0 – File Upload
+1 – Interesting File / Seen in logs
+2 – Misconfiguration / Default File
+3 – Information Disclosure
+4 – Injection (XSS/Script/HTML)
+5 – Remote File Retrieval – Inside Web Root
+6 – Denial of Service
+7 – Remote File Retrieval – Server Wide
+8 – Command Execution / Remote Shell
+9 – SQL Injection
+a – Authentication Bypass
+b – Software Identification
+c – Remote Source Inclusion
+x – Reverse Tuning Options (i.e., include all except specified)
+
+
+-- DIRB --
+
+# Basic Directory Scan	
+dirb http://10.11.12.83
+
+# Specify a Custom Wordlist	
+dirb http://10.11.12.83 /path/to/wordlist.txt
+
+# Scan HTTPS Website	
+dirb https://10.11.12.83
+
+# Save Results to a File	
+dirb http://10.11.12.83 -o results.txt
+
+# Recursive Scan	
+dirb http://10.11.12.83 -r
+
+# Follow Redirects Automatically	
+dirb http://10.11.12.83 -z 10
+
+# Limit Number of Threads	
+dirb http://10.11.12.83 -t 5
+
+# Add File Extensions to Search	
+dirb http://10.11.12.83 -X .php,.html,.txt
+
+# Exclude Specific File Extensions	
+dirb http://10.11.12.83 -x .png,.jpg
+
+# Scan with Proxy	
+dirb http://10.11.12.83 -p http://proxy.example.com:8080
+
+# Ignore Non-Existing Paths (No Errors)	
+dirb http://10.11.12.83 -w
+
+# Use Default Wordlist Only	
+dirb http://10.11.12.83
+
+
+-- Dirbuster --
+
+Target URL: Specify the target URL (e.g., http://10.11.12.83).
+Port: Define the port (default: 80 for HTTP, 443 for HTTPS).
+Wordlist: Load a custom or default wordlist for brute-forcing (e.g., /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt).
+Extensions: Add extensions to test specific file types (e.g., .php, .html, .txt, .js, .asp).
+Recursive Scanning: Enable recursive directory enumeration for deeper discovery.
+Threads: Set the number of concurrent threads (default: 10, increase for faster scans).
+Proxy: Configure proxy settings to route traffic through a proxy.
+Save Results: Export the results to a file (e.g., CSV, XML).
+HTTP Authentication: Use basic or digest authentication by providing credentials.
+Follow Redirects: Automatically follow HTTP redirects.
+Custom User-Agent: Set a specific User-Agent string to mimic different clients (e.g., browser).
+
+
+-- Netcat --
+
+nc 192.168.42.142 80
+GET / HTTP/1.0
+
+nc 192.168.42.142 80
+HEAD / HTTP/1.0
+
+
+-- WPScan --
+
+# Basic scan of a WordPress site.
+wpscan --url https://example.com
+
+# Enumerate WordPress usernames.
+wpscan --url https://example.com --enumerate u
+
+# Enumerate WordPress plugins.
+wpscan --url https://example.com --enumerate p
+
+# Enumerate vulnerable plugins.
+wpscan --url https://example.com --enumerate vp
+
+# Enumerate vulnerable themes.
+wpscan --url https://example.com --enumerate vt
+
+# Use API token for vulnerability database updates.
+wpscan --url https://example.com --api-token your_api_token
+
+# Use a random user-agent to evade detection.
+wpscan --url https://example.com --random-user-agent
+
+# Ignore warnings and force the scan to proceed.
+wpscan --url https://example.com --force
+
+# Use mixed detection method for plugins.
+wpscan --url https://example.com --plugins-detection mixed
+
+# Enumerate all plugins, including inactive ones.
+wpscan --url https://example.com --enumerate ap
+
+# Enumerate all themes, including inactive ones.
+wpscan --url https://example.com --enumerate at
+
+# Enumerate media files.
+wpscan --url https://example.com --enumerate m
+
+# Full command with enumeration options.
+wpscan --url https://example.com --enumerate [p/vp/ap/t/vt/at]
+
+# Test a target for all popular plugins
+wpscan --url https://example.com --enumerate vp --plugins-detection aggressive
+wpscan --url https://example.com --enumerate ap --plugins-detection aggressive
+
+# Simultaneously enumerate users, plugins, and themes.
+wpscan --url https://example.com -e u,p,t
+
+# Update WPScan to the latest version.
+wpscan --update
+
+# Brute force passwords using a file.
+wpscan --url https://example.com --passwords passwords.txt
+
+# Use a file for brute-forcing usernames.
+wpscan --url https://example.com --usernames users.txt
+
+# Set the number of threads for scanning.
+wpscan --url https://example.com --threads 10
+
+# Disable SSL/TLS checks for HTTPS.
+wpscan --url https://example.com --disable-tls-checks
