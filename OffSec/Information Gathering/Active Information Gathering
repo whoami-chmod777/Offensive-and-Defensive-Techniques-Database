@@ -704,8 +704,7 @@ dirb http://10.11.12.83
 
 Dirbuster is multi-threaded, has a nice GUI and includes more wordlists.
 
-- Key Options -
-
+Key Options
 Target URL: Specify the target URL (e.g., http://10.11.12.83).
 Port: Define the port (default: 80 for HTTP, 443 for HTTPS).
 Wordlist: Load a custom or default wordlist for brute-forcing (e.g., /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt).
@@ -723,39 +722,118 @@ Custom User-Agent: Set a specific User-Agent string to mimic different clients (
 
 Netcat can also be used to interact with webservers by issuing HTTP requests. 
 
+nc 192.168.42.142 80
+GET / HTTP/1.0
+
+nc 192.168.42.142 80
+HEAD / HTTP/1.0
 
 
 
+└─$ nc 192.168.42.142 80
+GET / HTTP/1.0
+
+HTTP/1.1 200 OK
+Date: Fri, 24 Jan 2025 20:56:15 GMT
+Server: Apache/2.2.8 (Ubuntu) DAV/2
+X-Powered-By: PHP/5.2.4-2ubuntu5.10
+Content-Length: 891
+Connection: close
+Content-Type: text/html
+
+<html><head><title>Metasploitable2 - Linux</title></head><body>
+<pre>
+
+                _                  _       _ _        _     _      ____  
+ _ __ ___   ___| |_ __ _ ___ _ __ | | ___ (_) |_ __ _| |__ | | ___|___ \ 
+| '_ ` _ \ / _ \ __/ _` / __| '_ \| |/ _ \| | __/ _` | '_ \| |/ _ \ __) |
+| | | | | |  __/ || (_| \__ \ |_) | | (_) | | || (_| | |_) | |  __// __/ 
+|_| |_| |_|\___|\__\__,_|___/ .__/|_|\___/|_|\__\__,_|_.__/|_|\___|_____|
+                            |_|                                          
 
 
+Warning: Never expose this VM to an untrusted network!
+
+Contact: msfdev[at]metasploit.com
+
+Login with msfadmin/msfadmin to get started
 
 
+</pre>
+<ul>
+<li><a href="/twiki/">TWiki</a></li>
+<li><a href="/phpMyAdmin/">phpMyAdmin</a></li>
+<li><a href="/mutillidae/">Mutillidae</a></li>
+<li><a href="/dvwa/">DVWA</a></li>
+<li><a href="/dav/">WebDAV</a></li>
+</ul>
+</body>
+</html>
 
 
+-- Web application scanners --
 
+-- WPScan --
 
+WPScan is a popular WordPress vulnerability scanner that can be used to find known vulnerabilities in WordPress, enumerate users, themes and plugins and run dictionary attacks on the user accounts
 
+# Basic scan of a WordPress site.
+wpscan --url https://example.com
 
+# Enumerate WordPress usernames.
+wpscan --url https://example.com --enumerate u
 
+# Enumerate WordPress plugins.
+wpscan --url https://example.com --enumerate p
 
+# Enumerate vulnerable plugins.
+wpscan --url https://example.com --enumerate vp
 
+# Enumerate vulnerable themes.
+wpscan --url https://example.com --enumerate vt
 
+# Use API token for vulnerability database updates.
+wpscan --url https://example.com --api-token your_api_token
 
+# Use a random user-agent to evade detection.
+wpscan --url https://example.com --random-user-agent
 
+# Ignore warnings and force the scan to proceed.
+wpscan --url https://example.com --force
 
+# Use mixed detection method for plugins.
+wpscan --url https://example.com --plugins-detection mixed
 
+# Enumerate all plugins, including inactive ones.
+wpscan --url https://example.com --enumerate ap
 
+# Enumerate all themes, including inactive ones.
+wpscan --url https://example.com --enumerate at
 
+# Enumerate media files.
+wpscan --url https://example.com --enumerate m
 
+# Full command with enumeration options.
+wpscan --url https://example.com --enumerate [p/vp/ap/t/vt/at]
 
+# Test a target for all popular plugins
+wpscan --url https://example.com --enumerate vp --plugins-detection aggressive
+wpscan --url https://example.com --enumerate ap --plugins-detection aggressive
 
+# Simultaneously enumerate users, plugins, and themes.
+wpscan --url https://example.com -e u,p,t
 
+# Update WPScan to the latest version.
+wpscan --update
 
+# Brute force passwords using a file.
+wpscan --url https://example.com --passwords passwords.txt
 
+# Use a file for brute-forcing usernames.
+wpscan --url https://example.com --usernames users.txt
 
+# Set the number of threads for scanning.
+wpscan --url https://example.com --threads 10
 
-
-
-
-
-
+# Disable SSL/TLS checks for HTTPS.
+wpscan --url https://example.com --disable-tls-checks
