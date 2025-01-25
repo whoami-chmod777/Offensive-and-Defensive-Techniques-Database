@@ -5,49 +5,49 @@ What are Email Attachments? Email attachments are files sent alongside an email 
 -- Types of Email Attachments --
 
 Documents:
-	- Common formats: .pdf, .docx, .xlsx, .pptx
-	- Usage: Sharing reports, contracts, presentations, etc.
-	- Risk: Documents can contain macros or embedded scripts that execute malicious code.
+• Common formats: .pdf, .docx, .xlsx, .pptx
+• Usage: Sharing reports, contracts, presentations, etc.
+• Risk: Documents can contain macros or embedded scripts that execute malicious code.
 
 Images:
-	- Common formats: .jpg, .png, .gif
-	- Usage: Sending visual content like pictures or graphs.
-	- Risk: May hide steganography or malware.
+• Common formats: .jpg, .png, .gif
+• Usage: Sending visual content like pictures or graphs.
+• Risk: May hide steganography or malware.
 
 Videos:
-	- Common formats: .mp4, .avi, .mov
-	- Usage: Sharing video files for presentations, media, etc.
-	- Risk: Video files can contain hidden malicious payloads.
+• Common formats: .mp4, .avi, .mov
+• Usage: Sharing video files for presentations, media, etc.
+• Risk: Video files can contain hidden malicious payloads.
 
 Compressed Archives:
-	- Common formats: .zip, .rar, .7z
-	- Usage: Compressing large files for easier sharing.
-	- Risk: Can hide multiple malicious files or executables.
+• Common formats: .zip, .rar, .7z
+• Usage: Compressing large files for easier sharing.
+• Risk: Can hide multiple malicious files or executables.
 
 Executables:
-	- Common formats: .exe, .bat, .sh, .msi
-	- Usage: Sending software or installation packages.
-	- Risk: High risk of malware, trojans, or ransomware infections.
+• Common formats: .exe, .bat, .sh, .msi
+• Usage: Sending software or installation packages.
+• Risk: High risk of malware, trojans, or ransomware infections.
 
 Scripts:
-	- Common formats: .js, .vbs, .ps1
-	- Usage: Running automation or tasks via scripts.
-	- Risk: These files can execute dangerous scripts once opened.
+• Common formats: .js, .vbs, .ps1
+• Usage: Running automation or tasks via scripts.
+• Risk: These files can execute dangerous scripts once opened.
 
 Emails (Forwarded/Attached):
-	- Common formats: .eml, .msg
-	- Usage: Forwarding or attaching previous email threads.
-	- Risk: Can contain phishing content or malicious links.
+• Common formats: .eml, .msg
+• Usage: Forwarding or attaching previous email threads.
+• Risk: Can contain phishing content or malicious links.
 
 Multimedia:
-	- Common formats: .mp3, .wav, .mkv
-	- Usage: Sharing audio files, songs, or multimedia.
-	- Risk: Like video, these files could contain hidden malware.
+• Common formats: .mp3, .wav, .mkv
+• Usage: Sharing audio files, songs, or multimedia.
+• Risk: Like video, these files could contain hidden malware.
 
 Risk Factors with Email Attachments:
-- Phishing: Emails with attachments can contain malicious content designed to trick users into opening files.
-- Malware Delivery: Attachments are a common way to deliver malware, ransomware, or spyware.
-- Social Engineering: Attackers often use attachments to lure victims, claiming they contain important documents (e.g., invoices, reports).
+• Phishing: Emails with attachments can contain malicious content designed to trick users into opening files.
+• Malware Delivery: Attachments are a common way to deliver malware, ransomware, or spyware.
+• Social Engineering: Attackers often use attachments to lure victims, claiming they contain important documents (e.g., invoices, reports).
 
 
 -- emldump.py Script --
@@ -61,9 +61,13 @@ $ emldump.py sample.eml -s 4 -d > quotation.iso
 -- File Analysis --
 
 File Hashing:
-- Uses cryptographic algorithms (like MD5, SHA-1, SHA-256) to generate a unique identifier (hash) for a file.
-- File hashes are used to check file integrity and match files against known malware databases.
-- Tools: md5sum, sha256sum, HashMyFiles.
+• Uses cryptographic algorithms (like MD5, SHA-1, SHA-256) to generate a unique identifier (hash) for a file.
+• File hashes are used to check file integrity and match files against known malware databases.
+• Tools: md5sum, sha256sum, HashMyFiles.
+
+md5sum quotation.iso 
+sha1sum quotation.iso 
+sha256sum quotation.iso 
 
 whoami@soc101-ubuntu:~/Desktop/01_Phishing_Analysis/04_Attachment_Analysis$ sha256sum quotation.iso 
 75fdb848eac332b4ca7d88f497e7ba7ebbb9a798d825b28cf1f87b9d7149e87f  quotation.iso
@@ -83,6 +87,13 @@ $ python3 eioc.py sample1.eml
 -- Microsoft Powershell --
 
 The PowerShell command you're using, Get-FileHash, computes the hash value of a file. This is typically used for verifying the integrity or authenticity of files, especially after downloading or receiving them.
+
+Get-FileHash .\quotation.iso
+Get-FileHash -Algorithm md5 .\quotation.iso
+Get-FileHash -Algorithm sha1 .\quotation.iso
+Get-FileHash -Algorithm sha256 .\quotation.iso
+Get-FileHash -Algorithm md5 .\quotation.iso; Get-FileHash -Algorithm sha1 .\quotation.iso; Get-FileHash -Algorithm sha256 .\quotation.iso
+
 
 PS C:\Users\mirko\Downloads\SOC101> Get-FileHash .\quotation.iso
 
