@@ -1,4 +1,18 @@
 
+Geolocation OSINT involves collecting and analyzing location-based information from publicly available sources to identify, verify, or track geographic positions and movements.
+
+Satellite Imagery Analysis
+Using platforms like Google Earth and commercial satellite services to examine locations, structures, and terrain features from above.
+
+Digital Mapping Tools
+Leveraging Google Maps, OpenStreetMap, and specialized GIS toolsto gather geographic intelligence and validate location data.
+
+Metadata Extraction
+Analyzing GPS coordinates and location data embedded in images, social media posts, and digital content.
+
+Cross-Reference Verification
+Combining multiple geolocation sources to confirm locations and establish patterns through temporal and spatial analysis.
+
 Geolocation OSINT: The process of identifying a location using publicly available data like maps, photos, videos, and metadata.
 Image OSINT: The analysis of images to extract actionable information, such as metadata, objects, or events, from open sources.
 
