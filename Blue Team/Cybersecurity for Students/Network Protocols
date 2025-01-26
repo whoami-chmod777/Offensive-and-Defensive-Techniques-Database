@@ -359,5 +359,44 @@ nslookup -debug example.com
 nslookup -type=<record-type> example.com  
 
 
+-- Telnet --
+
+Telnet is the protocol that helps accessing devices via the command line.
+
+Features of the Telnet Protocol
+
+• It is located in the 7th layer (Application Layer) within the OSI model.
+• It uses the TCP protocol at the transport layer.
+• Telnet protocol usually uses TCP port 23.
+• It is mostly used for management purposes.
+• It is not preferred because it transmits the data traffic in an unencrypted way.
+
+Making a Telnet Connection on Windows
+"Telnet client" is not installed on Windows by default so it must be installed and activated in the system to be able to make connections with telnet protocol.
+
+• Control
+•  Programs and Features
+•  Tunr Windows featires on or off
+• Telnet Client
+
+
+To be able to establish telnet connection, we should type a command such as "telnet 192.168.5.100" from the command line. The IP address in the command is the IP address of the target device to be connected.
+
+
+telnet <hostname or IP> <port>
+
+telnet 192.168.1.1 22
+telnet mail.example.com 25
+
+HELO example.com
+MAIL FROM:<you@example.com>
+RCPT TO:<recipient@example.com>
+DATA
+Hello, this is a test.
+.
+QUIT
+
+GET / HTTP/1.1
+Host: example.com
 
 
