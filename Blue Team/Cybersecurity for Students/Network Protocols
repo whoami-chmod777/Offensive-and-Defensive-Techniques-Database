@@ -2,10 +2,9 @@
 If you want to investigate suspicious network activities, you need to know how network protocols work and what evidence you can extract. Learn how it works and how you can use it as an analyst.
 
 • Transmission Control Protocol (TCP)
-
-
-
-
+• User Datagram Protocol (UDP)
+• Domain Name System (DNS)
+• Telnet
 
 
 -- Transmission Control Protocol (TCP) --
@@ -113,34 +112,251 @@ Establishing a TCP Connection with Netcat
 sudo nc 192.168.216.128 5555
 
 
+-- User Datagram Protocol (UDP) --
+
+What is User Datagram Protocol (UDP)
+User Datagram Protocol (UDP) is another network protocol that provides data transmission between applications. It is located in the 4th layer of the OSI model. Unlike the TCP protocol, the UDP protocol does not provide transmission reliability.
+
+Features of the UDP Protocol
+
+• It does not require connection setup before transmission.
+• It provides a fast transmission.
+• It does not guarantee that the data will be transmitted.
+• It contains less information in the header structure.
+• It is often used by video applications and real-time applications.
+• It doesn't do error checking.
+• It doesn't handle flow control.
+
+UDP Connections
+UDP connections are frequently used by applications that transmit data via UDP. In order for applications to connect with the UDP protocol, some information about the protocol is used. Each UDP connection consists of “Source IP Address-Source Port Number”, “Destination IP Address-Destination Port Number” information.
+
+Default UDP Ports
+• DNS : 53
+• DHCP : 67,68
+• SNMP : 161,162
+
+UDP Protocol Header
+
+Source Port Number
+It is the field that contains the port number of the sender. It is “16 bits” long.
+
+Destination Port Number
+It is the field that contains the port number of the recipient. It is “16 bits” long.
+
+Length
+It is the field that contains the total length of the header and data of the UDP segment. It is “16 bits” long.
+
+Checksum
+The “Checksum” field contains the hexadecimal value that allows checking whether the integrity of the UDP segment is intact during transmission. Unlike the TCP protocol, this field is not required. It is “16 bits” long.
 
 
 
+-- Domain Name System (DNS) --
+
+What is DNS Protocol
+In the early times of the internet the hostnames were located in the “Hosts” files in the central servers. The IP address of a computer with a known hostname used to be found through this file.
+Today, the hosts file is still included in computers and can be used. The DNS protocol finds the IP address of the hostname we need to connect to.
+
+What is Domain and Subdomain
+"Domain" is an address used to access websites on the internet that has certain hierarchical structures.
+"Subdomain" are the sub-sites under the main domain. Hierarchically subdomain is located on the left side of the main domain address it is separated form it with a "." (dot). For example https://app.letsdefend.io
+
+https://app.letsdefend.io/
+
+Protocol --> https
+Subdomain --> app
+Domain and domain suffix --> letsdefend.io
 
 
+Top-Level Domains
+Top-Level Domain (TLD) is the extensions added to the domain names. They are separated and determined in accordance with certain purposes to the right of the internet addresses.
+
+Top-Level Domains Examples 
+
+• .com - Commercial (e.g., businesses, general websites)
+• .org - Organization (e.g., non-profits, NGOs)
+• .net - Network (e.g., internet service providers, network infrastructure)
+• .edu - Education (e.g., accredited educational institutions)
+• .gov - Government (e.g., U.S. government agencies)
+• .mil - Military (e.g., U.S. military entities)
+• .info - Information (e.g., informational websites)
+• .biz - Business (e.g., small businesses, commercial use)
+• .io - Indian Ocean (commonly used for tech startups and developers)
+• .co - Company (e.g., businesses, alternative to .com)
+
+https://en.wikipedia.org/wiki/Top-level_domain
+https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains
+
+Features of the DNS Protocol
+
+• The DNS protocol is located in the 7th layer (Application Layer) according to the OSI model.
+• It uses the UDP protocol in the transport layer.
+• DNS consists of a hierarchical structure.
+• DNS has a mechanism that works using distributed databases.
+• Each organization has its own DNS servers to enable devices to communicate with each other within its own computer network.
+• DNS Server usually uses the UDP 53 port.
+
+DNS Protocol Working Logic
+When we want to connect to a website a number of highly systematic transactions occur within seconds. These are the DNS protocol and DNS servers related transactions. 
+The DNS protocol uses DNS servers to perform its tasks. DNS Server keeps the Hostname-IP address information of websites and responds to the DNS queries for this information. 
+In this way, the IP address of the website in the query is transmitted to provide network communication. 
+When the DNS protocol cannot perform the task, the communication of the devices with each other is interrupted, and therefore, the DNS protocol is of great importance for communication.
+
+1. The computer sends the DNS query to the DNS Server, which is registered on itself. If it has been accessed to “Letsdefend.io” previously, the IP address of this website may already be found in the DNS server. If so, IP address information is obtained from the DNS Server.
+2. If “Letsdefend.io” was not accessed before, DNS Server cannot find the IP address information and contacts the “Root DNS Server” in order to detect the authorized DNS Server of “Letsdefend.io”.
+3. The “Root DNS Server'' tries to determine the “Primary DNS Server” which belongs to "Letsdefend.io" from the database. After the “Primary DNS Server” IP address is determined, it is transmitted to the previous DNS server.
+4. The DNS Server, which is registered on the computer, obtains the “Primary DNS Server” address, which belongs to "Letsdefend.io", then sends a DNS query to detect the IP address of the "Letsdefend.io" domain.
+5. The DNS query reaches to the “Primary DNS Server” which belongs to “Letsdefend.io" and this DNS query is replied.
+6. The DNS Server, which is registered on the computer, sends the IP address of "Letsdefend.io" to the querying system t
 
 
+Types of DNS Records
+
+• A (Address Record) - Maps a domain name to an IPv4 address.
+• AAAA (IPv6 Address Record) - Maps a domain name to an IPv6 address.
+• CNAME (Canonical Name Record) - Alias of one domain to another (e.g., www.example.com → example.com).
+• MX (Mail Exchange Record) - Specifies mail servers for email routing.
+• TXT (Text Record) - Stores text data, often used for verification (e.g., SPF, DKIM).
+• NS (Name Server Record) - Specifies the authoritative name servers for a domain.
+• PTR (Pointer Record) - Maps an IP address to a domain name (reverse DNS lookup).
+• SRV (Service Record) - Defines the location (hostname and port) of specific services.
+• SOA (Start of Authority Record) - Provides metadata about the domain (e.g., primary DNS server, admin email).
+• CAA (Certification Authority Authorization) - Specifies which certificate authorities are allowed to issue SSL certificates for a domain
+
+https://en.wikipedia.org/wiki/List_of_DNS_record_types
 
 
+-- Hosts File --
+
+The hosts file is a registry file included with Windows and Linux. It is possible to use the hosts file, which was used before the DNS protocol was developed, in today's current operating systems as well. In DNS queries made over the system, the contents of the hosts file is checked first.  If a record related to the address in the query is in the hosts file, it means that this record is valid.
+
+Note: The location of the hosts file in Windows is: cmd
+"C:\Windows\System32\drivers\etc\hosts", in Linux it is "/etc/hosts".
 
 
+C:\Users\mirko>type "C:\Windows\System32\drivers\etc\hosts"
+# Copyright (c) 1993-2009 Microsoft Corp.
+#
+# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.
+#
+# This file contains the mappings of IP addresses to host names. Each
+# entry should be kept on an individual line. The IP address should
+# be placed in the first column followed by the corresponding host name.
+# The IP address and the host name should be separated by at least one
+# space.
+#
+# Additionally, comments (such as these) may be inserted on individual
+# lines or following the machine name denoted by a '#' symbol.
+#
+# For example:
+#
+#      102.54.94.97     rhino.acme.com          # source server
+#       38.25.63.10     x.acme.com              # x client host
+
+# localhost name resolution is handled within DNS itself.
+#       127.0.0.1       localhost
+#       ::1             localhost
+
+C:\Users\mirko>
+
+Note: Lines starting with the "#" sign in the hosts file are comment lines.
 
 
+-- DNS Query with Dig -- 
+
+The Dig tool allows to make DNS queries which works from the command line on Linux. 
+
+# Basic Query  
+dig example.com  
+
+# Query Specific Record Type  
+dig example.com <record-type>  
+
+# Check Authoritative Name Servers  
+dig NS example.com  
+
+# Reverse DNS Lookup  
+dig -x <IP-address>  
+
+# Query a Specific DNS Server  
+dig @<DNS-server> example.com  
+
+# Show Only Answer Section  
+dig +short example.com  
+
+# Query with Trace  
+dig +trace example.com  
+
+# Test DNSSEC Records  
+dig +dnssec example.com  
+
+# Specify Port  
+dig -p <port-number> example.com  
+
+# Use TCP Instead of UDP  
+dig +tcp example.com  
+
+# Force IPv6 Query  
+dig -6 example.com  
+
+# Force IPv4 Query  
+dig -4 example.com  
+
+# Print Results in JSON Format  
+dig +json example.com  
+
+# Set Query Timeout  
+dig +time=<seconds> example.com  
+
+# Disable Additional Records  
+dig +noadditional example.com  
+
+# Show All Details  
+dig +noall +answer example.com  
+
+# Print TTL of Records  
+dig +ttlunits example.com  
+
+Dig Online: https://www.digwebinterface.com/
 
 
+-- DNS Query with Nslookup --
 
+# Basic Query  
+nslookup example.com  
 
+# Query a Specific DNS Server  
+nslookup example.com <DNS-server>  
 
+# Find MX Records  
+nslookup -query=mx example.com  
 
+# Find NS Records  
+nslookup -query=ns example.com  
 
+# Find A Records  
+nslookup -query=a example.com  
 
+# Find AAAA Records  
+nslookup -query=aaaa example.com  
 
+# Find CNAME Records  
+nslookup -query=cname example.com  
 
+# Reverse DNS Lookup  
+nslookup <IP-address>  
 
+# Set Timeout  
+nslookup -timeout=<seconds>  
 
+# Use a Specific Port  
+nslookup -port=<port-number> example.com  
 
+# Enable Debugging Mode  
+nslookup -debug example.com  
 
-
+# Set Query Type  
+nslookup -type=<record-type> example.com  
 
 
 
