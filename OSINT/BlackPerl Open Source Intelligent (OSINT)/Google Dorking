@@ -1,0 +1,14 @@
+
+-- Basic Operators --
+
+Search within a specific site: site:example.com
+Search for keywords in the title of a page: intitle:"login"           
+Search for keywords in the URL: inurl:"admin"             
+Search for specific file types: filetype:pdf "report"     
+View the cached version of a page: cache:example.com         
+
+
+-- Combining Operators --
+
+
+...
