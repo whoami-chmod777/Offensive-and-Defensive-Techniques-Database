@@ -1,4 +1,6 @@
 
+Google dorking, also known as Google hacking, is a technique that uses Google’s advanced search operators to find specific information or resources. Below is a cheat sheet with commonly used operators and examples:
+
 -- Basic Operators --
 
 Search within a specific site: site:example.com
@@ -10,20 +12,41 @@ View the cached version of a page: cache:example.com
 
 -- Combining Operators --
 
-
-...
-
-
-
-
+Search for admin pages on a specific site: site:example.com inurl:admin                 
+Find login pages: intitle:"login" inurl:admin                  
+Discover files: site:example.com filetype:pdf                
+Expose directories: inurl:/wp-content/uploads/                   - 
 
 
+-- Vulnerability Hunting --
+
+Find SQL errors: intext:"sql syntax" filetype:php             
+Open cameras: inurl:/view/index.shtml                      
+Configuration files: filetype:env "DB_PASSWORD"                   
+Open directories: intitle:"index of /" inurl:ftp               
 
 
+-- Search for Sensitive Information --
 
-
-
-
+inurl:config pass
+inurl:config secret 
+inurl:config.php dbpasswd
+inurl:config.php pass
+inurl:config.php password
+inurl:configuration
+inurl:env
+inurl:setting
+filetype:log
+intext:"Index of /" +.htaccess
+intitle:"index of" 
+inurl:& intext:admin intext:login
+inurl:& intext:search
+inurl:config secret
+inurl:backup
+inurl:backup.zip
+inurl:quiz inurl:&
+inurl:Makefile.toml
+hostname user password filetype:xml
 
 
 -- Most Important Google Dorks List 2023 --
