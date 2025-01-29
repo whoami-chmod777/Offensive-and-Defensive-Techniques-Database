@@ -5,6 +5,10 @@ If you want to investigate suspicious network activities, you need to know how n
 • User Datagram Protocol (UDP)
 • Domain Name System (DNS)
 • Telnet
+• File Transfer Protocol (FTP)
+• Secure Shell Protocol (SSH)
+• Hypertext Transfer Protocol (HTTP)
+• Dynamic Host Configuration Protocol (DHCP)
 
 
 -- Transmission Control Protocol (TCP) --
@@ -375,8 +379,8 @@ Making a Telnet Connection on Windows
 "Telnet client" is not installed on Windows by default so it must be installed and activated in the system to be able to make connections with telnet protocol.
 
 • Control
-•  Programs and Features
-•  Tunr Windows featires on or off
+• Programs and Features
+• Tunr Windows featires on or off
 • Telnet Client
 
 
@@ -398,5 +402,135 @@ QUIT
 
 GET / HTTP/1.1
 Host: example.com
+
+
+-- File Transfer Protocol (FTP) --
+
+What is FTP Protocol
+File Transfer Protocol (FTP) is a network protocol that provides file transfer between devices.
+
+- Features of FTP Protocol -
+
+• According to the OSI model, the FTP protocol is located in the 7th Layer (Application Layer).
+• It uses the TCP protocol at the transport layer.
+• It has a Client-Server architecture.
+• Different operating systems can use it.
+• For file transfer with FTP protocol, a connection must be established first.
+• While establishing the FTP connection, the authentication process that provides basic security is performed using a username and password.
+• FTP does not encrypt its traffic; all transmissions are in clear text, and usernames, passwords, commands, and data can be read by anyone able to perform packet capture (sniffing) on ​​the network. (Source: Wikipedia)
+• Provides data representation diversity (like ASCII and EBCDIC).
+
+- FTP Commands -
+
+USER Command
+The USER command is the command that determines which user to connect to the FTP Server.
+
+PASS Command
+The PASS command is the command that gives the password of the user provided with the USER command for the connection to the FTP Server.
+
+HELP Command
+It is the command that provides information about the usage of commands. If used without parameters, a list of commands is displayed.
+
+PWD Command
+The PWD command is the command that shows which directory it is working on.
+
+RETR Command
+The RETR command is the command used to initiate the file transfer process.
+
+STOR Command
+It is the command used to transfer the specified file to the server.
+
+LIST Command
+It is the command that lists the names and properties of the directory and files under the current directory.
+
+QUIT Command
+It is the command that terminates the FTP connection.
+
+https://en.wikipedia.org/wiki/List_of_FTP_commands
+
+
+- FTP Server Return Codes -
+
+FTP servers transmit 3-digit return codes in response to commands from FTP clients.
+
+220 (vsFTPd 3.0.3) 
+AUTH TLS
+530 Please login with USER and PASS. 
+AUTH SSL
+530 Please login with USER and PASS.
+
+https://en.wikipedia.org/wiki/List_of_FTP_server_return_codes
+
+
+- File Transfer with FTP -
+
+Since FTP protocol has client-server architecture, FTP server must be installed on the device that will send the file. Similarly, the FTP client application must be installed on the device that will receive the file. 
+
+https://phoenixnap.com/kb/install-ftp-server-on-ubuntu-vsftpd 
+https://filezilla-project.org/download.php?type=client 
+https://windows.tutorials24x7.com/blog/how-to-install-filezilla-ftp-client-on-windows-10 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Secure Shell Protocol (SSH) --
+
+
+
+-- Hypertext Transfer Protocol (HTTP) --
+
+
+
+-- Dynamic Host Configuration Protocol (DHCP) --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
