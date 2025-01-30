@@ -1,1 +1,101 @@
 
+Domain WHOIS Lookup
+WHOIS records provide valuable information about a domain, such as registration details, owner, and contact information. Tools like DomainTools can be used to retrieve and analyze WHOIS data.
+
+DNS Analysis
+DNS records map domain names to IP addresses. Tools like MXToolbox can be used toexamine DNS records, revealing server locations, email settings, and potentialsecurity vulnerabilities.
+
+
+Osintframework
+https://www.osintframework.com/
+
+whois
+https://www.whois.com/
+
+ICANN Lookup
+https://lookup.icann.org/en
+
+Certificate Search
+https://crt.sh/
+
+View DNS Info
+https://viewdns.info/
+
+MX Toolbox
+https://mxtoolbox.com/SuperTool.aspx
+
+DNS Dumpster
+https://dnsdumpster.com/
+
+SecurityTrails
+https://securitytrails.com/
+
+built with
+https://builtwith.com/
+
+Wappalazer
+https://www.wappalyzer.com/
+
+isitwp
+https://www.isitwp.com/
+
+
+-- Sublist3r Cheat Sheet --
+
+# Basic subdomain enumeration
+python sublist3r.py -d example.com	
+
+# Save results to a file
+python sublist3r.py -d example.com -o results.txt	
+
+# Use specific search engines
+python sublist3r.py -d example.com -e google,yahoo,bing	
+
+# Scan subdomains for open ports
+python sublist3r.py -d example.com -p 80,443	
+
+# Increase threads for faster scanning
+python sublist3r.py -d example.com -t 20	
+
+# Bruteforce subdomains
+python sublist3r.py -d example.com -b	
+
+# Run with max performance
+python sublist3r.py -d example.com -t 50 -e google,bing,yahoo,virustotal -b -o subdomains.txt	
+
+
+
+-- Google Dork Cheat Sheet --
+
+site:example.com
+site:example.com -www
+site:example.com inurl:admin
+site:example.com intitle:"index of"
+site:example.com ext:bak
+site:example.com filetype:pdf
+site:example.com inurl:login
+site:example.com inurl:config
+site:example.com inurl:db
+site:example.com "password"
+site:testphp.vulnweb.com ext:bak | ext:sql | ext:zip
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
