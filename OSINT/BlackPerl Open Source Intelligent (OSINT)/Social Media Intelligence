@@ -16,20 +16,208 @@ Use comprehensive person search tools like Webmii and Rocketreach to gather info
 
 -- Twitter OSINT --
 
+- Advanced Search Operators -
+
+Tweets from a specific user: from:elonmusk
+Tweets directed to a user: to:elonmusk
+Mentions a user: @elonmusk
+Tweets since a date (YYYY-MM-DD): since:2024-01-01
+Tweets until a date: until:2024-01-31
+Tweets with at least X retweets: min_retweets:100
+Tweets with at least X likes: min_faves:500
+Tweets with at least X replies: min_replies:50
+Tweets containing links: filter:links
+Tweets with images/videos: filter:media
+Tweets from verified users: filter:verified
+Only replies: filter:replies
+Search for a specific language: lang:en
+Find tweets near a location: near:"New York" within:15km
+Search for hashtags: #OSINT
+Exact match search: "Twitter OSINT"
+Find tweets with either keyword: ("hacking" OR "cybersecurity")
+Exclude words: OSINT -tools
+Geo-located tweets: near:"city name" within:XXkm
+
+🛠 OSINT Tools for Twitter
+🐦 Twitter Advanced Search - https://twitter.com/search-advanced
+🔍 AllMyTweets - https://www.allmytweets.net (View all tweets from a user)
+📊 Followerwonk - https://moz.com/followerwonk (Analyze followers)
+🌍 TweetDeck - https://tweetdeck.twitter.com (Real-time monitoring)
+🛰️ Twitonomy - https://www.twitonomy.com (User analysis)
+🔗 Tinfoleak - https://github.com/vaguileradiaz/tinfoleak (Extract metadata)
+🕵️‍♂️ OSINT Combine Twitter Search - https://osintcombine.com/twitter-search
+👤 WhoPostedWhat - https://whopostedwhat.com (Historical searches)
+📍 GeoSocial Footprint - https://geosocialfootprint.com (Geo-based analysis)
+ 📸 ExifTool - https://exiftool.org (Extract metadata from images)
 
 
 -- Instagram and Facebook OSINT --
 
+Find specific user profiles: site:linkedin.com/in/ "John Doe"
+Find company profiles: site:linkedin.com/company/ "Tesla"
+Find job postings: site:linkedin.com/jobs/ "Cybersecurity Analyst"
+Find employees in a company: "Current * at Google"
+Find former employees: "Past * at Facebook"
+Find people with a specific title: "Software Engineer at Microsoft"
+Find people recommendation pages: intitle:"People you may know" site:linkedin.com
+Broaden searches for profiles: intitle:"profiles" site:linkedin.com "cybersecurity"
+View profiles without logging in: "View this profile with LinkedIn" site:linkedin.com
+Exclude job listings from searches: site:linkedin.com "Marketing Manager" -inurl:"jobs"
 
+🛠 OSINT Tools for LinkedIn
+👀 LinkedIn Advanced Search - https://www.linkedin.com/search
+🔍 Google Dorking - Use site:linkedin.com in Google to bypass login walls
+🕵️‍♂️ Intelligence X - https://intelx.io (Find leaked LinkedIn emails)
+🛡️ Pipl - https://pipl.com (Deep web people search)
+📜 Hunter.io - https://hunter.io (Find company emails)
+🧑‍💻 Skopenow - https://www.skopenow.com (Automated LinkedIn profiling)
+📊 Lusha - https://www.lusha.com (Extract contact info)
+🔍 RecruitEm - https://recruitin.net (Find professionals without logging in)
+📝 Name2Email - https://chrome.google.com/webstore/detail/name2email/mffmjcaofjcnlfdfffjdamhheiiomjgb (Guess LinkedIn emails)
+📡 LittleSis - https://littlesis.org (Find business/political connections)
 
 
 -- LinkedIn OSINT --
 
+Search Facebook in Google: site:facebook.com "John Doe"
+Find groups: site:facebook.com/groups/ "OSINT"
+Search for people: site:facebook.com/people/ "John Doe"
+Find events: site:facebook.com/events/ "Cybersecurity Conference"
+Publicly available profiles: site:facebook.com/public/ "Jane Smith"
+Find users who liked a page: intitle:"Facebook" AND "likes" site:facebook.com
+Use Google Cache: cache:facebook.com/usernamec/
+
+🛠 OSINT Tools for Facebook
+🔍 Facebook Advanced Search - https://www.facebook.com/search
+📸 Photo Lookup - https://facecheck.id (Find people using photos)
+🕵️ Who Posted What - https://whopostedwhat.com (Search posts by date)
+🔗 StalkScan (Archived) - https://stalkscan.com (Analyze profiles)
+📊 Social Searcher - https://www.social-searcher.com (Search posts & comments)
+📡 Intelligence X - https://intelx.io (Search for leaks & deleted posts)
+🧑‍💻 OSINT Combine Facebook Search - https://osintcombine.com/facebook-search
+🔄 Archive Facebook Profiles - https://web.archive.org
+
+📍 Facebook Graph Search Alternatives
+Although Facebook Graph Search is no longer available, you can still find information using Google Dorking and WhoPostedWhat.
+Search posts by year: site:facebook.com "John Doe" 2023
+Find posts by keyword: site:facebook.com "vaccine mandate"
+Find public check-ins: site:facebook.com "checked into" "New York"
+Search for live videos: site:facebook.com/videos "live now"
+
+
+- Advanced Search Operators for Instagramm -
+
+Search Instagram via Google: site:instagram.com "John Doe"
+Search specific posts: site:instagram.com/p/ "Cybersecurity"
+Find posts under a hashtag: site:instagram.com/explore/tags/osint/
+Search stories from Instagram: site:instagram.com/stories/ "HackerCon"
+Find accounts with a high following: intitle:"Instagram" AND "followers" site:instagram.com
+Search geotagged posts: site:instagram.com "New York" "Times Square"
+Find users posting from a location: site:instagram.com "posted in Paris"
+
+🛠 OSINT Tools for Instagram
+🔍 Instagram Advanced Search - https://www.instagram.com/explore
+📸 ImgOps - https://imgops.com (Reverse image search for Instagram photos)
+🕵️ Picuki - https://www.picuki.com (View profiles & posts anonymously)
+🔎 Inflact Instagram Viewer - https://inflact.com/profile-analyzer (Profile insights)
+📊 Snoopreport - https://snoopreport.com (Track public Instagram activity)
+📡 Save Instagram - https://saveig.app (Download posts & stories)
+📝 Stories IG - https://storiesig.me (View stories anonymously)
+📡 IGLeads - https://igleads.io (Extract followers & emails)
+🔄 Archive Instagram Profiles - https://web.archive.org
+
+- Links -
+
+Facebook Settings
+https://www.facebook.com/settings?tab=your_facebook_information
+
+Inflact
+https://inflact.com/
+
+Imginn
+https://imginn.com/
+
+Social Search
+https://www.social-searcher.com/
+
+Google Social Search
+https://www.social-searcher.com/google-social-search/
+
+Instagram Data Export
+https://www.instagram.com/download/request
 
 
 
 -- People Search --
 
+Comprehensive Search
+Tools like Webmii and Rocketreach aggregate data from various sources to create comprehensive profiles, including social media, public records, and online databases.
+
+Information Retrieval
+These tools allow you to search for individuals based on their name, email address, phone number, or other identifying information.
+
+Hands-On Task
+Investigate a fictional identity using a people search tool to gather information about their online presence, potential aliases, and associated accounts.
 
 
+- Google Dorking for People Search -
 
+Find profiles on Facebook: site:facebook.com "John Doe"
+Find LinkedIn profiles: site:linkedin.com/in/ "John Doe"
+Find Instagram accounts: site:instagram.com "johndoe123"
+Find Twitter accounts: site:twitter.com "John Doe"
+Find TikTok accounts: site:tiktok.com "@johndoe"
+Find Pinterest profiles: site:pinterest.com "John Doe"
+Find Reddit accounts: site:reddit.com "u/JohnDoe"
+Find YouTube channels: site:youtube.com "John Doe"
+Find Medium articles: site:medium.com "John Doe"
+Find personal webpages: inurl:about.me "John Doe"
+Find resumes: intitle:"resume" "John Doe"
+Find CVs online: intitle:"CV" "John Doe"
+Find emails related to a name: email * John Doe
+Find phone numbers: phone * John Doe
+
+
+🔎 OSINT Tools for People Search
+
+👥 General People Search
+Pipl – Deep web people search
+BeenVerified – Public records search
+Spokeo – US-based people search
+TruthFinder – Background check service
+FastPeopleSearch – Free people lookup
+
+📨 Email Lookup
+Hunter.io – Email lookup & verification
+Snov.io – Email finder & validator
+Email-Checker – Verify email addresses
+Email Permutator+ – Generate possible email formats
+
+📞 Phone Number Lookup
+Truecaller – Identify unknown numbers
+NumLooker – Reverse phone search
+Spokeo – Reverse phone lookup
+
+📌 Social Media Search
+UserSearch.org – Find usernames across platforms
+Namechk – Check username availability
+WhatsMyName – Cross-platform username search
+Social Searcher – Search posts across social media
+
+🕵️ Dark Web & Breach Data
+HaveIBeenPwned – Check for breached emails
+Dehashed – Search for leaked data
+IntelX – Search dark web leaks
+
+📍 Location & Address Search
+WhitePages – People & address lookup
+TruePeopleSearch – Free address lookup
+Google Earth – View physical locations
+Spokeo Maps – Reverse address search
+
+
+webmii
+https://webmii.com/
+
+RocketSearch
+https://rocketreach.co/
