@@ -470,14 +470,12 @@ https://phoenixnap.com/kb/install-ftp-server-on-ubuntu-vsftpd
 https://filezilla-project.org/download.php?type=client 
 https://windows.tutorials24x7.com/blog/how-to-install-filezilla-ftp-client-on-windows-10 
 
-
 - FTP and Wireshark -
 
 ftp.request.arg contains ".txt"
 ftp.request.arg == "upload.txt"
 ftp.request.command == "STOR" || ftp.request.command == "CWD"
 ftp.request.command == "STOR" && ftp.request.arg contains "upload.txt"
-
 
 Request: CWD /home/blueteam/uploads
 Response: 250 Directory successfully changed.
@@ -486,20 +484,51 @@ Request: STOR upload.txt
 Response: 150 Opening data connection.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 -- Secure Shell Protocol (SSH) --
+
+What is SSH Protocol
+SSH protocol is a remote access protocol that provides secure access to devices.
+
+- Features of SSH Protocol -
+
+• According to the OSI model, the SSH protocol is in the 7th Layer (Application Layer).
+• It uses the TCP protocol at the transport layer.
+• It has a Client-Server architecture.
+• Different operating systems can use it.
+• The SSH protocol uses TCP port 22 by default.
+• It is one of the protocols that is frequently preferred and provides secure remote access to devices.
+• While establishing the SSH connection, the authentication process that provides basic security is performed using a username and password.
+• In SSH connections, network traffic is transmitted as encrypted.
+
+- Establishing an SSH Connection -
+
+Since SSH protocol has a client-server architecture, an SSH server must be installed on the device to be connected. Similarly, the SSH client application must be installed on the device to be connected. SSH server and client applications can have a wide variety of features. For example, it could be an application running on the command line, or it could be an application with a graphical user interface (GUI). Being a command line or GUI application has no direct effect on the connection, but being a GUI can provide ease of use.
+
+ssh username@SSH_Server_IP_Address --> ssh letsdefend@192.168.216.127 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
