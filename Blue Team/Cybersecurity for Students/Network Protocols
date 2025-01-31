@@ -473,7 +473,11 @@ https://windows.tutorials24x7.com/blog/how-to-install-filezilla-ftp-client-on-wi
 
 - FTP and Wireshark -
 
+ftp.request.arg contains ".txt"
+ftp.request.arg == "upload.txt"
 ftp.request.command == "STOR" || ftp.request.command == "CWD"
+ftp.request.command == "STOR" && ftp.request.arg contains "upload.txt"
+
 
 Request: CWD /home/blueteam/uploads
 Response: 250 Directory successfully changed.
