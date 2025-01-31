@@ -471,7 +471,15 @@ https://filezilla-project.org/download.php?type=client
 https://windows.tutorials24x7.com/blog/how-to-install-filezilla-ftp-client-on-windows-10 
 
 
+- FTP and Wireshark -
 
+ftp.request.command == "STOR" || ftp.request.command == "CWD"
+
+Request: CWD /home/blueteam/uploads
+Response: 250 Directory successfully changed.
+
+Request: STOR upload.txt
+Response: 150 Opening data connection.
 
 
 
