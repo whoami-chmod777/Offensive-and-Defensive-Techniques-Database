@@ -662,29 +662,22 @@ Note: Although the HTTP protocol tries to provide security by using security hea
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 -- Dynamic Host Configuration Protocol (DHCP) --
 
+What is DHCP Protocol
+Dynamic Host Configuration Protocol (DHCP) enables the devices on the network to obtain IP addresses dynamically and to configure the other network of the device. It is located in the 7th layer of the OSI model.
 
+- DHCP Process -
 
+It takes 4 steps for a DHCP client to obtain an IP address from the DHCP server. These steps are shown in the image below:
 
+The events that occur in each step above are as follows:
+• The DHCP client sends a broadcast message to detect the IP address of the DHCP Server in the network.
+• Receiving the network packet, the DHCP Server offers the DHCP client an unused IP address as a response.
+• The DHCP client accepts and confirms the IP address information offered by the DHCP server and reports it to the DHCP server.
+• After the DHCP server learns that the DHCP client has approved the IP address information, it records it on its database.
+
+Note: DHCP Server saves the IP address information it has sent for a certain period of time for the DHCP client. At the end of this period, the DHCP client must request an IP address again.
 
 
 
