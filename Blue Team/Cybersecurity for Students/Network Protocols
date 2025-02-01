@@ -508,31 +508,175 @@ ssh username@SSH_Server_IP_Address --> ssh letsdefend@192.168.216.127
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 -- Hypertext Transfer Protocol (HTTP) --
+
+What is HTTP Protocol
+Hypertext Transfer Protocol (HTTP) is a network protocol that provides communication between client and server on the web.
+
+- Features of HTTP Protocol -
+
+• According to the OSI model, the HTTP protocol is in the 7th Layer (Application Layer).
+• It uses the TCP protocol at the transport layer.
+• It has a Client-Server architecture.
+• The HTTP protocol is a connectionless protocol, according to the OSI model, there is no need for connection setup at the application layer level.
+
+- Uniform Resource Locator (URL) -
+
+Uniform Resource Locator (URL) is an address used to reach a web address and contains some information about the target web server in its structure.
+
+http://192.168.216.128:80/files/message.txt
+
+Protocol --> http
+Host --> 192.168.216.128
+Lets Defeport --> 80
+Path --> /files/
+Filename --> message.txt
+
+
+- HTTP Protocol Working Logic -
+
+Since the HTTP protocol has a client-server architecture and is a connectionless protocol, the working logic is quite simple. The HTTP client sends a request to the HTTP server, and the HTTP server that receives the request returns a response to the HTTP client.
+
+- HTTP Messages -
+
+There are 2 basic message types of the HTTP protocol: HTTP Request and HTTP Response
+
+HTTP Request
+The HTTP request is the message sent by the client to the HTTP server. There can be 4 sections in the HTTP request:
+• Request Line
+• HTTP Request Headers
+• A Blank Line
+• Request Message Body
+
+HTTP Response
+The HTTP response is the message sent by the HTTP server in response to the HTTP request sent by the client. There can be 4 sections in the HTTP response:
+• Status Line
+• HTTP Response Headers
+• A Blank Line
+• Response Message Body
+
+- HTTP Methods -
+
+HTTP methods are protocol-specific methods defined in order to perform various operations on the server.
+
+GET Method
+HTTP Client requests a specific web page from the server to be sent to it with the GET method.
+
+POST Method
+The POST method ensures that the data assigned to the address given by the URL is accepted by the server. It transmits all the data to the server.
+
+OPTIONS Method
+The OPTIONS method allows getting the HTTP methods supported by the server.
+
+https://en.wikipedia.org/wiki/HTTP#Request_methods
+
+
+- HTTP Request Headers -
+
+One of the most basic parts of an HTTP request is request headers. Some request headers and descriptions are as follows:
+
+Host
+It is the header that contains the domain name of the server. In some cases, the domain name and port number may be included together.
+
+Accept
+It is the header that notifies the server of the data types accepted by the client.
+
+Accept-Language
+It is the header that notifies the server of the languages ​​that the client accepts.
+
+Accept-Encoding
+It is the header that notifies the server of the encoding algorithms supported by the client. Generally, this section contains the supported compression algorithms.
+
+Connection
+It is the header that informs the server whether the network connection will be open at the end of the process.
+
+Referer
+This header contains the information from which the address the request is directed. When clicking on the links of other addresses on the current website, this header can be added and a request can be sent.
+
+User-Agent
+With this header, the operating system information and browser information of the client is transmitted to the server.
+
+Cache-Control
+This header contains information about the control of the caching mechanism.
+
+Authorization
+It is the header that contains the credentials required for HTTP authentication.
+
+Cookie
+It is the header that contains the cookie information set by the server.
+
+https://en.wikipedia.org/wiki/List_of_HTTP_header_fields
+
+
+- HTTP Response Headers -
+
+The sections in the HTTP response sent in response to the HTTP request are called response headers. Some of these headers, which are included in the HTTP response, are as follows:
+
+Date
+It is the header that indicates the date and time of the HTTP response sent in response to the HTTP request.
+
+Server
+It is the header that contains the server name and sometimes the version information.
+
+Last-Modified
+It is the header that shows the date of the last change made on the resource on the server.
+
+Content-Encoding
+It is the header that tells which encoding algorithms the content sent by the server applies.
+
+Content-Length
+It is the header where the size of the body part in the response sent by the server to the client is informed.
+
+Connection
+It is the header that informs the client whether the network connection will be open at the end of the process.
+
+Content-Type
+It is the header in which the type of content sent to the client is declared.
+
+https://en.wikipedia.org/wiki/List_of_HTTP_header_fields
+
+
+- HTTP Response Status Codes -
+
+HTTP protocol informs the client by using some status codes in response messages.  
+
+
+Status Code    Explanation
+200            OK
+302            Found
+403            Forbidden
+404            Not Found
+500            Internal Server Error
+
+https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
+
+
+- HTTP Security Headers -
+
+HTTP protocol uses security headers to provide security. Some of these headers are as follows:
+• Strict-Transport-Security
+• Content-Security-Policy
+• X-Frame-Options
+
+Note: Although the HTTP protocol tries to provide security by using security headers, it is of particular importance that the traffic is transmitted as encrypted. They are SSL/TLS protocols that provide encrypted transmission of traffic. The specific name of the HTTP protocol, which uses SSL/TLS protocols, is HTTPS. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
