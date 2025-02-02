@@ -226,7 +226,7 @@ Hash functions are very important in terms of cyber security. On Linux and Windo
 Using online services
 https://www.miraclesalad.com/webtools/md5.php
 
-Linux: 
+Linux: echo -n LetsDefend | md5
 
 List of Hash Functions: https://en.wikipedia.org/wiki/List_of_hash_functions 
 
