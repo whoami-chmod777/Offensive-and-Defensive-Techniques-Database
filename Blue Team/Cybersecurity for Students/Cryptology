@@ -7,7 +7,9 @@
 • Objectives of Cryptography
 • Random Number Generators
 • Base64 Encoding/Decoding
-
+• Hash Functions
+• 
+• 
 
 
 -- Basic Concepts of Cryptology --
@@ -206,13 +208,27 @@ base64
 Base64: https://en.wikipedia.org/wiki/Base64 
 
 
+-- Hash Functions --
 
+What are Hash and Hash Functions
+Hash functions are a special type of function that performs certain operations mathematically and in computer science, which operates on bits. Hash functions are not encryption/decryption algorithms. Therefore, the hash function does not need a key to perform operations. Hash functions are functions that work fast and have easy calculation features. In this way, it can work in a short time even on large files. The hash function takes an input and produces an output as a result of the calculations in the algorithm. This output is called "Hash". The length of the input can be variable while the length of the output is fixed length. One of the important features of hash functions is that they produce a different hash for each different input. For example, the hash of the bit string "00110101" and the hash of the bit string "00110100" are different. The difference of even a single bit affects the result produced by the hash function, that is, it makes the value of the hash different. The reliability of the hash function depends on producing different hashes for different inputs. For example, if two different inputs cause the same hash the hash function loses its reliability. The situation where two different inputs produce the same hash is called "collision". 
 
+What are the Purposes of using it
+There are many ways of using Hash functions. Hash functions pass very large inputs or files through bit-based operations, resulting in a short and unique hash as a result of the algorithm. The hash produced as a result of the hash function can be used as the digital identity of the data.
+Another purpose of using hash functions is integrity check. If a problem has occurred in the transmission of the data or file and there has been a change in the bits of the file/data, hashes are used to understand this. Sometimes attackers can specifically replace real files with fake ones. In this case, it should be verified whether the file is the original file or not. One way to find out that the file is intact is to use hash functions. 
 
+$ sha256sum linuxmint-20.3-cinnamon-64bit.iso
+e739317677c2261ae746eee5f1f0662aa319ad0eff260d4eb7055d7c79d10952 linuxmint-20.3-cinnamon-64bit.iso
 
+The Role of Hash Functions in Cyber ​​Security
+Hash functions are very important in terms of cyber security. On Linux and Windows systems, users' password information is not kept as cleartext on the system. That would be a very insecure method. Passwords are kept in the form of hashes on the systems. Hash functions are different from other crypto algorithms. One of these differences, perhaps one of the most important, is that hash functions are unidirectional. 
 
+Using online services
+https://www.miraclesalad.com/webtools/md5.php
 
+Linux: 
 
+List of Hash Functions: https://en.wikipedia.org/wiki/List_of_hash_functions 
 
 
 
