@@ -4,8 +4,10 @@
 • Basic Concepts of Cryptology
 • Types of Cryptography
 • Historical Ciphers
+• Objectives of Cryptography
+• Random Number Generators
 • 
-• 
+
 
 
 -- Basic Concepts of Cryptology --
@@ -81,17 +83,75 @@ Online Caesar Encryption/Decryption Tool(CyberChef)
 https://gchq.github.io/CyberChef/#recipe=ROT13(true,false,false,3)&input=Y2lwaGVy 
 
 
+-- Objectives of Cryptography --
+
+4 principles, which are among the principles of information security, are also valid for cryptography:
+
+• Confidentiality
+• Integrity
+• Authentication
+• Non-repudiation
+
+Confidentiality
+Data/information sent over communication devices should not be understood by unauthorized people. Malicious people should not be able to make sense of the data, even if they obtain information that should remain between the parties. When the attacker listens to the network traffic, encrypted data should appear and this data should be cryptographically undecryptable. If encrypted data is somehow decrypted, the crypto algorithm used will cease to be reliable. Therefore, the developers of the crypto algorithm should design strong crypto algorithms considering this situation. This is the "Confidentiality" principle in information security principles. While designing cryptographic algorithms, it is necessary to design a crypto algorithm in line with this principle. 
+
+Integrity
+The attacker can attack the MiTM (Man in the Middle) attack by entering between two communication devices and taking over the traffic in between. In this case, the data reached by the attacker can be changed by the attacker and sent to the target. Apart from preventing this attack, which is possible in theory and in practice, it is necessary to verify that the integrity of the sent data is intact on the other side. In this way, data transmission security is ensured by cryptography. The “Integrity” principle, one of the information security principles, tells us that in such a case we have to verify that the data is not cryptographically compromised. While designing algorithms in cryptography, algorithm design should be done by considering data integrity. 
+
+Non-repudiation
+Another principle to consider when creating cryptographic algorithms is the "Non-repudiation" principle. This principle is responsible for ensuring that the sender is not in a position to deny that he has sent the information. Evidence that the sending party is sending the information must be found in the communication algorithm itself. When these principle requirements are not included in the algorithm, it is not revealed that fake people act/do not act on their behalf instead of real people. For example, if there is an insider threat in an institution and the suspect denies that he has done malicious activity, the crypto algorithm should have the technical infrastructure to reveal the truth. Otherwise, it will be difficult to identify the person performing the operation. 
+
+Authentication
+The parties that will establish the communication must verify that each other is the right person. It is very difficult to be sure that the party receiving the message is the party the sender wants to communicate with. Therefore, cryptography needs to establish a validation mechanism to prevent the occurrence of fake parties that technically and mathematically replace these two parties. The authentication mechanism is one of the most basic security requirements and its use is very common. For example, when logging in to social media applications or the banking system, whether you are the right person is verified with your username and password information. In addition, more advanced security measures can be taken. For example, “Two-Factor Authentication(2FA)” is one of these security features. With 2FA, one more step of verification is done by using SMS or an authenticator application, and security is increased. It is the "Authentication" principle that provides this for Cryptography. 
 
 
+-- Random Number Generators --
+
+For a crypto algorithm to be strong in cryptography, it is important that the key is long enough and random. Many random number generator methods have emerged to make the key random. 
+
+There are three types of Random Number Generators:
+
+• True Random Number Generators (TRNG)
+• Pseudorandom Number Generators (PRNG)
+• Cryptographically Secure Pseudorandom Number Generators (CSPRNG)
+
+True Random Number Generators (TRNG)
+True Random Generator is a method that generates random numbers based on real physical operations. An example of this type of random number generation is a coin flip or a dice toss. Although it is an effective method in terms of randomness, it is not a preferred method in terms of applicability and speed. 
+
+Coin Flipping: https://www.random.org/coins/ 
+
+Pseudorandom Number Generators (PRNG)
+The Pseudorandom Number Generator method needs an initial random value to ensure randomness. This value is called “seed”. This value can come from the TRNG method. It generates random numbers step by step according to some mathematical calculations over this first value. By applying the same mathematical calculation recursively, a number is generated at each step. Compared to the TRNG method, its application in practice is much easier and faster. But it is not secure and unpredictable enough for use in cryptography. Because if the first value is determined, it is not possible to talk about completely random values, since the value calculated in each step will be the same every time. For example, the "rand()" function in the C programming language can be given as an example of generating a number of types of PRNG. 
+
+Cryptographically Secure Pseudorandom Number Generators (CSPRNG)
+Cryptographically Secure Pseudorandom Number Generators (CSPRNG) is an unpredictable variant of PRNG. As in the PRNG method, it is not possible to predict and calculate the next value (0 or 1 bit) to be produced mathematically. The PRNG methods are frequently used in software testing, but CSPRNG is a cryptography-specific method. 
+
+CSPRNG: https://en.wikipedia.org/wiki/Cryptographically_secure_pseudorandom_number_generator 
 
 
+- Generating Random Value via Linux Command Line  -
+
+Random Number Generation with $RANDOM: sudo echo $RANDOM 
+
+└─$ sudo echo $RANDOM                                                              
+[sudo] password for kali: 
+28090
+
+In this method, random number generation is between “0-32767” values. 
+
+Random Number Generation with /dev/random: od -An -N2 -i /dev/random | od -An -N3 -i /dev/random 
+
+└─$ od -An -N2 -i /dev/random 
+       17174
+
+└─$ od -An -N3 -i /dev/random 
+    13358860
+
+└─$ od -An -N4 -i /dev/random 
+  1000187406
 
 
-
-
-
-
-
+CSPRNG Linux: https://medium.com/@phil_k/one-liner-csprng-in-your-friendly-linux-console-be02b3bc5a1f 
 
 
 
