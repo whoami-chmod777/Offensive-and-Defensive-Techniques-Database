@@ -1,0 +1,81 @@
+
+-- Cryptology --
+
+• Basic Concepts of Cryptology
+• 
+• 
+• 
+• 
+
+
+-- Basic Concepts of Cryptology --
+
+What is Cryptology
+The science that designs crypto algorithms that provide data security in communication infrastructures and research the reliability of these algorithms is called "Cryptology". “Cryptology” is a science that is based on encryption and decryption, which is usually the expertise of mathematicians. For the science of cryptology, it can be said that consist of the intersection of mathematics, electrical engineering, and computer science. Cryptology science is a very broad science and is divided into 2 itself: "Cryptography" and "Cryptanalysis". 
+
+What is Plaintext
+"Plaintext" is a readable and understandable text or piece of text. In cryptology, plaintext means unencrypted data. 
+
+What is Ciphertext
+"Ciphertext" is the value produced as a result of the algorithm after the plaintext is given as an input to a crypto algorithm. In cryptology, ciphertext means encrypted data.
+
+What is Cryptography
+"Cryptography" is the whole of the techniques used to transform the transmitted information into a form that cannot be understood by unauthorized people. Cryptography includes mathematical methods that try to provide the basic objectives of information security such as confidentiality, integrity, authentication, and non-repudiation. 
+"Cryptography" is the science that converts plaintext to ciphertext with the crypto algorithm. The algorithm in the encryption process is one of the main focuses. The method used by the encryption algorithm is one of the factors that determine the reliability of the algorithm. 
+
+What is Cryptanalysis
+"Cryptanalysis" is a branch of cryptology that examines the security of crypto algorithms in order to decrypt the encrypted data and tries to find their weaknesses. “Cryptanalysis” tries to detect mathematical vulnerabilities in the crypto algorithm in order to convert ciphertext to plaintext. 
+
+What is Encryption
+The process of converting plaintext into ciphertext is called "Encryption". There is an algorithm used mathematically in the encryption process. 
+
+What is Decryption
+The process of converting ciphertext into plaintext is called decryption. As in the encryption process, an algorithm is used in this process. 
+
+What is the Key
+The "Key" is a value given as input to encryption and decryption algorithms. Using this value, the encryption and decryption process is applied. 
+
+What is Encoding/Decoding
+"Encoding" is often confused with encryption as a concept. In fact, the two terms are used for very different purposes. Encoding is the process of converting data into a specific character set form. Unlike encryption algorithms, it is a conversion algorithm that is used without using key values ​​and without security concerns. There is also the opposite of the encoding process. For example, one of the most frequently used encoding algorithms is the "base64" algorithm. “Decoding” is the opposite of encoding algorithms. The encoded data with the decoding process will turn into previous data. 
+
+- The Correct/Incorrect Uses of Concepts -
+
+MD5/SHA1/SHA256 Encryption (-) Base32/Base64 Encryption/Decryption (-)
+MD5/SHA1/SHA256 Decryption (-) Base32/Base64 Encode/Decode (+)
+MD5/SHA1/SHA256 Hash Function (+) AES/RSA/ECC Encode/Decode (-)
+MD5/SHA1/SHA256 Encode/Decode (-) AES/RSA/ECC Encryption/Decryption (+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
