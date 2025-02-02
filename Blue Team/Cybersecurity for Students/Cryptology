@@ -2,8 +2,8 @@
 -- Cryptology --
 
 • Basic Concepts of Cryptology
-• 
-• 
+• Types of Cryptography
+• Historical Ciphers
 • 
 • 
 
@@ -44,6 +44,41 @@ MD5/SHA1/SHA256 Encryption (-) Base32/Base64 Encryption/Decryption (-)
 MD5/SHA1/SHA256 Decryption (-) Base32/Base64 Encode/Decode (+)
 MD5/SHA1/SHA256 Hash Function (+) AES/RSA/ECC Encode/Decode (-)
 MD5/SHA1/SHA256 Encode/Decode (-) AES/RSA/ECC Encryption/Decryption (+)
+
+
+-- Types of Cryptography --
+
+- Types of Cryptography -
+
+• Symmetric Ciphers
+• Asymmetric Ciphers
+• Protocols
+
+Symmetric Ciphers
+Symmetric encryption algorithms are cryptographic algorithms that use the same key in encryption and decryption operations. For example, after you have encrypted the plaintext, you can decrypt the result obtained with the same key again. 
+
+Asymmetric Ciphers
+In this type of cryptosystem, which is introduced as "Public-key cryptography" or "asymmetric cryptography", two different keys are used instead of a single key. One of these keys is the "secret key" and the other is the "public key". Different keys are used in encryption and decryption processes for asymmetric crypto algorithms. While “public key” is used for encryption, “secret key” or in other words “private key” is used for decryption. 
+
+Protocols
+Cryptographic protocols deal with the implementation of cryptographic algorithms. Symmetric and asymmetric crypto algorithms are used in the security infrastructure of many software. An example of the protocols in which these algorithms are applied is the "Transport Layer Security (TLS)" protocol. In this type of cryptographic protocol, symmetric and asymmetric crypto algorithms are generally used together. This is called “Hybrid Schemes”.
+
+
+-- Historical Ciphers --
+
+The Substitution Cipher
+The substitution cipher is an old and simple crypto algorithm. "Substitution Cipher" is an algorithm that works with the logic of replacing letters in the alphabet with another letter. 
+
+Shift Cipher (or Caesar Cipher)
+Caesar Cipher takes its name from the Roman leader "Julius Caesar". Julius Caesar developed a crypto algorithm to secretly transmit messages of military importance at that time, which was quite simple and changed each letter by scrolling over the alphabet. 
+Shift Cipher is one of the substitution cipher types. Shift cipher is an algorithm that works by sequentially shifting letters in the alphabet. In this algorithm, the key is the value that indicates how many times the alphabet will be shifted. 
+For example with the key "3", when 3 letters are shifted to the left for decryption
+
+Caesar Cipher
+https://en.wikipedia.org/wiki/Caesar_cipher
+
+Online Caesar Encryption/Decryption Tool(CyberChef)
+https://gchq.github.io/CyberChef/#recipe=ROT13(true,false,false,3)&input=Y2lwaGVy 
 
 
 
