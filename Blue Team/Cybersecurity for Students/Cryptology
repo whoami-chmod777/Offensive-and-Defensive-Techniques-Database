@@ -9,7 +9,8 @@
 • Base64 Encoding/Decoding
 • Hash Functions
 • Digital Signatures
-• 
+• SSL/TLS Protocol
+• Cryptographic Attacks
 
 
 -- Basic Concepts of Cryptology --
@@ -251,6 +252,80 @@ In the Windows operating system, files with the extension "exe" have a digital s
 
 Cryptographic Fundamentals of Digital Signatures
 Digital signatures work cryptographically similar to other crypto algorithms. Algorithms used in digital signatures should be asymmetric crypto algorithms. This is because the same key is used for encryption/decryption in symmetric crypto algorithms. In digital signing algorithms, 2 different keys are used for signing and signature verification: “public key” and “private key”. A private key is a personal key used in signing. The reason why this key is used in the signing process and kept secret is that it can be signed on behalf of the owner of the key. The public key, on the other hand, is used to verify signatures that are shared publicly and signed with a private key.
+
+
+-- SSL/TLS Protocol --
+
+What is SSL/TLS Protocol
+The SSL/TLS protocol is a protocol designed for secure two-party communication in computer networks. Generally, the use of the HTTPS protocol in web applications is widely known. However, SSL/TLS protocol is a protocol that is frequently used in e-mail, instant messaging, and VoIP applications. It ensures that the communication between the parties remains confidential. The SSL/TLS protocol has 3 main purposes:
+
+• Encryption: It allows to hide data from parties other than the 2 communicating parties.
+• Authentication: It allows to verify that both parties that want to provide secure communication are the correct parties.
+• Integrity: It ensures that the outgoing data has not been changed between the 2 parties with which secure communication is provided.
+
+The basis of the SSL/TLS protocol is cryptographically strong crypto algorithms.
+"SSL (Secure Sockets Layer)" is the name of the first version of the protocol to provide secure communication. Later, the name of the protocol was changed to "TLS (Transport Layer Security)". As can be seen from the table above, it is noticed that there is a name change before/after a certain date. The recommended version for using the SSL/TLS protocol is "TLS 1.3"
+Detailed information about SSL/TLS can be seen by clicking the padlock icon. The SSL/TLS certificate information of the server is located in this section.
+
+The SSL/TLS protocol uses certificates. Certificates are important to ensure secure communication. It is actually SSL/TLS certificates that enable encrypted traffic to occur by using HTTPS instead of HTTP on the browser. SSL/TLS certificate is a data file on the server. The client uses the server's certificate to verify the identity of the server and to get the public key from the server to be used in communication with the server. The browser uses its own list of certificate authorities to verify certificates. If the certificate of the connected server does not belong to a trusted certificate authority, the browser considers it insecure and warns the user.
+
+- How does SSL/TLS Principle work -
+
+Before starting encrypted and confidential data transfer with SSL/TLS protocol, the two parties that will communicate must follow the steps of some transactions. Communication consisting of all these steps is called “SSL/TLS Handshake”. These steps are as follows:
+
+• The user sends a request to the server.
+• The server sends its public key to the user along with its own SSL/TLS certificate.
+• The user's browser checks and verifies whether the sent certificate is valid.
+• The user's browser generates a randomly generated symmetric key and encrypts this symmetric key with the public key sent by the server and sends it to the server.
+• The server decrypts the encrypted symmetric key with the private key and the symmetric key is sent to the server in a secure manner.
+• From this stage onwards, the server encrypts every data to be sent to the user's browser using this symmetric key.
+• Since the user has this symmetric key, he decrypts the incoming encrypted data with the symmetric key and displays the page securely.
+
+
+-- Cryptographic Attacks --
+
+Cryptographic attacks require mastery of technical details that make them difficult to understand, depending on the crypto algorithm. Cryptographic attacks against each crypto algorithm differ. 
+
+Cryptanalysis and Attack Types
+Cryptanalysis is a branch of science that falls under cryptology. Those interested in this branch of science test the reliability of crypto algorithms designed by cryptography experts. The test here is very different from a routine test. By discovering attack methods specific to the Crypto algorithm, the weakness in the algorithm is exploited and the reliability of the crypto algorithm is tested in this way. Cryptanalysis is basically examined under 3 headings:
+
+• Classical Cryptanalysis
+• Implementation Attacks
+• Social Engineering
+
+- Classical Cryptanalysis -
+
+Classical cryptanalysis tries to obtain the plaintext from the ciphertext or to obtain the key from the ciphertext. With this method, simple methods are usually used when finding the weakness of the crypto algorithm. Structural weaknesses of the Crypto algorithm can be used or all possibilities can be tried with brute-force techniques. Generally, computers that require high processing power do not need to be used for this attack type. Attacks against Historic Ciphers are in this group. 
+
+- Brute-Force Attacks -
+
+In Brute-Force attacks, the attacker tries to determine the correct key value by trying all possible key possibilities on encrypted data he has captured. By checking whether the data obtained as a result of each key attempt is meaningful, he can understand whether he has obtained the key. Although there are many different criteria in this type of attack, the key length and the processing power of the attacker are important. If the length of the key is not long enough and the attacker has the processing power to do this attack, it may be possible to obtain the key in a short time. In order to prevent such attacks cryptographically, the length of the key value of the crypto algorithm should be such that it cannot be found by brute-force techniques. The crypto algorithm, which is developed assuming that the attacker has high processing power, can make it a more reliable crypto algorithm. 
+
+- Letter Frequency Analysis -
+
+If we had used the brute-force attack in the previous title on the Caesar cipher, the probability number of key values ​​would be 26, that is, it would be as many as the number of letters in the alphabet. If an encryption method is used as a substitution cipher instead of a Caesar cipher in the form of a different letter for each letter, an attack method that is more effective than a brute-force attack can be used: “Letter Frequency Analysis”. This analytical method makes it possible to obtain the plaintext using the weaknesses of the crypto algorithm. In the substitution cipher, each letter corresponds to a fixed letter. This reveals an analytical weakness. For example, one of the most used letters in English is statistically the letter "E" (about 13%). The second most used letter is the letter "T" (about 9%). If a letter analysis is made in the encrypted text, which is in the hands of the attacker, it can be easily seen how much each letter is. The letter corresponding to the letter "E" will be the letter with the highest number in the text. For example, let's examine the following plaintext and ciphertext:
+Plaintext: Having a certification is one of the popular factors that affect the recruitment process. Human resources specialists or the hiring managers who are authorized in the recruitment process consider the certificates of the candidates. Having a certificate or multiple certificates will be advantageous in order to stand out among other applicants. In some cases, having a certificate(s) may be mandatory depending on the requirements posted on the open position.
+Ciphertext: Kdylqj d fhuwlilfdwh lv rqh ri wkh srsxodu idfwruv wkdw diihfw wkh uhfuxlwphqw surfhvv. Kxpdq uhvrxufhv vshfldolvwv ru wkh klulqj pdqdjhuv zkr duh dxwkrulchg lq wkh uhfuxlwphqw surfhvv frqvlghu wkh fhuwlilfdwhv ri wkh fdqglgdwhv. Kdylqj d fhuwlilfdwh ru pxowlsoh fhuwlilfdwhv zloo eh dgydqwdjhrxv lq rughu wr vwdqg rxw dprqj rwkhu dssolfdqwv. Lq vrph fdvhv kdylqj fhuwlilfdwh(v) pdb eh pdqgdwrub ghshqglqj rq wkh uhtxluhphqwv srvwhg rq wkh rshq srvlwlrq. 
+
+CharacterCounter: https://github.com/smh67dmrc/CharacterCounter 
+
+- Implementation Attacks -
+
+Implementation attacks are an advanced type of attack that requires technical knowledge to implement. For example, obtaining the secret key according to the measurement of the electrical power consumption of the processor using the secret key is such an attack. In such an attack, it may be possible to obtain the secret key with signal processing techniques by following the power. In other words, such attacks are called "Side Channel Attacks".
+
+- Social Engineering -
+
+Social Engineering is the general name of a type of attack that is caused by the vulnerability of the person himself. Apart from Cryptology, this topic is very common and has many creative techniques. It is mostly used in terms of cryptology, which is mentioned under this title. For example, "social engineering" methods can be used to obtain the secret key necessary to obtain an encrypted text. Bribery, blackmail, and classical espionage methods can be given as examples. Using force to learn the secret key is also included in these methods. One of the frequently used methods is to persuade the person over the phone. Around a scenario, the attacker can achieve the goal based on a logical reason. For example, an attacker who says he is from the IT department may ask the person for their secret key or direct password for software updates. In order for the attacker to be successful in this attack, it is usually sufficient to convince the other party. Although it is a non-technical method and a simple method, many people can be persuaded by this type of talk. It is one of the methods that still remains popular today. In order to be protected from such an attack, people should be invested and the awareness of the employees should be increased.  
+
+
+
+
+
+
+
+
+
+
 
 
 
