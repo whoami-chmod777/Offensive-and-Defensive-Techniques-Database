@@ -8,7 +8,7 @@
 • Random Number Generators
 • Base64 Encoding/Decoding
 • Hash Functions
-• 
+• Digital Signatures
 • 
 
 
@@ -230,11 +230,27 @@ Linux: echo -n LetsDefend | md5
 
 List of Hash Functions: https://en.wikipedia.org/wiki/List_of_hash_functions 
 
+root@ip-172-31-12-68:~/Desktop/QuestionFiles/HashFunctions/Question3# md5sum 1.jpg 
+253dd04e87492e4fc3471de5e776bc3d  1.jpg
+root@ip-172-31-12-68:~/Desktop/QuestionFiles/HashFunctions/Question3# md5sum 2.jpg 
+253dd04e87492e4fc3471de5e776bc3d  2.jpg
+root@ip-172-31-12-68:~/Desktop/QuestionFiles/HashFunctions/Question3# 
+root@ip-172-31-12-68:~/Desktop/QuestionFiles/HashFunctions/Question3# md5sum 1.jpg 2.jpg | awk '{print $1}' | uniq -c | wc -l
+1
+root@ip-172-31-12-68:~/Desktop/QuestionFiles/HashFunctions/Question3#
+
+If the output is 1, the hashes are identical.
+If the output is 2, the hashes are different.
 
 
+-- Digital Signatures --
 
+What is a Digital Signature
+A digital signature is a cryptographic feature that allows verifying who sent and signed data in the digital environment. It is cryptographically based on mathematics and computer science. The requirements of the "Non-repudiation" principle included in the previous topics in the training are fulfilled with a digital signature. A digital signature is a feature used in security events in IT infrastructures. At the same time, an integrity check can be done with a digital signature. The digital equivalent of wet signatures on documents in daily life can be called digital signature. Although there are physical and logical differences between them, both serve similar purposes. 
+In the Windows operating system, files with the extension "exe" have a digital signature. Thanks to this signature, it is possible to see which company or who signed the file and verify it.
 
-
+Cryptographic Fundamentals of Digital Signatures
+Digital signatures work cryptographically similar to other crypto algorithms. Algorithms used in digital signatures should be asymmetric crypto algorithms. This is because the same key is used for encryption/decryption in symmetric crypto algorithms. In digital signing algorithms, 2 different keys are used for signing and signature verification: “public key” and “private key”. A private key is a personal key used in signing. The reason why this key is used in the signing process and kept secret is that it can be signed on behalf of the owner of the key. The public key, on the other hand, is used to verify signatures that are shared publicly and signed with a private key.
 
 
 
