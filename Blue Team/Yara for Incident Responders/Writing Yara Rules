@@ -55,7 +55,7 @@ Yara Docs
 https://yara.readthedocs.io/en/latest/writingrules.html
 
 
-- Create and Execute your first Yara Rule -
+-- Create and Execute your first Yara Rule --
 
 Step 1: Create a Basic YARA Rule
 
@@ -92,7 +92,7 @@ yara -r pe_rule.yar ./ -s
 strings -n 10 helloworld.exe
 
 
-- Finetune your Yara Rule -
+-- Finetune your Yara Rule --
 
 Basic YARA Rule for Detecting MD5 Hashes
 
