@@ -1,0 +1,163 @@
+
+-- Writing Yara Rules --
+
+• Basic Syntax
+• Create and Execute your first Yara Rule
+• Finetune your Yara Rule
+
+-- Basic Syntax --
+
+A basic YARA rule consists of several components: the rule definition, meta section (optional), strings section, and condition section. Here’s the basic syntax:
+
+rule first_rule
+{
+    meta:
+        description = "This is a test script"
+        author = "BlackPerl"
+        ref = "URL"
+
+    strings:
+        $x1 = "test"
+        $x2 = "First token"
+
+    condition:
+        all of ($x*)
+}
+
+
+rule ExampleRule
+{
+    meta:
+        description = "Detects a specific string pattern"
+        author = "Your Name"
+        date = "2025-02-03"
+
+    strings:
+        $text1 = "malware"          // A simple text string
+        $hex1 = { 6D 61 6C 77 61 72 65 } // Hexadecimal pattern
+        $regex1 = /Trojan[0-9]+/     // Regular expression
+
+    condition:
+        any of them // Condition to match any of the defined strings
+}
+
+
+Breakdown:
+• rule ExampleRule → Defines the rule name.
+• meta: → (Optional) Contains metadata such as description, author, and date.
+• strings: → Defines strings to search for:
+	- $text1 → Plain text.
+	- $hex1 → Hexadecimal pattern.
+	- $regex1 → Regular expression.
+• condition: → Specifies when the rule should trigger (e.g., when any of the strings are found).
+
+Yara Docs
+https://yara.readthedocs.io/en/latest/writingrules.html
+
+
+- Create and Execute your first Yara Rule -
+
+Step 1: Create a Basic YARA Rule
+
+rule ExampleRule
+{
+    meta:
+        description = "Detects a specific keyword"
+        author = "User"
+        date = "2025-02-03"
+
+    strings:
+        $malware_string = "malicious_keyword" // Plain text detection
+        $hex_pattern = { 4D 41 4C 57 41 52 45 } // "MALWARE" in hex
+
+    condition:
+        any of them
+}
+
+Step 2: Execute the YARA Rule
+
+yara example_rule.yar testfile.txt
+
+yara example_rule.yar testfile.txt -s
+yara example_rule.yar ./ -s
+yara -r example_rule.yar ./ -s
+yara example_rule.yar ./ -m
+find ./ -size +1M -exec yara example_rule.yar {} \;
+yara example_rule.yar *.exe -s
+yara example_rule.yar ./ -s > scan_results.txt
+yara -r rules_folder/ ./ -s
+sudo yara example_rule.yar /proc/*/mem -s
+yara -r pe_rule.yar ./ -s
+
+strings -n 10 helloworld.exe
+
+
+- Finetune your Yara Rule -
+
+Basic YARA Rule for Detecting MD5 Hashes
+
+rule Detect_MD5_Hashes {
+    meta:
+        description = "Detects potential MD5 hashes in a file"
+        author = "YourName"
+        date = "2025-02-03"
+        reference = "MD5 hash pattern detection"
+
+    strings:
+        $md5_pattern = /[a-fA-F0-9]{32}/
+
+    condition:
+        any of them
+}
+
+How It Works:
+• The rule matches any string in the file that looks like a 32-character hexadecimal MD5 hash.
+• It applies to both uppercase and lowercase hexadecimal values.
+• The condition any of them ensures that if at least one match is found, the rule triggers.
+
+
+- Finetuned YARA Rule -
+
+rule Advanced_MD5_Hash_Detection {
+    meta:
+        description = "Detects MD5 hashes but excludes random hex strings"
+        author = "YourName"
+        date = "2025-02-03"
+        reference = "Enhanced MD5 detection"
+
+    strings:
+        $md5_pattern = /\b[a-fA-F0-9]{32}\b/  // Ensures whole-word match
+        $prefix_pattern = /md5[:= ]?[a-fA-F0-9]{32}/  // Matches MD5 prefixes
+
+    condition:
+        (filesize < 1MB) and (any of them)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
