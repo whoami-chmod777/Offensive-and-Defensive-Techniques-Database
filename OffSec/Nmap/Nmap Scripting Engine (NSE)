@@ -1,4 +1,29 @@
 
+-- Nmap Scripting Engine (NSE) --
+
+
+• Script acarsd-info
+
+
+
+
+Script acarsd-info
+Retrieves information from a listening acarsd daemon. Acarsd decodes ACARS (Aircraft Communication Addressing and Reporting System) data in real time. The information retrieved by this script includes the daemon version, API version, administrator e-mail address and listening frequency. 
+
+nmap --script acarsd-info --script-args "acarsd-info.timeout=10,acarsd-info.bytes=512" -p <port> <host>
+
+PORT    STATE SERVICE
+2202/tcp open  unknown
+| acarsd-info:
+|   Version: 1.65
+|   API Version: API-2005-Oct-18
+|   Authorization Required: 0
+|   Admin E-mail: admin@acarsd
+|   Clients Connected: 1
+|_  Frequency: 131.7250 & 131.45
+
+
+
 
 
 
