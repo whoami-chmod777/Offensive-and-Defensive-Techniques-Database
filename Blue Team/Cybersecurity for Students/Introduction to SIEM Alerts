@@ -73,6 +73,8 @@ For further insight into the investigation process and additional context around
 
 - Case Creation and Playbook Initiation -
 
+Creating a case allows us to organize and track our investigation efforts, while the playbook guides us through the necessary steps to effectively respond to the security incident. 
+
 Take Ownership
 In this course, we will analyze the EventID: 257 - SOC282 - Phishing Alert - Deceptive Mail Detected . This is a phishing alert that requires an investigation to determine its legitimacy and potential impact. First, to assign the alert to yourself, click the button below. 
 
