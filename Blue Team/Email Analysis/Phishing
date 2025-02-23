@@ -56,33 +56,33 @@ Phishing targeting high-profile individuals, such as CEOs or executives.
 -- Phishing Attack Techniques --
 
 Pretexting
-- Creating a fabricated backstory to manipulate victims under false pretense.
+• Creating a fabricated backstory to manipulate victims under false pretense.
 
 Spoofing and Impersonation
-- Email Address Spoofing
-- Domain Spoofing
+• Email Address Spoofing
+• Domain Spoofing
 
 URL Manipulation
-- URL Shortening
-- Subdomain Spoofing
-- Homograph Attacks
-- Typo squatting
+• URL Shortening
+• Subdomain Spoofing
+• Homograph Attacks
+• Typo squatting
 
 Encoding
-- Obfuscating to evade detection
-- Techniques: Base64, URL encoding, HTML encoding
-- Obscuring malicious JavaScript
+• Obfuscating to evade detection
+• Techniques: Base64, URL encoding, HTML encoding
+• Obscuring malicious JavaScript
 
 Attachments
-- Malicious attachments that download and execute harmful software
+• Malicious attachments that download and execute harmful software
 
 Abuse of Legitimate Services
-- Using trusted services like Google Drive or Dropbox to send malware
+• Using trusted services like Google Drive or Dropbox to send malware
 
 Pharming
 A two-step technique:
-- Malware-based Pharming
-- DNS Server Poisoning
+• Malware-based Pharming
+• DNS Server Poisoning
 
 
 -- Phishing Analysis Methodology --
