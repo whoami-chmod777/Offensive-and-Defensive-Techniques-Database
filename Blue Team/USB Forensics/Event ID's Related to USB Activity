@@ -1,5 +1,5 @@
 
-1. Device Connection & Disconnection
+-- Device Connection & Disconnection --
 
 Event ID 2003 (Kernel-PnP) – USB Device Connected
 • Indicates when a USB device is plugged in.
@@ -11,7 +11,7 @@ Event ID 2102 (Kernel-PnP) – USB Device Disconnected
 • Useful for tracking how long a device was connected.
 
 
-2. USB Driver Installation
+-- USB Driver Installation --
 
 Event ID 1003 (Kernel-PnP) – Driver Installed for USB Device
 • Occurs when a USB device is plugged in for the first time.
@@ -22,7 +22,7 @@ Event ID 1006 (Kernel-PnP) – Device Migration
 • Can reveal if an old USB device was reused after a system upgrade.
 
 
-3. USB Storage Device Tracking
+-- USB Storage Device Tracking --
 
 Event ID 4663 (Security Log – Object Access) – USB File Access
 • Logs file operations (read, write, delete) on a USB drive.
@@ -41,7 +41,7 @@ Event ID 6416 (Security Log – System Audit) – USB Mass Storage Device Connec
 • Key event for detecting data transfer activities.
 
 
-4. USB Registry and Policy Changes
+-- USB Registry and Policy Changes --
 
 Event ID 1033 (Microsoft-Windows-DriverFrameworks-UserMode/Operational) – USB Device Registry Change
 • Logs modifications in registry keys related to USB devices.
@@ -52,7 +52,7 @@ Event ID 8003 (BitLocker) – USB Drive Encryption Event
 • Helps determine if a device was secured before removal.
 
 
-5. USB-Related Security Alerts
+-- USB-Related Security Alerts --
 
 Event ID 4720 (Security Log – Account Management) – New User Account Created
 • Attackers may create a new user to access a USB device.
