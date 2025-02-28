@@ -51,3 +51,47 @@ This artifact contains information about the USB devices that have been connecte
 • NTUser.dat Path
 • SetupApiDevLog Dates
 
+
+-- Best Practices for USB Forensics and Preserving Chain of Custody --
+
+1. Secure the Scene
+2. Photograph and Document
+3. Use Write-Blocking Tools
+4. Create Forensic Images
+5. Hashing
+6. Maintain COC
+7. Secure Storage and Access Control
+8. Label and Seal Evidence
+9. Maintain Integrity
+10. Document Analysis Steps
+11. Report and Documentation
+
+
+-- Limitations and Challenges of USB Forensics, including Encryption and Anti-Forensic Techniques --
+
+1. Encryption
+2. Data Volatility
+3. Physical Tampering
+4. Anti-Forensic Techniques
+5. USB Malware and Exploits
+6. Data Storage Capacity
+7. Limited Metadata
+8. Compatibility and Proprietary Formats
+9. Data Fragmentation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
