@@ -1,0 +1,82 @@
+
+1. Device Connection & Disconnection
+
+Event ID 2003 (Kernel-PnP) – USB Device Connected
+• Indicates when a USB device is plugged in.
+• Shows the VID (Vendor ID) and PID (Product ID).
+• Helps identify when a specific device was first introduced to the system.
+
+Event ID 2102 (Kernel-PnP) – USB Device Disconnected
+• Logs when a USB device is removed from the system.
+• Useful for tracking how long a device was connected.
+
+
+2. USB Driver Installation
+
+Event ID 1003 (Kernel-PnP) – Driver Installed for USB Device
+• Occurs when a USB device is plugged in for the first time.
+• Confirms whether the system recognized the device and installed drivers.
+
+Event ID 1006 (Kernel-PnP) – Device Migration
+• Indicates a USB device was migrated from an older system version (e.g., after a Windows update).
+• Can reveal if an old USB device was reused after a system upgrade.
+
+
+3. USB Storage Device Tracking
+
+Event ID 4663 (Security Log – Object Access) – USB File Access
+• Logs file operations (read, write, delete) on a USB drive.
+• Helps identify who accessed what data on the USB.
+
+Event ID 4656 (Security Log – Object Access) – USB File Opened
+• Captures when files are opened from a USB device.
+• Includes the user account that accessed the file.
+
+Event ID 4660 (Security Log – Object Access) – File Deletion on USB
+• Logs when files are deleted from a USB device.
+• Useful for detecting data exfiltration or evidence destruction.
+
+Event ID 6416 (Security Log – System Audit) – USB Mass Storage Device Connected
+• Logs when a mass storage device (e.g., flash drive, external HDD) is attached.
+• Key event for detecting data transfer activities.
+
+
+4. USB Registry and Policy Changes
+
+Event ID 1033 (Microsoft-Windows-DriverFrameworks-UserMode/Operational) – USB Device Registry Change
+• Logs modifications in registry keys related to USB devices.
+• Can indicate USB device spoofing or tampering.
+
+Event ID 8003 (BitLocker) – USB Drive Encryption Event
+• Logs when a USB device is encrypted or decrypted using BitLocker.
+• Helps determine if a device was secured before removal.
+
+
+5. USB-Related Security Alerts
+
+Event ID 4720 (Security Log – Account Management) – New User Account Created
+• Attackers may create a new user to access a USB device.
+• Useful for detecting unauthorized system access.
+
+Event ID 1102 (Security Log – Audit Log Cleared) – Audit Logs Erased
+• If an attacker wipes logs after using a USB, this event is triggered.
+• A red flag for anti-forensic activity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
