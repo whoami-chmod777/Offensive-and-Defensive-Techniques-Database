@@ -5,10 +5,12 @@
 Create or set the DWORD value Start to 4 to disable USB storage devices or to 3 to enable them
 
 
-Plug and Play (PnP) Activity: Event Viewer -> Applications and Services Logs -> Microsoft -> Windows -> DriverFrameworks-UserMode -> Operational
+Tracing USB Activity: Event Viewer > Application and Services Logs > Microsoft > Windows > DriverFrameworks-UserMode > Operational
 
-Device Setup Manager (DSM): Event Viewer -> Applications and Services Logs -> Microsoft -> Windows -> DeviceSetupManager -> Admin
+Plug and Play (PnP) Activity: Event Viewer > Applications and Services Logs > Microsoft > Windows > DriverFrameworks-UserMode > Operational
 
-Kernel PnP: Event Viewer -> Windows Logs -> System
+Device Setup Manager (DSM): Event Viewer > Applications and Services Logs > Microsoft > Windows > DeviceSetupManager > Admin
 
-Security Log (for auditing USB usage): Event Viewer -> Windows Logs -> Security
+Kernel PnP: Event Viewer > Windows Logs > System
+
+Security Log (for auditing USB usage): Event Viewer > Windows Logs > Security
