@@ -1,0 +1,143 @@
+
+Cyber Kill Chain is important for the SOC analyst to have a better understanding of the stages of a cyber attack and to determine which action(s) the cyber attack starts with and which action(s) follows.
+The Cyber Kill Chain course is designed to provide participants with a comprehensive understanding of the various stages of a cyber attack and how to identify and respond to them effectively. 
+The course covers the different phases of the Cyber Kill Chain, including reconnaissance, weaponization, delivery, exploitation, installation, command and control, and actions on objectives. 
+Participants will learn how to identify and analyze each stage of the Cyber Kill Chain, as well as how to develop effective strategies to prevent, detect, and respond to cyber attacks. 
+The course is ideal for SOC analysts, incident responders, and anyone interested in enhancing their understanding of cyber threats and defenses.
+
+-- Cyber Kill Chain --
+
+• Introduction to Cyber Kill Chain
+• Cyber Kill Chain Steps
+• Reconnaissance
+• Weaponization
+• Delivery
+• Exploitation
+• Installation
+• Command and Control (C2)
+• Actions on Objectives
+
+
+- Introduction to Cyber Kill Chain -
+
+What is Cyber Kill Chain?
+Cyber Kill Chain is a framework created by Lockheed Martin in 2011 and used to model the attacks of attackers. Within this framework, attacker behaviors and the whole cyber attack process consists of 7 steps that follow one another. 
+Cyber Kill Chain Official Page: https://www.lockheedmartin.com/en-us/capabilities/cyber/cyber-kill-chain.html
+
+Significance of Cyber Kill Chain
+Cyber Kill Chain is important for the SOC analyst to have a better understanding of the stages of a cyber attack and to determine which action(s) the cyber attack starts with and which action(s) follows. The SOC analyst can use Cyber Kill Chain to analyze where in the cyber attack the acts of the attacker noticed on the systems occur. The Cyber Kill Chain enables the organization to determine where and how severe the security flaws are. Blueteams can identify areas where security measures are lacking based on these flaws and take the appropriate actions. 
+
+
+- Cyber Kill Chain Steps -
+
+There are several actions that an attacker can take before, during, and after a successful cyber attack. These actions are sequential, and if the attacker fails at one stage, it is not possible to execute the next step of the cyber attack. The Cyber Kill Chain model divides these stages of attackers into 7 steps. The steps of cyber attacks are depicted in the visual  below:
+
+1. Reconnaissance
+2. Weaponization
+3. Delivery
+4. Exploitation
+5. Installation
+6. Command & Control (C2)
+7. Actions on Objectives
+
+
+- Reconnaissance -
+
+The Cyber Kill Chain begins with the "Reconnaissance" step. The attacker attempts to obtain information about the target system at this step. The more knowledge an attacker has about the target system, the more the attack surface seems to him. Attack vectors for the target are disclosed in this way. The techniques employed at this stage may be divided into two subcategories:
+
+• Passive Reconnaissance
+• Active Reconnaissance
+
+The term "Passive Reconnaissance" refers to the collecting of information from sources about the target system without physically engaging with the target system. As an instance of this, Web archive websites can be used to obtain information that is no longer available on the target system's website.
+"Active Reconnaissance" refers to the method of acquiring information about a target system by engaging with it directly. By submitting a request to a web server, for instance, version information about the web server may be acquired from the response.
+
+Adversary
+The attacker can gather information from a variety of sources using a variety of approaches during the "Reconnaissance" process. At this phase, the attacker can perform the following operations:
+
+• Obtaining version information of servers and software belonging to the target
+• Obtaining information from open sources of information about the target has previously been released
+• Obtaining e-mail addresses of employees of the organization
+• Obtaining internal or personal information about employees of the organization using social networking platforms
+• Detection of devices that are connected to the Internet
+• Detection of security vulnerabilities on servers open to access on the Internet
+• Identifying the IP address block belonging to the organization
+• Identification of vendors that the organization cooperates with
+
+Defender
+Blueteams may take action in response to attackers' attempts at this stage. This reduces the amount of information that an attacker can obtain. Some methods that SOC analysts and blueteams can implement are listed below:
+
+• Detection of areas of information disclosure with external pentest
+• Obtaining leak information about the organization from Threat Intelligence sources
+• Not to keep the documents providing organizational information available on the internet
+• Monitoring traffic by installing security solutions such as firewalls in areas of the company that are accessible over the internet
+• Instantly updating to avoid new security vulnerabilities from being exploited
+
+
+- Weaponization -
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+- Delivery -
+
+
+
+- Exploitation -
+
+
+- Installation -
+
+
+- Command and Control (C2) -
+
+
+
+- Actions on Objectives -
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
