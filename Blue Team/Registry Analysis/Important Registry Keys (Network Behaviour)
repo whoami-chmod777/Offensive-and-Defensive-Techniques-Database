@@ -1,12 +1,11 @@
 
-HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList
-\Signatures
-\Unmanaged (record DefaultGatewayMac, DnsSuffix, FirstNetwork (SSID), ProfileGuid)
-\Managed
-\Nla
-\Cache
-
-Profiles
+NetworkList: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList
+Signatures: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Signatures
+Unmanaged: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Signatures\Unmanaged (Record DefaultGatewayMac, DnsSuffix, FirstNetwork (SSID), ProfileGuid for Unmanaged networks.)
+Managed: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Signatures\Managed
+Nla: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Nla
+Cache: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Cache
+Profiles: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles
 
 Most info regarding NLA will be stored under the NetworkList key above, and also:
 HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\HomeGroup
