@@ -1,0 +1,17 @@
+
+Device identification:
+SYSTEM\CurrentControlSet\Enum\USBSTOR
+SYSTEM\CurrentControlSet\Enum\USB
+
+First/Last Times:
+SYSTEM\CurrentControlSet\Enum\USBSTOR\Ven_Prod_Version\USBSerial#\Properties\{83da6326-97a6-4088-9453-a19231573b29}\####
+Oo64=first connection
+0066=last connection
+0067=last removal
+
+USB device Volume Name:
+SOFTWARE\Microsoft\Windows Portable Devices\Devices
+
+HKLM\SYSTEM\MountedDevices:
+Find Serial # to obtain the Drive Letter of the USB device
+Find Serial # to obtain the Volume GUID of the USB device
