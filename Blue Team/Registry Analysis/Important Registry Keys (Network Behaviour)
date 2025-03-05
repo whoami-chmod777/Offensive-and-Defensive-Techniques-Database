@@ -1,0 +1,23 @@
+
+HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList
+\Signatures
+\Unmanaged (record DefaultGatewayMac, DnsSuffix, FirstNetwork (SSID), ProfileGuid)
+\Managed
+\Nla
+\Cache
+
+Profiles
+
+Most info regarding NLA will be stored under the NetworkList key above, and also:
+HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\HomeGroup
+HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles\{GUID}
+
+Network Types:
+0x06 = Wired
+0x17 = Broadband
+0x47 = Wireless
+
+Category:
+0 – Public
+1 – Private
+2 - Domain/Work
