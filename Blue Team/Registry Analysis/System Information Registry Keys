@@ -17,13 +17,9 @@ HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet
 HKEY_LOCAL_MACHINE\SYSTEM\Select\Current
 HKEY_LOCAL_MACHINE\SYSTEM\Select\LastKnownGood
 
-
 Computer Name: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\ComputerName
-
 Time Zone Information: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation
-
 Network Interfaces and Past Networks: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces
-
 
 Autostart Programs (Autoruns):
 HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
@@ -32,18 +28,11 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce
 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run
 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
 
-
 SAM Hive and User Information: HKEY_LOCAL_MACHINE\SAM\SAM\Domains\Account\Names
-
-
 Recent Documents: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs
-
 File Explorer History: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\TypedPaths
-
 Search History: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\WordWheelQuery
-
 Recent Run Commands: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
-
 
 Public or Private Domain: Private
 
@@ -60,7 +49,6 @@ Category:
 • 1 – Private
 • 2 - Domain/Work
 
-
 Identify another persistent presence on the machine within the Registry:
 HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run and RunOnce
 HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run and RunOnce
@@ -73,34 +61,26 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify 
 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\SharedTaskScheduler - Malware may add entries under this key to run code when the Windows Explorer starts.
 HKEY_CURRENT_USER\Control Panel\Desktop\SCRNSAVE.EXE - Malware can modify this value to set a screensaver executable that contains malicious code.
 
-
 Startup Folder:
 HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
 HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunOnce
 HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run
 HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce
 
-
 Services: HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services
-
 
 Scheduled Tasks:
 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree
 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks
 
-
 Explorer Shell Extensions:
 HKEY_CLASSES_ROOT\*\shellex\ContextMenuHandlers
 HKEY_CLASSES_ROOT\Directory\shellex\ContextMenuHandlers
-
 
 User Profile Settings:
 HKEY_CURRENT_USER\Software\Policies
 HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies
 
-
 By searching in these areas of the registry using Registry Explorer, you can identify keys associated with persistence mechanisms that may indicate the presence of malware or attacker activity on the machine.
-
 These keys contain entries that specify programs, scripts, services, scheduled tasks, shell extensions, or policy settings that are configured to run automatically or execute at specific events, such as system startup, user login, or file interaction. Malware or attackers often manipulate these keys to achieve persistence on the system.
-
 
