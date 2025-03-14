@@ -10,6 +10,7 @@
 • Example Full Analysis Using
 • About dig @8.8.8.8 -t txt futurepipe.com
 • Quarantine, Spam, and Received Emails
+• Email Header Analysis Commands
 
 
 -- Email Analysis, SPF, DKIM and DMARC --
@@ -723,23 +724,16 @@ If DMARC was p=reject, the email would be blocked.
 🔍 Always check email headers (Received-SPF, Authentication-Results) to see why an email went to spam
 
 
+-- Email Header Analysis Commands --
 
+dig @8.8.8.8 -t txt futurepipe.com
 
+sudo apt-cache search lha
+sudo apt install lhasa
 
+cat file1.bin | base64 -d | xxd | less
+cat file1.bin | base64 -d > file1.lzh
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+lhasa file1.lzh
+ls
 
