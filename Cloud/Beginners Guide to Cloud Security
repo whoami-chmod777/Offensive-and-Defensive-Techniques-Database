@@ -1,0 +1,10 @@
+
+This beginner-friendly guide introduces cloud security, starting with an explanation of cloud computing—the on-demand delivery of computing resources like storage, networking, and software over the internet.
+Types of Cloud Computing:
+
+• Infrastructure as a Service (IaaS) – Organizations rent essential computing resources (servers, storage, networking) and install their own software.
+• Platform as a Service (PaaS) – Provides pre-installed software tools on cloud-based infrastructure, reducing the need for technical setup.
+• Software as a Service (SaaS) – Offers fully managed applications (e.g., WordPress), requiring minimal user intervention.
+
+Cloud Security & Threats
+Cloud security involves protecting cloud-based systems from cyber threats, requiring shared responsibility between service providers and users. Common threats include zero-day vulnerabilities, Denial-of-Service (DoS) attacks, phishing, and malware.
