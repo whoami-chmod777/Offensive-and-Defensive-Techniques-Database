@@ -1,0 +1,72 @@
+
+-- DeepBlueCLI & Sysmon Cheat Sheet --
+
+• Standard Event Logs
+• Attack & Threat Detection
+• Sysmon-Specific Event Analysis
+
+
+- Standard Event Logs -
+
+General Event Log Analysis: .\DeepBlue.ps1 .\evtx\example.evtx
+Windows Security Events: .\DeepBlue.ps1 .\evtx\security.evtx
+Windows System Events: .\DeepBlue.ps1 .\evtx\system.evtx
+Windows Application Events: .\DeepBlue.ps1 .\evtx\application.evtx
+
+
+- Attack & Threat Detection -
+
+Event log manipulation: .\DeepBlue.ps1 .\evtx\disablestop-eventlog.evtx
+Metasploit attack (security): .\DeepBlue.ps1 .\evtx\metasploit-psexec-native-target-security.evtx
+Metasploit attack (system): .\DeepBlue.ps1 .\evtx\metasploit-psexec-native-target-system.evtx
+Pass-the-Hash attack detection: .\DeepBlue.ps1 .\evtx\pass-the-hash.evtx
+RDP brute-force attack: .\DeepBlue.ps1 .\evtx\rdp-brute-force.evtx
+PowerShell logging analysis: .\DeepBlue.ps1 .\evtx\powershell-script.evtx
+PowerShell downgrade attack: .\DeepBlue.ps1 .\evtx\powershell-downgrade.evtx
+Suspicious PowerShell script execution: .\DeepBlue.ps1 .\evtx\suspicious-powershell-script.evtx
+Mimikatz detection: .\DeepBlue.ps1 .\evtx\mimikatz.evtx
+Mimikatz LSASS dump detection: .\DeepBlue.ps1 .\evtx\mimikatz-lsass-dump.evtx
+Credential dumping (SAM access): .\DeepBlue.ps1 .\evtx\sam-dump.evtx
+Lateral movement analysis: .\DeepBlue.ps1 .\evtx\lateral-movement.evtx
+Ransomware activity detection: .\DeepBlue.ps1 .\evtx\ransomware.evtx
+Kerberoasting attack detection: .\DeepBlue.ps1 .\evtx\kerberoasting.evtx
+Unauthorized service creation: .\DeepBlue.ps1 .\evtx\unauthorized-service.evtx
+Suspicious service installation: .\DeepBlue.ps1 .\evtx\suspicious-service-install.evtx
+Scheduled task execution: .\DeepBlue.ps1 .\evtx\scheduled-task-execution.evtx
+Clearing security logs: .\DeepBlue.ps1 .\evtx\clear-security-logs.evtx
+Brute-force login attempts: .\DeepBlue.ps1 .\evtx\brute-force-logins.evtx
+Failed login attempts: .\DeepBlue.ps1 .\evtx\failed-logins.evtx
+NTLM authentication attempts: .\DeepBlue.ps1 .\evtx\ntlm-auth.evtx
+Malicious USB activity: .\DeepBlue.ps1 .\evtx\usb-insertion.evtx
+System process injection: .\DeepBlue.ps1 .\evtx\process-injection.evtx
+DNS tunneling detection: .\DeepBlue.ps1 .\evtx\dns-tunneling.evtx
+Firewall rule modifications: .\DeepBlue.ps1 .\evtx\firewall-modification.evtx
+Suspicious network traffic: .\DeepBlue.ps1 .\evtx\suspicious-network-traffic.evtx
+Exploit execution detection: .\DeepBlue.ps1 .\evtx\exploit-execution.evtx
+Group policy modification: .\DeepBlue.ps1 .\evtx\group-policy-modification.evtx
+Privilege escalation attempts: .\DeepBlue.ps1 .\evtx\privilege-escalation.evtx
+
+
+- Sysmon-Specific Event Analysis -
+
+Sysmon general log analysis: .\DeepBlue.ps1 .\evtx\sysmon.evtx
+Process creation (Event ID 1): .\DeepBlue.ps1 .\evtx\sysmon-process-creation.evtx
+File creation time change (Event ID 2): .\DeepBlue.ps1 .\evtx\sysmon-file-create-time.evtx
+Network connection (Event ID 3): .\DeepBlue.ps1 .\evtx\sysmon-network-connect.evtx
+Registry modification (Event ID 12-14): .\DeepBlue.ps1 .\evtx\sysmon-registry-modification.evtx
+Process termination (Event ID 5): .\DeepBlue.ps1 .\evtx\sysmon-process-termination.evtx
+Raw disk access (Event ID 9): .\DeepBlue.ps1 .\evtx\sysmon-raw-disk-access.evtx
+Driver loaded (Event ID 6): .\DeepBlue.ps1 .\evtx\sysmon-driver-load.evtx
+WMI event monitoring (Event ID 19-21): .\DeepBlue.ps1 .\evtx\sysmon-wmi-event.evtx
+Process hollowing detection: .\DeepBlue.ps1 .\evtx\sysmon-process-hollowing.evtx
+Code injection detection: .\DeepBlue.ps1 .\evtx\sysmon-code-injection.evtx
+Named pipe monitoring: .\DeepBlue.ps1 .\evtx\sysmon-named-pipe.evtx
+Registry key creation or modification: .\DeepBlue.ps1 .\evtx\sysmon-registry-key-create.evtx
+Remote thread creation: .\DeepBlue.ps1 .\evtx\sysmon-remote-thread.evtx
+Clipboard capture monitoring: .\DeepBlue.ps1 .\evtx\sysmon-clipboard.evtx
+
+
+
+
+
+
