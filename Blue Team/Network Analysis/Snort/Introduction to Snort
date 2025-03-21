@@ -2,12 +2,13 @@
 Snort is a flexible and powerful tool for network intrusion detection and prevention (IDS/IPS). It operates in multiple modes and helps to monitor, log, and prevent suspicious activities across networks.
 
 🔑 Key Snort Modes
+
 1. Sniffer Mode: Monitors and displays network packets in real-time.
 2. Packet Logger Mode: Logs packets to files for deeper analysis.
 3. IDS/IPS Mode: Detects and prevents suspicious activities by analyzing packets against predefined rules.
 
-
 ⚙️ Installation and Configuration
+
 • Install Snort: sudo apt install snort
 • Identify Your Network Range: Use ifconfig or ip a s to set up HOME_NET.
 • Rules and Configuration:
@@ -16,8 +17,8 @@ Snort is a flexible and powerful tool for network intrusion detection and preven
   - Open config for editing: sudo nano snort.conf
 • Verify Configuration: Test setup with sudo snort -T -c /etc/snort/snort.conf
 
-
 ⚙️ Edit Configuration
+
 • Open snort.conf: sudo snort -T -c /etc/snort/snort.conf
 • Step #1: Set Network Variable
   - Set your internal network's address range in the HOME_NET variable to define which network Snort will monitor.
@@ -28,32 +29,154 @@ Snort is a flexible and powerful tool for network intrusion detection and preven
 
 🛠 Common Snort Commands
 
-Sniffer Mode:
+- Sniffer Mode -
 
-sudo snort -i enp0s3
+sudo snort --version
+
+sudo snort -i <interface>
 sudo snort -i enp0s3 -e
 sudo snort -i enp0s3 -d
+sudo snort -i enp0s3 -v
 sudo snort -i enp0s3 -X
+sudo snort -i enp0s3 -A console
+sudo snort -i enp0s3 -q
+sudo snort -i enp0s3 -K ascii
+sudo snort -i enp0s3 -C
 
-curl google.com
+curl http://example.com
 
 __________________________________________________
 
-Packet Logging Mode:
+- Packet Logging Mode -
 
 sudo snort -i enp0s3 -l /var/log/snort
 sudo snort -i enp0s3 -l /var/log/snort -K ASCII
 sudo snort -i enp0s3 -l .
 
+__________________________________________________
+
+- Read Packet Logs -
+
 snort.log.17179612212
+
+sudo snort -r snort.log.17179612212
+sudo tcpdump -r snort.log.17179612212
 
 __________________________________________________
 
-Read Packet Logs:
+- Snort Reading and Writing Rules -
 
-sudo snort -r snort.log.17179612212
-tcpdump -r snort.log.17179612212
+hping3 -c 1 -p 4444 -S example.com
 
+
+nano /etc/snort/rules/local.rules
+
+action protocol source_ip source_port -> destination_ip destination_port (options)
+
+alert icmp any any -> 8.8.8.8 any (msg:"ICMP traffic to 8.8.8.8 detected"; sid:1000001; rev:1;)
+
+Rule Action: Specifies what Snort should do if the rule is triggered (e.g., 'alert', 'log', 'pass', 'drop', 'reject').
+Rule Protocol: Defines the protocol to match (e.g., 'tcp', 'udp', 'icmp', 'ip').
+Rule Source IP and Port: Specifies the source IP address and port (can be 'any' for all addresses or ports).
+Rule Direction Operator: Specifies the direction of traffic. ('->' for unidirectional or '<->' for bidirectional).
+Rule Destination IP and Port: Specifies the destination IP address and port.
+
+- Test the created rule -
+
+alert icmp any any -> 8.8.8.8 any (msg:"ICMP traffic to 8.8.8.8 detected"; sid:1000001; rev:1;)
+alert tcp any any -> any 4444 (msg:"Connection to Remote IP on Port 4444"; sid:1000002; rev:1;)
+
+sudo snort -A console -l /var/log/snort -t enp0s3 -c /etc/snort/snort.conf -q
+sudo snort -A full -l /var/log/snort -t enp0s3 -c /etc/snort/snort.conf -q
+sudo snort -A fast -l /var/log/snort -t enp0s3 -c /etc/snort/snort.conf -q
+
+__________________________________________________
+
+-- Intrusion Detection and Prevention Examples --
+
+nano /etc/snort/rules/local.rules
+sudo ls -l /var/log/snort/
+sudo rm /var/log/snort/*
+
+sudo wireshark 1.pcap
+alert tcp any any -> any 80 (msg:"HTTP URI contains .exe"; content:"|2e|exe"; nocase; http_uri; sid:100001; rev:1;)
+sudo snort -c /etc/snort/snort.conf -q -r 1.pcap -A console
+sudo snort -r /var/log/snort/snort.log.1717966005 -q -d
+sudo rm /var/log/snort/*
+
+sudo wireshark 1.pcap
+alert tcp any 80 -> any any (msg:"Potential .exe file download over HTTP"; content: "Content-Type: application/x-msdownload"; http_header; sid:100001:
+sudo snort -c /etc/snort/snort.conf -q -r 1.pcap -A console
+sudo snort -r /var/log/snort/snort.log.1717966529 -q -d
+sudo wireshark /var/log/snort/snort.log.1717966529
+sudo rm /var/log/snort/*
+
+sudo wireshark 1.pcap
+alert tcp any 80 -> any any (msg: "HTTTP payload contains DOS MZ or PE executable file signature"; file_data; content:"|4D 5A|"; depth: 2; sid: 100001; rev:1)
+sudo snort -c /etc/snort/snort.conf -q -r 1.pcap -A console
+sudo snort -r /var/log/snort/snort.log.1717966529 -q -d
+sudo wireshark /var/log/snort/snort.log.1717966529
+sudo rm /var/log/snort/*
+
+sudo wireshark 2.pcap
+alert tcp any any -> any any (msg:"Detected SSLoad activity via User-Agent"; content: "User-Agent: SSLoad/1.1"; http_header; nocase; sid: 100001; rev:1)
+sudo snort -c /etc/snort/snort.conf -q -r 2.pcap -A console
+sudo snort -r /var/log/snort/snort.log.1717966529 -q -d
+sudo wireshark /var/log/snort/snort.log.1717966529
+sudo rm /var/log/snort/*
+
+sudo wireshark 3.pcap
+sudo alert tcp any any -> any 22 ( msg:"Possible SSH Brute Force Attack"; flow:to_server,established; threshold:type both, track by_src, count 5 , seconds 30; sid:1000001; rev:1; ) 
+sudo alert tcp any any -> any 22 ( msg:"Possible SSH Brute Force Attack"; flow:to_server,established; threshold:type threshold, track by_src, count 5 , seconds 30; sid:10000001; rev:1; ) 
+sudo snort -c /etc/snort/snort.conf -q -r 3.pcap -A console
+sudo snort -r /var/log/snort/snort.log.1717966529 -q -d
+sudo wireshark /var/log/snort/snort.log.1717966529
+sudo rm /var/log/snort/*
+
+__________________________________________________
+
+- Wireshark Filter -
+
+Follow HTTP Stream
+Follow TCP Stream
+Statistics Protocol Hierarchy
+Capture File Properties
+
+http contains "audiodg"
+http.user_agent contains "SSLoad"
+
+__________________________________________________
 
 
 https://snort.org/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
