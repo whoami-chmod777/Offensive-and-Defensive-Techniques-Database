@@ -104,6 +104,8 @@ sudo snort -c /etc/snort/snort.conf -q -r 1.pcap -A console
 sudo snort -r /var/log/snort/snort.log.1717966005 -q -d
 sudo rm /var/log/snort/*
 
+
+Content-Type: application-/x-msdownload
 sudo wireshark 1.pcap
 alert tcp any 80 -> any any (msg:"Potential .exe file download over HTTP"; content: "Content-Type: application/x-msdownload"; http_header; sid:100001:
 sudo snort -c /etc/snort/snort.conf -q -r 1.pcap -A console
@@ -111,6 +113,8 @@ sudo snort -r /var/log/snort/snort.log.1717966529 -q -d
 sudo wireshark /var/log/snort/snort.log.1717966529
 sudo rm /var/log/snort/*
 
+
+File Signature: MZ and File Type: exe
 sudo wireshark 1.pcap
 alert tcp any 80 -> any any (msg: "HTTTP payload contains DOS MZ or PE executable file signature"; file_data; content:"|4D 5A|"; depth: 2; sid: 100001; rev:1)
 sudo snort -c /etc/snort/snort.conf -q -r 1.pcap -A console
@@ -118,6 +122,7 @@ sudo snort -r /var/log/snort/snort.log.1717966529 -q -d
 sudo wireshark /var/log/snort/snort.log.1717966529
 sudo rm /var/log/snort/*
 
+Cobald Strike
 sudo wireshark 2.pcap
 alert tcp any any -> any any (msg:"Detected SSLoad activity via User-Agent"; content: "User-Agent: SSLoad/1.1"; http_header; nocase; sid: 100001; rev:1)
 sudo snort -c /etc/snort/snort.conf -q -r 2.pcap -A console
@@ -125,6 +130,7 @@ sudo snort -r /var/log/snort/snort.log.1717966529 -q -d
 sudo wireshark /var/log/snort/snort.log.1717966529
 sudo rm /var/log/snort/*
 
+SSH Brute Force Attack
 sudo wireshark 3.pcap
 sudo alert tcp any any -> any 22 ( msg:"Possible SSH Brute Force Attack"; flow:to_server,established; threshold:type both, track by_src, count 5 , seconds 30; sid:1000001; rev:1; ) 
 sudo alert tcp any any -> any 22 ( msg:"Possible SSH Brute Force Attack"; flow:to_server,established; threshold:type threshold, track by_src, count 5 , seconds 30; sid:10000001; rev:1; ) 
