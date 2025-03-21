@@ -64,10 +64,6 @@ alert tcp any any -> any 21 (msg:"FTP Data Transfer Detected"; content:"STOR"; s
 Detects email traffic with attachments, useful for spotting malware attachments.
 alert tcp any any -> any 25 (msg:"Email with Attachment"; content:"Content-Disposition:"; sid:1000020; rev:1;)
 
-
-
-
-
 ******************************************************************************************************************************
 
 Examine The First 5 Packets Of The First PCAP File
@@ -91,22 +87,5 @@ sudo snort -v -i eth0 -l logdir -K ASCII
 
 Extract The UDP Traffic
 sudo snort -r example.com-7.pcap udp -l logdir2
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
