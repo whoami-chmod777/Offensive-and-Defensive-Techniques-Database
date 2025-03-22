@@ -92,7 +92,7 @@ sudo snort -A fast -l /var/log/snort -t enp0s3 -c /etc/snort/snort.conf -q
 
 __________________________________________________
 
--- Intrusion Detection and Prevention Examples --
+-- Intrusion Detection and Prevention --
 
 nano /etc/snort/rules/local.rules
 sudo ls -l /var/log/snort/
