@@ -1,0 +1,74 @@
+
+-- Email Protocols & Infrastructure --
+
+• Email Infrastructure
+• Simple Mail Transfer Protocol (SMTP)
+• Post Office Protocol v3 (POP3)
+• Internet Message Access Protocol (IMAP)
+• Mail Exchange (MX) Records
+
+
+- Email Infrastructure -
+
+DNS heavily used to support email
+- MX records
+- Email authentication and verification
+- Standard DNS (A records, etc)
+
+Internal networks
+- Public-facing gateway
+- Email security product(s)
+- Email servers: Mailbox DB, transport servers, etc
+
+External (internet) is much simpler
+
+
+- Simple Mail Transfer Protocol (SMTP) -
+
+Port 25, 587
+Used to send, receive, and relay email messages
+Primary protocol used by and between email servers (Also used by email clients for sending/receiving to servers)
+Different than IMAP/POP3 (Used mainly for accessing/download email)
+Original SMTP only supposed unauthenticated, unencrypted traffic (Allowed for "open relays")
+ESMTP - Extended SMTP
+
+
+- Post Office Protocol v3 (POP3) -
+
+Port 110, 995
+Older protocol, not as commonly used but still supported
+Originally designed when internet connections were temporary (dial-up)
+Designed for users to connect, download messages, disconnect (By default, messages deleted from server / One-way synchronization)
+Many functional limitations compared to modern protocols (Multi-device synchronization / Push delivery)
+First specification only supported unencrypted authentication (Additional extensions support encrypted communications)
+
+
+- Internet Message Access Protocol (IMAP) -
+
+Port 143, 993
+Supports multi-client interaction with mail servers (Changes synced across multiple devices)
+Plaintext communication (143), can be encrypted (IMAPS 587)
+By default, messages left on server after downloading (Unless explicitly deleted)
+Extension supports push notifications (Requires constant IMAP connection)
+
+
+- Mail Exchange (MX) Records -
+
+DNS records that direct email routing (Both internal networks and global internet)
+Must always point to a domain name (A record), not an IP
+Domain can use multiple MX records, ordered by 'priority' numbers (Used for redundancy purposes, or load balancing / Records with lower numbers are attempted first)
+As mail is routed, servers query destination domains for MX records (MX record tells server where to send message next)
+
+example.com   Record   Priority       Value              TTL
+@               MX       10       mail1.example.com     3600
+@               MX       20       mail2.example.com     3600
+
+
+
+
+
+
+
+
+
+
