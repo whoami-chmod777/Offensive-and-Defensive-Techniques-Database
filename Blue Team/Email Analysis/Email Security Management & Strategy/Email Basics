@@ -1,1 +1,53 @@
 
+-- Email Basics --
+
+• Email Beginnings
+• Technical Specs
+• Design & Security Issues
+
+
+- Email Beginnings -
+
+1971 - First "email" sent on ARPANET: Advanced Research Projects Agency Network (US DOD)
+1977 - RFC 733: First standard for “electronic mail” on ARPANET
+1978 - First spam message
+1989 - "You’ve got mail" on AOL
+1994 - Webmail client developed
+1996 - Hotmail released
+2004 - Gmail created: Originally launched on several hundred Pentium III computers
+
+
+- Technical Specs -
+
+RFC 5322 - Internet Message Format
+- Defines standard format - message body, headers, attachments, etc
+- Updated with RFC 6854 - adds additional headers
+
+RFC 2045, 2046, 2047 - Multipurpose Internet Mail Extensions
+- Adds standards for supporting attachments, various media types, associated headers
+
+Protocols
+- SMTP - RFC 5321 - port 25
+- IMAP - RFC 9051 - port 143
+- POP3 - RFC 1939 - port 110
+
+
+- Design & Security Issues -
+
+Email was not originally designed to be secure, no attachments
+- No built-in sender verification, message integrity checks, encryption
+- Additional controls required: SPF, DKIM, DMARC, Email security products
+
+Easy to spoof email origins
+- Headers can easily be modified/faked
+- Can be difficult to detect sometimes
+
+Email is everywhere, used by everyone
+- Security issues make it easy to exploit
+- User education is critical
+
+
+
+
+
+
