@@ -1,1 +1,145 @@
 
+-- Deciphering Email Headers --
+
+• Email Headers
+• Standard Header Components
+• Originator Fields
+• Destination Fields
+• Identification Fields
+• Informational Fields
+• Trace Fields
+• Header Example
+
+
+- Email Headers -
+
+All email messages contain "headers"
+- Fields that contain information about the message - metadata
+- Origin, destination, server information, etc
+
+Numerous “standard” headers
+- From, To, Subject, Reply-to, Message-ID, Received, etc
+
+Others can be added (no standard)
+- Commonly prefixed with X- (X-headers)
+- Ex: X-Originating-IP: 192.168.1.1
+
+Help trace message path
+Add security features
+Troubleshoot email systems
+Headers created/modified by system/program that sends message
+
+
+- Standard Header Components -
+
+Not all fields are always present
+Originator Fields: From, Sender, Reply-To, Date
+Destination: To, Cc, Bcc
+Identification: Message-ID, In-Reply-To, References
+Informational: Subject, Comments, Keywords
+Trace: Return-Path, Received
+
+
+- Originator Fields -
+
+From: Author of the message, Mailbox that created the message (not necessarily who sent it)
+Sender: Mailbox that transmitted the message, If From and Sender are the same, Sender will not be used
+Reply-To: Not always present, Indicates where replies should be sent
+Date: Time/date message was sent/queued
+
+
+- Destination Fields -
+
+All can contain single or multiple email addresses
+To: Address of the recipient(s)
+Cc: Carbon copy, Additional recipients, although content not directed at them
+Bcc: Blind carbon copy, Similar to Cc, but recipients cannot see who message was sent to
+
+
+- Identification Fields -
+
+Message-ID
+- Should exist on all messages
+- Unique identifier for a particular version of a message (If a message is changed (ex: headers added) new Message-ID used)
+- Used for tracking messages
+
+In-Reply-To
+- Contains Message-ID of original message(s), when replying
+- May contain multiple IDs
+
+References
+- Similar to In-Reply-To
+- Contains References and Message-ID of message(s) being replied to
+
+
+- Informational Fields -
+
+Normally only have human-readable content
+
+Subject
+- Contains subject of message, shown in email client
+- Can be prepended with “RE:” for replies
+
+Comments
+- May contain additional comments about the body of the message
+
+Keywords
+- Comma-separated list of words and phrases regarding message
+
+
+- Trace Fields -
+
+Return-Path
+- Used when SMTP systems makes “final delivery” of message (Inserted at beginning of headers / Note: will not appear at top of headers when analyzing)
+- Lists a single address for “error” messages to be sent
+- Non-delivery failures, or mail system failures
+
+Received
+- Common to see multiple Received: fields
+- Each SMTP server (hop) will prepend an additional field
+- Includes server information (hostname, IP), ID, date/time info, who message is FOR
+
+
+- Header Example -
+
+Delivered-To: bolliff@ine.com
+Received: by 2002:a05:7208:8289:b0:6f:1959:5e29 with SMTP id ci9csp185574rbb;
+Tue, 4 Jul 2023 08:05:25 -0700 (PDT)
+Return-Path: <XXXX@XXX.XXX>
+Received: from sonic309-20.consmr.mail.gq1.yahoo.com (sonic309-20.consmr.mail.gq1.yahoo.com. [98.137.65.146])
+by mx.google.com with ESMTPS id x36-20020a631724000000b0055ac5fed594si11648739pgl.366.2023.07.04.08.05.24
+for <bolliff@ine.com>
+(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+Tue, 04 Jul 2023 08:05:25 -0700 (PDT)
+Received: from sonic.gate.mail.ne1.yahoo.com by sonic309.consmr.mail.gq1.yahoo.com with HTTP; Tue, 4 Jul 2023 15:05:24 +0000
+Received: by hermes--production-ne1-6d679867d5-qftwg (Yahoo Inc. Hermes SMTP Server) with ESMTPA ID
+fa2f8cc7338955b1b0445b620285d8bf;
+Tue, 04 Jul 2023 15:05:20 +0000 (UTC)
+From: XXXXXX <XXXX@XXX.XXX>
+Content-Type: text/plain; charset=utf-8
+Subject: eEDA Course
+Message-Id: <E60848D1-4223-A2E4-B9BAA14BDE29@XXX.XXX>
+Date: Tue, 4 Jul 2023 10:05:08 -0500
+To: bolliff@ine.com
+References: <E60848D1-4223-A2E4-B9BAA14BDE29.ref@XXX.XXX>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
