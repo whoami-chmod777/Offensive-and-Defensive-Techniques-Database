@@ -1,4 +1,84 @@
 
+--- Security Awareness Training ---
+
+• Need for Training
+• Identifying Suspicious/Malicious Emails
+• Reporting Suspicious Messages
+• Other Resources
+• Internal Phishing Exercises
+
+
+-- Need for Training --
+
+● General employees of organizations are not security experts
+  ○ Cannot be faulted for not properly identifying malicious emails
+  ○ Unless they are properly trained
+● How to identify potentially malicious emails
+  ○ Spoofed sender addresses
+  ○ Hover over links
+● What to do with suspicious emails
+  ○ How do they report?
+  ○ Who do they ask if they have questions?
+● What tools are available to them?
+  ○ Digital signatures
+
+
+-- Identifying Suspicious/Malicious Emails --
+
+● Employees need to be taught what to look for
+● Check sender email address
+  ○ Does it match the name in the From field?
+  ○ Do they recognize and trust the sender?
+● Check for attachments
+  ○ Are they expecting the message with attachments?
+  ○ If not, use extreme caution and do not open attachment
+  ○ Report it to security team for analysis
+● Check for URLs/links in the message
+  ○ Again, are they expecting them?
+  ○ If URL is visible, is it a recognized domain?
+  ○ If not visible, hover over link WITHOUT CLICKING to check location
+
+
+-- Reporting Suspicious Messages --
+
+● All users should have an easy to use, convenient way to report
+  ○ Button directly in email client
+  ○ Simple process with minimal steps
+● Reports should go straight to security team
+  ○ Ideally in a ticketing system
+  ○ Should offer a SAFE way to view original message
+● Encourage users to report messages
+  ○ Thank them for reporting
+  ○ Work with management to offer rewards for catching malicious messages
+
+“We’d rather you report something that’s perfectly safe than not report something that was malicious”
+
+
+-- Other Resources --
+
+● Knowledgebase of example malicious emails
+  ○ Ideally ones that have been delivered to your organization
+● Periodic in-person (or virtual) training
+  ○ Should be interactive - let them ask questions
+● Organization-wide digital certificates for email
+  ○ Ability to verify the sender easily
+  ○ Do not work outside of organization, unless purchased from trusted CA
+● Always encourage users to ask questions, report any suspicious activity
+  ○ Don’t want them to be intimidated or “afraid” of reporting
+
+
+-- Internal Phishing Exercises --
+
+● Simulated (but safe) phishing messages sent to internal users
+  ○ Reporting to show who clicked opened/clicked on attachments or URLs
+  ○ May also show who reported messages as malicious
+    ■ Depends on product/vendor used
+● Used to gauge level of additional training that may be needed
+● Word of caution:
+  ○ Try not to use results to justify punitive action
+  ○ Sometimes necessary, but only with repetitive failures w/ no improvement
+● Reward for successfully acting on test message
+  ○ If reported, enter into drawing for gift cards, time off, etc.
 
 
 
@@ -9,9 +89,24 @@
 
 
 
-• 
-• 
-• 
-• 
-• 
-• 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
