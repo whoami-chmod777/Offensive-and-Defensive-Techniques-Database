@@ -1,1 +1,104 @@
 
+--- Email Attacks & Risks ---
+
+• Types Of Attacks
+• Social Engineering
+• Spam
+• Phishing
+• Malicious Attachments and URLs
+• Business Email Compromise
+
+
+-- Types Of Attacks --
+
+● Attacks against email infrastructure
+  ○ Similar to attacks against other systems
+  ○ Exploiting email server vulnerabilities
+  ○ Discovering and exploiting misconfigurations
+  ○ Goal of lateral movement, further exploitation, or using email systems
+● Attacks that use email as a mechanism
+  ○ Phishing
+  ○ Malware spread
+  ○ Social engineering  
+  ○ Business Email Compromise (BEC)
+
+
+-- Social Engineering --
+
+● Common component in any type of email attack
+  ○ Phishing, malicious files, etc
+● Attackers attempt to have users perform some sort of action for them
+  ○ Supply credentials (phishing)
+  ○ Open malicious software for reverse shell (malicious attachments/URLs)
+  ○ Financial gains (Ransomware, BEC)
+● Not just isolated to email attacks
+  ○ Common tactic used by many attackers
+● No email security can definitively block social engineering attacks
+  ○ Systems are getting better
+  ○ Relies heavily on user education and recognition
+
+
+-- Spam --
+
+● Commonly used as a blanket term for any malicious email
+● Any unwanted, potentially malicious email
+● One of the oldest forms of email attacks
+● Can flood users’ inboxes if not properly filtered
+  ○ Most may be solicitations/marketing
+  ○ Some will have malicious intent
+● Potential to impact mail server abilities to properly process email
+● Often used in DDoS attacks
+● Bottom line: unwanted email that may have malicious intent
+
+
+-- Phishing --
+
+● Multiple different types of phishing
+● Most combine some form of social engineering
+● Attackers attempt to trick users into supplying credentials, other sensitive info
+● Two forms
+  ○ Wording in email - sense of urgency
+  ○ Phishing URLs with link in message body (or attached file)
+● Spear phishing
+  ○ Phishing that targets specific users - administrators, finance, etc
+● Whaling
+  ○ Phishing that targets senior leadership - CEO, COO, etc.
+
+
+-- Malicious Attachments and URLs --
+
+● Attackers attempt to get users to run malware
+  ○ RAT for further control/persistence
+  ○ Ransomware
+● Commonly with MS Office attachments
+  ○ Embedded macros
+  ○ Functionality disabled by default, but will prompt users to enable
+    ■ Combined with social engineering
+● URLs used in same manner
+  ○ Can be easier for attackers to get past filtering systems (system dependent)
+  ○ Instead of opening attached file, relies on user downloading from website
+
+
+-- Business Email Compromise --
+
+● Attackers attempt to defraud company
+● Most common method
+  ○ Attacker poses as CEO (or other high level)
+  ○ Emails employees in company
+  ○ Asks for them to purchase gift cards and send them the numbers
+● Usually target those in finance/accounting roles
+  ○ Access to company funds/credit cards
+● Can be very difficult to trace or recover money
+● Protection relies heavily on user education
+
+
+
+
+
+
+
+
+
+
+
+
