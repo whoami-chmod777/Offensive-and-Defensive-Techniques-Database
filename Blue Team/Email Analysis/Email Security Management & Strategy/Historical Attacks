@@ -1,4 +1,98 @@
 
 --- Historical Attacks ---
 
+• Email As Attack Vector
+• Morris Worm (1988)
+• Melissa Virus (1999)
+• ILOVEYOU (2000)
+• Nimda (2001)
+• Target Data Breach (2013)
+• CryptoLocker (2013)
+
+
+-- Email As Attack Vector --
+
+● Email is very common attack vector
+  ○ Phishing, social engineering, malicious file/URL spread, etc
+● 1988 - First example of malware spreading via email protocols
+● Most attacks require some sort of user interaction
+  ○ Opening email, opening attachment
+  ○ Illustrates critical need for security awareness training
+
+
+-- Morris Worm (1988) --
+
+● Created by student at Cornell University
+  ○ Spread from MIT
+  ○ Originally to highlight weaknesses in many networks
+● Exploited vulnerabilities in several systems - not just email
+● Not intended to be destructive
+  ○ Coding change resulted in more damage and more widespread
+  ○ Replicate 14% of the time, instead of only to non-infected systems
+● Early internet - estimates of 10% of internet were affected
+● Resulted in first felony conviction under CFAA
+
+
+-- Melissa Virus (1999) --
+
+● Targeted MS Word and Outlook
+● Spread with malicious “list.doc” attachment
+  ○ Message body “Here’s the document you asked for….”
+● When opened, mailed itself to 50 addresses in contact list
+  ○ Required Outlook for this feature
+● Disabled safety settings in Word and Outlook
+● Resulted in slowed email systems
+● Affected Microsoft, Intel, US Marine Corps
+● At the time - fastest spreading email worm
+
+
+-- ILOVEYOU (2000) --
+
+● Subject line of “ILOVEYOU” with VBS attachment
+  ○ Attachment named “LOVE-LETTER-FOR-YOU.TXT.vbs”
+  ○ Exploited feature of Windows that hides file extensions
+● Visual Basic script
+  ○ Overwrote random files, hid MP3 files
+  ○ Emailed itself to all contacts in Outlook/Windows Address Book
+  ○ Allowed users to rewrite script, resulting in over 25 variations
+● Social engineering to entice recipients to open attachment
+  ○ Sender normally trusted, since only sent to contacts
+● Estimated 50 million infections within 10 days
+● Multiple corporations and govt shut down email systems
+
+
+-- Nimda (2001) --
+
+● One week after Sept 11 attacks in US
+  ○ Wide speculation about origin and attribution
+● Used multiple infection vectors
+  ○ Email, open network shares, compromised websites, vulnerabilities in IIS, backdoors from Code Red II and sadmind
+● Capable of running without user opening email
+  ○ Exploited preview feature in email client
+● Spread using stored email addresses on infected systems
+  ○ Searched Temporary Internet Files for all email addresses
+  ○ Looked at all emails in user’s inbox to collect sender addresses
+● Exploited multiple vulnerabilities and systems
+  ○ Resulted in widespread damage
+
+
+-- Target Data Breach (2013) --
+
+● Started as phishing email to HVAC contractor
+  ○ Allowed attackers to collect credentials
+  ○ Some were to Target’s network for billing
+● Attackers used credentials to infect Target POS machines
+● Compromise of financial & personal data of up to 110 million customers
+  ○ Credit card numbers, exp dates, CVV codes, etc
+
+
+-- CryptoLocker (2013) --
+
+● Ransomware attack spread via email attachments
+● Used social engineering to convince users to open
+  ○ Fake FedEx/UPS tracking notices
+● When first spread, difficult to detect initial infection
+  ○ After infection, files/systems encrypted
+● During initial spread, reliable backups were only method of recovery
+  ○ Or pay ransom and hope for decryption keys
 
