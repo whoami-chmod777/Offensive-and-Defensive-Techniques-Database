@@ -1,1 +1,76 @@
 
+--- Detecting Email Attacks ---
+
+• Constantly Changing Threat
+• Perimeter Detection
+• Mailbox Detection
+• Importance of User Vigilance
+
+
+-- Constantly Changing Threat --
+
+● Attackers constantly adapting tactics
+  ○ New methods of delivery
+  ○ Different ways to trick users
+● New types of attacks
+  ○ Phishing and social engineering
+  ○ Ransomware and botnets
+● Critical to have detection at multiple points
+  ○ Perimeter
+  ○ Mailbox-level
+
+
+-- Perimeter Detection --
+
+● First place that email enters network
+  ○ Assuming on-premise email systems
+  ○ Cloud providers often work differently
+● Proper scanning of inbound (and outbound) email
+  ○ Spam filtering
+  ○ Scanning of attachments
+  ○ Sandbox detonation of URLs
+  ○ Advanced email analysis to detect BEC attempts
+  ○ Methods to detect spoofed emails
+  ○ DLP scanning for outbound
+● Most options require third-party vendor solutions/products
+
+
+-- Mailbox Detection --
+
+● Defense in depth
+● Perimeter won’t always catch everything
+  ○ Well-disguised attacks
+  ○ New methods
+● Endpoint scanning that checks mailboxes
+  ○ Can also detect executed malware from email
+● Scanning on mail servers and databases
+  ○ Attempts to stop before reaches user
+● Similar to perimeter - often requires vendor products
+  ○ Cloud-hosted often has built-in solutions ($$)
+
+
+-- Importance of User Vigilance --
+
+● Continues defense in depth solutions
+● Users are often last line of defense
+  ○ Security solutions will not always catch everything
+● Security awareness training is critical for all organizations
+  ○ Users need to know how to spot suspicious emails
+■ Spoofed emails
+■ Suspicious attachments/URLs
+  ○ Know what NOT to do with them
+● Easy reporting mechanisms
+  ○ Built-in to email clients
+  ○ Allows reporting of false positives
+
+
+
+
+
+
+
+
+
+
+
+
