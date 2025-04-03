@@ -1,1 +1,91 @@
 
+--- Email Security Infrastructure ---
+
+• Components of Infrastructure
+• Email Security Gateway
+• Endpoint Tools
+• DLP (Data Loss Prevention)
+• Certificate Infrastructure
+• 
+• 
+
+-- Components of Infrastructure --
+
+● Email security gateway
+  ○ Inbound and outbound scanning
+● Email infrastructure servers
+● Endpoint tools
+● DLP scanning
+  ○ Outbound email
+● Additional scanning systems as needed
+  ○ Inspection servers in-line with internal mail flow
+● Certificate infrastructure
+  ○ Encryption, digital signatures
+
+
+-- Email Security Gateway --
+
+● Spam filtering (inbound and outbound)
+  ○ May also house end-user quarantines
+  ○ Other non-user accessible quarantines
+● Attachment scanning (and quarantine)
+  ○ Similar to AV/EDR scanning
+● URL checking (sandbox detonation if possible)
+● Phishing detection
+  ○ Check messages against SPF
+  ○ Verify DKIM
+● Outbound encryption
+● DLP functionality
+
+
+-- Endpoint Tools --
+
+● Standard AV/EDR
+  ○ May use same enterprise client or standalone email client
+  ○ Scans individual messages, attachments, etc
+● Endpoint DLP agent
+  ○ Stop/block sensitive data before sent
+● Email client addons
+  ○ Encryption tools
+  ○ Automatic digital signature configuration
+  ○ Email reporting
+
+
+-- DLP (Data Loss Prevention) --
+
+● Process and system to prevent leakage of sensitive information
+● Checks messages for sensitive data
+  ○ PII, PHI, credit card #s
+  ○ Custom identifiers depending on industry/organization
+● Common workflow
+  ○ DLP scanner detects sensitive information in email
+  ○ Stops outbound mail
+  ○ Quarantines message for manual review
+  ○ May notify sender of quarantined message
+  ○ Depending on findings, can be released or revised and resent
+
+
+-- Certificate Infrastructure --
+
+● Used for internal encryption and digital signatures
+  ○ Encryption provides confidentiality
+  ○ Digital signatures provide non-repudiation and integrity verification
+● Use internal PKI infrastructure
+  ○ Certificates are not externally trusted
+  ○ Encryption and signatures only work internally
+  ○ No additional cost
+● Use public, trusted CAs
+  ○ Encryption and signatures work internally and externally
+  ○ Can be significant cost depending on number needed
+  ○ Normally only used for high security purposes
+  
+
+
+
+
+
+
+
+
+
+
