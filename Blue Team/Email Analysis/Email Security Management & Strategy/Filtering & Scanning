@@ -1,1 +1,102 @@
 
+--- Filtering & Scanning ---
+
+• Scanning Basics
+• Spam Filtering
+• Phishing/Spoofed Email Detection
+• Malicious Attachment Scanning
+• URL Filtering
+• Quarantines
+
+
+-- Scanning Basics --
+
+● Fine balance between security and usability
+  ○ Effectively blocking threats
+  ○ Still allowing legitimate messages
+  ○ Low latency workflows
+● Scanning components
+  ○ Content filtering (spam, phishing, etc) - inbound and outbound
+  ○ Malicious attachments/URLs
+  ○ DLP
+● Most scanning happens on email security gateway
+  ○ Can have additional scanning systems in infrastructure
+● All have options for allow/block lists
+
+
+-- Spam Filtering --
+
+● Most common type of scanning/filtering
+  ○ Multiple "common" definitions
+● Looks for unwanted messages
+  ○ Marketing/bulk messages
+  ○ May or may not be malicious
+● Typically 3 levels of detection
+  ○ 100% confidence spam
+  ○ Possible spam
+  ○ Not spam
+● Quarantined (or blocked) depending on detection level
+● Can rely heavily on reputation scores
+● Scanning/detection methods vary depending on vendor
+
+
+-- Phishing/Spoofed Email Detection --
+
+● Attempts to identify "fake" messages
+  ○ Examines headers and content (similar to spam)
+  ○ Ex - From address is not accurate
+● SPF, DKIM, DMARC
+  ○ SPF - verify message sender (server) is verified
+  ○ DKIM - domain owners sign all messages from domain
+  ○ DMARC - instructs receiving servers what to do
+● Some vendors combine with spam filtering
+
+
+-- Malicious Attachment Scanning --
+
+● Similar to AV/EDR scanning
+  ○ Most email security products use AV/EDR vendor products
+● 3 levels of detection (similar to spam)
+● Sandbox detonation (possibly malicious)
+  ○ Suspected malicious attachments executed in isolated environment
+  ○ Can result in small email delay
+  ○ If malicious, blocked
+● Optionally send message, with attachment removed
+  ○ If message not classified as spam/malicious
+  ○ Usually has notification for user
+
+
+-- URL Filtering --
+
+● Very similar to spam/phishing scanning
+  ○ Focuses only on URLs/links in message body
+● Uses various intelligence sources to identify safety of domain
+  ○ Reputation scores
+  ○ Known malicious domains
+  ○ Known safe domains
+● Sandbox detonation
+● If suspected malicious - "defang" URL
+  ○ hxxps://www[.]google[.]com
+● Multiple options for processing depend on vendor
+
+
+-- Quarantines --
+
+● Location for suspected spam, malicious emails
+● Store message for period of time before automatically deleted
+  ○ Useful for false positive retrieval
+● User access to quarantine
+  ○ Spam - user access
+    ■ Unless message contains malicious attachment/URL
+    ■ May also contain suspected phishing messages
+  ○ Attachment/URL - no user access
+● Spam digest
+  ○ Periodic email sent to users showing what’s been quarantined
+  ○ Useful to see if non-malicious messages have been caught
+
+
+
+
+
+
+
