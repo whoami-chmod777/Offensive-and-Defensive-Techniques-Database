@@ -1,1 +1,129 @@
 
+--- Email Authentication & Verification ---
+
+• The Problem
+• SPF
+• SPF Record
+• DKIM
+• DKIM Header
+• DKIM DNS Record
+• DMARC
+
+
+-- The Problem --
+
+● Email not initially designed to be secure
+● Headers are set by system that created email
+  ○ Can result in misleading information
+● Methods needed to verify sender & integrity of messages
+  ○ Certificates get expensive, require everyone to purchase
+● SPF - Sender Policy Framework
+● DKIM - DomainKeys Identified Mail
+● DMARC - Domain-based Message Authentication Reporting and Conformance
+
+
+-- SPF --
+
+● Provides a method to authenticate sender
+● DNS TXT record
+  ○ Only one per domain
+● Domains can list all servers they send email from
+● Receiving servers check SPF record (return-path)
+  ○ If IP of sending server in record - pass
+■ Routed as normal
+  ○ If not - fail
+■ Message rejected or quarantined
+
+
+-- SPF Record --
+
+v=spf1 ip4=192.168.1.25 include:domain.com -all
+
+● v=spf1 - indicates SPF record & version
+  ○ Record MUST begin with this
+● ip4= - lists IP address of approved sending server (can have multiple)
+● include: - check content of this domain SPF record
+  ○ Commonly used to allow third-party senders
+● -all - failing messages should be rejected
+  ○ ~all - mark as insecure/spam, but accept
+  ○ +all - all messages should be accepted
+■ Not commonly used
+
+
+-- DKIM --
+
+● Method to digitally sign all emails from domain
+  ○ Provides authentication and integrity checking
+● Uses public key cryptography
+  ○ Public key stored in DKIM record (DNS)
+  ○ Private key kept in sending email system(s)
+● Sending server adds DKIM header
+  ○ Information used to generate signature
+  ○ Hash of message body
+  ○ Algorithm used
+  ○ Signature
+● Receiving server verifies signature against public key
+
+
+-- DKIM Header --
+
+DKIM-Signature: v=1; a=rsa-sha256; d=domain.com; s=mailsel; bh=wMX6SFepjdgl+EfxcDEEtDNdrj05Kgv8e31+tACuzxw=; h=From:Subject:Date:To; b=tLlBRaVlrBKpLiu264ks4FyW.....
+
+● a - algorithm used to compute signature
+● d - domain of sender
+● s - selector to use when looking up DNS record
+● bh - hash of email body
+● h - which headers used to create signature
+● b - digital signature
+
+
+-- DKIM DNS Record --
+
+Name                               Type     Content                          TTL
+mail-sel._domainkey.domain.com     TXT      v=DKIM1; p=76E629F05F70F6853…    6000
+
+● Name
+  ○ mail-sel - Selector
+  ○ ._domainkey - Required to identify DKIM
+  ○ .domain.com - Domain
+● Content
+  ○ v=DKIM1 - indicates DKIM record
+  ○ p=76E629F05F70F6853… - public key
+
+
+-- DMARC --
+
+● DNS record
+● Instructs receiving server what to do after checking SPF & DKIM
+● Can also include information to send reports
+
+Name                  Type      Content                                                                       TTL
+_dmarc.domain.com     TXT       v=DMARC1; p=quarantine; adkim=r; aspf=r; rua=mailto:email@thirdparty.com;     32600
+
+● p=quarantine - Quarantine messages that fail SPF/DKIM
+● adkim=r; aspf=r - Type of check (strict/relaxed)
+● rua=mailto:email…. - Where to send DMARC reports
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
