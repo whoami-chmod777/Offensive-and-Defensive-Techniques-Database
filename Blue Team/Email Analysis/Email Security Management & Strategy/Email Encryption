@@ -1,1 +1,75 @@
 
+--- Email Encryption ---
+
+• Encryption Methods
+• S/MIME
+• PGP
+• TLS
+• What Should be Encrypted?
+
+-- Encryption Methods --
+
+● Confidential information is commonly sent via email
+● Email is not a secure form of communication
+  ○ Traffic is sent in clear-text and easy to intercept
+● Multiple types of encryption can be added
+  ○ S/MIME - Secure/Multipurpose Internet Mail Extensions
+  ○ PGP - Pretty Good Privacy
+  ○ TLS - Transport Layer Security
+● All require additional configuration/infrastructure
+
+
+-- S/MIME --
+
+● Uses standard CA infrastructure
+  ○ Either public or private
+  ○ Private certificates cannot be used for external recipients
+● Standard PKCS #7
+● Provides functionality for encryption and digital signatures
+  ○ Authentication and non-repudiation
+  ○ Encryption and privacy
+● Message normally signed/encrypted in email client
+  ○ Signing - uses private cert of sender issued by CA
+  ○ Encryption - uses public cert of recipient
+
+
+-- PGP --
+
+● Not as commonly used in enterprise environments
+  ○ Standard is much more complex than S/MIME
+● Uses combination of hashing, public/private key cryptography
+● Originally used only "web of trust"
+  ○ Involves others verifying and trusting certificates
+  ○ Now supports key management servers
+● Similar to S/MIME, requires users to sign/encrypt messages
+
+
+-- TLS --
+
+● Very different from S/MIME or PGP
+● Encrypts entire session instead of individual message
+  ○ Uses standard TLS protocol for encryption
+● Requires configuration on both sending and receiving systems
+  ○ Many systems now use TLS by default
+● Easier and less expensive than using certificates
+  ○ Does not require additional purchase for each user
+  ○ Users do not need to manually encrypt messages
+● Provides privacy and confidentiality only
+  ○ Cannot be used for identity verification, non-repudiation
+● Configuration will vary depending on systems in use
+
+
+-- What Should be Encrypted --
+
+● Any confidential information
+● Personal information
+  ○ PHI, PII
+● Financial information
+● Sensitive company IP (intellectual property)
+● Compliance requirements based on industry
+  ○ PCI-DSS
+  ○ US healthcare - HIPAA
+● Always work with legal/compliance departments
+  ○ Guidance on what legally needs to be encrypted
+
+
