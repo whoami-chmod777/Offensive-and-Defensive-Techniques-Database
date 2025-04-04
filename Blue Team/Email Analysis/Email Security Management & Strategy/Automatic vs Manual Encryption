@@ -1,1 +1,59 @@
 
+--- Automatic vs Manual Encryption ---
+
+• Automatic Encryption
+• Manual Encryption
+• Which is Better
+
+
+-- Automatic Encryption --
+
+● Usually performed by email security appliances/gateways
+  ○ Any edge/perimeter email appliance
+● Most common with TLS encryption
+  ○ Sending & receiving domains cooperate to establish TLS configs
+● Common with DLP scanning workflows
+  ○ Sensitive data detected -> email automatically encrypted
+  ○ Rules can be established using other criteria
+● Does not require any user interaction
+● Not normally performed with individual user certificate encryption
+  ○ Would require private keys on email systems
+● Provides privacy and confidentiality
+
+
+-- Manual Encryption --
+
+● User-initiated encryption process
+  ○ Usually using button/function in email client
+● Uses user-specific certificates
+● Can work with internal or public certificates
+● Provides privacy/confidentiality, sender verification, non-repudiation
+● Besides certificate setup, requires no additional configuration
+● Possibility of data leakage without other processes in place
+  ○ DLP scanning, etc
+
+
+-- Which is Better --
+
+● Automatic
+  ○ Ensures secure communication
+    ■ Between configured domains
+  ○ Requires no user initiated process
+  ○ Does not require individual user certificates
+  ○ Normally no sender verification
+● Manual
+  ○ Requires users to initiate
+  ○ Requires certificate for each user (as needed)
+  ○ Provide sender verification, non-repudiation
+● Both should be used
+
+
+
+
+
+
+
+
+
+
+
