@@ -8,6 +8,7 @@
 • DKIM Header
 • DKIM DNS Record
 • DMARC
+• Create Email Authentication & Verification with SPF, DKIM, & DMARC (Example)
 
 
 -- The Problem --
@@ -107,20 +108,135 @@ _dmarc.domain.com     TXT       v=DMARC1; p=quarantine; adkim=r; aspf=r; rua=mai
 
 
 
+-- Create Email Authentication & Verification with SPF, DKIM, & DMARC (Example) --
+
+Introduction
+In this lab, you will be configuring SPF, DKIM, and DMARC DNS records for the ine.lab email domain. These DNS records help to validate the authenticity of sent & received emails.
+
+Tasks
+You have been tasked with setting up SPF, DKIM, and DMARC for the ine.lab domain. The domain uses two email servers, with their information listed below.
+
+FQDN: mail01.ine.lab (172.31.115.25) 
+FQDN: mail02.ine.lab (172.31.115.26) 
+
+1. Configure DNS A records for both email servers
+
+2. Create an SPF record with the following requirements:
+    • Both email servers are permitted to send mail for the ine.lab domain
+    • Receiving servers should also check the SPF record for the ine2.lab domain
+    • Any messages that fail the SPF check should be rejected
+
+3. Create DKIM keys and DNS record for the domain using the selector name of "selector"
+
+4. Create a DMARC record with the following requirements:
+    • Mail that fails checks should be quarantined
+    • Both SPF and DKIM checks should be relaxed
+    • Reports should be emailed to thirdparty@vendor42.test
+
+5. Verify all records have been successfully created using nslookup in Windows
 
 
+-- Step 1: Create A Records for Email Servers --
+
+> DNS Manager (GUI) 
+
+DNS Manager > Forward Lookup Zones > ine.lab
+Right-click in blank space > New Host (A or AAAA)...
+
+# Create A record for mail01:
+Name: mail01
+IP: 172.31.115.25
+Click [Add Host]
+
+# Create A record for mail02:
+Name: mail02
+IP: 172.31.115.26
+Click [Add Host]
+
+-- Step 2: Create SPF Record --
+
+> DNS Manager 
+
+Right-click in blank space > Other New Records... > TXT > Create Record
+
+Record Name: [leave blank or @]
+Text: "v=spf1 ip4=172.31.115.25 ip4=172.31.115.26 include:ine2.lab -all"
+
+Click OK > Done
+
+-- Step 3: Generate DKIM Key and Add Record --
+
+> Linux email server (172.31.115.110) 
+
+# Connect to the server
+ssh labadmin@172.31.115.110
+# Password: cLx!LmN3y2zK
+
+# Generate private DKIM key
+openssl genrsa -out dkim.private.key 2048
+
+# Generate and display public DKIM key (formatted)
+openssl rsa -in dkim.private.key -pubout -outform der 2>/dev/null | openssl base64 -A
+
+> Copy the entire output string from the last command
+
+Right-click in blank space > Other New Records... > TXT > Create Record
+
+Record Name: selector._domainkey
+Text: "v=DKIM1; p=<paste-public-key-here>"
+
+Click OK > Done
+
+-- Step 4: Create DMARC Record --
+
+> DNS Manager
+
+Right-click in blank space > Other New Records... > TXT > Create Record
+
+Record Name: _dmarc
+Text: "v=DMARC1; p=quarantine; adkim=r; aspf=r; rua=mailto:thirdparty@vendor42.test"
+
+Click OK > Done
+
+-- Step 5: Verify Records with nslookup --
+
+nslookup
+> set type=txt
+
+# Check SPF
+> ine.lab
+
+# Check DKIM (replace "selector" with your actual selector)
+> selector._domainkey.ine.lab
+
+# Check DMARC
+> _dmarc.ine.lab
 
 
+-- Check SPF Record --
+
+dig +short TXT ine.com
+nslookup -type=TXT ine.com
+"v=spf1 ... "
+
+-- Check DKIM Record --
+
+<selector._domainkey.ine.com>
+
+dig +short TXT default._domainkey.ine.com
+nslookup -type=TXT default._domainkey.ine.com
+
+"v=DKIM1; k=rsa; p=..."
+
+-- Check DMARC Record --
+
+dig +short TXT _dmarc.ine.com
+nslookup -type=TXT _dmarc.ine.com
+
+"v=DMARC1; p=reject; rua=mailto:dmarc@ine.com; ..."
 
 
-
-
-
-
-
-
-
-
+Alternative: host -t TXT ine.com
 
 
 
