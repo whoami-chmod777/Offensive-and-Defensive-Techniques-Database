@@ -1,1 +1,36 @@
 
+tasklist
+taskkill /PID 1234 /F
+tasklist /V
+tasklist /M
+
+tasklist /M /FI "PID eq 2088"
+tasklist /FI "PID eq 2088"
+tasklist /FI "IMAGENAME eq notmaleware.exe"
+tasklist /M /FI "PID eq 2088"
+
+netstat -ano
+netstat -anob | findstr ESTABLISHED
+
+sc query
+
+wmic process list brief
+wmic process where processid=2088 get Name,ParentProcessId,ProcessId
+wmic process get Name,ParentProcessId,ProcessId | find "192"
+wmic process where processid=2088 get CommandLine
+wmic process where "name='cmd.exe'" get ProcessId,ParentProcessId,CommandLine
+
+wmic startup get Caption,Command,Location
+wmic service list brief
+wmic useraccount list full
+
+start msconfig: reg query HKLM\Software\Microsoft\Windows\CurrentVersion\Run
+
+
+> Persistence Registry Paths
+
+HKLM\Software\Microsoft\Windows\CurrentVersion\Run
+HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+HKLM\SYSTEM\CurrentControlSet\Services\
+HKLM\Software\Microsoft\Active Setup\Installed Components
+HKCU\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\Shell	
