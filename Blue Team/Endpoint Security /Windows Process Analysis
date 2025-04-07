@@ -1,4 +1,23 @@
 
+--- Processes ---
+
+Running instances of programs and applications  
+• Partitioned set of system resources (CPU, memory, I/O)
+
+System (Windows) Processes  
+• OS core functions  
+• System, smss.exe, csrss.exe
+
+User (Application) Processes 
+• Initiated by users  
+• chrome.exe, notepad.exe, minesweeper.exe
+
+Service (Background) Processes
+• Background functions  
+• Windows Update, Print Spooler, lsass.exe
+
+
+
 tasklist
 taskkill /PID 1234 /F
 tasklist /V
