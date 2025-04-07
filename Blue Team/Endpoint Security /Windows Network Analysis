@@ -1,1 +1,23 @@
 
+net share Exfil=C:\Users\admin\Downloads\exfil (mount a folder)
+net use X: \\127.0.0.\Exfil
+
+net view
+net view \\127.0.0.1\
+net view \\HOSTNAME
+
+net share
+net share \\127.0.0.1\
+
+net session
+net use
+
+netstat -anob [ESTABLISHED]
+netstat -e
+netstat -nr
+netstst -S
+netstat -vb
+
+arp -a
+ipconfig /all
+route print
