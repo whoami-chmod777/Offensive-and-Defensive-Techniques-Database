@@ -12,6 +12,17 @@
 
 -- What is SPF Alignment? --
 
+An email message is made up of several different headers. Each header contains information about certain attributes of an email message, including the date sent, where it was sent, and to who it was sent to. SPF deals with two types of email headers:
+
+• The <From:> header
+• The Return-Path header
+
+
+
+
+
+
+
 
 
 -- How to Set Up Microsoft Office 365 SPF record? --
