@@ -61,7 +61,29 @@ tcp.flags.rst == 1
 tcp.flags.syn == True
 
 tls
+
 ftp
+ftp || ftp-data
+ftp.request.command
+ftp.request.command=="USER"
+ftp.request.command=="PASS"
+ftp.request.command=="EPSV"
+
+ftp.response.code
+ftp.response.code == 530
+
+ftp.request.command == "USER" || ftp.request.command == "PASS"
+ftp.request.command == "EPSV" || ftp-data
+
+220 - Service ready
+331 - Username OK, need password
+230 - Login successful
+530 - Login incorrect / Not logged in
+150 - File status okay; about to open data connection
+226 - Transfer complete
+425 - Can’t open data connection
+550 - Action not taken (e.g., file not found)
+
 
 tcp.port != 22
 udp.port != 137
