@@ -1,1 +1,28 @@
 
+--- Basic Searching in Splunk ---
+
+• Search with Keywords and Phrases
+• Wildcards
+• 
+• 
+
+
+-- Search with Keywords and Phrases --
+
+Search events that match the following keywords. Check which index(es) these events belong to
+
+• invalid
+• amanda
+• Macintosh
+• telco01
+
+
+Search events that match quoted phrases for all time. Check which index(es) these events belong to
+
+• “user ubuntu”
+• “failed password”
+• “like gecko”
+• “Mac OS”
+
+
+-- Wildcards --
