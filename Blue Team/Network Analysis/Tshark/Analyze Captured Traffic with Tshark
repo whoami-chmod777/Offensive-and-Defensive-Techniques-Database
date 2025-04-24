@@ -1,0 +1,14 @@
+
+
+--- Analyze Captured Traffic with Tshark ---
+
+
+View All Packets: tshark -r /var/log/snort/snort.log.1728380306 
+
+Filter SSH Traffic: tshark -r /var/log/snort/snort.log.1728380306 -Y "tcp.port == 22" 
+
+Filter for HTTP Traffic: tshark -r /var/log/snort/snort.log.1728380306 -Y "http" 
+
+Filter for Potentially Malicious Payloads: tshark -r /var/log/snort/snort.log.1728380306 -Y "http contains "1%27%20OR%20%271%27=%271"" 
+
+
