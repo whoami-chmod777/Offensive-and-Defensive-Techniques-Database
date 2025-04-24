@@ -1,0 +1,69 @@
+
+--- Simulating Attacks ---
+
+We will simulate the following network attacks and create specific rules in Snort to detect each of these attacks, and guide you through simulating them.
+
+1. Port Scan Attack
+2. SQL Injection Attack
+3. SSH Brute Force Attack
+
+
+> Step 1: Setup Snort to Monitor Traffic
+
+Ensure that Snort is configured to run in inline mode (for active response) or IDS mode (for passive monitoring). Here’s a quick recap of how to run Snort:
+
+Start Snort in IDS mode: sudo snort -q -l /var/log/snort/ -A console -c /etc/snort/snort.conf -i eth0
+
+Replace eth0 with your network interface.
+
+
+> Step 2: Create Snort Rules
+
+Add the following rules to your /etc/snort/rules/local.rules file:
+
+Rule 1: Port Scan Detection: alert tcp any any -> $HOME_NET any (msg:"Port Scan Detected"; flags:S; sid:1000002; rev:1;)
+Rule 2: SQL Injection: alert tcp any any -> $HOME_NET 80,8080 (msg:"SQL Injection Attempt Detected"; content:"1%27%20OR%20%271%27=%271"; sid:1000003; rev:1;)
+Rule 3: SSH Brute Force: alert tcp any any -> $HOME_NET 22 (msg:"SSH Brute Force Detected"; threshold:type threshold, track by_src, count 5, seconds 60; sid:1000004; rev:1;)
+
+After adding the rules, restart Snort to apply the changes: sudo snort -q -l /var/log/snort/ -A console -c /etc/snort/snort.conf -i eth0
+
+
+> Step 3: Simulate Each Attack
+
+10/08-10:25:26.895298  [**] [1:1000002:1] Port Scan Detected [**] [Priority: 0] {TCP} 192.168.29.214:57871 -> 192.168.29.137:8080
+10/08-10:25:27.768935  [**] [1:1000002:1] Port Scan Detected [**] [Priority: 0] {TCP} 192.168.29.214:56984 -> 192.168.29.137:8080
+10/08-10:25:27.768973  [**] [1:1000001:1] SQL Injection Attempt Detected [**] [Priority: 0] {TCP} 192.168.29.214:56984 -> 192.168.29.137:8080
+10/08-10:25:30.143707  [**] [1:1000002:1] Port Scan Detected [**] [Priority: 0] {TCP} 192.168.29.214:47160 -> 192.168.29.137:22
+10/08-10:25:30.144083  [**] [1:1000004:1] SSH Brute Force Detected [**] [Priority: 0] {TCP} 192.168.29.214:47160 -> 192.168.29.137:22
+10/08-10:25:30.157265  [**] [1:1000004:1] SSH Brute Force Detected [**] [Priority: 0] {TCP} 192.168.29.214:47160 -> 192.168.29.137:22
+10/08-10:25:34.593080  [**] [1:1000004:1] SSH Brute Force Detected [**] [Priority: 0] {TCP} 192.168.29.214:47160 -> 192.168.29.137:22
+
+
+1. Simulating Port Scan Attack
+
+Use Nmap to perform a SYN scan: nmap -sS <target-IP>
+
+Snort should detect the scan attempt.
+
+2. Simulating SQL Injection Attack
+
+Use curl to simulate an SQL injection attack on the PHP application we set up: curl "http://<target-IP>:8080/index.php?id=1%27%20OR%20%271%27=%271"
+
+Check Snort for SQL injection alerts.
+
+3. Simulating SSH Brute Force Attack
+
+Use Hydra to perform a brute force attack against the SSH service: hydra -l root -P /usr/share/wordlists/rockyou.txt ssh://<target-IP>
+
+Check Snort for alerts indicating the SSH brute force attack.
+
+
+> Step 4: Monitor Alerts and Responses
+
+As you run these attack simulations, keep an eye on the Snort console. You should see alerts similar to the following:
+
+For port scan: [**] [1:1000002:1] Port Scan Detected [**]
+For SQL injection: [**] [1:1000003:1] SQL Injection Attempt Detected [**]
+For SSH brute force: [**] [1:1000004:1] SSH Brute Force Detected [**]
+
+
