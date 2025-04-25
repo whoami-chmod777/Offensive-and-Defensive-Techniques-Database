@@ -3,7 +3,7 @@
 
 • Search with Keywords and Phrases
 • Wildcards
-• 
+• Boolean Operators
 • 
 
 
@@ -25,3 +25,49 @@ Search events that match quoted phrases for all time. Check which index(es) thes
 
 
 -- Wildcards --
+
+Use wildcards (*) to match characters in string values for events in your index:
+✓ As best practice, use wildcards at the end of a term, e.g., pass*, fail*
+✓ Avoid using wildcards in the following situations:
+  ○ Beginning of a string – *fail, *word
+    ➤ Search will look at EVERY string, i.e., scans all events.
+    ➤ Can cause performance issues.
+  ○ Middle of a string – http*buttercupgames.com
+    ➤ Might cause inconsistent results especially in strings containing punctuation.
+
+Search events that match the following terms with wildcards for all time. Compare execution times.
+
+• fail*
+• pass*
+• http://www.buttercupgames.com
+
+
+-- Boolean Operators --
+
+Use Boolean operators AND, OR, NOT to combine search terms:
+  ✓ Boolean Operators must be in uppercase.
+  ✓ The AND operator is implied between terms. Does not need to be explicitly specified.
+     ○ Search for failed password is the same as failed AND password.
+  ✓ NOT operator applies to the term immediately following NOT.
+     ○ user NOT administrator – Search events that contain the word user and does not contain the word administrator.
+
+Search events that match the following terms with Boolean operators for all time
+• failed password same as failed AND password
+• invalid OR Macintosh
+• (www1 OR www2) user amanda same as (www1 OR www2) AND user AND amanda
+• user administrator
+• user NOT administrator
+
+
+-- Search Assistant --
+
+
+
+
+
+
+
+
+
+
+
