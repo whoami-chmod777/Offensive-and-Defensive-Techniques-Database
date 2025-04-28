@@ -110,6 +110,13 @@ Search assistant also provides guidance to match parenthesis as you type.
   ✓ Raw
   ✓ Table
 
+• Run the base search host01 OR host09
+• Validate timestamps and confirm events are in reverse chronological order of time.
+• Check metadata fields and validate that selected fields show under each event.
+• Check that the terms matching your search are highlighted in the search results.
+• Click an item in the search and verify the drilldown options Add to Search, Exclude from Search, New Search.
+• Click on each event viewer display option Raw, List, Table to see how it formats the results.
+
 
 -- Search Time Range --
 
