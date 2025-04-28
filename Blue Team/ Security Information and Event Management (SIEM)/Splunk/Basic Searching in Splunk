@@ -4,7 +4,9 @@
 • Search with Keywords and Phrases
 • Wildcards
 • Boolean Operators
-• 
+• Search Assistant
+• Identify Contents of Search Results
+• Search Time Range
 
 
 -- Search with Keywords and Phrases --
@@ -60,6 +62,75 @@ Search events that match the following terms with Boolean operators for all time
 
 
 -- Search Assistant --
+
+The Search Assistant helps with writing searches by providing selections to complete search strings.
+
+• Matching terms in indexed Data.
+• Matching searches based on recent search history.
+• Shows list of commands after first pipe (|).
+
+Search assistant also provides guidance to match parenthesis as you type.
+
+• Inner Parenthesis > user amanda ( (www1 OR (www2 invalid)) ) >> (www2 invalid)
+• Outer Parenthesis > user amanda ( (www1 OR (www2 invalid)) ) >> ( (xxx OR (www2 invalid)) )
+
+• Verify that the default search assistant mode is Compact.
+• Type the following keywords on the search bar to verify search assistant:
+  ✓ Use – check for matching terms in indexed data.
+  ✓ (www1 – Check for matching searches run recently.
+    o Select a recent search with parenthesis. Verify matching start parenthesis.
+  ✓ telco01 | - check for commands after the pipe.
+    o Mouse over a command to get information.
+• Change the search assistant mode to Full and verify that count of terms for search above.
+• Use the Auto Open option to toggle Full mode.
+• Disable search assistant and verify that they’re no selections provided for searches.
+
+
+-- Identify Contents of Search Results --
+
+• Each event contains a timestamp extracted at index time.
+• Search results are displayed in reverse chronological order by timestamp.
+
+• Splunk also extracts metadata fields at index time:
+  ✓ host
+  ✓ source
+  ✓ sourcetype
+  ✓ index
+
+• Selected fields (host, source, sourcetype) are shown at the bottom of each event.
+• Terms that match the search are highlighted in search results.
+
+• When you click an item in the search results, you can drilldown to the following:
+  ✓ Add to search
+  ✓ Exclude from search
+  ✓ New search
+
+• The events viewer has 3 display options:
+  ✓ List (default)
+  ✓ Raw
+  ✓ Table
+
+
+-- Search Time Range --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
