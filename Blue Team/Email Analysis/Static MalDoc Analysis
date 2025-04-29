@@ -67,7 +67,6 @@ Show the detailed structure of an OLE file:
 oledump.py <file> -S
 
 
-
 https://blog.didierstevens.com/programs/oledump-py/
 https://github.com/DidierStevens/DidierStevensSuite/blob/master/oledump.py
 
