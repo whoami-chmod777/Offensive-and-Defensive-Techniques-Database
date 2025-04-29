@@ -1,14 +1,11 @@
 
 Static PDF Analysis refers to the process of examining a PDF document without executing or interacting with it. This type of analysis helps identify potentially malicious content, such as embedded scripts, JavaScript, hidden links, or other exploits, in a PDF file. Analysts review the PDF structure, objects, metadata, and embedded content for indicators of compromise (IOCs) and other threats.
 
-
 -- What is pdf-parser --
 pdf-parser is a Python tool designed for static analysis of PDF files. It allows analysts to inspect the structure of the PDF, including objects, streams, and embedded elements like links or JavaScript. It helps detect malicious content by providing a deeper view into the internal elements of a PDF file.
 
-
 -- What is pdfid --
 pdfid is another Python tool for PDF analysis. It provides an overview of the PDF's structure by displaying common elements and potentially suspicious indicators, such as embedded JavaScript, launch actions, or file attachments. pdfid is used to quickly assess whether a PDF has suspicious content or objects that could signify an exploit.
-
 
 -- Other Commands for Static PDF Analysis --
 
@@ -17,7 +14,6 @@ oledump: Typically used for analyzing OLE files, but in the context of PDFs, it 
 
 whoami@soc101-ubuntu:~$ file eicar-dropper.doc
 whoami@soc101-ubuntu:~$ python3 oledump.py eicar-dropper.doc
-
 
 
 -- pdf-parser Cheat Sheet --
@@ -29,13 +25,10 @@ $ python3 ./pdf-parser.py book04-02.4422136363.pdf -s "/JavaScript"
 $ python3 ./pdf-parser.py pdf-doc-vba-eicar-dropper.pdf --object 8 --filter --raw --dump eicar-dropper.doc
 
 
-
 -- pdfid Cheat Sheet --
 
 $ python3 ./pdfid.py pdf-doc-vba-eicar-dropper.pdf
 $ python3 ./pdfid.py pdf-doc-vba-eicar-dropper.pdf -n
-
-
 
 
 
