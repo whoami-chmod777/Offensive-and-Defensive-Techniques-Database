@@ -1,14 +1,11 @@
 
 Email URL Analysis is the process of inspecting and evaluating URLs within emails to identify potential threats, such as phishing links or malware.
 
-
 - Link -
 When analyzing suspicious emails, it’s crucial to handle links carefully. Instead of clicking, right-click the link and choose "Copy Link Location" to inspect the URL without interacting. This prevents the risk of activating potential malware embedded in the link. Always analyze URLs in a safe environment before further action.
 
-
 - Sublime Text -
 Use the "Sublime Text" editor for analyzing email headers or URLs. In the context of email URL analysis, search for "HTTP" (or "HTTPS") to identify and inspect embedded links. Also, search for the <a> tag, which is used for hyperlinks. This allows you to view the full URL without clicking, providing a safe method to identify potential phishing or malicious sites.
-
 
 - CyberChef -
 Use CyberChef for email analysis tasks such as decoding quoted-printable strings, extracting URLs, and defanging malicious links. The "From Quoted Printable" operation helps decode encoded content, while the "Extract URLs" function identifies all URLs. To prevent accidental clicks on malicious links, use the "Defang URL" operation, which modifies URLs to render them safe for analysis without activating the link.
@@ -77,9 +74,7 @@ SHA256 Hash: [a-fA-F0-9]{64}
 
 To extract the first and second URLs from an email during the process of email header analysis, follow these steps:
 
-1. Access the Email Source (Raw Email Content):
-You'll need to open the email in its raw format to view both the header and the body content. Here's how:
-
+1. Access the Email Source (Raw Email Content): You'll need to open the email in its raw format to view both the header and the body content. Here's how:
 - Gmail: Open the email > Click the three dots (more) in the top-right corner > Select "Show original."
 - Outlook (Web): Open the email > Click the three dots (more actions) > Select "View message source."
 - Yahoo Mail: Open the email > Click the three dots next to reply > Select "View raw message."
@@ -97,15 +92,13 @@ html
 <a href="https://first-url-example.com">Click here</a>
 <a href="https://second-url-example.com">Click here</a>
      
-4. Identify URLs in Encoded Formats:
-If the email content is Base64 encoded, you may need to decode it first to access the links. You can use tools like CyberChef or command-line tools to decode the content.
+4. Identify URLs in Encoded Formats: If the email content is Base64 encoded, you may need to decode it first to access the links. You can use tools like CyberChef or command-line tools to decode the content.
 
 Example:
 bash
 echo "<Base64 encoded string>" | base64 --decode
    
-5. Extract URLs from Headers:
-Sometimes, URLs may also appear in headers like Received, Return-Path, or References, but these are more related to email routing and less likely to be user-facing URLs.
+5. Extract URLs from Headers: Sometimes, URLs may also appear in headers like Received, Return-Path, or References, but these are more related to email routing and less likely to be user-facing URLs.
 
 Tools for Extracting URLs:
 - Email URL extraction tools: You can use tools like PhishTool, CyberChef, or MIME tools to automatically extract URLs from the email content.
@@ -206,6 +199,36 @@ JoeSandbox: Performs in-depth dynamic analysis of URLs and attached files.
 - Disadvantage: Resource-intensive and slower.
 
 Before relying on any of these tools, understanding the methodology behind them is essential to avoid false confidence in results and ensure a thorough, multi-layered analysis.
+
+
+
+-- Email URL Analysis (Lab) -- 
+
+1. Access the Email Source (Raw Email Content)
+2. Search for URLs: http, https, <a
+3. Check for URLs in the Email Body: <a href="URL
+4. Identify URLs in Encoded Formats: echo "<Base64 encoded string>" | base64 --decode
+5. Extract URLs from Headers: headers like Received, Return-Path, or References
+6. Analyze URL Reputation Check: VirusTotal, URL2PNG, urlscan.io, URLVoid (subdomain and domain)
+
+Red Flags in Email URLs:
+
+Mismatched Display Name and URL: The text link says one thing, but hovering shows a totally different domain.
+Misspelled Domains: Example: amaz0n.com instead of amazon.com, or faceb00k.com.
+Use of IP Addresses Instead of Domain Names: Example: http://192.168.1.1/login instead of a proper company domain.
+Excessively Long URLs: Very long, confusing links trying to hide the real destination.
+URL Shorteners: Services like bit.ly, tinyurl.com, goo.gl to obscure the true destination.
+Unusual Top-Level Domains (TLDs): Example: .xyz, .top, .club, or something unexpected for the brand.
+Additional Subdomains: Example: paypal.security.alerts.login.com, where the real domain is login.com (not PayPal!).
+Typos or Extra Words: Example: www.banksecure-login.com pretending to be bank.com.
+HTTPS Issues: Lack of HTTPS (http:// instead of https://) or fake padlock icons embedded into the email image.
+URL Parameters with Suspicious Codes: example: https://site.com/login?sessionid=abcd1234efgh5678 where the session ID is overly long or nonsensical.
+Requests for Sensitive Information: URLs that prompt users to immediately "verify" passwords, SSNs, or credit cards.
+Mismatch Between Sender and URL Domain: Email from info@company.com but links point to an entirely different domain.
+Hidden Links in Attachments: Links embedded in attached PDFs, Word docs, or Excel files.
+Lookalike Characters (Homograph Attacks): Example: Using Cyrillic "а" instead of Latin "a" in domains (xn--80ak6aa92e.com).
+Urgency and Threats: Links leading to pages warning you that your account will be locked "within 24 hours" unless you act.
+
 
 
 References:
