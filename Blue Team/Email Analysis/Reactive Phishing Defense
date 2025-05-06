@@ -2,6 +2,36 @@
 Phishing attacks can strike at any time, so having a clear, reactive defense strategy is critical to minimize damage. Here’s a breakdown of the key steps involved in a Reactive Phishing Defense:
 
 
+-- Reactive Phishing Defense --
+
+Phishing attacks can strike at any time, so having a clear, reactive defense strategy is critical to minimize damage. Here’s a breakdown of the key steps involved in a Reactive Phishing Defense:
+
+• Containment
+- Determine scope
+- Quarantine
+- Block sender artifacts
+- Block web artifacts
+- Block file artifacts
+
+• Eradication
+- Remove malicious emails
+  → Content search and eDiscovery
+- Remove malicious files
+- Abuse form submissions
+- Credential changes
+- Reimaging
+
+• Recovery
+- Restore systems
+
+• Communication
+- Notify affected users
+- Update stakeholders
+
+• User Education
+- End-user training
+
+
 -- Detection and Reactive Response --
 
 Quick identification and response are vital.
@@ -75,49 +105,17 @@ Get-MessageTrackingLog -Start "10/01/2024 00:00:00" -End "10/03/2024 23:59:59" -
 
 -- Common Parameters --
 
-• Start
-Start time for the search (required).
-  → Start "10/03/2024 00:00:00"
-
-• End
-End time for the search (required).
-  → End "10/03/2024 23:59:59"
-
-• Sender
-Specify the sender email address to filter logs.
-  → Sender "user@example.com"
-
-• Recipients
-Specify the recipient email address to filter logs.
-  → Recipients "recipient@example.com"
-
-• MessageSubject
-Search for a specific message subject.
-  → MessageSubject "Invoice Due"
-
-• EventId
-Filter by specific event types like RECEIVE, SEND, FAIL, or DELIVER.
-  → EventId "RECEIVE"
-
-• MessageId
-Specify a message ID for tracking a particular message.
-  → MessageId "<messageid@domain.com>"
-
-• Server
-Specify the Exchange server for searching logs.
-  → Server "EXCHANGESERVER1"
-
-• ResultSize
-Limit the number of results returned.
-  → ResultSize 1000
-
-• ClientIp
-Filter logs based on client IP address.
-  → ClientIp "192.168.1.10"
-
-• LogonType
-Filter by logon type (Admin, Owner, Delegate).
-  → LogonType "Admin"
+• Start: Start time for the search (required)  → Start "10/03/2024 00:00:00"
+• End: End time for the search (required)  → End "10/03/2024 23:59:59"
+• Sender: Specify the sender email address to filter logs  → Sender "user@example.com"
+• Recipients: Specify the recipient email address to filter logs  → Recipients "recipient@example.com"
+• MessageSubject: Search for a specific message subject  → MessageSubject "Invoice Due"
+• EventId: Filter by specific event types like RECEIVE, SEND, FAIL, or DELIVER  → EventId "RECEIVE"
+• MessageId: Specify a message ID for tracking a particular message  → MessageId "<messageid@domain.com>"
+• Server: Specify the Exchange server for searching logs  → Server "EXCHANGESERVER1"
+• ResultSize: Limit the number of results returned  → ResultSize 1000
+• ClientIp: Filter logs based on client IP address  → ClientIp "192.168.1.10"
+• LogonType: Filter by logon type (Admin, Owner, Delegate)  → LogonType "Admin"
 
 
 -- Common EventId Values --
@@ -130,28 +128,60 @@ TRANSFER: The message was transferred to another server.
 DEFER: Delivery of the message was deferred.
 
 
+-- Get-MessageTrackingLog --
+
+# 1. Install the module if you haven’t already
+Install-Module ExchangeOnlineManagement -Force
+
+# 2. Import the module (good practice)
+Import-Module ExchangeOnlineManagement
+
+# 3. Connect to Exchange Online
+Connect-ExchangeOnline -UserPrincipalName your_admin_account@yourdomain.com
+
+PS > Get-MessageTrace -RecipientAddress user@example.com
+PS > Connect-ExchangeOnline -UserPrincipalName user@example.com
+PS > Get-MessageTrace -RecipientAddress user@example.com -StartDate "05/05/2025" -EndDate "05/06/2025"
+
+PS > Get-MessageTrackingLog -Sender "attacker@attacker.com"
+PS > Get-MessageTrackingLog -Recipients "victim@victim.com"
+PS > Get-MessageTrackingLog -Sender "attacker@attacker.com" -MessageSubject "Hello"
+PS > Get-MessageTrackingLog -Start "MM/DD/YYYY HH:MM:SS" -End "MM/DD/YYYY HH:MM:SS"
+
+
+- Useful Examples -
+
+• Find All Emails from a Sender: Get-MessageTrackingLog -Start "10/01/2024 00:00:00" -End "10/03/2024 23:59:59" -Sender "user@example.com"
+• Track an Email to a Specific Recipient: Get-MessageTrackingLog -Start "10/01/2024 00:00:00" -End "10/03/2024 23:59:59" -Recipients "recipient@example.com"
+• Find Emails with a Specific Subject: Get-MessageTrackingLog -Start "10/01/2024 00:00:00" -End "10/03/2024 23:59:59" -MessageSubject "Invoice Due"
+• Search for Specific Event Types (e.g., Received Emails): Get-MessageTrackingLog -Start "10/01/2024 00:00:00" -End "10/03/2024 23:59:59" -EventId "RECEIVE"
+• Find Messages by Message ID: Get-MessageTrackingLog -MessageId "<messageid@domain.com>"
+• Filter Logs by Client IP Address: Get-MessageTrackingLog -Start "10/01/2024 00:00:00" -End "10/03/2024 23:59:59" -ClientIp "192.168.1.10"
+• Find the Last 100 Emails: Get-MessageTrackingLog -Start "10/01/2024 00:00:00" -End "10/03/2024 23:59:59" -ResultSize 100
+
+
 -- Get-MessageTrackingLog CheatSheet --
 
-–ResultSize Unlimited
+• ResultSize Unlimited
 
 Get-MessageTrackingLog | Out-Host –Paging
 Get-MessageTrackingLog | Format-Table –AutoSize
 Get-TransportServer | Get-MessageTrackingLog
 
-
 Get-MessageTrackingLog -Start (Get-Date).AddHours(-24) -ResultSize unlimited | where {[string]$_.recipients -like "*@gmail.com"}
-
 Get-MessageTrackingLog -ResultSize unlimited –Sender "cmansion@woshub.com” –server rome-hub-01 -Start "11/30/2019 06:00:00" -End "12/13/2019 22:00:00" |select-object Timestamp,Sender,Recipients,MessageSubject,EventId|ft
-
 Get-MessageTrackingLog -Sender "cmansion@woshub.com" -Recipients "amorato@woshub.com" -ResultSize unlimited –server rome-hub-01| Select-Object Timestamp,Sender,{$_.recipients},MessageSubject | Export-Csv -Path "C:\Export\exchange\exchange_tracking_logs.csv" -Encoding Default -Delimiter ";"
-
 Get-MessageTrackingLog -MessageSubject "test" -ResultSize unlimited –server rome-hub-01| Select-Object Timestamp,Sender, {$_.recipients}, MessageSubject | out-gridview
-
 Get-MessageTrackingLog -messageID "41A4321C3543314FFFFF23122F2BDB7ABD00342@rome-hub-01.woshub.com" -ResultSize unlimited –server rome-hub-01| Select-Object Timestamp,Sender, {$_.recipients}, MessageSubject
-
 (Get-MessageTrackingLog -EventID "RECEIVE" -Recipients "amorato@woshub.com" -ResultSize unlimited).Count
-
 Get-MessageTrackingLog -EventId "Receive" -Start (Get-Date).AddDays(-5) -ResultSize Unlimited | Where-Object {$_.Sender -like "*@gmail.com"} | Group-Object Sender | Sort-Object Count -Descending | Format-Table *
+
+
+Tools:
+
+https://phishtank.org/
+https://whois.domaintools.com/
+https://urlscan.io/
 
 
 References:
