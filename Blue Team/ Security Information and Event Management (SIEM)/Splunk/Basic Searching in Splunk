@@ -120,13 +120,32 @@ Search assistant also provides guidance to match parenthesis as you type.
 
 -- Search Time Range --
 
+Basic Syntax: 
+earliest=<time_modifier> 
+latest=<time_modifier>
 
+Relative Time Modifiers: [+|-]<integer><unit>@<snap_unit>
 
+Unit	Description
 
+s	= Seconds  
+m	= Minutes
+h	= Hours
+d	= Days
+w	= Weeks
+mon	= Months
+q	= Quarters
+y	= Years
 
+earliest=-15m: 15 minutes ago
+latest=now: Current time
+earliest=-1d@d: Start of yesterday
+earliest=-7d@d latest=@d: Last 7 full days
+earliest=-1w@w1: Start of last Monday
 
-
-
+earliest=-24h latest=now
+earliest=-24h@h latest=now
+earliest=09/03/2023:00:00:00 latest=09/04/2023:23:00:00
 
 
 
