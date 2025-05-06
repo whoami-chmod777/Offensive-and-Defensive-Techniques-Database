@@ -75,47 +75,47 @@ Get-MessageTrackingLog -Start "10/01/2024 00:00:00" -End "10/03/2024 23:59:59" -
 
 -- Common Parameters --
 
--Start
+• Start
 Start time for the search (required).
 -Start "10/03/2024 00:00:00"
 
--End
+• End
 End time for the search (required).
 -End "10/03/2024 23:59:59"
 
--Sender
+• Sender
 Specify the sender email address to filter logs.
 -Sender "user@example.com"
 
--Recipients
+• Recipients
 Specify the recipient email address to filter logs.
 -Recipients "recipient@example.com"
 
--MessageSubject
+• MessageSubject
 Search for a specific message subject.
 -MessageSubject "Invoice Due"
 
--EventId
+• EventId
 Filter by specific event types like RECEIVE, SEND, FAIL, or DELIVER.
 -EventId "RECEIVE"
 
--MessageId
+• MessageId
 Specify a message ID for tracking a particular message.
 -MessageId "<messageid@domain.com>"
 
--Server
+• Server
 Specify the Exchange server for searching logs.
 -Server "EXCHANGESERVER1"
 
--ResultSize
+• ResultSize
 Limit the number of results returned.
 -ResultSize 1000
 
--ClientIp
+• ClientIp
 Filter logs based on client IP address.
 -ClientIp "192.168.1.10"
 
--LogonType
+• LogonType
 Filter by logon type (Admin, Owner, Delegate).
 -LogonType "Admin"
 
