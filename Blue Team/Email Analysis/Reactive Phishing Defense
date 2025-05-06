@@ -6,31 +6,31 @@ Phishing attacks can strike at any time, so having a clear, reactive defense str
 
 Quick identification and response are vital.
 
-> Containment
+• Containment
 - Scope the Threat: Identify the extent of the phishing attack.
 - Quarantine and Block Sender Artifacts:
-	- Block email addresses, domains, and sender IPs.
-	- Block emails by subject or content.
+  → Block email addresses, domains, and sender IPs.
+  → Block emails by subject or content.
 - Block Web Artifacts: Stop emails with malicious URLs.
 - Block File Artifacts: Prevent malicious attachments by filename.
 
-> Eradication:
+• Eradication:
 - Remove Malicious Emails:
-	- Use content search and eDiscovery.
-	- Exchange delivery reports.
-	- PowerShell’s get-messagetrackinglog for email traces.
+- Use content search and eDiscovery.
+  → Exchange delivery reports.
+  → PowerShell’s get-messagetrackinglog for email traces.
 - Remove Malicious Files: Eradicate harmful attachments.
 - Abuse Form Submissions: Submit reports to services to blacklist phishing domains.
 - Credential Changes: Initiate password resets for impacted users.
 
-> Recovery
+• Recovery
 - Restore Systems: Recover compromised systems to a safe state.
 
-> Communication
+• Communication
 - Notify Affected Users: Ensure users are aware and taking action.
 - Update Stakeholders: Keep internal teams and leadership informed.
 
-> User Education
+• User Education
 - End-User Training: Continuous education to recognize and avoid phishing attempts.
 
 Proactive training and a reactive plan can significantly reduce the impact of phishing attacks.
@@ -77,47 +77,47 @@ Get-MessageTrackingLog -Start "10/01/2024 00:00:00" -End "10/03/2024 23:59:59" -
 
 • Start
 Start time for the search (required).
--Start "10/03/2024 00:00:00"
+  → Start "10/03/2024 00:00:00"
 
 • End
 End time for the search (required).
--End "10/03/2024 23:59:59"
+  → End "10/03/2024 23:59:59"
 
 • Sender
 Specify the sender email address to filter logs.
--Sender "user@example.com"
+  → Sender "user@example.com"
 
 • Recipients
 Specify the recipient email address to filter logs.
--Recipients "recipient@example.com"
+  → Recipients "recipient@example.com"
 
 • MessageSubject
 Search for a specific message subject.
--MessageSubject "Invoice Due"
+  → MessageSubject "Invoice Due"
 
 • EventId
 Filter by specific event types like RECEIVE, SEND, FAIL, or DELIVER.
--EventId "RECEIVE"
+  → EventId "RECEIVE"
 
 • MessageId
 Specify a message ID for tracking a particular message.
--MessageId "<messageid@domain.com>"
+  → MessageId "<messageid@domain.com>"
 
 • Server
 Specify the Exchange server for searching logs.
--Server "EXCHANGESERVER1"
+  → Server "EXCHANGESERVER1"
 
 • ResultSize
 Limit the number of results returned.
--ResultSize 1000
+  → ResultSize 1000
 
 • ClientIp
 Filter logs based on client IP address.
--ClientIp "192.168.1.10"
+  → ClientIp "192.168.1.10"
 
 • LogonType
 Filter by logon type (Admin, Owner, Delegate).
--LogonType "Admin"
+  → LogonType "Admin"
 
 
 -- Common EventId Values --
