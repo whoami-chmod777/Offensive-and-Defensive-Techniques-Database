@@ -164,7 +164,13 @@ Zoom to Selection
 ✓ Deselect
  ⭘ Cancel a selection.
 
-
+• Run the base search host01 OR host09 using a time range of 60mins.
+✓ Check that the legend defaults to 1 minute per column. Change time range to 24hrs and notice the change in the legend. Revert to 60mins.
+✓ Change the timeline view from Compact to Full and confirm taller bars and labels on axes. Revert to Compact.
+✓ Hide (disable) and re-enable the timeline.
+✓ Use the Zoom Out option to confirm time range changes to 1day and search is re-executed. Revert to 60mins.
+✓ Select a single bar and confirm results are filtered to that range. Use Deselect to revert.
+✓ Select a series of bars to make up 10mins and click Zoom to Selection. Confirm search is re-executed for selected time range.
 
 
 
