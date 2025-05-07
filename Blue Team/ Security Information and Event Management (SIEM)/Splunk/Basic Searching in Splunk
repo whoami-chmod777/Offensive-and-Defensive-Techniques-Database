@@ -140,6 +140,29 @@ earliest=-7d@d latest=@d: Last 7 full days
 earliest=-1w@w1: Start of last Monday
 
 
+-- Events Timeline --
+
+Formatting the timeline:
+✓ Hidden – hides the timeline
+✓ Views:
+   ⭘ Compact – No labels on axis.
+   ⭘ Full – taller timeline with labels on axis.
+
+Scale:
+ ⭘ Linear scale
+ ⭘ Log scale
+
+Zoom Options:
+Zoom Out
+ ✓ Increases the size of the time bin in the legend.
+ ⭘ Re-executes the search.
+Zoom to Selection
+ ⭘ Select a few bars and click “zoom to selection” to zoom in.
+ ⭘ Decreases the size of the bin.
+ ⭘ Re-executes the search.
+
+✓ Deselect
+ ⭘ Cancel a selection.
 
 
 
