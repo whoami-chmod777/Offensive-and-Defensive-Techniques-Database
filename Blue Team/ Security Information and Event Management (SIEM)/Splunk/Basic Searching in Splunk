@@ -7,6 +7,7 @@
 • Search Assistant
 • Identify Contents of Search Results
 • Search Time Range
+• Manage Search Jobs
 
 
 -- Search with Keywords and Phrases --
@@ -173,20 +174,87 @@ Zoom to Selection
 ✓ Select a series of bars to make up 10mins and click Zoom to Selection. Confirm search is re-executed for selected time range.
 
 
+-- Manage Search Jobs --
+
+- Search Action -
+
+Every search you run is a job and generates a Job ID
+
+Job Menu:
+✓ Change job settings
+✓ Send job to background
+✓ Inspect job
+✓ Delete Job
+
+Pause/Resume Job:
+✓ Pause a job while it’s running and resume to finalize
+
+Stop Job:
+✓ Will generate partial results.
+
+Share Job:
+✓ Provides a link to bookmark or copy/share job.
+✓ Extend retention of results to 7 days from default of 10mins.
+✓ Give read permissions to everyone.
+
+Export Job:
+✓ Export Search results as Raw Events (text file), CSV, XML, JSON.
+✓ After using a transforming command, you no longer have Raw Events. Only CSV, XML, JSON available.
+
+Print Job:
+✓ Print results or save as PDF.
+
+- Job Settings -
+
+✓ Permissions:
+○ By default, only owner can view the job (Private).
+○ When you share job link as in previous slide, read access is provided to everyone.
+
+✓ Lifetime:
+○ Default job lifetime is 10mins
+○ When you share job link as in previous slide, lifetime is automatically extended to 7 days
+○ To keep results longer, save job as a report
+
+- Access Saved Jobs -
+
+✓ Activity -> Jobs
+✓ Show jobs run within last 10mins (default)
+✓ Shows jobs with lifetime extended to 7 days
+✓ To view jobs results, click on job link
+
+• Run the base search host01 OR host09 using a time range of last 7 days.
+
+✓ Stop the job while it’s still running and check that partial results are generated.
+  ✓ Run the job again and pause the job while it’s still running. Resume the job and wait for completion.
+  ✓ Check the default job settings to confirm the following:
+    o Permissions – private
+    o Lifetime – 10mins.
+  
+✓ Share the job and note the following:
+    o Permissions – everyone.
+    o Lifetime – 7 days.
+    o Double-check these new settings on the job menu.
+  
+✓ Copy the job link and use it on a new browser tab to access the job.
+  ✓ Check how long the job ran using the inspect option in the job menu.
+  ✓ Save the job as PDF.
+  ✓ Export the job as raw events and CSV.
+  ✓ Access the saved job through the activity menu and click on the job link to view details.
 
 
 
+-- Search History --
 
+• Contains a list of most recently run ad-hoc searches.
+• Use filter to find specific previously run searches.
+• By default, contains 20 searches per page.
+• Use time filter to set the time range.
+• Use “Add to Search” to run a previously run search.
 
-
-
-
-
-
-
-
-
-
+- View Search History -
+• Access your search history.
+• Use your filter to find searches containing the term host. Set time filter to today.
+• Find and rerun the base search (host01 OR host09)
 
 
 
