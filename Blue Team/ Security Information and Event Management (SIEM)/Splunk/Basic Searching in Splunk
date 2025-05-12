@@ -7,20 +7,24 @@
 • Search Assistant
 • Identify Contents of Search Results
 • Search Time Range
+• Events Timeline
 • Manage Search Jobs
+• Search History
 
 
 -- Search with Keywords and Phrases --
 
-Search events that match the following keywords. Check which index(es) these events belong to
+Use keywords and phrases to retrieve matched events from the index:
+✓ Match is performed against raw events in the _raw field
+✓ To search matching phrases, use double-quotes, e.g., "user ubuntu"
 
+Search events that match the following keywords. Check which index(es) these events belong to
 • invalid
 • amanda
 • Macintosh
 • telco01
 
 Search events that match quoted phrases for all time. Check which index(es) these events belong to
-
 • "user ubuntu"
 • "failed password"
 • "like gecko"
@@ -64,33 +68,31 @@ Search events that match the following terms with Boolean operators for all time
 
 -- Search Assistant --
 
-The Search Assistant helps with writing searches by providing selections to complete search strings.
-
+The Search Assistant helps with writing searches by providing selections to complete search strings
 • Matching terms in indexed Data.
 • Matching searches based on recent search history.
 • Shows list of commands after first pipe (|).
 
-Search assistant also provides guidance to match parenthesis as you type.
-
+Search assistant also provides guidance to match parenthesis as you type
 • Inner Parenthesis > user amanda ( (www1 OR (www2 invalid)) ) >> (www2 invalid)
 • Outer Parenthesis > user amanda ( (www1 OR (www2 invalid)) ) >> ( (xxx OR (www2 invalid)) )
 
-• Verify that the default search assistant mode is Compact.
+• Verify that the default search assistant mode is Compact
 • Type the following keywords on the search bar to verify search assistant:
-  ✓ Use – check for matching terms in indexed data.
-  ✓ (www1 – Check for matching searches run recently.
-    o Select a recent search with parenthesis. Verify matching start parenthesis.
-  ✓ telco01 | - check for commands after the pipe.
-    o Mouse over a command to get information.
-• Change the search assistant mode to Full and verify that count of terms for search above.
-• Use the Auto Open option to toggle Full mode.
-• Disable search assistant and verify that they’re no selections provided for searches.
+  ✓ Use – check for matching terms in indexed data
+  ✓ (www1 – Check for matching searches run recently
+    o Select a recent search with parenthesis. Verify matching start parenthesis
+  ✓ telco01 | - check for commands after the pipe
+    o Mouse over a command to get information
+• Change the search assistant mode to Full and verify that count of terms for search above
+• Use the Auto Open option to toggle Full mode
+• Disable search assistant and verify that they’re no selections provided for searches
 
 
 -- Identify Contents of Search Results --
 
-• Each event contains a timestamp extracted at index time.
-• Search results are displayed in reverse chronological order by timestamp.
+• Each event contains a timestamp extracted at index time
+• Search results are displayed in reverse chronological order by timestamp
 
 • Splunk also extracts metadata fields at index time:
   ✓ host
@@ -121,13 +123,38 @@ Search assistant also provides guidance to match parenthesis as you type.
 
 -- Search Time Range --
 
-• Run the base search host01 OR host09.
-• Use time picker options presets, relative, real-time, date range, data & time range , advanced.
-• Use the following absolute and relative time ranges in advanced option of time picker and search bar.
-  ✓ earliest=-24h latest=now
-  ✓ earliest=-24h@h latest=now
-  ✓ earliest=-7d@d latest=@d
-  ✓ earliest=09/03/2023:00:00:00 latest=09/04/2023:23:00:00
+Time Picker:
+Use the Time Range Picker to specify the time range of your search:
+✓ Presets specify exact time ranges to use.
+✓ Default time picker selection is Last 24 hours.
+✓ You can also specify custom time ranges.
+
+Time Modifiers:
+• Use time modifiers to specify absolute and relative time ranges.
+
+• Options for specifying modifiers include:
+✓ earliest=<time_modifier>
+✓ latest=<time_modifier>
+
+• Time modifiers can be used in:
+✓ Advanced section of Time Range Picker
+✓ Search string
+○ Overwrites the Time Range Picker value.
+
+• Relative Time Examples:
+✓ earliest=-24h latest=now
+✓ earliest=-24h@h latest=now
+
+• Absolute Time Example:
+✓ earliest=09/03/2023:00:00:00 latest=09/04/2023:23:00:00
+
+Time Range Abbreviations:
+Time unit abbreviations include:
+✓ s = seconds, m = minutes, h = hours, d = days, w = weeks, mon = months, y = years
+✓ Use the @ symbol to “snap” time to a specified unit.
+  ○ Snapping always rounds down to the nearest time unit specified.
+    ➤ If current time is 10:42:07, -4h@h looks back to 06:00:00.
+    ➤ If current time is 15:38:12, -30m@h looks back to 15:00:00.
 
 Basic Syntax: earliest=<time_modifier> and latest=<time_modifier>
 Relative Time Modifiers: [+|-]<integer><unit>@<snap_unit>
@@ -140,8 +167,20 @@ earliest=-1d@d: Start of yesterday
 earliest=-7d@d latest=@d: Last 7 full days
 earliest=-1w@w1: Start of last Monday
 
+• Run the base search host01 OR host09.
+• Use time picker options presets, relative, real-time, date range, data & time range , advanced.
+• Use the following absolute and relative time ranges in advanced option of time picker and search bar.
+  ✓ earliest=-24h latest=now
+  ✓ earliest=-24h@h latest=now
+  ✓ earliest=-7d@d latest=@d
+  ✓ earliest=09/03/2023:00:00:00 latest=09/04/2023:23:00:00
+
 
 -- Events Timeline --
+
+• Shows distribution of events over time for selected time range
+• Bin size (scale) of the timeline is shown on the legend
+• Formatting the timeline:
 
 Formatting the timeline:
 ✓ Hidden – hides the timeline
@@ -164,6 +203,12 @@ Zoom to Selection
 
 ✓ Deselect
  ⭘ Cancel a selection.
+
+Filtering Events:
+• Point mouse at a bar to get details of count and time range.
+• Click on a bar to filter results to the corresponding time period.
+• Select a series of bars to filter search results without re-executing the search.
+  ✓ To re-execute the search for the selected time range, click “Zoom to selection”.
 
 • Run the base search host01 OR host09 using a time range of 60mins.
 ✓ Check that the legend defaults to 1 minute per column. Change time range to 24hrs and notice the change in the legend. Revert to 60mins.
