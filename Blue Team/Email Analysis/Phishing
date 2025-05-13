@@ -28,29 +28,14 @@ How Phishing Works :
 
 -- Phishing Attack Types --
 
-1. Information Gathering
-Collecting data through reconnaissance to verify accounts and craft credible phishing attempts.
-
-2. Credential Harvesting
-Obtain login credentials from victims
-
-3. Malware Delivery
-Delivering malware via malicious attachments, links, or drive-by downloads.
-
-4. Vishing, SMiShing, and Quishing
-Attempting to obtain information through phone calls, SMS with malicious URLs, or QR codes leading to malicious sites.
-
-5. Business Email Compromise (BEC):
-Compromising legitimate email accounts for unauthorized wire transfers or invoice scams.
-
-6. Spam
-Unsolicited and irrelevant emails, typically not malicious but a nuisance.
-
-7. Spear Phishing
-Targeted, customized attacks aimed at specific individuals or organizations using detailed research.
-
-8. Whaling
-Phishing targeting high-profile individuals, such as CEOs or executives.
+1. Information Gathering: Collecting data through reconnaissance to verify accounts and craft credible phishing attempts.
+2. Credential Harvesting: Obtain login credentials from victims
+3. Malware Delivery: Delivering malware via malicious attachments, links, or drive-by downloads.
+4. Vishing, SMiShing, and Quishing: Attempting to obtain information through phone calls, SMS with malicious URLs, or QR codes leading to malicious sites.
+5. Business Email Compromise (BEC): Compromising legitimate email accounts for unauthorized wire transfers or invoice scams.
+6. Spam: Unsolicited and irrelevant emails, typically not malicious but a nuisance.
+7. Spear Phishing: Targeted, customized attacks aimed at specific individuals or organizations using detailed research.
+8. Whaling: Phishing targeting high-profile individuals, such as CEOs or executives.
 
 
 -- Phishing Attack Techniques --
