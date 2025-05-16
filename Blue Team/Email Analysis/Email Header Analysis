@@ -67,6 +67,86 @@ Receiving bounced emails, also known as "bounce-back emails" or "Non-Delivery Re
 
 The bounce-back message usually contains a reason for the failure, which helps identify the cause. If you are receiving these emails, it means that messages you sent could not be delivered to their intended recipients.
 
+- Key Hints for Identifying Bounced Emails (Header & Body Clues) -
+
+1. Common Subject Lines. Bounce messages usually have subjects like
+
+• "Undeliverable:"
+• "Returned mail:"
+• "Delivery Status Notification (Failure)"
+• "Mail delivery failed:"
+• "Message not delivered"
+• "failure notice"
+
+2. Return-Path / MAILER-DAEMON. Check the Return-Path or From address:
+
+Return-Path: <mailer-daemon@domain.com>
+Return-Path: <>
+From: Mail Delivery Subsystem <mailer-daemon@googlemail.com>
+
+If Return-Path is empty (<>), it's often a bounce message.
+
+3. Message Type & MIME. Bounced emails are often of type:
+
+Content-Type: multipart/report; report-type=delivery-status;
+
+This explicitly indicates a delivery status report.
+
+4. Headers: DSN Fields (Delivery Status Notification). Look for these in the headers or the message body:
+
+Action: failed
+Status: 5.1.1  (User unknown)
+Diagnostic-Code: smtp; 550 5.1.1 <user@domain.com>... User unknown
+
+Key fields:
+Action: – Should say failed
+Status: – SMTP status codes (see below)
+Diagnostic-Code: – Human-readable SMTP failure explanation
+
+5. SMTP Status Codes. Bounce messages include SMTP status codes like:
+
+Code	   Meaning
+4.x.x	   Temporary failure (soft bounce)
+5.x.x	   Permanent failure (hard bounce)
+5.1.1	   User unknown
+5.2.2	   Mailbox full
+5.4.4	   Unable to route
+5.7.1	   Blocked by policy or spam filter
+
+6. Header Fields That Suggest a Bounce. Look for these fields in the header:
+
+X-Failed-Recipients: user@domain.com
+Final-Recipient: rfc822; user@domain.com
+Original-Recipient: rfc822; user@domain.com
+
+7. X-Header Fields (Optional). Sometimes added by MTAs:
+
+X-Mailer: Mail Delivery Subsystem
+X-Failed-Recipients: user@domain.com
+X-Mailgun-Sending-Ip: ...
+
+8. Tools You Can Use grep through .eml or logs:
+
+grep -ri "Action: failed" *.eml
+grep -ri "Status: 5" *.eml
+grep -ri "mailer-daemon" *.eml
+
+Example (see Return-Path: <01010186faff12b2-5bcaa145-861b-45da-a06e-b5c1ee3ca941-000000@email.dropbox.com>)
+
+Extracted Headers:
+===============================
+Return-Path: <01010186faff12b2-5bcaa145-861b-45da-a06e-b5c1ee3ca941-000000@email.dropbox.com>
+Authentication-Results: mx.google.com;
+    dkim=pass header.i=@dropbox.com header.s=b55ck4krgdjxhl3qlcrbmzyg4d26eak header.b=I7MrJlfM;
+    dkim=pass header.i=@amazonses.com header.s=7v7vs6w47njt4pimodk5mmttebgzsi6n header.b=Ufi0ec1;
+    spf=pass (google.com: domain of 01010186faff12b2-5bcaa145-861b-45da-a06e-b5c1ee3ca941-000000@email.dropbox.com designates 54.240.60.143 as permitted sender) smtp.mailfrom=01010186faff12b2-5bcaa145-861b-45da-a06e-b5c1ee3ca941-000000@email.dropbox.com;
+    dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=dropbox.com
+From: Dropbox <no-reply@dropbox.com>
+To: emily.nguyen@gbllogistics.com
+Subject: Reset your Dropbox password
+Date: Sun, 12 May 2024 04:12:50 +0000
+Message-ID: <01010186faff12b2-5bcaa145-861b-45da-a06e-b5c1ee3ca941-000000@us-west-2.amazonses.com>
+
 
 
 -- SPF (Sender Policy Framework --
