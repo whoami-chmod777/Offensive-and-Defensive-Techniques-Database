@@ -55,6 +55,7 @@ Risk Factors with Email Attachments:
 The emldump.py script is a Python tool typically used for parsing and analyzing .eml files (email messages) to extract useful data, such as email headers, attachments, and the body content. It can be used for email forensic analysis, extracting key indicators of compromise (IOCs) and other useful information that can assist in threat detection.
 
 $ emldump.py sample.eml
+$ emldump.py sample.eml -d > quotation.iso (index number of the attachment file)
 $ emldump.py sample.eml -s 4 -d > quotation.iso
 
 
