@@ -64,6 +64,8 @@ sudo tcpdump -i enp0s3 -n -w /path/filename
 
 Read from a CaptureFile:
 sudo tcpdump -i enp0s3 -n -r /path/filename
+sudo tcpdump -i enp0s3 -n -r /path/filename.pcap icmp
+sudo tcpdump -i enp0s3 -n -r /path/filename.pcap tcp
 
 
 -- Useful tcpdump command examples --
