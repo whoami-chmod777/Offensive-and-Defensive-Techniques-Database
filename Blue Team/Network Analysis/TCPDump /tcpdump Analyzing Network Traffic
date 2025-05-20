@@ -23,8 +23,8 @@ tcpdump -tt -r capture.pcap port 80
 tcpdump -tt -r capture.pcap port 80 and host 10.0.0.168
 tcpdump -tt -r capture.pcap port 80 and host 10.0.0.168 | grep -E "GET|POST"
 
-tcpdump -tt -r capture.pcap | grep "audio.exe"
-tcpdump -tt -r capture.pcap -A | grep "audio.exe" -A 500 | less
+tcpdump -tt -r capture.pcap | grep "audiodg.exe"
+tcpdump -tt -r capture.pcap -A | grep "audiodg.exe" -A 500 | less
 
 
 -- tcpdump Analysis Step-by-Step Example --
