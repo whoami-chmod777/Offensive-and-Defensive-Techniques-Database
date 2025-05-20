@@ -1,7 +1,6 @@
 
 --- Using Fields in Searches ---
 
-• Module Overview
 • What are Fields
 • Using the Fields Sidebar
 • Using Fields in Searches
@@ -12,12 +11,35 @@
 • Search Best Practices
 
 
--- Module Overview --
-
-
-
 -- What are Fields --
 
+• Fields are searchable name/value pairs in your event data.
+• Searches using fields are more efficient than searches using keywords or quoted phrases.
+• Fields can be extracted from data at index time and at search time.
+  ✓ Index-time Extractions:
+    ○ Metadata fields: host, source, sourcetype, index.
+    ○ Internal fields: _time, _raw, etc.
+    ○ Custom fields.
+  ✓ Search-time Extractions:
+    ○ Field Discovery
+      ➤ Automatically discover fields based on sourcetype and name/value pairs in your data.
+      ➤ Enabled by default.
+    ○ Custom Fields.
+    ○ Ad-hoc Search.
+
+• Most data vendors have documentation for field name/value mappings that can be used to define extractions in Splunk.
+
+• Run the query index=web sourcetype=access_combined for All time.
+• Identify metadata fields host, source, sourcetype, index and internal fields _time, _raw.
+• Change search mode to Fast to disable field discovery. Revert to re-enable field discovery.
+• Identify data-specific fields for clientip, categoryId, status.
+
+index=main sourcetype=eventgen nodeName=host05
+index=main sourcetype=eventgen partner=Telco04 calleeNumber=5500*
+index=main sourcetype=eventgen (nodeName=host05 OR nodeName=host07) responseCode>200 deviceMAC="*33:9f:dl:ed:66:20*"
+
+index=web sourcetype=access_combined
+| table _time _raw
 
 
 -- Using the Fields Sidebar --
