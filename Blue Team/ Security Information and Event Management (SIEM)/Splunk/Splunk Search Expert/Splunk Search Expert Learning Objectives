@@ -1,0 +1,60 @@
+
+--- Splunk Search Expert Learning Objectives ---
+
+Intro to Splunk
+ • Splunk components
+ • Basic Splunk functions
+ • Using Splunk
+ • Define Splunk apps
+ • Understand Splunk user roles
+ • Search & Reporting app
+ • Splunk Web interface
+
+Using Search
+ • Run basic searches
+ • Set the time range of a search
+ • Save search results
+ • Identify the contents of search results
+ • Work with events
+ • Share search jobs
+ • Export search results
+ • Select search modes
+ • Control a search job
+
+Exploring Events
+ • Refine searches
+ • Understand timestamps
+ • Use the events tab to add and remove terms from a search
+
+Search Processing Language
+ • Use wildcards to search for multiple terms
+ • Understand case sensitivity in searches
+ • Use booleans to include and exclude search criteria
+ • Use special characters with search terms
+
+What are Commands?
+ • Understand the anatomy of Splunk's search language:
+   - Search terms
+   - Commands
+   - Functions
+   - Arguments
+   - Clauses
+ • Understand best practices for writing searches
+
+What are Knowledge Objects?
+ • Identify the five categories of knowledge objects:
+   - Data interpretation
+   - Data classification
+   - Data Enrichment
+   - Data Normalization
+   - Data Models
+ • Understand types of knowledge objects
+
+Creating Reports and Dashboards
+ • Save a search as a report
+ • Edit reports
+ • Use transforming commands to create visualizations
+ • Create a dashboard
+ • Add a report to a dashboard
+ • Edit a dashboard
+
