@@ -44,6 +44,49 @@ index=web sourcetype=access_combined
 
 -- Using the Fields Sidebar --
 
+• Fields sidebar displays fields discovered in your events.
+• Field Groupings:
+  ✔ Selected Fields:
+    ○ host, source, sourcetype by default.
+    ○ Can be configured to add/remove fields.
+    ○ Listed under every event.
+  ✔ Interesting Fields:
+    ○ Fields that appear in at least 20% of events.
+    ○ Can make interesting field a selected field and vice versa.
+  ✔ All Fields:
+    ○ Use this to see all fields in events.
+    ○ Will also include fields that appear in <20% of events.
+  ✔ Field Characteristics:
+    ○ # - Numeric fields.
+    ○ a - Alphanumeric field.
+    ○ Count of unique values.
+
+• To make any field a selected field:
+  ✔ Click on “All Fields”.
+  ✔ Click the checkbox to the left of the field you want.
+  ✔ Field will now show up in Selected Fields list.
+
+• Click on a field name on the fields sidebar to open the fields window.
+• The field window shows:
+  ✔ Top 10 values of the field by count and percentage.
+  ✔ Reports:
+    ○ Top values – stats and visualization of top 20 values.
+    ○ Top values by time – timechart of top values.
+    ○ Rare values – stats and visualization of bottom 20 values.
+    ○ Events with field – all events containing this field.
+• If field is an interesting field, click “Yes” to make it a selected field.
+
+• Run the query “index=web sourcetype=access_combined” for All time.
+  ✔ Identify selected fields and confirm they show up under each event.
+  ✔ Change JSESSIONID field from an interesting to a selected field.
+  ✔ Revert JSESSIONID to an interesting field. Make it a selected field using the “All Fields” option.
+  ✔ Identify numeric and alphanumeric fields on the fields sidebar.
+  ✔ Check how many unique values are part of the JSESSIONID field.
+  ✔ Click on the productid field to check top 10 values. Open each report associated with this field.
+  ✔ Click on the numeric field status and confirm/verify the following 3 additional reports:
+    ○ Average over time.
+    ○ Maximum value over time.
+    ○ Minimum value over time.
 
 
 -- Using Fields in Searches --
