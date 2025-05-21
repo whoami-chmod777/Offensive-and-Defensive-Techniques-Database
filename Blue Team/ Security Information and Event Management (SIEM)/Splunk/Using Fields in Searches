@@ -34,6 +34,8 @@
 • Change search mode to Fast to disable field discovery. Revert to re-enable field discovery.
 • Identify data-specific fields for clientip, categoryId, status.
 
+- Commands -
+
 index=main sourcetype=eventgen nodeName=host05
 index=main sourcetype=eventgen partner=Telco04 calleeNumber=5500*
 index=main sourcetype=eventgen (nodeName=host05 OR nodeName=host07) responseCode>200 deviceMAC="*33:9f:dl:ed:66:20*"
@@ -87,6 +89,19 @@ index=web sourcetype=access_combined
     ○ Average over time.
     ○ Maximum value over time.
     ○ Minimum value over time.
+
+- Commands -
+
+index=web sourcetype=access_combined| top limit=20 productId
+index=web sourcetype=access_combined| rare limit=20 productId
+index=web sourcetype=access_combined| timechart count by productId limit=10
+
+index=web sourcetype=access_combined productId="*"
+index=web sourcetype=access_combined productId="*"| timechart avg(status)
+
+index=web sourcetype=access_combined| timechart max(status)
+index=web sourcetype=access_combined| timechart min(status)
+
 
 
 -- Using Fields in Searches --
