@@ -103,9 +103,57 @@ index=web sourcetype=access_combined| timechart max(status)
 index=web sourcetype=access_combined| timechart min(status)
 
 
-
 -- Using Fields in Searches --
 
+Search syntax is: <field_name> = <field_value>
+
+• Using fields to search is more efficient than using keywords and quoted strings.
+• Use quotation marks for field names with spaces.
+• Case Sensitivity:
+  ✔ Field names are case sensitive
+  ✔ Field values are NOT case sensitive
+• You can use wildcards with fields.
+• Splunk understands CIDR notation for IP addresses.
+• You can use Boolean Operators: AND, OR, NOT with fields.
+• You can use comparison operators: =, !=, >, <, >=, <=
+
+- Using Wildcards -
+
+• Wildcards match an unlimited number of characters in a field value.
+• Wildcards can be used at the start, middle, or end of a value.
+
+❌ Avoid wildcards at the beginning – this can hurt performance.
+❌ Avoid wildcards in the middle – this may cause inconsistent results.
+
+- CIDR Format for IP Fields -
+
+• Specify network IP and subnet mask: userIPAddress="192.168.180.0/24"
+• Splunk will search all events with IPs in the specified subnet.
+
+Case Sensitivity Examples:
+
+index=web action=addtocart         ✅
+index=web ACTION=addtocart         ❌  (not the same)
+index=web action=addtocart         ✅
+index=web action=ADDTOCART         ✅  (value case-insensitive)
+
+Wildcard & IP Examples:
+
+index=web action=addtocart JSESSIONID=SD2*
+index=web userIPAddress="192.168.104.0/24"
+index=web userIPAddress="192.168.104.*
+
+Combining Operators Example: index=main sourcetype="eventgen" (nodeName=host05 OR nodeName=host07) NOT partner=Telco04
+Comparison Operator Example: index=web status=200 action=purchase
+
+• Run the query “index=main sourcetype=eventgen partner=telco04” for last 60 mins.
+  ✓ To verify case sensitivity, search with:
+    o PARTNER=telco04 – Notice no results generated. Why?
+    o partner=TELCO04 – Notice results generated. Why?
+  ✓ Using a wildcard, find all caller Numbers starting with 710 and all response Codes starting with 4.
+  ✓ Narrow the search down to all /24 IP addresses starting with 192.168.143 using:
+    o Wildcard
+    o CIDR notation
 
 
 -- Boolean Operators --
