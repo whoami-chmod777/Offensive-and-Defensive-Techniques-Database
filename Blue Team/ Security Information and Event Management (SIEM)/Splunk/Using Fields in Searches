@@ -172,19 +172,24 @@ Comparison Operator Example: index=web status=200 action=purchase
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 -- Comparison Operators --
+
+• Comparison or relational operators are used to link key/value pairs.
+• We’ve already seen how to use “=“ operator with fields.
+• Other comparison operators include:
+
+Operator	Meaning
+!=	      Not Equal
+>	        Greater Than
+<	        Less Than
+>=	      Greater Than or Equal To
+<=	      Less Than or Equal To
+
+• Run the query index=web sourcetype=access_combined for last All time.
+✔ Retrieve only events from Webserv1 and Webserv2.
+✔ Events having number of bytes greater than or equal to 3000.
+✔ Exclude events with action field value of remove.
+✔ Events with status greater then 200 and less than 500.
 
 
 
