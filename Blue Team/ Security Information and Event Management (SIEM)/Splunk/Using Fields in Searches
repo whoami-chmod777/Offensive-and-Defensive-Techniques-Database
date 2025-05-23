@@ -158,6 +158,30 @@ Comparison Operator Example: index=web status=200 action=purchase
 
 -- Boolean Operators --
 
+• Supported Boolean Operators: AND, OR, NOT.
+• AND operator is implied.
+• Boolean operators are always in uppercase.
+• Boolean operators help to:
+  ✓ Narrow down searches specifically to what you want.
+  ✓ Improves performance.
+
+• Run the query “index=web sourcetype=access_combined” for last All time.
+  ✓ Retrieve only events from Webserv1 and Webserv2.
+  ✓ Exclude events that have action field value equal remove.
+  ✓ Insert the AND operator in the query and verify results are the same.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 -- Comparison Operators --
