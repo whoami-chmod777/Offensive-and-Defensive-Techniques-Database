@@ -1,2 +1,22 @@
 
 --- Search Language Fundamentals ---
+
+• Search Language Components, Syntax and Pipeline
+• Search Pipeline Readability
+• fields Command
+• table and rename Commands
+• sort Command
+• dedup Command
+
+
+-- Search Language Components, Syntax and Pipeline --
+
+-- Search Pipeline Readability --
+
+-- fields Command --
+
+-- table and rename Commands --
+
+-- sort Command --
+
+-- dedup Command --
