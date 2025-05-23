@@ -171,7 +171,6 @@ Comparison Operator Example: index=web status=200 action=purchase
   ✓ Insert the AND operator in the query and verify results are the same.
 
 
-
 -- Comparison Operators --
 
 • Comparison or relational operators are used to link key/value pairs.
@@ -192,15 +191,71 @@ Operator	Meaning
 ✔ Events with status greater then 200 and less than 500.
 
 
-
 -- Difference between != and NOT --
 
+• Both operators can be used to exclude events from your search.
+• In practice, they can produce different results. Example:
+  ✔ NOT will search:
+    ○ All events where action field exists, and value is different from remove.
+    ○ All events where action field does not exist.
+  ✔ != will only search
+    ○ All events where action field exists, and value is different from remove.
+  ✔ Will produce the same results if action field exists in all events.
+
+• Run the query “index=web sourcetype=access_combined” for All time.
+  ✔ Get the count of events where action field value is different from remove, using NOT Boolean operator.
+  ✔ Get count of events where action field value is different from remove using != relational operator.
+  ✔ Verify that the counts are different. Why?
 
 
 -- Search Modes -- 
 
+✓ Fast Mode:
+  ○ Best performance, speed over completeness.
+  ○ Field discovery disabled.
+  ○ No event list when using transforming commands.
+
+✓ Smart Mode (Default):
+  ○ Balances speed and completeness.
+  ○ Field discovery is enabled.
+  ○ Behaves like Fast Mode when using transforming commands.
+
+✓ Verbose Mode:
+  ○ More data, least performance, completeness over speed.
+  ○ Field discovery is enabled.
+  ○ Shows event list when using transforming commands.
+
+• Run the query "index=main sourcetype=eventgen" for last 24 hrs.
+  ✓ Check fields sidebar for each mode to confirm field discovery is disabled in fast mode but enabled in smart and verbose mode.
+  ✓ Inspect the search to confirm fast mode is the most performant and verbose least performant.
+  ✓ Add the transforming command | stats count
+    ○ Check that there’s no event list for fast and smart modes.
 
 
 -- Search Best Practices --
 
+• Specify indexes at the beginning of search string.
+  ✓ Can search without indexes but it’s more efficient when you specify them.
+    ○ Examples:
+      - index=main
+      - (index=web OR index=security)
+
+• Avoid using wildcards the beginning or in the middle of your search string.
+  ✓ Beginning of a string – *fail, *word
+    ○ Search will look at EVERY string, i.e., scans all events.
+    ○ Can cause performance issues.
+  ✓ Middle of a string – p*word, http*buttercupgames.com
+    ○ Might cause inconsistent results especially in strings containing punctuation.
+  ✓ Use OR instead of wildcards when possible.
+    ○ (process=su OR process=sudo) instead of process=su*
+
+• It is better to use inclusion than exclusion.
+  ✓ Inclusion: action=addtocart
+  ✓ Exclusion: NOT action=addtocart
+
+• Include as many search terms as possible to narrow down your results.
+• Specify time to narrow down the results of your search. This is the most efficient filter.
+• Use filters as early as possible in your search.
+• Make your search terms as specific as possible.
+  ✓ Search for "Jean Claude" instead of "Jean".
 
