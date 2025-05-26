@@ -84,7 +84,8 @@ index=main sourcetype=eventgen (nodeName=host01 OR nodeName=host02) NOT partner=
    
 index=main sourcetype=eventgen (nodeName=host01 OR nodeName=host02) NOT partner=Telco07
 | eval CallResult=if(responseCode==200, "Success", "Failure")
-| top limit=0 CallResult| rename CallResult AS finalResult
+| top limit=0 CallResult
+| rename CallResult AS finalResult
 
 
 
