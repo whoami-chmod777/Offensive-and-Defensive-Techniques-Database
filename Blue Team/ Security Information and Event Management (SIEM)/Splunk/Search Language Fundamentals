@@ -81,9 +81,10 @@ index=main sourcetype=eventgen (nodeName=host01 OR nodeName=host02) NOT partner=
   ✓ Activate search auto-format and then add | eval to the search. Notice that the pipe (|) moves to the next line.
   ✓ Activate line numbers and remove and add | eval again. Notice pipe(|) moves to next line but a line number is also added.
   ✓ Complete the search as below and verify the syntax coloring:
-    index=main sourcetype=eventgen (nodeName=host01 OR nodeName=host02) NOT partner=Telco07
-    | eval CallResult=if(responseCode==200, "Success", "Failure")
-    | top limit=0 CallResult| rename CallResult AS finalResult
+   
+index=main sourcetype=eventgen (nodeName=host01 OR nodeName=host02) NOT partner=Telco07
+| eval CallResult=if(responseCode==200, "Success", "Failure")
+| top limit=0 CallResult| rename CallResult AS finalResult
 
 
 
