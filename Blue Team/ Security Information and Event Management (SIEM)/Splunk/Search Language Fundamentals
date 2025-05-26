@@ -35,12 +35,55 @@
 
 -- Search Pipeline Readability --
 
+• Change the search bar theme – Preferences → SPL Editor → Themes:
+  ✓ Light Theme
+    ○ Default theme.
+    ○ Provides syntax coloring on white background.
+  ✓ Dark Theme
+    ○ Provides syntax coloring on dark background.
+  ✓ Black on White
+    ○ Disables syntax coloring.
+    ○ Uses back font in white background.
+
+• Activate Search Auto-Format:
+  ✓ When enabled, each pipe character appears on a separate line.
+  ✓ This improves readability.
+
+• Add Line Numbers:
+  ✓ Line numbers will show next to each line in the search pipeline.
 
 
+index=main sourcetype=eventgen (nodeName=host01 OR nodeName=host02) NOT partner=Telco07
+| eval callResult=if(responseCode==200, "Success", "Failure")
+| top limit=0 callResult
+| rename callResult AS finalResult
+
+• Commands are in Blue:
+✓ eval
+✓ top
+✓ rename
+
+• Functions are in Purple:
+✓ if
+✓ count
+
+• Boolean Operators and Clauses (command modifiers) are in Orange:
+✓ AND, OR, NOT
+✓ BY, AS
+
+• Command arguments are in Green:
+✓ limit
+✓ span
 
 
-
-
+• Run the query “index=main sourcetype=eventgen (nodeName=host01 OR nodeName=host02) NOT partner=Telco07” for last 60 mins.
+  ✓ Change the search bar theme from default to light, Dark, Black on While and check the behavior.
+  ✓ Activate search auto-format and then add | eval to the search. Notice that the pipe (|) moves to the next line.
+  ✓ Activate line numbers and remove and add | eval again. Notice pipe(|) moves to next line but a line number is also added.
+  ✓ Complete the search as below and verify the syntax coloring:
+    index=main sourcetype=eventgen (nodeName=host01 OR nodeName=host02) NOT partner=Telco07
+    | eval CallResult=if(responseCode==200, "Success", "Failure")
+    | top limit=0 CallResult| rename CallResult AS finalResult
 
 
 
