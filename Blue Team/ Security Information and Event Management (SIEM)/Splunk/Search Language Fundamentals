@@ -11,7 +11,44 @@
 
 -- Search Language Components, Syntax and Pipeline --
 
+• Apply Search Terms to retrieve data from the index(s).
+  ✓ Keywords, phrases, wildcards, Booleans, etc.
+
+• Apply commands to events retrieved by Search Terms:
+  ✓ Commands
+    ○ Specifies what to do with results retrieved.
+    ○ Calculate statistics, generate charts, evaluate new fields, etc.
+  ✓ Functions
+    ○ Defines how to perform a task required by the command.
+    ○ Function Arguments provide the variables needed for the function to work.
+  ✓ Arguments
+    ○ Variables needed for the command to work.
+    ○ Example: Command argument can limit the number of results.
+  ✓ Clauses
+    ○ Group or rename fields in your results.
+
+• A series of commands can be applied to data retrieved from the index:
+  ✓ Commands separated by pipe (|) character.
+  ✓ Next command applied to intermediate results by previous command.
+  ✓ This is known as the Search Pipeline.
+
+
 -- Search Pipeline Readability --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 -- fields Command --
 
