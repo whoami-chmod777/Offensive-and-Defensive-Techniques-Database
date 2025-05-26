@@ -52,7 +52,6 @@
 • Add Line Numbers:
   ✓ Line numbers will show next to each line in the search pipeline.
 
-
 index=main sourcetype=eventgen (nodeName=host01 OR nodeName=host02) NOT partner=Telco07
 | eval callResult=if(responseCode==200, "Success", "Failure")
 | top limit=0 callResult
@@ -88,17 +87,37 @@ index=main sourcetype=eventgen (nodeName=host01 OR nodeName=host02) NOT partner=
 | rename CallResult AS finalResult
 
 
-
-
-
-
-
-
-
 -- fields Command --
+
+• Use the fields command to filter list of fields returned in search results.
+• Note that internal fields _raw and _time (timestamp) are returned by default.
+  ✓ To include fields:
+    ○ Use fields (or fields +) – default behavior.
+    ○ Only the specified fields are extracted.
+    ○ Performance improvement on field extractions.
+  ✓ To exclude fields:
+    ○ Use fields -
+    ○ Happens after field extractions – no performance improvement.
+
+• From web index and sourcetype access_combined:
+  ✓ Return only fields action, clientip, categoryId, JSESSIONID for all time.
+  ✓ Use the job inspector the check duration of the search query.
+  ✓ Run same search without the fields command. Check the duration and compare with the previous search.
+• From web index and sourcetype access_combined:
+  ✓ Remove fields action, clientip, categoryId, JSESSIONID for all time.
+
 
 -- table and rename Commands --
 
+
+
+
+
 -- sort Command --
+
+
+
+
+
 
 -- dedup Command --
