@@ -29,6 +29,7 @@ host www.example.com and not (port 80 or port 25)
 host www.example.com and not port 80 and not port 25
 
 (tcp[0:2] > 1500 and tcp[0:2] < 1550) or (tcp[2:2] > 1500 and tcp[2:2] < 1550)
+
 tcp portrange 1501-1549
 ether proto 0x888e
 not ether dst 01:80:c2:00:00:0e
@@ -60,8 +61,7 @@ CLIENTNAME: not tcp port 3389
 
 --  Discussion --
 
-[Blaster probes 135/tcp, 4444/tcp, and 69/udp]
-(tcp dst port 135 or tcp dst port 4444 or udp dst port 69) and ip[2:2]==48
+Blaster probes 135/tcp, 4444/tcp, and 69/udp: (tcp dst port 135 or tcp dst port 4444 or udp dst port 69) and ip[2:2]==48
 
 [SIP]
 tcp port sip
@@ -82,7 +82,6 @@ pppoes and (host 192.168.0.0 and port 80)
 [VLAN]
 vlan
 vlan and (host 192.168.0.0 and port 80)
-
 
 
 https://wiki.wireshark.org/CaptureFilters
