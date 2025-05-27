@@ -22,8 +22,8 @@ port not 53 and not arp
 
 tcp port 23 and host 10.0.0.5
 tcp port 23 and not src host 10.0.0.5
-
 host 10.0.0.1 and port 53
+
 host www.example.com and not (port 80)
 host www.example.com and not (port 80 or port 25)
 host www.example.com and not port 80 and not port 25
