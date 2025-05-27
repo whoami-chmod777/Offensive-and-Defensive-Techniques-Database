@@ -54,11 +54,11 @@ udp.dstport == 53
 
 tcp.port >= 1024
 
+tcp.flags.syn == True
 tcp.flags.syn == 1
 tcp.flags.fin == 1
 tcp.flags.ack == 1
 tcp.flags.rst == 1
-tcp.flags.syn == True
 
 tls
 
