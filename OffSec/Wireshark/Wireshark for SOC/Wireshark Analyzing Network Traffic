@@ -1,83 +1,209 @@
 
+--- Wireshark Analyzing Network Traffic --- 
+
+• Detailing steps for Analyzing Network Traffic in Wireshark
+• Step-by-step guide for analyzing network traffic using Wireshark
+
+
 -- Detailing steps for Analyzing Network Traffic in Wireshark --
 
 1. Set Time Step (UTC)
-Adjust Wireshark’s time settings to UTC for consistency in analysis.
-Using UTC helps standardize timestamps, especially when correlating with logs from other systems.
+• Action: Adjust Wireshark to display timestamps in UTC.
+• Why: Using UTC helps standardize timestamps, especially when correlating with logs from other systems (e.g., firewalls, SIEMs).
 
 2. Check File Properties
-Review file metadata, such as capture duration and file size.
-Basic info on the capture file helps understand the scope and potential impact of captured events.
+• Action: Go to Statistics → Capture File Properties.
+• Why: Review file metadata, such as capture duration and file size, packet count, and file size to understand capture scope. Basic info on the capture file helps understand the scope and potential impact of captured events.
 
 3. Analyze Conversations (IPv4)
-View top talkers and communication patterns for IPv4 packets.
-Identifying top talkers can reveal unusual or unauthorized devices communicating on the network.
+• Action: Go to Statistics → Conversations, select the IPv4 tab.
+• Why: Identifying top talkers can reveal unusual or unauthorized devices communicating on the network.
 
 4. Protocol Hierarchy
-Check the protocol hierarchy for an overview of protocols used.
-Analyzing the distribution of protocols can highlight abnormal use of high-risk protocols like HTTP or SMB.
+• Action: Go to Statistics → Protocol Hierarchy.
+• Why: Get an overview of protocol distribution; highlight abnormal or risky protocols (e.g., SMB, Telnet).
+• Check the protocol hierarchy for an overview of protocols used. Analyzing the distribution of protocols can highlight abnormal use of high-risk protocols like HTTP or SMB.
 
 5. Apply Display Filter (HTTP)
-Filter for HTTP packets to focus on web traffic.
-Focusing on HTTP traffic helps narrow down analysis to possible web-based threats or data exfiltration.
+• Action: Enter http in the display filter for HTTP packets to focus on web traffic.
+• Why: Focus analysis on web traffic to detect data leaks or suspicious requests.
+• Focusing on HTTP traffic helps narrow down analysis to possible web-based threats or data exfiltration.
 
 6. Follow HTTP Stream
-Follow HTTP streams to view full conversations between client and server.
-This reveals the exact content exchanged, which may show compromised credentials or data leaks.
+• Action: Right-click an HTTP packet → Follow → HTTP Stream.
+• Why: Reconstruct full web communication between client and server to identify credentials or exfiltrated data.
+• This reveals the exact content exchanged, which may show compromised credentials or data leaks.
 
 7. Follow TCP Stream
-Follow TCP streams for detailed TCP-based communication analysis.
-Following TCP streams can uncover details of suspicious connections, like C2 communication.
+• Action: Right-click any TCP packet → Follow → TCP Stream.
+• Why: Analyze full TCP sessions, useful for spotting C2 traffic or file transfers.
+• Follow TCP streams for detailed TCP-based communication analysis.
+• Following TCP streams can uncover details of suspicious connections, like C2 communication.
 
 8. HTTP Statistics
-Review HTTP statistics for traffic volume, methods, and responses.
-Helps identify unusual activity, like a high volume of HTTP POST requests potentially indicating exfiltration.
+• Action: Go to Statistics → HTTP.
+• Why: Review request types (e.g., GET, POST), hosts, and content types to detect anomalies.
+• Review HTTP statistics for traffic volume, methods, and responses.
+• Helps identify unusual activity, like a high volume of HTTP POST requests potentially indicating exfiltration.
 
 9. Export Objects (HTTP)
-Export HTTP objects (like files) sent over HTTP for deeper analysis.
-Extracting files allows further inspection for malware or sensitive data leakage.
+• Action: Go to File → Export Objects → HTTP.
+• Why: Extract transferred files (e.g., downloads, payloads) for malware or data leak analysis.
+• Export HTTP objects (like files) sent over HTTP for deeper analysis.
+• Extracting files allows further inspection for malware or sensitive data leakage.
 
 10. Export Objects (SMB)
-Export SMB objects to examine files shared over the network.
-Useful for analyzing potential lateral movement or malware propagation over SMB shares.
+• Action: Go to File → Export Objects → SMB.
+• Why: Retrieve files shared over SMB — common in lateral movement or worm propagation.
+• Export SMB objects to examine files shared over the network.
+• Useful for analyzing potential lateral movement or malware propagation over SMB shares.
 
 11. Filter for ARP and Broadcast Traffic
-Use arp and eth.dst == ff:ff:ff:ff:ff:ff to see ARP and broadcast packets.
-Broadcast traffic can indicate network discovery or scanning attempts.
+• Filter: arp || eth.dst == ff:ff:ff:ff:ff:ff  
+• Why: Detect ARP scanning, spoofing, or broadcast discovery attempts.
+• Use arp and eth.dst == ff:ff:ff:ff:ff:ff to see ARP and broadcast packets.
+• Broadcast traffic can indicate network discovery or scanning attempts.
 
 12. Filter for ICMP Traffic
-Filter icmp to view ping and error messages.
-ICMP traffic can reveal network mapping attempts or misconfigurations.
+• Filter: icmp
+• Why: View ping sweeps or error messages — often used in reconnaissance or diagnostics.
+• Filter icmp to view ping and error messages.
+• ICMP traffic can reveal network mapping attempts or misconfigurations.
 
 13. IP Address Filter
-Use ip.addr == 10.0.0.1 to filter traffic from a specific IP.
-Filtering by IP isolates traffic from a specific source or destination, making it easier to track specific devices.
+• Filter: ip.addr == 10.0.0.1
+• Why: Isolate traffic to/from a specific device for deeper inspection.
+• Use ip.addr == 10.0.0.1 to filter traffic from a specific IP.
+• Filtering by IP isolates traffic from a specific source or destination, making it easier to track specific devices.
 
 14. SMTP Filter
-Filter for smtp to review email-related traffic.
-Analyzing SMTP traffic can reveal unauthorized email exfiltration or phishing attempts.
+• Filter: smtp
+• Why: Review email traffic for signs of phishing, spam, or data exfiltration.
+• Filter for smtp to review email-related traffic.
+• Analyzing SMTP traffic can reveal unauthorized email exfiltration or phishing attempts.
 
-15. Analyze Suspicious File (86607.dat)
-Export and analyze file 86607.dat if flagged or suspicious.
-Exporting the file allows deeper inspection for malware or further analysis in external tools.
+15. Analyze Suspicious File (e.g., 86607.dat)
+• Action: Export the file from HTTP/SMB stream or as a payload.
+• Why: Investigate for malicious behavior or artifacts --> file 86607.dat
+• Export and analyze file 86607.dat if flagged or suspicious.
+• Exporting the file allows deeper inspection for malware or further analysis in external tools.
 
 16. Calculate File Hash (SHA-256)
-Use sha256sum on 86607.dat to generate its SHA-256 hash for verification.
-A hash value helps uniquely identify the file, useful for malware detection and validation.
+• Use sha256sum on 86607.dat to generate its SHA-256 hash for verification.
+• A hash value helps uniquely identify the file, useful for malware detection and validation.
+• Linux > sha256sum 86607.dat
+• Windows > Get-FileHash -Algorithm SHA256 .\86607.dat
 
 17. Submit to VirusTotal
-Upload the SHA-256 hash or file to VirusTotal for threat intelligence analysis.
-VirusTotal scans against multiple antivirus engines to check if the file is flagged as malicious.
+• Action: Go to https://www.virustotal.com, submit the file or hash.
+• Why: Scan against dozens of AV engines for known threats.
+• Upload the SHA-256 hash or file to VirusTotal for threat intelligence analysis.
+• VirusTotal scans against multiple antivirus engines to check if the file is flagged as malicious.
 
 18. Submit to Malware Bazaar
-Upload or check file on Malware Bazaar for malware information.
-Malware Bazaar provides insights into known malware samples, which can assist in threat identification.
+• Action: Go to https://bazaar.abuse.ch, submit or search the file/hash.
+• Why: Check for known malware families and IOCs.
+• Upload or check file on Malware Bazaar for malware information.
+• Malware Bazaar provides insights into known malware samples, which can assist in threat identification.
 
 19. Analyze with CyberChef
-Use CyberChef for further decoding, deobfuscation, or extraction from suspicious data.
-CyberChef offers a variety of tools for transforming, decoding, or analyzing raw data and malicious code.
+• Action: Use https://gchq.github.io/CyberChef for decoding.
+• Why: Decode, extract, or deobfuscate suspicious payloads (e.g., base64, XOR, hex).
+• Use CyberChef for further decoding, deobfuscation, or extraction from suspicious data.
+• CyberChef offers a variety of tools for transforming, decoding, or analyzing raw data and malicious code.
+
+
+***************************************************************************************************************************
+
+-- Step-by-step guide for analyzing network traffic using Wireshark --
+
+Here's a step-by-step guide for analyzing network traffic using Wireshark, tailored for SOC analysts, incident responders, and network defenders. This guide balances technical precision with practical steps.
+
+🔍 Step-by-Step: Analyzing Network Traffic in Wireshark
+
+🧱 1. Load or Capture Network Traffic
+• Open Wireshark.
+• To capture live traffic:
+  → Select the correct network interface (e.g., Ethernet, Wi-Fi).
+  → Click Start.
+• To load a PCAP:
+  → Go to File → Open, and select a .pcap or .pcapng file.
+
+🔬 2. Get an Overview of the Capture
+Use the Statistics menu:
+• Capture File Properties: Understand file size, duration, packets.
+• Protocol Hierarchy: See what protocols are in use — unusual protocols may be suspicious.
+• Endpoints & Conversations: Spot top talkers or new/suspicious IPs.
+• IO Graphs: Visualize traffic spikes, drops, or patterns over time.
+
+📌 3. Identify and Filter Relevant Traffic
+• Apply display filters:
+  → Filter by IP: ip.addr == x.x.x.x
+  → Only TCP traffic: tcp
+  → DNS queries only: dns && udp.port == 53
+  → HTTP requests: http.request
+  → Only marked packets:	frame.marked == 1
+
+You can also color-code traffic or mark packets for later (Ctrl + M).
+
+📡 4. Inspect Individual Packets
+• Click any packet to view the packet details pane.
+• Expand protocol layers (e.g., Ethernet, IP, TCP, HTTP).
+• Look for anomalies:
+  → Bad checksums
+  → TCP resets (RST)
+  → Suspicious domains or user agents
+  → Command-and-control indicators (strange URLs or base64 payloads)
+
+🔍 5. Follow Streams
+• To reconstruct sessions:
+• Right-click a packet → Follow → TCP Stream (or UDP/HTTP).
+  → This helps with:
+  → Viewing entire conversations (e.g., credentials in HTTP)
+  → Analyzing malware payloads or exfiltration streams
+  → Decoding base64 or inspecting ASCII commands
+
+📊 6. Use Flow/Service/Stream Graphs (Advanced)
+• Flow Graph:
+  → Visualizes communication order (good for attack kill chains).
+• TCP Stream Graphs:
+  → Analyze retransmissions, throughput, round-trip times.
+• Service Response Time:
+  → Measure DNS, HTTP, or SMB response times — abnormal latency can signal attack or tunneling.
+
+🧠 7. Analyze DNS and HTTP Behavior
+• Statistics → DNS:
+  → Look for high query rates, random subdomains (DGA), NXDOMAIN floods.
+• Statistics → HTTP:
+  → Find unusual methods (e.g., PUT, DELETE), strange user agents, long URIs (payloads?).
+
+📦 8. Extract Files or Payloads
+• File → Export Objects:
+  → Choose HTTP, SMB, etc.
+  → Export transferred executables, images, or other artifacts for malware analysis or evidence.
+
+📝 9. Document Findings
+• Mark suspicious packets: frame.marked == 1
+• Add comments: Right-click → Packet Comment
+• Export filtered packets:
+  → File → Export Specified Packets (select only marked or filtered packets)
+• Generate reports (e.g., protocol usage, conversations)
+
+🔁 10. Loop Back as Needed
+• After spotting a lead (e.g., odd IP, large POST, encrypted DNS), return to steps 3–6 to pivot and drill deeper.
+
+🧠 Pro Tips for SOC Analysts
+• Use external threat intel to correlate IPs, domains, or user agents.
+• Combine Wireshark with Zeek logs or Suricata alerts when available.
+• Practice with malicious PCAPs (e.g., from malware-traffic-analysis.net).
+
+
 
 
 References
 https://en.wikipedia.org/wiki/List_of_file_signatures
 https://www.garykessler.net/library/file_sigs.html
+
+https://www.virustotal.com
+https://bazaar.abuse.ch
+https://gchq.github.io/CyberChef
