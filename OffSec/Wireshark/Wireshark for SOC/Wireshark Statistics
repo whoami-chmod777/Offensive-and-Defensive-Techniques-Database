@@ -1,86 +1,82 @@
 
 -- Here’s a table explaining the Wireshark Statistics features and their functions --
 
+✅ Capture File Properties
+• Function: Displays metadata about the capture file (time, packet count, size, etc.).
+• SOC Use: Helps analysts quickly assess the capture scope (e.g., duration of attack, size of traffic dump).
 
-Capture File Properties
-Provides an overview of the capture, including traffic volume and duration.
-Quickly assess traffic behavior, spot abnormal traffic bursts or unexpected protocols.
+✅ Resolved Addresses
+• Function: Shows a list of IP addresses resolved to domain names (if name resolution is enabled).
+• SOC Use: Helps identify malicious or suspicious domains involved in traffic.
 
-Protocol Hierarchy
-Shows the distribution of protocols used in the capture.
-Identify unusual protocols that may indicate malicious activity (e.g., uncommon protocols used in lateral movement).
+✅ Protocol Hierarchy
+• Function: Displays a breakdown of all protocols found in the capture (e.g., TCP, DNS, HTTP).
+• SOC Use: Quickly reveals unusual protocols (e.g., seeing IRC or FTP in a restricted environment).
 
-Conversations
-Displays communication between IP/MAC endpoints.
-Detect unauthorized or unusual communication patterns between devices.
+✅ Conversations
+• Function: Lists communication sessions between endpoints, with byte and packet counts and between IP/MAC endpoints.
+• SOC Use: Identifies top talkers, potential data exfiltration, or C2 communications and unauthorized or unusual communication patterns between devices.
 
-Endpoints
-Lists all the unique endpoints involved in the capture (IP, MAC, etc.).
-Track down compromised or unauthorized endpoints communicating on the network.
+✅ Endpoints
+• Function: Shows all endpoints (IP, MAC, ports) and their stats.
+• SOC Use: Helps locate internal/external devices generating or receiving traffic. Track down compromised or unauthorized endpoints communicating on the network.
 
-Resolved Addresses
-Maps IP addresses to domain names (if available).
-Useful for identifying legitimate vs. suspicious domains communicating with internal assets.
+✅ IO Graphs
+Function: Visualizes network traffic over time (packet or byte rate).
+SOC Use: Detects spikes that may indicate scanning, DoS or DDoS attacks, or data bursts and other network anomalies.
 
-IO Graphs
-Visual representation of traffic over time.
-Detect traffic spikes or drops indicative of DDoS attacks, data exfiltration, or other network anomalies.
+✅ Flow Graph
+• Function: Sequence diagram of communication flows (packet by packet).
+• SOC Use: Useful for dissecting malware behavior or seeing step-by-step attack execution, identify attack paths, lateral movement, and the progression of attacks.
 
-Flow Graph
-Visualizes the flow of communication between endpoints.
-Identify attack paths, lateral movement, and the progression of attacks.
+✅ Packet Lengths
+• Function: Shows distribution of packet sizes.
+• SOC Use: Anomalous packet sizes (e.g., too small or large) may indicate covert channels or malformed packets. Large packets might indicate file transfers (exfiltration), while small ones might suggest reconnaissance.
 
-Packet Lengths
-Shows the distribution of packet sizes in the capture.
-Large packets might indicate file transfers (exfiltration), while small ones might suggest reconnaissance.
+✅ Service Response Time
+• Function: Measures how long servers take to respond to requests for specific services like DNS and HTTP..
+• SOC Use: Identifies slowdowns possibly caused by DDoS or infrastructure abuse.
 
-Service Response Time
-Measures response times for specific services like DNS and HTTP.
-Identify slow response times that may indicate network performance degradation due to malicious activity.
+✅ TCP Stream Graphs
+• Function: Graphs of TCP streams showing sequence numbers, RTT, throughput, etc.
+• SOC Use: Detects anomalies in TCP behavior like retransmissions, resets, or packet loss (often seen in attacks or malware traffic). Diagnose slow or abnormal performance, potentially caused by attacks affecting availability.
 
-TCP Stream Graphs
-Visualizes TCP stream data, including round-trip time and throughput.
-Diagnose slow or abnormal performance, potentially caused by attacks affecting availability.
+✅ Following Streams (TCP/UDP/HTTP/etc.)
+• Function: Reconstructs a full session between two endpoints (e.g., HTTP conversation). Enables inspection of specific TCP, UDP, or HTTP streams.
+• SOC Use: Critical for viewing malware payloads, credentials, or command-and-control messages.
 
-Following Streams
-Enables inspection of specific TCP, UDP, or HTTP streams.
-Track specific communication streams for deep packet analysis, such as reviewing an entire connection or exchange.
+✅ HTTP Statistics
+• Function: Summarizes HTTP requests and responses (hosts, URIs, methods).
+• SOC Use: Detects suspicious URLs, beaconing behavior, known bad user-agents or abnormal HTTP traffic (e.g., excessive POST requests, large uploads, exfiltration).
 
-HTTP Statistics
-Provides detailed statistics on HTTP requests and responses.
-Detect abnormal HTTP traffic (e.g., excessive POST requests, large uploads, exfiltration).
+✅ DNS Statistics
+• Function: Summarizes DNS requests/responses, including errors and types.
+• SOC Use: Identifies DNS tunneling, domain generation algorithms (DGAs), or queries to suspicious domains.
 
-DNS Statistics
-Displays details of DNS queries and responses.
-Identify DNS tunneling or malicious domain resolution attempts.
+✅ Exporting Objects
+• Function: Allows export of files from HTTP, SMB, FTP streams (e.g., images, executables).
+• SOC Use: Recover malware samples or leaked files from network traffic for analysis.
 
-Exporting Objects
-Allows exporting files, images, or other content transferred via HTTP, SMB, or other protocols.
-Recover malware samples, images, or files that were transferred during an attack.
-
-frame.marked == 1
-Filter for specifically marked packets in Wireshark.
-Highlight and focus on key packets flagged during the investigation, ensuring important events are analyzed.
+🔍 Display Filter Example: frame.marked == 1
+• Function: Filters for only those packets you have manually marked during your analysis.
+• SOC Use: Helps focus only on "interesting" packets you've flagged — often used when going through large captures to save and review relevant evidence (e.g., C2 traffic, suspicious downloads, data exfiltration).
 
 
 
 -- Wireshark Statistics for SOC Analysis --
 
-• Resolved Addresses are useful for SOC analysts to quickly identify if an IP address maps to a well-known domain or a suspicious domain, helping to determine if a connection is benign or malicious.
-• Endpoints allow analysts to quickly get an inventory of all devices involved in the traffic, helping spot unusual or unauthorized devices.
+• Protocol Hierarchy find unusual traffic types.
+• Conversations identify high-traffic or rare communications.
+• IO Graphs	spot traffic anomalies and burst patterns.
+• DNS/HTTP Stats reveal C2 and malware communications.
+• Flow Graphs	visualize attacker steps or malware flow.
+• frame.marked == 1	focus on evidence during investigation.
+
+• Resolved Addresses quickly identify if an IP address maps to a well-known domain or a suspicious domain, helping to determine if a connection is benign or malicious.
+• Endpoints allow aquickly get an inventory of all devices involved in the traffic, helping spot unusual or unauthorized devices.
 • Following Streams enables in-depth review of a specific TCP, UDP, or HTTP conversation, providing context for potential command-and-control (C2) traffic or data exfiltration.
 • frame.marked == 1 is particularly useful in SOC environments where analysts collaborate to flag critical packets for review by others.
 • Exporting Objects lets analysts extract malicious payloads, making it easier to assess what kind of data is being transmitted and whether sensitive information is compromised.
-
-
-
-
-
-
-
-
-
-
 
 
 
