@@ -121,6 +121,7 @@ tcpdump -vv -A -T snmp -s 0 "(dst port 162) or (src port 161) or (dst port 161) 
 tcpdump -i eno1 -T snmp -n dst portrange 161-162
 
 tcpdump net 192.168.122.0/24 #Find packets by network
+
 #raffic coming from 192.168.x.x and going to the 10.x or 172.16.x.x networks, and we’re showing hex output with no hostname resolution
 tcpdump -nvX src net 192.168.0.0/16 and dst net 10.0.0.0/8 or 172.16.0.0/16
 
@@ -138,12 +139,15 @@ tcpdump -tlni eth1 -n icmp
 tcpdump -i eth1 -c1 -n -s0 -vvvv icmp
 tcpdump -c 1 -X icmp #PAcket Contents with Hex Output
 tcpdump -tlni em0 
+
 # listen for ICMP traffic on em0 network interface
 tcpdump -tlni em0 -n icmp
+
 # capture one ICMP packet and decode it
 tcpdump -i nfe0 -c1 -n -s0 -vvvv icmp
 tcpdump -i eth1 -c1 -n -s0 -vvvv icmp -w temp.pcap
 tcpdump -r capture_file #read PCAP files
+
 #Look for all ICMP packets with port unreachable
 tcpdump -nnx -r pcap.file 'icmp[0] =3 and icmp[1] =3'
 tcpdump -nnx -r pcap.file 'icmp[0:2] = 0x0303'
@@ -268,12 +272,16 @@ tcpdump -i eth-s1p1c0 proto ospf
 tcpdump -i eth-s1p1c0 port telnet
 tcpudmp -i eth-s1p1c0 port 23
 tcpdump -i eth-s2p1c0 udp port 68 
+
 #Show all traffic on the interface except port 80:
 tcpdump -i eth-s1p1c0 not port 80
+
 #Show traffic only from specific host:
 tcpdump -i eth-s1p1c0 host 192.168.10.24
+
 #Show additional information about each packet:
 tcpdump -vv -i eth-s1p1c0
+
 #Limit the size (in bytes) of captured packets 
 tcpdump -s 320 -i eth-s1p1c0
 
