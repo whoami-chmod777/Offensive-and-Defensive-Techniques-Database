@@ -19,6 +19,8 @@ tcpdump -tt -r capture.pcap
 
 tcpdump -tt -r capture.pcap port 80 --count
 tcpdump -tt -r capture.pcap port 80
+tcpdump -tt -r capture.pcap -n port 80 | grep -E "POST"
+
 
 tcpdump -tt -r capture.pcap port 80 and host 10.0.0.168
 tcpdump -tt -r capture.pcap port 80 and host 10.0.0.168 | grep -E "GET|POST"
