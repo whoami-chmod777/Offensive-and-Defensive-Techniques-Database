@@ -81,6 +81,9 @@ Invalid Credentials: Look for a 530 response code after the PASS command.
 
 -- What could be the name of the file that was retrieved from the file sharing server --
 
+FTP commands like RETR, STOR, LIST are plaintext.
+RETR <filename> is used when a file is downloaded.
+
 tcpdump -nn -A -r tcpdump_challenge.pcap port 21 | grep 'RETR'
 
 
