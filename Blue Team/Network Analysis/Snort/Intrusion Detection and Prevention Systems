@@ -6,7 +6,6 @@ Intrusion Detection and Prevention Systems (IDS/IPS)
 • Intrusion Prevention Systems (IPS)
 • Network-Based IDS/IPS (NIDS/NIPS)
 • Host-Based IDS/IPS (HIDS/HIPS)
-• Detection Methods
 
 Detection Methods
 • Signature-based Detection
@@ -18,14 +17,36 @@ The JoHari Window Model
 
 --- Intrusion Detection and Prevention Systems (IDS/IPS) ---
 
-The core functions of IDS and IPS for building robust network and endpoint security. Here’s a breakdown of the main components.
-
-
--- Intrusion Detection Systems (IDS) --
+The core functions of IDS and IPS for building robust network and endpoint security. Here’s a breakdown of the main components:
 
 Intrusion Detection Systems (IDS)
 • IDS solutions provide passive monitoring, logging, and alert generation without interrupting traffic.
 • Ideal for situations needing out-of-band threat awareness without active interference.
+
+Intrusion Prevention Systems (IPS)
+• IPS actively inspects traffic, blocks malicious packets, and can terminate suspicious connections in real-time.
+• Deployed inline for instant prevention and mitigation, with comprehensive logging for auditing.
+
+Network-Based IDS/IPS (NIDS/NIPS)
+• Operate at the network level, monitoring traffic flows and flagging/blocking harmful activities across network appliances.
+
+Host-Based IDS/IPS (HIDS/HIPS)
+• Deployed on individual endpoints to monitor host activities (file access, logins, apps) and mitigate potential threats directly on the device.
+
+Detection Methods
+1. Signature-Based Detection: Matches activities against known attack patterns; excellent for known threats.
+2. Behavior-Based Detection: Detects anomalies by comparing against a baseline; valuable for catching new threats.
+3. Rule-Based Detection: Uses custom policies for violation detection; effective but requires frequent updates.
+
+The JoHari Window Model: Identifies different types of knowledge in security analysis
+
+Known Known: Threats we are aware of and understand.
+Known Unknown: Threats we are aware of but do not fully understand.
+Unknown Known: Insights we have but haven’t actively recognized.
+Unknown Unknown: Completely unforeseen threats that pose unique challenges.
+
+
+-- Intrusion Detection Systems (IDS) --
 
 • Passive monitoring and analysis
 • Alert generation
@@ -34,10 +55,6 @@ Intrusion Detection Systems (IDS)
 
 
 -- Intrusion Prevention Systems (IPS) --
-
-Intrusion Prevention Systems (IPS)
-• IPS actively inspects traffic, blocks malicious packets, and can terminate suspicious connections in real-time.
-• Deployed inline for instant prevention and mitigation, with comprehensive logging for auditing.
 
 • Blocking and dropping packets
 • Terminating connections
@@ -48,9 +65,6 @@ Intrusion Prevention Systems (IPS)
 
 -- Network-Based IDS/IPS (NIDS/NIPS) --
 
-Network-Based IDS/IPS (NIDS/NIPS)
-• Operate at the network level, monitoring traffic flows and flagging/blocking harmful activities across network appliances.
-
 • Operate at the network level
 • Analyze traffic flowing through network appliances
 • Alert, log, and/or block malicious traffic
@@ -58,20 +72,12 @@ Network-Based IDS/IPS (NIDS/NIPS)
 
 -- Host-Based IDS/IPS (HIDS/HIPS) --
 
-Host-Based IDS/IPS (HIDS/HIPS)
-• Deployed on individual endpoints to monitor host activities (file access, logins, apps) and mitigate potential threats directly on the device.
-
 • Operate at the endpoint level
 • Analyze activities on the host (file system, logins, apps)
 • Alert, log, and/or block malicious host actions
 
 
 --- Detection Methods ---
-
-Detection Methods
-1. Signature-Based Detection: Matches activities against known attack patterns; excellent for known threats.
-2. Behavior-Based Detection: Detects anomalies by comparing against a baseline; valuable for catching new threats.
-3. Rule-Based Detection: Uses custom policies for violation detection; effective but requires frequent updates.
 
 -- Signature-based Detection -- 
 
@@ -95,7 +101,6 @@ Detection Methods
 --- The JoHari Window Model ---
 
 The JoHari Window Model
-The JoHari Window Model: Identifies different types of knowledge in security analysis
 
 Known Known: Threats we are aware of and understand.
 Known Unknown: Threats we are aware of but do not fully understand.
