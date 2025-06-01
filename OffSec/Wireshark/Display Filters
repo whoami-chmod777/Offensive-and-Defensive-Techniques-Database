@@ -133,12 +133,17 @@ eth.addr[0:3]==00:06:5B
 http contains "login"
 http contains "service"
 http contains "audiodg.exe"
+
 http.request.uri contains "/login"
 http.request.uri contains "audiodg"
+http.request.uri matches "gl=se$"
+
 http.host matches "acme\\.(org|com|net)"
 
 udp contains 81:60:03
 sip.To contains "a1762"
+
+dns.qry.name == "example.com"
 dns.qry.name contains "www.\x77\x69\x72\x65\x73\x68\x61\x72\x6b.org"
 
 
