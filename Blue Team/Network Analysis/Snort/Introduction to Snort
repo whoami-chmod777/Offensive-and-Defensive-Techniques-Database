@@ -12,9 +12,9 @@ Snort is a flexible and powerful tool for network intrusion detection and preven
 • Install Snort: sudo apt install snort
 • Identify Your Network Range: Use ifconfig or ip a s to set up HOME_NET.
 • Rules and Configuration:
-  - Configuration file location: /etc/snort/snort.conf
-  - Back up your config file: sudo cp snort.conf snort.conf.bak
-  - Open config for editing: sudo nano snort.conf
+  -> Configuration file location: /etc/snort/snort.conf
+  -> Back up your config file: sudo cp snort.conf snort.conf.bak
+  -> Open config for editing: sudo nano snort.conf
 • Verify Configuration: Test setup with sudo snort -T -c /etc/snort/snort.conf
 
 ⚙️ Edit Configuration
