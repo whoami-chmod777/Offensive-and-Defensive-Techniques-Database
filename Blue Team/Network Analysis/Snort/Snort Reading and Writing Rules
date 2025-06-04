@@ -21,6 +21,8 @@ action protocol source_ip source_port -> destination_ip destination_port (option
 - Rule Direction Operator: Specifies the direction of traffic. ('->' for unidirectional or '<->' for bidirectional).
 - Rule Destination IP and Port: Specifies the destination IP address and port.
 
+'->' unidirectional: source to destination
+
 
 2. Options Field
 
