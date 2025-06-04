@@ -99,7 +99,7 @@ hping3 -c 1 -p 4444 -S example.com
 -l: log directory
 -i: interface for capture
 -c: configuration file
--q: Quite Mode
+-q: quite mode
 
 
 
