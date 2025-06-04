@@ -5,8 +5,8 @@ Snort Logs capture detailed information about network traffic flagged by Snortâ€
 Key Points
 - Log Files Location: By default, Snort logs are stored in /var/log/snort.
 - File Types:
-	- Alerts: Summary of detected threats, typically in plain text (alert.fast).
-	- Full Packet Dumps: Raw packet data (snort.log.* files), viewable with tools like tcpdump or Wireshark for deeper analysis.
+  -> Alerts: Summary of detected threats, typically in plain text (alert.fast
+  -> Full Packet Dumps: Raw packet data (snort.log.* files), viewable with tools like tcpdump or Wireshark for deeper analysis.
 
 
 -- Useful Commands --
