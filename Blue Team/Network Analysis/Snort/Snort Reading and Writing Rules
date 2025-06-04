@@ -15,11 +15,11 @@ Rule Options: (msg:"ICMP traffic to 8.8.8.8 detected"; sid:1000001; rev:1;)
 
 action protocol source_ip source_port -> destination_ip destination_port (options)
 
-- Action: Specifies what Snort should do if the rule is triggered (e.g., 'alert', 'log', 'pass', 'drop', 'reject').
-- Protocol: Defines the protocol to match (e.g., 'tcp', 'udp', 'icmp', 'ip').
-- Source IP and Port: Specifies the source IP address and port (can be 'any' for all addresses or ports).
-- Direction Operator: Specifies the direction of traffic. ('->' for unidirectional or '<->' for bidirectional).
-- Destination IP and Port: Specifies the destination IP address and port.
+- Rule Action: Specifies what Snort should do if the rule is triggered (e.g., 'alert', 'log', 'pass', 'drop', 'reject').
+- Rule Protocol: Defines the protocol to match (e.g., 'tcp', 'udp', 'icmp', 'ip').
+- Rule Source IP and Port: Specifies the source IP address and port (can be 'any' for all addresses or ports).
+- Rule Direction Operator: Specifies the direction of traffic. ('->' for unidirectional or '<->' for bidirectional).
+- Rule Destination IP and Port: Specifies the destination IP address and port.
 
 
 2. Options Field
