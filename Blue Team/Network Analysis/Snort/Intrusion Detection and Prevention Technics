@@ -20,7 +20,7 @@ Content-Type: application-/x-msdownload
 
 sudo wireshark 1.pcap
 
-alert tcp any 80 -> any any (msg:"Potential .exe file download over HTTP"; content: "Content-Type: application/x-msdownload"; http_header; sid:100001:
+alert tcp any 80 -> any any (msg:"Potential .exe file download over HTTP"; content: "Content-Type: application/x-msdownload"; http_header; sid:100001; rev:1;)
 
 sudo snort -c /etc/snort/snort.conf -q -r 1.pcap -A console
 sudo snort -r /var/log/snort/snort.log.1717966529 -q -d
