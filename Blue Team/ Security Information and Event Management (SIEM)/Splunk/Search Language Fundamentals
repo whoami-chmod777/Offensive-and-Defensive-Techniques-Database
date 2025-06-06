@@ -74,7 +74,6 @@ index=main sourcetype=eventgen (nodeName=host01 OR nodeName=host02) NOT partner=
 ✓ limit
 ✓ span
 
-
 • Run the query “index=main sourcetype=eventgen (nodeName=host01 OR nodeName=host02) NOT partner=Telco07” for last 60 mins.
   ✓ Change the search bar theme from default to light, Dark, Black on While and check the behavior.
   ✓ Activate search auto-format and then add | eval to the search. Notice that the pipe (|) moves to the next line.
