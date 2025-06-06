@@ -108,8 +108,18 @@ index=main sourcetype=eventgen (nodeName=host01 OR nodeName=host02) NOT partner=
 
 -- table and rename Commands --
 
+• The table command creates a statistics table of the specified fields.
+• Each row of the table represents an event, and the columns represent field names.
+• Columns are displayed in the order given in the command.
+• Use the rename command to change the name of a field.
+• Useful when you want to provide meaningful names.
+• Use double-quotes when field names include spaces or special characters.
 
-
+• From web index and sourcetype access_combined:
+  ✓ Return a stats table of clientip, bytes, status, method, productId fields.
+  ✓ Examine the table and order of field names.
+  ✓ Rename the fields in the table:
+    o Method to “HTTP Method”, status “HTTP Status”, clientip to Client_IPAddress
 
 
 -- sort Command --
