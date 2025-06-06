@@ -2,9 +2,16 @@
 --- Intrusion Detection and Prevention Technics ---
 
 
+- Commands -
+
 nano /etc/snort/rules/local.rules
 sudo ls -l /var/log/snort/
 sudo rm /var/log/snort/*
+
+sudo snort -c /etc/snort/snort.conf -q -r 1.pcap -A console
+sudo snort -c /etc/snort/snort.conf -q -r snort_challenge.pcap -A console -k none
+sudo snort -r /var/log/snort/snort.log.1717966005 -q -d
+
 
 
 sudo wireshark 1.pcap
