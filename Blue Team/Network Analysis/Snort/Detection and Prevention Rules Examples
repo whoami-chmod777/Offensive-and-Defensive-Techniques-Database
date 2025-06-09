@@ -67,6 +67,7 @@ alert tcp any any -> any 25 (msg:"Email with Attachment"; content:"Content-Dispo
 ******************************************************************************************************************************
 
 Examine The First 5 Packets Of The First PCAP File
+
 snort -r example.com-7.pcap -n 5
 snort -r example.com-7.pcap -n 5 -d (examine the payload of the packets)
 
