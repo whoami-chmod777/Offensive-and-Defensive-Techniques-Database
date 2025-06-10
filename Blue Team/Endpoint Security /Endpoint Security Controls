@@ -1,1 +1,73 @@
 
+--- Endpoint Security Controls ---
+
+• Endpoints
+• Endpoint Security Controls
+• Endpoint Security Monitoring
+
+
+>> Endpoints <<
+
+• Workstations
+  → Desktops and laptops
+• Mobile Devices
+  → Smartphones and tablets
+• Servers
+  → Email, web, database, file servers, etc.
+• IoT Devices
+  → Smart printers, cameras, appliances, etc.
+  → OT, ICS, SCADA
+• Networking Equipment
+  → Routers, switches, firewalls, etc.
+
+
+>> Endpoint Security Controls <<
+
+• Antivirus / Antimalware
+  → Scans files and activities
+  → Matching patterns and signatures
+
+• Endpoint Detection and Response (EDR)
+  → Real-time monitoring and response
+  → Agent-based deployment
+  → Monitor process, file, registry, and network activity
+
+• Extended Detection and Response (XDR)
+  → Integration of multiple security controls and telemetry
+  → Runbooks and automated response to routine threats
+
+• Data Loss Prevention (DLP)
+  → Protect sensitive data at rest, transit, and in processing
+  → Access controls, data masking, prevention
+
+• User and Entity Behavior Analytics (UBA)
+  → Monitoring user behavior patterns
+  → Detect deviations from historic and contextual baseline
+  → Insider threats, account compromise, data exfiltration
+
+• HIDS / HIPS
+  → Host-based Intrusion Detection System (HIDS)
+  → Host-based Intrusion Prevention System (HIPS)
+
+• Host-based Firewall
+  → Controls incoming and outgoing traffic on a host
+
+
+>> Endpoint Security Monitoring <<
+
+• Process Execution
+  → Monitoring running processes
+  → Executable files, PIDs, command-line arguments
+  → Parent-child process hierarchy
+
+• File System Changes
+  → Creation, modification, deletion
+  → File Integrity Monitoring (FIM)
+
+• Network Connections
+  → Traffic and connections initiated from the endpoint
+  → Associated processes and executables
+
+• Registry Modifications
+  → Monitor registry keys and values
+  → Detect backdoors, persistence, detection evasion
