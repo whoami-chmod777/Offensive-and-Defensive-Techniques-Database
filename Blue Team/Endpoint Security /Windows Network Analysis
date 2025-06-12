@@ -1,8 +1,11 @@
 
+> Network Discovery <
+
 net share Exfil=C:\Users\admin\Downloads\exfil (mount a folder)
 net use X: \\127.0.0.\Exfil
 
 net view
+net view /all
 net view \\127.0.0.1\
 net view \\HOSTNAME
 
@@ -21,3 +24,103 @@ netstat -vb
 arp -a
 ipconfig /all
 route print
+
+wmic volume list brief
+wmic share get
+wmic logicladisk get
+
+TCPView 
+Process Explorer
+Fiddler 
+Sysmon 
+
+
+> Scan <
+
+nbtstat -A indirizzoip
+for /L %I in (1,1,254) do ping -w 30 -n 1 192.168.1.%I | find "Reply" >> nomefile.txt
+nbtstat -c
+for /L %I in (1,1,254) do nbtstat -An 192.168.1.%I
+vedere le connessioni wifi salvate:
+netsh wlan show profile
+vedere le pssword salvate:
+netsh wlan show profile nomedelprofilo key=clear
+
+
+> Network <
+
+netstat -b
+netstat -e
+netstat -nr
+netstat -naob
+netstst -S
+netstat -vb
+
+route print
+arp -a
+ipconfig /all
+
+netsh wlan show interfaces
+netsh wlan show all
+
+
+> Start/Stop Firewall <
+
+netsh advfirewall show rule name=all
+netsh advfirewall set allprofile state off
+netsh advfirewall set allprofile state on
+netsh advfirewall set publicprofile state on
+netsh advfirewall set privateprofile state on
+netsh advfirewall set domainprofile state on
+netsh advfirewall firewall add rule name="Open Port 80" dir=in action=allow protocol=TCP localport=80
+netsh advfirewall firewall add rule name="My Application" dir=in action=allow program="C:\MyApp\MyApp.exe" enable=yes
+
+
+> User <
+
+net users
+net localgroup administrators
+net group administrators
+
+wmic rdtoggle list
+wmic useraccount list
+wmic group list
+
+wmic netlogin get name,lastlogin,badpasswordcount
+wmic netclient list brief
+wmic nicconfig get
+wmic netuse get
+
+show content of file: type file.txt
+
+
+> TCP connections and underlying process <
+
+netstat -b
+
+Get-NetTCPConnection |
+select LocalAddress,localport,remoteaddress,remoteport,state,@{name="process";Expression={(get-process -id $_.OwningProcess).ProcessName}}, @{Name="cmdline";Expression={(Get-WmiObject Win32_Process -filter "ProcessId = $($_.OwningProcess)").commandline}} | 
+sort Remoteaddress -Descending | ft -wrap -autosize
+
+Get-NetTCPConnection |
+select LocalAddress,localport,remoteaddress,remoteport,state,@{name="process";Expression={(get-process -id $_.OwningProcess).ProcessName}}, @{Name="cmdline";Expression={(Get-WmiObject Win32_Process -filter "ProcessId = $($_.OwningProcess)").commandline}} 
+|  Select-String -Pattern 'anydesk'
+
+Get-NetTCPConnection -AppliedSetting Internet |
+select-object -property remoteaddress, remoteport, creationtime |
+Sort-Object -Property creationtime |
+format-table -autosize
+
+(Get-NetTCPConnection).remoteaddress | Sort-Object -Unique 
+
+Get-NetTCPConnection |
+? {($_.RemoteAddress -eq "1.2.3.4")} |
+select-object -property state, creationtime, localport,remoteport | ft -autosize
+
+Get-NetTCPConnection -remoteaddress 0.0.0.0 |
+select state, creationtime, localport,remoteport | ft -autosize
+
+Get-NetUDPEndpoint | select local*,creationtime, remote* | ft -autosize
+
+stop-process -verbose -force -Confirm:$false (Get-Process -Id (Get-NetTCPConnection -RemoteAddress "1.2.3.4" ).OwningProcess)
+
