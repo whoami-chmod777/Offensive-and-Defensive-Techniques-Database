@@ -1,4 +1,14 @@
 
+--- Windows Network Analysis ---
+
+• Network Discovery
+• Scan
+• Network Connections
+• Start/Stop Firewall
+• Show Users / Groups
+• TCP connections and underlying process 
+
+
 > Network Discovery <
 
 net share Exfil=C:\Users\admin\Downloads\exfil (mount a folder)
@@ -47,7 +57,7 @@ vedere le pssword salvate:
 netsh wlan show profile nomedelprofilo key=clear
 
 
-> Network <
+> Network Connections <
 
 netstat -b
 netstat -e
@@ -76,7 +86,7 @@ netsh advfirewall firewall add rule name="Open Port 80" dir=in action=allow prot
 netsh advfirewall firewall add rule name="My Application" dir=in action=allow program="C:\MyApp\MyApp.exe" enable=yes
 
 
-> User <
+> Show Users / Groups <
 
 net users
 net localgroup administrators
@@ -90,7 +100,6 @@ wmic netlogin get name,lastlogin,badpasswordcount
 wmic netclient list brief
 wmic nicconfig get
 wmic netuse get
-
 show content of file: type file.txt
 
 
