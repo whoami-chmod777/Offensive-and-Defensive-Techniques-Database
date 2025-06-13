@@ -17,16 +17,35 @@ Service (Background) Processes
 • Windows Update, Print Spooler, lsass.exe
 
 
+--- Structured representation of the Process Hierarchy ---
+
+Parent Process:
+  - Name: explorer.exe
+  - PID: 13716
+
+  ├── Child Process:
+  │     - Name: firefox.exe
+  │     - PID: 20780
+  │
+  ├── Child Process:
+  │     - Name: winword.exe
+  │     - PID: 14001
+  │
+  └── Child Process:
+        - Name: notepad.exe
+        - PID: 15315
+
+
+--- Analyze Processes ---
 
 tasklist
 taskkill /PID 1234 /F
 tasklist /V
 tasklist /M
 
-tasklist /M /FI "PID eq 2088"
 tasklist /FI "PID eq 2088"
+tasklist /FI "PID eq 2088" /M 
 tasklist /FI "IMAGENAME eq notmaleware.exe"
-tasklist /M /FI "PID eq 2088"
 
 netstat -ano
 netstat -anob | findstr ESTABLISHED
