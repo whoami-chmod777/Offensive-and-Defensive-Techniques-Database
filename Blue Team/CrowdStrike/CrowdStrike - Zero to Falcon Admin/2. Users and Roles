@@ -1,1 +1,43 @@
 
+--- Users and Roles ---
+
+• Roles
+• A note on Real Time Responder (RTR) Roles
+• How to add a new user
+• Setting up Email Notifications
+
+
+-- Roles --
+
+Users are assigned by the Falcon admin
+Must have an associated domain email/CID association
+CID needs to be associated with your company’s email domain, if not = CS customer support
+
+Top Roles:
+• Falcon Admin – doesn't come with manage custom IOA or connect to host (RTR and custom IOAs manager)
+• Prevention Policy Admin
+• Falcon Console Guest
+• Dashboard Admin
+• Desktop Support Analyst
+• Workflow Author
+• Help Desk Analyst
+• Role Access is cumulative to combine roles for capabilities
+
+
+-- A note on Real Time Responder (RTR) Roles --
+
+• RTR – Read only analyst – can’t do custom scripts or “PUT” actions
+• RTR – Active Responder – can use the “GET” command, some custom scripts
+• RTR – Administrator – custom scripts, upload files, run commands
+
+
+-- How to add a new user --
+
+Navigation: Host setup > Falcon users > User management
+Can reset 2FA, passwords, delete users, create users
+
+
+-- Setting up Email Notifications --
+
+Navigation: Support and resources > General settings > Scroll to the bottom
+Endpoint security > Crowdscore incidents > Can set up email notifications
