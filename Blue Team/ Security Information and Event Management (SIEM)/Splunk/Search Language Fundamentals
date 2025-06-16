@@ -124,9 +124,62 @@ index=main sourcetype=eventgen (nodeName=host01 OR nodeName=host02) NOT partner=
 
 -- sort Command --
 
+• Sort search results by specified fields.
+
+• To sort in ascending order:
+  ✓ Use sort +<fieldname>
+  ✓ This is the default (when + not specified).
+
+• To sort in descending order:
+  ✓ Use sort -<fieldname>
+
+• Use the limit argument to limit the number of results.
+  ✓ You can also specify the value without argument name.
+
+• To sort on multiple fields, use a space after the sort sign.
+  ✓ Use sort -/+ <fieldnames>
+
+=> Sort by Client IP Address in descending order
+index=web sourcetype=access_combined
+| table clientip, method, bytes, status, productId
+| rename method as "HTTP Method", status as "HTTP Status", clientip as Client_IPAddress
+| sort -Client_IPAddress
 
 
+=> Sort by Client IP Address, then by HTTP Method (both ascending)
+index=web sourcetype=access_combined
+| table clientip, method, bytes, status, productId
+| rename method as "HTTP Method", status as "HTTP Status", clientip as Client_IPAddress
+| sort Client_IPAddress "HTTP Method"
+  
 
+=> Sort by Client IP Address in ascending order, limit to 10 results
+index=web sourcetype=access_combined
+| table clientip, method, bytes, status, productId
+| rename method as "HTTP Method", status as "HTTP Status", clientip as Client_IPAddress
+| sort limit=10 Client_IPAddress
+
+
+=> Sort by HTTP Method in descending order, limit to 20 results
+index=web sourcetype=access_combined
+| table clientip, method, bytes, status, productId
+| rename method as "HTTP Method", status as "HTTP Status", clientip as Client_IPAddress
+| sort 20 - "HTTP Method"
+  
+• From the previous demo:
+✓ Sort the table in ascending order of Client IP Address. Limit to 10 results.
+✓ Sort the table in descending order of HTTP Method. Limit to 20 results.
+✓ Sort the table in descending order by Client IP Address, then by HTTP Method.
 
 
 -- dedup Command --
+
+
+
+
+
+
+
+
+
+
