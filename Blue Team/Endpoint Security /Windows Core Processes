@@ -1,1 +1,174 @@
 
+--- Windows Core Processes ---
+
+• Process Investigation
+• Process Tree Overview
+• System
+• smss.exe (Session Manager Subsystem)
+• csrss.exe (Client/Server Runtime Subsystem)
+• wininit.exe (Windows Initialization)
+• services.exe (Service Control Manager)
+• svchost.exe (Service Host)
+• lsass.exe (Local Security Authority Subsystem Service)
+• winlogon.exe (Windows Logon)
+• explorer.exe (Windows Explorer)
+
+
+-- Process Investigation --
+
+• Parent Process
+  → Is this the expected process hierarchy?
+• Child Process
+  → Is this the expected process hierarchy?
+• Command Line Arguments
+  → svchost -k
+• Process Names
+  → Typos, lookalikes, copies
+• User Account
+  → Is this process running from the expected user account?
+• Image Path
+  → Is this process running the expected executable?
+
+
+-- Process Tree Overview --
+
+System (PID 4)
+└── smss.exe (Master)
+    ├── smss.exe (Session 0)
+    │   ├── csrss.exe
+    │   └── wininit.exe
+    │       ├── services.exe
+    │       │   └── svchost.exe
+    │       └── lsass.exe
+    └── smss.exe (Session 1)
+        ├── winlogon.exe
+        │   └── userinit.exe
+        │       └── explorer.exe
+        └── csrss.exe
+
+
+-- System --
+
+• Kernel-mode system thread
+• Manages CPU, memory, disk
+• Device drivers, hardware, process scheduling, etc.
+
+Image Path:	None (or C:\Windows\system32\ntoskrnl.exe)
+PID:	4
+Parent Process:	None (or System Idle Process)
+Number of Instances:	1
+User Account:	Local System
+Start Time:	At Boot
+
+
+-- smss.exe (Session Manager Subsystem) --
+
+• Windows Session Manager
+• Initiating and managing user sessions
+• Launches child processes – wininit.exe, csrss.exe
+
+Image Path:	%SystemRoot%\System32\smss.exe
+Parent Process:	System (PID 4)
+Number of Instances:	1 master, 1 child per session (children self-terminate)
+User Account:	Local System
+Start Time:	Within seconds of boot
+
+
+-- csrss.exe (Client/Server Runtime Subsystem) --
+
+• Managing console windows
+• Importing DLLs for the Windows API
+• GUI tasks around shutdown
+
+Image Path:	%SystemRoot%\System32\csrss.exe
+Parent Process:	smss.exe (orphan process)
+Number of Instances:	Two or more
+User Account:	Local System
+Start Time:	Within seconds of boot (first two instances)
+
+
+-- wininit.exe (Windows Initialization) --
+
+• Initialize all the things!
+• Session 0
+• Spawns child processes (services.exe, lsass.exe)
+
+Image Path:	%SystemRoot%\System32\wininit.exe
+Parent Process:	smss.exe (orphan process)
+Number of Instances:	1
+User Account:	Local System
+Start Time:	Within seconds of boot
+
+
+-- services.exe (Service Control Manager) --
+
+• Service Control Manager (SCM)
+• Starting, stopping, and interacting with services
+• Sets the LastKnownGood CurrentControlSet registry value
+
+Image Path:	%SystemRoot%\System32\services.exe
+Parent Process:	wininit.exe
+Number of Instances:	1
+User Account:	Local System
+Start Time:	Within seconds of boot
+
+
+-- svchost.exe (Service Host) --
+
+• Hosting and managing Windows services
+• Used to run service DLLs
+• Runs with the -k parameter to differentiate instances/services
+
+Image Path:	%SystemRoot%\System32\svchost.exe
+Parent Process:	services.exe
+Number of Instances:	Many (typically 10+)
+User Account:	Local System, Network Service, etc.
+Start Time:	Within seconds of boot or when services start
+
+
+-- lsass.exe (Local Security Authority Subsystem Service) --
+
+• Authenticating users
+• Implementing local security policies
+• Writing events to the security event log
+
+Image Path:	%SystemRoot%\System32\lsass.exe
+Parent Process:	wininit.exe
+Number of Instances:	1
+User Account:	Local System
+Start Time:	Within seconds of boot
+
+
+-- winlogon.exe (Windows Logon) --
+
+• Manages login and logout procedures
+• Loads user profiles (NTUSER.DAT)
+• Responds to the Secure Attention Sequence (SAS)
+
+Image Path:	%SystemRoot%\System32\winlogon.exe
+Parent Process:	smss.exe (orphan process)
+Number of Instances:	1 or more
+User Account:	Local System
+Start Time:	Within seconds of boot (Session 1)
+
+
+-- explorer.exe (Windows Explorer) --
+
+• Provides the GUI for files, folders, and system settings
+• Manages the taskbar, Start Menu, and desktop
+• Responsible for the overall desktop environment
+
+Image Path:	%SystemRoot%\explorer.exe
+Parent Process:	userinit.exe (orphan process)
+Number of Instances:	1 or more
+User Account:	Logged-in User Account
+Start Time:	When interactive user sessions begin
+
+
+
+
+
+
+
+
+
