@@ -31,18 +31,18 @@ Here’s a breakdown of important Windows Registry hives, their functionality pa
 • Purpose: Contains configuration data for the entire system, hardware, drivers, services, and installed software.
 
 • Important Subkeys:
-  •→ HKLM\SYSTEM\CurrentControlSet\Services\
-What to look for: Malicious drivers, unauthorized services.
-Why: Attackers may create or modify services for persistence.
-HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
-What to look for: Auto-start entries.
-Why: Used for persistence by malware.
-HKLM\SAM
-What to look for: Windows account credentials (protected).
-Why: Accessed during credential dumping attacks (e.g., Mimikatz).
-HKLM\SECURITY
-What to look for: LSA secrets, cached credentials.
-Why: Targeted in credential attacks.
+  → HKLM\SYSTEM\CurrentControlSet\Services\
+      What to look for: Malicious drivers, unauthorized services.
+      Why: Attackers may create or modify services for persistence.
+    HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+      What to look for: Auto-start entries.
+      Why: Used for persistence by malware.
+    HKLM\SAM
+        What to look for: Windows account credentials (protected).
+        Why: Accessed during credential dumping attacks (e.g., Mimikatz).
+    HKLM\SECURITY
+        What to look for: LSA secrets, cached credentials.
+        Why: Targeted in credential attacks.
 
 
 
