@@ -178,6 +178,13 @@ reg save HKLM\SAM C:\sam.save
 
 --- Structure of the Registry ---
 
+• The Windows Registry is a collection of databases that contains the system's configuration data. This configuration data can be about the hardware, the software, or the user's information. It also includes data about the recently used files, programs used, or devices connected to the system. As you can understand, this data is beneficial from a forensics standpoint.
+• You can view the registry using regedit.exe, a built-in Windows utility to view and edit the registry.
+• The Windows registry consists of Keys and Values.
+  → When you open the regedit.exe utility to view the registry, the folders you see are Registry Keys.
+  → Registry Values are the data stored in these Registry Keys.
+• A Registry Hiveis a group of Keys, subkeys, and values stored in a single file on the disk.
+
 The registry on any Windows system contains the following five root keys:
 
 • HKEY_CURRENT_USER
@@ -205,12 +212,4 @@ The registry on any Windows system contains the following five root keys:
 • The USRCLASS.DAT hive is in the directory C:\Users\<username>\AppData\Local\Microsoft\Windows.
 
 •AmCache hive is in C:\Windows\AppCompat\Programs\Amcache.hve. Windows creates this hive to save information on programs that were recently run on the system.
-
-
-
-
-
-
-
-
 
