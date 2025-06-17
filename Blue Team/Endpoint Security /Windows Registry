@@ -32,27 +32,146 @@ Here’s a breakdown of important Windows Registry hives, their functionality pa
 
 • Important Subkeys:
   → HKLM\SYSTEM\CurrentControlSet\Services\
-      What to look for: Malicious drivers, unauthorized services.
-      Why: Attackers may create or modify services for persistence.
+    ► What to look for: Malicious drivers, unauthorized services.
+    ► Why: Attackers may create or modify services for persistence.
   → HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
-      What to look for: Auto-start entries.
-      Why: Used for persistence by malware.
+    ► What to look for: Auto-start entries.
+    ► Why: Used for persistence by malware.
   → HKLM\SAM
-        What to look for: Windows account credentials (protected).
-        Why: Accessed during credential dumping attacks (e.g., Mimikatz).
+    ► What to look for: Windows account credentials (protected).
+    ► Why: Accessed during credential dumping attacks (e.g., Mimikatz).
   → HKLM\SECURITY
-        What to look for: LSA secrets, cached credentials.
-        Why: Targeted in credential attacks.
+    ► What to look for: LSA secrets, cached credentials.
+    ► Why: Targeted in credential attacks.
+
+
+🧍 2. HKEY_CURRENT_USER (HKCU)
+
+• Path: HKCU\
+• Purpose: Settings specific to the currently logged-in user.
+
+• Important Subkeys:
+  → HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+    ► What to look for: User-specific persistence.
+  → HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs
+    ► What to look for: Recent file access — useful in timeline analysis.
+  → HKCU\Software\Microsoft\Windows\Shell\BagMRU
+    ► What to look for: User interaction with folders.
+  → HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\OpenSavePidlMRU
+    ► What to look for: Files recently accessed via open/save dialogs.
+
+
+🌐 3. HKEY_USERS (HKU)
+
+• Path: HKU\<UserSID>\
+• Purpose: Contains user profile settings for all users.
+• Useful for: Accessing another user’s HKCU equivalent when they are not logged in.
+
+• Important Subkeys:
+
+→ Look for same keys as in HKCU, but under each SID (e.g., S-1-5-21-...).
+
+
+⚙️ 4. HKEY_CLASSES_ROOT (HKCR)
+
+• Path: HKCR\
+• Purpose: File association and COM object settings.
+
+• Important Subkeys:
+  → Used in DLL hijacking or COM hijacking.
+  → Malware may register malicious DLLs here for persistence.
+
+
+🖥️ 5. HKEY_CURRENT_CONFIG (HKCC)
+
+• Path: HKCC\
+• Purpose: Dynamic configuration data — hardware profile used at startup.
+• Less relevant for persistence or IOC detection, but helpful for understanding device context.
+
+
+🔍 High-Value Registry Keys for SOC Analysis
+
+HKLM\SYSTEM\CurrentControlSet\Services\ → Service definitions → Check for new/modified services
+HKLM\Software\Microsoft\Windows\CurrentVersion\Run → System-wide autoruns → Malware persistence
+HKCU\Software\Microsoft\Windows\CurrentVersion\Run → User-specific autoruns → User-level persistence
+HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs → Recently opened documents → User activity
+HKCU\Software\Microsoft\Windows\Shell\BagMRU → Folder access history → Lateral movement / behavior
+HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers → Application compatibility shims → Exploit abuse
+HKLM\SYSTEM\CurrentControlSet\Control\Lsa → Security policies → Credential dumping (e.g., disabling LSASS protection)
+
+
+🎯 Tips for SOC Analysts
+
+• Use tools like:
+  → RegRipper, Autoruns, Sysinternals, FTK Imager, Velociraptor, KAPE.
+
+• Correlate registry findings with:
+  → Event logs (EVTX)
+  → File system artifacts ($MFT, prefetch, shimcache)
+  → Memory analysis
+
+• Watch for anomalies like:
+  → Suspicious Run keys pointing to non-standard paths
+  → Services with strange names or binaries in C:\Users\ or AppData
+  → Unexpected registry changes outside patch windows
 
 
 
+✅ reg.exe – The Built-in Windows Registry CLI Tool
+
+It allows you to add, delete, query, import/export, and compare registry entries from the command line.
+
+reg [add|delete|query|copy|save|load|unload|restore|compare|export|import] <KeyName> [Options]
 
 
+1. 🔍 Query a Registry Key
+reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
+Use case: Check for persistence mechanisms. Add /s to recursively list all subkeys:
+reg query "HKCU\Software\Microsoft" /s
+
+2. ➕ Add a Registry Key or Value
+reg add "HKCU\Software\TestKey" /v "MaliciousRun" /t REG_SZ /d "C:\Evil\malware.exe" /f
+/v: value name
+/t: type (e.g., REG_SZ, REG_DWORD, etc.)
+/d: data
+/f: force overwrite without prompt
+
+3. ❌ Delete a Registry Key or Value
+reg delete "HKCU\Software\TestKey" /f
+To delete just a value:
+reg delete "HKCU\Software\TestKey" /v "MaliciousRun" /f
+
+4. 📝 Export a Registry Key to File
+reg export "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" C:\runkey_backup.reg
+
+5. 📥 Import a Registry File
+reg import C:\runkey_backup.reg
+
+6. 🔄 Compare Two Registry Keys
+reg compare "HKCU\Software\Microsoft" "HKLM\Software\Microsoft"
 
 
+💡 Useful Registry Value Types (/t parameter)
+
+REG_SZ → String
+REG_DWORD → 32-bit integer
+REG_BINARY → Binary data
+REG_MULTI_SZ → Multi-line strings
+REG_EXPAND_SZ → Expandable string
 
 
+🔐 Requires Admin?
 
+• HKCU = No admin needed
+• HKLM, HKCR, HKU = Usually requires admin
+
+
+🚨 Security Tip
+
+From a SOC perspective, also monitor use of reg.exe by suspicious processes:
+
+reg query HKLM\SAM
+reg save HKLM\SAM C:\sam.save
 
 
 
