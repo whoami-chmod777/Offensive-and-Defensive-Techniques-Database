@@ -1,1 +1,65 @@
 
+In Security Operations Center (SOC) analysis, the Windows Registry is a crucial forensic artifact. It stores configuration settings, user activity data, and system state information — making it a goldmine for identifying malicious behavior, persistence mechanisms, and lateral movement.
+Here’s a breakdown of important Windows Registry hives, their functionality paths, and key areas SOC analysts should monitor:
+
+
+--- Windows Registry ---
+
+• HKEY_LOCAL_MACHINE (HKLM)
+• HKEY_CURRENT_USER (HKCU)
+• HKEY_USERS (HKU)
+• HKEY_CLASSES_ROOT (HKCR)
+• HKEY_CURRENT_CONFIG (HKCC)
+• High-Value Registry Keys for SOC Analysis
+• Tips for SOC Analysts
+
+
+--- Built-in Windows Registry CLI ---
+
+• The Built-in Windows Registry CLI Tool
+• Common Use Cases for SOC/Forensics Work
+
+
+--- Useful Registry Value Types (/t parameter) ---
+
+
+-- Windows Registry --
+
+🔑 1. HKEY_LOCAL_MACHINE (HKLM)
+
+• Path: HKLM\
+• Purpose: Contains configuration data for the entire system, hardware, drivers, services, and installed software.
+
+• Important Subkeys:
+  •→ HKLM\SYSTEM\CurrentControlSet\Services\
+What to look for: Malicious drivers, unauthorized services.
+Why: Attackers may create or modify services for persistence.
+HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+What to look for: Auto-start entries.
+Why: Used for persistence by malware.
+HKLM\SAM
+What to look for: Windows account credentials (protected).
+Why: Accessed during credential dumping attacks (e.g., Mimikatz).
+HKLM\SECURITY
+What to look for: LSA secrets, cached credentials.
+Why: Targeted in credential attacks.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
