@@ -176,6 +176,15 @@ reg save HKLM\SAM C:\sam.save
 
 ************************************************************************************************************************
 
+• Structure of the Registry
+• Accessing Registry hive Offline
+• Important Registry Keys
+• 
+• 
+• 
+• 
+
+
 --- Structure of the Registry ---
 
 • The Windows Registry is a collection of databases that contains the system's configuration data. This configuration data can be about the hardware, the software, or the user's information. It also includes data about the recently used files, programs used, or devices connected to the system. As you can understand, this data is beneficial from a forensics standpoint.
@@ -212,4 +221,117 @@ The registry on any Windows system contains the following five root keys:
 • The USRCLASS.DAT hive is in the directory C:\Users\<username>\AppData\Local\Microsoft\Windows.
 
 •AmCache hive is in C:\Windows\AppCompat\Programs\Amcache.hve. Windows creates this hive to save information on programs that were recently run on the system.
+
+
+--- Important Registry Keys (System Information) ---
+
+• OS Version: SOFTWARE\Microsoft\Windows NT\CurrentVersion
+• Current Control set:
+  → HKLM\SYSTEM\CurrentControlSet
+  → SYSTEM\Select\Current
+  → SYSTEM\Select\LastKnownGood
+• Computer Name:
+  → SYSTEM\CurrentControlSet\Control\ComputerName
+• Time Zone Information:
+  → SYSTEM\CurrentControlSet\Control\TimeZoneInformation
+• Network Interfaces and Past Networks:
+  → SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces
+• Autostart Programs (Autoruns):
+  → NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Run
+  → NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\RunOnce
+  → SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce
+  → SOFTWARE\Microsoft\Windows\CurrentVersion\policies\Explorer\Run
+  → SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+  → SAM hive and user information:
+• SAM\Domains\Account\User
+  → SAM\Domains\Account\User
+
+--- Important Registry Keys (External Device) ---
+
+• Device identification:
+  → SYSTEM\CurrentControlSet\Enum\USBSTOR
+  → SYSTEM\CurrentControlSet\Enum\USB
+• First/Last Times:
+  → SYSTEM\CurrentControlSet\Enum\USBSTOR\Ven_Prod_Version\USBSerial#\Properties\{83da6326-97a6-4088-9453-a19231573b29}\####
+  → Oo64=first connection
+  → 0066=last connection
+  → 0067=last removal
+• USB device Volume Name:
+  → SOFTWARE\Microsoft\Windows Portable Devices\Devices
+• HKLM\SYSTEM\MountedDevices
+  → Find Serial # to obtain the Drive Letter of the USB device
+  → Find Serial # to obtain the Volume GUID of the USB device
+
+
+--- Important Registry Keys (File/folder usage) ---
+
+• Recent Files:
+  → NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs
+• Office Recent Files:
+  → NTUSER.DAT\Software\Microsoft\Office\VERSION
+  → NTUSER.DAT\Software\Microsoft\Office\VERSION\UserMRU\LiveID_####\FileMRU
+• ShellBags:
+  → USRCLASS.DAT\Local Settings\Software\Microsoft\Windows\Shell\Bags 
+  → USRCLASS.DAT\Local Settings\Software\Microsoft\Windows\Shell\BagMRU
+  → NTUSER.DAT\Software\Microsoft\Windows\Shell\BagMRU
+  → NTUSER.DAT\Software\Microsoft\Windows\Shell\Bags
+• Open/Save and LastVisited Dialog MRUs:
+  → NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\OpenSavePIDlMRU
+  → NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\LastVisitedPidlMRU
+• Windows Explorer Address/Search Bars:
+  → NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\TypedPaths
+  → NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\WordWheelQuer
+
+
+--- Important Registry Keys (Network Behaviour) ---
+
+• HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList
+  → \Signatures
+    ► \Unmanaged (record DefaultGatewayMac, DnsSuffix, FirstNetwork (SSID), ProfileGuid)
+    ► \Managed
+  → \Nla
+    ► \Cache
+  → Profiles
+• Most info regarding NLA will be stored under the NetworkList key above, and also:
+  → HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\HomeGroup
+• HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles\{GUID}
+  → Network Types:
+    ► 0x06 = Wired
+    ► 0x17 = Broadband
+    ► 0x47 = Wireless
+  → Category:
+    ► 0 – Public
+    ► 1 – Private
+    ► 2 - Domain/Work
+
+
+--- Auditing Registry Through PowerShell ---
+
+• Get-ChildItem -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run\'
+• Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run\’
+• Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run\' -name SecurityHealth
+• Get-ChildItem -Path 'HKLM:\SYSTEM\CurrentControlSet\Enum\USBSTOR’
+• Get-ChildItem -Path 'HKLM:\SYSTEM\CurrentControlSet\Enum\USBSTOR\Disk&Ven_SanDisk&Prod_Cruzer_Blade&Rev_1.00’
+
+
+--- Malware Persistence in Registry ---
+
+• HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run and RunOnce
+• HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run and RunOnce
+• HKEY_CLASSES_ROOT\Directory\Background\Shell – Launches while running any shell or on mouse click option
+• HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer\Browser Helper Objects - BHOs can modify browser behavior, inject advertisements, or steal sensitive information.
+• HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services – Create as a service themselves
+• HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunServices - Malware may add entries here to run as a service during user login
+• HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Windows and add as AppInit_DLLs
+• HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify – Launches itself when windows kernel event occurs, such as user login, user logoff
+• HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\SharedTaskScheduler - Malware may add entries under this key to run code when the Windows Explorer starts.
+• HKEY_CURRENT_USER\Control Panel\Desktop\SCRNSAVE.EXE - Malware can modify this value to set a screensaver executable that contains malicious code.
+
+
+
+
+
+
+
+
 
