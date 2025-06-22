@@ -1,1 +1,91 @@
 
+--- Windows Service Analysis ---
+
+services.msc
+
+
+-- Basic Syntax --
+
+sc create <ServiceName> binPath= "<FullPathToExecutable>" [options]
+
+sc create EvilService binPath= "C:\Users\Public\evil.exe" start= auto 
+sc create EvilService binPath= "C:\Users\Public\evil.exe" start= auto DisplayName= "Windows Update Service"
+sc create EvilService binPath= "C:\Users\Public\evil.exe" start= auto DisplayName= "Windows Update Scheduler"
+
+sc create MyMonitorService binPath= "C:\Program Files\MonitorTool\monitor.exe" start= auto DisplayName= "System Monitor"
+
+sc query
+sc qc <ServiceName>
+sc start <ServiceName>
+sc stop <ServiceName>
+sc delete <ServiceName>
+sc create <Name> binPath= "C:\Path\file.exe" start= auto
+
+
+-- Using CMD --
+
+sc query state= all
+sc qc Spooler
+sc query
+
+reg query "HKLM\SYSTEM\CurrentControlSet\Services" /s | findstr /i "ImagePath"
+
+
+-- Using PowerShell --
+
+Get-Service
+Get-Service -Name Spooler
+
+Get-Service -Name W*  
+
+Get-Service | Where-Object { $_.Status -eq 'Running' }
+Get-Service | Where-Object { $_.Status -eq 'Stopped' }
+Get-Service | Where-Object { $_.DisplayName -like "*Windows Update*" }
+
+Get-Service | Sort-Object Status, DisplayName
+Get-Service | Sort-Object Status | Format-Table -AutoSize
+
+Get-Service | Format-Table Name, DisplayName, Status, StartType
+
+Get-WmiObject -Class Win32_Service | 
+Select Name, DisplayName, StartMode, State, StartName, PathName
+
+Get-WmiObject -Class Win32_Process | 
+Select Name, ProcessId, ExecutablePath, CommandLine
+
+Get-WmiObject Win32_Service | 
+Select-Object Name, DisplayName, StartMode, StartName, State, PathName
+
+Get-WmiObject -Class Win32_ComputerSystem | 
+Select UserName
+
+Get-WmiObject -Class Win32_Product | 
+Select Name, Version, InstallDate
+
+Get-WmiObject -Class Win32_NetworkAdapterConfiguration | 
+Where-Object { $_.IPEnabled -eq $true } | 
+Select Description, IPAddress, DefaultIPGateway, MACAddress
+
+Get-WmiObject -Class Win32_OperatingSystem | 
+Select Caption, Version, BuildNumber, LastBootUpTime
+
+Get-WmiObject -Class Win32_StartupCommand | 
+Select Name, Command, Location
+
+Get-WmiObject -Class Win32_Service -Filter "Name = 'SuspiciousService'" | 
+Format-List *
+
+Get-WmiObject Win32_Service | 
+Where-Object { $_.PathName -match "Users|AppData|Temp" } | 
+Format-Table Name, PathName, StartName
+
+Get-CimInstance -ClassName Win32_Service
+
+
+-- Detection Tip --
+
+C:\Users, C:\Users\Public, %TEMP%, %APPDATA%
+With no digital signature
+Sysmon Event ID 13, Registry Key Creation
+
+Get-WinEvent -LogName System | Where-Object { $_.Id -eq 7045 } | Select TimeCreated, Message
