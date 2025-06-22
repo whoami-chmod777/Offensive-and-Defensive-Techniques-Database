@@ -1,1 +1,103 @@
 
+
+-- Autostart Programs (Autoruns) --
+
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Run
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\RunOnce
+
+SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce
+SOFTWARE\Microsoft\Windows\CurrentVersion\policies\Explorer\Run
+SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+
+
+-- Autorun Registry Keys --
+
+HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce
+
+HKLM\Software\Microsoft\Windows\CurrentVersion\Run
+HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce
+
+
+-- Service Configuration Keys --
+
+HKLM\SYSTEM\CurrentControlSet\Services\{ServiceName}
+
+
+-- Scheduled Tasks --
+
+%SystemRoot%\System32\Tasks
+HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache
+
+
+-- Suspicious Registry Indicators --
+
+%TEMP%, %APPDATA%, %PUBLIC%, %USERPROFILE%
+UNC paths (\\192.168.x.x\share\malware.exe)
+
+
+-- Windows CLI --
+
+reg query [RootKey\SubKey] [/v ValueName] [/s]
+
+reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Run"
+reg query "HKLM\Software\Microsoft\Windows\CurrentVersion\Run"
+
+reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v OneDrive
+reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /s
+
+
+reg add [RootKey\SubKey] /v ValueName /t Type /d Data [/f]
+
+/v	Value name
+/t	Type (REG_SZ, REG_DWORD, REG_BINARY, etc.)
+/d	Data to store
+/f	Force overwrite without prompt
+
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v MyTool /t REG_SZ /d "C:\Tools\mytool.exe" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce" /v TempScript /t REG_SZ /d "C:\Temp\script.bat" /f
+
+
+
+-- PowerShell --
+
+Get-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run"
+Get-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Run"
+
+Get-ItemProperty -Path "Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Run"
+Get-ItemProperty -Path "Registry::HKLM\Software\Microsoft\Windows\CurrentVersion\Run"
+
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name "MyTool" -Value "C:\Tools\mytool.exe"
+
+New-Item -Path "HKCU:\Software\MyMalware" -Force
+New-ItemProperty -Path "HKCU:\Software\MyMalware" -Name "Payload" -Value "evil.exe" -PropertyType String
+
+
+*************************************************************************************
+
+
+Import-Module .\AutoRuns.psm1
+Set-ExecutionPolicy Unrestricted
+
+Get-Module
+Get-Module -Name AutoRuns
+Get-Command -Module AutoRuns
+
+Get-PSAutorun
+Get-Help Get-PSAutorun --detailed
+
+
+Get-PSAutorun -VerifyDigitalSignature |
+Where { -not($_.isOSbinary)} |
+New-AutoRunsBaseLine -Verbose -FilePath .\Baseline.ps1
+
+Get-PSAutorun -VerifyDigitalSignature |
+Where { -not($_.isOSbinary)} |
+New-AutoRunsBaseLine -Verbose -FilePath .\CurrentState.ps1
+
+Compare-AutoRunsBaseLine -ReferenceBaseLineFile .\Baseline.ps1 -DifferenceBaseLineFile .\CurrentState.ps1
+
+
+
+https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns
+https://github.com/p0w3rsh3ll/AutoRuns?tab=readme-ov-file#Todo
