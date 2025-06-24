@@ -1,0 +1,33 @@
+--- Respond (Analysis) ---
+
+Live Triage - Windows
+
+• System information
+• User information
+• Network information
+• Service information
+• Policy, patch and settings information
+• Autorun and autoload information
+• Logs
+• Files, drives and shares information
+
+Live Triage - Linux
+• System information
+• User information
+• Network information
+• Service information
+• Policy, patch and settings information
+• Autorun and autoload information
+• Logs
+• Files, drives and shares information
+
+Malware Analysis
+• Static analysis basics
+• Identify malware
+• Process Explorer
+• File hash analysis
+• Hash query
+
+Hard Drive and Memory Acquisition
+• Windows
+• Linux
