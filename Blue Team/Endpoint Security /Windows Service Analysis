@@ -87,3 +87,11 @@ With no digital signature
 Sysmon Event ID 13, Registry Key Creation
 
 Get-WinEvent -LogName System | Where-Object { $_.Id -eq 7045 } | Select TimeCreated, Message
+
+Get-Service | Where-Object { $_.Name -like "*keyword*" }
+Get-Service | Where-Object { $_.DisplayName -like "*keyword*" }
+Get-Service | Where-Object { $_.DisplayName -like "*update*" }
+Get-Service | Where-Object { $_.Name -like "*win*" }
+
+Get-Service | Where-Object { $_.DisplayName -like "*update*" } | Format-Table Name, DisplayName, Status, StartType
+
