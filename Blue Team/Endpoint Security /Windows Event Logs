@@ -1,1 +1,113 @@
 
+--- Windows Event Logs ---
+
+ • Security Event IDs
+ • System Event IDs
+ • Event Viewer
+ • wevtutil for SOC Analysts
+
+
+
+
+
+-- Security Event IDs --
+
+4720 - A user account was created
+4722 - A user account was enabled
+4723 - An attempt was made to change an account's password
+4724 - An attempt was made to reset an account's password
+4738 - A user account was changed
+4725 - A user account was disabled
+4726 - A user account was deleted
+4732 - A member was added to a security-enabled local group
+4688 - A new process has been created
+1102 - The audit log was cleared
+
+-- System Event IDs --
+
+7045 - A service was installed in the system
+7030 - The Service Control Manager tried to take a corrective action (Restart the service)
+7035 - The Service Control Manager is transitioning services to a running state
+7036 - The Service Control Manager has reported that a service has entered the running state
+
+
+-- Event Viewer --
+
+Start → Run → eventvwr.msc
+eventvwr
+
+-- 📂 Key Event Log Categories --
+
+Security             Authentication, authorization, and audit logs (e.g., logons, privilege use)
+System               OS-level operations (e.g., driver failure, shutdown, restart)
+Application          App-specific events (e.g., errors, crashes)
+Setup                Windows setup and updates
+Forwarded Events     Logs from other systems (if configured via WEC)
+
+
+-- 🔑 Critical Security Event IDs --
+
+4624	Successful logon
+4625	Failed logon
+4634	Logoff
+4648	Logon using explicit credentials
+4670	Permission on object changed
+4688	New process creation
+4697	Service installation
+4720	User account created
+4722	User account enabled
+4723	Password change
+4740	Account locked out
+1102	Security log cleared (highly suspicious)
+4723  Password change
+4724  Password change/reset
+
+
+
+--- 🛡️ wevtutil for SOC Analysts ---
+
+wevtutil qe Security
+wevtutil qe Security /c:10 /f:text
+wevtutil qe Security /c:10 /f:text /rd:true
+wevtutil qe Security /c:10 /f:text /rd:true /q:"[System[(EventID=4624)]]"
+
+wevtutil qe Security "/q:*[System[(EventID=4624)]]" /f:text
+wevtutil qe Security /c:50 /f:text | findstr /i "4625"
+
+
+-- 🛡️ Get-WinEvent PowerShell for SOC Analysts --
+
+Get-WinEvent -LogName System
+Get-WinEvent -LogName Security
+
+Get-WinEvent -LogName Security | Where-Object {$_.Id -eq 4625}
+
+Get-WinEvent -FilterHashtable @{logname="Security"; ID=4625}
+
+Get-WinEvent -FilterHashtable @{logname='Security'; ID=4624} -MaxEvents 2 | 
+Format-List *
+
+Get-WinEvent -FilterHashtable @{LogName="Security"; Id=4624} |
+Select-Object TimeCreated, Id, Message
+
+Get-WinEvent -Path "C:\Windows\System32\winevt\Logs\Security.evtx"
+Get-WinEvent -LogName System -MaxEvents 10
+Get-WinEvent -LogName Security | Where-Object {$_.Message -like "*admin*"}
+
+$ids = 4624, 4625, 4634
+Get-WinEvent -FilterHashtable @{LogName='Security'; Id=$ids}
+
+Get-WinEvent -FilterHashtable @{LogName="Security"; Id=4740} |
+Select-Object TimeCreated, Message
+
+
+
+
+
+
+
+
+
+
+
+
