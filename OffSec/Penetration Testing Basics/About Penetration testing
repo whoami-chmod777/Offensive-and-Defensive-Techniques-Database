@@ -53,15 +53,16 @@ In a white box test the penetration tester has full knowledge of the target syst
 
 >> Hackers using social engineering to bypass authentication <<
 
-The starting point of many cyber-attacks is often a malware infection or phishing attack performed through some form of social engineering. Social engineering exploits the weakest link in the security chain which, on many occasions, happens to be the human element. Social Engineering attacks trick humans into executing malicious files or sharing passwords granting an attacker a new, higher level of access. Even authentication mechanisms that are considered ‘safe’ can be rendered ineffective by people sharing valid credentials thereby providing legitimate access to the underlying systems. The following article describes how attackers used social engineering through an email phishing campaign to steal credentials and then exploited vulnerabilities in a web application using malware to steal the data of millions of customers: https://www.csoonline.com/article/2601021/11-steps-attackers-took-to-crack-target.html More information about social engineering: https://www.webroot.com/ie/en/home/resources/tips/online-shopping-banking/secure-what-is-social-engineering
+The starting point of many cyber-attacks is often a malware infection or phishing attack performed through some form of social engineering. Social engineering exploits the weakest link in the security chain which, on many occasions, happens to be the human element. Social Engineering attacks trick humans into executing malicious files or sharing passwords granting an attacker a new, higher level of access. Even authentication mechanisms that are considered ‘safe’ can be rendered ineffective by people sharing valid credentials thereby providing legitimate access to the underlying systems. The following article describes how attackers used social engineering through an email phishing campaign to steal credentials and then exploited vulnerabilities in a web application using malware to steal the data of millions of customers: 
+https://www.csoonline.com/article/2601021/11-steps-attackers-took-to-crack-target.html 
+
+More information about social engineering: 
+https://www.webroot.com/ie/en/home/resources/tips/online-shopping-banking/secure-what-is-social-engineering
 
 
 
 Links
 http://www.pentest-standard.org/index.php/Main_Page
-
-
-
 
 
 
