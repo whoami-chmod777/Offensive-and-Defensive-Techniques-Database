@@ -99,7 +99,23 @@ Get-WinEvent -FilterHashtable @{LogName='Security'; Id=$ids}
 Get-WinEvent -FilterHashtable @{LogName="Security"; Id=4740} |
 Select-Object TimeCreated, Message
 
+Get-WinEvent -ListLog *
+Get-WinEvent -ListLog Setup | Format-List -Property *
+Get-WinEvent -ListLog * -ComputerName localhost | Where-Object { $_.RecordCount }
 
+Get-WinEvent -ListProvider *
+(Get-WinEvent -ListLog Application).ProviderNames
+
+Get-WinEvent -ListProvider *Policy*
+(Get-WinEvent -ListProvider Microsoft-Windows-GroupPolicy).Events | Format-Table Id, Description
+
+$Event = Get-WinEvent -LogName 'Windows PowerShell'
+$Event.Count
+$Event | Group-Object -Property Id -NoElement | Sort-Object -Property Count -Descending
+$Event | Group-Object -Property LevelDisplayName -NoElement
+
+Get-WinEvent -Path 'C:\Test\Windows PowerShell.evtx'
+Get-WinEvent -Path 'C:\Test\PowerShellCore Operational.evtx' -MaxEvents 100
 
 
 
