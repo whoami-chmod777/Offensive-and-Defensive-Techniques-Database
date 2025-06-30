@@ -148,6 +148,7 @@ DNSenum
 DNSenum is a Perl script that can be used to enumerate the DNS information of a domain and to discover non-contiguous IP blocks. This tool will also attempt zone transfers on all the related domain name servers and searches for subdomains.
 
 dnsenum [domainname]
+dnsenum google.com
 
 
 DNSrecon
@@ -175,8 +176,25 @@ theHarvester -h
 
 Let’s see if we can find any e-mail addresses for the cisco.com domain using the Yahoo search engine. We will specify the domain to search for with -d, the data source with -b and limit the results for this search to 100 results by adding -l 100 to the command 
 
+theHarvester
+theHarvester -h
 theHarvester -d cisco.com -b google -l 100
+theHarvester -d cisco.com -b all -l 100
+
+theHarvester -d cisco.com -b google -l 100
+theHarvester -d cisco.com -b bing -l 100
 theHarvester -d cisco.com -b yahoo -l 100
+theHarvester -d cisco.com -b baidu -l 100
+theHarvester -d cisco.com -b bingapi -l 100
+theHarvester -d cisco.com -b crtsh -l 100
+theHarvester -d cisco.com -b dogpile -l 100
+theHarvester -d cisco.com -b googleCSE -l 100
+theHarvester -d cisco.com -b hunter -l 100
+theHarvester -d cisco.com -b linkedin -l 100
+theHarvester -d cisco.com -b twitter -l 100
+theHarvester -d cisco.com -b netcraft -l 100
+theHarvester -d cisco.com -b yahoo -l 100
+
 
 
 Recon-ng
