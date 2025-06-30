@@ -104,6 +104,9 @@ google.com has address 142.251.209.142
 google.com has IPv6 address 2a00:1450:4005:801::200e
 google.com mail is handled by 10 smtp.google.com.
 
+└─$ host 142.251.209.142
+└─$ host 8.8.8.8
+
 
 Zone transfers
 DNS is regarded as a very critical component for applications and services to function properly. For this reason, DNS servers are frequently set up to be highly-available and when the one DNS server goes down a secondary will take over. In order to have this setup function properly we have to make sure that both DNS servers contain the same data and therefore multiple DNS servers need to ‘synchronize’ data with each other on a regular basis. A mechanism to replicate DNS databases (containing DNS records) across a set of DNS servers is called a zone transfer, the replicated database is called a ‘DNS zone’. A zone transfer occurs when the information from the primary DNS server is replicated on one or more secondary DNS servers. While DNS zone transfers are perfectly fine between DNS servers that are intended to share zones, they can unintentionally leak sensitive information to an attacker that would otherwise not be available. While DNS records itself are not sensitive, a DNS zone may reveal a complete list of all hosts for a given zone. This zone may contain sensitive data, such as hostnames, and can provide a larger attack surface for attackers – especially when a company uses a lot of custom sub-domains that are hard to discover using brute force techniques. This misconfiguration can lead to an attack surface consisting of less secure staging servers, business applications with a web interface, VOIP setups and references to every local branch of an organization. Good security practice (which is typical on most DNS servers) is to turn off zone transfers for the public.
