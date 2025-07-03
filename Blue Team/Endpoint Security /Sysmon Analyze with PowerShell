@@ -1,0 +1,33 @@
+
+--- Sysmon Analyze with PowerShell ---
+
+# View all Sysmon logs
+Get-WinEvent -LogName "Microsoft-Windows-Sysmon/Operational"
+
+# Monitoring for Suspicious Processes
+Get-Process | Where-Object { $_.CPU -gt 100 } | Select-Object Name, CPU
+
+# Checking for Open Ports
+Get-NetTCPConnection | Where-Object { $_.State -eq 'Listen' } | Select-Object LocalAddress, LocalPort
+
+# Scanning for Vulnerable Software
+Get-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*" | Select-Object DisplayName, DisplayVersion
+
+# Extracting Event Logs
+Get-WinEvent -FilterHashtable @{LogName='Security'; ID=4625} | Select-Object TimeCreated, Id, LevelDisplayName, Message
+
+# Suspicious Process Creation (Event ID 1)
+Get-WinEvent -FilterHashtable @{LogName="Microsoft-Windows-Sysmon/Operational"; Id=1}
+
+# Show the most recent network connection event (Sysmon Event ID 3) with all details
+Get-WinEvent -FilterHashtable @{logname="Microsoft-Windows-Sysmon/Operational"; id=3} -MaxEvents 1 | Format-List *
+
+# Filter Sysmon network connection events (ID 3) where DestinationPort = 4444
+Get-WinEvent -LogName 'Microsoft-Windows-Sysmon/Operational' -FilterXPath "*[System/EventID=3 and EventData[Data[@Name='DestinationPort']='4444']]" | Format-List *
+
+# Get process creation events (Event ID 1) where ProcessId is 4584
+Get-WinEvent -LogName 'Microsoft-Windows-Sysmon/Operational' -FilterXPath "*[System/EventID=1 and EventData[Data[@Name='ProcessId']='4584']]"
+
+# Get process creation events (Event ID 1) where ProcessId is 4584
+Get-WinEvent -LogName 'Microsoft-Windows-Sysmon/Operational' -FilterXPath "*[System/EventID=1 and EventData[Data[@Name='ProcessId']='4584']]" | Format-List *
+
