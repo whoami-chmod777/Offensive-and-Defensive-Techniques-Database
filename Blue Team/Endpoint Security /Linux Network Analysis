@@ -1,1 +1,31 @@
 
+--- Linux Network Analysis ---
+
+netstat -tn
+netstat -tnp
+netstat -antup
+netstat -rn
+
+
+ss -s
+ss -tnp
+ss -tulnp
+ss -an
+
+ss src 127.0.0.1
+ss dst 127.0.0.1
+ss sport == 4444 -tnp
+ss dport == 4444 -tnp
+
+
+lsof
+lsof -u root
+lsof -i
+lsof -i :80
+lsof -nP -i
+lsof -iTCP -sTCP:LISTEN
+lsof -p 3610 -- Process ID
+
+
+sha256sum <hash_value>
+
