@@ -1,1 +1,56 @@
 
+--- Linux Cron Jobs ---
+
+
+-- CRON JOB MANAGEMENT --
+
+crontab -l                     
+crontab -e                      
+crontab -r                     
+crontab -u <user> -l           
+ls -la /var/spool/cron/crontabs    
+
+
+-- SYSTEM-WIDE CRON JOBS --
+
+cat /etc/crontab               
+ls /etc/cron.d/                
+ls /etc/cron.{hourly,daily,weekly,monthly} 
+
+
+-- LOGGING & DEBUGGING --
+
+grep CRON /var/log/syslog      
+tail -f /var/log/cron         
+journalctl -u cron            
+
+
+-- CRON SYNTAX STRUCTURE --
+
+# ┌──────── Minute (0 - 59)
+# │ ┌─────── Hour (0 - 23)
+# │ │ ┌───── Day of month (1 - 31)
+# │ │ │ ┌─── Month (1 - 12)
+# │ │ │ │ ┌─ Day of week (0 - 6) (Sunday=0 or 7)
+# │ │ │ │ │
+# * * * * *  command_to_execute
+
+
+-- EXAMPLES --
+
+0 5 * * * /usr/bin/backup.sh             -- Every day at 5:00 AM  
+*/10 * * * * /usr/bin/check_disk.sh      -- Every 10 minutes  
+0 0 * * 0 /usr/bin/weekly_report.sh      -- Every Sunday at midnight  
+0 12 1 * * /usr/bin/monthly_cleanup.sh   -- On the 1st of each month at 12:00 PM  
+
+
+-- ENVIRONMENT VARIABLES IN CRON --
+
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+
+
+https://crontab.guru/
+
+
