@@ -1,1 +1,29 @@
 
+--- Linux Process Analysis ---
+
+
+ps -u root
+ps -aux
+ps -AFH 
+ps -AFH | less
+
+ps -p 3610
+ps -p 3610 -F
+ps --ppid 2941
+
+
+pstree
+pstree -p -s 3610
+
+
+top
+top -u root -c 
+top -u root -c -o -TIME+
+
+
+/proc$ ls -la
+/proc$ ls -la exe
+/proc$ strings exe
+
+/proc/3160$ cat env
+/proc/3160$ cat env | tr '\0' '\n'
