@@ -1,7 +1,6 @@
 
 --- Linux Process Analysis ---
 
-
 ps -u root
 ps -aux
 ps -AFH 
