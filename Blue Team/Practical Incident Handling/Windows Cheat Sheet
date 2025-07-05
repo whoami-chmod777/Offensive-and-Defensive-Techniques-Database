@@ -1,0 +1,116 @@
+
+🔐 User Accounts
+Identify abnormal or unauthorized accounts in the system (especially in the Administrators group)
+
+• net user
+• net localgroup administrators
+
+
+⚙️ Processes
+Find suspicious or high-privilege processes that may indicate malicious activity.
+
+• tasklist
+• wmic process list full
+• wmic process get name,parentprocessid,processid
+• wmic process where processid=[pid] get commandline
+
+
+🧩 Services
+Identify abnormal or unauthorized services running on the system.
+
+• net start
+• sc query | more
+• tasklist /svc
+
+
+⏰ Scheduled Tasks
+Identify suspicious scheduled tasks (especially those running with high privileges or unfamiliar names)
+
+• schtasks
+
+
+🚀 Extra Startup Items
+Find unexpected or unauthorized programs set to auto-launch from user-specific folders
+
+• dir /s /b "C:\Documents and Settings\[username]\Start Menu\"
+• dir /s /b "C:\Users\[username]\Start Menu\"
+
+
+🧬 Auto-start Reg Key Entries
+Inspect registry keys commonly used for persistent malware or unauthorized startup programs.
+
+• HKLM\Software\Microsoft\Windows\CurrentVersion\Run
+• HKLM\Software\Microsoft\Windows\CurrentVersion\Runonce
+• HKLM\Software\Microsoft\Windows\CurrentVersion\RunonceEx
+• reg query [reg key]
+
+
+🌐 Listening and Active TCP/UDP Ports
+Identify abnormal or unauthorized active network connections and listening ports.
+
+• netstat -nao 10
+
+
+📁 File Shares
+List and validate file shares available on the system — ensure all are authorized.
+
+• net view \\127.0.0.1
+
+
+🗂️ Files
+Detect large files that may indicate data hoarding or exfiltration.
+
+• Use File Explorer search: size:>5M
+
+
+🔥 Firewall Settings
+Review the current firewall configuration to detect deviations from your security baseline.
+
+• netsh firewall show config [XP / 2003]
+• netsh advfirewall show currentprofile [Vista to Windows 8+]
+
+
+🌐 Systems Connected to the Machine
+Identify remote systems communicating with the machine using NetBIOS over TCP/IP.
+
+nbtstat -S
+
+
+🔓 Open Sessions
+Check who currently has an active session with the machine (helps detect unauthorized access).
+
+net session
+
+
+🔗 Sessions with Other Systems (NetBIOS/SMB)
+List outbound sessions your machine has opened with other systems (possible lateral movement).
+
+net use
+
+
+📄 Log Entries
+Search for suspicious security-related event logs
+
+wevtutil qe security
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
