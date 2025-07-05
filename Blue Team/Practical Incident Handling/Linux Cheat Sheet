@@ -1,0 +1,92 @@
+
+🔐 User Accounts
+Identify suspicious user accounts or attacker-created temporary users in /etc/passwd.
+
+• passwd -S [User_Name]
+• grep :0: /etc/passwd
+• find / -nouser -print
+
+🔎 grep :0: — Display UID 0 and GID 0 accounts
+🕵️ find / -nouser — Identify files without an associated user (often linked to deleted or attacker accounts)
+
+
+📄 Log Entries
+Detect suspicious events in system logs, such as:
+
+Large numbers of login failures (telnetd, sshd, etc.)
+Abnormally long input strings (possible buffer overflow attempts)
+
+
+📊 Resources
+Check for abnormal CPU or memory usage compared to known baselines.
+
+--> Check CPU load (system load average)
+• uptime
+
+--> Check memory utilization
+• free
+
+
+⚙️ Running Processes (focus on those running with root privileges)
+Identify abnormal or suspicious processes that could indicate malicious activity.
+
+• ps aux
+• lsof -p [pid]
+
+
+🔧 Services
+List and inspect services that might be unauthorized or misconfigured.
+
+• service --status-all     # RedHat and Mandrake systems
+• chkconfig --list         # Alternative for RedHat/Mandrake
+
+
+📅 Scheduled Tasks (focus on cron jobs run by root or UID 0)
+Detect suspicious scheduled tasks that could indicate persistence mechanisms.
+
+• crontab -l -u [account]
+• cat /etc/crontab
+• cat /etc/cron.*
+
+
+🌐 Listening and Active TCP/UDP Ports
+Identify abnormal or unauthorized listening or active network ports.
+
+• lsof -i         -- Compare this to a baseline
+• netstat -nap    -- Compare this to a baseline
+
+
+🔁 ARP
+Detect unusual or spoofed IP–MAC address mappings.
+
+arp -a          -- Compare this to a baseline
+
+
+📁 Files
+Spot suspicious files such as:
+Abnormal SUID root files (potential privilege escalation)
+Unusually large files (potential data hoarding or exfiltration)
+
+--< Abnormal SUID root files
+• find / -uid 0 -perm -4000 -print
+
+--> Overly large files
+• find /home/ -type f -size +512k -exec ls -lh {} \;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
