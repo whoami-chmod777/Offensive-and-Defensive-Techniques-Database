@@ -67,7 +67,7 @@ Spot suspicious files such as:
 Abnormal SUID root files (potential privilege escalation)
 Unusually large files (potential data hoarding or exfiltration)
 
---< Abnormal SUID root files
+--> Abnormal SUID root files
 • find / -uid 0 -perm -4000 -print
 
 --> Overly large files
