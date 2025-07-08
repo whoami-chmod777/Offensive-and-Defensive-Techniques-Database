@@ -56,15 +56,56 @@ https://developers.facebook.com/tools/ct/
 https://www.google.com/transparencyreport/https/ct/
 
 
-
 -- Utilization of search engines, internet-wide scanners & other sites --
 
+Search Engine Reconnaissance
+• Attackers use search engines for passive information gathering (e.g., cache views, advanced search operators).
+• You cannot detect these searches, so mimic attacker behavior to find what your organization exposes.
 
+Tools & Techniques
+• Wayback Machine: View historical/deleted versions of pages.
+• Recon-ng & SearchDiggity: Automate reconnaissance through search engines.
+
+Internet-Wide Scanners (e.g., Shodan, Censys)
+
+Used to discover
+• IP ranges
+• Server/software versions
+• Open ports
+• Technology stacks
+
+Armed with this, attackers identify vulnerabilities without active probing.
+
+> Preparation & Defense <
+
+• Audit your online exposure using the same tools attackers do.
+• Request removal of sensitive content from search engines.
+• Limit public-facing technical data (e.g., avoid exposing internal hostnames or unused services).
+• Enforce strict information-sharing policies among employees.
+• Educate staff on phishing & social engineering, as human factors are prime attack targets.
+
+https://web.archive.org/
 
 
 -- DNS interrogation --
 
+The Domain Name System can provide useful information about an organization. Most of the times attackers will try to dump all records from a DNS server through zone transfers. This way, they can identify internet-reachable machines.
 
+> Preparation & Defense <
+
+To prepare against DNS-based reconnaissance you can:
+
+• Configure the primary DNS server so that it accepts zone requests by secondary and tertiary DNS servers only
+• Use split DNS
+• Thoroughly harden every DNS server
+• Proactively attempt a zone transfer
+
+dig @[DNS_server_IP] [target_domain] -t AXFR
+
+nslookup
+> server [authoritative_server_IP_or_name]
+> set type=any
+> ls -d [target_domain]
 
 
 -- Abusing exposed OWA --
@@ -72,5 +113,46 @@ https://www.google.com/transparencyreport/https/ct/
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 -- JavaScript injection --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
