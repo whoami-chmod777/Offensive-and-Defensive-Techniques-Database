@@ -20,6 +20,11 @@ whois -h whois.arin.net 8.8.8.8
 Looking up and analyzing Whois information, is a reconnaissance technique that does not involve even a single packet being sent from the attacker to the targeted organization’s network. Such reconnaissance is known as passive reconnaissance.
 Passive reconnaissance techniques are particularly interesting due to the fact that they cannot be detected.
 
+> Preparation & Defense <
+
+You can’t tell when someone is looking at your organization’s Whois information, but you can be proactive by closely monitoring the submitted contact email and DNS server(s).
+You can also defend against ill-intended Whois lookups by purchasing a Whois privacy service that many registrars offer. On your right you can see an example of such a service.
+
 https://lookup.icann.org/en
 https://whois.domaintools.com/
 https://www.whois.com/whois/
@@ -27,21 +32,44 @@ https://www.whois.com/whois/
 
 -- SSL certificate information analysis --
 
+By analyzing a SSL certificate an attacker can
 
+• Sketch a picture of an organization’s network layout (by checking the subdomains that could appear in the CN’s)
+• Identify provided services (by analyzing the subdomain names)
+• Identify critical assets (critical assets are always SSL-protected)
+• Identify internal host names, IPs or alternative DNS servers
 
+You should also know about the Certificate Transparency initiative. This initiative enables detecting SSL certificates that have been mistakenly issued by a certificate authority or have been maliciously acquired. It also makes it possible to identify certificate authorities that have gone rogue and are maliciously issuing certificates.
 
+> Preparation & Defense <
 
+Once again, you can’t tell when someone is going through your organization’s SSL certificate information.
+You can be proactive though, by requesting and analyzing all the information included in your organization’s SSL certificates.
+In addition, a great example of how you can check for sensitive information inside your organization’s SSL certificates from an attacker’s perspective is Censys.
 
+https://search.censys.io/
+
+Other publicly available sources to passively gather and analyze SSL certificate information are:
+
+https://crt.sh/
+https://developers.facebook.com/tools/ct/
+https://www.google.com/transparencyreport/https/ct/
 
 
 
 -- Utilization of search engines, internet-wide scanners & other sites --
 
 
+
+
 -- DNS interrogation --
 
 
+
+
 -- Abusing exposed OWA --
+
+
 
 
 -- JavaScript injection --
