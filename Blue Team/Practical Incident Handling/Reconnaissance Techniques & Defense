@@ -1,5 +1,48 @@
 
 --- Reconnaissance Techniques & Defense ---
 
+• Whois information analysis
+• SSL certificate information analysis
+• Utilization of search engines, internet-wide scanners & other sites
+• DNS interrogation
+• Abusing exposed OWA
+• JavaScript injection
 
+
+-- Whois information analysis --
+
+Whenever a domain name is registered, information such as postal addresses, phone numbers, contact names and authoritative domain name servers are requested by the registrar.
+This information can be the starting point of attacks such as social engineering, war dialing, war driving and network mapping.
+
+whois 8.8.8.8
+whois -h whois.arin.net 8.8.8.8
+
+Looking up and analyzing Whois information, is a reconnaissance technique that does not involve even a single packet being sent from the attacker to the targeted organization’s network. Such reconnaissance is known as passive reconnaissance.
+Passive reconnaissance techniques are particularly interesting due to the fact that they cannot be detected.
+
+https://lookup.icann.org/en
+https://whois.domaintools.com/
+https://www.whois.com/whois/
+
+
+-- SSL certificate information analysis --
+
+
+
+
+
+
+
+
+
+-- Utilization of search engines, internet-wide scanners & other sites --
+
+
+-- DNS interrogation --
+
+
+-- Abusing exposed OWA --
+
+
+-- JavaScript injection --
 
