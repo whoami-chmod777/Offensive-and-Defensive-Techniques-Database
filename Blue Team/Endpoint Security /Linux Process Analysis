@@ -24,5 +24,11 @@ top -u root -c -o -TIME+
 /proc$ ls -la exe
 /proc$ strings exe
 
+/proc/4440$ strings /proc/4440/exe > ~/output.txt
+/proc/4440$ cat ~/output.txt | less
+
+grep -Ei 'usage|version|help|copyright|shell|backdoor|exploit|root|connect|http|ftp' output.txt
+
+
 /proc/3160$ cat env
 /proc/3160$ cat env | tr '\0' '\n'
