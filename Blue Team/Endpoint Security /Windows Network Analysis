@@ -27,6 +27,7 @@ net use
 
 netstat -anob [ESTABLISHED]
 netstat -e
+netstat -o
 netstat -nr
 netstst -S
 netstat -vb
