@@ -1,6 +1,10 @@
 
 --- Sysmon Analyze with PowerShell ---
 
+sysmon.exe -accepteula -i sysmonconfig-export.xml
+sysmon.exe -c sysmonconfig-export.xml
+sysmon.exe -u
+
 # View all Sysmon logs
 Get-WinEvent -LogName "Microsoft-Windows-Sysmon/Operational"
 
