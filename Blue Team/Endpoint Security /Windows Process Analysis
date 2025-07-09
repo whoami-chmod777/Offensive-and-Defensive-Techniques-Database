@@ -39,6 +39,7 @@ Parent Process:
 --- Analyze Processes ---
 
 tasklist
+taskkill /FI "PID eq 6016"
 taskkill /PID 1234 /F
 tasklist /V
 tasklist /M
