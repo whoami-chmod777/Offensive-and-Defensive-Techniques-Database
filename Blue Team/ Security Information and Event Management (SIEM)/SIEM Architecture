@@ -1,0 +1,121 @@
+
+--- Security Information and Event Management (SIEM) ---
+
+• Log Management
+• Real-time Monitoring
+• Alerting and Notification
+• Incident Response
+• Dashboards, Reports, and Visualization
+• Threat Intelligence Integration
+
+
+-- SIEM Log Management --
+
+• Collection
+• Aggregation
+• Parsing and Normalization
+• Retention
+• Indexing
+• Correlation and Analysis
+• Alerting
+
+
+>> SIEM Log Management - Collection <<
+
+• Which devices will we collect events from?
+• Which events do we want to collect?
+• How long will we retain the logs?
+• Where will we store the logs?
+• Methods of collection
+  → Agents
+  → Agentless
+
+
+>> SIEM Log Management - Aggregation <<
+
+• Collecting and consolidating events
+• Unify the timeline across the organization
+• Enhancing holistic visibility
+• Allows for correlation and analysis
+
+
+>> SIEM Log Management - Parsing and Normalization <<
+
+• Ensure consistency across logs
+• Extracting structured information
+  → Fields, columns
+  → Regular expressions, parsing tools, or custom parsers
+• Convert into a common schema
+  → Field Mapping
+  → Data Transformation
+  → Common Event Format (CEF)
+
+
+>> SIEM Log Management - Retention <<
+
+• Storing log data to ensure analysis availability
+  → Incident Response
+  → Compliance
+• Log Retention Policies
+  → Retention Period
+  → Storage Solutions
+  → Security Controls
+  → Storage Integrity
+  → Data Destruction
+
+
+>> SIEM Log Management - Indexing <<
+
+• Turns raw logs into searchable event data
+• Repository or grouping of events
+• Efficient log retrieval
+• Helps with scaling as log sources grow
+
+
+>> SIEM Log Management - Correlation and Analysis <<
+
+• Linking related log events together
+• Contextualization
+  → Enriching events with additional metadata
+• Correlation Rules
+  → Specify how events should be correlated
+• Correlation Engines
+• Analysis
+  → Pattern Recognition
+  → Anomaly Detection
+
+
+>> SIEM Log Management - Alerting <<
+
+• Notify relevant people about security incidents
+• Threshold-Based Alerts
+• Pattern-Based Alerts
+• Anomaly-Based Alerts
+• Event-Based Alerts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
