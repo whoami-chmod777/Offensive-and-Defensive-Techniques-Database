@@ -1,4 +1,15 @@
 
 --- SIEM Logs ---
 
+• Log Types
+• 
 
+
+→
+
+
+
+Linux
+cd /var/log
+tail syslog
+Windows
