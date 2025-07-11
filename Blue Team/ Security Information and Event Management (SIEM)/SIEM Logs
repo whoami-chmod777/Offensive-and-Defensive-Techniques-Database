@@ -2,12 +2,9 @@
 --- SIEM Logs ---
 
 • Log Types
-• 
+• Log Formats
 
-
-→ 
-
->> Log Types <<
+-- Log Types --
 
 • System Logs
 • Network Logs
@@ -70,6 +67,48 @@ Audit Logs: Record of user actions or system changes for accountability.
 • Web Server Logs → NGINX: /var/log/nginx/
 
 💡 Use journalctl for viewing logs from systemd-enabled systems.
+
+
+-- Log Formats --
+
+🔹 Unstructured Logs
+  → No predefined format or syntax
+  → Common Log Format (CLF)
+
+🔹 Semi-Structured Logs
+  → Some syntax structure
+  → Lack adherence to a schema
+  → Syslog
+  → Windows Event Log (EVT)
+
+🔹 Structured Logs
+  → Well-defined syntax and formatting
+  → Adherence to an agreed upon schema
+  → CSV, TSV
+  → JavaScript Object Notation (JSON)
+  → eXtensible Markup Language (XML)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
