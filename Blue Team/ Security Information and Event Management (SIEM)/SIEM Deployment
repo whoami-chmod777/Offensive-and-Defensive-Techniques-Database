@@ -1,2 +1,29 @@
-Universal forwarder
-hard firwarder
+
+--- SIEM Deployment ---
+
+• SIEM Components
+• SIEM Deployment Models
+
+
+🔧 SIEM Components
+
+Endpoint (Data) → Forwarder → Indexer → Search Head → Analyst
+
+Endpoint (Data): Devices or systems generating logs (servers, workstations, firewalls).
+Forwarder: Collects logs from endpoints and sends them to the indexer.
+Indexer: Stores and processes logs for fast search and retrieval.
+Search Head: Allows users to query and analyze data across multiple indexers.
+Analyst: Uses dashboards and alerts to investigate incidents and security trends.
+
+
+🚚 Heavy Forwarder vs Universal Forwarder
+
+Heavy Forwarder: Parses and filters data before forwarding; uses more system resources.
+Universal Forwarder: Lightweight agent that only forwards raw data with minimal processing.
+
+
+🏗 SIEM Deployment Models
+
+Single Instance: All components (indexing, searching, UI) are combined on one server.
+Distributed Deployment: Components are split across multiple servers for scalability and performance.
+Clustered Deployment: Multiple redundant instances (indexers/search heads) for high availability.
