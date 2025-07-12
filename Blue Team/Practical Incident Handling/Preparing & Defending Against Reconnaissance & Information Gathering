@@ -1,0 +1,148 @@
+
+-- Reconnaissance & Information Gathering --
+
+🔍 1.Reconnaissance Techniques (Attacker Perspective)
+
+Passive Recon (Stealthy, Undetectable)
+
+• Whois Lookup: Reveals domain ownership, contact info, name servers.
+    → Can aid in social engineering, network mapping.
+
+• SSL Certificate Analysis: Extracts subdomains, identifies services and internal hosts.
+    → Tools: crt.sh, Censys, Certificate Transparency logs.
+
+• Search Engine Recon: Google Dorks, Wayback Machine for exposed data or deprecated pages.
+    → Tools: Recon-ng, SearchDiggity.
+
+🌐 Internet-wide Scanning
+
+• Tools like Shodan and Censys reveal:
+    → Exposed IPs, open ports, services
+    → OS & tech stacks
+
+🧠 DNS Interrogation
+
+• Attempt zone transfers to get full DNS records.
+    → Tools: dig, nslookup
+    → Vulnerable if AXFR is not restricted.
+
+📧 Outlook Web Access (OWA) Exploits
+
+• MailSniper tool can infer domain names via response time inconsistencies.
+• NTLM over HTTP leaks Active Directory domain name via Base64 challenge in HTTP response.
+
+💻 Browser-based Recon
+
+• BeEF Framework: Uses JavaScript injection for client-side data collection.
+
+
+🛡️ 2. Defensive Techniques (Defender Perspective)
+
+🔐 General Hardening
+
+• Limit publicly available data (e.g., use privacy in Whois, limit metadata exposure).
+• Split DNS to separate internal and public records.
+• Restrict DNS zone transfers to authorized servers only.
+• Harden SSL/TLS: Use subdomain monitoring via Certificate Transparency alerts.
+
+⚙️ OWA/Exchange Hardening
+
+• Block NTLM where possible or limit endpoint exposure.
+• Monitor for login anomalies (rate-limiting, thresholds).
+• Track timing discrepancies in login behavior.
+
+🛑 Recon-Awareness
+
+• Regularly self-scan with Shodan, Censys, crt.sh to see what’s publicly exposed.
+• Monitor Wayback Machine entries and remove outdated/obsolete content.
+• Maintain alert lists for lookalike domains or exposed certificates.
+
+
+
+🧰 Reconnaissance – Tools, Links & Commands
+
+🔎 Whois Lookup
+
+Common Fields
+• Domain Name, Registrar, Name Servers
+• Registrant Contact (may be redacted)
+• Creation, Expiration, Updated Dates
+• Domain Status
+
+whois 8.8.8.8
+whois -h whois.arin.net 8.8.8.8
+
+Web Tools
+🌐 https://lookup.icann.org/en
+🌐 https://whois.domaintools.com/
+🌐 https://www.whois.com/whois/
+
+
+🔐 SSL Certificate Analysis
+
+Goals
+• Find subdomains (CN/SANs)
+• Infer services, internal hosts
+• Discover critical assets
+
+Tools/Links
+🌐 https://search.censys.io/
+🌐 https://crt.sh/
+🌐 https://developers.facebook.com/tools/ct/
+🌐 https://www.google.com/transparencyreport/https/ct/
+
+
+🌐 Search Engine & Web Recon
+
+Purpose: View cached pages, old data, misconfigured files
+
+Tools
+🌐 https://web.archive.org/
+🧰 Recon-ng, SearchDiggity
+
+
+
+🌍 Internet-Wide Scanners
+
+Used to Discover
+• IP ranges, open ports, services
+• Tech stack info
+
+Tools
+🌐 https://www.shodan.io/
+🌐 https://censys.io/
+
+
+
+🧠 DNS Interrogation
+
+Commands (Zone Transfer Attempt):
+
+dig @[DNS_server_IP] [domain] -t AXFR
+
+nslookup
+> server [auth_DNS_IP_or_name]
+> set type=any
+> ls -d [target_domain]
+
+
+
+📧 Outlook Web Access (OWA) Recon
+
+🧰 MailSniper
+
+Import-Module .\MailSniper.ps1
+Invoke-DomainHarvestOWA -ExchHostname mail.domain.com -OutFile domains.txt -CompanyName "Target"
+
+
+NTLM Exploit Path (via crafted HTTP request)
+• POST /autodiscover/autodiscover.xml
+• Analyze Base64 in WWW-Authenticate: NTLM response
+
+
+
+💉 Client-Side Recon
+
+🧰 BeEF (Browser Exploitation Framework)
+Use: JavaScript injection, hook browsers, gather client data
+
