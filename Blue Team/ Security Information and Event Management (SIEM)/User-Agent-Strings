@@ -30,3 +30,7 @@ Complete User-Agent strings as they typically appear in logs.
 | Java/1.8.0_181                                                                               | Java-based HTTP client                      |
 | Python-urllib/3.8                                                                            | Python HTTP client                          |
 | Scrapy/2.4.1 (+https://scrapy.org)                                                           | Python web crawler/scraper                  |
+
+
+https://www.whatismybrowser.com/detect/what-is-my-user-agent/
+https://explore.whatismybrowser.com/useragents/parse/
