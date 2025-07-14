@@ -14,32 +14,47 @@
   → Incorrect usernames or passwords
   → Increase in failures from a single user account
   → Increase in failures from multiple user accounts
-
 • Login Times
   → Time of day that logons or access requests are taking place
   → Abnormalities from a user’s baseline
-
 • Login/Access Locations
   → Geographic locations of logons or access requests
   → Unusual countries or regions
   → Impossible Travel
-
 • File Access Patterns
   → File paths, modifications, or other activity
-
 • User-Agent Strings
   → Unusual or associated with known tools
 
 
+-- SQL Injection --
 
-SQL Injection
+• Inserting or injecting malicious SQL statements
+• Manipulate expected database queries
+  → Retrieve sensitive information
+  → Extract hashed passwords
+  → Bypass authentication logic
+• Look for SQL keywords
+  → SELECT, FROM, WHERE, UNION
+• Look for injection characters
+  → Single/double quotes, semicolons, comment indicators (dashes)
+• URL-encoded keywords/injection characters
+• Malformed entries or errors within database logs
 
 
-Cross-Site Scripting
+-- Cross-Site Scripting --
 
 
-Command Injection
 
 
-Path Traversal and LFI
+
+-- Command Injection --
+
+
+
+
+-- Path Traversal and LFI --
+
+
+
 
