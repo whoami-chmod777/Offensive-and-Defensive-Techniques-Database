@@ -1,0 +1,40 @@
+
+--- SQL Injection ---
+
+• Data Queries
+• SQL injection Characters
+
+
+-- Data Queries --
+
+| SQL Keyword         | Description                                                                  |
+|---------------------|------------------------------------------------------------------------------|
+| SELECT              | Retrieve data from a database table                                          |
+| FROM                | Specifies the table to retrieve data from                                    |
+| WHERE               | Filter records based on conditions                                           |
+| ORDER BY            | Sort the results (ascending or descending)                                   |
+| GROUP BY            | Group rows with identical values into summaries                              |
+| INSERT INTO         | Adds new rows of data into a table                                           |
+| UPDATE              | Modifies existing data in a table                                            |
+| DELETE              | Removes existing rows from a table                                           |
+| DROP                | Deletes a table or database from the system                                  |
+| JOIN                | Combines rows from two or more tables based on a column                      |
+| INNER JOIN          | Returns records that have matching values in multiple tables                 |
+| UNION               | Combines the results of two or more SELECT statements                        |
+| LIKE                | Searches for a specified pattern in a column                                 |
+| IN                  | Checks if a value matches any value in a list or query  
+
+
+-- SQL injection Characters --
+
+| Character       | Normal Character | URL-Encoded Character  |
+|---------------- |------------------|------------------------|
+| Single Quote    | `'`              | `%27`                  |
+| Double Quote    | `"`              | `%22`                  |
+| Space           | (space)          | `%20`                  |
+| Semicolon       | `;`              | `%3B`                  |
+| Dash            | `-`              | `%2D`                  |
+
+
+---------------------------------------------------------------------------------------------------
+
