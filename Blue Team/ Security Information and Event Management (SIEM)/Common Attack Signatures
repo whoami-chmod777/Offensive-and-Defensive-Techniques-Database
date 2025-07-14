@@ -44,8 +44,18 @@
 
 -- Cross-Site Scripting --
 
-
-
+• Executing malicious code by injecting JavaScript
+  → Hijack user sessions
+  → Steal cookies
+  → Deface websites
+• Look for <script> tag indicators
+• Look for event handlers
+  → onload, onclick, onmouseover
+  → References to <script> tags
+  → References to "javascript"
+• Special characters
+  → <, >, ", ', &, %, ;
+• URL-encoded injection characters
 
 
 -- Command Injection --
