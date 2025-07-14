@@ -8,7 +8,28 @@
 • Path Traversal and LFI
 
 
-User Behavior
+-- User Behavior Indicators --
+
+• Multiple Failed Login Attempts
+  → Incorrect usernames or passwords
+  → Increase in failures from a single user account
+  → Increase in failures from multiple user accounts
+
+• Login Times
+  → Time of day that logons or access requests are taking place
+  → Abnormalities from a user’s baseline
+
+• Login/Access Locations
+  → Geographic locations of logons or access requests
+  → Unusual countries or regions
+  → Impossible Travel
+
+• File Access Patterns
+  → File paths, modifications, or other activity
+
+• User-Agent Strings
+  → Unusual or associated with known tools
+
 
 
 SQL Injection
