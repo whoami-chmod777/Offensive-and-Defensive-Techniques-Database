@@ -1,0 +1,32 @@
+
+Complete User-Agent strings as they typically appear in logs.
+
+
+| User-Agent String                                                                            | Description                                 |
+|----------------------------------------------------------------------------------------------|---------------------------------------------|
+| Mozilla/5.0 (Hydra)                                                                          | Brute-force tool                            |
+| curl/7.68.0                                                                                  | Command-line HTTP client                    |
+| python-requests/2.25.1                                                                       | Python HTTP library                         |
+| sqlmap/1.5.2                                                                                 | SQL injection tool                          |
+| Nmap Scripting Engine                                                                        | Port scanner and automation                 |
+| masscan/1.0 (https://github.com/robertdavidgraham/masscan)                                   | High-speed port scanner                     |
+| wpscan/3.8.22                                                                                | WordPress vulnerability scanner             
+| Nikto/2.1.6 (Evasion: None) (Test: Headers)                                                  | Web vulnerability scanner                   |
+| Fuzz Faster U Fool                                                                           | Fuzzing tool                                |
+| libwww-perl/6.05                                                                             | Perl-based HTTP client                      |
+| WinHttpRequest                                                                               | Windows HTTP request library                |
+| ZmEu                                                                                         | Exploit scanner targeting PHP apps          |
+| Morfeus Fucking Scanner                                                                      | Aggressive web vulnerability scanner        |
+| ApacheBench/2.3                                                                              | HTTP benchmarking tool                      |
+| Apache-HttpClient/4.5.2 (Java/1.8.0_181)                                                     | Java-based HTTP client                      |
+| Go-http-client/1.1                                                                           | Go (Golang) default HTTP client             |
+| lwp-trivial/1.41                                                                             | Simple Perl-based HTTP client               |
+| DirBuster-0.12                                                                               | Directory brute-force tool                  |
+| BOT for JCE                                                                                  | Exploit bot targeting Joomla JCE            |
+| Mozilla/5.0 (compatible; MJ12bot/v1.4.8; http://mj12bot.com/)                                | SEO/search engine bot                       |
+| Mozilla/5.0 (compatible; ZmEu; Linux 2.6.38)                                                 | ZmEu scanner variant                        |
+| Mozilla/5.0 (compatible; Morfeus Fucking Scanner; Linux)                                     | Morfeus scanner variant                     |
+| HTTrack 3.0x                                                                                 | Website mirroring/cloning tool              |
+| Java/1.8.0_181                                                                               | Java-based HTTP client                      |
+| Python-urllib/3.8                                                                            | Python HTTP client                          |
+| Scrapy/2.4.1 (+https://scrapy.org)                                                           | Python web crawler/scraper                  |
