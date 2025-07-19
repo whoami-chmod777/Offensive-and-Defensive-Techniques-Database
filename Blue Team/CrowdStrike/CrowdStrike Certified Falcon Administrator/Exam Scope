@@ -1,0 +1,79 @@
+
+--- Exam Scope ---
+
+The following topics provide a general guideline for the content likely to be included on the exam; however, other related topics may also appear on any specific delivery of the exam.
+
+1. User Management
+2. Sensor Deployment
+3. Host Management and Setup
+4. Group Creation
+5. Policy Application
+6. Rule Configuration
+7. Dashboards and Reports
+8. Workflows
+
+
+-- Exam Objectives --
+
+The following subtopics and learning objectives provide further guidance on the content and purpose of the exam:
+
+1. User Management
+• Determine roles required for access to features and functionality in the Falcon console
+• Create roles and assign users to roles based on desired permissions
+• Manage API keys
+
+2. Sensor Deployment
+• Determine prerequisites to successfully install a Falcon sensor on supported operating systems
+• Analyze the default policies and apply the best practices to prepare workloads for the Falcon sensor
+• Uninstall a sensor
+• Troubleshoot a sensor
+
+3. Host Management and Setup
+• Understand how filtering might be used in the Host Management page
+• Disable detections for a host
+• Explain the effect of disabling detections on a host
+• Explain the impact of Reduced Functionality Mode (RFM) and why it might be caused
+• Find hosts in RFM
+• Locate inactive sensors
+• Recall how long inactive sensors are retained
+• Determine relevant reports specific to host management
+
+4. Group Creation
+• Determine the appropriate group assignment for endpoints and understand how this impacts the application of policies
+• Apply best practices when managing host groups
+
+5. Policy Application
+• Determine the appropriate prevention policy settings for endpoints and explain how this impacts security posture
+• Determine the appropriate sensor update policy settings in order to control the update process
+• Apply roles and policy settings, and track and review Falcon RTR audit logs in order to manage user activity
+• Understand the functionality of a containment policy
+• Configure a containment policy for IP address or subnet exclusions that will apply to network contained hosts based on security workflow requirements
+• Understand options and requirements to manage quarantined files
+
+6. Rules Configuration
+• Create custom IOA rules to monitor for behavior that is not fundamentally malicious
+• Interpret business requirements in order to allow trusted activity, resolve false positives and fix performance issues
+• Assess IOC settings required for customized security posturing and to manage false positives
+• Understand configurations for CID wide management within General Settings
+
+7. Dashboards and Reports
+• Understand the different types of sensor reports and their use cases
+• Understand the different audit logs and their use cases
+
+8. Workflows
+• Configure workflows to respond to defined triggers
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
