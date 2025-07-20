@@ -1,0 +1,27 @@
+
+--- Pattern Matching ---
+
+
+>> Access File Analysis <<
+
+List All Unique IPs: grep -oE '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' access.log | sort | uniq
+Count Requests Per IP: grep -oE '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' access.log | sort | uniq -c | sort -nr
+List Requested URLs: cut -d '"' -f2 access.log | awk '{print $2}' | sort | uniq
+Find Non-200 Status Codes: awk '$9 != 200 { printf "%-15s %-30s %-6s\n", $1, $7, $9 }' access.log
+Find Redirects (HTTP 302, 301): awk '$9 ~ /^30[1-2]$/ { print $1, $7, $9 }' access.log
+Find Possible Attacks by User-Agent (Hydra, Nmap): grep -Ei 'Hydra|Nmap|curl|sqlmap' access.log
+Find Access to Sensitive Files: grep -Ei '/etc/passwd|/etc/shadow|/\.git|/\.env|/config\.php|/wp-config\.php|\.bak|\.old' access.log
+Find XSS or Code Injection Attempts: grep -Ei '%3c|%3e|<script|onerror|alert' access.log
+Find Directory Traversal Attempts: grep -Ei '\.\./|%2e%2e%2f|%252e%252e%252f' access.log
+Filter by Specific Date: grep '\[17/Jul/2024' access.log
+
+
+>> Cheat Sheet <<
+
+Contain the string 404: grep "404" access.log, grep -c "404" access.log, grep -n "404" access.log
+Cross Site Scripting: grep -E '%3C|%3E|<|>' access.log
+Directory Traversal: grep -E '\.\./|%2E%2E%2F|%2E%2E%2E%2E%2E%2F' access.log, grep -Ei '\.\./|%2e%2e%2f|%252e%252e%252f' access.log
+XSS Injection: grep -Ei '%3c|%3e|<script|alert|onerror|<img' access.log
+IP Addresses: grep -Po '\b(?:\d{1,3}\.){3}\d{1,3}\b' access.log
+Match Suspicious File Access (e.g. passwd, root): grep -Ei '/etc/passwd|/root|\.htaccess' access.log, grep -Ei '/etc/passwd|/etc/shadow|/etc/hosts|/etc/group|/proc/self/environ|/root/\.bash_history|/var/log/auth.log|\.htaccess' access.log
+Match Suspicious User Agents: cut -d '"' -f6 access.log | grep -Ei 'Mozilla|curl|Hydra|Nmap'
