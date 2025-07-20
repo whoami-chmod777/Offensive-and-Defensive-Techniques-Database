@@ -1,0 +1,122 @@
+
+--- Command Line Log Analysis ---
+
+
+Log Analysing Methodology
+
+• File Type 
+• Scope of the File
+• Time Range  
+• IP Addresses 
+• Sort IP Adresses
+• Filter Duplicate Lines
+• Filter Duplicate Lines (count uniq addresses)
+• Specific URLs to the GET Request  
+• Redirection to another URL
+• HTTP Status Code
+• User Agent
+
+
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ ls
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ file access.log 
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ ls -lh access.log 
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ ls -lh access.log 
+
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ wc access.log 
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ wc -l access.log 
+
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ wc -w access.log 
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ wc -b access.log 
+
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ head access.log 
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ head -n 1 access.log 
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ tail access.log 
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ tail -n 1 access.log 
+
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ cat access.log
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ more access.log 
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ less access.log 
+
+
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ cut access.log -d " " -f 1
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ cut access.log -d " " -f 7
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ cut access.log -d " " -f 9
+
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ cut access.log -d " " -f 1 | sort
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ cut access.log -d " " -f 1 | sort | uniq
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ cut access.log -d " " -f 1 | sort | uniq -c | sort -nr
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ cut access.log -d " " -f 1 | sort | uniq -c | grep -v " 1 " | sort -nr
+
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ cut -d "\"" -f 6 access.log 
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ cut -d "\"" -f 6 access.log  | sort | uniq -c | sort -nr
+
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ grep "Mozilla/5.0 (Hydra)" access.log 
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ grep "Mozilla/5.0 (Hydra)" access.log | awk '{print $1}'
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ grep "Mozilla/5.0 (Hydra)" access.log | awk '{print $1}' | sort | uniq -c
+
+
+-- HTTP Response Code --
+
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ grep "Mozilla/5.0 (Hydra)" access.log | awk '{print $9}'
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ grep "Mozilla/5.0 (Hydra)" access.log | awk '$9 > 200'
+
+
+-- Redirection --
+
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ grep "17/Jul/2024:18:49:02 -0400" access.log 
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ grep "17/Jul/2024:18:49:02 -0400" access.log | grep -v "login.php"
+grep "Mozilla/5.0 (Hydra)" access.log | awk '{print $1}' | uniq -c
+
+
+
+🧾 Log Analyzing Methodology
+
+1. File Type
+Purpose: Check if the log file is plain text or another format.
+Command: file access.log
+
+2. Scope of the File
+Purpose: Understand file size, length, and structure.
+Commands: ls -lh access.log – View file size,  wc access.log – Count lines, words, bytes, head access.log, tail access.log – Preview top/bottom, cat, less, more – View content
+
+3. Time Range
+Purpose: Identify specific timestamps or time ranges.
+Command: grep "17/Jul/2024:18:49:02 -0400" access.log
+
+4. IP Addresses
+Purpose: Extract IP addresses from each line.
+Command: cut access.log -d " " -f 1
+
+5. Sort IP Addresses
+Purpose: Sort IP addresses alphabetically.
+Command: cut access.log -d " " -f 1 | sort
+
+6. Filter Duplicate Lines
+Purpose: Get unique IP addresses.
+Command: cut access.log -d " " -f 1 | sort | uniq
+
+7. Filter Duplicate Lines (count uniq addresses)
+Purpose: Count and sort how many times each IP appears (exclude single hits).
+Command: cut access.log -d " " -f 1 | sort | uniq -c | sort -nr, cut access.log -d " " -f 1 | sort | uniq -c | grep -v " 1 " | sort -nr
+
+8. Specific URLs to the GET Request
+Purpose: Extract requested URLs (e.g., /index.html, /login.php).
+Command: cut access.log -d " " -f 7
+
+9. Redirection to another URL
+Purpose: Look for 3xx HTTP status codes (redirects).
+Command (implied): cut access.log -d " " -f 9 | grep "^3"
+
+10. HTTP Status Code
+Purpose: Analyze response status codes: 200 (OK), 404 (Not Found), etc.
+Command: cut access.log -d " " -f 9, grep "Mozilla/5.0 (Hydra)" access.log | awk '{print $9}', awk '$9 > 200'
+
+11. User Agent
+Purpose: Identify clients/bots/tools making requests.
+Command: cut -d "\"" -f 6 access.log, cut -d "\"" -f 6 access.log | sort | uniq -c | sort -nr, grep "Mozilla/5.0 (Hydra)" access.log
+
+
+https://whois.domaintools.com/
+https://talosintelligence.com/
+https://www.kali.org/tools/hydra/
+https://nmap.org/
