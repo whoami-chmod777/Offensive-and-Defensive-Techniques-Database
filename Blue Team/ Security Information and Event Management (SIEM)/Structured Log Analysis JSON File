@@ -1,0 +1,99 @@
+
+--- Structured Log Analysis ---
+
+$ file events.json 
+events.json: JSON text data
+
+jq . events.json 
+jq 'length' events.json 
+jq 'map(.event)' events.json 
+jq '.[] | select(.event.PROCESS_ID == 3532)' events.json 
+jq '.[] | select(.event.PROCESS_ID == 3532) | .event.FILE_PATH' events.json 
+jq '.[] | select(.event.PROCESS_ID == 3532) | .event.HASH' events.json 
+jq '.[] | select(.event.PROCESS_ID == 3532) | .event.PROCESS_ID' events.json 
+jq '.[] | select(.event.PROCESS_ID == 3532) | .event.PARENT.PROCESS_ID' events.json 
+jq '.[] | select(.event.PROCESS_ID == 3532) | .event.PARENT.FILE_PATH' events.json 
+jq '.[] | select(.event.PROCESS_ID == 3532) | .event.PARENT.HASH' events.json
+
+
+$ ./json_alert.sh events.json 
+=================================
+ATTENTION: A "NEW_PROCESS" alert has been triggered on "DESKTOP-C6OJ5NL\tcm"
+
+Alert Details:
+Time: "2024-07-10 05:27:07"
+Event ID: "9f34c375-8841-4d01-b392-1e760072dd3a"
+Endpoint IP (Internal): "192.168.1.9"
+
+Child Process Details:
+Command-Line: "mimikatz.exe"
+File Path: "C:\Users\tcm\Downloads\mimikatz.exe"
+SHA256: "92804faaab2175dc501d73e814663058c78c0a042675a8937266357bcfb96c50"
+Process ID: "3532"
+
+Parent Process Details:
+Command-Line: ""C:\Windows\system32\cmd.exe" "
+File Path: "C:\Windows\system32\cmd.exe"
+SHA256: "badf4752413cb0cbdc03fb95820ca167f0cdc63b597ccdb5ef43111180e088b0"
+Process ID: "1948"
+=================================
+whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$
+
+
+
+
+--- json_alert.sh ---
+
+#!/bin/bash
+
+# Check if filename argument is provided
+if [ $# -eq 0 ]; then
+  echo "Usage: $0 <json_file>"
+  exit 1
+fi
+
+# Extract relevant fields using jq from the provided JSON file
+jq_query='.[] | select(.event.PROCESS_ID == 3532) | {
+  USER_NAME: .event.USER_NAME,
+  ts: .ts,
+  event_id: .routing.event_id,
+  int_ip: .routing.int_ip,
+  COMMAND_LINE: .event.COMMAND_LINE,
+  FILE_PATH: .event.FILE_PATH,
+  HASH: .event.HASH,
+  PROCESS_ID: .event.PROCESS_ID,
+  PARENT_COMMAND_LINE: .event.PARENT.COMMAND_LINE,
+  PARENT_FILE_PATH: .event.PARENT.FILE_PATH,
+  PARENT_HASH: .event.PARENT.HASH,
+  PARENT_PROCESS_ID: .event.PARENT.PROCESS_ID
+}'
+
+# Execute jq query and store the output
+data=$(jq -r "$jq_query" "$1")
+
+# Print formatted output
+echo "================================="
+echo "ATTENTION: A \"NEW_PROCESS\" alert has been triggered on \"$(echo "$data" | jq -r '.USER_NAME')\""
+echo
+echo "Alert Details:"
+echo "Time: \"$(echo "$data" | jq -r '.ts')\""
+echo "Event ID: \"$(echo "$data" | jq -r '.event_id')\""
+echo "Endpoint IP (Internal): \"$(echo "$data" | jq -r '.int_ip')\""
+echo
+echo "Child Process Details:"
+echo "Command-Line: \"$(echo "$data" | jq -r '.COMMAND_LINE')\""
+echo "File Path: \"$(echo "$data" | jq -r '.FILE_PATH')\""
+echo "SHA256: \"$(echo "$data" | jq -r '.HASH')\""
+echo "Process ID: \"$(echo "$data" | jq -r '.PROCESS_ID')\""
+echo
+echo "Parent Process Details:"
+echo "Command-Line: \"$(echo "$data" | jq -r '.PARENT_COMMAND_LINE')\""
+echo "File Path: \"$(echo "$data" | jq -r '.PARENT_FILE_PATH')\""
+echo "SHA256: \"$(echo "$data" | jq -r '.PARENT_HASH')\""
+echo "Process ID: \"$(echo "$data" | jq -r '.PARENT_PROCESS_ID')\""
+echo "================================="
+
+
+***********************************************************************************************************************************
+
+
