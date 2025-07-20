@@ -17,55 +17,52 @@ Log Analysing Methodology
 • User Agent
 
 
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ ls
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ file access.log 
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ ls -lh access.log 
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ ls -lh access.log 
+$ ls
+$ file access.log 
+$ ls -lh access.log 
 
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ wc access.log 
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ wc -l access.log 
+$ wc access.log 
+$ wc -l access.log 
+$ wc -w access.log 
+$ wc -b access.log 
 
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ wc -w access.log 
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ wc -b access.log 
+$ head access.log 
+$ head -n 1 access.log 
+$ tail access.log 
+$ tail -n 1 access.log 
 
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ head access.log 
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ head -n 1 access.log 
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ tail access.log 
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ tail -n 1 access.log 
+$ cat access.log
+$ more access.log 
+$ less access.log 
 
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ cat access.log
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ more access.log 
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ less access.log 
+$ cut access.log -d " " -f 1
+$ cut access.log -d " " -f 7
+$ cut access.log -d " " -f 9
 
+$ cut access.log -d " " -f 1 | sort
+$ cut access.log -d " " -f 1 | sort | uniq
+$ cut access.log -d " " -f 1 | sort | uniq -c | sort -nr
+$ cut access.log -d " " -f 1 | sort | uniq -c | grep -v " 1 " | sort -nr
 
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ cut access.log -d " " -f 1
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ cut access.log -d " " -f 7
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ cut access.log -d " " -f 9
+$ cut -d "\"" -f 6 access.log 
+$ cut -d "\"" -f 6 access.log  | sort | uniq -c | sort -nr
 
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ cut access.log -d " " -f 1 | sort
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ cut access.log -d " " -f 1 | sort | uniq
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ cut access.log -d " " -f 1 | sort | uniq -c | sort -nr
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ cut access.log -d " " -f 1 | sort | uniq -c | grep -v " 1 " | sort -nr
-
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ cut -d "\"" -f 6 access.log 
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ cut -d "\"" -f 6 access.log  | sort | uniq -c | sort -nr
-
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ grep "Mozilla/5.0 (Hydra)" access.log 
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ grep "Mozilla/5.0 (Hydra)" access.log | awk '{print $1}'
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ grep "Mozilla/5.0 (Hydra)" access.log | awk '{print $1}' | sort | uniq -c
+$ grep "Mozilla/5.0 (Hydra)" access.log 
+$ grep "Mozilla/5.0 (Hydra)" access.log | awk '{print $1}'
+$ grep "Mozilla/5.0 (Hydra)" access.log | awk '{print $1}' | sort | uniq -c
 
 
 -- HTTP Response Code --
 
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ grep "Mozilla/5.0 (Hydra)" access.log | awk '{print $9}'
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ grep "Mozilla/5.0 (Hydra)" access.log | awk '$9 > 200'
+$ grep "Mozilla/5.0 (Hydra)" access.log | awk '{print $9}'
+$ grep "Mozilla/5.0 (Hydra)" access.log | awk '$9 > 200'
 
 
 -- Redirection --
 
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ grep "17/Jul/2024:18:49:02 -0400" access.log 
-whoami@soc101-ubuntu:~/Desktop/04_SIEM/01_Log_Analysis$ grep "17/Jul/2024:18:49:02 -0400" access.log | grep -v "login.php"
-grep "Mozilla/5.0 (Hydra)" access.log | awk '{print $1}' | uniq -c
+$ grep "17/Jul/2024:18:49:02 -0400" access.log 
+$ grep "17/Jul/2024:18:49:02 -0400" access.log | grep -v "login.php"
+$ grep "Mozilla/5.0 (Hydra)" access.log | awk '{print $1}' | uniq -c
 
 
 
