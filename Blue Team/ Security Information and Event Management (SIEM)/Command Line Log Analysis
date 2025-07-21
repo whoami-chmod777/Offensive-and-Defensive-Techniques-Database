@@ -44,7 +44,11 @@ $ cut access.log -d " " -f 1 | sort | uniq
 $ cut access.log -d " " -f 1 | sort | uniq -c | sort -nr
 $ cut access.log -d " " -f 1 | sort | uniq -c | grep -v " 1 " | sort -nr
 
+$ cut challenge.log -d " " -f 1 | sort | uniq -c | sort -nr | head -n 3
+
+
 $ cut -d "\"" -f 6 access.log 
+$ cut -d " " -f 9 | sort | uniq -c access.log 
 $ cut -d "\"" -f 6 access.log  | sort | uniq -c | sort -nr
 
 $ grep "Mozilla/5.0 (Hydra)" access.log 
