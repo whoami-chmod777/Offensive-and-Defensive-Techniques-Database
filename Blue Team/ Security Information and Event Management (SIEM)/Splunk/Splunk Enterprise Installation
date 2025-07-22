@@ -1,0 +1,39 @@
+
+--- Splunk Enterprise Installation ---
+
+Windows
+wget -O splunk-9.4.3-237ebbd22314-windows-x64.msi "https://download.splunk.com/products/splunk/releases/9.4.3/windows/splunk-9.4.3-237ebbd22314-windows-x64.msi"
+
+Linux
+wget -O splunk-9.4.3-237ebbd22314-linux-amd64.tgz "https://download.splunk.com/products/splunk/releases/9.4.3/linux/splunk-9.4.3-237ebbd22314-linux-amd64.tgz"
+wget -O splunk-9.4.3-237ebbd22314-linux-amd64.deb "https://download.splunk.com/products/splunk/releases/9.4.3/linux/splunk-9.4.3-237ebbd22314-linux-amd64.deb"
+wget -O splunk-9.4.3-237ebbd22314.x86_64.rpm "https://download.splunk.com/products/splunk/releases/9.4.3/linux/splunk-9.4.3-237ebbd22314.x86_64.rpm"
+
+Mac OS
+wget -O splunk-9.4.3-237ebbd22314-darwin-intel.dmg "https://download.splunk.com/products/splunk/releases/9.4.3/osx/splunk-9.4.3-237ebbd22314-darwin-intel.dmg"
+wget -O splunk-9.4.3-237ebbd22314-darwin-intel.tgz "https://download.splunk.com/products/splunk/releases/9.4.3/osx/splunk-9.4.3-237ebbd22314-darwin-intel.tgz"
+
+
+whoami@soc101-ubuntu:~/Downloads$ sudo tar xvzf splunk-9.4.3-237ebbd22314-linux-amd64.tgz -C /opt/
+
+whoami@soc101-ubuntu:/opt/splunk/bin$ sudo ./splunk start
+whoami@soc101-ubuntu:/opt/splunk/bin$ sudo ./splunk stop
+whoami@soc101-ubuntu:/opt/splunk/bin$ sudo ./splunk restart
+
+whoami@soc101-ubuntu:/opt/splunk/bin$ sudo ./splunk start --accept-licence
+
+username: admin
+password: Passw0rd13
+
+http://127.0.0.1:8000
+http://192.168.199.63:8000/
+http://soc101-ubuntu:8000
+
+whoami@soc101-ubuntu:/opt/splunk/bin$ sudo ./splunk enable boot-start
+
+
+
+https://www.splunk.com/
+https://www.splunk.com/en_us/download/splunk-enterprise.html
+https://help.splunk.com/en/splunk-enterprise/get-started/install-and-upgrade/9.4/plan-your-splunk-enterprise-installation/installation-overview
+
