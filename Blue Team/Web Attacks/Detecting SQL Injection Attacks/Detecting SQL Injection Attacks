@@ -12,6 +12,7 @@
 -- What is SQL Injection (SQLi) --
 
 SQL Injections are critical attack vectors in which a web application directly includes unsanitized user-provided data in SQL queries.
+The frameworks we use today to develop web applications have preventative mechanisms in place to protect against SQL Injection attacks. However, we still come across SQL injection vulnerabilities because sometimes raw SQL queries are used, sometimes the framework has an inherent SQL injection vulnerability, or the framework is not used properly.
 
 
 -- Types of SQL Injections --
