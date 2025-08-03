@@ -1,0 +1,65 @@
+
+--- Detecting SQL Injection Attacks ---
+
+• What is SQL Injection (SQLi)
+• Types of SQL Injections
+• How Does SQL Injection Work
+• What Attackers Gain from SQL Injection Attacks
+• How to Prevent SQL Injections
+• Detecting SQL Injection Attacks
+
+
+-- What is SQL Injection (SQLi) --
+
+SQL Injections are critical attack vectors in which a web application directly includes unsanitized user-provided data in SQL queries.
+
+
+-- Types of SQL Injections --
+
+There are 3 types of SQL Injection. These are: 
+
+1. In-band SQLi (Classic SQLi): When an SQL query is sent and responded to on the same channel, we call this in-band SQLi. This is easier for attackers to exploit than other categories of SQLi.
+2. Inferential SQLi (Blind SQLi): SQL queries that receive a response that cannot be seen are called Inferential SQLi. They are also called "Blind SQLi" because the response cannot be seen.
+3. Out-of-band SQLi: If the response to an SQL query is communicated through another channel, this type of SQLi is called "out-of-band SQLi". For example, if the attacker receives replies to the SQL queries via DNS, this is called out-of-band SQLi.
+
+
+-- How Does SQL Injection Work --
+
+Today, most standard web applications receive data from a user and use that data to display specific content. The login page is where most SQL injection attacks occur. Let's look at how SQL injections work through an example.
+A user is usually expected to enter their username and password on the login page. Then, on the other side, the web application will use this username and password information to create an SQL query like the one below:
+
+• SELECT * FROM users WHERE username = 'USERNAME’ AND password = 'USER_PASSWORD'
+
+The meaning of this SQL query is "Bring me all the information about the user from the user's table whose name is USERNAME and whose password is USER_PASSWORD". If the web application finds a matching user, it will authenticate the user, if it cannot find a user after executing the query, the login will fail.
+Let's say your username is "john" and your password is "supersecretpassword". When you enter this information and click the 'Login' button, the SQL query shown below will be queried and you will be able to log in because a match was found after the SQL query.
+
+• SELECT * FROM users WHERE username = ‘john’ AND password = 'supersecretpassword'
+
+So what if we do not use this system as it was designed and we put an apostrophe (') in the username field? The SQL query will look like this and the error will be excluded from the database because the query was incorrect.
+
+• SELECT * FROM users WHERE username = ‘john’’ AND password = 'supersecretpassword'
+
+Of course, an attacker would be pleased to get an error message, as they can manipulate the information in the error message to their advantage. It also shows that the attacker is on the right track. So what if the attacker enters a payload like the following in the username section?
+
+• ' OR 1=1 -- -
+
+When the attacker submits the payload, the web application executes the following SQL query:
+
+• SELECT * FROM users WHERE username = ‘’ OR 1=1 -- - AND password = 'supersecretpassword'
+
+In SQL, any characters after "-- -" are considered to be a comment line. So if we look at the query above, the characters after "-- -" mean nothing. So, for the sake of simplicity, let's remove that part before we examine the SQL query further.
+
+• SELECT * FROM users WHERE username = ‘’ OR 1=1
+
+The query above now looks like this "if the username is empty or 1=1". It does not matter whether the username field is empty or not, because 1 is always equal to 1. So this query will always be true and will most likely call the first entry in the database. The attacker will be able to successfully enter the web application because there is a match.
+This is a typical SQL injection attack. Of course, SQL injection attacks are not limited to this example, the attacker could use SQL to execute commands in the system using SQL commands such as xp_cmdshell.
+
+
+-- What Attackers Gain from SQL Injection Attacks --
+
+
+
+
+
+
+
