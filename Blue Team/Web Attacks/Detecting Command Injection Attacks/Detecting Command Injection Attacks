@@ -6,7 +6,7 @@
 • How attackers can exploit Command Injection Attacks
 • How to Prevent Command Injection
 • Detecting Command Injection Attacks
-• 
+• A Detection Example
 • 
 • 
 • 
@@ -63,15 +63,34 @@ Attackers can execute commands on an operating system by exploiting command inje
 
 -- Detecting Command Injection Attacks --
 
+I think we all understand the criticality of the command injection vulnerability. If such a critical vulnerability is exploited and goes undetected, the targeted company can lose a great deal of money and reputation.
+
+So how do we detect command injection attacks?
+
+Actually, there is more than one way. These are:
+
+• When examining a web request, look at all areas: The command injection vulnerability may be in different areas depending on how the web application works. Therefore, you should check all areas of the web request.
+• Look for keywords related to the terminal language: Check the data received from the user for keywords related to terminal commands such as dir, ls, cp, cat, type, etc.
+• Learn about commonly used command injection payloads: When attackers discover a command injection vulnerability, they usually create a reverse shell to make their work easier. Therefore, knowing commonly used command injection payloads will make it easier to detect a command injection attack.
 
 
+-- A Detection Example --
 
+In this example, we will not be looking at access logs, but instead at an HTTP request.
 
+GET / HTTP/1.1
+Host: yourcompany.com
+User-Agent: () { :;}; echo "NS:" $(</etc/passwd)
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9
+Connection: close
 
-
-
-
-
+Looking at the HTTP request above, we can see that the main page of the web application yourcompany[.]com was requested.
+But if we look at the HTTP request headers, we see a suspicious situation in the User-Agent header. There is a bash command in the User-Agent header where there should be browser/operating system information.
+In fact, this request was captured while a security vulnerability called Shellshock was being exploited. Shellshock is a security vulnerability that was disclosed in 2014 and had a major impact.
+Shellshock comes from bash somehow executing environment variables unintentionally. It is a great example of a command injection attack.
+The contents of the file "/etc/passwd" are returned to the attacker as "NS" in the HTTP response header when the bash command, which is in the user agent, is executed.
 
 
 
