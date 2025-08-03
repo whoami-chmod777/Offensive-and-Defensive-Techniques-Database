@@ -1,0 +1,14 @@
+
+-- What are web attacks? --
+
+Web applications are applications that provide services to users through a browser interface. Today, web applications make up a large part of internet usage. Sites such as Google, Facebook, and YouTube (excluding their mobile applications) are actually web applications.
+Because web applications serve as the interface to the internet for many organizations, they can be exploited by attackers to gain access to devices, steal personal data, or cause service disruptions, resulting in significant financial damage.
+A study by Acunetix found that 75% of all cyber-attacks were at the web application level.
+
+Below are some of the attack methods used to infiltrate web applications. We will cover these methods in our Web Attacks 101 course, explaining what they are, how and why attackers use them, and how we can detect such activity.
+• SQL Injection
+• Cross Site Scripting
+• Command Injection
+• IDOR
+• RFI & LFI
+• File Upload (Web Shell)
