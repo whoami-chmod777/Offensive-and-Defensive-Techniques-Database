@@ -6,7 +6,7 @@
 • How XML External Entity Works
 • Impact of XML External Entity
 • Prevention Methods for XML External Entity
-• 
+• Detecting XML External Entity Attacks
 
 
 -- What is XML External Entity --
@@ -30,4 +30,38 @@ There are several best practices that can help prevent XXE attacks:
 • Use secure coding practices: Use secure coding practices, such as input validation, data sanitization, and error handling, to minimize the risk of XXE attacks.
 
 By implementing these best practices, you can significantly reduce the risk of XXE attacks in your web application. It is important to keep up-to-date with the latest security best practices and patches for your web application, and to periodically perform security assessments to identify and remediate any vulnerabilities.
+
+
+-- Detecting XML External Entity Attacks --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
