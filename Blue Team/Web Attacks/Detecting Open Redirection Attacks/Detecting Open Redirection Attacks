@@ -6,7 +6,7 @@
 • How Open Redirection Works
 • Impact of Open Redirection
 • Prevention Methods for Open Redirection
-• 
+• Detecting Open Redirect Attacks
 
 
 -- What is Open Redirection --
@@ -109,6 +109,12 @@ exit;
 ?>
 
 In the fixed version, the `filter_var` function with `FILTER_VALIDATE_URL` filter is used to validate the user-supplied `url` parameter. This filter checks if the value is a valid URL according to the PHP filter extension, and if it returns `true`, the redirect is performed to the validated URL. If the `url` parameter does not pass the validation, a default URL or an error message can be shown, and no redirection is performed. This helps to prevent malicious URLs or invalid values from being used in the redirection process, mitigating the open redirection vulnerability.
+
+
+-- Detecting Open Redirect Attacks --
+
+
+
 
 
 
