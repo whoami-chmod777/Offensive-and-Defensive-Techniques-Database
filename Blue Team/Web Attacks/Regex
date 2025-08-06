@@ -4,6 +4,7 @@
 • Detecting Open Redirection Attacks
 • Detecting Directory Traversal Attacks
 • Detecting Brute Force Attacks
+• Detecting IP addresses
 • 
 
 
@@ -66,7 +67,11 @@ An example of a regular expression that can be used to detect repeated failed lo
 
 
 
+-- Detecting IP addresses --
 
+An example of a regular expression that can be used to detect the IP address of the attacker who performed the Brute Forcing attack
+
+🔍 Regex: ^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}
 
 
 
