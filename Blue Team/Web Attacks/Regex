@@ -1,0 +1,74 @@
+
+--- Regex ---
+
+• Detecting Open Redirection Attacks
+• Detecting Directory Traversal Attacks
+• Detecting Brute Force Attacks
+• 
+
+
+-- Detecting Open Redirection Attacks --
+
+This regex will match any log entry where the HTTP method is GET, the request contains a query parameter with https://x.com, and the request is using HTTP version 1.0 or 1.1. This should match the most common open redirection attack patterns.
+
+🔍 Regex Explanation: /^.*"GET.*\?.*=(https%3a%2f%2f[a-z0-9-]+%2e[a-z]{2,}).+?.*HTTP\/.*".*$/gm
+
+✅ Using grep: grep -E '^.*"GET.*\?.*=(%2e%2e%2f).+?.*HTTP\/.*".*$' access.log
+✅ Using grep -P (Perl Regex): grep -Pi '"GET.*\?.*=(https%3a%2f%2f[a-z0-9-]+%2e[a-z]{2,}).*HTTP\/.*"' /var/log/nginx/access.log
+✅ Using awk: awk 'tolower($0) ~ /get.*\?.*=https%3a%2f%2f[a-z0-9-]+%2e[a-z]{2,}.*http\// { print $0 }' /var/log/nginx/access.log
+✅ Using sed: sed -n '/https%3a%2f%2f[a-z0-9-]*%2e[a-z][a-z]*/Ip' /var/log/nginx/access.log
+✅ Extended Matching: grep -Pi '(https%3a%2f%2f|https:\/\/|http:\/\/|https%253a%252f%252f)[a-z0-9-]+\.[a-z]{2,}' /var/log/nginx/access.log
+✅ Highlight Matches: grep -Pi --color=always '(https%3a%2f%2f|https:\/\/|http:\/\/|https%253a%252f%252f)[a-z0-9-]+\.[a-z]{2,}' /var/log/nginx/access.log
+
+
+
+-- Detecting Directory Traversal Attacks --
+
+These are really basic payloads for directory traversal attacks. So, we should keep in mind ../ (dot dot slash), encoded and double encoded ../ is the key values for this attack type. Here is the basic example for detecting these payloads on nginx access.log file;
+
+Linux
+/etc/issue
+/etc/passwd
+/etc/shadow
+/etc/group
+/etc/hosts
+
+
+Windows
+c:/boot.ini
+c:/inetpub/logs/logfiles
+c:/inetpub/wwwroot/global.asa
+c:/inetpub/wwwroot/index.asp
+c:/inetpub/wwwroot/web.config
+c:/sysprep.inf
+
+🔍 Regex Explanation: /^.*"GET.*\?.*=(%2e%2e%2f).+?.*HTTP\/.*".*$/gm
+
+🔧 Using grep: grep -E '^.*"GET.*\?.*=(%2e%2e%2f).+?.*HTTP\/.*".*$' access.log
+🔧 Using grep -P: grep -P '"GET.*\?.*=(%2e%2e%2f).+?.*HTTP\/.*"' /var/log/nginx/access.log
+🔧 Using awk: awk '{ if ($0 ~ /GET.*\?.*=(%2e%2e%2f).*HTTP/) print $0 }' /var/log/nginx/access.log
+🔧 Using sed: sed -n '/%2e%2e%2f\|%2e%2e\/\|\.\.\/\|%252e%252e%252f/p' /var/log/nginx/access.log
+🔧 Extended Pattern Matching (Catches More Variants): (%2e%2e%2f|%2e%2e/|\.\./|%252e%252e%252f)
+🔧 Bash + Grep to Match All Traversal Attempts: grep -P '(%2e%2e%2f|%2e%2e/|\.\./|%252e%252e%252f)' /var/log/nginx/access.log
+🔧 Bash + Grep to Match All Traversal Attempts: grep -Pi '(%2e%2e%2f|%2e%2e/|\.\./|%252e%252e%252f)' /var/log/nginx/access.log
+🔧 Highlight Matches: grep -P --color=always '(%2e%2e%2f|%2e%2e/|\.\./|%252e%252e%252f)' /var/log/nginx/access.log
+
+
+
+-- Detecting Brute Force Attacks --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
