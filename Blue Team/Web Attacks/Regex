@@ -5,7 +5,7 @@
 • Detecting Directory Traversal Attacks
 • Detecting Brute Force Attacks
 • Detecting IP addresses
-• 
+• Detecting XML External Entity Attacks
 
 
 -- Detecting Open Redirection Attacks --
@@ -72,6 +72,23 @@ An example of a regular expression that can be used to detect repeated failed lo
 An example of a regular expression that can be used to detect the IP address of the attacker who performed the Brute Forcing attack
 
 🔍 Regex: ^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}
+
+
+
+
+-- Detecting XML External Entity Attacks --
+
+🔍 Regex: ^(\S+) - (\S+) \[(.*?)\] "(\S+) (.*?)\?(?=.*?\b21DOCTYPE\b).*? HTTP\/\d\.\d" (\d+) (\d+) "(.*?)" "(.*?)"
+
+The most important things to detect XXE attacks on the logs, you should check specific keyword like;
+
+• DOCTYPE
+• ELEMENT
+• ENTITY
+
+
+
+
 
 
 
