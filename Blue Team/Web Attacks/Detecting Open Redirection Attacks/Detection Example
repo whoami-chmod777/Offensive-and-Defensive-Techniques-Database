@@ -1,7 +1,6 @@
 
 Example nginx access log file;
 
-
 192.168.80.1 - - [18/Apr/2023:20:05:05 +0000] "GET /products.php?pro=url HTTP/1.1" 200 2937 "http://victim.com/process.php? file=Generics/about.nsp" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.5615.50 Safari/537.36"
 192.168.80.1 - - [18/Apr/2023:20:05:05 +0000] "GET /products.php?pro=http%3a%2f%2fwww%2egoogle%2ecom HTTP/1.1" 200 2955 "http://victim.com/process.php?file=Generics/about.nsp" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.5615.50 Safari/537.36"
 192.168.80.1 - - [18/Apr/2023:20:05:05 +0000] "GET /products.php?pro=%2f%5c%2fgoogle%2ecom HTTP/1.1" 200 2947 "http://victim.com/process.php?file=Generics/about.nsp" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.5615.50 Safari/537.36"
