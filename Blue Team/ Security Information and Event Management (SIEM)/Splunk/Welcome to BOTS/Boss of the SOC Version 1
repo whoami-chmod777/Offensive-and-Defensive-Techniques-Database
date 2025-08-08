@@ -1,0 +1,278 @@
+
+--- Web site defacement ---
+
+Today is Alice's first day at the Wayne Enterprises' Security Operations Center. Lucius sits Alice down and gives her first assignment: A memo from Gotham City Police Department (GCPD). Apparently GCPD has found evidence online (http://pastebin.com/Gw6dWjS9) that the website www.imreallynotbatman.com hosted on Wayne Enterprises' IP address space has been compromised. The group has multiple objectives... but a key aspect of their modus operandi is to deface websites in order to embarrass their victim. Lucius has asked Alice to determine if www.imreallynotbatman.com. (the personal blog of Wayne Corporations CEO) was really compromised.
+
+-- Questions --
+
+What is the likely IPv4 address of someone from the Po1s0n1vy group scanning imreallynotbatman.com for web application vulnerabilities?
+What company created the web vulnerability scanner used by Po1s0n1vy? Type the company name.
+What content management system is imreallynotbatman.com likely using?
+What is the name of the file that defaced the imreallynotbatman.com website? Please submit only the name of the file with extension?
+This attack used dynamic DNS to resolve to the malicious IP. What fully qualified domain name (FQDN) is associated with this attack?
+What IPv4 address has Po1s0n1vy tied to domains that are pre-staged to attack Wayne Enterprises?
+What IPv4 address is likely attempting a brute force password attack against imreallynotbatman.com?
+What is the name of the executable uploaded by Po1s0n1vy?
+What is the MD5 hash of the executable uploaded?
+GCPD reported that common TTPs (Tactics, Techniques, Procedures) for the Po1s0n1vy APT group, if initial compromise fails, is to send a spear phishing email with custom malware attached to their intended target. This malware is usually connected to Po1s0n1vys initial attack infrastructure. Using research techniques, provide the SHA256 hash of this malware.
+What special hex code is associated with the customized malware discussed in question 111?
+What was the first brute force password used?
+One of the passwords in the brute force attack is James Brodsky's favorite Coldplay song. We are looking for a six character word on this one. Which is it?
+What was the correct password for admin access to the content management system running "imreallynotbatman.com"?
+What was the average password length used in the password brute forcing attempt?
+How many seconds elapsed between the time the brute force password scan identified the correct password and the compromised login?
+How many unique passwords were attempted in the brute force attempt?
+
+
+>> Starting the Investigate 
+
+| eventcount summarize=false index=*
+
+botsv1	
+history	
+main	
+perfmon	
+summary	
+windows	
+wineventlog
+
+
+| metadata type=sourcetypes
+| fields sourcetype
+
+WinEventLog:Application
+WinEventLog:Security
+WinEventLog:System
+WinRegistry
+XmlWinEventLog:Microsoft-Windows-Sysmon/Operational
+fgt_event
+fgt_traffic
+fgt_utm
+iis
+nessus:scan
+stream:dhcp
+stream:dns
+stream:http
+stream:icmp
+stream:ip
+stream:ldap
+stream:mapi
+stream:sip
+stream:smb
+stream:snmp
+stream:tcp
+stream:udp
+suricata
+
+
+
+>> What is the likely IPv4 address of someone from the Po1s0n1vy group scanning imreallynotbatman.com for web application vulnerabilities 
+
+* Start your search with "sourcetype=stream:http" and review the rich data captured in these events.
+* You'll notice that source and destination IP addresses are stored in fields called src_ip and dest_ip respectively. Determine top-talkers for HTTP by combining : "sourcetype=stream:http | stats count by src_ip, dest_ip | sort -count"
+
+index=botsv1 sourcetype=fgt* "imreallynotbatman.com"
+index=botsv1 sourcetype=stream:http "imreallynotbatman.com"
+index="botsv1" sourcetype=fgt* "imreallynotbatman.com" action=blocked
+index="botsv1" sourcetype="stream:http" "imreallynotbatman.com" action=blocked
+
+
+>> What company created the web vulnerability scanner used by Po1s0n1vy? Type the company name 
+
+* Many commercial web vulnerability scanners clearly identify themselves in the headers of the HTTP request. Inspect the HTTP source headers (src_headers) of requests from the IP identified in question 101.
+
+index=botsv1 sourcetype=fgt* "imreallynotbatman.com" action=blocked
+index="botsv1" sourcetype=* "imreallynotbatman.com" http_method=POST
+
+
+>> What content management system is imreallynotbatman.com likely using 
+
+* Look for successful (http status code of 200) GET requests from the scanning IP address (identified previously) and inspect the fields related to URL/URI for clues to the CMS in use.
+
+index=botsv1 sourcetype=stream:http "imreallynotbatman.com" http_method=GET
+
+index="botsv1" sourcetype=* "imreallynotbatman.com"
+index="botsv1" sourcetype=* "imreallynotbatman.com" | top limit=5 url
+
+index="botsv1" sourcetype="stream:http" "imreallynotbatman.com" http_method=GET
+| top limit=5 url
+
+
+>> What is the name of the file that defaced the imreallynotbatman.com website? Please submit only the name of the file with extension 
+
+* First find the IP address of the web server hosting imreallynotbatman.com. You may have found this IP during the course of answering the previous few questions.
+* Revealing sourcetypes include stream:http, fgt_utm, and suricata. 
+* The key here is searching for events where the IP address of the web server is the source. Because it's a web server, we most often see it as a destination but in this case the intruder took control of the server and pulled the defacement file from an internet site.
+
+index=botsv1 sourcetype="stream:http" "imreallynotbatman.com"
+index=botsv1 sourcetype="stream:http" "imreallynotbatman.com" dest_ip="192.168.250.70"
+index=botsv1 sourcetype="stream:http" c_ip="192.168.250.70"
+
+
+>> This attack used dynamic DNS to resolve to the malicious IP. What fully qualified domain name (FQDN) is associated with this attack 
+
+* Consider the answer to question 104. The fully qualified domain name was recorded by Stream, Suricata, and the Fortigate firewall.
+
+index=botsv1 sourcetype="stream:http" c_ip="192.168.250.70" uri="/poisonivy-is-coming-for-you-batman.jpeg"
+
+
+>> What IPv4 address has Po1s0n1vy tied to domains that are pre-staged to attack Wayne Enterprises 
+
+* Consider the answer to question 104. The IP address was recorded by Stream, Suricata, and the Fortigate firewall. Do you dig me?
+
+index=botsv1 sourcetype="stream:http" "imreallynotbatman.com"
+
+
+>> What IPv4 address is likely attempting a brute force password attack against imreallynotbatman.com?
+
+* Login attempts will use the HTTP POST method, and they will include some obvious fields in the form_data field of stream:http events.
+
+index=botsv1 sourcetype="stream:http" "imreallynotbatman.com" http_method=POST passwd*
+
+
+>> What is the name of the executable uploaded by Po1s0n1vy?
+
+* File uploads to web forms use the HTTP POST method. 
+* The question mentions an executable. Search for common executable filename extensions on Windows systems.
+
+index=botsv1 sourcetype=* "imreallynotbatman.com" AND "*.exe"
+index=botsv1 sourcetype=* "imreallynotbatman.com" AND "*.exe" "http.http_method"=POST
+index=botsv1 sourcetype=* "imreallynotbatman.com" AND "*.exe" "http.http_method"=POST "fileinfo.filename"="3791.exe"
+
+
+>> What is the MD5 hash of the executable uploaded?
+
+* It will be difficult to calulate a hash based on the Splunk event you used to answer 109. Instead Search for the file name in a different data source to find evidence of execution, including file hash values.
+* This is an ideal use case for Microsoft Sysmon data. Determine the sourcetype for Sysmon events and search them for the executable.
+
+index=botsv1 sourcetype=* "imreallynotbatman.com" "3791.exe"
+file_hash: ec78c938d8453739ca2a370b9c275971ec46caf6e479de2b2d04e97cc47fa45d
+
+
+>> GCPD reported that common TTPs (Tactics, Techniques, Procedures) for the Po1s0n1vy APT group, if initial compromise fails, is to send a spear phishing email with custom malware attached to their intended target. This malware is usually connected to Po1s0n1vys initial attack infrastructure. Using research techniques, provide the SHA256 hash of this malware.
+
+* You need to pivot outside of Splunk to answer this question. Use the IP address discovered earlier to search for malware that has been associated with it in the past.
+* Experienced analysts know to use sites like www.threatminer.org to search for malware associated with the malicious IP address, but if all alse fails, Google it!
+
+
+>> What special hex code is associated with the customized malware discussed in question 111?
+
+* Do some further research on the hash discovered in the last question. Virustotal.com is a good starting place.
+* malwr.com might lead you astray
+* The hex codes we are after here will be formatted like this: 49 66 20 79 6f 75 20 64 65 63 6f 64 65 20 74 68 65 20 68 69 6e 74 2c 20 79 6f 75 20 64 6f 6e 27 74 20 6e 65 65 64 20 61 20 68 69 6e 74 21. Submit the hex codes, but decode them on the web for fun!
+
+
+>> What was the first brute force password used?
+
+* Login attempts will use the HTTP POST method, and they will include some obvious fields that you can search for in the form_data field of stream:http events.
+* Login attempts will use the HTTP POST method, and they will include some obvious fields that you can search for in the form_data field of stream:http events.
+
+index=botsv1 sourcetype="stream:http" dest_ip="192.168.250.70" http_method=POST
+
+index=botsv1 sourcetype="stream:http" dest_ip="192.168.250.70" http_method=POST form_data="*task=login*"
+
+index=botsv1 sourcetype="stream:http" dest_ip="192.168.250.70" http_method=POST form_data="*task=login*"
+| rex field=form_data "passwd=(?<password>[^&]+)"
+| sort 0 + _time
+| table _time password form_data
+| head 1
+
+
+>> One of the passwords in the brute force attack is James Brodsky's favorite Coldplay song. We are looking for a six character word on this one. Which is it?
+
+* If you have not done so already, try to extract the attempted password into a new field using the "rex" SPL command and a regular expression. Having the password attempt in its own field will serve you well for the next several questions!
+* It's not hard to get a list of songs by the artist. Once you have that,use the "len()" function of the "eval" SPL command. For Splunk style points, use a lookup table to match the password attempts with songs.
+* Coldplay’s most famous songs in the early 2000s was yellow --> ChatGPT
+
+index=botsv1 sourcetype="stream:http" src_ip="23.22.63.114" http_method=POST form_data="*task=login*"
+| rex field=form_data "passwd=(?<password>[^&]+)"
+| search password!=""
+| where len(password)=6
+| table password
+
+index=botsv1 sourcetype="stream:http" src_ip="23.22.63.114" http_method=POST form_data="*task=login*"
+| rex field=form_data "passwd=(?<password>[^&]+)"
+| search password!=""
+| where len(password)=6
+| table password
+| dedup password
+
+index=botsv1 sourcetype="stream:http" src_ip="23.22.63.114" http_method=POST form_data="*task=login*"
+| rex field=form_data "passwd=(?<password>[^&]+)"
+| search password!=""
+| where len(password)=6
+| table password
+| dedup password
+| search password=yellow
+
+
+>> What was the correct password for admin access to the content management system running "imreallynotbatman.com"?
+
+* From the previous questions, you should know how to extract the password attempts.  You should also know what IP is submitting passwords.  Are any other IP addresses submitting passwords?
+
+-- Final Search Syntax
+
+index=botsv1 sourcetype="stream:http" src_ip="23.22.63.114" http_method=POST form_data="*task=login*"
+| rex field=form_data "username=(?<user>[^&]+)"
+| rex field=form_data "passwd=(?<password>[^&]+)"
+| search user=admin password=batman
+| table _time src_ip user password
+
+
+Step 1
+index=botsv1 sourcetype=stream:http dest_ip="192.168.250.70" http_method=POST uri=/joomla/Administrator/index.php  status=200 
+| rex field=form_data "passwd=(?<password>\w+)"
+
+Step 2 
+index=botsv1 sourcetype=stream:http dest_ip="192.168.250.70" http_method=POST uri=/joomla/Administrator/index.php
+
+Step 3
+index=botsv1 sourcetype=stream:http dest_ip="192.168.250.70" http_method=POST uri=/joomla/Administrator/index.php
+| rex field=form_data "passwd=(?<password>\w+)"
+| stats count by password
+| sort -count
+
+
+index=botsv1 "imreallynotbatman.com" http_method="POST" form_data=*passwd* connection_type="Keep-Alive"
+
+index=botsv1 "imreallynotbatman.com" http_method="POST" form_data=*passwd* connection_type="Keep-Alive"
+| rex field=form_data "passwd=(?<userpassword>\w+)"
+| stats dc by userpassword
+
+
+>> What was the average password length used in the password brute forcing attempt?
+
+* Calculate the length of every password attempt and store the result in a new field. Then calulate the average of that new field with a stats command. Use eval to average, or just visually inspect.
+* Then calulate the average of that new length field with a stats command, and finally use eval to round, or just manually round.
+
+index=botsv1 sourcetype="stream:http" src_ip="23.22.63.114" http_method=POST form_data="*task=login*"
+| rex field=form_data "passwd=(?<password>[^&]+)"
+| eval pw_length=len(password)
+| stats avg(pw_length) as average_password_length
+
+
+>> How many seconds elapsed between the time the brute force password scan identified the correct password and the compromised login?
+
+* You'll note from previous answers that one of the passwords was attempted twice. You need to calculate the duration of time between those two attempts.
+* Need more help? Write a search that returns only the two events in questions, then use  either "| delta _time" or "| transaction <extracted-pword-attempt>" SPL commands.
+
+imreallynotbatman.com http_method=POST form_data="*username*passwd*"
+| rex field=form_data "username=(?<user>[^&]+)"
+| rex field="form_data" "passwd=(?<password>[^&]+)"
+| search password="batman"
+| search user=admin password=batman
+| sort 0 + _time
+| table _time src_ip user password
+| delta _time as seconds_between_attempts
+
+
+>> How many unique passwords were attempted in the brute force attempt?
+
+* Be sure you are extracting the password attempts correctly, then use a stats function to count unique (not total) attempts.
+
+index=botsv1 sourcetype="stream:http" http_method=POST form_data="*username*passwd*"
+| rex field=form_data "username=(?<user>[^&]+)"
+| rex field=form_data "passwd=(?<password>[^&]+)"
+| stats dc(password) as unique_password_count
+
+
