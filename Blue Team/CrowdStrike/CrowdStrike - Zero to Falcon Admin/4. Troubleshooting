@@ -1,1 +1,32 @@
 
+--- Troubleshooting ---
+
+• The Checklist
+• RFM
+
+
+-- The Checklist --
+
+• Is the OS supported by CS?
+• System requirements met for what services need to be running?
+• KEX approved for Macs?
+• Did you verify that the sensor is running?
+• Network requirements met for the correct enabled/allowed lists at the Firewalls?
+• Did you use the correct installer with correct command line and correct CID?
+• Netstat.exe -f with admin creds to see if the falcon domain name or falcon cloud IPs is showing an established connection
+• If cant connect to the cloud: can your host get on the internet? Are you using a proxy and are those settings correct? Firewall/network settings correct? Check that the host trusts the CS CA?
+• Are there other products interfering with the falcon sensor? (avast, bitdefender, AVG, ZoneAlarm, etc)
+• Is it a timeout issue? Agent install will timeout after 20min. Can override with the ProvNoWait parameter in the command line: <installer_filename> /install /quiet /norestart CID=<CID> ProvNoWait=1
+• What do the logs say? Any error codes present? (%LOCALAPPDATA%\temp) for anything matching crowdstrike around time of installation
+
+
+-- RFM --
+
+Reduced Functionality Mode
+• The sensor enters safe mode, limited logging if any based on the OS affected
+• Unsupported Kernel updates
+• Use the sensor dashboards available to check what sensors have entered RFM
+
+Options to address:
+• Roll back the system updates or downgrade to an older version of that system
+• Bear and grit it until Falcon releases a sensor update for that kernel
