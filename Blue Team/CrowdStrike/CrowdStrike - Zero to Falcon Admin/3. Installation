@@ -1,11 +1,137 @@
 
 --- Installation ---
 
-• Installation
-• Demo: Installing Sensors
+• Manual vs Automatic Installs
+• Points of Note
+• Networking Items
+• Windows Installation
+• Linux Install
+• MacOS Install
+• Installation Tokens
 
 
--- • Installation
-• Demo: Installing Sensors
+
+-- Manual vs Automatic Installs --
+
+Should be able to complete sensor roll out to all hosts within 45 days.
+Do not shutdown or reboot the host while the sensor is installing.
+
+1. Manual install
+a. Small number to deploy
+i. Host setup and management > sensor downloads > installer based on OS > download > copy CID
+ii. Doubleclick the pkg file > CID > go through installation
+iii. Verify sensor is running: sc.exe query csagent
+
+2. Automatic install
+i. SCCM or automated push
+ii. Host setup > sensor downloads > sensor installer based on OS > download > copy CID
+iii. Run on CLI via your deployment tool
+
+<installer file name> /install /quiet /norestart CID=<CID>
+
+
+-- Points of Note --
+
+Make sure you have the correct installer for version OS. Sensor Release Matrix in knowledge base article
+*FQDN domains need to be on allowed list = Documentation Cloud IP addresses
+Need to be allowed in network for those, see docs for IPs and domains for data between sensors and cloud
+
+
+-- Networking Items --
+
+Installer makes several attempts to connect to the cloud. If failure, it will uninstall
+
+Network Dependencies: outbound SSL traffic (port 443)
+Sensor uses certificate pinning: add falcon domain and IPs to bypass any firewall/proxy deep packet inspection, pinning = what certs are valid, certs get pinned CA public keys to check against
+
+Specific URLs and IPs will differ based on what cloud instance you are on (US1, US2, GOV, etc)
+
+
+-- Windows Installation --
+
+Requirements:
+• LM hosts (might be disabled)
+• Network store interface
+• Windows base filtering engine
+• Windows power services
+• WinHTTP auto proxy (if using a proxy)
+
+In order to use the NGAV that comes with CS, Windows Defender must be disabled
+
+Cant change the installation path
+
+HOW TO: GUI or CLI, both need company code (CID)
+
+<installer file name> /install /quiet /norestart CID=<string of numbers>
+
+/quiet = no UI prompt  /norestart = ensures the host doesn’t reboot after install
+
+Verify sensor: sc.exe query csagent
+
+
+-- Linux Install --
+
+CLI Install option only, no GUI available.
+*Make sure you check what OSs are supported
+
+uname -r to get kernel version (to make sure the version is supported)
+
+Ubuntu: sudo dpkg -I <installer package>
+RHEL, CentOS, Amazon Linux: sudo yum install <installer package>
+SLES: sudo zypper install <installer package>
+
+Register it with: sudo /opt/crowdstrike/falconctl -s --cid=<CID>
+Start the sensor: systemctl start falcon-sensor
+Check if running: ps -e | grep falcon-sensor
+
+
+-- MacOS Install --
+
+Elevated privileges needed
+JAMF to script out and install, always more customization on the CLI compared to GUI
+
+Grab the right sensor pkg file, double click and roll or go to CLI
+1. Install file on host
+2. License the sensor with CID
+
+To Install: sudo installer -verboseR -package <installer filename> -target /
+Register the sensor: sudo /Applications/Falcon.app/Contents/Resources/falconctl license <CID>
+
+Kernel extensions (KEX) will need to be approved
+
+Check stats: sudo /Applications/Falcon.app/Contents/Resources/falconctl stats
+
+
+-- Installation Tokens --
+
+Host setup > installation tokens:
+• 1 year, 90 days, 30 days, does not expire
+• Can align best to your org, maybe 30 days is best
+• Can stagger all 50 that are available to you
+
+Prevent unauthorized installations
+• Opt-in: it is off by default
+• Set expiration to rotate tokens
+• 50 tokens per CID
+
+Create in falcon console or through API
+Keep them secret, for preventing anyone from installing the sensors
+
+Audit log will show who has taken tokens on the console
+
+Usage: 
+--provisioning-token <token> 
+ProvToken = <token>
+
+
+
+
+
+
+
+
+
+
+
 
 
