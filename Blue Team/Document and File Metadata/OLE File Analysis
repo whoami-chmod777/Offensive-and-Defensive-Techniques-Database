@@ -1,1 +1,33 @@
 
+OLE File Analysis means examining an old Microsoft Office file (like .xls, .doc, .ppt) stored in the Object Linking and Embedding (OLE) container format.
+It helps detect macros, embedded objects, and malware hidden in the file’s internal streams.
+
+• oledump.py
+• xlmdeobfuscator 
+
+
+-- oledump.py --
+
+python3 oledump.py /root/research-1646684671.xls 
+python3 oledump.py -i /root/research-1646684671.xls
+python3 oledump.py -s 7 -v /root/research-1646684671.xls
+
+python3 oledump.py -p plugin_biff.py /root/research-1646684671.xls
+
+python3 oledump.py -p plugin_biff /root/research-1646684671.xls 
+python3 oledump.py -p plugin_biff --help /root/research-1646684671.xls 
+python3 oledump.py -p plugin_biff --pluginoptions -x /root/research-1646684671.xls
+
+python3 oledump.py FILE.xls -p plugin_biff.py --pluginoptions "-h"
+python3 oledump.py FILE.xls -p plugin_biff.py --pluginoptions "-x"
+python3 oledump.py FILE.xls -p plugin_biff.py --pluginoptions "-o FORMULA"
+
+
+
+
+-- xlmdeobfuscator --
+
+xlmdeobfuscator --file /root/Desktop/research-1646684671.xls
+xlmdeobfuscator --file /root/Desktop/research-1646684671.xls -n -x
+
+
