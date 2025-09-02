@@ -2,6 +2,12 @@
 --- Types of Threat Intelligence ---
 
 • Strategic Threat Intelligence
+• Tactical Threat Intelligence
+• Operational Threat Intelligence
+• Technical Threat Intelligence
+
+
+• Strategic Threat Intelligence
   → High level analysis - trends, risks, impacts
   → Threat actor motives, goals, and capabilities
   → Deciding long-term security strategy
