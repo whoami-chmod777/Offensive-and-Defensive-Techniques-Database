@@ -1,0 +1,54 @@
+
+--- The Threat Intelligence Cycle ---
+
+-- The Intelligence Cycle (Full) --
+
+• Requirements and Direction (Planning)
+• Collection (Processing)
+• Analysis
+• Dissemination
+• Feedback
+
+
+-- The Intelligence Cycle (Requirements and Direction (Planning)) --
+
+>> Intelligence Sources <<
+
+• Open-Source Intelligence (OSINT)
+
+  → Dark web, forums, social media
+  → Passive recon, vulnerability, and malware databases
+  → Public repositories
+
+• Commercial Threat Intelligence
+
+  → Third-party vendors
+  → Proprietary subscription-based threat feeds
+  → IOCs, malware signatures, attack patterns
+
+• Vendor Reports and Security Research
+
+  → Published reports and whitepapers
+
+• Information Sharing and Analysis Centers (ISACs)
+
+  → Industry groups facilitating threat intelligence sharing: AUTO-ISAC, AVIATION ISAC, WATER ISAC, E-ISAC, SPACE ISAC
+
+
+-- References --
+
+https://www.canada.ca/en/security-intelligence-service/corporate/publications/2019-public-report/the-intelligence-cycle.html
+https://nvd.nist.gov/vuln/search
+https://cve.mitre.org/
+https://bazaar.abuse.ch/
+https://www.virustotal.com/gui/home/upload
+https://talosintelligence.com/
+https://www.cisa.gov/
+https://www.ncsc.gov.uk/
+https://otx.alienvault.com/
+https://www.misp-project.org/
+https://www.recordedfuture.com/products/threat-intelligence
+https://www.mandiant.com/advantage/threat-intelligence
+https://media.kasperskycontenthub.com/wp-content/uploads/sites/43/2016/05/20081514/E-ISAC_SANS_Ukraine_DUC_5.pdf
+https://en.wikipedia.org/wiki/Information_Sharing_and_Analysis_Center
+https://www.nationalisacs.org/
