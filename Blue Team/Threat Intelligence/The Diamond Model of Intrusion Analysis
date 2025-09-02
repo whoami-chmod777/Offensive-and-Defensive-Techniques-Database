@@ -1,14 +1,30 @@
 
 --- The Diamond Model of Intrusion Analysis ---
 
+                 [ Adversary ]
+                       ?
+                        ^
+                        | Develops
+                        |
+[ Infrastructure ] <--- Deployed Via ---> [ Capability ]
+   Infected USB drives                      - 4 Zero day exploits
+                                            - Automatic worm execution
+   Uses                                     - Rootkits
+                                            - Stolen certificates
+                        |                   - Malware to sabotage centrifuges
+                        |
+                        v Exploits
+                     [ Victim ]
+                  Iran's nuclear program
 
 
+This keeps the diamond shape logic:
 
-
-
-
-
-
+• Adversary on top
+• Infrastructure on the left
+• Capability on the right
+• Victim at the bottom
+• Arrows showing relationships
 
 
 
