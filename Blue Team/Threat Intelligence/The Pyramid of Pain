@@ -1,9 +1,27 @@
 
+--- The Pyramid of Pain ---
+
 The Pyramid of Pain shows how difficult it is for attackers to adapt when defenders block different types of indicators.
 The higher you go (from hash values to TTPs), the more disruptive and costly it becomes for the attacker.
 
 
+-- THE PYRAMID OF PAIN --
 
+                   
+                                /        \                        
+                               /  TTPs    \                Tough!
+                              /------------\               
+                             /    Tools     \              Challenging
+                            /----------------\             
+                           / Network/Host     \            Annoying
+                          /    Artifacts       \
+                         /----------------------\
+                        /    Domain Names        \          Simple
+                       /--------------------------\
+                      /     IP Addresses           \        Easy
+                     /------------------------------\
+                    /       Hash Values              \      Trivial
+                   /----------------------------------\
 
 
 
