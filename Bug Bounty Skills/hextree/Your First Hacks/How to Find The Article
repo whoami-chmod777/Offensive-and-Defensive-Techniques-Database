@@ -1,1 +1,75 @@
 
+--- How to Find The Article ---
+
+This vulnerability can have different names. Sometimes it's called IDOR (Insecure Direct Object Reference) or "Lack of Authentication"
+
+• Identifying Inputs
+• Hidden Photos 
+• Finding the Links
+
+
+-- Identifying Inputs --
+
+<a href="/post/0">this post</a>
+
+<ul>
+  <li><a href="/post/0">first post</a></li>
+  <li><a href="/post/1">second post</a></li>
+</ul>
+
+https://blogger1-mvjry32zlyvxy.hexbirch.com/post/0
+https://blogger1-mvjry32zlyvxy.hexbirch.com/post/1
+https://blogger1-mvjry32zlyvxy.hexbirch.com/post/2
+https://blogger1-mvjry32zlyvxy.hexbirch.com/post/3
+
+
+-- Hidden Photos --
+
+Menu -> Tools -> Developer Tools
+
+<header class="masthead" style="background-image: url('/static/img/umberto-jXd2FSvcRr8-unsplash.jpg');">
+      <div class="overlay"></div>
+      ...
+
+/static/img/umberto-jXd2FSvcRr8-unsplash.jpg.
+
+https://blogger1-qh5e2of5655cw.hexbirch.com/static/img/image01.jpeg
+https://blogger1-qh5e2of5655cw.hexbirch.com/static/img/image02.jpeg
+https://blogger1-qh5e2of5655cw.hexbirch.com/static/img/image03.jpeg
+https://blogger1-qh5e2of5655cw.hexbirch.com/static/img/image04.jpeg
+
+-- Finding the Links --
+
+<a href="/posts">click me</a>
+
+<li class="nav-item">
+  <a class="nav-link" href="/photos">Photos</a>
+</li>
+<!-- The Guestbook was getting targeted by spammers. Removed it for now. -->
+<!-- <li class="nav-item"> <a class="nav-link" href="/guestbook">Guestbook</a> </li> -->
+<li class="nav-item">
+  <a class="nav-link" href="/about">About</a>
+</li>
+
+view-source:https://blogger1-mvjry32zlyvxy.hexbirch.com/
+
+https://blogger1-mvjry32zlyvxy.hexbirch.com/
+https://blogger1-mvjry32zlyvxy.hexbirch.com/photos
+https://blogger1-mvjry32zlyvxy.hexbirch.com/guestbook
+https://blogger1-mvjry32zlyvxy.hexbirch.com/about
+https://blogger1-mvjry32zlyvxy.hexbirch.com/posts
+https://blogger1-mvjry32zlyvxy.hexbirch.com/robots.txt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
