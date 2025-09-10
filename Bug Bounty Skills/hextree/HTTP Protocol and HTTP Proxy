@@ -1,0 +1,7 @@
+
+--- HTTP Protocol and HTTP Proxy ---
+
+We are exploring the basics of HTTP by looking at the raw TCP communication. After that we learn how an HTTP proxy works, which helps us understand how modern proxy tools for web hacking work.
+
+
+HTTP Protocol
