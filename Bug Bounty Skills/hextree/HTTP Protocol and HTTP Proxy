@@ -55,6 +55,7 @@ nc blogger2-idhh5vd4yne4o.hexbirch.com 80
 nc -v blogger2-idhh5vd4yne4o.hexbirch.com 80
 
 curl -v http://blogger2-idhh5vd4yne4o.hexbirch.com/
+curl -v http://blogger2-idhh5vd4yne4o.hexbirch.com//api/photos -H "Cookie: admin_sessionid=HXT{...}"
 curl -v https://blogger2-rl3lv6nw7og6u.hexbirch.com/photos/ \ -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36
 curl -v https://blogger2-rl3lv6nw7og6u.hexbirch.com/photos/ -H "Cookie: admin_sessionid=HXT{this-is-a-secret-value-f59661f0}"
 
