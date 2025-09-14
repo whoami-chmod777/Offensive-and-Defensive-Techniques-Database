@@ -9,7 +9,14 @@ We are exploring the basics of HTTP by looking at the raw TCP communication. Aft
 • Custom HTTP header
 • Raw HTTP Request and Responses with Netcat
 • Cookies
-• 
+• HTTP Proxy Internals 
+• Regular HTTP vs HTTP Proxy
+• Most Common Proxy Tools 
+• Proxy Intercepting https:// Errors 
+• The Certificate Root Store
+• Usefull Commands
+• Response Code
+• Wireshark Filters
 
 
 -- HTTP Protocol --
@@ -110,12 +117,124 @@ Content-Type: text/html
 -- Cookies --
 
 If a cookie for a domain is stored by the browser, the browser will always send this header along each HTTP request. Because this cookie is not set automatically, we can use the developer tools to set this cookie by hand.
+Adjust Domain, Secure, and HttpOnly flags as needed, since some (like HttpOnly) cannot be set via JavaScript and must be set by the server.
 
 → DevTools → Application → Cookies
 → Select the site
 → Double-click the cookie value to edit, or right-click → Add to create a new cookie with name admin_sessionid and your value
 → Reload the page → the browser will send it automatically
 → Cookie: admin_sessionid=HXT{this-is-a-secret-value-f59661f0}
+
+In the browser console: document.cookie = "myCookieName=myCookieValue; path=/; Secure; SameSite=None";
+In HTTP Headers: res.cookie("myCookieName", "myCookieValue", { httpOnly: true, secure: true });
+With curl when testing your own API: curl -b "myCookieName=myCookieValue" https://yourdomain.com/endpoint
+
+
+-- HTTP Proxy Internals  --
+
+# depending on your netcat versions you might also have to use one the following command
+
+nc -l 0.0.0.0 8888
+nc -l -p 8888 0.0.0.0 
+
+
+-- Regular HTTP vs HTTP Proxy --
+
+GET http://blogger2-<id>.hexbirch.com/ HTTP/1.1 (fake proxy)
+[...]
+
+GET / HTTP/1.1
+[...]
+
+
+-- Most Common Proxy Tools --
+
+1. Burp Suite defacto professional standard
+2. mitmproxy great for the command-line
+3. ZAP (Zed Attack Proxy) the "free burp alternative"
+4. Fiddler
+5. Charles Proxy
+6. Caido
+7. Proxyman
+
+
+-- Proxy Intercepting https:// Errors --
+
+It's not really possible to access https:// URLs with an HTTP proxy. The browser requires a direct connection to the real server to establish a secure encrypted connection. But when a web proxy intercepts this connection, the proxy cannot cryptographically proof ownership over the target domain. That's why eg. Firefox will display an SSL error.
+
+https://hstspreload.org/
+https://raw.githubusercontent.com/mozilla/gecko-dev/refs/heads/master/security/manager/ssl/nsSTSPreloadList.inc 
+
+
+-- The Certificate Root Store --
+
+If you want a web proxy to be able to intercept HTTPS traffic, the client software (in this case the browser) has to trust the cryptographic certificate of the proxy. Depending on the setup, operating system and target software, the process to achieve the trust can vary.
+Many mobile apps for example perform certificate pinning, which means even with a trusted system root certificate, the client software (the app) refuses to trust the proxy certificate.
+For regular web security work though, you can simply use pre-configured browser settings by the proxy.
+
+
+-- Usefull Commands --
+
+ps -aux
+ps aux | grep nginx
+
+service nginx status
+service nginx start
+service nginx stop
+
+nc -v -l 0.0.0.0 8888
+
+tcpdump -i any 'tcp port 80' -v -A
+tcpdump -i any 'tcp port 80' -v -A -w tcpdump.pcap
+tcpdump -i any 'tcp port 80' -v -A -r tcpdump.pcap
+
+
+-- Response Code --
+
+HTTP/1.1 200 OK
+X-Hextree: http test response
+Content-Type: text/html
+
+<h1>This is HTTP Response</h1>
+<p>typing some response text</p>
+
+
+-- Wireshark Filters --
+
+http.request.method == "GET"
+http.host matches "blogger2"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
