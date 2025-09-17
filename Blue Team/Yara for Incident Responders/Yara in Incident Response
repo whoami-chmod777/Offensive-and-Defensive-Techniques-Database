@@ -1,1 +1,21 @@
 
+$ yara helloworld.yar ../Samples/
+
+$ yara helloworld.yar ../Samples/helloworld.exe
+HelloWorldString ../Samples/helloworld.exe
+
+$ yara helloworld.yar ../Samples/helloworld.exe -s
+HelloWorldString ../Samples/helloworld.exe
+0x7400:$hello: Hello World
+
+$ printf "%d\n" 0x7400
+29696
+
+$ hexdump -C ../Samples/helloworld.exe | grep Hello
+00007400  48 65 6c 6c 6f 20 57 6f  72 6c 64 0a 00 00 00 00  |Hello World.....|
+
+$ hexdump -s 29696 -n 20 -C ../Samples/helloworld.exe
+00007400  48 65 6c 6c 6f 20 57 6f  72 6c 64 0a 00 00 00 00  |Hello World.....|
+00007410  00 00 00 00                                       |....|
+00007414
+
