@@ -89,6 +89,7 @@ yara C:\detect_test.yar C:\Users\mirko\Downloads\BCAD\*
 
 yara -s C:\detect_test.yar C:\Users\mirko\Downloads\BCAD\RevengeRAT.exe.meow
 yara -s C:\detect_test.yar C:\Users\mirko\Downloads\BCAD\RevengeRAT.exe.meow | grep -E '^0x' | wc -l
+yara -s C:\domain_base.yar C:\Users\mirko\Downloads\BCAD\FreeYoutubeDownloader.exe.meow | awk '/^0x/ {print $1}'
 
 yara -r C:\detect_test.yar C:\Users\mirko\Downloads\BCAD\
 yara -r -w -s C:\detect_test.yar C:\Users\mirko\Downloads\BCAD\
