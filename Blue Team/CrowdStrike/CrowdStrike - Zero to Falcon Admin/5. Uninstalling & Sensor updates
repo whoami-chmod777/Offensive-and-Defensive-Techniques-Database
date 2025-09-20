@@ -5,6 +5,7 @@
 • Uninstall and Maintenance Protection
 • Sensor Updating
 • Update Throttling
+• Command Explanation
 
 
 -- Steps for Uninstall --
@@ -81,7 +82,18 @@ Best Practice:
 • Go slow
 
 
+-- Command Explanation --
 
+PS C:\Users\Miro\Downloads> .\CsUninstallTool.exe MAINTENANCE_TOKEN=3fd047047fc055989410e500b05e36bc0c877f34d615b8a763a93c116e2e57ef /quiet
+
+
+Explanation:
+
+> .\CsUninstallTool.exe: Runs the executable in the current directory.
+
+> MAINTENANCE_TOKEN=...: Passes a maintenance token as a command-line argument (likely required for authentication or authorization).
+
+> /quiet: Runs the tool silently without user interaction or output.
 
 
 
