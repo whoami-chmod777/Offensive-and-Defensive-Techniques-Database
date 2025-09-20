@@ -1,1 +1,100 @@
 
+--- Uninstalling & Sensor Updates ---
+
+• Steps for Uninstall
+• Uninstall and Maintenance Protection
+• Sensor Updating
+• Update Throttling
+
+
+-- Steps for Uninstall --
+
+1. Control panel > programs and features > uninstall
+2. Download a CS uninstall tool from "Tool Downloads" in console
+  a. CSUninstall tool
+  b. HKLM\system\crowdstrike should be gone
+
+Find the host in host management, reveal maintenance token and copy 
+
+Support > tool download > sensor removal tool based on OS > download it
+
+Uninstall via CLI:
+
+csuninstalltool.exe MAINTENANCE_TOKEN=<token> /quiet
+CsUninstallTool.exe /quiet
+
+MacOS: sudo /library/cs/falconctl uninstall --maintenance-token
+
+(for 1 host)
+
+Linux:
+
+• Ubuntu: sudo apt-get purge falcon-sensor
+• RHEL, centOS, amazon: sudo yum remove falcon-sensor
+• SLES: sudo zypper remove falcon-sensor
+3. Use “PUT” file of CSuninstall tool from "tool downloads" onto CS files
+  → Put the file on the host
+  → Then run "C:\CsUninstallTool.exe" or csuninstalltool.exe MAINTENANCE_TOKEN=token /quiet
+  → Validate the sensor uninstall by navigating to: HKLM\system\crowdstrike and C:\Windows\system32\drivers\CrowdStrike
+
+(Blue note on the right: Use a policy to do so with sensor uninstallation and maintenance policy disabled and sensor version upgrades.)
+
+
+-- Uninstall and Maintenance Protection --
+
+Can’t uninstall without a token if maintenance protections is enabled
+
+Bulk maintenance mode:
+• Not recommended globally, one token to rule them all
+• Sensor update has to be off
+• Use targeted host groups which require manual updates
+
+Bulk Uninstall:
+• 1 token for all hosts in that policy or with the bulk maintenance mode enabled
+
+
+-- Sensor Updating --
+
+Should be in a policy
+
+Host setup and management > sensor update policies > create new > name it > create
+
+Set the settings:
+• uninstall and maintenance protection: on
+• sensor version: Auto-latest or N-1 or whichever you want to set
+
+Auto-latest = test pilot machines to see how the latest sensor goes
+N-1 or N-2 for best practice
+
+Sensor version Updates off = manual management of the updated sensor versions
+
+
+-- Update Throttling --
+
+• Limits number of hosts performing updates at once
+• Think about the network resources it takes to update 5,000 endpoints all at the same time...
+
+Set the number of hosts per minute that you want to have updated in Support and Resources > General Settings
+
+Best Practice:
+• TEST groups!
+• N-1
+• N-2 for the paranoid
+• Go slow
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
