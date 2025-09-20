@@ -1,1 +1,91 @@
 
+--- Host Management ---
+
+• Host Groups
+• Host Groups, Cont.
+• Tagging Hosts
+• Hosts that don’t check in
+
+
+-- Host Groups --
+
+Dynamic
+• Use whenever possible and can be automated
+• AD and dynamic is a good way to manage hosts, OU grouping
+
+Static by Hostname or Host ID
+• Defined manually via host IDs/Agent IDs list or by selecting them in the console
+• Good for testing of systems that you test every time
+• Can cause duplications
+• Only if you have really good nomenclature for all your hosts…not likely
+• AIDs can get pretty long to manage them by that random strings of names
+• Can assign up to 1k hosts to a static group at a time
+
+Make one: Host setup > host groups > add new group > name and fill out > add group > edit > set filter
+
+Filters only come from the sensors that are installed and send the data back to the console
+
+A host can be in multiple groups with each group targeting different policies
+
+
+-- Host Groups, Cont. --
+
+Roll out your groups slowly, with small subsets of hosts to use as samples
+
+By default, all your Assigned Policies to your hosts groups are BLANK. You add the policies as you go configure the host groups (firewall, response, ML, IOAs, preventions, update policies)
+
+Be wise in what you use to set your host groups matching policy:
+• OU, platform, usage of wildcards
+• leverage sensor tags where it makes sense
+
+
+-- Tagging Hosts --
+
+For organization and filtering on your hosts
+
+Sensor grouping tags: added during sensor install: 
+
+• GROUPING_TAGS="HR,Prod" at the end of the installation CLI command, after company code (Windows)
+• falconctl grouping-tags set "tag" (MacOS)  
+• falconctl –s -- tags="tag1,tag2" (Linux)  
+
+DON’T USE SPACES
+Sensor grouping tags, if messed up on windows install, will need to be fixed in the registry and then reboot and then new update from the sensor will make the change needed
+
+• configured on the sensor themselves, only way to edit is via the registry
+
+Falcon grouping tags: in the console, can add more details to them if needed 237-character limit for the tags, can have 50 tags per host, 1,000 tags per CID
+
+
+-- Hosts that don’t check in --
+
+• If host hasn’t checked in in past 45 days, it will age out, sensor is gone with it. Sensor needs to be reinstalled
+• If a deleted host has an active sensor, the detections will still come into the console
+• Host management > trash can icon > info for hosts that have been deleted or aged off (Can restore)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
