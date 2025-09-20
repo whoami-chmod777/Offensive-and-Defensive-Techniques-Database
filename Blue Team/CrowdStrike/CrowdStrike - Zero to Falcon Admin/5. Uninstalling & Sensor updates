@@ -23,15 +23,14 @@ Uninstall via CLI:
 csuninstalltool.exe MAINTENANCE_TOKEN=<token> /quiet
 CsUninstallTool.exe /quiet
 
-MacOS: sudo /library/cs/falconctl uninstall --maintenance-token
-
-(for 1 host)
+MacOS: sudo /library/cs/falconctl uninstall --maintenance-token (for 1 host)
 
 Linux:
 
 • Ubuntu: sudo apt-get purge falcon-sensor
 • RHEL, centOS, amazon: sudo yum remove falcon-sensor
 • SLES: sudo zypper remove falcon-sensor
+
 3. Use “PUT” file of CSuninstall tool from "tool downloads" onto CS files
   → Put the file on the host
   → Then run "C:\CsUninstallTool.exe" or csuninstalltool.exe MAINTENANCE_TOKEN=token /quiet
@@ -63,8 +62,7 @@ Set the settings:
 • uninstall and maintenance protection: on
 • sensor version: Auto-latest or N-1 or whichever you want to set
 
-Auto-latest = test pilot machines to see how the latest sensor goes
-N-1 or N-2 for best practice
+Auto-latest = test pilot machines to see how the latest sensor goes N-1 or N-2 for best practice
 
 Sensor version Updates off = manual management of the updated sensor versions
 
