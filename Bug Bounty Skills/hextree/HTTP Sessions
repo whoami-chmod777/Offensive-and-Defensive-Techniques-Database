@@ -72,18 +72,56 @@ Accept-Language: en-US,en;q=0.9
 
 -- Cookies on Client Side --
 
+Set-Cookie Header*
+The server can send a Set-Cookie header to instruct the browser to attach the cookie to every request. The value of the cookie is usually a randomly generated ID, but there are also other options which we will explore later.
+
+HTTP/1.1 302 Found
+Date: Sat, 27 Jan 2024 16:44:34 GMT
+Content-Length: 0
+Location: https://stirling-pdf-3r7v7jm7hvulm.hexbirch.com/
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Set-Cookie: JSESSIONID=C1239F5C79C58BFA44636410E4E3260D; Path=/; Secure; HttpOnly
+X-Content-Type-Options: nosniff
+X-Xss-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+X-Frame-Options: DENY
+
+curl -I "https://stirling-pdf-3r7v7jm7hvulm.hexbirch.com/"
+curl -v "https://stirling-pdf-3r7v7jm7hvulm.hexbirch.com/"
+curl -v -L -c cookies.txt "https://stirling-pdf-3r7v7jm7hvulm.hexbirch.com/"
+curl -v -b "JSESSIONID=C1239F5C79C58BFA44636410E4E3260D" "https://stirling-pdf-3r7v7jm7hvulm.hexbirch.com/"
+
+printf "GET / HTTP/1.1\r\nHost: stirling-pdf-3r7v7jm7hvulm.hexbirch.com\r\nConnection: close\r\n\r\n" \ | openssl s_client -connect stirling-pdf-3r7v7jm7hvulm.hexbirch.com:443 -servername stirling-pdf-3r7v7jm7hvulm.hexbirch.com
+
+Cookie Header*
+The client (usually the browser) can then attach a Cookie header to every request. The server can then associate this request to a specific user.
+
+GET / HTTP/1.1
+Host: stirling-pdf-3r7v7jm7hvulm.hexbirch.com
+Cookie: JSESSIONID=C1239F5C79C58BFA44636410E4E3260D
+Pragma: no-cache
+Cache-Control: no-cache
+Sec-Ch-Ua: "Chromium";v="121", "Not A(Brand";v="99"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Referer: https://stirling-pdf-3r7v7jm7hvulm.hexbirch.com/login
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+Priority: u=0, i
 
 
-
-
-
-
-
-
-
-
-
-
+-- Cookies on Server Side --
 
 
 
