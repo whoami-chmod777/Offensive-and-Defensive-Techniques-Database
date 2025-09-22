@@ -1,8 +1,110 @@
 
 --- HTTP Sessions ---
 
-• 
-• 
+This information provides a foundational understanding of web authentication technologies. We will learn how server-side sessions can be implemented with cookies or HTTP headers, and how signed tokens work.
+
+• Stateful vs. Stateless Protocols
+• Cookies on Client Side
+• Cookies on Server Side
+• HTTP Basic Auth
+• API Keys and Custom Headers
+• Sessions with URL Rewriting
+• HMAC Signed Session Cookie
+• Forging a Signed Cookie
+• Introduction to JWT - JSON Web Tokens
+• Exploiting JWT Verification Middleware
+
+
+-- Stateful vs. Stateless Protocols --
+
+# create a TCP server listening in port 1234
+nc -l 1234
+
+# connect to the local port 1234
+nc 127.0.0.1 1234
+
+Authentication (State) with HTTP
+
+Cookie:
+GET / HTTP/1.1
+Host: stirling-pdf-43poipnfttjs4.hexbirch.com
+Cookie: JSESSIONID=6E1C0E5781A7CD5143B4DB46717DD6D5
+Pragma: no-cache
+Cache-Control: no-cache
+Sec-Ch-Ua-Platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+
+HTTP Basic Auth:
+GET /api/resource HTTP/1.1
+Host: example-api.com
+Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+Sec-Ch-Ua-Platform: "Windows"
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+
+JWT Token:
+GET /api/trainings HTTP/2
+Host: app.hextree.io
+Accept: application/json, text/plain, */*
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJob2tlb19leHB...
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+Sec-Ch-Ua-Platform: "Windows"
+Referer: https://app.hextree.io/
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+
+API Key:
+GET /api/weather?city=NewYork HTTP/1.1
+Host: example.hextree.io
+X-API-Key: e5a304a5-d47a-446f-93bc-a56acc3acac5
+Accept: application/json
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)
+Sec-Ch-Ua-Platform: "Windows"
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+
+
+-- Cookies on Client Side --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
