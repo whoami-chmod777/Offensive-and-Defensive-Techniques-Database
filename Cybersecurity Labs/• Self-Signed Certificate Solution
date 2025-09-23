@@ -1,0 +1,11 @@
+
+A Self-Signed Certificate is a digital certificate generated and signed by the entity it belongs to, instead of a trusted third-party Certificate Authority (CA). These certificates are commonly employed in development and testing environments, allowing for encrypted communication without the need to obtain a certificate from a recognized CA. Additionally, they might be used for internal applications or services within an organization, where the administrative overhead and cost of acquiring a CA-signed certificate are not justified. While they provide encryption for data in transit, the absence of third-party authentication makes them less suitable for production environments where user trust and security are crucial. For such scenarios, obtaining a certificate from a reputable CA is the recommended practice to ensure a secure and trusted connection.
+
+
+In this lab environment, you will be provided with GUI access to a Windows 2019 machine running IIS. Access the IIS default website at http://myine.lab.local.
+
+Objective: Complete the following tasks:
+
+    Task 1: Create a Self-Signed Certificate in IIS.
+    Task 2: Bind the Self-Signed Certificate to the IIS default website.
+    Task 3: Test the website for HTTPS. (i.e. https://myine.lab.local)
