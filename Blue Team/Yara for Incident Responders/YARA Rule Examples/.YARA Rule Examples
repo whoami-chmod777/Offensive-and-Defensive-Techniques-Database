@@ -1,7 +1,7 @@
 
 --- YARA Rule Examples ---
 
-• 
+• Use the name of the JPG file to create a YARA detection rule for any executable files that match this string identifier (EXE_Contains_tmp1E2A_JPG.yar)
 • 
 • 
 • 
