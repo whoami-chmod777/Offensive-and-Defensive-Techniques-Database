@@ -5,7 +5,7 @@
 • Create a YARA detection rule for any executable files that match this string identifier "www.youtubedownloadernew.com" (domain_base.yar)
 • Create a YARA rule only to detect this registry key, and run it recursively against the /YARA/Challenges/ folder (regkey_borland_delphi_rtl.yar)
 • Create a YARA rule to detect any GIF89a files under 50 KB in size (Detect_GIF89a_Less50KB.yara)
-• 
+• Create a YARA rule to detect any GIF89a files over 50 KB in size (Detect_GIF89a_Over50KB.yar)
 • 
 • 
 • 
