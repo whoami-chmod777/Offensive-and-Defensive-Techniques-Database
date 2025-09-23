@@ -2,3 +2,8 @@
 Asymmetric encryption, also known as public-key cryptography, is a cryptographic system that uses a pair of keys for secure communication. The two keys are mathematically related but are not identical. One key is designated as the "public key," and the other is the "private key." The public key can be freely distributed to anyone. It is used for encryption. The private key is kept secret and should only be known to the owner. It is used for decryption. Popular asymmetric encryption algorithms include RSA (Rivest-Shamir-Adleman), DSA (Digital Signature Algorithm), and ECC (Elliptic Curve Cryptography).
 
 
+Objective: Perform an asymmetric encryption & decryption using RSA algorithm by completing the following tasks:
+
+Task 1: Generate key-pairs for Alice and Bob on their respective machines and share Bob's public key to Alice.
+Taks 2: Being Alice, encrypt a text file using the public key of Bob and share the encrypted file to Bob for decryption.
+
