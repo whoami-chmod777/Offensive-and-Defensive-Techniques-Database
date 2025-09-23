@@ -8,6 +8,8 @@ Task 1: Generate key-pairs for Alice and Bob on their respective machines and sh
 Taks 2: Being Alice, encrypt a text file using the public key of Bob and share the encrypted file to Bob for decryption.
 
 
+In this lab, we learned how to perform a asymmetric key encryption & decryption for a text file using OpenSSL.
+
 Step 1: Open the lab link to access the machines:
 Step 2: You can check if OpenSSL is installed using the following command: openssl version
 
