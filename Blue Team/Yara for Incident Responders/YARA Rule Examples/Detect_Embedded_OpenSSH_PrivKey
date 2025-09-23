@@ -1,0 +1,21 @@
+
+rule Detect_Embedded_OpenSSH_PrivKey
+{
+    meta:
+        description = "Finds embedded OpenSSH private keys (PEM header or binary magic)"
+
+    strings:
+        $pem_hdr = "-----BEGIN OPENSSH PRIVATE KEY-----" ascii
+        // "openssh-key-v1\0" as bytes:
+        $magic   = { 6F 70 65 6E 73 73 68 2D 6B 65 79 2D 76 31 00 }
+
+    condition:
+        any of them
+}
+
+
+whoami@soc101-ubuntu:~$ yara -r Detect_Embedded_OpenSSH_PrivateKey.yar ../../../YARA/Challenges/
+Detect_Embedded_OpenSSH_PrivKey ../../../YARA/Challenges//Samples/Meoware.exe.meow
+Detect_Embedded_OpenSSH_PrivKey ../../../YARA/Challenges//Samples/Random/VG8gQmF
+Detect_Embedded_OpenSSH_PrivKey ../../../YARA/Challenges//Samples/Detect_Embedded_OpenSSH_PrivateKey.yar
+whoami@soc101-ubuntu:~$ 
