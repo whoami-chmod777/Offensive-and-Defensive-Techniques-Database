@@ -92,3 +92,13 @@ DigiCert
 
 PS C:\Users\Administrator>
 
+Our self-signed certificate is present here. 
+
+We learned about creating a Self-Signed Certificate in IIS and binding it to a website, thus making the website accessible over HTTPS
+
+
+https://venafi.com/blog/self-signed-certificates-cyber-criminals-can-quickly-turn-strength-vulnerability/
+
+
+
+
