@@ -1,4 +1,7 @@
 
+ Vigilance and rapid response are the cornerstones of effective cybersecurity. This collection zeroes in on essential techniques and tools for advanced monitoring and threat detection. By navigating these labs, you'll learn how to employ tools like Wazuh, Sysmon, Splunk, and Zeek to monitor folder access, detect threats like Mimikatz, PsExec, and malicious WebShells, and analyze potential vulnerabilities in various systems. From honing skills in PCAP analysis to emulating attacks for proactive defense, arm yourself with the knowledge to stand as a guardian in the digital realm. 
+
+
 --- Blue Team Defender: Monitoring & Detection ---
 
 • 
