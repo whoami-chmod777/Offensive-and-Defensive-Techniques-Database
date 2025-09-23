@@ -1,0 +1,124 @@
+
+Symmetric encryption is a type of encryption where the same key is used for both the encryption and decryption processes. In other words, a single secret key is employed for both converting plaintext (original data) into ciphertext (encrypted data) and vice versa. This contrasts with asymmetric encryption (or public-key encryption), where a pair of keys, one public and one private, is used for encryption and decryption.
+
+Common symmetric encryption algorithms include Advanced Encryption Standard (AES), Data Encryption Standard (DES), and Triple DES (3DES). These algorithms are widely used for securing data in various applications, such as data storage, communication, and secure transactions.
+
+
+Objective: Perform a symmetric key encryption & decryption using AES algorithm for the following tasks:
+
+Task 1: Encrypt and decrypt a text file.
+Taks 2: Encrypt and decrypt an image file.
+
+
+In this lab, we learned how to perform a symmetric key encryption & decryption using AES algorithm for a text file and an image file using OpenSSL.
+
+Step 1: Open the lab link to access the ubuntu machine
+Step 2: Check if OpenSSL is installed using the following command: openssl version
+
+OpenSSL is a full-featured toolkit for general-purpose cryptography and secure communication.
+
+Step 3: You can use the following command to list the available ciphers (encryption algorithms) that OpenSSL supports: openssl enc -ciphers
+
+You can see different algorithms like AES, Camellia, Triple DES etc. We will use the preferred AES algorithm and specifically we will choose the most commonly used aes-256-cbc algorithm for encryption and decryption.
+
+What is AES-256-CBC?
+AES (Advanced Encryption Standard) is a symmetric encryption algorithm established by the National Institute of Standards and Technology (NIST) in 2001. It has become the standardized encryption algorithm for securing sensitive information. AES supports key sizes of 128, 192, and 256 bits. The number in the cipher name (AES-256-CBC) refers to the key size. CBC (cipher-block chaining) is a mode of operation for block ciphers like AES. 
+For more details refer: https://nordlayer.com/blog/aes-encryption/
+
+
+>> Task 1: Encrypt and decrypt a text file <<
+
+Step 4: Let's first view the confidential-data.txt file present in /root/Desktop/resources: cd /root/Desktop/resources, ls, cat confidential-data.txt
+
+We have a text file that has some confidential data that needs to be encrypted.
+
+Step 5: Now, encrypt the text file using the following command: openssl enc -aes-256-cbc -pbkdf2 -p -in confidential-data.txt -out encrypted_file.enc
+
+• -aes-256-cbc: Specifies the encryption algorithm to be used.
+• -pbkdf2: PBKDF2 (Password-Based Key Derivation Function 2) is a key derivation function that helps strengthen the encryption key based on a password or passphrase.
+• -p: Print out the key and other parameters like salt and initialization vector (IV) used. The salt is a random value used to strengthen the security of the key derivation process, and the IV is an initialization value that ensures unique ciphertexts are produced even when encrypting the same data with the same key.
+• -in: Specifies the input file you want to encrypt.
+• -out: Specifies the output file where the encrypted data will be written.
+
+Once you run this command, you will be prompted for a password. Use a strong password like $B1g7re#D0g$JumpeD. The actual symmetric key used for encryption/decryption is derived from this.
+
+We have successfully encrypted the file. Try viewing the encrypted_file.enc file.
+
+Command: cat encrypted_file.enc
+
+The data is encrypted.
+
+Step 6: To decrypt the file, you can use the following command:
+
+Command: openssl enc -d -aes-256-cbc -pbkdf2 -p -in encrypted_file.enc -out decrypted_file.txt
+
+• -d: Indicates decryption.
+• -aes-256-cbc: Specifies the decryption algorithm, which must match the one used for encryption.
+• -pbkdf2: Specifies the use of PBKDF2 (Password-Based Key Derivation Function 2) for key derivation.
+• -p: Print out the key and other parameters like salt and initialization vector (IV) used.
+• -in: Specifies the input file, which is the encrypted file you want to decrypt.
+• out: Specifies the output file where the decrypted data will be written.
+
+You will be prompted to enter the password that was used during the encryption process. So in our case the password was $B1g7re#D0g$JumpeD. The symmetric key used for decryption will be derived from this.
+
+The command ran successfully. Check the decrypted_file.txt file.
+
+Command: cat decrypted_file.txt
+
+The data was successfully decrypted.
+
+
+>> Task 2: Encrypt and decrypt an image file <<
+
+The commands used to encrypt/decrypt a text file can also be used on an image file. 
+
+Step 7: Let's first view the ine-logo.png file present in /root/Desktop/resources. This image file needs to be encrypted.
+
+Command: xdg-open ine-logo.png
+
+Step 8: Use the following command to encrypt the ine-logo.png image file.
+
+Command: openssl enc -aes-256-cbc -pbkdf2 -p -in ine-logo.png -out encrypted_image.enc
+
+Enter a strong password like before when prompted: $B1g7re#D0g$JumpeD
+
+We have successfully encrypted the image file. The encrypted_image.enc file will not be viewable since it is encrypted.
+
+Step 9: To decrypt the file, you can use the following command: openssl enc -d -aes-256-cbc -pbkdf2 -p -in encrypted_image.enc -out decrypted_image.png
+
+When prompted, enter the password used during encryption: $B1g7re#D0g$JumpeD
+
+The command ran successfully. Try viewing the decrypted_image.png file. The image was successfully decrypted.
+
+
+
+-- Commands Overview --
+
+>> Encrypt and decrypt a text file <<
+
+openssl version
+openssl enc -ciphers
+
+cat confidential-data.txt
+
+openssl enc -aes-256-cbc -pbkdf2 -p -in confidential-data.txt -out encrypted_file.enc
+cat encrypted_file.enc
+
+openssl enc -d -aes-256-cbc -pbkdf2 -p -in encrypted_file.enc -out decrypted_file.txt
+cat decrypted_file.txt
+
+
+>> Encrypt and decrypt an image file <<
+
+xdg-open ine-logo.png
+
+openssl enc -aes-256-cbc -pbkdf2 -p -in ine-logo.png -out encrypted_image.enc
+Enter a strong password: $B1g7re#D0g$JumpeD
+
+openssl enc -d -aes-256-cbc -pbkdf2 -p -in encrypted_image.enc -out decrypted_image.png
+Enter the strong password: $B1g7re#D0g$JumpeD
+
+
+References:
+https://nordlayer.com/blog/aes-encryption/
+https://www.openssl.org/
