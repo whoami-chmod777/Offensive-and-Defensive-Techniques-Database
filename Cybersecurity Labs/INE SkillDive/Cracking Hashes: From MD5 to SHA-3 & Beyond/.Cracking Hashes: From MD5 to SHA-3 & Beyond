@@ -1,4 +1,7 @@
 
+Embark on a comprehensive journey through the intricacies of cryptographic hashes with this collection. From deciphering the age-old MD5 hashes to tackling the more contemporary SHA-3 digests, learners will delve into the mechanisms and techniques essential for breaking various cryptographic representations. The labs explore not just the basic hashes but also venture into the challenges of cracking salted variants and HMAC keys. Ideal for aspiring cryptanalysts, cybersecurity professionals, and enthusiasts, this collection is a deep dive into the evolving world of hash security and its vulnerabilities. 
+
+
 --- Cracking Hashes: From MD5 to SHA-3 & Beyond ---
 
 • 
