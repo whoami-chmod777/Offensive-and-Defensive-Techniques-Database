@@ -1,0 +1,100 @@
+
+A Self-Signed Certificate is a digital certificate generated and signed by the entity it belongs to, instead of a trusted third-party Certificate Authority (CA). These certificates are commonly employed in development and testing environments, allowing for encrypted communication without the need to obtain a certificate from a recognized CA. Additionally, they might be used for internal applications or services within an organization, where the administrative overhead and cost of acquiring a CA-signed certificate are not justified. While they provide encryption for data in transit, the absence of third-party authentication makes them less suitable for production environments where user trust and security are crucial. For such scenarios, obtaining a certificate from a reputable CA is the recommended practice to ensure a secure and trusted connection.
+
+
+In this lab environment, you will be provided with GUI access to a Windows 2019 machine running IIS. Access the IIS default website at http://myine.lab.local.
+
+Objective: Complete the following tasks:
+
+Task 1: Create a Self-Signed Certificate in IIS.
+Task 2: Bind the Self-Signed Certificate to the IIS default website.
+Task 3: Test the website for HTTPS. (i.e. https://myine.lab.local)
+
+
+>> Task 1: Create a Self-Signed Certificate in IIS. <<
+
+Step 1: Open the lab link to access the Windows 2019 machine
+
+Step 2: Open Internet Explorer and try to access the IIS default website at http://myine.lab.local.
+
+It is accessible. Now, try to access the website over HTTPS i.e. https://myine.lab.local. 
+
+The website is not accessible over HTTPS. Let's fix this.
+
+Task 1: Create a Self-Signed Certificate in IIS.
+
+Step 3: Search for and open the Internet Information Services (IIS) Manager. 
+
+Step 4: Click on the server name (myine) and then click on Server Certificates.
+
+Step 5: Next, click on Create Self-Signed Certificate under Actions on the right.
+
+Step 6: Specify a friendly name for the certificate, for example: myine-self-signed-cert and then click on OK.
+
+The Self-signed certificate has been created and the validity of this certificate is one year.
+
+
+>> Task 2: Bind the Self-Signed Certificate to the IIS default website. <<
+
+Step 7: Now, expand Sites and click on Default Web Site on the left. After that, click on Bindings on the right.
+
+Step 8: Click on Add button.
+
+Step 9: From the Type drop-down, select https. 
+
+Step 10: In the SSL certificate drop-down, select the newly created Self-signed certificate. After that, click on OK.
+
+A binding for port 443 has been added. Click on Close to save the changes.
+
+
+>> Task 3: Test the website for HTTPS. (i.e. https://myine.lab.local) <<
+
+Step 11: The default website is now secure with a self-signed certificate. You can access it using HTTPS without any issues.
+
+Access the URL: https://myine.lab.local
+
+Success! Click on the padlock to see the details.
+
+You can click on View certificates to view your certificate.
+
+
+Note: It is common to see an error or warning related to the certificate not being trusted because the self-signed certificate was issued by your computer, and not by a trusted Certificate Authority (CA). However, the browser (in our case, the IE), will trust the certificate if it is added to the list of Trusted Root Certification Authorities in the certificate store on the local computer or in the Group Policy of the domain. On Windows Server 2019, the self-signed certificate when created is also added to the list of Trusted Root Certification Authorities. 
+
+To check this, you can use the following powershell command: (Get-ChildItem -Path Cert:\LocalMachine\Root).FriendlyName
+
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+PS C:\Users\Administrator> (Get-ChildItem -Path Cert:\LocalMachine\Root\).FriendlyName
+Microsoft Root Certificate Authority
+Thawte Timestamping CA
+Microsoft Root Authority
+
+Microsoft Root Certificate Authority 2011
+Microsoft Authenticode(tm) Root
+Microsoft Root Certificate Authority 2010
+Microsoft ECC TS Root Certificate Authority 2018
+Microsoft Timestamp Root
+VeriSign Time Stamping CA
+myine-self-signed-cert
+Microsoft ECC Product Root Certificate Authority 2018
+DigiCert Global Root G2
+DigiCert Baltimore Root
+Sectigo (AAA)
+Globalsign Root CA - R1
+Starfield Class 2 Certification Authority
+DigiCert
+DigiCert Global Root G3
+VeriSign Class 3 Public Primary CA
+DigiCert
+VeriSign Universal Root Certification Authority
+DigiCert
+
+PS C:\Users\Administrator>
+
+Our self-signed certificate is present here. 
+
+We learned about creating a Self-Signed Certificate in IIS and binding it to a website, thus making the website accessible over HTTPS
+
+
+https://venafi.com/blog/self-signed-certificates-cyber-criminals-can-quickly-turn-strength-vulnerability/
