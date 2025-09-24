@@ -1,1 +1,65 @@
 
+--- Exclusions and Quarantines ---
+
+• What is an Exclusion
+• GLOB Patterns
+• Quarantined Files
+
+
+-- What is an Exclusion --
+
+How to tune your console
+These are whitelisted, trusted processes, that you want to exclude from detections
+Could be another AV or EDR solution to add exclusions for
+
+3 Types:
+
+1. Machine Learning = manual or via detection page to create (GLOB syntax)
+• File paths
+
+2. IOAs = configured via the detection page only (regex)
+• behavioral exclusions that come up for FP CS detections
+
+3. Sensor Visibility = completely ignored by the falcon sensor. Use with caution, or don’t use it at all.
+• last resort option
+• sensor wont really log the events, either
+
+Exclusions will apply to ALL hosts or to specific Hosts Groups you select
+
+
+-- GLOB Patterns --
+
+Uses matches found in detections to create the exclusion
+Assumes drive letters, so you don’t need to add them
+Limit of 1 pattern per exclusion
+\*\ For one folder
+\** For recursive
+
+How to add a ML Exclusion: In filter bar: triggering file: <filename> and then group by hash, group by command line, etc and then copy it
+
+Go to: endpoint sec > exclusions > ML exclusions > all hosts > next > paste in command line in exclusion pattern, click detections and preventions check box > create
+** always test the pattern
+
+Example for Malwarebytes:
+
+*\Program Data\Malwarebytes*  
+*\Program Files\Malwarebytes*  
+
+
+-- Quarantined Files --
+
+Need to enable it in the prevention policy
+Not available on the Linux platform, but should be soon
+Locally stored malware files will be stored on the host for 30 days, then deleted
+
+Windows: \Windows\system32\Drives\CrowdStrike\Quarantine
+MacOS: /Library/Application Support/CrowdStrike/Falcon/Quarantine
+
+When Downloading/Uploading a Quarantined File:
+• Pw is infected, for a stop and pause moment to take note
+• 32MB is max size to upload to the cloud - windows and mac only
+• Local quarantine on a host = 30 days
+• Cloud storage = 90 days (90 days together max, not 120 days)
+
+
+
