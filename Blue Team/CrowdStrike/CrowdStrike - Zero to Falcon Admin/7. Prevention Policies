@@ -1,1 +1,49 @@
 
+--- Prevention Policies ---
+
+• The Big Picture
+• What makes up Prevention Policies
+• Prevention Policy Precedence
+• Default, Phase 1,2,3 Prevention Policies
+
+
+-- The Big Picture --
+
+• Hosts are placed into host groups
+• Make the policies that you want for the host group
+• Those policies make up the Prevention Policy
+• Assign a Prevention Policy to a host group
+
+
+-- What makes up Prevention Policies --
+
+1. Sensor visibilities
+2. NGAV (can slide the detection vs prevention settings from cautious -> extra aggressive)
+3. Malware protection
+4. Behavior and ML detections
+
+
+-- Prevention Policy Precedence --
+
+• Hosts may be assigned to more than one policy
+• If no host assigned to a policy, it will drop to the last precedence policy = default
+• Default = catch all policy
+
+Make one: endpoint security > prevention policies > create new > platform > name > create > enable settings > save > confirm > enable > enable policy
+
+set the precedence order
+
+
+-- Default, Phase 1,2,3 Prevention Policies --
+
+Phase 1: Intended for customers setting up Falcon for the first time
+• Rapid deployment strategy, doesn’t fully protect, should be used during initial deployment and alongside an AV
+• Should use for a minimum time
+
+Phase 2: Intended if you have no AV or EDR solution currently in place
+• A bit more protective in policy settings
+• Should use for 30 days
+• Start introducing your IOA
+
+Phase 3: The ideal standard level of protection for your hosts
+• Should try to get here in 90 days or less to ensure adequate protection of your endpoints
