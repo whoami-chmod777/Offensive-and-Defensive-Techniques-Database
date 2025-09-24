@@ -1,1 +1,103 @@
 
+--- Custom IOAs ---
+
+• What are IOAs?
+• IOA Workflow
+• Different options based on OS 
+• Review of Regex and CS Gotchas
+• IOC Management
+• Icons
+
+
+-- What are IOAs? --
+
+• Indicators of Attack (IOA)
+• Custom IOCs to implement into CS via regex pattern matching
+• Actions: Monitor, Detect, Block Execution, Kill Process (depends on what Rule Type you select)
+• Rule Types: Process Creation, File Creation, Network Connection, Domain Name
+
+Path: Endpoint security > Configure > Custom IOA Rule Groups
+
+
+-- IOA Workflow --
+
+• Create a rule group
+• Add your IOAs to the rule group
+• Enable your rules
+• Enable your IOA rule group
+• Assign Group to a Prevention Policy
+
+
+-- Different options based on OS --
+
+Rule Types: Process Creation, File Creation, Network Connection, Domain Name
+
+| Rule Option        | Windows  | MacOS | Linux |
+|--------------------|----------|-------|-------|
+| Process Creation   |    ✔    |   ✔   |   ✔   |
+| File Creation      |    ✔    |   ✔   |   ✔   |
+| Network Connection |    ✔    |   ✔   |       |
+| Domain Name        |    ✔    |       |        |
+|--------------------|----------|-------|-------|
+
+
+-- Review of Regex and CS Gotchas --
+
+1. .* still works for wildcards
+2. Need to escape \ just like usual
+3. Leave all unused fields as .*
+4. Always TEST the rule before implementing. Just because test pattern is correct doesn’t mean it’s the right regex for the job!
+
+What we can do with IOAs:
+
+1. Block CIDR ranges of IPs
+2. Blocking IPs
+3. Blocking Domains
+4. File names
+5. File paths
+6. Parent, Grandparent file names
+7. Command Line Arguments, parent command lines
+
+
+-- IOC Management --
+
+• Keep in mind, these are all sensor-based actions
+• Can assign a severity to the detection (color codes can be set in preferences)
+• Can put to a specific host group, or all hosts
+• Can add tags into the IOC being implemented (“Bad IP”, “Adware”, “IT Tool”)
+
+| Type    | Block | Block+Hide | Allow | Detect Only | Do Nothing |
+|---------|-------|------------|-------|-------------|------------|
+| Domains |       |            |       |      ✔     |     ✔      |
+| Hashes  |   ✔   |     ✔     |   ✔   |      ✔     |     ✔      |
+| IPs     |       |            |       |      ✔     |     ✔      |
+|---------|-------|------------|-------|-------------|------------|
+
+
+-- Icons --
+
+• 🟥 Red cube → Part of an Incident  
+• 🟥 Red cube + ✅ shield → Process was blocked  
+• 🟥 Red cube + ⭕ shield → Process was killed or operation was blocked  
+• 🟥 Red cube + 🛡️ black → Overwatch Detection  
+• 🔵 🟡 🟠 🔴 🟣 → Severity scale (Low to Critical)  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
