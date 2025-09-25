@@ -1,1 +1,66 @@
 
+--- Console Overview ---
+
+• UTC
+• Dark Theme
+• Subscriptions
+• Menu Options
+• Bookmarks
+
+
+Be sure to do the following
+• Set your time preference to UTC
+
+Staying Signed In / Dark Theme
+• Enable Stay Signed In toggle (you’ll stay signed in until you restart your browser).
+• Use the Dark Theme option for better visibility.
+
+Different Subscriptions have different menu options
+• Pro > Enterprise > Elite > Complete
+• AV > EDR > IT Hygiene > Reactive Services
+
+
+Menu Options (depending on subscription)
+
+• OverWatch
+  → Reports
+  → Hunting snapshot (New)
+  → Hunting leads (New)
+  → Submissions
+• Endpoint Security
+  → Monitor
+    > Activity dashboard
+    > CrowdScore incidents
+    > Endpoint detections
+    > Mobile detections
+    > Quarantined files
+    > On-demand scans
+    > Remediation
+  → Firewall
+    > Activity (Updated)
+    > Policies (Updated)
+    > Rule groups (Updated)
+    > Network locations
+  → USB device control
+  → Configure
+    > Prevention policies
+    > Custom IOA rule groups
+    > Exclusions
+    > IOC management
+• Other Menus
+  → Bookmarks
+  → Recently visited
+  → Cloud security
+  → Identity protection
+  → Exposure management
+  → Threat intelligence
+  → Investigate
+  → Dashboards and reports
+  → Host setup and management
+  → CrowdStrike Store
+  → Audit logs
+  → Support and resources
+
+
+Bookmarks
+Example: Splunk Search bookmark can be saved and accessed from the left-hand menu.
