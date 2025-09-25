@@ -12,3 +12,164 @@ Task 1: Generate hash of a file using different hashing algorithms:
 • SHA3-256
 
 Task 2: Compute the SHA-512 based password hash for: Tio3tPLr&m4 with a specific salt using OpenSSL.
+
+In this lab, we will explore and implement different hashing algorithms to compute hash of file using OpenSSL. We also will learn about salting as a technique to enhance hash security and generated a hashed password with a specific salt.
+
+
+
+>> Task 1: Generate hash of a file using different hashing algorithms <<
+
+Step 1: Open the lab link to access the ubuntu machine:
+
+Step 2: Check if OpenSSL is installed using the following command: openssl version
+
+OpenSSL is a full-featured toolkit for general-purpose cryptography and secure communication.
+
+Step 3: The file that we need to generate the hash for is present in /root/Desktop/resources. Navigate to this directory and check the content of the confidential-data.txt file.
+
+cat confidential-data.txt
+
+CONFIDENTIAL INFORMATION
+------------------------
+
+Employee Name: John Doe
+Employee ID: 12345
+Department: Research and Development
+Salary: $85,000
+Bank Account: XXXX-XXXX-XXXX-1234
+Social Security Number: XXX-XX-XXXX
+
+Project Details:
+- Project Code: PRJ-789
+- Project Name: Top Secret Project
+- Project Deadline: 2023-12-31
+- Project Budget: $500,000
+
+Access Credentials:
+Username: johndoe
+Password: Confidential@123
+
+------------------------
+END OF CONFIDENTIAL INFORMATION
+
+
+Step 4: To get a list of cryptographic hash functions supported by OpenSSL, run the following command: openssl list --digest-commands
+
+What is MD5?
+
+• MD5 (Message Digest Algorithm 5) is a widely used cryptographic hash function that produces a 128-bit hash value from an input of any length. It was designed by Ronald Rivest in 1991 and is commonly used for integrity checking and verifying digital signatures.
+• It's important to note that MD5 is considered to be broken for cryptographic purposes due to vulnerabilities that allow for collision attacks. A collision occurs when two different inputs produce the same hash output, compromising the integrity of the hash function.
+• Due to these vulnerabilities, MD5 is not recommended for security-sensitive applications. For cryptographic purposes and data integrity verification, more secure hash functions like SHA-256 are generally preferred.
+
+For more details, refer: https://en.wikipedia.org/wiki/MD5
+
+Step 5: You can generate the MD5 hash of the given file using the following command: openssl dgst -md5 confidential-data.txt
+
+So, the MD5 hash of the given file is 484eb956dda6ab44847fb8b2fbb09e32.
+
+
+What is RIPEMD-160?
+
+• RIPEMD-160 (RACE Integrity Primitives Evaluation Message Digest 160) is a 160-bit cryptographic hash function designed in 1992. It was designed as a substitute for the 128-bit hash functions MD4, MD5, and its predecessor RIPEMD.
+• RIPEMD-160 has been used in various security applications, including Bitcoin and other cryptocurrencies based on Bitcoin.
+• However, RIPEMD-160 has been surpassed by the Secure Hash Algorithms SHA-256 and SHA-512, along with their variations. SHA-256 and SHA-512 provide superior security and performance compared to RIPEMD-160.
+
+For more details, refer: https://en.wikipedia.org/wiki/RIPEMD
+
+Step 6: You can generate the RIPEMD-160 hash of the given file using the following command: openssl dgst -rmd160 confidential-data.txt
+
+So, the RIPEMD-160 hash of the given file is f486ed9d42974967c955f972f311822447341b96.
+
+
+What is SHA-256?
+
+• SHA-256, or Secure Hash Algorithm 256-bit, is a widely used cryptographic hash function that belongs to the SHA-2 family of hash functions. It was designed by the National Security Agency (NSA) and published in 2001.
+• The SHA-256 algorithm takes an input message and produces a fixed-size 256-bit hash value. SHA-256 is widely used in various security applications and protocols, including digital signatures, certificate generation, and integrity verification. It is considered to be secure for cryptographic purposes and is commonly employed in blockchain technology, where it is used to generate the hash values of blocks in a blockchain.
+• One important property of SHA-256 is its resistance to collision attacks, which means it is designed to make it computationally infeasible for two different inputs to produce the same hash output. This resistance to collisions is crucial for the reliability of hash functions in cryptographic applications.
+
+For more details, refer: https://en.wikipedia.org/wiki/SHA-2
+
+Step 7: You can generate the SHA-256 hash of the given file using the following command: openssl dgst -sha256 confidential-data.txt
+
+So, the SHA-256 hash of the given file is 0fe9f8349883f0a6d8eaab3e42285db6c275dfad361e97a72cf6578d33dc4e72.
+
+
+What is SHA-512?
+
+• SHA-512, or Secure Hash Algorithm 512-bit, is a cryptographic hash function that belongs to the SHA-2 family of hash functions. It was designed by the National Security Agency (NSA) and published in 2001. The internal structure of SHA-512 is similar to SHA-256 but it provides a larger hash output size of 512 bits.
+• The primary differences between SHA-512 and SHA-256 lie in their hash output size, internal word size, and the number of rounds in the hashing process.
+• Though not as widely used as SHA-256, it is also a powerful hashing algorithm. SHA-512, with its larger output size, provides a larger hash space, making it potentially more resistant to certain types of attacks.
+
+For more details, refer: https://en.wikipedia.org/wiki/SHA-2
+
+Step 8: You can generate the SHA-512 hash of the given file using the following command: openssl dgst -sha512 confidential-data.txt
+
+So, the SHA-512 hash of the given file is b65ffa687f4e8e7a1258c49a2d5a3c5ea4bbddf38097274226a71088255ec678587a57b9c9c632c3986ca01d68cf617858e12a826b406949e593cc0bf6708711.
+
+
+What is SHA3-256?
+
+• SHA3-256, or Secure Hash Algorithm-3 256-bit, is a cryptographic hash function that belongs to the SHA-3 family of hash functions released by National Institute of Standards and Technology (NIST) in 2015. SHA3-256 produces a 256-bit hash value for a given input.
+• The SHA-3 family uses the Keccak sponge construction, which differs from the Merkle–Damgård construction used in the SHA-2 family (e.g., SHA-256 and SHA-512). SHA-3 have been used to replace SHA-2 when necessary (in specific circumstances).
+• The SHA-3 family of cryptographic hash functions is not susceptible to the "length extension attack," a vulnerability that exists in SHA-2.
+
+For more details, refer:
+https://en.wikipedia.org/wiki/SHA-3
+https://en.wikipedia.org/wiki/Length_extension_attack
+
+Step 9: You can generate the SHA3-256 hash of the given file using the following command: openssl dgst -sha3-256 confidential-data.txt
+
+So, the SHA3-256 hash of the given file is 100e54b78d458a37b49f3b48f4c4448c6ace9e5bf80c74e8c1cad4d24f54e920.
+
+
+>> Task 2: Compute the SHA-512 based password hash for: Tio3tPLr&m4 with a specific salt using OpenSSL <<
+
+Salting is a technique used in cryptography to enhance the security of password hashes. It involves adding a random value (the salt) to the input before hashing it. Salting ensures that even if two users have the same password, their hashed passwords will look different due to the unique salt applied to each. Salting is a fundamental practice in password security and is widely used in systems that store user credentials. It significantly improves the security of password storage and helps protect against various types of attacks, including brute-force attacks and rainbow table attacks.
+
+Step 10: First, let's generate a random salt. Run the following command to generate a random base-64 encoded string: openssl rand -base64 32
+
+Step 11: Now, once we have our specific salt, run the following command to hash the given password using SHA-512 based algorithm: openssl passwd -6 -salt vFWgF97VAn3ViSNS92SKRGY6i4l/nFMsqBKi0MvF2Dw= 'Tio3tPLr&m4'
+
+root@ip-172-31-30-20:~/Desktop/resources# openssl passwd -6 -salt vFWgF97VAn3ViSNS 'Tio3tPLr&m4'
+$6$vFWgF97VAn3ViSNS$x80dwmuVIQLNKKZBpKXVxzRCBihVvJTt82vxCQthB0lsb8yrRfg2zFFkGP/9GFdnr8REr/ybjYlksWR0xWaa.
+root@ip-172-31-30-20:~/Desktop/resources#
+
+
+Note that only the initial string is picked up as the actual salt.
+
+The output format here is a general format ($id$salt$hash) for representing password hashes in most Unix-like operating systems. Here:
+
+• \$6$ indicates the use of SHA-512.
+• vFWgF97VAn3ViSNS is the salt used.
+• The rest of the string is the resulting hash.
+
+
+
+>> Commands Overview <<
+
+openssl version
+cat confidential-data.txt
+
+openssl list --digest-commands
+
+openssl dgst -md5 confidential-data.txt
+openssl dgst -rmd160 confidential-data.txt
+openssl dgst -sha256 confidential-data.txt
+openssl dgst -sha512 confidential-data.txt
+openssl dgst -sha3-256 confidential-data.txt
+
+openssl rand -base64 32
+openssl passwd -6 -salt vFWgF97VAn3ViSNS92SKRGY6i4l/nFMsqBKi0MvF2Dw= 'Tio3tPLr&m4'
+
+
+
+
+
+
+
+
+
+
+
+
+
