@@ -162,7 +162,7 @@ openssl rand -base64 32
 openssl passwd -6 -salt vFWgF97VAn3ViSNS92SKRGY6i4l/nFMsqBKi0MvF2Dw= 'Tio3tPLr&m4'
 
 
-
+https://www.openssl.org/
 
 
 
