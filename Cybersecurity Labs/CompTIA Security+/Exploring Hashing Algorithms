@@ -1,1 +1,14 @@
 
+Hashing is a process of converting input data (or 'message') into a fixed-size string of characters, which is typically a hash value or hash code. The output, or hash, is unique to the input data, meaning that even a small change in the input will produce a significantly different hash. Hash functions are commonly used in cryptography for various purposes, including data integrity verification, password storage, and digital signatures. Some of the common hashing algorithms include MD5, SHA-256, SHA-3 family etc. 
+
+
+Objective: Complete the following tasks:
+
+Task 1: Generate hash of a file using different hashing algorithms:
+• MD5
+• RIPEMD-160
+• SHA-256
+• SHA-512
+• SHA3-256
+
+Task 2: Compute the SHA-512 based password hash for: Tio3tPLr&m4 with a specific salt using OpenSSL.
