@@ -1,1 +1,40 @@
 
+--- Where to Spend Your Time ---
+
+• Areas important to SOC Operations
+
+
+-- Areas important to SOC Operations --
+
+• Endpoint security – monitor and act on detections/incidents; manage policies/IOCs.
+  → Monitor: Activity dashboard, CrowdScore incidents, Endpoint detections, Quarantined files, On-demand scans, Remediation
+  → Firewall
+  → USB device control
+  → Configure: Prevention policies, Custom IOA rule groups, Exclusions, IOC management
+
+• Investigate – search and hunt across telemetry to answer questions.
+  → Search: Events, Scheduled search, Hosts, Users, Hashes, Hash executions, IP addresses, Bulk domains
+  → Hunt: Linux sensors, Mac sensors, Detection activity, Command line & ASEP activity, Executables from Recycle Bin, Executables from temp
+
+• Threat intelligence – research and monitor adversary intel; analyze artifacts.
+  → Research: Actors, Indicators, Malquery search
+  → Monitor: Malquery monitoring rules
+  → Analyze: Sandbox (New), Malquery hunt
+
+• Overview of Detections
+• Incidents Queue
+• Detections Queue
+
+• Regex Rules
+• Whitelisting
+• Hashes, IPs, Domains
+
+• Splunk Searching of Raw Logs
+• Custom Splunk Alerting
+• Host Dashboard Timeline
+• User login and process activity
+• Has a hash been seen
+• Did that file execute
+
+• Reports, Event searches,
+• Prebuilt dashboards for hunting
