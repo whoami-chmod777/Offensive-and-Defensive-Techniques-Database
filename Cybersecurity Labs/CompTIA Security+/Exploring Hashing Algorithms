@@ -13,9 +13,8 @@ Task 1: Generate hash of a file using different hashing algorithms:
 
 Task 2: Compute the SHA-512 based password hash for: Tio3tPLr&m4 with a specific salt using OpenSSL.
 
+
 In this lab, we will explore and implement different hashing algorithms to compute hash of file using OpenSSL. We also will learn about salting as a technique to enhance hash security and generated a hashed password with a specific salt.
-
-
 
 >> Task 1: Generate hash of a file using different hashing algorithms <<
 
