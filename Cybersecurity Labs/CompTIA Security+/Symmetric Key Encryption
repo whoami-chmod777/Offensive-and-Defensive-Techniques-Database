@@ -1,6 +1,5 @@
 
 Symmetric encryption is a type of encryption where the same key is used for both the encryption and decryption processes. In other words, a single secret key is employed for both converting plaintext (original data) into ciphertext (encrypted data) and vice versa. This contrasts with asymmetric encryption (or public-key encryption), where a pair of keys, one public and one private, is used for encryption and decryption.
-
 Common symmetric encryption algorithms include Advanced Encryption Standard (AES), Data Encryption Standard (DES), and Triple DES (3DES). These algorithms are widely used for securing data in various applications, such as data storage, communication, and secure transactions.
 
 
