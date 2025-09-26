@@ -9,7 +9,7 @@ Task 2: Bind the Self-Signed Certificate to the IIS default website.
 Task 3: Test the website for HTTPS. (i.e. https://myine.lab.local)
 
 
-In this lab environment, you will be provided with GUI access to a Windows 2019 machine running IIS. Access the IIS default website at http://myine.lab.local.
+In this lab environment, you will be provided with GUI access to a Windows 2019 machine running IIS. Access the IIS default website at http://cyberintel.lab.local.
 
 >> Task 1: Create a Self-Signed Certificate in IIS. <<
 
