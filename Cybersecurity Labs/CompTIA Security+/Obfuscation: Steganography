@@ -1,1 +1,17 @@
 
+Steganography is the practice of hiding one piece of information within another in such a way that it's difficult to detect. In digital steganography, which is the most common form today, information is typically hidden within multimedia files such as images, audio, or video. The carrier file, which contains the hidden information, appears normal and unchanged to casual observers. The information is embedded using various techniques without significantly altering the visual or auditory quality of the carrier file.
+Steganography is distinct from cryptography in the sense that cryptography is the practice of protecting the contents of a message alone, whereas steganography is concerned with concealing both the fact that a secret message is being sent and its contents.
+
+
+Objective: Embed a secret text file into an image file:
+
+• Task 1: Using Steghide utility (Command Line)
+• Task 2: Using Stegosuite utility (GUI)
+
+
+Tools
+• Steghide
+• Stegosuite
+
+
+Step 1: Open the lab link to access the ubuntu machine:
