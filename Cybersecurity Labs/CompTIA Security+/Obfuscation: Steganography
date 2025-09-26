@@ -8,10 +8,70 @@ Objective: Embed a secret text file into an image file:
 • Task 1: Using Steghide utility (Command Line)
 • Task 2: Using Stegosuite utility (GUI)
 
+Tools: Steghide, Stegosuite
 
-Tools
-• Steghide
-• Stegosuite
 
+In this lab, we learned about steganography as a technique to hide secret information in image files. We implemented this using Steghide, a command-line steganography tool and also Stegosuite which is a graphical steganography tool. 
 
 Step 1: Open the lab link to access the ubuntu machine:
+
+Step 2: Navigate to the /root/Desktop/resources directory and check the files: cd /root/Desktop/resources, ls
+
+There are two files. The ine-logo.jpg is an image file. The secret.txt is the text file that we need to embed into the given image file.
+
+Check the content of the secret.txt file: cat secret.txt
+
+AccessKey: j7Ls9P2kRtQz
+SecretKey: P2sqs#41dfW$s98hjki8
+UserID: trojan223
+
+
+>> Task 1: Using Steghide utility (Command Line) <<
+
+Steghide is a command-line steganography tool that allows you to hide confidential data inside a cover file (such as an image or audio file). It has support for JPEG, BMP, WAV and AU files. 
+
+Step 3: Run the following command to hide the secret.txt file inside the ine-logo.jpg image file (also known as cover file) using the Steghide utility. You can use the following command: steghide embed -ef secret.txt -cf ine-logo.jpg
+
+You will be prompted for a passpharse. Enter any passphrase for example: stegano123. This passphrase will later be used to extract the embedded file. 
+
+Step 4: Now, since we have hidden the text file in the image, we can remove the secret.txt file. You can use the following command: rm secret.txt
+
+Step 5: The ine-logo.jpg image is still normally viewable, however a secret text file is hidden inside it.
+
+Step 6: To extract the hidden file from the image, you can use the following command: steghide extract -sf ine-logo.jpg
+
+When prompted for the passphrase, enter the one you used when hiding the file i.e. stegano123. That's it! We have our extracted secret.txt file again.
+
+
+>> Task 2: Using Stegosuite utility (GUI) <<
+
+Stegosuite is a free graphical steganography tool for hiding information in image files. Stegosuite is written in Java using SWT. It supports BMP, GIF, JPG and PNG file types.
+
+Step 7: You can also hide a text file inside an image using Stegosuite. Search for it and launch the application.
+
+Step 8: Now, go to File > Open and then browse for the cover image i.e. ine-logo.jpg file present in /root/Desktop/resources folder.
+
+Step 9: Next, we need to upload the file that we want to hide in the image. For this, right-click on the "embedded files" box and click on Add file and browse for the secret.txt file present in /root/Desktop/resources folder.
+
+Step 10: Now, enter any password for example: stegano123. This password will later be used to extract the embedded file. Next, click on "Embed" to embed the text file into the image.
+
+A new file is created with the name ine-logo_embed.jpg, the path for which is shown at the bottom.
+
+Step 11: The ine-logo_embed.jpg is normally viewable, however a secret text file is hidden inside it:
+
+You can delete the secret.txt file as we no longer need it since the secret.txt file is already embedded into ine-logo_embed.jpg image and we can easily extract it from there: rm secret.txt
+
+Step 12: To extract the secret.txt file, open the ine-logo_embed.jpg file in Stegosuite. Enter the password that you used when embedding i.e. stegano123 and simply click on "Extract." 
+
+The extracted file is saved to the path shown at the bottom.
+
+Step 13: Navigate to that directory and check the secret.txt file: cat secret.txt 
+
+The extraction is successful.
+
+
+https://en.wikipedia.org/wiki/Steganography
+
+
+
+
