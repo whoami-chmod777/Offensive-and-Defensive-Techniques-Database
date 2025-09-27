@@ -70,6 +70,16 @@ Step 13: Navigate to that directory and check the secret.txt file: cat secret.tx
 The extraction is successful.
 
 
+>> Commands Overview <<
+
+cat secret.txt
+rm secret.txt
+
+steghide embed -ef secret.txt -cf ine-logo.jpg
+steghide extract -sf ine-logo.jpg
+
+
+
 https://en.wikipedia.org/wiki/Steganography
 
 
