@@ -10,7 +10,7 @@ Taks 2: Being Alice, encrypt a text file using the public key of Bob and share t
 
 In this lab, we learned how to perform a asymmetric key encryption & decryption for a text file using OpenSSL.
 
-Step 1: Open the lab link to access the machines:
+Step 1: Open the lab link to access the machines
 Step 2: You can check if OpenSSL is installed using the following command: openssl version
 
 OpenSSL is a full-featured toolkit for general-purpose cryptography and secure communication.
@@ -171,8 +171,37 @@ Check the content: cat decrypted.txt
 
 The file has been successfully decrypted by Bob.
 
-
 In this lab, we learned how to perform an asymmetric encryption & decryption using RSA algorithm for a text file using OpenSSL. However, note that RSA is not ideal for encrypting large user data. More often, RSA is used to transmit shared keys for symmetric-key cryptography, which are then used for bulk encryption–decryption.
+
+
+>> Commands Overview <<
+
+openssl version
+cat confidential-data.txt
+
+openssl genrsa -out alice-private-key.pem 2048
+cat alice-private-key.pem
+
+openssl rsa -pubout -in alice-private-key.pem -out alice-public-key.pem
+cat alice-public-key.pem 
+
+openssl genrsa -out bob-private-key.pem 2048
+openssl rsa -pubout -in bob-private-key.pem -out bob-public-key.pem
+
+ip addr
+python3 -m http.server 8080
+curl http://10.0.26.112:8080/bob-public-key.pem -o bob-public-key.pem
+
+cat bob-public-key.pem
+openssl rsautl -encrypt -in confidential-data.txt -inkey bob-public-key.pem -pubin -out encrypted.bin
+cat encrypted.bin
+
+ip addr
+python3 -m http.server 8080
+curl http://10.0.19.73:8080/encrypted.bin -o encrypted.bin
+
+openssl rsautl -decrypt -in encrypted.bin -inkey bob-private-key.pem -out decrypted.txt
+cat decrypted.txt
 
 
 https://www.openssl.org/
