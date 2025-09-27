@@ -1,1 +1,38 @@
 
+A checksum is a value derived from the digital data of a file or message that is used to verify the integrity of the data. The purpose of a checksum is to ensure that the data has not been altered or corrupted during transmission or storage. Checksums are generated through different algorithms, with the Secure Hash Algorithms (SHAs) and the MD5 algorithm standing out as the two most widely used methods. Websites often provide checksums alongside downloadable files as a means for users to independently verify the integrity of the file they are downloading. Users can calculate the checksum of the downloaded file and compare it to the provided checksum on the website. If the checksums match, it suggests that the file has not been corrupted or compromised, providing a level of confidence in the file's integrity.
+
+
+Objective: Verify the integrity of the downloaded Ubuntu MATE ISO file (ubuntu-mate-22.04.3-desktop-amd64.iso) if the SHA256 checksum of this file mentioned on the website is d84cd3eb7732fbb39ce3cd24ba1b302a643fe0362f7ac9261fc4c7b756e42a55.
+
+• Task 1: Using Command Line
+• Task 2: Using GtkHash (GUI)
+
+Tools
+• sha256sum
+• GtkHash
+
+
+In this lab exercise, we confirmed the integrity of the downloaded Ubuntu MATE ISO file by verifying the checksum from the command line as well as using the GtkHash GUI.
+
+Step 1: Open the lab link to access the ubuntu machine:
+
+Step 2: Navigate to Downloads where the downloaded Ubuntu MATE ISO file is present.
+
+
+
+
+
+
+
+
+
+
+
+https://en.wikipedia.org/wiki/Checksum
+https://ubuntu-mate.org/download/
+
+
+
+
+
+
