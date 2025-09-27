@@ -14,25 +14,59 @@ Tools
 
 In this lab exercise, we confirmed the integrity of the downloaded Ubuntu MATE ISO file by verifying the checksum from the command line as well as using the GtkHash GUI.
 
-Step 1: Open the lab link to access the ubuntu machine:
+Step 1: Open the lab link to access the ubuntu machine
 
 Step 2: Navigate to Downloads where the downloaded Ubuntu MATE ISO file is present.
 
+Step 3: At the time of this writing, the SHA256 checksum of the given ISO file as mentioned on the website is d84cd3eb7732fbb39ce3cd24ba1b302a643fe0362f7ac9261fc4c7b756e42a55.
 
 
+>> Task 1: Using Command Line <<
+
+Step 4: Save the checksum mentioned on the website to a file named SHA256.txt using the following command: echo "d84cd3eb7732fbb39ce3cd24ba1b302a643fe0362f7ac9261fc4c7b756e42a55" > SHA256.txt
+
+Step 5: Next, calculate the SHA256 checksum of the downloaded ISO file using the following command: sha256sum ubuntu-mate-22.04.3-desktop-amd64.iso
+
+This may take a minute or two to run as the file is huge. In case if it takes more than that, stop and rerun the command.
+
+Alternatively, you can use a more general-purpose command: openssl dgst -sha256 ubuntu-mate-22.04.3-desktop-amd64.iso
+
+Grab the generated SHA256 checksum from the terminal and save it to a file named My_SHA256.txt using the following command: echo "d84cd3eb7732fbb39ce3cd24ba1b302a643fe0362f7ac9261fc4c7b756e42a55" > My_SHA256.txt
+
+Step 6: Now, compare the contents of My_SHA256.txt and SHA256.txt (file containing the SHA256 checksum from the website): diff -qs My_SHA256.txt SHA256.txt
+
+The diff command is used to compare two files. The options used in the command are:
+
+• -q: Report only when files differ.
+• -s: Report when files are the same.
+
+As observed above, both checksums match, confirming the integrity of the ISO file.
 
 
+>> Task 2: Using GtkHash (GUI) <<
+
+GtkHash is a free desktop utility for computing message digests or checksums. 
+
+Step 7: You can also verify the checksum using GtkHash. Search for and open GtkHash.
+Step 8: Load the Ubuntu MATE ISO file present in Downloads.
+Step 9: Copy the SHA256 checksum as mentioned on the website (i.e. d84cd3eb7732fbb39ce3cd24ba1b302a643fe0362f7ac9261fc4c7b756e42a55) and paste it in the Check field.
+Step 10: Click on Hash. 
+
+It will take a few seconds to complete. Once it is done, you will see green checkmarks.
+
+This indicates that the provided SHA256 checksum (from the website) matches with the calculated SHA256 checksum, confirming the integrity of the ISO file.
 
 
+>> Commands Overview <<
 
+echo "d84cd3eb7732fbb39ce3cd24ba1b302a643fe0362f7ac9261fc4c7b756e42a55" > SHA256.txt
+sha256sum ubuntu-mate-22.04.3-desktop-amd64.iso
+openssl dgst -sha256 ubuntu-mate-22.04.3-desktop-amd64.iso
+
+echo "d84cd3eb7732fbb39ce3cd24ba1b302a643fe0362f7ac9261fc4c7b756e42a55" > My_SHA256.txt
+diff -qs My_SHA256.txt SHA256.txt
 
 
 
 https://en.wikipedia.org/wiki/Checksum
 https://ubuntu-mate.org/download/
-
-
-
-
-
-
