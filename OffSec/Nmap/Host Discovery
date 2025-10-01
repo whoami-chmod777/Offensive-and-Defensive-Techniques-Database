@@ -1,5 +1,5 @@
 
--- Host Discovery --
+--- Host Discovery ---
 
 • Ping Sweep & Don't Ping
 • TCP SYN Ping
@@ -11,44 +11,117 @@
 • IP Protocol Ping
 • Traceroute & Reverse DNS Resolution
 
-Send-ip
 
 
-- Ping Sweep & Don't Ping -
+-- Ping Sweep & Don't Ping --
+
+# Ping Scan - disable port scan
+nmap -sn 192.168.199.1/24
+nmap -sn 192.168.199.1-150
+nmap -sn 192.168.199.1, 192.168.199.38
+
+# Exclude hosts/networks 
+nmap -sn 192.168.199.1/24 --exclude 192.168.199.1
+nmap -sn 192.168.199.1/24 --excludefile hosts.txt
+
+# Scan on specific devices
+nmap -sn -iL hosts.txt    
+
+# Don't ping scan
+nmap -Pn 192.168.199.1
+nmap -Pn 192.168.199.1.1-100 --excludefile hosts.txt
+nmap -Pn 192.168.199.1/24 --excludefile hosts.txt
 
 
-- TCP SYN Ping -
+-- TCP SYN Ping --
+
+nmap -PS 192.168.199.1/24  
+nmap -PS -p21,23,80 192.168.199.1/24
+
+Wireshark Filter:
+[ SYN, ACK ] --> device is online and the port is open
+[ RST, ACK ] --> device in offline and the port close
+
+ip.src == 192.168.199.1
+tcp.flags == 0x012
 
 
-- TCP ACK Ping -
+-- TCP ACK Ping --
+
+nmap -sn -PA nmap.scanme.org
+nmap -Pn -sn -PA nmap.scanme.org
+nmap -Pn -sn -PA -n nmap.scanme.org
+
+Wireshark Filter:
+[ ACK ] --> device is online and the port is open
+[ RST, ACK ] --> device in offline and the port close
+
+ip.dst == 45.33.32.156
+tcp.flags == 0x010
 
 
-- UDP Ping Scan -
+-- UDP Ping Scan --
+
+sudo nmap -sn -PU nmap.scanme.org  
+sudo nmap -sU -p1-1000 192.168.199.1
+
+Wireshark Filter:
+If we don't get response it means the port is open
+Destination unreachable (Port unreachable) --> port is close
+
+Type: 3 (Destination unreachable)
+Code: 3 (Port unreachable)
+
+udp.dstport == 77
 
 
-- ARP Ping -
+-- ARP Ping --
+
+nmap -PR 192.168.199.1/24
+nmap -sP -PR 192.168.1/24
+
+Wireshark:
+Address Resolution Protocol (reply) --> device reply
 
 
-- Disable ARP Ping -
+-- Disable ARP Ping --
 
 nmap -sn 192.168.1.108 --disable-arp-ping
 
 
+-- ICMP ECHO Ping & ICMP Timestamp Ping --
 
-- ICMP ECHO Ping & ICMP Timestamp Ping -
+sudo nmap -PE nmap.scanme.org
+
+Wireshark:
+ICMP    42    Echo (ping) request  
+ICMP    60    Echo (ping) reply 
+
+nmap -PP nmap.scanme.org
+
+Wireshark:
+ICMP    54    Timestamp request  
+ICMP    60    Timestamp reply  
 
 
-- IP Protocol Ping -
+-- IP Protocol Ping --
+
+If no protocols are specified, the default is to send multiple IP packets for ICMP (protocol 1), IGMP (protocol 2), and IP-in-IP (protocol 4) TCP (protocol 6), UDP (protocol 17) and SCTP (protocol 132)
+
+sudo nmap -PO1 nmap.scanme.org
+
+Wireshark:
+ICMP    54    Timestamp request  
+ICMP    60    Timestamp reply  
+
+sudo nmap -PO2 nmap.scanme.org
 
 
-- Traceroute & Reverse DNS Resolution -
+-- Traceroute & Reverse DNS Resolution --
 
+sudo nmap -sn nmap.scanme.org --traceroute
+nmap -R 45.33.32.156
 
-
-- Disable-arp-ping -
-
-
-- Send-ip -
 
 
 
