@@ -1,1 +1,127 @@
 
+--- Service Enumeration ---
+
+• Banner Grabbing With Nmap
+• Whois & Traceroute Geo-location Enumeration
+• FTP Enumeration
+• SMTP Enumeration
+• DNS Enumeration - Zone-transfer & DNS Bruteforce
+• HTTP Enumeration - HTTP Methods
+• HTTP Enumeration - Finding Hidden Files & Directories
+• HTTP Enumeration - WAF Detection & Fingerprinting
+• SMB Enumeration
+• MySQL Enumeration
+• Vulnerability Scanning With Nmap
+
+
+-- Banner Grabbing With Nmap --
+
+nmap -p22,80 --script banner 192.168.199.39
+nmap -F -T4 --script banner 192.168.199.39
+
+
+-- Whois & Traceroute Geo-location Enumeration --
+
+la -al /usr/share/nmap/scripts | grep -e "whois"
+nmap -sn --script whois-domain nmap.scanme.org
+nmap -sn --script "whois-*" nmap.scanme.org
+
+ls -al /usr/share/nmap/scripts | grep -e "traceroute"
+nmap -sn --traceroute nmap.scanme.org
+nmap -sn --traceroute --script traceroute-geolocation nmap.scanme.org
+
+
+-- FTP Enumeration --
+
+ls -al /usr/share/nmap/scripts | grep -e "ftp"    
+
+nmap -sV -p21 192.168.199.39 192.168.199.41
+nmap -sS -p21 --script "ftp-*" 192.168.199.39 192.168.199.41
+nmap -sS -p21 --script ftp-anon,ftp-syst,tftp-enum,ftp-vsftpd-backdoor 192.168.199.39 192.168.199.41
+
+nmap --script ftp-vuln-cve2010-4221 -p 21 192.168.199.39
+
+ftp://192.168.199.39:21
+
+
+-- SMTP Enumeration --
+
+ls -la /usr/share/nmap/scripts | grep -e "smtp"
+
+nmap -p25 --script smtp-commands 192.168.199.39
+nmap -p25 --script smtp-enum-users 192.168.199.39  
+nmap -p25 --script smtp-enum-users --script-args smtp-enum-users.methods={VRFY} 192.168.199.39
+nmap -p25 --script smtp-open-relay 192.168.199.39
+nmap -p25 --script smtp-vuln-cve2010-4344 192.168.199.39   
+
+
+-- DNS Enumeration - Zone-transfer & DNS Bruteforce --
+
+ls -al /usr/share/nmap/scripts | grep -e "dns"
+
+nmap -p 53 dns-zone-transfer --script-args dns-zone-transfer.domani=zonetras
+nmap --script dns-zone-transfer --script-args dns-zone-transfer.server=nsztm1.digi.ninja,dns-zone-transfer.port=53,dns-zone-transfer.domain=zonetransfer.me
+nmap -Pn --script dns-brute --script-args dns-brute.threads=5,dns-brute.hostlist=/usr/share/wordlists/seclists/Discovery/DNS/fierce-hostlist.txt zonetransfer.me
+
+ls -l /usr/share/wordlists/seclists/Discovery/DNS
+
+
+-- HTTP Enumeration - HTTP Methods --
+
+ls -al /usr/share/nmap/scripts | grep -e "http-"
+
+nmap -Pn -sV -p80 -T4 --script http-methods --script-args http-method.test-all nmap.scanme.org  
+
+
+-- HTTP Enumeration - Finding Hidden Files & Directories --
+
+nmap -F -sV -T5 192.168.199.39                                                                
+nmap -sV -p80 --script http-enum 192.168.199.39
+
+
+-- HTTP Enumeration - WAF Detection & Fingerprinting --
+
+ls -al /usr/share/nmap/scripts | grep -e "http-waf"
+
+nmap -Pn -p 80 --script http-waf-detect forum.hackersploit.org
+nmap -Pn -p 443 --script http-waf-detect hackersploit.org
+nmap -Pn -p 443 --script http-waf-detect,http-waf-fingerprint hackersploit.org
+nmap -Pn -p 443 --script http-waf-fingerprint hackersploit.org
+
+
+-- SMB Enumeration --
+
+ls -al /usr/share/nmap/scripts | grep -e "smb"  
+
+nmap -p445 --script smb-os-discovery 192.168.199.39
+nmap -p445 --script smb-enum-shares 192.168.199.41                                                                            
+nmap -p445 --script smb-enum-users 192.168.199.39
+nmap -p445 --script smb-enum-users 192.168.199.41 -d
+
+nmap -p445 --script smb-protocols 192.168.199.39
+nmap -p445 --script smb-double-pulsar-backdoor 192.168.199.39
+nmap -p445 --script smb-vuln-ms17-010.nse 192.168.199.41
+
+
+-- MySQL Enumeration --
+
+ls -al /usr/share/nmap/scripts | grep -e "mysql
+
+nmap -p3306 --script mysql-info 192.168.199.39
+nmap -p3306 --script mysql-enum 192.168.199.39
+nmap -p3306 --script mysql-empty-password.nse 192.168.199.39
+
+mysql -u root -h 192.168.199.39 -p
+
+nmap -p3306 --script mysql-brute.nse 192.168.199.39         
+nmap -p3306 --script mysql-brute.nse --script-args mysql-brute.threads=100 192.168.199.39
+
+
+-- Vulnerability Scanning With Nmap --
+
+ls -al /usr/share/nmap/scripts | grep -e "vulners"
+
+nmap -sV -p21-8080 --script vulners 192.168.199.39   
+nmap -sV -p80 --script vulners --script-args http-vulners-regex 192.168.199.39
+
+
