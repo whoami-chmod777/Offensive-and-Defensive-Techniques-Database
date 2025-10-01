@@ -21,25 +21,33 @@
 -- Obtaining, Compiling, Installing, and Removing Nmap --
 
 
+
 -- Host Discovery (“Ping Scanning”) --
+
 
 
 -- Port Scanning Techniques --
 
 
+
 -- Optimizing Nmap Performance --
+
 
 
 -- Service and Application Version Detection --
 
 
+
 -- Remote OS Detection --
+
 
 
 -- Nmap Scripting Engine --
 
 
+
 -- Detecting and Subverting Firewalls and Intrusion Detection Systems --
+
 
 
 
