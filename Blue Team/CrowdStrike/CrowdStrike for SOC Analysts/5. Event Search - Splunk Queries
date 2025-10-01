@@ -1,1 +1,104 @@
 
+--- Event Search - Splunk Queries ---
+
+• Fields to Call Out
+• Fields for Files
+• Searching tips/gotchas
+• Top Splunk Commands to get the Job Done
+• Combining it together
+
+
+-- Fields to Call Out --
+
+• event_simpleName
+• _time
+• CommandLine
+• ComputerName
+• FileName
+• AppName
+• AppPath
+• UserName
+• SHA256HashData
+• DomainName
+• IP4Records
+• LocalIP / LPort
+• RemoteIP / RPort
+
+
+-- Fields for Files --
+
+FileName: filezilla.exe
+FilePath: \Device\HarddiskVolume3\Program Files\FileZilla FTP Client\
+ImageFileName: \Device\HarddiskVolume3\Program Files\FileZilla FTP Client\filezilla.exe
+
+MD5HashData: 7f2c106ee1b1212cf3225f03042cee40
+
+SHA256HashData: 7a981fe60feeecb07d34eb3931e25d4b915bd6898d65ac5e6eb23b00e364cfc8
+TargetImageFileName: \Device\HarddiskVolume3\Program Files\FileZilla FTP Client\filezilla.exe
+
+
+-- Searching Tips/Gotchas -- 
+
+1. Must Escape Special Characters: ImageFileName="\\Device\\HarddiskVolume3\\Program Files\\FileZilla FTP Client\\filezilla.exe"
+2. leverage _time with | convert ctime(_time)
+3. Leverage quick wins from Events Actions Button
+4. Brush up on your splunk commands of stats, rex, eval, sort
+5. When in doubt, just throw in string values and then start building out your search from there
+
+Tip = leverage time picker, host name, computer name, user name, etc
+
+
+-- Top Splunk Commands to get the Job Done --
+
+| table _time <field1>, <field2>, <field3>, <field4>, <field5>
+| stats count by <field>
+| stats values(field1) values(field2) values(field3)
+| stats values(field1) by (field2)
+| sort
+| timechart
+| eval
+| rex
+
+
+-- Combining it together --
+
+Event Search for Fields of Interest:
+"sting of interest for your IOC"
+| table _time ComputerName event_simpleName AppName AppPath UserName SHA256HashData 
+  FileName CommandLine DomainName IP4Records LocalIP LPort RemoteIP Rport
+
+Event Search for generic activity:
+"*.ps1" OR "*.exe" OR "wsmprovhost.exe" OR "bloodhound" OR "hailieshaw" OR "baddomain.com"
+
+FilePath=C:\Users\Public\* AND ("*.exe" OR "*.ps1")
+| stats values(FileName)
+
+Conduct stacking analysis with the stats command
+Index=network_logs sourcetype=firewall_logs1
+Examples:
+| stats count by RemoteIP
+| stats values(RemoteIP)
+| stats values(services)
+| stats values(Rport)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
