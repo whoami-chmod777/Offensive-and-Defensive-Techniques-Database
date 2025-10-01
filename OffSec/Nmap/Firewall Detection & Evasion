@@ -1,15 +1,74 @@
 
 --- Firewall Detection & Evasion ---
 
-- Firewall detection with ACK Probing
-- Packet Fragmentation
-- Specifying MTU
-- Using IP Decoys
-- Spoofing MAC Addresses
+• Firewall detection with ACK Probing
+• Packet Fragmentation
+• Specifying MTU
+• Using IP Decoys
+• Spoofing MAC Addresses
 
 
-- Firewall detection with ACK Probing
-- Packet Fragmentation
-- Specifying MTU
-- Using IP Decoys
-- Spoofing MAC Addresses
+-- Firewall detection with ACK Probing --
+
+nmap -sA 192.168.199.41
+
+Status: Firewall is disabled
+ACK is sending, RST is responding
+
+Wireshark: 
+TCP    54    45522 → 3389 [ACK]
+TCP    60    5906 → 38330 [RST]
+
+Status: Firewall is active
+There are no RST responses
+
+Wireshark: 
+TCP    54    62346 → 139 [ACK] Seq=1 Ack=1 Win=1024 Len=0
+
+nmap -sA 192.168.199.41
+
+Wireshark activate firewall: No RST responses
+TCP    54    62346 → 139 [ACK] Seq=1 Ack=1 Win=1024 Len=0
+
+
+-- Packet Fragmentation --
+
+nmap -sS -f 192.168.199.41
+nmap -f 192.168.199.41
+
+Wireshark:
+IPv4 42 Fragmented IP protocol
+
+
+-- Specifying MTU --
+
+nmap --mtu 16 192.168.199.41
+nmap -A --mtu 16 192.168.199.41
+
+Wireshark:
+IPv4 50 Fragmented IP protocol
+
+
+-- Using IP Decoys --
+
+nmap -sS -F -D 192.168.199.1 192.168.199.41
+nmap -sS -F -D 192.168.199.1,192.168.199.2 192.168.199.41
+nmap -sS -D 192.168.199.1,192.168.199.2 192.168.199.41
+
+nmap -D RND:5 192.168.199.41  
+nmap -n -D 192.168.1.5,10.5.1.2,172.1.2.4,3.4.2.1 192.168.1.5
+nmap -sS -Pn -D 10.10.10.1, 10.10.10.2, ME – F 10.10.78.73
+
+nmap -n -D decoy-ip1,decoy-ip2,your-own-ip,decoy-ip3,decoy-ip4 remote-host-ip
+nmap -n -D 192.168.1.5,10.5.1.2,172.1.2.4,3.4.2.1 192.168.1.5
+nmap -P0 -sI 1.1.1.1:1234 192.1.2.3
+
+
+-- Spoofing MAC Addresses --
+
+nmap -sS --spoof-mac 0 192.168.199.41  
+nmap --spoof-mac Dell  
+nmap --spoof-mac Apple
+
+
+
