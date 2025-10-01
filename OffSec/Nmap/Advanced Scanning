@@ -36,9 +36,7 @@ nmap -p http 192.168.199.39
 
 nmap -sT -p- 192.168.199.39
 
-Wireshark Filter:
-
-Full Tree Way Handshake:
+Wireshark Filter → Full Tree Way Handshake:
 TCP 40430 → 80 [SYN]
 TCP 80 → 40430 [SYN, ACK]
 TCP 40430 → 80 [ACK]
@@ -47,27 +45,149 @@ TCP 40430 → 80 [RST, ACK]
 
 -- Stealth (SYN) Scanning (-sS) --
 
+nmap -sS -p- 192.168.199.39
+
+Wireshark Filter → Half-Open Scan:
+TCP 52796 → 25 [SYN]
+TCP 25 → 52796 [SYN, ACK]
+TCP 52796 → 25 [RST]
+
 
 -- OS Detection & Service Detection --
+
+nmap -sS -O 192.168.199.39
+nmap -sS -sV -O -p- 192.168.199.39
+nmap -sn 192.168.199.1/24 --exclude 192.168.199.39
+
+searchsploit vsftpd 2.3.4
 
 
 -- Aggressive Scanning --
 
+nmap -sS -A 192.168.199.39 
+
+ls -la /usr/share/nmap/scripts/
+
 
 -- UDP Scanning --
+
+nmap -sU -p1-1000 192.168.199.39
+
+Wireshark Filter → Destination Unreachable (Port Unreachable):
+• ICMP sending UDP packets
+• If the port is open we don't get a response back.
+• If we get an ICMP port unreachable response that means that the port is closed.
 
 
 -- The Reason Option --
 
+nmap -sn 192.168.199.1/24 --reason
+nmap -sS -A -p1-100 192.168.199.41 --reason
+man nmap | grep -e "reason"
+
 
 -- The Fast Scan --
+
+# 100 Most Common Ports
+
+nmap -F 192.168.199.39
+nmap -F -sV 192.168.199.39  
 
 
 -- Verbosity, output and logging --
 
+nmap -sS -A -F 192.168.199.99 -oA win2k8   
+grep -e "SSH" win2k8.gnmap
+
+nmap -v -sS -A -F 192.168.199.41 -oA win2k8
+nmap -vv -sS -A -F 192.168.199.41 -oA win2k8
+nmap -vvv -sS -A -F 192.168.199.41 -oA win2k8
+nmap -vvv -sS -A -F 192.168.199.41 -oN win2k8.txt
+cat win2k8.txt  
+
 
 -- FIN, XMAS and NULL Scanning --
 
+It's not effective against Windows operating systems !!! no-response means the port is open
+
+# TCP Null Scan
+nmap -sN 192.168.199.39
+
+Wireshark Filter:
+TCP    54    54628 → 722 [<None>]
+TCP    60    3301 → 54628 [RST, ACK]
+
+# TCP FIN Scan
+nmap -sF 192.168.199.39
+nmap -sF 192.168.199.39 --reason
+nmap -sF -p 8080 192.168.199.39 --reason
+
+Wireshark Filter:
+TCP    54    39260 → 53 [FIN]
+TCP    60    1025 → 39260 [RST, ACK]
+
+# XMAS Scan
+nmap -sX 192.168.199.39  
+nmap -sX 192.168.199.39 --reason
+
+Wireshark Filter:
+TCP    54    52274 → 5850 [FIN, PSH, URG]
+TCP    60    1311 → 52274 [RST, ACK]
+
 
 -- WebMap - Web Dashboard For Nmap --
+
+Install WebMap
+
+apt install docker.io
+
+systemctl enable docker
+systemctl start docker
+systemctl status docker  
+
+docker ps -a
+
+mkdir /tmp/webmap
+docker run -d \
+  --name webmap \
+  -h webmap \
+  -p 8000:8000 \
+  -v /tmp/webmap:/opt/xml \
+  reborntc/webmap
+
+sudo docker images   
+sudo docker ps -a
+
+# Now point your browser to http://localhost:8000
+
+sudo docker exec -ti webmap /root/token
+Token: KNR9DIyHew1Q
+
+cd /tmp/webmap
+
+# Run Nmap and save the XML Report on /tmp/webmap
+nmap -sT -A -T4 -oX /tmp/webmap/myscan.xml 192.168.1.0/24
+
+== Nmap Scan ==
+
+cd /tmp/webmap
+nmap -sS -A -p21-443 nmap.scanme.org -oX nmap.scanme.org
+mv nmap.scanme.org nmap.scanme.xml
+
+== New Nmap Scan ==
+
+nmap -sS -sV -p80,443 nmap.scanme.org -oX nmap.scanme.org
+mv nmap.scanme.org nmap.scanme.xml
+
+== Own Example ==
+
+nmap -p 0- -sV -sS -T4 192.168.199.39 -oX hackersploit2.org
+mv hackersploit2.org hackersploit2.xml
+
+
+WebMap
+https://hub.docker.com/r/reborntc/webmap
+
+WebMap
+https://github.com/SabyasachiRana/WebMap#usage
 
