@@ -1,12 +1,50 @@
 
 -- Nmap Scripting Engine (NSE) --
 
-
+• Introduction To The NSE
+• NSE Syntax
+• Script Categories
 • Script acarsd-info
 
 
+-- Introduction To The NSE --
+
+ls -la /usr/share/nmap/scripts/
+ls -la /usr/share/nmap/scripts/ | grep -e "http-enum"
+
+Nmap Scripting Engine
+The Nmap Scripting Engine (NSE) is one of Nmap's most powerful and flexible features. It allows users to write (and share) simple scripts to automate a wide variety of networking tasks. Those scripts are then executed in parallel with the speed and efficiency you expect from Nmap. Users can rely on the growing and diverse set of scripts distributed with Nmap, or write their own to meet custom needs.
+
+https://nmap.org/book/nse.html
 
 
+-- NSE Syntax --
+
+nmap --script-updatedb
+nmap -sn 192.168.199.39
+nmap -sV 192.168.199.39   
+
+ls -la /usr/share/nmap/scripts | grep -e "ftp"
+nmap -p 21 --script ftp-anon 192.168.199.39
+nmap -p 21 --script ftp-anon,ftp-vsftpd-backdoor 192.168.199.39
+nmap -p 21 --script "ftp-*" 192.168.199.39  
+
+
+-- Script Categories --
+
+nmap -sC 192.168.199.39
+nmap -A 192.168.199.39
+
+nmap --script default 192.168.199.39
+nmap --script 192.168.199.39   
+nmap --script auth 192.168.199.39   
+nmap --script auth,discovery 192.168.199.39
+
+https://nmap.org/nsedoc/categories/auth.html
+
+
+-- Script acarsd-info --
+ 
 Script acarsd-info
 Retrieves information from a listening acarsd daemon. Acarsd decodes ACARS (Aircraft Communication Addressing and Reporting System) data in real time. The information retrieved by this script includes the daemon version, API version, administrator e-mail address and listening frequency. 
 
@@ -23,6 +61,7 @@ PORT    STATE SERVICE
 |_  Frequency: 131.7250 & 131.45
 
 
+https://nmap.org/nsedoc/categories/auth.html
 
 
 
