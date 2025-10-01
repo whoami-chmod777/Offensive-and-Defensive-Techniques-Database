@@ -1,1 +1,77 @@
 
+--- Triaging a Detection ---
+
+• Detections
+• Icons & Color Coding
+• Where to look first
+• Group your Detections, if it helps
+• Things to ask yourself when looking at a Detection
+• What to include in a write up
+
+
+-- Detections --
+
+Detections are present for a 90 day retention period
+Indicators are present based on your CS retention period, more than likely this is 1 year
+
+
+-- Icons & Color Coding --
+
+• If there is a white badge = a process was killed or an operation was blocked
+• Multiple detections, could be part of an Incident
+• If there is a green badge = a process was blocked
+
+Right side legend:
+• Malware - Informational
+• Overwatch Detection
+• Persistence, Defense Evasion, blocked/killed
+• Malware - High
+
+
+-- Where to look first --
+
+• Detect Time: Jul. 29, 2023 10:29:56
+• Hostname: Christinas-MacBook-Air.local
+• Host Type: Workstation
+• User Name: christinalaurencarter
+• Severity: Medium
+• Objective: Falcon Detection Method
+• Tactic & Technique: Falcon Intel via Intelligence Indicator - Domain
+• Technique ID: CST0018
+• IOA Name: IntelDomainMedium
+• IOA Description: A domain lookup matched a CrowdStrike Intelligence indicator
+
+
+-- Group your Detections, if it helps --
+
+• Options: No grouping, Grouped by Host, Grouped by Grouping Tags, Grouped by Objective, Grouped by Tactic, Grouped by Technique, Grouped by Technique ID, Grouped by IOA Name
+• Sort by newest detect time
+
+
+-- Things to ask yourself when looking at a Detection --
+
+Are we dealing with a Server or a Workstation?
+What is the severity of the alert?
+What is CS noting for MITRE Tactic & Technique?
+Was anything blocked?
+Is something still running?
+Any flags for indicators or known TA groups?
+Do we recognize the file name or other processes involved?
+Outbound active network connections seen?
+Suspicious command line arguments?
+Odd parent child process trees?
+Hash, IP, Domain, URL analysis from OSINT?
+
+
+-- What to include in a write up --
+
+• At a minimum: Host, timestamps (UTC), process involved, command lines, what happened on the host, what actions you took, OSINT research
+• Nice to have: Root Cause Analysis, pictures of forensic artifacts you found, scoping steps taken, next steps/recommendations to the next tier in the SOC, sandbox sample/analysis, link to the detection
+
+Tip:
+Best to develop your own “detection template” that you can use to just fill in each time you do a write up.
+BTC has a free one available on our website store: BlueTeamWins.com
+
+
+
+
