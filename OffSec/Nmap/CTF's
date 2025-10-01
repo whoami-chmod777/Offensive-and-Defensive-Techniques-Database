@@ -1,1 +1,6 @@
 
+--- Example of Nmap Commands Used in CTF's ---
+
+nmap -sS -A -p21-443 nmap.scanme.org -oX nmap.scanme.org
+nmap -sS -sV -p80,443 nmap.scanme.org -oX nmap.scanme.org
+nmap -p 0- -sV -sS -T4 192.168.199.39 -oX hackersploit2.org
