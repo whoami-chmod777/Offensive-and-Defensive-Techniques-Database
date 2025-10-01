@@ -1,1 +1,73 @@
 
+--- Advanced Scanning ---
+
+• Default Nmap Scan
+• Port Scanning Options & Ranges
+• TCP Connect Scan (-sT)
+• Stealth (SYN) Scanning (-sS)
+• OS Detection & Service Detection
+• Aggressive Scanning
+• UDP Scanning
+• The Reason Option
+• The Fast Scan
+• Verbosity, output and logging
+• FIN, XMAS and NULL Scanning
+• WebMap - Web Dashboard For Nmap
+
+
+
+-- Default Nmap Scan --
+
+nmap nmap.scanme.org
+
+
+-- Port Scanning Options & Ranges --
+
+nmap -p 22 192.168.199.39
+nmap -p 22,23,25,80,443 192.168.199.39
+nmap -p 1-1000 192.168.199.39
+nmap -p- 192.168.199.39
+nmap -p ssh 192.168.199.39   
+nmap -p telnet 192.168.199.39
+nmap -p http 192.168.199.39  
+
+
+-- TCP Connect Scan (-sT) --
+
+nmap -sT -p- 192.168.199.39
+
+Wireshark Filter:
+
+Full Tree Way Handshake:
+TCP 40430 → 80 [SYN]
+TCP 80 → 40430 [SYN, ACK]
+TCP 40430 → 80 [ACK]
+TCP 40430 → 80 [RST, ACK]
+
+
+-- Stealth (SYN) Scanning (-sS) --
+
+
+-- OS Detection & Service Detection --
+
+
+-- Aggressive Scanning --
+
+
+-- UDP Scanning --
+
+
+-- The Reason Option --
+
+
+-- The Fast Scan --
+
+
+-- Verbosity, output and logging --
+
+
+-- FIN, XMAS and NULL Scanning --
+
+
+-- WebMap - Web Dashboard For Nmap --
+
