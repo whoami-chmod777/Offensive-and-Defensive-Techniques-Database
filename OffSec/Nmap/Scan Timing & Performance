@@ -1,1 +1,48 @@
 
+--- Scan Timing & Performance ---
+
+• Timing Templates
+• Parallelism
+• Host Timeout
+• Scan Delay
+
+
+-- Timing Templates --
+
+nmap.scanme.org -sV -T1
+nmap -vv -sV nmap.scanme.org -T1
+nmap -sS -vv -sV nmap.scanme.org -T1
+nmap -sS -A -p- 192.168.199.39 -T5   
+
+Option   Name         Description
+-----------------------------------------------
+-T0      Paranoid     Extremely slow
+-T1      Sneaky       Useful for avoiding intrusion detection systems
+-T2      Polite       Unlikely to interfere with the target system
+-T3      Normal       This is the default timing template
+-T4      Aggressive   Produces faster results on local networks
+-T5      Insane       Very fast and aggressive
+
+
+-- Parallelism --
+
+nmap -sS -F nmap.scanme.org -T4 --min-parallelism 10    
+nmap -sS -F nmap.scanme.org -T4 --max-parallelism 2
+
+
+-- Host Timeout --
+
+nmap -Pn 192.168.0-255.0-100
+nmap -Pn -v 192.168.0-255.0-100
+nmap -Pn 192.168.199.0-255 -T4
+nmap -Pn -v -p21-100 192.168.199.0-255
+nmap -Pn -v -p21-100 192.168.199.0-255 --host-timeout 25s
+
+
+-- Scan Delay --
+
+nmap -sS -A -p1-100 nmap.scanme.org -T1 --scan-delay 10s
+
+Wireshark: the traffic don't looks Suspicious !!!
+
+
