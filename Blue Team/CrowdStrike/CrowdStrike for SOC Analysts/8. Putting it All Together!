@@ -1,0 +1,30 @@
+
+--- Putting it All Together! ---
+
+• Create your Detection Template
+• Bookmark All Your Favorite OSINT Tools
+
+
+-- Create your Detection Template --
+
+• Always best to have a clean, formal, professional alert template:
+  → Highlight important information at the top
+  → Always report in UTC
+  → Use your own words for summarizing at the top of the report
+• Use it as a repeatable process to follow
+  → This lowers triage time as you gain experience
+• Doesn’t have to be fancy → even Notepad++ works fine
+• (Note: Slide mentions a downloadable template for customization.)
+
+
+-- Bookmark All Your Favorite OSINT Tools --
+
+• VirusTotal
+• Shodan Search Engine
+• Whois.com (domain identity info)
+• Joe Sandbox Cloud (automated malware analysis)
+• Linux Forensics Tools (intrusion detection, threat hunting)
+• Hunt Evil | SANS Poster
+• urlscan.io (URL & website scanner)
+• MX Lookup Tool (DNS/MX records check)
+• CyberChef
