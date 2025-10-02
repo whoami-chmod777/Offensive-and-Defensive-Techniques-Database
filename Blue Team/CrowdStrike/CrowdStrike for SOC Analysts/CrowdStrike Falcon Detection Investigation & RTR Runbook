@@ -1,0 +1,121 @@
+
+--- CrowdStrike Falcon Detection Investigation & RTR Runbook ---
+
+• Identify the Detection
+• Analyze the Detection
+• Real-Time Response (RTR) Deep Dive
+• Host Context Investigation
+• Network Operations
+• Event Search (Falcon Insight)
+• Explore Detection
+• Final Actions & Documentation
+• Splunk & PowerShell Enrichment
+
+
+This is now a full CrowdStrike Falcon IR Playbook with:
+• Detection template
+• OSINT resources
+• RTR commands & workflow
+• Blocking/Exclusions
+• Sandbox handling
+• Splunk & PowerShell enrichment
+
+
+
+1. Identify the Detection
+• Falcon Console → Detections → Filter: Critical/High
+• Click into Full Detection Details
+
+2. Analyze the Detection
+
+a. Process Activity
+• Review process tree
+• Focus on parent/child relationships, LOLBins (PowerShell, wmic, rundll32), unusual parent-child combos
+
+b. File Analysis
+• Dropped, modified, executed files
+• Validate SHA256 in VirusTotal + internal DB
+
+c. Executable Locations
+• Suspicious if found in %TEMP%, %APPDATA%, C:\ProgramData, C:\Users\Public\
+• Look for .exe, .dll, .bat, .vbs, .js
+
+d. Quarantine Files
+• In console: quarantine file
+• Via RTR:
+
+get /path/to/file
+quarantine /path/to/file
+
+3. Real-Time Response (RTR) Deep Dive
+
+a. Device Type: hostname, systeminfo
+b. Severity & Context: Host role, user role, exposure
+c. Time Correlation: time
+d. Network & DNS: netstat -ano, ipconfig /displaydns
+e. File/Path Inspection: ls C:\Users\[user]\AppData\Roaming, ls C:\ProgramData, sha256sum C:\path\to\suspicious.exe
+f. Process Inspection: ps, cat C:\path\to\script.ps1
+g. Quarantine (again): get C:\path\to\suspicious.exe, quarantine C:\path\to\suspicious.exe
+h. Kill Process: kill [PID]
+
+4. Host Context Investigation: whoami, query user
+• Check logged-in user, admin rights
+• Console → Host Management: software, users, processes
+
+5. Network Operations
+• DNS/Beaconing (rare domains, beacon-like traffic)
+• IP reputation checks: CrowdStrike Intel, WHOIS, VirusTotal, AbuseIPDB
+
+6. Event Search (Falcon Insight)
+
+Example query:
+
+event_platform = "WinEvent"
+| filter event_simpleName = "ProcessRollup2"
+| filter TargetProcessName = "*suspicious.exe"
+
+7. Explore Detection
+• Check detection method: Behavioral / IOA / ML
+• Map to MITRE ATT&CK techniques
+• Tag detection:
+  → ✅ True Positive
+  → ❌ False Positive
+  → 🔍 Under Investigation
+
+8. Final Actions & Documentation: contain
+• Collect evidence: memory dumps, suspicious files
+• Document: Root cause, MITRE TTPs, remediation, assignment
+
+
+-- Splunk & PowerShell Enrichment --
+
+Splunk – Time Analysis by Hash
+
+
+SHA256HashData="92804faaab2175dc501d73e814663058c78c0a042675a8937266357bcbf96c50"
+| stats min(_time) as Start, max(_time) as End count by ComputerName UserName FilePath FileName
+| convert ctime(Start), ctime(End)
+
+
+Splunk – Full Activity Table
+
+| table _time ComputerName event_simpleName UserName SHA256HashData FileName CommandLine DomainName LocalIP LPort RemoteIP RPort
+
+
+PowerShell – Search across drive
+
+Get-ChildItem C:\* -Recurse | Select-String -Pattern "malware" | Select-Object -First 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
