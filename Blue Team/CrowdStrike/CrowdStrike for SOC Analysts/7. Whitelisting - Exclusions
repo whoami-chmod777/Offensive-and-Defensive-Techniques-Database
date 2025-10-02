@@ -1,0 +1,79 @@
+
+--- Whitelisting - Exclusions ---
+
+• 3 Types of Exclusions in CS
+• Example: ML based Exclusion
+• Example: IOA Based Exclusion
+• Sensor Visibility Exclusions
+• Some Side Notes
+• Falcon Prevent Policies
+• Falcon Prevent Console Settings
+
+
+-- 3 Types of Exclusions in CS --
+
+Types visible in console:
+
+• Machine Learning Exclusions
+  → IOA Exclusions
+  → Sensor Visibility Exclusions
+• Machine Learning and IOA: Made that option from a detection
+• Sensor Visibility: Complete exclusion from the sensor, won’t even collect logs, everything in the path you specify will be allowed to run. You manually put in the path to whitelist here.
+
+
+-- Example: ML based Exclusion --
+
+• Comes from CS machine learning repository of known malware, hashes, files, etc.
+• Example IOA Name: Machine Learning Identified High Confidence Malicious File
+• Description: 
+  A file written to the file system meets the on-sensor machine learning high confidence threshold for malicious files. Detection is based on entropy, packing, anti-malware evasion, or similarity to known malware.
+
+
+-- Example: IOA Based Exclusion --
+
+• Detection comes from an IOA
+• Example IOA Name: SuspiciousFileWritten
+• Description:
+  A process has written a suspicious file to disk. Adversaries may write a malicious file to a commonly trusted directory, use a benign name, or mismatch file extension.
+
+
+-- Sensor Visibility Exclusions --
+
+• Complete visibility loss
+• Use Glob pattern syntax:
+  → Example: C:\Program Files\McAfee\
+  → Program Files\McAfee\**
+  → **\McAfee.exe
+
+
+-- Some Side Notes --
+
+• Can always whitelist (WL) a hash in IOC Management
+• Can always allow an IP from HBFW
+• OverWatch detections cannot be excluded
+• Can’t allow or WL from Custom IOAs
+
+
+-- Falcon Prevent Policies --
+
+• Default policies shown for different OS and environments
+• Prevention controls can vary depending on assigned policy
+
+
+-- Falcon Prevent Console Settings --
+
+• Security configuration options include enforcement levels and detection settings.
+• Admins can tune policies here.
+
+
+
+
+
+
+
+
+
+
+
+
+
