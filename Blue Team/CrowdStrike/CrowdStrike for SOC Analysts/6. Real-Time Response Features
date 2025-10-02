@@ -1,1 +1,51 @@
 
+--- Real-Time Response Features ---
+
+• Online Status of Host
+• Commands to get comfortable with
+
+
+-- Online Status of Host Matters for RTR --
+
+LAPTOP-J26AI80A  
+Host status: ● Offline
+
+LAPTOP-J26AI80A  
+Host status: ● Online
+
+• Online = powered on and connected to the cloud console
+• A host can be both online and network contained
+• A few ways to get to Real Time Response (RTR) in the console
+
+
+-- Commands to get comfortable with --
+
+• mkdir
+• cd
+• cat
+• file hash / get-filehash (ps)
+• kill
+• help
+• netstat
+• ps
+• put
+• run
+• get
+• runscript
+• ls
+
+• No tab complete, to my knowledge
+• Get comfortable moving around the CLI, leverage double quotes
+• Files pulled off will have the password “infected” and will be zipped up
+• Some limitations for file sizes 2/4GB files max(?) to pull off
+• Leverage google or chatgpt for how tos with powershell commands or scripts or really anything
+
+
+-- A few ways to get to Real Time Response (RTR) in the console --
+
+• From Event Actions – Example shows event data with an option: Connect to Host
+• From an Incident – Incident summary preview shows a red arrow pointing to Connect to Host
+• Host management page, Detections page – Sidebar with a red arrow pointing to Connect to Host
+
+
+
