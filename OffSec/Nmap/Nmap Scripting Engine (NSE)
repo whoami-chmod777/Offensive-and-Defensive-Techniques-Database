@@ -25,6 +25,7 @@ nmap -sn 192.168.199.39
 nmap -sV 192.168.199.39   
 
 ls -la /usr/share/nmap/scripts | grep -e "ftp"
+
 nmap -p 21 --script ftp-anon 192.168.199.39
 nmap -p 21 --script ftp-anon,ftp-vsftpd-backdoor 192.168.199.39
 nmap -p 21 --script "ftp-*" 192.168.199.39  
