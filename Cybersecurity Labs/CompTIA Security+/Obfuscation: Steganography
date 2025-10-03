@@ -70,7 +70,7 @@ Step 13: Navigate to that directory and check the secret.txt file: cat secret.tx
 The extraction is successful.
 
 
->> Commands Overview <<
+>> Commands Summarization <<
 
 cat secret.txt
 rm secret.txt
