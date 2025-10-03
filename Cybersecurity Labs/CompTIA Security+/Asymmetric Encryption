@@ -174,7 +174,7 @@ The file has been successfully decrypted by Bob.
 In this lab, we learned how to perform an asymmetric encryption & decryption using RSA algorithm for a text file using OpenSSL. However, note that RSA is not ideal for encrypting large user data. More often, RSA is used to transmit shared keys for symmetric-key cryptography, which are then used for bulk encryption–decryption.
 
 
->> Commands Overview <<
+>> Commands Summarization <<
 
 openssl version
 cat confidential-data.txt
