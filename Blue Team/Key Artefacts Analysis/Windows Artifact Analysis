@@ -1,7 +1,172 @@
 
 --- Windows Artifact Analysis --
 
+• File Download
+• Program Execution
+• Deleted File or File Knowledge
+• Network Activity/Physical Location
+• File/Folder Opening
+• Account Usage
+• External Device/USB Usage
+• Browser Usage
+• System Info and Accounts
+• Software, Services and Programms
+• Network, Share and Backups
+• Hardware, printers and External/USB device
+• Files and Folders
+
+
 • Prefetch Files
+• ShellBags
+• LastVisitedPidMRU and OpenSavePidMRU. 
+• RecentDocs
+• RunMRU
+• TypedPaths
+
+
+-- File Download --
+
+• Open/Save MRU
+• Email Attachments
+• Skype History
+• Browser Artifacts
+• Downloads
+• ADS Zone.Identifer
+
+
+-- Open/Save MRU --
+-- Email Attachments --
+-- Skype History --
+-- Browser Artifacts --
+-- Downloads --
+-- ADS Zone.Identifer --
+
+
+
+
+-- Program Execution --
+
+
+
+
+-- Deleted File or File Knowledge --
+
+
+
+
+-- Network Activity/Physical Location --
+
+
+
+
+-- File/Folder Opening --
+
+
+
+
+-- Account Usage --
+
+
+
+
+-- External Device/USB Usage --
+
+
+
+
+-- Browser Usage --
+
+
+
+-- System Info and Accounts --
+
+• Computername and Domain Membership
+• Time Zone Settings
+• Memory Management
+• Environment Variables
+• User Profiles
+• GUI Settings
+• Font Substitutions
+• SAM Hive
+• System Policies
+
+
+Contains information about the computer name and domain membership: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\ComputerName
+
+Contains information about the time zone settings on the system: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation
+
+Contains information about memory management settings on the system: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management
+
+Contains environment variables that are set on the system: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment
+
+Contains information about the user profiles that are configured on the system: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList
+
+Contains information about the system's graphical user interface (GUI) settings, including the desktop background and screen saver: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows
+
+Contains information about font substitutions on the system: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\FontSubstitutes
+
+SAM hive and user information: SAM\Domains\Account\Users
+
+Contains information about system policies that are enforced on the system: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+
+
+
+-- Software, Services and Programms --
+
+• Information about Services
+• Automatically started programms when the system boots up
+• UserAssist
+• AppCompatCache
+• Full Path of the Executed Programs
+• Amcache Hive
+• Autoruns
+• Command History
+
+
+Contains information about the services that are installed on the system: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services
+
+Contains a list of programs that are automatically started when the system boots up: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+
+Tracks the usage of executable files and applications launched by the user: USER.DAT\Software\Microsoft\Windows\Currentversion\Explorer\UserAssist{GUID}\Count
+
+Stores file name, file size, and last modified time of the executables: SYSTEM\CurrentControlSet\Control\Session Manager\AppCompatCache
+
+Saves the full path of the executed programs: + SYSTEM\CurrentControlSet\Services\bam\UserSettings{SID} , + SYSTEM\CurrentControlSet\Services\dam\UserSettings{SID}
+
+Windows system file that is created to store information related to program executions: C:\Windows\AppCompat\Programs\Amcache.hve
+
+Autostart Programs (Autoruns): 
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Run , NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\RunOnce , 
+SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce , SOFTWARE\Microsoft\Windows\CurrentVersion\policies\Explorer\Run ,
+SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+
+Run command history: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+
+
+
+-- Network, Share and Backups --
+
+
+
+
+
+
+
+
+-- Hardware, printers and External/USB device --
+
+
+
+
+
+
+
+-- Files and Folders --
+
+
+
+
+
 
 
 
@@ -9,7 +174,6 @@
 
 
 -- Prefetch Files --
-
 
 Prefetch Files are Windows system files that store data about how programs are used, facilitating faster application launch times by predicting which files will be needed next and preloading them into memory. They contain information such as file paths, timestamps, and usage statistics, aiding in system optimization and performance enhancement.
 
@@ -24,3 +188,73 @@ $ vol.py -f Target1-1dd8701f.vmss --profile=Win7SP1x86_23418 prefetchparser
 $ vol.py -f Target1-1dd8701f.vmss --profile=Win7SP1x86_23418 prefetchparser | grep PING.EXE-7E94E73E.pf
 
 Third-party Tools: Prefetch Parser, NirSoft WinPrefetchView, Sysinternals Process Monitor, Volatility, PECmd (Prefetch Execution Command) developed by Eric Zimmerman 
+
+
+-- ShellBags --
+
+ShellBags in Windows are data structures that retain folder settings and view preferences, facilitating personalized folder layouts and offering forensic insights into user activity and file access patterns.
+ShellBags are Windows Registry artifacts that store details about folders a user has accessed in Windows Explorer.
+They record things like view preferences (icons, list, details), window position/size, and sometimes the path of the folder.
+In forensics, ShellBags are super valuable because they can show which directories a user browsed, even if the folders/files themselves have been deleted.
+
+>> For the current user (NTUSER.DAT) <<
+
+HKEY_CURRENT_USER\Software\Microsoft\Windows\Shell\Bags
+HKEY_CURRENT_USER\Software\Microsoft\Windows\Shell\BagMRU
+HKEY_CURRENT_USER\Software\Microsoft\Windows\ShellNoRoam\Bags
+HKEY_CURRENT_USER\Software\Microsoft\Windows\ShellNoRoam\BagMRU
+
+>> For all users (USRCLASS.DAT) <<
+
+HKEY_USERS\<SID>\Software\Microsoft\Windows\Shell\Bags
+HKEY_USERS\<SID>\Software\Microsoft\Windows\Shell\BagMRU
+HKEY_USERS\<SID>\Software\Microsoft\Windows\ShellNoRoam\Bags
+HKEY_USERS\<SID>\Software\Microsoft\Windows\ShellNoRoam\BagMRU
+
+Third-party Tools: ShellBags Explorer
+
+
+-- LastVisitedPidMRU and OpenSavePidMRU --
+
+These are related artifacts, also stored in the user’s registry hives, and they are extremely useful in Windows forensics because they track file and folder usage.
+
+>> OpenSaveMRU / OpenSavePidMRU <<
+
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\OpenSaveMRU
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\OpenSavePidMRU
+
+
+>> LastVisitedMRU / LastVisitedPidMRU <<
+
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\LastVisitedMRU
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\LastVisitedPidMRU
+
+
+-- RecentDocs --
+
+Stores a list of recently opened documents by file type and extension.
+
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs
+
+
+-- RunMRU --
+
+Stores commands and programs executed from the Windows Run dialog.
+
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+
+
+-- TypedPaths --
+
+Stores paths typed into the Windows Explorer address bar.
+
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\TypedPaths
+
+
+
+
+
+
+
+
+
