@@ -1,0 +1,15 @@
+
+LastVisitedPidMRU and OpenSavePidMRU. 
+These are related artifacts, also stored in the user’s registry hives, and they are extremely useful in Windows forensics because they track file and folder usage.
+
+
+-- OpenSaveMRU / OpenSavePidMRU --
+
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\OpenSaveMRU
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\OpenSavePidMRU
+
+
+-- LastVisitedMRU / LastVisitedPidMRU --
+
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\LastVisitedMRU
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\LastVisitedPidMRU
