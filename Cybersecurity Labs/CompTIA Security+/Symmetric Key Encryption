@@ -91,9 +91,9 @@ The command ran successfully. Try viewing the decrypted_image.png file. The imag
 
 
 
--- Commands Overview --
+>> Commands Summarization <<
 
->> Encrypt and decrypt a text file <<
+-- Encrypt and decrypt a text file --
 
 openssl version
 openssl enc -ciphers
@@ -107,7 +107,7 @@ openssl enc -d -aes-256-cbc -pbkdf2 -p -in encrypted_file.enc -out decrypted_fil
 cat decrypted_file.txt
 
 
->> Encrypt and decrypt an image file <<
+-- Encrypt and decrypt an image file --
 
 xdg-open ine-logo.png
 
