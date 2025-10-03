@@ -57,7 +57,7 @@ It will take a few seconds to complete. Once it is done, you will see green chec
 This indicates that the provided SHA256 checksum (from the website) matches with the calculated SHA256 checksum, confirming the integrity of the ISO file.
 
 
->> Commands Overview <<
+>> Commands Summarization <<
 
 echo "d84cd3eb7732fbb39ce3cd24ba1b302a643fe0362f7ac9261fc4c7b756e42a55" > SHA256.txt
 sha256sum ubuntu-mate-22.04.3-desktop-amd64.iso
