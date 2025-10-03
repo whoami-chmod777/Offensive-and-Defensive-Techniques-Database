@@ -143,7 +143,7 @@ The output format here is a general format ($id$salt$hash) for representing pass
 • The rest of the string is the resulting hash.
 
 
->> Commands Overview <<
+>> Commands Summarization <<
 
 openssl version
 cat confidential-data.txt
