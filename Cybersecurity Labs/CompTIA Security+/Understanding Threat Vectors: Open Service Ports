@@ -1,0 +1,52 @@
+
+"Open Service Ports" as a threat vector refers to the security risk posed by active and accessible communication endpoints on a network. Attackers may exploit vulnerabilities in services running on these open ports to gain unauthorized access or disrupt systems. Mitigation involves monitoring, limiting unnecessary services, using firewalls, and implementing access controls to enhance security.
+
+In this lab environment, the user will get access to a Kali instance's GUI. A vulnerable target machine is deployed on http://demo.ine.local. Your task is to find and exploit the open service ports on the target machine.
+
+Objective: To scan and find the open service ports on the target machine and exploit the services running on them.
+
+          ┌───────────────┐
+          │   Switch/Hub  │
+          └───────┬───────┘
+                  │
+      ┌───────────┴───────────┐
+      │                       │
+┌────────────┐        ┌────────────────┐
+│   Kali GUI │        │ demo.ine.local │
+└────────────┘        └────────────────┘
+        ▲
+        │
+   ┌────────┐
+   │  You   │
+   └────────┘
+
+
+Credentials:
+Username: student
+Password: Pass@student123
+
+
+The best tools for this lab are:
+• Nmap (Network Mapper): is a versatile and powerful open-source tool used for network exploration and security auditing. It is designed to discover devices, services, and hosts on a computer network, thus helping administrators identify potential vulnerabilities. Nmap employs various scanning techniques to gather information about target systems, such as open ports, services running on those ports, and details about the underlying operating system.
+• Netcat Netcat (nc): is a versatile networking tool used for tasks like port scanning, file transfer, remote shell access, chat, and network debugging. It's known as the "Swiss Army knife of networking" due to its flexibility.
+
+
+Step 1: Open the lab link to access the Kali machine.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
