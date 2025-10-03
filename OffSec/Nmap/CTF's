@@ -4,6 +4,16 @@
 nmap -h
 nmap --help
 
+
+nmap demo.ine.local (1,000 TCP ports)
+nmap -sU -p 50-200 demo.ine.local (UDP scan)
+nmap -p- demo.ine.local (65,535 TCP ports)
+nmap -sV demo.ine.local (service version scan)
+nmap -A demo.ine.local (aggressive scan ) * This command performs an aggressive scan (-A) on the target host demo.ine.local. This scan includes service version detection, script scanning, and OS detection, providing comprehensive information about the target's open ports, running services, operating system, and potential vulnerabilities.
+nmap --script ftp-anon demo.ine.local
+
+
+
 nmap -p 22 192.168.1.1
 nmap -p 20-23 192.168.1.1
 
