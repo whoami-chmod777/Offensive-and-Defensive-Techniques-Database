@@ -13,7 +13,6 @@ nmap -A demo.ine.local (aggressive scan ) * This command performs an aggressive 
 nmap --script ftp-anon demo.ine.local
 
 
-
 nmap -p 22 192.168.1.1
 nmap -p 20-23 192.168.1.1
 
