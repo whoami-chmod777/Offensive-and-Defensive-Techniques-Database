@@ -1,0 +1,93 @@
+
+--- Windows Forensic Artifact Triage ---
+
+Windows Forensic Artifact Triage - How To
+
+When performing live response or forensic acquisition, it’s often not necessary to capture everything immediately. Instead, we can collect a targeted set of high-value artifacts that reveal user activity, persistence, logon behavior, and system usage.
+
+Two common tools for this workflow are:
+• KAPE/gkape – fast triage collection of predefined artifacts
+• FTK Imager – creating forensic images of memory, drives, and selected files
+
+1. Memory Capture (FTK Imager)
+
+Open FTK Imager → File → Capture Memory.
+Save the memory dump to an external drive.
+• Optionally capture pagefile.sys for swap analysis.
+This allows analysis of live processes, loaded drivers, network connections, and injected code.
+
+
+2. Physical Drive / Targeted Capture (KAPE or gkape)
+
+Using KAPE (kape.exe) or its GUI (gkape), select targets for core forensic artifacts.
+
+Recommended Targets
+• !BasicCollection – baseline Windows artifacts
+• !SANS_Triage – SANS standard triage set
+• $LogFile – NTFS transaction logs
+• $MFT – Master File Table (filesystem record of all files)
+• RecycleBin – deleted file evidence
+• RegistryHivesUsers – per-user registry data (ntuser.dat, userclass.dat)
+• RegistryHivesSystem – SYSTEM hive for OS configuration
+• RegistryHivesOther – SAM, SECURITY, SOFTWARE hives
+• Amcache – application execution evidence
+• LogFiles – system logs, trace data
+• LNKFilesAndJumpLists – recent file/document activity
+• Prefetch – evidence of program execution
+
+✅ These provide strong coverage of file system, registry, user activity, and program execution.
+
+PowerShell
+.\kape.exe --tflush --target !SANS_Triage,RecycleBin,RegistryHives,$LogFile,$MFT,Amcache,LNKFilesAndJumpLists,LogFiles,Prefetch,RecycleBin_DataFiles,RecycleBin_InfoFiles,RegistryHivesSystem,RegistryHivesUser --gui
+
+
+3. Targeted File/Folder Imaging (FTK Imager – Custom Content)
+
+FTK Imager allows imaging of specific artifacts when full disk imaging isn’t possible.
+In FTK Imager: File → Create Disk Image.
+
+Choose Custom Content Image. Add the following artifacts:
+• $Recycle.Bin
+• Users (user profiles, documents, browsing history)
+• $LogFile, $MFT
+• pagefile.sys, swapfile.sys
+• Registry Hives:
+	→ DEFAULT
+	→ SAM
+	→ SECURITY
+	→ SOFTWARE
+	→ SYSTEM
+	→ Amcache.hve
+	→ RegBack (backup hives)
+• LogFiles
+• sru (System Resource Usage Monitor)
+• ntuser.dat (per-user activity)
+• userclass.dat
+• Event logs: *.evtx
+• Shortcut artifacts: *.lnk, *.pf, *.automaticDestinations-ms, *.customDestinations-ms
+
+Create the image and verify with hash values.
+
+
+4. Why These Artifacts?
+
+• Memory dump – live processes, malware in RAM, volatile evidence.
+• $MFT, $LogFile, $UsnJrnl – filesystem changes, file existence, renames/deletions.
+• Registry hives – accounts, persistence mechanisms, system config.
+• Amcache / Shimcache – evidence of executed applications.
+• Prefetch – execution history (with timestamps, run counts).
+• LNK & Jump Lists – user document access.
+• Event logs – logon/logoff, account creation, service starts, etc.
+• Recycle Bin – user deletions.
+• SRU (sru.db) – network and resource usage.
+
+
+5. Output & Next Steps
+
+• KAPE: outputs triage artifacts in a structured folder, optionally compressed.
+• FTK Imager: produces an E01 or raw image of selected content.
+• Both outputs can then be analyzed in forensic tools (Autopsy, X-Ways, Magnet AXIOM, Eric Zimmerman tools, etc.).
+
+
+
+
