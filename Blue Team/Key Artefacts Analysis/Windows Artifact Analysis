@@ -33,12 +33,12 @@
 • ADS Zone.Identifer
 
 
--- Open/Save MRU --
--- Email Attachments --
--- Skype History --
--- Browser Artifacts --
--- Downloads --
--- ADS Zone.Identifer --
+Open/Save MRU 
+Email Attachments
+Skype History
+Browser Artifacts 
+Downloads
+ADS Zone.Identifer 
 
 
 
@@ -65,6 +65,34 @@
 
 -- Account Usage --
 
+• Last Login
+• Last Password Change
+• RDP Usage
+• Services Events
+• Logon Types
+• Authentication Events
+• Success/Fail Logons
+
+
+
+
+Authentication Events
+
+
+
+
+
+Success/Fail Logons
+Track account usage for known compromised accounts.
+
+Win7/8/10: %system root%\System32\winevt\logs\Security.evtx
+
+• 4624 – Successful Logon
+• 4625 – Failed Logon
+• 4634 | 4647 – Successful Logoff
+• 4648 – Logon using explicit credentials (Runas)
+• 4672 – Account logon with superuser rights (Administrator)
+• 4720 – An account was created
 
 
 
