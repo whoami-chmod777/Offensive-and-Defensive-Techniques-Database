@@ -14,22 +14,111 @@ The best tools for this lab are:
 
 Step 1: Open the lab link to access the Windows machine.
 
+Step 2: Navigate to the "C:\Tools" directory and create a new folder. Now, let's put some files into this folder.
+
+Step 3: First, open the notepad, write some malicious code into a file, and save it in the newly created folder in the "Tools" directory with a ".bat" extension.
+
+Paste the code given below into a file.
+
+start
+start
+start
+start
+start
+start
+start
+start
+start
+start
+start
+start
+
+In a batch file (.bat), the start command is used to open a new command prompt window or to launch a new program or process. 
+
+Now, save the file with the name "malicious_code.bat" inside a newly created folder in the "Tools" directory.
+
+Step 4: Next, copy the greet.pdf file from the "C:\Tools" directory and paste the pdf file into the newly created folder.
+
+Now, this folder has two files inside it. Let's open each of the files.
+
+Step 5: Open both files one-by-one.
+
+Double-click on the greet.pdf file. The pdf file will open in the browser, and it has the content "Hi there!" in it.
+
+Double-click on the malicious_code.bat file. The malicious code inside the file has been executed, and we can see multiple command prompt windows on the screen.
+
+Now that we have our PDF file and our malicious code file, let's create our malicious file.
+
+Step 6: Navigate to the C:\Tools directory and run the 7zSFX Constructor Application.
+
+Open the folder with the name 7zSFX Constructor v4.5, as highlighted below.
+
+Now run the application. Simply double-click.
+
+Step 7: Set the proper input fields inside the SFX application.
+
+Click on the select files icon and select the "malicious_code.bat" file and greet.pdf file. 
+
+Navigate to the "C:\Tools\New folder" and select both files. (Press shift and use the arrow keys.)
+
+Once both files are selected, click on "Open."
+
+Next, type "." in the "Extract to" field.
+
+Now, check the "x86/x64" option, uncheck the "Run as Administrator" option, and make sure that the "malicious_code.bat" file is selected as the "Run file."
+
+Also, click on the 7zSFX image icon to select our own icon. Click on the Select File icon.
+
+Navigate to the C:\Tools directory and select the pdf.ico file. Click on "Open." Click on "Apply."
+
+Now, check the "Index" option and uncheck the "Run" option. Also, click on the "Script" button to edit the script.
+
+You will see the following script:
+
+;!@Install@!UTF-8!
+GUIMode="2"
+InstallPath="."
+RunProgram="%%P:\\"malicious_code.bat\\""
+;Project created in program 7z SFX Constructor
+;!@InstallEnd@!
+
+Add the following code below line 4: RunProgram="%%P:\"greet.pdf\""
+
+;!@Install@!UTF-8!
+GUIMode="2"
+InstallPath="."
+RunProgram="%%P:\\"malicious_code.bat\\""
+RunProgram="%%P:\"greet.pdf\""
+;Project created in program 7z SFX Constructor
+;!@InstallEnd@!
+
+Click on the save icon and select "Yes" when prompted.
+
+Once done editing the script and saving it, close the window.
+
+Now, click on the browse folder icon and set the "Save into folder:" path to "Desktop."
+
+Select the "Desktop" and click "OK."
+
+Step 8: Create the 7z SFX file. Navigate to the desktop and open the file.
+
+Click on the "Create 7z SFX" option.
+
+Go to "Desktop" and refresh if the file is not visible. Open the PDF looking file.
+
+It has opened the PDF file in the browser and has also executed the malicious code attached to it, opening up multiple command prompt windows.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+References
+https://www.7-zip.org
+https://github.com/CryptoNickSoft/7z-SFX-Constructor
 
 
 
 >> Commands Summarization <<
+
+
+
+
+
+
