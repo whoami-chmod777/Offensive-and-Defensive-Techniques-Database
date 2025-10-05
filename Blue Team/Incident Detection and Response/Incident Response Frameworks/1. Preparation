@@ -1,0 +1,79 @@
+
+--- Preparation ---
+
+• End Users
+  → Security awareness training
+  → Phishing simulations
+  → Incident reporting
+
+• Stakeholder Involvement
+  → Information Technology
+  → Legal Advisors
+  → Public Relations (PR)
+  → Data Owners
+
+• Communication
+  → Incident reporting
+  → Contact information
+  → On-call information
+  → Escalation protocols
+  → Out-of-band communication
+
+• Physical Locations
+  → War Room
+  → Evidence storage
+    ► Confidentiality
+    ► Integrity
+    ► Availability
+
+• Incident Tracking
+  → thehive-project.org
+  → Existing ticketing system
+  → Access control, version control
+
+• Hardware and Software
+  → Digital forensic workstations
+  → Laptops
+  → Removable media (USB, hard drives)
+  → Evidence documentation
+  → Jumpkit
+
+• Asset Management
+  → OS, applications, hostnames, IPs
+  → Protocols, services
+  → Critical systems
+  → Network diagrams
+  → Baselines
+  → Clean OS images
+  → Cryptographic hashes
+
+• Simulated Exercises
+  → Tabletop exercises
+  → Prepare staff to handle incidents
+  → Identify weaknesses
+  → NIST SP 800-84
+  → play.backdoorsandbreaches.com
+  → Identify log sources and event visibility
+
+• Incident Response Plan
+  → Playbooks
+    ► How to handle specific incidents
+    ► High-level perspective and strategy
+  → Runbooks
+    ► Technical procedures to execute tasks
+    ► Step-by-step
+
+• Notification Policies
+  → Engaging with law enforcement, legal, regulators
+  → Cyber Insurance
+  → Management
+
+• Documentation
+  → Documented evidence
+  → Slooooooow down!
+
+
+References:
+https://www.sans.org/media/security-training/mgt512/secinc_forms.pdf
+https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-84.pdf
+https://play.backdoorsandbreaches.com
