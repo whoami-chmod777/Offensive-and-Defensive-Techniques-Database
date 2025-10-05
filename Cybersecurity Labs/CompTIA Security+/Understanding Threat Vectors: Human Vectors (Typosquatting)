@@ -1,0 +1,30 @@
+
+Human vectors (typosquatting) as threat vectors refer to the security risk associated with typing mistakes. Attackers exploit common typos by creating fake websites with similar names to legitimate ones. Users who make innocent errors may land on these deceptive sites, exposing themselves to phishing or malware. Prevention involves user awareness, careful typing, and tools to detect and block malicious domains. Typosquatting underscores the importance of human behavior in cybersecurity.
+
+With this lab exercise, we will got a clear understanding of how human vectors can act as threat vectors and learned how typosquatting attacks work.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+References
+https://en.wikipedia.org/wiki/Typosquatting
