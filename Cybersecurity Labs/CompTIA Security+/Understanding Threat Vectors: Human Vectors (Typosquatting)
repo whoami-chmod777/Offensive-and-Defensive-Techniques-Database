@@ -4,27 +4,82 @@ Human vectors (typosquatting) as threat vectors refer to the security risk assoc
 With this lab exercise, we will got a clear understanding of how human vectors can act as threat vectors and learned how typosquatting attacks work.
 
 
+In this lab environment, the user will get access to a Kali instance's GUI. A legitimate website is running on http://student.ine.local. Your task is to find the fake website running on the fraudulent server and understand how typosquatting attacks work.
+
+Objective: To find the fake website running on the fraudulent server and understand how typosquatting attacks work.
+
+The following credentials might be useful:
+Username: Bob
+Password: Bob@123
+
+The best tools for this lab are: Firefox Web Browser
 
 
+Step 1: Open the lab link to access the Kali machine.
 
+Step 2: Verify whether the target website is up.
 
+Open the terminal and run the command: ping -c 4 student.ine.local
 
+The target website is up and running.
 
+Step 3: Open the web browser and visit the URL: http://student.ine.local
 
+You will see a login page.
 
+Step 4: Enter Bob's credentials and login.
 
+Username: Bob
+Password: Bob@123
 
+Click on "Login." And you will see the Bob's profile.
 
+Now that we have seen the legitimate website, let's try to find the fake website and understand how typosquatting works.
 
+Step 5: Open a new tab in a browser and enter the URL liuke: http://stuudent.ine.local
 
+Here, we are adding an extra "u" in student, which is a typo, and we are visiting the URL.
 
+You can see we landed on the website, which looks exactly the same as our original website.
 
+If the user is not careful and tries to login to this fake website, then their account could be compromised.
 
+Let's enter Bob's credentials and see what we get.
 
+Credentials:
 
+Username: Bob
+Password: Bob@123
 
+Click on "Login." Here, you can see we got the message that the account has been compromised.
 
+We just saw a demonstration of how attackers can create a fake website that looks the same as the original one and host it on the server with a little change in the domain name, like in our case, where the legitimate website was running on "student.ine.local" and the fake one was hosted on "stuudent.ine.local." A small typo in the URL can cause the user's account to be compromised. This type of attack is known as a typosquatting attack. Typosquatting attacks aim to take advantage of user typos in the URL, potentially leading to account compromises or other security risks.
 
 
 References
 https://en.wikipedia.org/wiki/Typosquatting
+
+
+
+>> Commands Summarization <<
+
+ping -c 4 student.ine.local
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
