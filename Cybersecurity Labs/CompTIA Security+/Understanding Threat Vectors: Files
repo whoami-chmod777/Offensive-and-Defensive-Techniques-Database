@@ -1,10 +1,18 @@
 
+Files as a Threat Vector refers to the security challenges associated with various types of computer files. In this context, the threat vector involves potential risks posed by files that may harbor malicious content, allowing attackers to compromise systems, execute unauthorized actions, or deliver malware. These files can be transmitted through emails, downloads, or external storage devices. Mitigation strategies include using reliable antivirus software, keeping all software up-to-date, regularly scanning files for potential threats, and educating users about safe file-handling practices.
+
+With this lab exercise, we will got a clear understanding of how a simple PDF-looking file can act as a threat vector.
+
+Objective: To create a malicious file that disguises itself as a PDF file and runs the malicious code when the file is opened.
+
+
+Tools
+The best tools for this lab are:
+7z SFX Constructor: 7z SFX Constructor is easy-to-use software for creating and editing 7z SFX self-extracting archives. (Build, compression of one or multiple files into a single executable file: *.exe)
 
 
 
-
-
-
+Step 1: Open the lab link to access the Windows machine.
 
 
 
