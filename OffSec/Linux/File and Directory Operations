@@ -1,0 +1,64 @@
+
+--- File and Directory Operations ---
+
+• Creating Files and Directories
+• Copying Files and Directories
+• Moving or Renaming Files and Directories
+• Deleting Files and Directories
+• 
+
+
+-- Creating Files and Directories --
+
+touch: create files
+touch: update the access and modification times of existing files [if the file specified does not exist, it will create a new empty file]
+mkdir: create directories
+
+
+-- Copying Files and Directories --
+
+cp source_file target_file
+
+cp: copy files
+cp -r: copy directories
+
+cp readme.txt readme_copy.txt
+cp -r documents documents_copy
+
+
+-- Moving or Renaming Files and Directories --
+
+mv: move or rename files and directories
+ 
+mv readme_copy.txt readme_moved.txt
+mv readme_moved.txt documents/
+
+
+-- Deleting Files and Directories --
+
+rm: delete files
+rm -r: delete directories
+ 
+rm readme_moved.txt
+rm -r documents
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
