@@ -1,0 +1,64 @@
+
+-- Phishing Analysis --
+
+• Core Tools
+• Step-by-Step Procedure
+
+
+
+🧰 Core Tools
+
+• PhishTool – Automated artifact extraction & analysis
+• WHOIS / nslookup / dig – Domain & registrar information
+• URLScan.io / URL2PNG – URL reputation & screenshot capture
+• VirusTotal – File & URL reputation
+• OSINT Tools – Domain history, IP lookup, threat feeds
+• Sandbox (Any.Run / Joe Sandbox) – File detonation
+• Email Header Analyzer – SPF/DKIM/DMARC inspection
+
+
+🧩 Step-by-Step Procedure
+
+1️⃣ Collect Artifacts
+
+• Save full .eml / .msg file
+• Extract headers, body, URLs, attachments
+
+ripmime -i suspicious.eml -d ./artifacts
+grep -Eo "https?://[^\"'<> ]+" suspicious.eml > urls.txt
+
+
+
+
+
+
+
+
+2️⃣ Header Analysis
+
+
+
+3️⃣ URL & Domain Analysis
+
+
+
+4️⃣ Attachment Analysis
+
+
+
+5️⃣ Decision & Action
+
+
+
+6️⃣ Documentation
+
+• Record all findings (headers, hashes, URLs, timestamps)
+• Save evidence in case folder
+• Example report fields:
+  → Header summary
+  → Artifact table (hashes, domains)
+  → Analysis result
+  → Recommended controls
+
+
+
