@@ -11,3 +11,119 @@ The best tools for this lab are: Xsser, Firefox Web Browser
 
 
 Step 1: Open the lab link to access the Kali machine.
+
+Step 2: Verify whether the target machine is up, use the command: ping -c 4 demo.ine.local
+
+The target machine is up and running.
+
+Step 3: Open the web browser and visit the URL: http://demo.ine.local
+
+Here, we have the sign-up and login options.
+
+Step 4: Let's check how the application works. Click on the "Sign up" button.
+
+Enter the below given-details:
+
+Email: john@inestudent.com
+Name: John Doe
+Passowrd: John@123
+Mobile: 95346632145
+Address: 62 Main St, NY
+
+Click on the "Sign Up" button.
+
+Now, login with the newly created user "John."
+Email: john@inestudent.com
+Passowrd: John@123
+
+Click on the "Log In" button. You can see the John user's profile.
+
+Now that we know how applications work, let's try to find and exploit the vulnerabilities.
+
+Step 5: Let's learn how to use the xsser tool to find the XSS vulnerability in the application.
+
+Open the terminal and type the command: xsser -h
+
+"Xsser" is a tool commonly used for finding and exploiting cross-site scripting (XSS) vulnerabilities in web applications. Here, we can see the important options, such as "-u," which is used to specify the URL, and "-g," which sends the payload using the GET method.
+
+Let's copy the URL from the profile page: demo.ine.local/profile/1?name=John+Doe
+
+Now, use this command and see what we get: xsser -u "http://demo.ine.local" -g "/profile/1?name=John+Doe"
+
+We can see it is asking to specify a payloader using "XSS" as a keyword. Let's specify this and run the command: xsser -u "http://demo.ine.local" -g "/profile/1?name=XSS"
+
+The xsser tool was able to find the possible XSS vector. That means the application is vulnerable to XSS. It has also provided us with the payload. 
+
+This is how we can use the xsser tool to find the XSS vulnerability in the application. Now, let's go to the browser and learn how to test it manually.
+
+Step 6: Open the browser and exploit the XSS vulnerability.
+
+On the user's profile page, you can see the "name" parameter in the URL and a value, i.e., "John+Doe," which is the username of the logged-in user. 
+
+Let's replace this value with the JavaScript payload: <script>alert("XSS")</script>
+
+This is a simple JavaScript code to generate the alert box: demo.ine.local/profile/1?name=<script>alert("XSS")</script>
+
+Visit the URL and you can see we got an alert box. Congrats! We were successfully able to execute the Javascript payload.
+
+Now, click on the "Logout" button and login again with the same user credentials.
+Email: john@inestudent.com
+Passowrd: John@123
+
+On the user's profile page, you can see that the alert message has gone. 
+
+This type of vulnerability is known as reflected XSS. Reflected cross-site scripting (XSS) occurs when an attacker injects malicious code into a website, and that code is immediately sent back to users by the web server. The injected code is then executed in the users' browsers, potentially leading to unauthorized actions, data theft, or manipulation of the displayed content. Here, the user-injected malicious code is not stored on the server.
+
+Let's learn about the other type of XSS!
+
+Go to the Sign Up page and click on the "Sign Up" button.
+
+Now, enter the details given below.
+Email: <script>alert("XSS")</script>
+Name: demo
+Password: demo
+Mobile: 1234
+Address: abc
+
+Click on the "Sign Up" button. Here, we are trying to inject the JavaScript payload into the email field.
+
+Now, login with these credentials:
+Email: <script>alert("XSS")</script>
+Password: demo
+
+You can see, We were successfully able to inject and execute the Javascript payload. Click on "OK" and try refreshing the page.
+
+We can again we the alert message! Let's logout and login again. Login we the same credentails.
+
+You will see that this time we got an alert message even after relogging in. This was possible because the JavaScript code we injected got stored on the server.
+
+Stored Cross-Site Scripting (XSS) involves an attacker injecting malicious code into a web application. This code is permanently stored on the server and served to users when they access a specific page or resource. The injected code executes in user's browsers, enabling various malicious actions.
+
+
+References
+https://www.kali.org/tools/xsser/
+
+
+
+>> Commands Summarization <<
+
+<script>alert("XSS")</script>
+demo.ine.local/profile/1?name=John+Doe
+
+
+xsser -h
+xsser -u "http://demo.ine.local" -g "/profile/1?name=John+Doe"
+xsser -u "http://demo.ine.local" -g "/profile/1?name=XSS"
+
+demo.ine.local/profile/1?name=<script>alert("XSS")</script>
+
+
+
+
+
+
+
+
+
+
+
