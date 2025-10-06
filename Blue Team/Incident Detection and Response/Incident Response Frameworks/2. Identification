@@ -1,0 +1,38 @@
+
+Identification Sources
+• Network perimeter
+• Email perimeter
+• Host perimeter
+• Application-level detection
+• Threat Intelligence
+• User Entity and Behavior Analytics (UEBA)
+• Human-level detection
+• User reports
+
+Alert Tuning
+• Alert fatigue
+• Signal-to-noise ratio
+
+Incident Prioritization
+• Incident triage
+• Incident scope
+• Urgency, criticality, impact
+
+Documentation
+• Ticket, reports
+• Record of events
+
+Communication and Notification
+• Notify relevant parties
+• Situation Reports (SitReps)
+  → Key stakeholders
+  → Clear summary
+  → Severity
+  → Status
+• Actions
+
+
+
+Next steps
+
+Communication planning
