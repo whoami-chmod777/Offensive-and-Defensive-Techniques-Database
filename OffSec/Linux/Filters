@@ -1,0 +1,112 @@
+
+--- Filters ---
+
+Filters are programs that take plain text (stored in a file or produced by another program) as standard input, transform it into a meaningful format, and then return it as standard output. Linux has a multitude of filters.
+
+• cat
+• head
+• tail
+• sort
+• uniq
+• grep
+• wc
+• sed
+ 
+ 
+
+
+ -- Cat --
+
+cat: display the contents of one or more text files on the terminal. 
+
+cat /etc/ssh/sshd_config
+
+
+-- Head --
+
+head: display the first few lines of a specified file
+
+head /var/log/apache2/access.log
+head -n 3 /var/log/apache2/access.log
+
+
+-- Tail --
+
+tail: display the last few lines of a specified file
+
+tail /var/log/auth.log
+tail -n 3 /var/log/auth.log
+
+
+-- Sort --
+
+sort: sorts the contents of a given file alphabetically
+ 
+sort names.txt
+
+
+-- Uniq --
+
+uniq: filters out consecutive duplicate lines from a file and shows the unique lines.
+
+sort names.txt | uniq
+
+
+-- Grep --
+
+searches files for specific text strings, filters lines, and displays matching results
+grep is a powerful tool commonly used to search log files, configuration files, or any text file.
+
+grep '192.168.1.1' /var/log/apache2/access.log
+
+
+-- Wc --
+
+wc: determines how large a file is or how much data it contains
+
+wc /etc/passwd
+wc -l /var/log/apache2/access.log
+
+
+root@hackerbox:~$ wc /etc/passwd
+46   67 2544 /etc/passwd
+
+46	             Number of lines
+67	             Number of words
+2544	           Number of characters
+/etc/passwd      File path
+
+-l: Displays only the number of lines.
+-w: Displays only the number of words. 
+-c: Displays only the number of bytes.
+-m: Displays only the number of characters (useful for multi-byte character sets).
+
+
+-- Sed --
+
+Sed performing various text edits such as processing, modifying, adding, deleting, or replacing texts between files.
+
+sed 's/Alice/George/' names.txt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
