@@ -1,0 +1,59 @@
+
+
+
+Containment
+Short-term Containment
+
+Quarantining, isolating
+
+Limit the incident before it gets worse
+
+Isolating networks
+
+Taking down systems
+
+Network filters and rules
+
+Firewall
+
+IPS/IDS
+
+Killing processes
+
+Temporary patches
+
+Business Impact
+
+Plan containment measures carefully
+
+Work with data owners and stakeholders
+
+Mission critical systems
+
+Evidence Collection / System Backup
+
+Creating forensic images
+
+Capturing memory
+
+Evidence documentation
+
+Long-term Containment
+
+Stabilize the environment while rebuilding clean systems
+
+Removing the attacker’s access
+
+Deleting user accounts
+
+Resetting credentials
+
+Disabling remote access
+
+Removing backdoors
+
+Traffic segmentation
+
+Additional monitoring and detection
+
+Patching and hardening
