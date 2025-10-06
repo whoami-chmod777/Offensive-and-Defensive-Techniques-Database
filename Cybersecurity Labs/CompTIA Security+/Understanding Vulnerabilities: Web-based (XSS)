@@ -1,0 +1,13 @@
+
+Cross-Site Scripting (XSS) is a web-based vulnerability that occurs when attackers inject malicious scripts into web pages viewed by other users. Exploiting insecure input mechanisms, such as form fields or URL parameters, attackers can inject code that is executed by victims' browsers. This enables the theft of sensitive information, session hijacking, or defacement of websites. XSS comes in various forms, including stored, reflected, and DOM-based, and can compromise user data and undermine the security of web applications if not properly mitigated through input validation, output encoding, and secure coding practices.
+
+With this lab exercise, we got a clear understanding of how attackers can take advantage of the cross-site scripting (XSS) vulnerability present in the application and also learned about its types, such as reflected XSS and stored XSS.
+
+
+In this lab environment, the user will get access to a Kali instance's GUI. A vulnerable application is running on http://demo.ine.local. Your task is to find and exploit the cross-site scripting (XSS) vulnerability present in the application.
+Objective: To find and exploit the cross-site scripting (XSS) vulnerability present in the application.
+
+The best tools for this lab are: Xsser, Firefox Web Browser
+
+
+Step 1: Open the lab link to access the Kali machine.
