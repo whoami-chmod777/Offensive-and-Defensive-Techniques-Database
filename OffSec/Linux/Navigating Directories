@@ -1,0 +1,75 @@
+
+-- Navigating Directories --
+
+The Linux file system is hierarchically organized, starting with the root directory /. Understanding this structure is key to effectively navigating in Linux.
+
+• /: The root directory, the base of the file system.
+• /bin, /sbin: Contains essential user and system binaries.
+• /etc: Contains system configuration files.
+• /home: Contains personal directories for users.
+• /var: Contains variable files like logs and databases.
+• /usr: Secondary hierarchy for user data; contains most user programs and utilities.
+
+• pwd: show you your current location in the file system.
+• ls: list the files and folders in your current directory.
+• ls -l: shows details such as permissions, ownership, and modification times.
+• ls -a: include hidden files
+• ls -la: ls -la
+
+• cd - : go back to the previous directory
+
+
+user@hackerbox:~$ ls -l
+total 8
+drwxr-xr-x 2 user users 4096 Jul 29 08:24 Desktop
+drwxr-xr-x 2 user users 4096 Jul 29 08:24 Documents
+drwxr-xr-x 2 user users 4096 Jul 29 08:24 Downloads
+drwxr-xr-x 2 user users 4096 Jul 29 08:24 Pictures
+drwxr-xr-x 2 user users 4096 Jul 29 08:24 Videos
+
+drwxr-xr-x	    File type and permissions
+2	              Number of hard links to the file/directory
+user            Owner of the file/directory
+users	          Group owner of the file/directory
+4096	          Size of the file or blocks used to store the directory information
+Jul 29 08:24	  Creation or last modification date of the file/directory
+Desktop	        Name of the file/directory
+
+
+In Linux, files and directories starting with . are considered hidden files
+
+user@hackerbox:~$ ls -la
+total 12
+drwxr-xr-x 3 user user 4096 Aug  1 10:00 .
+drwxr-xr-x 4 user user 4096 Aug  1 09:58 ..
+drwxr-xr-x 2 user users 4096 Jul 29 08:24 Desktop
+drwxr-xr-x 2 user users 4096 Jul 29 08:24 Documents
+drwxr-xr-x 2 user users 4096 Jul 29 08:24 Downloads
+drwxr-xr-x 2 user users 4096 Jul 29 08:24 Pictures
+drwxr-xr-x 2 user users 4096 Jul 29 08:24 Videos
+-rw------- 1 user users  220 Jul 29 09:58 .bashrc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
