@@ -20,18 +20,43 @@ Open the terminal and run the command: ping -c 4 demo.ine.local
 
 The target machine is up and running.
 
+Step 3: Open the web browser and visit the URL: http://demo.ine.local
+
+Here, we have the sign-up and login options.
+
+Step 4: Let's login with Bob's credentials. Click on the "Log In" button.
+
+Enter the following credentials:
+
+Email: bob@inestudent.com
+Password: Bob@123
+
+Click on the "Log In" button. Here, you can see the Bob user's profile. Now, click on the "Logout" button.
+
+Step 5: Go to the login page and perform the SQL Injection attack.
+
+Click on the "Log In" button.
+
+Here, we will be performing the SQL injection attack, but to perform SQLi, we need a payload. You can find tons of Github repositories for payloads. One such repository is https://github.com/payloadbox/sql-injection-payload-list.
+
+Use the payload given below in the email field and type any random password: ' OR 1 -- -
+
+The SQL injection payload ' OR 1 -- - is an attempt to manipulate a SQL query. It uses a single quote to close the existing SQL string, injects a condition that is always true (OR 1), and uses SQL comments (--) to ignore the rest of the original query. This can potentially bypass authentication or authorization checks in a vulnerable web application and allow unauthorized access to data.
+
+Note: Use any random string as a password, e.g., "hiii," and the above-given payload as an email.
+
+Click on the "Log In" button.
+
+Voila! We got logged in as the "Admin" user.
+
+
+https://github.com/payloadbox/sql-injection-payload-list.
 
 
 
+>> Commands Summarization <<
 
-
-
-
-
-
-
-
-
+ping -c 4 demo.ine.local
 
 
 
