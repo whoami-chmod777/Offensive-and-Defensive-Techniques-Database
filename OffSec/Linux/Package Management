@@ -5,9 +5,6 @@ Linux distributions provide various package managers to facilitate tasks such as
 
 • Key Features of Package Managers
 • Advanced Package Manager (APT)
-• 
-• 
-
 
 
 -- Key Features of Package Managers --
@@ -21,40 +18,17 @@ Linux distributions provide various package managers to facilitate tasks such as
 
 -- Advanced Package Manager (APT) --
 
-sudo apt update: update your package list
+sudo apt update: Updating Package Lists
 
+sudo apt search htop: Searching in Package Lists
+sudo apt search ^htop
+sudo apt search --names-only htop
 
+sudo apt install htop: Installing and Updating Packages
+sudo apt upgrade: Update all packages
+sudo apt dist-upgrade: Not install any new packages or remove any old ones
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+sudo apt remove htop: Removing Packages
+sudo apt purge htop: Delete the configuration file
 
 
