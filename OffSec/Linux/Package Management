@@ -1,2 +1,60 @@
 
+-- Package Management --
+
 Linux distributions provide various package managers to facilitate tasks such as software installation, updating, and removal. 
+
+• Key Features of Package Managers
+• Advanced Package Manager (APT)
+• 
+• 
+
+
+
+-- Key Features of Package Managers --
+
+• Package Downloading: Automatically download software packages and dependencies from the internet.
+• Dependency Resolution: Identify and automatically install the dependencies required by a package.
+• Package Installation and Removal: Install software packages to the system and remove them when necessary.
+• Updates and Upgrades: Check for new versions of installed packages and update them.
+• Configuration Files and Directories: Provide standards for the configuration files and directories of software packages.
+
+
+-- Advanced Package Manager (APT) --
+
+sudo apt update: update your package list
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
