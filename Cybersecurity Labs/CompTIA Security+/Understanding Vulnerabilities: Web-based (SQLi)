@@ -1,1 +1,55 @@
 
+SQL Injection (SQLi) is like a sneaky way that bad actors use to mess with a website's database. It happens when the website doesn't properly check the information people type in (like in search boxes or login forms) before using it to talk to the database. The bad guys can then insert their own instructions, making the database do things it shouldn't, like giving them access to secret information or messing up the data. To stop this, web developers need to make sure they check and handle user input carefully, so the bad instructions can't sneak in and cause trouble. SQL Injection commonly targets input fields, such as login forms, search boxes, or any user-input area that interacts with a database.
+
+In this lab environment, the user will get access to a Kali instance's GUI. A vulnerable application is running on http://demo.ine.local. Your task is to find and exploit the SQL Injection (SQLi) vulnerability present in the application.
+
+Objective: To find and exploit the SQL Injection (SQLi) vulnerability present in the application.
+
+These credentials might be helpful:
+Email: bob@inestudent.com
+Password: Bob@123
+
+The best tools for this lab are: Firefox Web Browser
+
+
+Step 1: Open the lab link to access the Kali machine.
+
+Step 2: Verify whether the target machine is up.
+
+Open the terminal and run the command: ping -c 4 demo.ine.local
+
+The target machine is up and running.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
