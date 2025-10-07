@@ -1,4 +1,6 @@
 
+-- Linux Shell --
+
 The Linux shell is a unique program that acts as a bridge between the user and the services of the operating system. It takes commands entered in a human-readable format, such as text typed on a keyboard or stored in a file, and translates them into a form that the operating system's kernel can process. The shell functions essentially as a command-language interpreter, executing these instructions. It becomes active automatically when users log into their accounts or start a terminal session.
 
 Linux operating systems offer various shells, each with unique features and command syntax:
