@@ -11,10 +11,9 @@ Filters are programs that take plain text (stored in a file or produced by anoth
 • grep
 • wc
 • sed
+• awk
  
  
-
-
  -- Cat --
 
 cat: display the contents of one or more text files on the terminal. 
@@ -88,11 +87,32 @@ Sed performing various text edits such as processing, modifying, adding, deletin
 
 sed 's/Alice/George/' names.txt
 
+root@hackerbox:~$ cat names.txt
+Alice
+Charlie
+Bob
+
+root@hackerbox:~$ sed 's/Alice/George/' names.txt
+George
+Charlie
+Bob
 
 
+-- Awnk --
 
+awk reads files line by line, splits each line into fields (columns), and processes them based on specified conditions
 
+oot@hackerbox:~$ cat names.txt
+John Doe
+Emily Clark
+Alex Turner
 
+root@hackerbox:~$ awk '{print $1}' names.txt
+John
+Emily
+Alex
+
+The command awk '{print $1}' names.txt processes the content of this file using the awk program. awk reads the text files line by line, splitting each line into fields separated by spaces or tabs. 
 
 
 
