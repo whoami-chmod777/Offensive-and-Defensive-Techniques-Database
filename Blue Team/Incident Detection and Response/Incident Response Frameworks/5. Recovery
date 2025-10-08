@@ -1,2 +1,22 @@
 
--- Recovery --
+--- Recovery ---
+
+
+• Get affected systems back into production
+  → Restore systems
+  → Remove artifacts
+
+
+•  Confirm functionality
+  → Functionality testing
+
+
+•  Prevent future incidents
+  → Hardening, scanning, monitoring
+
+
+•  Recovery decisions
+  → Recovery time window
+  → How to test and verify functionality
+  → Duration of monitoring
+  → Tools for monitoring
