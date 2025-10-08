@@ -1,1 +1,38 @@
 
+--- Eradication ---
+
+• Eradication
+
+• Remove the attacker’s system and network artifacts
+  → Restoring Systems
+  → Known good backup
+  → Original disk images
+  → Recovery Time Objective (RTO)
+  → Recovery Point Objective (RPO)
+
+• Manually Removing Artifacts
+  → Malware
+    ► Disk
+    ► Memory
+  → Backdoors
+  → Network connections
+  → Services
+
+• Improving Defenses
+  → Network filters
+  → Applying patches
+  → Hardening systems
+  → CIS Benchmarks
+
+• Vulnerability Management
+  → Scanning the system and network
+    ► Any related vulnerabilities
+  → Vulnerability scans
+  → Threat intelligence
+  → Threat hunting
+
+
+
+References
+https://www.cisecurity.org/cis-benchmarks
+https://www.sans.org/media/score/incident-forms/IH-Eradication.pdf
