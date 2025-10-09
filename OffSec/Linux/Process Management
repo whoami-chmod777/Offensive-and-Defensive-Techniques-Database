@@ -1,1 +1,137 @@
 
+--- Process Management --- 
+
+OVERVIEW
+------------------------------------------------------------
+• A process = a running program (terminal, web server, DB, GUI, etc.)
+• Each process has a unique PID (process ID) assigned by the kernel.
+• Common tasks: view/find processes, see resource usage, background/foreground, change priority, kill processes, schedule jobs.
+
+VIEWING PROCESSES
+------------------------------------------------------------
+Basic:  kali >ps
+Example output:
+PID   TTY     TIME CMD
+39659 pts/0   00:00:01 bash
+39665 pts/0   00:00:00 ps
+
+All users / full info: kali >ps aux
+Example (format):
+USER   PID  %CPU  %MEM  VSZ   RSS   TTY  STAT  START  TIME  COMMAND
+Root     1   0.0   0.4  202540 6396 ?   Ss   Apr24  0:46 /sbin/init
+...
+
+Important columns:
+USER    -> user who started the process
+PID     -> process id (use this to act on the process)
+%CPU    -> CPU percent used
+%MEM    -> memory percent used
+COMMAND -> command that started the process
+
+FILTER BY NAME (pipe to grep)
+------------------------------------------------------------
+Example: kali >ps aux | grep msfconsole
+Example output lines (keep examples/names intact):
+root 39756 0.0 0.0 4304 716 pts/2 Ss+ 15:13 0:00 sh -c service postgresql start && msfdb init & msfconsole
+root 39759 35.1 15.2 4304 227888 pts/2 Sl+ 15:13 1:36 ruby /usr/bin/msfconsole
+root 39892 0.0 0.0 4304 940 pts/2 S+ 15:18 0:00 grep msfconsole
+
+FIND HUNGRIEST PROCESSES (top)
+------------------------------------------------------------
+Run: kali >top
+Key fields in top:
+PID USER  PR NI VIRT RES SHR S %CPU %MEM TIME+ COMMAND
+Interactive:
+H or ?  -> help
+Q       -> quit
+R (in top) -> renice interactive
+K (in top) -> kill interactive
+
+PRIORITY: nice & renice
+------------------------------------------------------------
+Nice range: -20 (highest priority) ... 0 (default) ... +19 (lowest priority)
+
+Start process with adjusted niceness (nice increments):
+kali >nice -n -10 /bin/slowprocess   # increase priority (less "nice")
+kali >nice -n 10 /bin/slowprocess    # decrease priority (more "nice")
+
+Change niceness of running process (renice uses absolute value):
+kali >renice 20 6996   # set PID 6996 to nice value 20 (lower priority)
+
+In top: press R, then enter PID and nice value.
+
+KILLING PROCESSES
+------------------------------------------------------------
+kill syntax:
+kill -SIGNAL PID   (default if no signal given: SIGTERM)
+
+Common signals:
+SIGHUP   (1)   -> Hangup: stop and restart process.
+SIGINT   (2)   -> Interrupt (weak).
+SIGQUIT  (3)   -> Quit + core dump.
+SIGTERM  (15)  -> Termination (default).
+SIGKILL  (9)   -> Force kill (absolute).
+
+Examples:
+kali >kill -1 6996       # send HUP to PID 6996
+kali >kill -9 6996       # force kill PID 6996
+kali >killall -9 zombieprocess   # kill by name
+In top: press K, then enter PID to kill.
+
+BACKGROUND / FOREGROUND JOBS
+------------------------------------------------------------
+Start process in background: kali >leafpad newscript &
+Return to foreground: kali >fg 1234    # bring PID 1234 to foreground
+If PID unknown, use ps to find it.
+
+SCHEDULING: at (one-time) and crond (recurring)
+------------------------------------------------------------
+at -> schedule a job once at a future time.
+Examples of time formats accepted by at:
+at 7:20pm
+at 7:20pm June 25
+at noon
+at tomorrow
+at now + 20 minutes
+at now + 10 hours
+at now + 5 days
+at now + 3 weeks
+at 7:20pm 06/25/2019
+
+Usage: kali >at 7:20am
+at> /root/myscanningscript (enter commands, then Ctrl-D to finish)
+
+SUMMARY & QUICK REFERENCE
+------------------------------------------------------------
+View:
+ps
+ps aux
+ps aux | grep <name>
+top
+
+Priority:
+nice -n <increment> <cmd>    # when starting (increment from parent)
+renice <value> <PID>         # change absolute value of running process
+
+Kill:
+kill <PID>               # default SIGTERM
+kill -9 <PID>            # SIGKILL (force)
+killall -9 <name>        # kill by process name
+(or K inside top)
+
+Background/Foreground:
+<command> &   -> background
+fg <PID>      -> foreground
+
+Schedule:
+at <time>      -> schedule one-time jobs
+crond         -> use for recurring jobs (see cron syntax / Chapter 16)
+
+
+EXERCISES (from chapter)
+------------------------------------------------------------
+1) Run: ps aux -> note first and last process.
+2) Run: top -> note top two processes by resource use.
+3) Kill the process using the most resources (use kill).
+4) Use renice to reduce priority of a running process to +19.
+5) Create a file 'myscanning' and schedule it next Wednesday at 1 am with at.
