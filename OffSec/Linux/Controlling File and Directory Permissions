@@ -107,10 +107,11 @@ Syntax:
   chmod [u/g/o][+/-/=][r/w/x] filename
 
 Examples:
-  chmod u-w file      -> remove write for owner
-  chmod u+x file      -> add execute for owner
-  chmod o=r file      -> others read only
-  chmod u+x,o+x file  -> add execute for owner and others
+chmod u-w file      -> remove write for owner
+chmod u+x file      -> add execute for owner
+chmod o=r file      -> others read only
+chmod u+x,o+x file  -> add execute for owner and others
+chmod ugo+rwx notes.txt ->  grant all permissions to all sets for the file notes.txt
 
 
 MAKING FILE EXECUTABLE
