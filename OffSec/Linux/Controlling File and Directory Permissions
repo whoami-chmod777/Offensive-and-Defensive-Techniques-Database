@@ -1,1 +1,225 @@
 
+GENERAL CONCEPT
+------------------------------------------------------------
+Every file and directory in Linux has specific permissions 
+for three types of users:
+
+  - User (Owner)
+  - Group
+  - Others
+
+Each of these can be granted permissions to:
+  r - read
+  w - write
+  x - execute
+
+Permissions control access and security in a multiuser system.
+
+
+TYPES OF USERS
+------------------------------------------------------------
+root  - all-powerful system administrator.
+users - limited access.
+groups - collections of users with similar roles.
+
+Example groups:
+  finance, engineering, devs, network_admins, db_admins, etc.
+
+Users inherit permissions from their group membership.
+
+
+VIEWING PERMISSIONS
+------------------------------------------------------------
+Command:
+  ls -l
+
+Example output:
+  drwxr-xr-x 5 root root 4096 Dec 5 10:47 charsets
+  -rw-r--r-- 1 root root 33685504 Jun 28 2018 hashcat.hcstat
+
+Field meaning:
+  1st char  -> file type (d=directory, -=file)
+  next 9    -> permissions (rwx rwx rwx)
+  owner     -> file owner
+  group     -> owning group
+  size/date/name follow
+
+Example:
+  -rw-r--r--
+  owner: rw-
+  group: r--
+  others: r--
+
+
+CHANGING OWNERSHIP
+------------------------------------------------------------
+Change owner:
+  chown username /path/to/file
+
+Example:
+  chown ubob /tmp/bobsfile
+
+Change group:
+  chgrp groupname filename
+
+Example:
+  chgrp usecurity newIDS
+
+
+NUMERIC (OCTAL) PERMISSION VALUES
+------------------------------------------------------------
+Binary | Octal | rwx
+---------------------
+000    | 0     | ---
+001    | 1     | --x
+010    | 2     | -w-
+011    | 3     | -wx
+100    | 4     | r--
+101    | 5     | r-x
+110    | 6     | rw-
+111    | 7     | rwx
+
+Example conversions:
+  Read only  -> 4
+  Write only -> 2
+  Execute    -> 1
+  All        -> 7 (4+2+1)
+
+
+CHANGING PERMISSIONS (NUMERIC)
+------------------------------------------------------------
+Command:
+  chmod XYZ filename
+
+Examples:
+  chmod 777 file       -> all users full access
+  chmod 755 script.sh  -> owner rwx, group r-x, others r-x
+  chmod 644 text.txt   -> owner rw-, others r--
+
+Example:
+  chmod 774 hashcat.hcstat
+Gives owner/group all permissions, others read only.
+
+
+CHANGING PERMISSIONS (SYMBOLIC - UGO)
+------------------------------------------------------------
+Syntax:
+  chmod [u/g/o][+/-/=][r/w/x] filename
+
+Examples:
+  chmod u-w file      -> remove write for owner
+  chmod u+x file      -> add execute for owner
+  chmod o=r file      -> others read only
+  chmod u+x,o+x file  -> add execute for owner and others
+
+
+MAKING FILE EXECUTABLE
+------------------------------------------------------------
+Example:
+  chmod 766 newhackertool
+
+Result:
+  -rwxrw-rw-
+Owner has all permissions, group/others have read+write.
+
+
+DEFAULT PERMISSIONS AND UMASK
+------------------------------------------------------------
+Default base:
+  Files -> 666
+  Dirs  -> 777
+
+umask defines which permissions are removed from the base.
+
+Example:
+  umask 022 -> files 644, dirs 755
+  umask 007 -> files 660, dirs 770
+
+Set user umask in:
+  /home/username/.profile
+
+View current:
+  umask
+
+
+SPECIAL PERMISSIONS
+
+SUID (Set User ID)
+------------------------------------------------------------
+Allows file to run with owner's privileges (e.g. root).
+Set with: chmod 4### filename
+Example: chmod 4644 file
+
+Appears as: -rwsr-xr-x
+(S replaces x in owner field)
+
+Used for programs like passwd that need root access to /etc/shadow.
+
+
+SGID (Set Group ID)
+------------------------------------------------------------
+Allows file to run with group’s privileges.
+Set with: chmod 2### filename
+Example: chmod 2644 file
+
+On directories: new files inherit the directory’s group.
+
+
+STICKY BIT
+------------------------------------------------------------
+Legacy from old Unix systems. 
+Modern Linux uses it mainly on shared directories (like /tmp).
+Allows only file owners to delete/rename their own files.
+
+Set with: chmod 1### dirname
+Example: chmod 1777 /tmp
+
+
+CHECKING SPECIAL PERMISSIONS
+------------------------------------------------------------
+Find files with SUID bit set: find / -user root -perm -4000
+Find files with SGID bit set: find / -perm -2000
+
+Example output:
+  /usr/bin/chsh
+  /usr/bin/gpasswd
+  /usr/bin/pkexec
+  /usr/bin/sudo
+  /usr/bin/passwd
+
+Example of SUID file (sudo):
+  -rwsr-xr-x 1 root root 140944 Jul 5 2018 sudo
+
+
+PERMISSION SUMMARY
+------------------------------------------------------------
+r = 4, w = 2, x = 1  -> add values for each (u,g,o)
+Examples:
+  chmod 600 file  -> owner rw-, others none
+  chmod 644 file  -> owner rw-, others r--
+  chmod 755 file  -> owner rwx, others r-x
+  chmod 777 file  -> everyone rwx (NOT secure)
+
+
+SECURITY IMPLICATIONS
+------------------------------------------------------------
+- SUID/SGID can lead to privilege escalation if misused.
+- Root or admin should regularly audit these permissions.
+- Use restrictive umask for new files.
+- Avoid 777 permissions whenever possible.
+- Sticky bit protects files in shared directories.
+
+
+SUMMARY
+------------------------------------------------------------
+Linux permissions (rwx for user/group/others) protect system integrity.
+
+Commands:
+  ls -l      -> view permissions
+  chmod      -> change permissions
+  chown      -> change ownership
+  chgrp      -> change group
+  umask      -> set default mask
+  find       -> search for special bits
+
+Hackers or pentesters may exploit misconfigured SUID/SGID files for privilege escalation, so administrators must manage and audit permissions carefully.
