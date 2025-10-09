@@ -3,12 +3,6 @@
 
 In Linux, a user is associated with a user account that has several attributes defining their identity and privileges within the system. These attributes include the username, UID (User ID), GID (Group ID), home directory, default shell, and password.
 
-• Types of Users
-• Creating a User
-• 
-• 
-• 
-
 
 -- Types of Users --
 
@@ -16,7 +10,15 @@ System users are created by the system during installation and are used to run s
 Regular users are created by an administrator and can access the system and resources based on their permissions.
 
 
-useradd -u 1002 -d /home/john -s /bin/bash john: Creating a User
+-- Creating a User --
 
 This command creates a user account for John with a user ID (UID) of 1002, a home directory set as /home/john, and a default shell of /bin/bash
-.
+
+useradd -u 1002 -d /home/john -s /bin/bash john: Creating a User
+id john:  verify the user account
+
+cat /etc/passwd
+cat /etc/shadow
+
+sudo passwd john: Changing User Passwords
+sudo userdel john: Deleting a User
