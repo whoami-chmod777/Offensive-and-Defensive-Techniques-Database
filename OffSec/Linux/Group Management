@@ -1,1 +1,11 @@
 
+In Linux systems, a group is a collection of users who have specific permissions and access rights. Groups are used to simplify access control in file systems and make user management more efficient.
+
+
+sudo groupadd development: create a new group
+
+view the groups: cat /etc/group , cat /etc/group | grep development
+
+Adding Users to a Group: sudo usermod -aG development john
+
+Deleting a Group: sudo groupdel development
