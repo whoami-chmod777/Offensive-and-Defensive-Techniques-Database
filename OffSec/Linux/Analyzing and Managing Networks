@@ -26,6 +26,7 @@ KEY FIELDS
 • Bcast = broadcast address
 • Mask = netmask
 
+
 CHECKING WIRELESS WITH iwconfig
 ------------------------------------------------------------
 List wireless capabilities, mode, association, power: kali >iwconfig
@@ -36,11 +37,13 @@ wlan0  IEEE 802.11bg  ESSID:off/any
 lo     no wireless extensions
 eth0   no wireless extensions
 
+
 CHANGING YOUR NETWORK INFORMATION
 ------------------------------------------------------------
 Change IP address on eth0: kali >ifconfig eth0 192.168.181.115
 
 Change IP + netmask + broadcast: kali >ifconfig eth0 192.168.181.115 netmask 255.255.0.0 broadcast 192.168.1.255
+
 
 SPOOFING YOUR MAC ADDRESS (HWaddr)
 ------------------------------------------------------------
@@ -49,10 +52,12 @@ kali >ifconfig eth0 down
 kali >ifconfig eth0 hw ether 00:11:22:33:44:55
 kali >ifconfig eth0 up
 
+
 GET A NEW DHCP ADDRESS (WITHOUT REBOOT)
 ------------------------------------------------------------
 Request a lease from DHCP for eth0: kali >dhclient eth0
 Then verify: kali >ifconfig
+
 
 DNS RECON WITH dig
 ------------------------------------------------------------
@@ -66,6 +71,7 @@ ns6.wixdns.net. 5 IN A 216.239.32.100
 Get mail exchangers (MX) for domain: kali >dig hackers-arise.com mx
 
 Example AUTHORITY (from text): hackers-arise.com. 5 IN SOA ns6.wixdns.net. support.wix.com 2016052216 10800 3600 604800 3600
+
 
 CHANGING YOUR DNS SERVER (/etc/resolv.conf)
 ------------------------------------------------------------
@@ -91,6 +97,110 @@ ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 
 (Press TAB between IP and hostname.)
+
+
+LISTING AVAILABLE DEVICES
+------------------------------------------------------------
+When the ifconfig command is called without parameters, it lists the available network devices (NIC, Network Interface Controller).
+
+root@hackerbox:~$ ifconfig
+
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 172.20.1.109  netmask 255.255.255.0  broadcast 172.20.1.255
+        inet6 fe80::5054:ff:fe10:72c3  prefixlen 64  scopeid 0x20<link>
+        ether 52:54:00:10:72:c3  txqueuelen 1000  (Ethernet)
+        RX packets 4542  bytes 352144 (343.8 KiB)
+        RX errors 2  dropped 0  overruns 0  frame 2
+        TX packets 1475  bytes 6213607 (5.9 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+        device interrupt 11  memory 0xfc840000-fc860000  
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 16  bytes 1888 (1.8 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 16  bytes 1888 (1.8 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+In the output above, there are 2 network interfaces:
+• eth0: Ethernet interface, UP and active. IP 172.20.1.109, MAC 52:54:00:10:72:c3
+• lo: Loopback interface for 127.0.0.1 (local host)
+
+To view a specific interface: root@hackerbox:~$ ifconfig eth0
+To view inactive interfaces too: root@hackerbox:~$ ifconfig -a
+
+
+ACTIVATING AND DEACTIVATING INTERFACES
+------------------------------------------------------------
+Bring an interface up: root@hackerbox:~$ ifconfig eth0 up
+Bring an interface down: root@hackerbox:~$ ifconfig eth0 down
+
+(Note: Doing this on your main network interface will interrupt your internet connection.)
+
+
+ASSIGNING AN IP ADDRESS
+------------------------------------------------------------
+Assign or update an IP address: root@hackerbox:~$ ifconfig eth0 172.20.1.110
+
+Set the netmask: root@hackerbox:~$ ifconfig eth0 netmask 255.255.255.0
+
+
+PROMISCUOUS MODE
+------------------------------------------------------------
+Enable promiscuous mode (to capture all packets): root@hackerbox:~$ ifconfig eth0 promisc
+Disable promiscuous mode: root@hackerbox:~$ ifconfig eth0 -promisc
+
+
+CHANGING THE MAC ADDRESS
+------------------------------------------------------------
+Change the MAC address of eth0: root@hackerbox:~$ ifconfig eth0 hw ether AA:BB:CC:DD:EE:FF
+
+
+DNS SETTINGS
+------------------------------------------------------------
+In Linux, DNS settings are stored in /etc/resolv.conf.
+Edit with a text editor: root@hackerbox:~$ nano /etc/resolv.conf
+
+Example: nameserver 172.20.1.1
+
+To use Cloudflare’s DNS:
+nameserver 1.1.1.1
+nameserver 1.0.0.1
+
+
+SSH (SECURE SHELL)
+------------------------------------------------------------
+SSH allows secure remote connections over a network.
+
+Install SSH service (Debian-based):
+sudo apt-get update
+sudo apt-get install openssh-server
+
+Start and enable SSH service:
+sudo systemctl start ssh
+sudo systemctl enable ssh
+
+Connect to a remote server:
+ssh user@ip_address
+Example:
+ssh root@192.168.1.100
+
+Generate SSH key pair:
+ssh-keygen
+Copy public key to remote host:
+ssh-copy-id user@ip_address
+Example:
+ssh-copy-id root@192.168.1.100
+
+SSH configuration file:
+sudo nano /etc/ssh/sshd_config
+Change port or disable root login:
+Port 2222
+Restart SSH service after editing:
+sudo systemctl restart ssh
+
 
 SUMMARY
 ------------------------------------------------------------
