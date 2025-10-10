@@ -1,1 +1,178 @@
 
+--- Getting Started with the Basics ---
+
+
+OVERVIEW
+------------------------------------------------------------
+• Kali Linux = penetration-testing distribution with many preinstalled tools.
+• Linux is case-sensitive: Desktop ≠ desktop ≠ DeskTop.
+• Shell (bash) = command interpreter; Terminal = CLI window.
+• root (superuser) can do anything; avoid routine work as root.
+• Filesystem is logical, rooted at “/” (not C:).
+
+INTRODUCTORY TERMS
+------------------------------------------------------------
+Binaries        Executable files (like Windows EXE). Common paths: /usr/bin, /usr/sbin
+Case sensitivity Different names if case differs.
+Directory       Same as “folder”; organizes files hierarchically.
+Home            Per-user directory under /home (root user’s home is /root).
+Kali            Linux distro for pentesting (e.g., aircrack-ng, Snort included).
+root            Administrator/superuser account.
+Script          Series of commands (bash, Python, Perl, Ruby).
+Shell           Command environment; we use bash.
+Terminal        Command line interface.
+
+A TOUR OF KALI
+------------------------------------------------------------
+Login (default in older releases): user: root  pass: toor
+Open terminal: click terminal icon or press Ctrl-Alt-T
+Change password:  kali >passwd
+
+LINUX FILESYSTEM (TOP-LEVEL)
+------------------------------------------------------------
+/                # filesystem root
+/root            # superuser’s home
+/boot            # kernel/boot files
+/home            # user directories
+/etc             # system configuration
+/mnt             # general-purpose mount point
+/media           # auto-mount (USB/CD)
+/proc            # kernel data (virtual)
+/sys             # kernel’s view of hardware
+/dev             # device files
+/bin /sbin       # essential binaries
+/lib             # essential libraries
+/usr/bin /usr/sbin /usr/lib   # more binaries/libraries
+
+BASIC COMMANDS
+------------------------------------------------------------
+Where am I?
+kali >pwd
+
+Who am I?
+kali >whoami
+
+Move around:
+kali >cd /etc
+kali >cd ..
+kali >cd /
+kali >cd ~          # home
+
+List files:
+kali >ls
+kali >ls -l         # long listing
+kali >ls -la        # include hidden files
+
+HELP & MANUALS
+------------------------------------------------------------
+kali >aircrack-ng --help
+kali >nmap -h
+kali >man aircrack-ng      # q to quit
+
+FINDING STUFF
+------------------------------------------------------------
+Quick (DB-based):
+kali >locate aircrack-ng
+
+Binary + manpage:
+kali >whereis aircrack-ng
+
+Which binary will run:
+kali >which aircrack-ng
+
+Powerful recursive search:
+Syntax: find <startdir> <options> <expression>
+
+By exact name:
+kali >find / -type f -name apache2
+
+Limit scope for speed:
+kali >find /etc -type f -name apache2
+
+Use wildcards:
+kali >find /etc -type f -name "apache2.*"
+
+Wildcard quick ref:
+*  any chars    ? one char    [c,b] one of set
+
+FILTERING OUTPUT (grep + pipes)
+------------------------------------------------------------
+List all processes:
+kali >ps aux
+
+Find apache2 in the list:
+kali >ps aux | grep apache2
+root 4851 0.2 0.7 37548 7668 ? Ss 10:14 0:00 /usr/sbin/apache2 -k start
+--snip--
+
+CREATING & VIEWING FILES
+------------------------------------------------------------
+Create with cat (finish with Ctrl-D):
+kali >cat > hackingskills
+Hacking is the most valuable skill set of the 21st century!
+^D
+
+View:
+kali >cat hackingskills
+
+Append (finish with Ctrl-D):
+kali >cat >> hackingskills
+Everyone should learn hacking
+^D
+
+Overwrite:
+kali >cat > hackingskills
+Everyone in IT security without hacking skills is in the dark
+^D
+
+Create empty/update timestamp:
+kali >touch newfile
+
+DIRECTORIES & FILE OPERATIONS
+------------------------------------------------------------
+Make directory:
+kali >mkdir newdirectory
+kali >cd newdirectory
+
+Copy file (optionally rename at destination):
+kali >touch /root/oldfile
+kali >cp /root/oldfile /root/newdirectory/newfile
+
+Rename or move:
+kali >mv newfile newfile2
+
+Delete file:
+kali >rm newfile2
+
+Remove empty directory:
+kali >rmdir newdirectory   # fails if not empty
+
+Remove directory recursively (DANGER):
+kali >rm -r newdirectory
+
+SAFETY NOTES
+------------------------------------------------------------
+• Don’t do routine work as root; attackers who compromise root own the box.
+• Be careful with: rm -r, wildcards, and commands run as root.
+
+EXERCISES
+------------------------------------------------------------
+1) From /, explore:
+   kali >ls
+   kali >cd /etc ; pwd
+   (repeat for other top-level dirs)
+
+2) Verify user:
+   kali >whoami
+
+3) Find password wordlists:
+   kali >locate wordlists
+
+4) Create & append:
+   kali >cat > testfile (type, Ctrl-D)
+   kali >cat >> testfile (type, Ctrl-D)
+
+5) Practice copy/rename:
+   kali >mkdir hackerdirectory
+   kali >touch hackerdirectory/hackedfile
+   kali >cp hackerdirectory/hackedfile /root/secretfile
