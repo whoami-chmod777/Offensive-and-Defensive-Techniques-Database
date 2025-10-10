@@ -1,6 +1,53 @@
 
---- Host Discovery ---
+--- Host Discovery ("Ping Scanning") ---
 
+Overview
+------------------------------------------------------------
+• Anything on the command line that's not an option is a target spec.
+• Targets: single IP/hostname, CIDR (a.b.c.d/NN), octet ranges, -iL list, -iR random.
+• Combine with discovery options (-sn, -Pn, -sL) and probe types (-PS, -PA, -PU, -PE, -PP, -PM, -PO, -PR).
+• Use --exclude / --excludefile to skip hosts/netblocks.
+
+
+Target Specifications
+------------------------------------------------------------
+Single host:
+nmap scanme.nmap.org
+nmap 64.13.134.52
+
+CIDR (scan block): nmap 192.168.10.0/24   # scans 192.168.10.0 - 192.168.10.255
+
+Octet ranges:
+nmap 192.168.0-255.1-254
+nmap 192.168.3-5,7.1   # scans 192.168.3.1, .4.1, .5.1, .7.1
+nmap 0-255.0-255.13.37 # Internet-wide scan for *.13.37
+
+IPv6: nmap -6 2001:db8::1    # fully-qualified IPv6 only
+
+Multiple targets: nmap scanme.nmap.org 192.168.0.0/8 10.0.0.0,1,3-7
+
+
+Input from File / STDIN
+------------------------------------------------------------
+From file: nmap -iL targets.txt    # file contains any acceptable target format
+From stdin: cat leases.txt | nmap -iL -   # hyphen tells nmap to read hosts from stdin
+
+
+Random Targets
+------------------------------------------------------------
+Random targets:
+nmap -iR 100            # scan 100 random valid public IPv4 addresses
+nmap -iR 0              # never-ending random scan (until stopped)
+
+
+Excluding Targets
+------------------------------------------------------------
+Exclude hosts/netblocks: nmap 10.0.0.0/8 --exclude 10.6.0.0/16,host.example.com
+From file: nmap 10.0.0.0/8 --excludefile exclude.txt
+
+
+Host Discovery ("Ping Scanning") 
+------------------------------------------------------------
 • Ping Sweep & Don't Ping
 • TCP SYN Ping
 • TCP ACK Ping
@@ -12,9 +59,14 @@
 • Traceroute & Reverse DNS Resolution
 
 
+List Scan (DRY-RUN)
+------------------------------------------------------------
+List the targets without sending packets: nmap -sL -n <targets>
+Example:nmap -sL www.stanford.edu/28
 
--- Ping Sweep & Don't Ping --
 
+Ping Sweep & Don't Ping
+------------------------------------------------------------
 # Ping Scan - disable port scan
 nmap -sn 192.168.199.1/24
 nmap -sn 192.168.199.1-150
@@ -33,35 +85,35 @@ nmap -Pn 192.168.199.1.1-100 --excludefile hosts.txt
 nmap -Pn 192.168.199.1/24 --excludefile hosts.txt
 
 
--- TCP SYN Ping --
-
+TCP SYN Ping (-PS)
+------------------------------------------------------------
 nmap -PS 192.168.199.1/24  
 nmap -PS -p21,23,80 192.168.199.1/24
 
 Wireshark Filter:
-[ SYN, ACK ] --> device is online and the port is open
-[ RST, ACK ] --> device in offline and the port close
+[ SYN, ACK ] --> host online & port open
+[ RST, ACK ] --> host offline and the port close
 
 ip.src == 192.168.199.1
 tcp.flags == 0x012
 
 
--- TCP ACK Ping --
-
+TCP ACK Ping (-PA)
+------------------------------------------------------------
 nmap -sn -PA nmap.scanme.org
 nmap -Pn -sn -PA nmap.scanme.org
 nmap -Pn -sn -PA -n nmap.scanme.org
 
 Wireshark Filter:
-[ ACK ] --> device is online and the port is open
-[ RST, ACK ] --> device in offline and the port close
+[ ACK ] --> host online and the port is open
+[ RST, ACK ] --> host offline and the port close
 
 ip.dst == 45.33.32.156
 tcp.flags == 0x010
 
 
--- UDP Ping Scan --
-
+UDP Ping Scan (-PU)
+------------------------------------------------------------
 sudo nmap -sn -PU nmap.scanme.org  
 sudo nmap -sU -p1-1000 192.168.199.1
 
@@ -75,8 +127,8 @@ Code: 3 (Port unreachable)
 udp.dstport == 77
 
 
--- ARP Ping --
-
+ARP Ping (-PR)
+------------------------------------------------------------
 nmap -PR 192.168.199.1/24
 nmap -sP -PR 192.168.1/24
 
@@ -84,14 +136,15 @@ Wireshark:
 Address Resolution Protocol (reply) --> device reply
 
 
--- Disable ARP Ping --
-
+Disable ARP Ping (force IP-level)
+------------------------------------------------------------
 nmap -sn 192.168.1.108 --disable-arp-ping
 
 
--- ICMP ECHO Ping & ICMP Timestamp Ping --
-
+ICMP Echo Ping (-PE) & ICMP Timestamp Ping (-PP)
+------------------------------------------------------------
 sudo nmap -PE nmap.scanme.org
+sudo nmap -PP nmap.scanme.org
 
 Wireshark:
 ICMP    42    Echo (ping) request  
@@ -104,23 +157,136 @@ ICMP    54    Timestamp request
 ICMP    60    Timestamp reply  
 
 
--- IP Protocol Ping --
-
+IP Protocol Ping (-PO)
+------------------------------------------------------------
 If no protocols are specified, the default is to send multiple IP packets for ICMP (protocol 1), IGMP (protocol 2), and IP-in-IP (protocol 4) TCP (protocol 6), UDP (protocol 17) and SCTP (protocol 132)
 
 sudo nmap -PO1 nmap.scanme.org
+sudo nmap -PO2 nmap.scanme.org
 
 Wireshark:
 ICMP    54    Timestamp request  
 ICMP    60    Timestamp reply  
 
-sudo nmap -PO2 nmap.scanme.org
 
-
--- Traceroute & Reverse DNS Resolution --
-
+Traceroute & Reverse DNS Resolution 
+------------------------------------------------------------
 sudo nmap -sn nmap.scanme.org --traceroute
 nmap -R 45.33.32.156
+
+
+List Scan (DRY-RUN)
+------------------------------------------------------------
+List the targets without sending packets:  nmap -sL -n <targets>
+Example: nmap -sL www.stanford.edu/28
+
+
+Host Discovery Modes
+------------------------------------------------------------
+-sL    # list scan (no packets, may do rDNS)
+-sn    # disable port scan; perform host discovery only (ping/ping-sweep)
+-Pn    # skip host discovery; treat all hosts as up (run scans against all)
+
+
+Default Behavior
+------------------------------------------------------------
+Default for privileged users: -PE -PS443 -PA80 -PP  (ICMP echo, SYN to 443, ACK to 80, ICMP timestamp)
+For unprivileged Unix users: -PS80,443 (TCP connect)
+
+
+Common Host Discovery Probes
+------------------------------------------------------------
+-PE              ICMP echo request (classic ping)
+-PP              ICMP timestamp request
+-PM              ICMP address mask request
+-PS<ports>       TCP SYN ping (e.g. -PS80 or -PS22,80)
+-PA<ports>       TCP ACK ping
+-PU<ports>       UDP ping (default ports 40125 if none specified)
+-PO<protos>      IP-protocol ping (protocol numbers)
+-PR              ARP ping (used automatically on local LAN)
+--send-ip        Force raw IP packets (disable ARP behavior)
+--send-eth       Force raw ethernet frames (for ARP tracing)
+
+
+DNS & Resolution Options
+------------------------------------------------------------
+-n               No DNS resolution
+-R               Do reverse-DNS for all targets (even down ones)
+--system-dns     Use system resolver (slower)
+--dns-servers a,b Use specific DNS servers for rDNS
+
+
+Other Handy Options
+------------------------------------------------------------
+--reason           Show reason why host is considered up/down
+--packet-trace     Show all packets sent/received
+--randomize-hosts  Shuffle host order
+--data-length N    Add N random bytes to probes (evade trivial IDS)
+--source-port N    Use source port N (can bypass naive filters)
+-T4 / -T3          Timing templates (T4 is faster; choose carefully)
+-oA prefix         Save all output formats with a prefix
+
+
+EXAMPLES
+------------------------------------------------------------
+List-targets around scanme: nmap -sL scanme.nmap.org/24
+Ping-sweep (no ports) of /24: nmap -sn -T4 192.168.1.0/24
+Ping-scan using SYN to port 80: nmap -sn -PS80 -R microsoft.com ebay.com google.com
+Random web servers: nmap -sS -PS80 -iR 0 -p 80
+Read DHCP lease IPs and scan: egrep '^lease' /var/lib/dhcp/dhcpd.leases | awk '{print $2}' | nmap -iL -
+Disable discovery and scan everything (be careful): nmap -Pn -p 1-65535 target-range
+ARP scan on LAN (fast/accurate for local networks): nmap -sn -PR 192.168.1.0/24
+
+
+Performance / Strategy Notes
+------------------------------------------------------------
+• Use -sL to confirm target list before active scanning.
+• Use -sn to quickly find which hosts are up (ping sweep).
+• Use -Pn when you must scan hosts that block discovery, but expect slower scans.
+• Combine diverse probes (ICMP, SYN, ACK, UDP) to find more hosts behind varied filters.
+• Default 4-probe combo (good compromise): -PE -PA80 -PS443 -PP
+• Extended combos increase detection but increase time (tradeoff).
+• ARP scanning is automatic and preferred for targets on the same LAN.
+
+
+Safety & Legal
+------------------------------------------------------------
+• Only scan networks you own or have explicit permission to test.
+• Large/random scans can trigger IDS/alerts and legal issues—read “Legal Issues”.
+• Use --ttl, --source-port, and --dns-servers carefully to reduce collateral effects.
+
+
+Quick Reference (common commands)
+------------------------------------------------------------
+nmap -sL -n target-range                       # list targets (no packets)
+nmap -sn target-range                          # ping-sweep (host discovery only)
+nmap -Pn -p 1-1000 target-range                # skip discovery; scan ports
+nmap -sn -PS80,443 -PA80 -PU53 target-range    # mixed probe ping-sweep
+nmap -iL targets.txt --excludefile exclude.txt
+nmap -iR 100 -p 80                             # 100 random IPs, port 80
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
