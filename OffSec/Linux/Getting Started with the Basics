@@ -71,13 +71,22 @@ kali >man aircrack-ng      # q to quit
 
 FINDING STUFF
 ------------------------------------------------------------
-Quick (DB-based):
+find [search path] [search criteria] [action]
+
+-name: Search by Name
+-type: Search by Type [regular files f, directories d]
+-size: Search by Size
+-mtime, -atime, or -ctime: Search by Modification Time
+
+Quick (DB-based): 
+The locate command is used to find files on the system. locate uses a database called updatedb, which contains an index of files on your system, and the locate command quickly searches this database.
 kali >locate aircrack-ng
 
 Binary + manpage:
 kali >whereis aircrack-ng
 
-Which binary will run:
+Which binary will run: 
+The which command is used to obtain information about the path of a specific command. This is especially useful for understanding which version of a program is being used when multiple versions are installed.
 kali >which aircrack-ng
 
 Powerful recursive search:
@@ -85,12 +94,18 @@ Syntax: find <startdir> <options> <expression>
 
 By exact name:
 kali >find / -type f -name apache2
+kali >find / -name "notes.txt"
 
 Limit scope for speed:
 kali >find /etc -type f -name apache2
 
+Search by Size:
+find / -size +50M
+find / -mtime -7
+
 Use wildcards:
 kali >find /etc -type f -name "apache2.*"
+kali >find /home/user -type d -name "Project*"
 
 Wildcard quick ref:
 *  any chars    ? one char    [c,b] one of set
