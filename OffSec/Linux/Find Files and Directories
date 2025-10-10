@@ -21,24 +21,13 @@ find [search path] [search criteria] [action]
 -size: Search by Size
 -mtime, -atime, or -ctime: Search by Modification Time
 
-find / -name "notes.txt"
-find /home/user -type d -name "Project*"
+
+
 find / -size +50M
 find / -mtime -7
 
 
--- locate Command --
 
-The locate command is used to find files on the system. locate uses a database called updatedb, which contains an index of files on your system, and the locate command quickly searches this database.
-
-locate notes.txt
-
-
--- which Command --
-
-The which command is used to obtain information about the path of a specific command. This is especially useful for understanding which version of a program is being used when multiple versions are installed.
-
-which python [shows the path of the python executable]
 
 
 
