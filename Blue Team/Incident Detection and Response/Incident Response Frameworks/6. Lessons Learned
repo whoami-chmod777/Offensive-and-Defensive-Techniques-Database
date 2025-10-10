@@ -1,1 +1,23 @@
 
+--- Lessons Learned ---
+
+
+• Self reflect and improve the incident response process
+
+• Post-Incident Reviews
+  → Postmortem reports
+  → Who, what, where, why, how?
+
+• Lessons Learned Meetings
+  → When was the problem first detected?
+  → Who detected it?
+  → What was the scope of the incident?
+  → How was it contained, eradicated, and recovered?
+  → How were we effective?
+  → What are areas for improvement?
+  → Questions, suggestions, and discussions
+
+
+
+References
+https://www.atlassian.com/incident-management/postmortem/templates
