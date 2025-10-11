@@ -30,6 +30,11 @@ C:\Windows\System32\LogFiles\: Logs
 
 
 
+-- Windows Defender Firewall --
+
+netsh advfirewall firewall show rule name=all
+netsh advfirewall firewall show rule name=all | find "<value>"
+
 
 
 -- Prompts --
