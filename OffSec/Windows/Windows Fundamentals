@@ -1,1 +1,58 @@
 
+--- Windows Fundamentals ---
+
+• System Files
+• Prompts
+
+
+
+-- System Files --
+
+Program Files:
+• \Program Files: For 64-bit programs on 64-bit Windows
+• \Program Files (x86): For 32-bit programs on 64-bit Windows
+• \ProgramData: For program data independent of users
+
+User Data:
+• \Users: Contains a profile folder for each user
+• \Public: For files shared among users
+• [username]\AppData: For per-user application data and settings
+
+Windows System:
+• \Windows: Contains Windows itself.
+• \System, \System32, \SysWOW64: Contains Windows core components and dynamic link libraries (DLLs)
+• \WinSxS: Windows component store (including updates and service packs)
+
+Other:
+• \PerfLogs: Windows performance logs (empty by default)
+C:\ProgramData\Microsoft\Diagnosis\: Logs
+C:\Windows\System32\LogFiles\: Logs
+
+
+
+
+
+-- Prompts --
+
+Managing User Accounts: lusrmgr.msc
+Windows Event Viewer: eventvwr.msc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
