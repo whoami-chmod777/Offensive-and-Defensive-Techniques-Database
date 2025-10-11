@@ -38,8 +38,9 @@ Managing User Accounts: lusrmgr.msc
 Windows Event Viewer: eventvwr.msc
 System Configuration: msconfig
 Registry Editor: regedit
-
-
+Services: services.msc
+Local Security Policy: secpol.msc
+Local Group Policy: gpedit.msc
 
 
 
