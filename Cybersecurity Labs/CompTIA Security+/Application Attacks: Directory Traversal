@@ -1,1 +1,48 @@
 
+Directory Traversal, a common application attack, involves exploiting insufficient security measures to gain unauthorized access to files and directories. Attackers manipulate input parameters, such as file paths in web applications, to navigate beyond the intended directory structure and access sensitive information or execute arbitrary commands. Proper input validation and access controls are crucial to prevent directory traversal attacks and ensure the security of web applications.
+
+In this lab environment, the user will get access to a Kali instance's GUI. A vulnerable application is running on http://demo.ine.local. Your task is to exploit the vulnerability present in the application and perform a directory traversal attack.
+
+Objective: To exploit the vulnerability present in the application and perform a directory traversal attack.
+
+The best tools for this lab are: Firefox Web Browser
+
+
+With this lab exercise, we will got a clear understanding of how attackers can take advantage of the vulnerability present in the application and perform application attacks like directory traversal attacks.
+
+
+Step 1: Open the lab link to access the Kali machine.
+
+Step 2: Verify whether the target machine is up.
+
+Open the terminal and run the command: ping -c 4 demo.ine.local
+
+The target machine is up and running.
+
+Step 3: Open the web browser and visit the following URL: http://demo.ine.local
+
+You can see that it looks like a file viewer application where the user can select files that they want to view.
+
+Step 4: Let's check how the application works.
+
+Select one of the files that you want to view. Click on the "View File" button.
+
+Here, we can see the data from the file displayed on the screen.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
