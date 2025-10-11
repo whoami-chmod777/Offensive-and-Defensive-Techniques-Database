@@ -3,6 +3,11 @@
 
 • Core Tools
 • Step-by-Step Procedure
+  → Header Analysis
+  → URL & Domain Analysis
+  → Attachment Analysis
+  → Decision & Action
+  → Documentation
 
 
 
@@ -21,33 +26,59 @@
 
 1️⃣ Collect Artifacts
 
-• Save full .eml / .msg file
-• Extract headers, body, URLs, attachments
+Save full .eml / .msg file
+Extract headers, body, URLs, attachments
 
 ripmime -i suspicious.eml -d ./artifacts
 grep -Eo "https?://[^\"'<> ]+" suspicious.eml > urls.txt
 
 
 
-
-
-
-
-
 2️⃣ Header Analysis
+
+ripgrep -o 'https?://[^ >]+' mail.eml | sort -u
+grep -Ei "Received:|From:|Reply-To:|Return-Path:" suspicious.eml
+
+For Short-URLs: curl -I <shorturl> in a Sandbox 
+
+Verify domains via whois / dig:
+• whois bad-domain.com
+• dig bad-domain.com any
 
 
 
 3️⃣ URL & Domain Analysis
 
+Scan URLs:
+• urlscan.io
+• https://www.virustotal.com/gui/home/url
+
+Capture screenshots: url2png.com
+
+Check age & registration of domain (young domains → suspicious)
+
 
 
 4️⃣ Attachment Analysis
 
+Hash and scan file:
+md5sum attachment.docx
+sha256sum attachment.docx
+  → Lookup on VirusTotal.
+
+Sandbox test in Any.Run / Cuckoo / Hybrid Analysis
+
+If executable → static check: strings -n 8 attachment.exe | less
 
 
 5️⃣ Decision & Action
 
+If malicious indicators found:
+• Block sender & domain (mail gateway)
+• Block URLs (proxy/DNS firewall)
+• Reset affected user passwords
+• Notify users (awareness)
+• Share IOCs with Threat Intel team
 
 
 6️⃣ Documentation
