@@ -36,7 +36,8 @@ C:\Windows\System32\LogFiles\: Logs
 
 Managing User Accounts: lusrmgr.msc
 Windows Event Viewer: eventvwr.msc
-
+System Configuration: msconfig
+Registry Editor: regedit
 
 
 
