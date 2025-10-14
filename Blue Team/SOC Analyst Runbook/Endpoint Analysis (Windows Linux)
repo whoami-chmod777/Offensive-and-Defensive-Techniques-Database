@@ -1,1 +1,55 @@
 
+
+-- Endpoint Analysis (Windows Linux) --
+
+• Tools
+• Process Tree Analysis
+• Network Connections
+• Event Log Review
+
+
+
+🔧 Tools:
+
+• Sysmon / Windows Event Viewer / Autoruns / Process Explorer / PowerShell
+• LimaCharlie / Velociraptor / Wazuh / KAPE
+• Linux: ps, lsof, netstat, systemctl, journalctl
+
+
+🔍 Process Tree Analysis
+
+Get-Process | Sort-Object CPU -Descending
+Get-WinEvent -LogName "Microsoft-Windows-Sysmon/Operational" | Select-String "ParentProcessId"
+
+
+📡 Network Connections
+
+Windows
+netstat -ano | findstr ESTABLISHED
+Get-NetTCPConnection | Where-Object {$_.State -eq "Established"}
+
+Linux
+netstat -tulpen
+lsof -i
+
+
+🧾 Event Log Review
+
+Get-WinEvent -LogName Security | where {$_.Id -eq 4624 -or $_.Id -eq 4625}
+Get-WinEvent -LogName "Microsoft-Windows-Sysmon/Operational"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
