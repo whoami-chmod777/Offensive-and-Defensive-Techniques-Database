@@ -37,6 +37,8 @@ Domains, IPs, file hashes, emails, TTPs
 
 • Lookup indicators in MISP / VirusTotal:
 
+curl https://www.virustotal.com/api/v3/files/<hash>
+curl https://api.abuseipdb.com/api/v2/check?ipAddress=<IP>
 curl -H "Authorization: Bearer $VT_API" \ "https://www.virustotal.com/api/v3/files/<sha256>"
 
 
