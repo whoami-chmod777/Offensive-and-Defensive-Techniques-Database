@@ -525,7 +525,7 @@ https://any.run
 Sandboxing is a controlled, isolated environment used to safely execute and observe suspicious files.  
 It allows analysts to detect malicious behavior (processes, network calls, file changes) without risking production systems.
 
-🔹 What to Look for During Sandboxing
+🔹 What to Look for During Sandboxing 🔹 
 
 Process Activity:
 - Monitor spawned or unexpected processes.
@@ -578,39 +578,129 @@ https://medium.com/@asmcybersecurity/diving-deeper-into-the-microsoft-office-cve
 
 -- Static MalDoc Analysis --  
 
+Static MalDoc Analysis examines potentially malicious documents (Word, Excel, PDF, etc.) without executing them.  
+It focuses on identifying embedded macros, scripts, and objects that could deliver or hide malware.
+
+🔹Key Focus Areas🔹 
+
+Metadata Review: Check file properties (author, creation date, last modified, etc.) for anomalies or tampering.
+Macro Inspection: Extract and analyze VBA macros embedded in Office files. Look for suspicious keywords like: Shell, PowerShell, WScript, CreateObject, AutoOpen.
+OLE Stream Analysis: Inspect Object Linking and Embedding (OLE) structures for hidden or malicious streams.
+Embedded Objects: Identify executables, scripts, or URLs embedded within the document.
+Obfuscation Detection: Decode or decompress obfuscated VBA or encoded payloads to reveal malicious code.
+
+What is OLE
+Object Linking and Embedding (OLE) is a Microsoft technology that allows documents to embed or link to other objects (images, spreadsheets, executables, etc.).  
+Attackers often abuse OLE to hide scripts or drop malware through embedded objects or macros.
+
+python3 oledump.py --help
+python3 oledump.py sample1.xlsm → List all OLE streams in the document → "M" indicates a macro stream (e.g., Stream 4)
+python3 oledump.py sample1.xlsm -s 4 → Extract a specific macro from stream 4
+python3 oledump.py sample1.xlsm -s 4 -S → Extract readable strings from the macro
+python3 oledump.py sample1.xlsm -s 4 --vbadecompresscorrupt → Decompress or decode corrupted VBA macros
+python3 oledump.py sample1.xlsm -i → Show file metadata, including authorship and modification timestamps
+python3 oledump.py sample1.xlsm -S → Show the detailed structure of an OLE file
 
 
+# Identify file type and format
+file sample1.xlsm
+file quotation.iso
+file suspicious.doc
 
+# Extract readable text strings (useful for detecting URLs, macros, PowerShell)
+strings sample1.xlsm | less
+strings -n 6 sample1.xlsm | grep -Ei "http|https|cmd|powershell|wscript|shell"
 
+# View ASCII and hex representation of the file
+xxd sample1.xlsm | head -50
 
+# Check for embedded URLs, IPs, or suspicious patterns
+grep -Eo "(http|https)://[a-zA-Z0-9./?=_-]*" sample1.xlsm
+grep -Eo "[0-9]{1,3}(\.[0-9]{1,3}){3}" sample1.xlsm
 
+# Analyze metadata (creation time, author, last modified)
+exiftool sample1.xlsm
+exiftool sample1.pdf
 
+# Detect OLE objects or embedded streams (manual verification)
+oleid sample1.xlsm
+oledir sample1.xlsm
 
+# Extract possible Base64-encoded payloads
+grep -Eo "([A-Za-z0-9+/]{20,}={0,2})" sample1.xlsm | head -20
 
+# Detect suspicious macros or embedded scripts (VBA-related)
+strings sample1.xlsm | grep -Ei "AutoOpen|Shell|CreateObject|Execute|PowerShell"
 
+# View summary information for Office files
+olemeta sample1.xlsm
 
+# (Optional) Generate file hashes for comparison / sandbox upload
+md5sum sample1.xlsm
+sha256sum sample1.xlsm
 
+Static MalDoc Analysis reveals hidden malicious behavior before execution, reducing risk and supporting early detection.
 
-
-
-
-
-
-
-
-
-
-
-
-
+https://blog.didierstevens.com/programs/oledump-py/
+https://github.com/DidierStevens/DidierStevensSuite/blob/master/oledump.py
 
 
 
 -- Static PDF Analysis --  
--- Automated Email Analysis with PhishTool --  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://github.com/DidierStevens/DidierStevensSuite/blob/master/pdf-parser.py
+https://github.com/DidierStevens/DidierStevensSuite/blob/master/pdfid.py
+
+
+
+-- Automated Email Analysis with PhishTool -- 
+
+
+
+
 -- Reactive Phishing Defense --  
+
+
+
+
 -- Proactive Phishing Defense --  
+
+
+
+
 -- Documentation and Reporting --  
+
+
+
+
+
 
 
 
