@@ -1,1 +1,85 @@
 
+--- Security Information and Event Monitoring (SIEM) ---
+
+• Objective
+• Core Tools
+• Step-by-Step Procedure
+  → Logging & Aggregation
+  → Correlation (Sigma)
+  → SIEM Query Examples (Splunk)
+  → Dashboards
+
+
+🎯 Objective: Aggregate, correlate, and investigate security events.
+
+
+🧰 Core Tools
+
+• Splunk – Log ingestion & query
+• Sigma – Rule standardization
+• ATT&CK – Mapping tactics/techniques
+• Event Viewer / Sysmon – Windows event logging
+
+
+🧩 Step-by-Step Procedure
+
+1️⃣ Logging & Aggregation
+
+• Ensure sources: Windows, Syslog, EDR, Firewall.
+
+tail -f /var/log/syslog
+
+
+2️⃣ Correlation (Sigma)
+
+• Write generic detection logic:
+
+title: Powershell DownloadFile
+detection:
+  selection:
+    EventID: 4688
+    CommandLine|contains: "DownloadFile"
+  condition: selection
+
+
+3️⃣ SIEM Query Examples (Splunk)
+
+# Suspicious PowerShell
+index=wineventlog EventCode=4688 New_Process_Name="*powershell.exe" CommandLine="*DownloadFile*"
+
+# New local admin creation
+index=wineventlog EventCode=4720 OR EventCode=4728 | table _time, user, target_user_name, workstation
+
+
+4️⃣ Dashboards
+
+• Create ATT&CK-mapped dashboards in Splunk (by MITRE tactic)
+• Enable alerting & correlation rules.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
