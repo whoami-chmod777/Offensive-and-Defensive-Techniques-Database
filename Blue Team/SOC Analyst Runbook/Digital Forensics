@@ -4,7 +4,11 @@
 • Objective
 • Core Tools
 • Step-by-Step Procedure
-  
+  → Acquisition
+Preservation
+Analysis
+Reporting
+
 
 
 🎯 Objective: Collect, preserve, and analyze digital evidence from compromised systems.
@@ -30,6 +34,34 @@
 
 winpmem.exe --format raw -o memdump.raw
 FTK Imager -> create E01 image
+
+
+2️⃣ Preservation
+
+• Calculate hash values:
+
+sha256sum image.E01 > image.E01.sha256
+
+
+3️⃣ Analysis
+
+• Memory (Volatility 3):
+
+vol -f memdump.raw windows.pslist
+vol -f memdump.raw windows.malfind
+vol -f memdump.raw windows.cmdline
+
+• Disk (Autopsy): Parse MFT, Prefetch, Recycle Bin, Browser data.
+
+• File carving: scalpel image.dd
+
+• Linux Artifacts: /etc/passwd, /var/log/auth.log, .bash_history
+
+
+4️⃣ Reporting
+
+• Timeline of user activity, process creation, and file access.
+• Identify persistence mechanisms & root cause.
 
 
 
