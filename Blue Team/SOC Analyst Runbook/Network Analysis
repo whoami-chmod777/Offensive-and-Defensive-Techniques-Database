@@ -1,0 +1,30 @@
+
+--- Network Analysis ---
+
+• Tools
+• Packet Capture
+• Analyze with Wireshark
+• IDS / Snort
+
+
+
+🔧 Tools: Wireshark / tcpdump / Zeek / Snort
+
+
+📡 Packet Capture
+
+sudo tcpdump -i eth0 -w capture.pcap
+sudo tcpdump -i eth0 host 192.168.1.10 and port 443
+
+
+🔍 Analyze with Wireshark
+
+http.request.method == "POST"
+tls.handshake.extensions_server_name
+dns.qry.name contains "suspiciousdomain.com"
+
+
+🚨 IDS / Snort
+
+snort -A console -c /etc/snort/snort.conf -i eth0
+alert tcp any any -> any 80 (content:"/cmd.exe"; msg:"Possible CMD Execution"; sid:1000001;)
