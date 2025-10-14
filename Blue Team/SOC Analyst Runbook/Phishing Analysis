@@ -33,7 +33,6 @@ ripmime -i suspicious.eml -d ./artifacts
 grep -Eo "https?://[^\"'<> ]+" suspicious.eml > urls.txt
 
 
-
 2️⃣ Header Analysis
 
 ripgrep -o 'https?://[^ >]+' mail.eml | sort -u
@@ -46,7 +45,6 @@ Verify domains via whois / dig:
 • dig bad-domain.com any
 
 
-
 3️⃣ URL & Domain Analysis
 
 Scan URLs:
@@ -56,7 +54,6 @@ Scan URLs:
 Capture screenshots: url2png.com
 
 Check age & registration of domain (young domains → suspicious)
-
 
 
 4️⃣ Attachment Analysis
