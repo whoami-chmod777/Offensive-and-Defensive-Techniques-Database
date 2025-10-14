@@ -5,7 +5,9 @@
 • Tools
 • Process Tree Analysis
 • Network Connections
+• Services
 • Event Log Review
+• Scheduled Tasks
 
 
 
@@ -22,6 +24,7 @@ Get-Process | Sort-Object CPU -Descending
 Get-Process | Sort CPU -Descending | Select -First 20
 
 Get-WinEvent -LogName "Microsoft-Windows-Sysmon/Operational" | Select-String "ParentProcessId"
+Get-WinEvent -FilterHashtable @{LogName='Security'; StartTime=(Get-Date).AddHours(-1)} -MaxEvents 200
 
 
 📡 Network Connections
@@ -34,6 +37,11 @@ Get-NetTCPConnection | Sort-Object -Property State
 Linux
 netstat -tulpen
 lsof -i
+
+
+📡 Services
+
+Get-Service | Where-Object {$_.Status -eq 'Running'}
 
 
 🧾 Event Log Review
