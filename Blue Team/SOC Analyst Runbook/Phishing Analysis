@@ -2,7 +2,6 @@
 --- Phishing Analysis ---
 
 • Email Fundamentals  
-• Phishing Analysis Configuration  
 • Phishing Attack Types  
 • Phishing Attack Techniques  
 • Email Analysis Methodology  
@@ -40,29 +39,326 @@ Gmail’s server sends the message via SMTP across the internet to Alice’s mai
 Alice then connects to her Yahoo mailbox using POP3 or IMAP to receive and read Bob’s email.
 
 
-Email Headers: Email headers are lines of metadata attached to an email and contain useful information like sender, receiver, subject, and mail servers.
-Email Body: The email body is the main part of the email that the receiver reads and contains the message, links, images, or attachments.
+• Email Headers: Email headers are lines of metadata attached to an email and contain useful information like sender, receiver, subject, and mail servers.
+• Email Body: The email body is the main part of the email that the receiver reads and contains the message, links, images, or attachments.
+
+• SMTP (Simple Mail Transfer Protocol) – 25 (default), 465 or 587 (secure)
+• POP3 (Post Office Protocol v3) – 110 (default), 995 (secure)
+• IMAP (Internet Message Access Protocol) – 143 (default), 993 (secure)
+
+
+EMAIL FLOW WITH MAIL AGENTS (ASCII)
+
+   [ Bob - Sender ]                        [ Mail Servers / Internet ]                     [ Alice - Recipient ]
++--------------------+                +------------------------+                    +-----------------------+
+| Mail User Agent    | --SMTP-->      | Mail Transfer Agents   | --SMTP-->          | Mail Delivery Agent   |
+| (MUA - e.g. Gmail) |                | (MTA - route messages) |                    | (MDA - inbox handler) |
++--------------------+                +------------------------+                    +-----------------------+
+         |                                                                              |
+         |                                                                              |
+         +---------------------------- POP3 / IMAP ------------------------------------+
+                                    (Mail Retrieval Agent - MRA)
+
+
+MUA (Mail User Agent) – Used by the user to write, send, and read emails.
+→ Example: Gmail, Outlook, Yahoo, Thunderbird
+
+MSA (Mail Submission Agent) – Takes the email from the MUA and sends it to the first mail server using SMTP.
+
+MTA (Mail Transfer Agent) – Transfers and routes the email across multiple mail servers until it reaches the recipient’s server.
+→ Example: Postfix, Sendmail, Exim
+
+MDA (Mail Delivery Agent) – Accepts the message from the MTA and puts it into the recipient’s mailbox.
+→ Example: Procmail, Dovecot LDA
+
+MRA (Mail Retrieval Agent) – Allows the recipient to fetch or sync their emails from the mailbox using POP3 or IMAP.
+→ Example: Outlook IMAP, Apple Mail, Thunderbird
+
+-----------------------------------------------------------
+Simple Explanation:
+Bob writes an email using Gmail (MUA).  
+The Mail Submission Agent (MSA) sends it to Gmail’s server.  
+Mail Transfer Agents (MTAs) pass the message across the internet until it reaches Yahoo’s mail server.  
+The Mail Delivery Agent (MDA) places it into Alice’s inbox.  
+Finally, Alice’s email client (MRA) retrieves the email using POP3 or IMAP so she can read it.
+-----------------------------------------------------------
+
+An email moves from the sender’s client through mail agents (MSA → MTA → MDA → MRA) using SMTP and is retrieved by the recipient with POP3 or IMAP.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
--- Phishing Analysis Configuration --  
 -- Phishing Attack Types --  
+
+• Information Gathering – Collecting information about targets to create realistic phishing emails.
+• Credential Harvesting – Stealing usernames and passwords through fake login pages or deceptive links.
+• Malware Delivery – Sending malicious attachments or links that install malware.
+• Spear Phishing – Highly targeted phishing aimed at specific people or organizations.
+• Whaling – Phishing attacks aimed at high-profile individuals like CEOs or executives.
+• Vishing / SMiShing / Quishing – Using phone calls, SMS, or QR codes to trick users into giving information.
+• Business Email Compromise (BEC) – Using real or stolen business accounts to send fraudulent requests or scams.
+• Spam – Unwanted or irrelevant bulk emails, usually without direct malicious intent.
+
+
+
 -- Phishing Attack Techniques --  
--- Email Analysis Methodology --  
+
+• Pretexting – Creating a fake story or reason to trick someone into giving information.
+• Spoofing and Impersonation – Faking an email address or domain to look like a trusted person or company.
+• URL Manipulation – Using fake or shortened links to hide the real malicious website.
+• Encoding – Hiding malicious code or URLs using Base64, HTML, or JavaScript encoding to avoid detection.
+• Attachments – Sending files that the victim downloads and runs to install malware.
+• Abuse of Legitimate Services – Using trusted sites like Google Drive or Dropbox to deliver malicious content.
+• Pharming – Redirecting users to fake websites by poisoning DNS or using malware to steal data.
+
+
+
+-- Email Analysis Methodology -- 
+
+• Initial Triage – Quickly check the email and decide how serious and urgent it is.
+• Header and Sender Examination – Look at sender details, IPs, and mail servers to find the real source.
+• Content Examination – Read the email text to spot fake language, tone, formatting or social engineering tricks.
+• Web and URL Examination – Collect and analyze all links and domains used in the email.
+• Attachment Examination – Safely extract and check attached files for malware or sandbox behavior.
+• Contextual Examination – Compare with other incidents to see if it’s part of a bigger campaign.
+• Defense Measures – Take needed actions like blocking domains, alerting users, or resetting passwords.
+• Documentation and Reporting – Record all findings, actions, and outcomes in a report and close the
+
+
+
 -- Email Header and Sender Analysis --  
--- Email Authentication Methods --  
--- Email Content Analysis --  
+
+Look at these key points to find the true sender and verify authenticity:
+
+• Date and Time: – The exact date and time the email was sent; check for inconsistencies or delays between hops.
+• From: – The sender’s display name and email address (can be spoofed in phishing attempts).
+• To: – The recipient’s email address showing who the message was intended for.
+• Subject: – The subject line of the email, giving an idea of the message’s content.
+• Return-Path: – The real address used for mail delivery or bounces; useful for tracing the sending server.
+• Reply-To: – The address replies will go to (can differ from From; often abused in phishing).
+• Message-ID: – A unique identifier created by the sending mail server to track the message’s journey.
+• Received: – Lists all servers and IPs the email passed through; unexpected hops may indicate spoofing.
+• Authentication-Results: – Displays SPF, DKIM, and DMARC check results.
+• SPF Result: – Tells if the sender’s IP is authorized to send for that domain.
+• DKIM Signature: – Confirms if the message content and sender domain are genuine.
+• DMARC Policy: – Defines how the receiving server should handle SPF/DKIM failures.
+• Originating IP Address: – The first external IP in the Received chain (actual sending source).
+• Mail Server Hostnames: – The domain names of each mail server in the route.
+• X-Headers: – Custom headers added by servers or gateways (e.g., X-Originating-IP, X-Mailer) that may reveal the original sending system or tools.
+• X-Sender-IP: – Reveals the real IP address of the sender; useful for tracing origin and identifying malicious hosts.
+
+
+How to Analyze the "Received" Chain:
+• Read from Bottom to Top: The bottom-most “Received” header shows the first mail server that handled the email, while the top one shows the final server that delivered it to the recipient.
+• Check for Unexpected Hops: If there are unknown, mismatched, or suspicious servers in the chain, it may indicate tampering, relaying through unauthorized systems, or redirection by malicious actors.
+• Verify IP Addresses and Domains: Cross-check each IP address and domain with trusted sources (e.g., WHOIS, DNS records, or internal threat intel) to confirm they belong to legitimate mail servers.
+
+Why it matters:
+• Analyzing the “Received” headers helps uncover spoofing attempts, misconfigured domains, or phishing attacks.
+• Validating these entries against SPF, DKIM, and DMARC records strengthens confidence in the email’s authenticity.
+
+
+https://www.iana.org/assignments/message-headers/message-headers.xhtml
+https://whois.domaintools.com/
+https://mha.azurewebsites.net/
+https://github.com/microsoft/MHA
+https://mxtoolbox.com/EmailHeaders.aspx
+https://toolbox.googleapps.com/apps/messageheader/
+http://mailheader.org/
+https://testconnectivity.microsoft.com/tests/exo
+
+
+
+-- Email Authentication Methods -- 
+
+Email Authentication Methods (SPF, DKIM, DMARC)
+
+SPF (Sender Policy Framework) – Checks if the sending mail server is authorized for the domain.
+➡️ Uses DNS records listing valid sender IPs.
+✅ Pass if IP matches, ❌ Fail if not in record.
+
+Received-SPF: pass (google.com: domain of example.com designates 192.168.1.20 as permitted sender) client-ip=192.168.1.20;
+
+
+DKIM (DomainKeys Identified Mail) – Confirms message integrity and sender authenticity.
+➡️ Email is signed with a private key; recipient verifies using a public key in DNS.
+✅ Pass if signature valid, ❌ Fail if modified.
+
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=example.com; s=selector1;
+ h=from:subject:date:message-id;
+ bh=AbCdEfGh1234567890==;
+ b=RANDOMLONGENCRYPTEDSIGNATURE==
+
+
+DMARC (Domain-based Message Authentication, Reporting & Conformance) – Enforces SPF/DKIM checks and gives reporting visibility.
+➡️ DNS policy tells how to handle failed messages (none / quarantine / reject).
+✅ Pass if SPF or DKIM align with the “From” domain.
+
+Authentication-Results: mx.google.com;
+ spf=pass smtp.mailfrom=example.com;
+ dkim=pass header.d=example.com;
+ dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=example.com
+
+
+>> Email Authentication Verification Commands <<
+
+  SPF (Sender Policy Framework)
+----------------------------------
+
+# Check SPF record for a domain
+nslookup -type=txt namecheap.com | grep -i spf
+dig TXT namecheap.com | grep -i spf
+
+# Check included SPF records
+nslookup -type=txt _spf.sendgrid.net | grep -i spf
+dig TXT _spf.google.com | grep -i spf
+host -t txt example.com | grep -i spf
+
+curl -s https://dns.google/resolve?name=example.com&type=TXT | jq '.Answer[] | select(.data | test("spf"))'
+
+# Example Output
+shodan.io text = "v=spf1 ip4:216.117.2.180 ip4:69.72.37.146 include:_spf.google.com -all"
+
+# Interpretation
+v=spf1       → SPF version
+ip4:         → Authorized sending IPs
+include:     → Reference another domain’s SPF record
+-all         → Hard fail (reject unauthorized senders)
+~all         → Soft fail (mark as suspicious, don’t reject)
+
+
+  DKIM (DomainKeys Identified Mail)
+--------------------------------------
+
+# Check DKIM record (replace selector1 with actual selector name)
+nslookup -type=txt selector1._domainkey.namecheap.com
+dig selector1._domainkey.namecheap.com TXT
+
+dig selector1._domainkey.example.com TXT +short | awk -F'p=' '{print length($2)}'
+
+# Example Output
+v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC1LfA...
+
+# Interpretation
+v=DKIM1  → DKIM version
+k=rsa    → Key type
+p=       → Public key for verifying DKIM signature
+
+
+  DMARC (Domain-based Message Authentication, Reporting & Conformance)
+-------------------------------------------------------------------------
+
+# Check DMARC record
+nslookup -type=txt _dmarc.namecheap.com
+dig _dmarc.namecheap.com TXT
+
+curl -s https://dns.google/resolve?name=_dmarc.example.com&type=TXT | jq '.Answer[]'
+
+# Example Output
+v=DMARC1; p=reject; rua=mailto:dmarc-reports@yourdomain.com
+
+# Interpretation
+v=DMARC1  → DMARC version
+p=        → Policy (none / quarantine / reject)
+rua=      → Reporting address for DMARC aggregate reports
+
+SPF   → Verifies if the sender server is authorized to send mail for the domain.
+DKIM  → Confirms message integrity and authenticity using digital signatures.
+DMARC → Enforces SPF/DKIM checks and defines policy for failed authentication.
+
+
+https://mxtoolbox.com/EmailHeaders.aspx
+https://mxtoolbox.com/dkim.aspx
+https://mxtoolbox.com/dmarc.aspx
+https://defang.me/
+
+
+
+-- Email Content Analysis -- 
+
+Look at these key points to identify phishing or malicious intent:
+
+Email Body: – Main text of the message; check for urgency, fear, or financial requests.
+Language and Tone: – Poor grammar, unusual phrasing, or unnatural urgency.
+Links: – Hover to see the real URL; watch for misspelled domains or redirects.
+Attachments: – Mentioned but missing, or attached with suspicious names/extensions.
+Logos and Branding: – Slight visual changes or wrong colors/fonts can indicate fakes.
+Sender Signature: – Check if the signature matches the claimed company format.
+Requests for Action: – Login links, payments, data updates — red flags for phishing.
+Embedded Code: – Hidden HTML, JavaScript, or base64 content in the message source.
+Mismatch: – Visible URL ≠ actual hyperlink destination.
+Social Engineering: – Emotional pressure, authority impersonation, or urgency tactics.
+
+
+MIME Analysis (Multipurpose Internet Mail Extensions):
+
+MIME-Version: – Defines which MIME protocol version is used.
+Content-Type: – Specifies the email format (plain text, HTML, or multipart with attachments).
+Content-Transfer-Encoding: – Shows how content is encoded (Base64, quoted-printable, etc.).
+MIME Boundary: – Separates multiple parts of an email (plain text vs. HTML or attachments).
+➡️ Used to detect hidden payloads or extra HTML content that doesn’t appear in the plain-text view.
+
+
+Red Flags
+• Organization name mismatch.
+• Awkward greetings or inconsistent sender identity.
+• Social engineering tactics (urgency, fear, pressure, or authority).
+• Poor grammar, spelling mistakes, or formatting inconsistencies.
+
+Encoding Types (Common Obfuscation Techniques)
+• Base64 Encoding: – Encodes attachments or hides scripts within HTML or MIME parts.
+• HTML Entity Encoding: – Masks malicious code or links inside HTML text.
+• URL Encoding: – Hides phishing URLs or redirects inside encoded characters (%2E, %2F, etc.).
+
+
+CyberChef: – Decode and analyze encoded content.
+• Decode Base64 strings to reveal hidden data.
+• Deobfuscate encoded URLs or HTML entities.
+• Visualize and extract hidden scripts or payloads.
+
+
+- Email Content Analysis Examples -
+
+• Hiding Malicious URLs within Legitimate-Looking Links Example: 
+<a href="https://malicious-site.com">https://legitimate-site.com</a>
+
+• URL Encoding Example:
+https://malicious-site.com/badstuff
+https://malicious-site.com/%62%61%64%73%74%75%66
+
+• Base64 Encoding Example:
+https://malicious-site.com/badstuffaHR0cHM6Ly9tYWxpY2lvdXMtc2l0ZS5jb20vYmFkc3R1ZmY=
+
+• Combining Both Techniques – Hidden and Encoded Link Example:
+<a href="https://malicious-site.com/%62%61%64%73%74%75%66">Click here to update your account</a>
+https://malicious-site.com/%62%61%64%73%74%75%66
+
+• Using CyberChef to Decode Encoded URLs: aHR0cHM6Ly9tYWxpY2lvdXMtc2l0ZS5jb20vYmFkc3R1ZmY=
+
+1. Go to CyberChef (https://gchq.github.io/CyberChef/)
+2. Use "From Base64"
+3. Paste the Base64-encoded URL
+4. Click "Bake!"
+5. Decoded result → https://malicious-site.com/badstuff
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://gchq.github.io/CyberChef/
+https://www.w3schools.com/html/html_entities.asp
+
+
+
 -- The Anatomy of a URL --  
 -- Email URL Analysis --  
 -- Email Attachment Analysis --  
