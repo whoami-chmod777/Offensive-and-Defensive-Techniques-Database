@@ -1,1 +1,166 @@
 
+--- Phishing Analysis ---
+
+• Email Fundamentals  
+• Phishing Analysis Configuration  
+• Phishing Attack Types  
+• Phishing Attack Techniques  
+• Email Analysis Methodology  
+• Email Header and Sender Analysis  
+• Email Authentication Methods  
+• Email Content Analysis  
+• The Anatomy of a URL  
+• Email URL Analysis  
+• Email Attachment Analysis  
+• Dynamic Attachment Analysis and Sandboxing  
+• Static MalDoc Analysis  
+• Static PDF Analysis  
+• Automated Email Analysis with PhishTool  
+• Reactive Phishing Defense  
+• Proactive Phishing Defense  
+• Documentation and Reporting  
+
+
+-- Email Fundamentals --
+
+EMAIL FLOW (ASCII)
+
+Sender (Bob)                  Bob's Mail Server                 Alice's Mail Server                 Recipient (Alice)
++-------------+               +-------------------+             +--------------------+              +--------------+
+|  Bob        | -- SMTP --->  |  Gmail / SMTP MX  | -- SMTP --> |  Yahoo / SMTP MX   | -- POP3/IMAP|   Alice      |
+|  (Sender)   |               |  (outbound MTA)   |             |  (inbound MTA)     | <----------- |  (Recipient) |
++-------------+               +-------------------+             +--------------------+              +--------------+
+
+Legend:
+- SMTP: Simple Mail Transfer Protocol (sending/relaying mail between servers)
+- POP3/IMAP: Protocols used by the recipient to retrieve mail from their mail server
+
+Bob (the sender) writes an email and sends it using his mail service (e.g., Gmail).  
+Gmail’s server sends the message via SMTP across the internet to Alice’s mail server (e.g., Yahoo).  
+Alice then connects to her Yahoo mailbox using POP3 or IMAP to receive and read Bob’s email.
+
+
+Email Headers: Email headers are lines of metadata attached to an email and contain useful information like sender, receiver, subject, and mail servers.
+Email Body: The email body is the main part of the email that the receiver reads and contains the message, links, images, or attachments.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Phishing Analysis Configuration --  
+-- Phishing Attack Types --  
+-- Phishing Attack Techniques --  
+-- Email Analysis Methodology --  
+-- Email Header and Sender Analysis --  
+-- Email Authentication Methods --  
+-- Email Content Analysis --  
+-- The Anatomy of a URL --  
+-- Email URL Analysis --  
+-- Email Attachment Analysis --  
+-- Dynamic Attachment Analysis and Sandboxing --  
+-- Static MalDoc Analysis --  
+-- Static PDF Analysis --  
+-- Automated Email Analysis with PhishTool --  
+-- Reactive Phishing Defense --  
+-- Proactive Phishing Defense --  
+-- Documentation and Reporting --  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
++++++++++++++++++++++++
