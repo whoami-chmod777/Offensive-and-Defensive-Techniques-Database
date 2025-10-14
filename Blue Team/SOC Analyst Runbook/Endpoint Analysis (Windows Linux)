@@ -19,7 +19,11 @@
 🔍 Process Tree Analysis
 
 Get-Process | Sort-Object CPU -Descending
+Get-Process | Sort CPU -Descending | Select -First 20
+
 Get-WinEvent -LogName "Microsoft-Windows-Sysmon/Operational" | Select-String "ParentProcessId"
+
+
 
 
 📡 Network Connections
@@ -27,6 +31,7 @@ Get-WinEvent -LogName "Microsoft-Windows-Sysmon/Operational" | Select-String "Pa
 Windows
 netstat -ano | findstr ESTABLISHED
 Get-NetTCPConnection | Where-Object {$_.State -eq "Established"}
+Get-NetTCPConnection | Sort-Object -Property State
 
 Linux
 netstat -tulpen
@@ -39,10 +44,9 @@ Get-WinEvent -LogName Security | where {$_.Id -eq 4624 -or $_.Id -eq 4625}
 Get-WinEvent -LogName "Microsoft-Windows-Sysmon/Operational"
 
 
+🧾 Scheduled Tasks
 
-
-
-
+Get-ScheduledTask | where {$_.State -ne 'Disabled'}
 
 
 
