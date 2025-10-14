@@ -1,6 +1,13 @@
 
 --- Threat Intelligence ---
 
+• Objective
+• Core Tools
+• Step-by-Step Procedure
+  → Identify & Collect IOCs
+  → Enrich
+  → Analyze
+  → Disseminate
 
 
 
@@ -20,3 +27,39 @@
 
 
 🧩 Step-by-Step Procedure
+
+1️⃣ Identify & Collect IOCs
+
+• Gather from phishing, malware, logs, or feeds
+
+Domains, IPs, file hashes, emails, TTPs
+
+
+2️⃣ Enrich
+
+• Lookup indicators in MISP / VirusTotal:
+
+curl -H "Authorization: Bearer $VT_API" \ "https://www.virustotal.com/api/v3/files/<sha256>"
+
+
+3️⃣ Analyze
+
+• Correlate with ATT&CK: Map observed behavior to TTPs (e.g. T1566.001: Spear Phishing Attachment)
+• Assess threat actor motives (financial, espionage, activism)
+
+
+4️⃣ Disseminate
+
+• Push IOCs to SIEM / firewall / EDR
+• Share sanitized intelligence in ISAC or internal reports
+• Use Pyramid of Pain to prioritize harder-to-change indicators
+
+
+
+
+
+
+
+
+
+
