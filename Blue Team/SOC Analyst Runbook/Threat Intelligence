@@ -1,1 +1,22 @@
 
+--- Threat Intelligence ---
+
+
+
+
+🎯 Objective: Identify, analyze, and share threat data (IOCs, TTPs, APTs).
+
+
+
+🧰 Core Tools
+
+• MISP – IOC management & correlation
+• OpenCTI – Threat data enrichment
+• VirusTotal / Hybrid Analysis – IOC reputation
+• ATT&CK Navigator – TTP mapping
+• OSINT Sources – AbuseIPDB, GreyNoise, Malpedia, Shodan
+• ISACs / CERTs – Information sharing networks
+
+
+
+🧩 Step-by-Step Procedure
