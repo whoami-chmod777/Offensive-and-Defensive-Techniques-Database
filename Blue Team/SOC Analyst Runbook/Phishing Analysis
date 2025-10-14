@@ -341,28 +341,199 @@ https://malicious-site.com/%62%61%64%73%74%75%66
 4. Click "Bake!"
 5. Decoded result → https://malicious-site.com/badstuff
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 https://gchq.github.io/CyberChef/
 https://www.w3schools.com/html/html_entities.asp
 
 
 
--- The Anatomy of a URL --  
--- Email URL Analysis --  
+-- The Anatomy of a URL -- 
+
+https://blog.raminzamani.com:443/6-parts-of-a-url?utm_source=linkedin&utm_medium=organic#definition
+
+https://blog.raminzamani.com:443/6-parts-of-a-url?utm_source=linkedin&utm_medium=organic#definition
+│        │                   │   │                   │                             │
+│        │                   │   │                   │                             └─ Fragment: #definition
+│        │                   │   │                   └─ Query String: ?utm_source=linkedin&utm_medium=organic
+│        │                   │   └─ Path: /6-parts-of-a-url
+│        │                   └─ Port: 443
+│        └─ Hostname: blog.raminzamani.com
+│             ├─ Subdomain: blog
+│             ├─ Main Domain: raminzamani
+│             └─ TLD: com
+└─ Protocol: https
+
+
+
+-- Email URL Analysis -- 
+
+Email URL Analysis is the process of examining links found in emails to detect signs of phishing, malicious redirects, or other security risks.
+
+🔹 Safe Handling of Links
+- Never click suspicious links directly.
+- Right-click → "Copy Link Location" to inspect safely.
+- Always analyze URLs in an isolated or sandboxed environment.
+
+🔹 Using Sublime Text
+- Open the .eml file in Sublime Text.
+- Search for "http" or "https" to locate embedded URLs.
+- Look for <a> tags to reveal hidden or disguised links.
+- This method allows visual inspection without activating the URL.
+
+🔹 Using CyberChef
+- Tool: https://gchq.github.io/CyberChef/
+- Useful operations:
+  - "From Quoted Printable" → Decode encoded email content.
+  - "Extract URLs" → List all URLs from the message.
+  - "Defang URL" → Safely modify links (e.g., hxxps[:] instead of https://).
+- Helps decode and examine malicious links securely.
+
+🔹 Using Email IOC Extractor
+- A Python script for automatic extraction of Indicators of Compromise (IOCs) from email files.
+
+$ python3 eioc.py <file_path>
+
+$ python3 eioc.py sample1.eml
+
+Extracted IP Addresses:
+====================================
+209[.]85[.]128[.]170 - Atlanta, Georgia, US, ISP: AS15169 Google LLC
+10[.]13[.]153[.]59
+
+Extracted URLs:
+====================================
+hxxps[://]drive[.]google[.]com/file/d/1sdzd_hr-_bEt_tJabjINZfvYiOvEJjSJ
+hxxps[://]apply-submite[.]vercel[.]app/
+
+Extracted Headers:
+====================================
+Date: Mon, 31 Oct 2022 11:53:21 +0300
+Subject: [Action required] Verify your info to continue using your account
+From: Ropo12g Gaming <jodykrier60@gmail.com>
+Return-Path: jodykrier60@gmail.com
+X-Sender-IP: 209.85.128.170
+Authentication-Results: spf=pass (sender IP is 209.85.128.170)
+
+Extracted Attachments:
+====================================
+Filename: 3spyWy0D.pdf
+MD5: 42f1cb17cee1027608917094c3fe99b9
+SHA256: 6bd89500da5666a9444d2cd9af7a1fe4c945ea9fb31562d97018fdb2799dbda3
+
+🔹 Notes:
+- Defang URLs (e.g., hxxp:// or [.] instead of .com) before sharing.
+- Cross-check domains on threat intelligence platforms (VirusTotal, URLScan, AbuseIPDB).
+- Record all findings (URLs, IPs, hashes) in your case documentation.
+
+
+Analyze URL Reputation Check
+
+https://gchq.github.io/CyberChef/
+https://github.com/MalwareCube/Email-IOC-Extractor
+https://phishtank.org/
+https://www.url2png.com/
+https://urlscan.io/
+https://www.virustotal.com/gui/home/upload
+https://www.urlvoid.com/
+https://www.wannabrowser.net/
+https://unshorten.it/
+https://urlhaus.abuse.ch/
+https://transparencyreport.google.com/safe-browsing/search
+https://www.joesandbox.com/
+
+
+
 -- Email Attachment Analysis --  
+
+Analyzing email attachments helps identify hidden malware or phishing payloads.
+
+🔹 Common Attachment Types
+
+Documents: .pdf, .docx, .xlsx, .pptx
+⚠️ May contain malicious macros or embedded scripts.
+
+Images: .jpg, .png, .gif
+⚠️ Could hide steganography or injected payloads.
+
+Compressed Archives: .zip, .rar, .7z
+⚠️ Often used to conceal multiple files or executables.
+
+Executables: .exe, .bat, .sh, .msi
+⚠️ High risk of malware, trojans, or ransomware.
+
+Scripts: .js, .vbs, .ps1
+⚠️ Can execute dangerous code automatically.
+
+Emails: .eml, .msg
+⚠️ May include phishing or malicious links.
+
+Multimedia: .mp3, .wav, .mkv
+⚠️ Can contain hidden malicious payloads.
+
+
+Extracting Attachments (Static Analysis)
+
+python3 emldump.py sample1.eml
+python3 emldump.py sample1.eml -s 4 -d > quotation.iso
+
+python3 eioc.py sample1.eml
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+File Reputation Services
+
+https://github.com/DidierStevens/DidierStevensSuite/blob/master/emldump.py
+https://github.com/MalwareCube/Email-IOC-Extractor
+https://www.virustotal.com/gui/home/upload
+https://talosintelligence.com/
+https://any.run
+
+
+
 -- Dynamic Attachment Analysis and Sandboxing --  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 -- Static MalDoc Analysis --  
 -- Static PDF Analysis --  
 -- Automated Email Analysis with PhishTool --  
