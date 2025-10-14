@@ -16,8 +16,8 @@
 • Static PDF Analysis  
 • Automated Email Analysis with PhishTool  
 • Reactive Phishing Defense  
-• Proactive Phishing Defense  
-• Documentation and Reporting  
+• Phishing Analysis Report Template
+
 
 
 -- Email Fundamentals --
@@ -693,32 +693,6 @@ Analyst Notes:
 • Never open suspect PDFs directly on a production host — use isolated VMs.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 https://github.com/DidierStevens/DidierStevensSuite/blob/master/pdf-parser.py
 https://github.com/DidierStevens/DidierStevensSuite/blob/master/pdfid.py
 
@@ -726,20 +700,168 @@ https://github.com/DidierStevens/DidierStevensSuite/blob/master/pdfid.py
 
 -- Automated Email Analysis with PhishTool -- 
 
+When a phishing incident is detected, take immediate reactive steps to contain, remove, and recover from the threat.
+
+Containment
+- Determine scope of the phishing incident (users, systems, emails involved).
+- Quarantine affected mailboxes or devices.
+- Block sender domains and email addresses.
+- Block associated URLs and web artifacts in proxies/firewalls.
+- Block or hash-block malicious attachments across EDR and AV.
+
+Eradication
+- Remove malicious emails (via Content Search / eDiscovery in M365 or mail gateway).
+- Remove any malicious files from infected hosts.
+- Revoke or reset compromised credentials.
+- Investigate and remove abuse form submissions (phishing landing pages).
+- Reimage compromised systems if needed.
+
+Recovery
+- Restore affected systems or accounts from known clean backups.
+- Validate that no persistence or backdoors remain.
+- Re-enable quarantined services only after verification.
+
+Communication
+- Notify affected users about the incident and recommended actions.
+- Update internal stakeholders and management with a summary of scope and remediation.
+- Coordinate with IT, IR, and threat intel teams for cross-verification.
+
+User Education
+- Conduct targeted user awareness training post-incident.
+- Share phishing examples and prevention best practices.
+- Reinforce safe email handling and reporting procedures.
+
+
+https://www.phishtool.com/
 
 
 
 -- Reactive Phishing Defense --  
 
+Remove Malicious Emails: Use PowerShell’s Get-MessageTrackingLog to trace the delivery path of phishing emails, identify affected recipients, and confirm successful removal from mailboxes.
+
+# Install the module if you haven’t already
+Install-Module ExchangeOnlineManagement -Force
+
+# Import the module (good practice)
+Import-Module ExchangeOnlineManagement
+
+# Connect to Exchange Online
+Connect-ExchangeOnline -UserPrincipalName your_admin_account@yourdomain.com
+
+PS > Get-MessageTrace -RecipientAddress user@example.com
+
+PS > Connect-ExchangeOnline -UserPrincipalName user@example.com
+
+PS > Get-MessageTrace -RecipientAddress user@example.com -StartDate "05/05/2025" -EndDate "05/06/2025"
+
+PS > Get-MessageTrackingLog -Sender "attacker@attacker.com"
+PS > Get-MessageTrackingLog -Recipients "victim@victim.com"
+PS > Get-MessageTrackingLog -Sender "attacker@attacker.com" -MessageSubject "Hello"
+PS > Get-MessageTrackingLog -Start "MM/DD/YYYY HH:MM:SS" -End "MM/DD/YYYY HH:MM:SS"
+
+
+# Find All Emails from a Sender
+Get-MessageTrackingLog -Start "10/01/2024 00:00:00" -End "10/03/2024 23:59:59" -Sender "user@example.com"
+
+# Track an Email to a Specific Recipient
+Get-MessageTrackingLog -Start "10/01/2024 00:00:00" -End "10/03/2024 23:59:59" -Recipients "recipient@example.com"
+
+# Find Emails with a Specific Subject
+Get-MessageTrackingLog -Start "10/01/2024 00:00:00" -End "10/03/2024 23:59:59" -MessageSubject "Invoice Due"
+
+# Search for Specific Event Types (e.g., Received Emails)
+Get-MessageTrackingLog -Start "10/01/2024 00:00:00" -End "10/03/2024 23:59:59" -EventId "RECEIVE"
+
+# Find Messages by Message ID
+Get-MessageTrackingLog -MessageId "<messageid@domain.com>"
+
+# Filter Logs by Client IP Address
+Get-MessageTrackingLog -Start "10/01/2024 00:00:00" -End "10/03/2024 23:59:59" -ClientIp "192.168.1.10"
+
+# Find the Last 100 Emails
+Get-MessageTrackingLog -Start "10/01/2024 00:00:00" -End "10/03/2024 23:59:59" -ResultSize 100
+
+
+Get-MessageTrackingLog | Out-Host –Paging
+Get-MessageTrackingLog | Format-Table –AutoSize
+Get-TransportServer | Get-MessageTrackingLog
+
+Get-MessageTrackingLog -Start (Get-Date).AddHours(-24) -ResultSize unlimited | where {[string]$_.recipients -like "*@gmail.com"}
+
+Get-MessageTrackingLog -ResultSize unlimited –Sender "cmansion@woshub.com” –server rome-hub-01 -Start "11/30/2019 06:00:00" -End "12/13/2019 22:00:00" |select-object Timestamp,Sender,Recipients,MessageSubject,EventId|ft
+
+Get-MessageTrackingLog -Sender "cmansion@woshub.com" -Recipients "amorato@woshub.com" -ResultSize unlimited –server rome-hub-01| Select-Object Timestamp,Sender,{$_.recipients},MessageSubject | Export-Csv -Path "C:\Export\exchange\exchange_tracking_logs.csv" -Encoding Default -Delimiter ";"
+
+Get-MessageTrackingLog -MessageSubject "test" -ResultSize unlimited –server rome-hub-01| Select-Object Timestamp,Sender, {$_.recipients}, MessageSubject | out-gridview
+
+Get-MessageTrackingLog -messageID "41A4321C3543314FFFFF23122F2BDB7ABD00342@rome-hub-01.woshub.com" -ResultSize unlimited –server rome-hub-01| Select-Object Timestamp,Sender, {$_.recipients}, MessageSubject
+
+(Get-MessageTrackingLog -EventID "RECEIVE" -Recipients "amorato@woshub.com" -ResultSize unlimited).Count
+
+Get-MessageTrackingLog -EventId "Receive" -Start (Get-Date).AddDays(-5) -ResultSize Unlimited | Where-Object {$_.Sender -like "*@gmail.com"} | Group-Object Sender | Sort-Object Count -Descending | Format-Table *
 
 
 
--- Proactive Phishing Defense --  
+-- Phishing Analysis Report Template --  
+
+
+Phishing Analysis Report Template
+
+Headers
+======================================
+Date:
+Subject:
+
+To:
+From:
+
+Reply-To:
+Return-Path:
+
+Sender IP:
+Resolve Host:
+
+Message-ID:
+
+
+URLs
+=======================================
 
 
 
+Attachments
+======================================
+Attachment Name:
+MD5:
+SHA1:
+SHA256:
 
--- Documentation and Reporting --  
+
+Description
+======================================
+
+
+
+Artifact Analysis
+======================================
+Sender Analysis:
+
+
+URL Analysis:
+
+
+Attachment Analysis:
+
+
+
+Conclusion
+======================================
+
+
+
+Defense Actions
+======================================
 
 
 
