@@ -50,6 +50,20 @@ index=wineventlog EventCode=4688 New_Process_Name="*powershell.exe" CommandLine=
 # New local admin creation
 index=wineventlog EventCode=4720 OR EventCode=4728 | table _time, user, target_user_name, workstation
 
+# Suspicious Logins
+index=windows EventCode=4624 OR EventCode=4625
+| stats count by Account_Name, Workstation_Name, IpAddress
+
+# Command Execution
+index=sysmon EventCode=1 CommandLine="*powershell*"
+| table _time, User, Computer, CommandLine
+
+# Network Anomalies
+index=firewall action=allow
+| stats count by src_ip, dest_ip, dest_port
+| where count > 100
+
+
 
 4️⃣ Dashboards
 
