@@ -368,6 +368,15 @@ https://blog.raminzamani.com:443/6-parts-of-a-url?utm_source=linkedin&utm_medium
 
 Email URL Analysis is the process of examining links found in emails to detect signs of phishing, malicious redirects, or other security risks.
 
+Domain Name: – Check spelling, typos, special characters, or extra subdomains.
+Redirects: – Identify short URLs or multi-hop redirects that hide the real site.
+Registration Details: – Use WHOIS to see domain age, registrar, and ownership.
+SSL Certificate: – Verify the certificate issuer, validity, and domain match.
+Hosting IP: – Check IP reputation, geolocation, and ASN ownership.
+Path and Parameters: – Watch for encoded, obfuscated, or long random strings.
+Protocol Used: – HTTP vs HTTPS; missing HTTPS may indicate fake sites.
+Redirection Behavior: – Observe how the site redirects when opened safely.
+
 🔹 Safe Handling of Links
 - Never click suspicious links directly.
 - Right-click → "Copy Link Location" to inspect safely.
@@ -387,8 +396,8 @@ Email URL Analysis is the process of examining links found in emails to detect s
   - "Defang URL" → Safely modify links (e.g., hxxps[:] instead of https://).
 - Helps decode and examine malicious links securely.
 
-🔹 Using Email IOC Extractor
-- A Python script for automatic extraction of Indicators of Compromise (IOCs) from email files.
+Using Email IOC Extractor
+A Python script for automatic extraction of Indicators of Compromise (IOCs) from email files.
 
 $ python3 eioc.py <file_path>
 
@@ -446,7 +455,19 @@ https://www.joesandbox.com/
 
 Analyzing email attachments helps identify hidden malware or phishing payloads.
 
-🔹 Common Attachment Types
+Look at these key points to identify malware or hidden payloads:
+
+File Name and Extension: – Suspicious, double extensions, or disguised file types.
+File Size and Metadata: – Check for unusual size or metadata inconsistencies.
+Hashes: – Calculate MD5, SHA1, SHA256 for reputation or VirusTotal checks.
+Macros or Scripts: – Analyze with olevba or oledump for malicious code.
+File Type Verification: – Use file or exiftool to confirm actual file format.
+PDF Objects: – Check with pdfid or pdf-parser for JavaScript or embedded files.
+Sandbox Behavior: – Observe processes, connections, and dropped files.
+Content Match: – Confirm attachments match what the email claims.
+
+
+🔹 Common Attachment Types 🔹
 
 Documents: .pdf, .docx, .xlsx, .pptx
 ⚠️ May contain malicious macros or embedded scripts.
@@ -477,13 +498,18 @@ python3 emldump.py sample1.eml -s 4 -d > quotation.iso
 
 python3 eioc.py sample1.eml
 
+sha256sum quotation.iso
+sha1sum quotation.iso
+md5sum quotation.iso
 
+sha256sum quotation.iso && sha1sum quotation.iso && md5sum quotation.iso
 
+Get-FileHash .\quotation.iso # default is SHA256
+Get-FileHash -Algorithm MD5 .\quotation.iso
+Get-FileHash -Algorithm SHA1 .\quotation.iso
+Get-FileHash -Algorithm SHA256 .\quotation.iso
 
-
-
-
-
+Get-FileHash -Algorithm MD5 .\quotation.iso; Get-FileHash -Algorithm SHA1 .\quotation.iso; Get-FileHash -Algorithm SHA256 .\quotation.iso
 
 
 
