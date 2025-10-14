@@ -24,8 +24,6 @@ Get-Process | Sort CPU -Descending | Select -First 20
 Get-WinEvent -LogName "Microsoft-Windows-Sysmon/Operational" | Select-String "ParentProcessId"
 
 
-
-
 📡 Network Connections
 
 Windows
