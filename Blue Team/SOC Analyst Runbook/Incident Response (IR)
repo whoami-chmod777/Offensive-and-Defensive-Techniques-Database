@@ -1,1 +1,78 @@
 
+--- Incident Response (IR) ---
+
+• Objective
+• Framework: PICERL
+• Core Tools
+• Step-by-Step Procedure
+  → Preparation
+  → Detection & Analysis
+  → Containment
+  → Eradication & Recovery
+  → Lessons Learned & Reporting
+
+
+🎯 Objective: Detect, contain, eradicate, and recover from incidents using a structured lifecycle.
+
+
+📘 Framework: PICERL
+
+• Preparation → Identification → Containment → Eradication → Recovery → Lessons Learned
+
+
+🧰 Core Tools
+
+• Wireshark – Network packet analysis
+• DeepBlueCLI – Windows Event log hunting
+• YARA – Malware pattern detection
+• TheHive5 – Case management
+• ATT&CK Navigator – Incident classification
+• PowerShell / CMD – Host-based investigation
+
+
+🧩 Step-by-Step Procedure
+
+1️⃣ Preparation
+
+• Maintain IR plan, contacts, runbooks, and playbooks.
+• Establish baselines & log sources.
+
+
+2️⃣ Detection & Analysis
+
+• Use SIEM to correlate events.
+• Collect indicators with YARA or event log tools: yara -r rules.yar /path/to/suspect
+• Analyze packets: tshark -r network.pcap -Y "http.request"
+
+
+3️⃣ Containment
+
+• Isolate host: Get-NetAdapter | Disable-NetAdapter -Confirm:$false
+• Block malicious IPs: iptables -A INPUT -s 203.0.113.1 -j DROP
+
+4️⃣ Eradication & Recovery
+
+• Remove persistence, malicious services, files.
+• Patch vulnerabilities, restore from clean backups.
+
+
+5️⃣ Lessons Learned & Reporting
+
+• Document timeline & corrective measures.
+• Metrics: detection time, response time, affected assets.
+• Store artifacts & analysis summary in TheHive case.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
