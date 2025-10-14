@@ -578,8 +578,7 @@ https://medium.com/@asmcybersecurity/diving-deeper-into-the-microsoft-office-cve
 
 -- Static MalDoc Analysis --  
 
-Static MalDoc Analysis examines potentially malicious documents (Word, Excel, PDF, etc.) without executing them.  
-It focuses on identifying embedded macros, scripts, and objects that could deliver or hide malware.
+Static MalDoc Analysis examines potentially malicious documents (Word, Excel, PDF, etc.) without executing them. It focuses on identifying embedded macros, scripts, and objects that could deliver or hide malware.
 
 🔹Key Focus Areas🔹 
 
@@ -647,6 +646,51 @@ https://github.com/DidierStevens/DidierStevensSuite/blob/master/oledump.py
 
 
 -- Static PDF Analysis --  
+
+Static PDF Analysis examines PDF documents without opening or executing them. The goal is to identify malicious elements like embedded scripts, JavaScript, or hidden links by analyzing structure, metadata, and embedded objects.
+
+What to Look For
+- Embedded JavaScript or Launch actions
+- Hidden URLs or external links
+- Embedded files (attachments)
+- Suspicious metadata (creator, modification time)
+- Unusual object structure or obfuscation
+
+
+• pdf-parser is a Python tool for inspecting internal PDF structure — objects, streams, and embedded elements (URIs, JavaScript, etc.).
+
+Basic usage:
+python3 pdf-parser.py pdf-doc-vba-eicar-dropper.pdf
+python3 pdf-parser.py pdf-doc-vba-eicar-dropper.pdf | more
+
+Search for embedded URLs: python3 pdf-parser.py book04-02.4422136363.pdf -s "/URI"
+
+Search for JavaScript: python3 pdf-parser.py book04-02.4422136363.pdf -s "/JavaScript"
+
+Extract an embedded file: python3 pdf-parser.py pdf-doc-vba-eicar-dropper.pdf --object 8 --filter --raw --dump eicar-dropper.doc
+
+
+• pdfid provides a quick overview of the PDF’s structure and potential red flags (JavaScript, embedded files, launch actions).
+
+Run analysis: python3 pdfid.py pdf-doc-vba-eicar-dropper.pdf
+
+Example output includes:
+  /JavaScript
+  /OpenAction
+  /AA
+  /EmbeddedFile
+
+Other Useful Commands
+
+Check file type: file eicar-dropper.doc
+
+Analyze embedded OLE objects (if present): python3 oledump.py eicar-dropper.doc
+
+Analyst Notes:
+• Run pdfid first for a quick scan, then use pdf-parser for detailed inspection.
+• Look for suspicious actions like '/Launch', '/URI', '/JavaScript', or '/EmbeddedFile'.
+• If extraction reveals other document types (e.g., .doc, .xls), analyze them separately using oledump.py or oletools.
+• Never open suspect PDFs directly on a production host — use isolated VMs.
 
 
 
