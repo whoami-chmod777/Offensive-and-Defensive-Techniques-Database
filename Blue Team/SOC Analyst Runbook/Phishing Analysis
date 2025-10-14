@@ -29,8 +29,11 @@
 Save full .eml / .msg file
 Extract headers, body, URLs, attachments
 
-ripmime -i suspicious.eml -d ./artifacts
 grep -Eo "https?://[^\"'<> ]+" suspicious.eml > urls.txt
+sed -n '1,200p' suspect.eml
+ripmime -i suspicious.eml -d ./artifacts
+
+dig +short TXT $(echo "example.com" | sed 's/^/._spf./')  
 
 
 2️⃣ Header Analysis
@@ -58,7 +61,10 @@ Authentication-Results: dkim=pass/fail; dmarc=pass/fail
 3️⃣ URL & Domain Analysis
 
 grep -Eo '(http|https)://[^ ]+' email.eml > urls.txt
+grep -Eo "https?://[^ >'\"]+" suspect.eml | sort -u > urls.txt
 curl -I <url>
+
+while read u; do host=$(echo $u | sed -E 's#https?://([^/]+)/.*#\1#'); echo "$u -> $host"; dig +short $host; whois $host; done < urls.txt
 
 Scan URLs:
 • urlscan.io
