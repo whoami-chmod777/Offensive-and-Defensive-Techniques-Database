@@ -14,7 +14,6 @@
 🎯 Objective: Identify, analyze, and share threat data (IOCs, TTPs, APTs).
 
 
-
 🧰 Core Tools
 
 • MISP – IOC management & correlation
@@ -23,7 +22,6 @@
 • ATT&CK Navigator – TTP mapping
 • OSINT Sources – AbuseIPDB, GreyNoise, Malpedia, Shodan
 • ISACs / CERTs – Information sharing networks
-
 
 
 🧩 Step-by-Step Procedure
