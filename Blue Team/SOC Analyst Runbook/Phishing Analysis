@@ -44,8 +44,21 @@ Verify domains via whois / dig:
 • whois bad-domain.com
 • dig bad-domain.com any
 
+https://mxtoolbox.com/EmailHeaders.aspx
+
+
+2️⃣ Sender-Authentifizierung prüfen
+
+Check SPF, DKIM, DMARC results in headers
+
+Received-SPF: Pass/Fail
+Authentication-Results: dkim=pass/fail; dmarc=pass/fail
+
 
 3️⃣ URL & Domain Analysis
+
+grep -Eo '(http|https)://[^ ]+' email.eml > urls.txt
+curl -I <url>
 
 Scan URLs:
 • urlscan.io
@@ -54,6 +67,29 @@ Scan URLs:
 Capture screenshots: url2png.com
 
 Check age & registration of domain (young domains → suspicious)
+
+https://urlscan.io/
+
+
+3️⃣ Attachment-Analyse
+
+exiftool attachment.doc
+oleid attachment.doc
+pdfid attachment.pdf
+
+sha256sum attachment.doc
+curl -s --request POST --url https://www.virustotal.com/api/v3/files
+
+
+3️⃣ Dynamic Sandbox
+
+• Upload to Any.Run, Cuckoo, or Hybrid Analysis
+
+Check for:
+• Created processes
+• Network traffic (C2)
+• Dropped files
+• Registry edits
 
 
 4️⃣ Attachment Analysis
