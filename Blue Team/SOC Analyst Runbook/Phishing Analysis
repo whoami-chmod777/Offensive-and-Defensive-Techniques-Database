@@ -35,7 +35,7 @@ grep -Eo "https?://[^\"'<> ]+" suspicious.eml > urls.txt
 
 2️⃣ Header Analysis
 
-ripgrep -o 'https?://[^ >]+' mail.eml | sort -u
+rg -o 'https?://[^ >]+' mail.eml | sort -u
 grep -Ei "Received:|From:|Reply-To:|Return-Path:" suspicious.eml
 
 For Short-URLs: curl -I <shorturl> in a Sandbox 
