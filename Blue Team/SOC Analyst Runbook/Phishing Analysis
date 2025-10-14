@@ -300,40 +300,40 @@ MIME Boundary: – Separates multiple parts of an email (plain text vs. HTML or 
 
 
 Red Flags
-• Organization name mismatch.
-• Awkward greetings or inconsistent sender identity.
-• Social engineering tactics (urgency, fear, pressure, or authority).
-• Poor grammar, spelling mistakes, or formatting inconsistencies.
+- Organization name mismatch.
+- Awkward greetings or inconsistent sender identity.
+- Social engineering tactics (urgency, fear, pressure, or authority).
+- Poor grammar, spelling mistakes, or formatting inconsistencies.
 
 Encoding Types (Common Obfuscation Techniques)
-• Base64 Encoding: – Encodes attachments or hides scripts within HTML or MIME parts.
-• HTML Entity Encoding: – Masks malicious code or links inside HTML text.
-• URL Encoding: – Hides phishing URLs or redirects inside encoded characters (%2E, %2F, etc.).
+- Base64 Encoding: – Encodes attachments or hides scripts within HTML or MIME parts.
+- HTML Entity Encoding: – Masks malicious code or links inside HTML text.
+- URL Encoding: – Hides phishing URLs or redirects inside encoded characters (%2E, %2F, etc.).
 
 
 CyberChef: – Decode and analyze encoded content.
-• Decode Base64 strings to reveal hidden data.
-• Deobfuscate encoded URLs or HTML entities.
-• Visualize and extract hidden scripts or payloads.
+- Decode Base64 strings to reveal hidden data.
+- Deobfuscate encoded URLs or HTML entities.
+- Visualize and extract hidden scripts or payloads.
 
 
 - Email Content Analysis Examples -
 
-• Hiding Malicious URLs within Legitimate-Looking Links Example: 
+Hiding Malicious URLs within Legitimate-Looking Links Example: 
 <a href="https://malicious-site.com">https://legitimate-site.com</a>
 
-• URL Encoding Example:
+URL Encoding Example:
 https://malicious-site.com/badstuff
 https://malicious-site.com/%62%61%64%73%74%75%66
 
-• Base64 Encoding Example:
+Base64 Encoding Example:
 https://malicious-site.com/badstuffaHR0cHM6Ly9tYWxpY2lvdXMtc2l0ZS5jb20vYmFkc3R1ZmY=
 
-• Combining Both Techniques – Hidden and Encoded Link Example:
+Combining Both Techniques – Hidden and Encoded Link Example:
 <a href="https://malicious-site.com/%62%61%64%73%74%75%66">Click here to update your account</a>
 https://malicious-site.com/%62%61%64%73%74%75%66
 
-• Using CyberChef to Decode Encoded URLs: aHR0cHM6Ly9tYWxpY2lvdXMtc2l0ZS5jb20vYmFkc3R1ZmY=
+Using CyberChef to Decode Encoded URLs: aHR0cHM6Ly9tYWxpY2lvdXMtc2l0ZS5jb20vYmFkc3R1ZmY=
 
 1. Go to CyberChef (https://gchq.github.io/CyberChef/)
 2. Use "From Base64"
@@ -466,7 +466,6 @@ PDF Objects: – Check with pdfid or pdf-parser for JavaScript or embedded files
 Sandbox Behavior: – Observe processes, connections, and dropped files.
 Content Match: – Confirm attachments match what the email claims.
 
-
 🔹 Common Attachment Types 🔹
 
 Documents: .pdf, .docx, .xlsx, .pptx
@@ -490,8 +489,7 @@ Emails: .eml, .msg
 Multimedia: .mp3, .wav, .mkv
 ⚠️ Can contain hidden malicious payloads.
 
-
-Extracting Attachments (Static Analysis)
+- Extracting Attachments (Static Analysis) -
 
 python3 emldump.py sample1.eml
 python3 emldump.py sample1.eml -s 4 -d > quotation.iso
@@ -512,14 +510,7 @@ Get-FileHash -Algorithm SHA256 .\quotation.iso
 Get-FileHash -Algorithm MD5 .\quotation.iso; Get-FileHash -Algorithm SHA1 .\quotation.iso; Get-FileHash -Algorithm SHA256 .\quotation.iso
 
 
-
-
-
-
-
-
-
-File Reputation Services
+File Reputation Services:
 
 https://github.com/DidierStevens/DidierStevensSuite/blob/master/emldump.py
 https://github.com/MalwareCube/Email-IOC-Extractor
@@ -531,36 +522,90 @@ https://any.run
 
 -- Dynamic Attachment Analysis and Sandboxing --  
 
+Sandboxing is a controlled, isolated environment used to safely execute and observe suspicious files.  
+It allows analysts to detect malicious behavior (processes, network calls, file changes) without risking production systems.
+
+🔹 What to Look for During Sandboxing
+
+Process Activity:
+- Monitor spawned or unexpected processes.
+- Track process tree, memory usage, and privilege escalation.
+- Identify suspicious process hierarchies (e.g., cmd.exe → powershell.exe → mshta.exe).
+
+Registry Activity:
+- Observe new or modified registry keys.
+- Detect persistence mechanisms (e.g., Run/RunOnce entries).
+- Flag registry changes linked to known malware behavior.
+
+Network Activity:
+- Watch for outbound connections to suspicious IPs or domains.
+- Detect potential C2 (Command & Control) communication.
+- Identify DNS requests or download attempts for secondary payloads.
+
+File Activity:
+- Track file creation, deletion, modification, or encryption.
+- Detect dropped executables or temporary hidden files.
+- Watch for ransomware-like behavior (file encryption, renaming).
+
+Benefits of Sandboxing
+- Isolation – Malware executes safely without spreading.
+- Behavioral Insight – Detects threats based on activity, not just signatures.
+- Automated Reporting – Generates detailed logs and behavioral summaries for further analysis.
+
+Recommended Sandboxing Tools
+- Cuckoo Sandbox – Open-source automated malware analysis.
+- Any.Run – Interactive, cloud-based real-time analysis.
+- Joe Sandbox – Advanced static/dynamic behavior analytics.
+- Hybrid Analysis – Cloud service combining multiple detection engines.
+
+Analyst Notes
+- Always hash the file before sandboxing (MD5, SHA1, SHA256).
+- Upload only non-confidential samples to cloud sandboxes.
+- Review process, file, and network behavior in sandbox reports.
+- Correlate sandbox IOCs (IPs, domains, hashes) with threat intelligence feeds.
+
+Sandboxing provides safe behavioral analysis of suspicious attachments, helping detect and contain threats before they impact your environment.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+https://hybrid-analysis.com/
+https://cuckoo.cert.ee/
+https://joesandbox.com
+https://app.any.run
+https://cloud.google.com/blog/topics/threat-intelligence/cve-2017-0199-hta-handler
+https://medium.com/@asmcybersecurity/diving-deeper-into-the-microsoft-office-cve-2017-0199-vulnerability-11bd3e725ab7
 
 
 
 -- Static MalDoc Analysis --  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 -- Static PDF Analysis --  
 -- Automated Email Analysis with PhishTool --  
 -- Reactive Phishing Defense --  
