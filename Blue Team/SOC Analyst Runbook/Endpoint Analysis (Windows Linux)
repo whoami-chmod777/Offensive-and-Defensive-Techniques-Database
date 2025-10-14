@@ -26,6 +26,8 @@ Get-Process | Sort CPU -Descending | Select -First 20
 Get-WinEvent -LogName "Microsoft-Windows-Sysmon/Operational" | Select-String "ParentProcessId"
 Get-WinEvent -FilterHashtable @{LogName='Security'; StartTime=(Get-Date).AddHours(-1)} -MaxEvents 200
 
+ps aux --sort=-%cpu | head -n 20
+
 
 📡 Network Connections
 
@@ -37,6 +39,7 @@ Get-NetTCPConnection | Sort-Object -Property State
 Linux
 netstat -tulpen
 lsof -i
+ss -tunap
 
 
 📡 Services
