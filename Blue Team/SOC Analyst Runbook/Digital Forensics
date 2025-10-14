@@ -5,9 +5,10 @@
 • Core Tools
 • Step-by-Step Procedure
   → Acquisition
-Preservation
-Analysis
-Reporting
+  → Preservation
+  → Analysis
+  → Reporting
+  → Quick Info
 
 
 
@@ -48,6 +49,7 @@ sha256sum image.E01 > image.E01.sha256
 • Memory (Volatility 3):
 
 vol -f memdump.raw windows.pslist
+vol -f memory.raw windows.netstat.netstat
 vol -f memdump.raw windows.malfind
 vol -f memdump.raw windows.cmdline
 
@@ -64,9 +66,10 @@ vol -f memdump.raw windows.cmdline
 • Identify persistence mechanisms & root cause.
 
 
+4️⃣ Quick Info
 
-
-
+strings -a -n 8 suspect.exe | head -n 100
+exiftool suspect.docx
 
 
 
