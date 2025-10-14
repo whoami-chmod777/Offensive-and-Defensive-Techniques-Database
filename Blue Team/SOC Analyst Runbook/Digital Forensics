@@ -1,1 +1,52 @@
 
+--- Digital Forensics ---
+
+• Objective
+• Core Tools
+• Step-by-Step Procedure
+  
+
+
+🎯 Objective: Collect, preserve, and analyze digital evidence from compromised systems.
+
+
+🧰 Core Tools
+
+• FTK Imager – Disk & memory imaging
+• Autopsy – GUI forensic analysis
+• Volatility / Volatility 3 – Memory analysis
+• KAPE – Rapid triage collection
+• Scalpel – File carving
+• Windows File Analyzer / JumpList Explorer / PECmd – Windows artifact tools
+• Browser History Viewer – Web activity review
+• Linux CLI – dd, grep, find, file, stat
+
+
+🧩 Step-by-Step Procedure
+
+1️⃣ Acquisition
+
+• Maintain Chain of Custody
+
+winpmem.exe --format raw -o memdump.raw
+FTK Imager -> create E01 image
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
