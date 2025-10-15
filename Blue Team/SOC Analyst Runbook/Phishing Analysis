@@ -90,7 +90,7 @@ An email moves from the sender’s client through mail agents (MSA → MTA → M
 
 -- Phishing Attack Types --  
 
-• Information Gathering – Collecting information about targets to create realistic phishing emails.
+• Information Gathering / Recon – Collecting information about targets to create realistic phishing emails.
 • Credential Harvesting – Stealing usernames and passwords through fake login pages or deceptive links.
 • Malware Delivery – Sending malicious attachments or links that install malware.
 • Spear Phishing – Highly targeted phishing aimed at specific people or organizations.
