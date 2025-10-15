@@ -147,6 +147,16 @@ Look at these key points to find the true sender and verify authenticity:
 • X-Headers: – Custom headers added by servers or gateways (e.g., X-Originating-IP, X-Mailer) that may reveal the original sending system or tools.
 • X-Sender-IP: – Reveals the real IP address of the sender; useful for tracing origin and identifying malicious hosts.
 
+X-Headers (Extended Email Headers)
+
+• X-Headers are custom fields added by mail servers, gateways, or security tools. They provide valuable forensic information about the origin, transmission, and filtering of an email — often used to detect spoofing, phishing, or spam activity.
+• X-Originating-IP – Shows the IP address of the computer or network that originally sent the email. Example: X-Originating-IP: [192.168.1.10]
+• X-Sender-IP – Reveals the real IP address of the sender; useful for tracing origin and identifying malicious hosts. Example: X-Sender-IP: 209.85.128.170
+• X-Mailer – Indicates the email client or software used to send the email (e.g., Outlook, Thunderbird, PHP mailer). Example: X-Mailer: Microsoft Outlook 16.0
+• X-Spam-Flag – Indicates whether an email was flagged as spam by the mail server’s spam filter. Example: X-Spam-Flag: YES
+• X-DKIM-Signature – Contains the DKIM signature used to verify message authenticity. Example:
+
+
 How to Analyze the "Received" Chain:
 • Read from Bottom to Top: The bottom-most “Received” header shows the first mail server that handled the email, while the top one shows the final server that delivered it to the recipient.
 • Check for Unexpected Hops: If there are unknown, mismatched, or suspicious servers in the chain, it may indicate tampering, relaying through unauthorized systems, or redirection by malicious actors.
@@ -214,8 +224,12 @@ Authentication-Results: mx.google.com;
 ----------------------------------
 
 # Check SPF record for a domain
+nslookup -type=txt namecheap.com
 nslookup -type=txt namecheap.com | grep -i spf
+
 dig TXT namecheap.com | grep -i spf
+dig @8.8.8.8 -t txt namecheap.com
+dig @8.8.8.8 -t txt namecheap.com | grep spf
 
 # Check included SPF records
 nslookup -type=txt _spf.sendgrid.net | grep -i spf
@@ -468,6 +482,7 @@ https://www.urlvoid.com/
 https://www.wannabrowser.net/
 https://unshorten.it/
 https://urlhaus.abuse.ch/
+https://www.abuseipdb.com/
 https://transparencyreport.google.com/safe-browsing/search
 https://www.joesandbox.com/
 
@@ -617,12 +632,19 @@ Object Linking and Embedding (OLE) is a Microsoft technology that allows documen
 Attackers often abuse OLE to hide scripts or drop malware through embedded objects or macros.
 
 python3 oledump.py --help
+
 python3 oledump.py sample1.xlsm → List all OLE streams in the document → "M" indicates a macro stream (e.g., Stream 4)
 python3 oledump.py sample1.xlsm -s 4 → Extract a specific macro from stream 4
+python3 oledump.py sample1.xlsm -s 4 -v → Extract and display the content of a specific stream.
 python3 oledump.py sample1.xlsm -s 4 -S → Extract readable strings from the macro
 python3 oledump.py sample1.xlsm -s 4 --vbadecompresscorrupt → Decompress or decode corrupted VBA macros
+
+python3 oledump.py sample1.xlsm -a → Displays all OLE objects with automatic analysis.
 python3 oledump.py sample1.xlsm -i → Show file metadata, including authorship and modification timestamps
+python3 oledump.py sample1.xlsm -t → Show all streams with indicators for macro content.
 python3 oledump.py sample1.xlsm -S → Show the detailed structure of an OLE file
+python3 oledump.py sample1.xlsm -p plugin → Uses a specific plugin to analyze the file.
+
 
 
 # Identify file type and format
