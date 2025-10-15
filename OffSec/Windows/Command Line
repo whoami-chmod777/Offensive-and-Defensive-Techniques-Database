@@ -1,1 +1,40 @@
 
+
+Navigation
+------------
+
+dir
+cd
+cd .
+cd ..
+
+
+File Operations
+------------------
+
+mkdir Logs
+rmdir Logs
+copy file.txt file1.txt
+move file1.txt C:\Temp\
+del file.txt
+
+
+Network
+----------
+ipconfig
+netstat -ano
+nslookup example.com
+arp -a
+
+
+System Tasks
+--------------
+
+systeminfo
+tasklist
+taskkill /PID 5432 /F
+wmic os get caption,version
+
+
+
+
