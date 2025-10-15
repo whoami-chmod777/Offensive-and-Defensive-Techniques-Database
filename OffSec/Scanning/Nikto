@@ -1,0 +1,9 @@
+
+Nikto is an open source web server scanner that performs vulnerability scanning against web servers for multiple items, including dangerous files and programs.
+
+
+Start Nikto: nikto -h <target_url>
+
+Specify Port: nikto -h <target_url> -p <port>
+
+Use SSL: nikto -h <target_url> -ssl
