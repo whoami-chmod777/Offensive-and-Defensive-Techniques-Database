@@ -149,37 +149,266 @@ https://learn.microsoft.com/en-us/sysinternals/downloads/tcpview
 
 -- Windows Process Analysis -- 
 
+⚙️ Process Management
+
+tasklist → Show all running processes
+taskkill /PID 1234 /F → Forcefully terminate a process by PID
+tasklist /V → Display detailed process info (memory, user, status)
+tasklist /M → Show which DLL modules each process has loaded
+
+tasklist /M /FI "PID eq 2088" → Show DLLs used by process with PID 2088
+tasklist /FI "PID eq 2088" → Show info only for PID 2088
+tasklist /FI "IMAGENAME eq notmaleware.exe" → Show info for a specific executable
+tasklist /M /FI "PID eq 2088" → List modules associated with the given process
+
+Get-Process → Show all running processes (like tasklist)
+Stop-Process -Id 1234 -Force → Forcefully terminate a process by PID (like taskkill /PID 1234 /F)
+Get-Process | Sort-Object CPU -Descending → Sort processes by CPU usage
+Get-Process | Select-Object Name,Id,CPU,StartTime → Display selected process details
+Get-Process -Name notepad → Show info for a specific process
+
+Get-Process | Where-Object { $_.Id -eq 2088 } → Filter process by PID
+Get-Process | Where-Object { $_.Name -like "malware" } → Search for suspicious process names
 
 
+🌐 Network Connections (Related to Processes)
+
+netstat -ano → Display all connections with owning process IDs
+netstat -anob | findstr ESTABLISHED → Show only established connections with process info
+
+Get-NetTCPConnection → Show active TCP connections (similar to netstat -ano)
+Get-NetTCPConnection | Where-Object { $_.State -eq "Established" } → Show established sessions only
+Get-NetUDPEndpoint → Display active UDP listeners
+Get-NetTCPConnection | Select-Object LocalAddress,LocalPort,RemoteAddress,OwningProcess → Show connection + PID mapping
+Get-Process -Id (Get-NetTCPConnection | Where-Object { $_.RemotePort -eq 80 }).OwningProcess → Identify which process owns a specific connection
 
 
+🔧 Windows Services and Components
+
+sc query → List all running and stopped services with current status
+
+wmic service list brief → Display a concise list of all services
+wmic useraccount list full → Show detailed information about user accounts
+
+Get-Service → List all Windows services and their status (like sc query)
+Get-Service | Where-Object { $_.Status -eq 'Running' } → Show only running services
+Restart-Service -Name spooler → Restart a service by name
+Stop-Service -Name wuauserv -Force → Stop Windows Update service
+Set-Service -Name wuauserv -StartupType Disabled → Disable a service from auto-starting
+Get-WmiObject Win32_Service | Select Name,State,StartMode,PathName → Display full details of each service
 
 
+🧠 Process Investigation (WMIC-Based)
+
+wmic process list brief → List processes with PID, command line, and parent info
+wmic process where processid=2088 get Name,ParentProcessId,ProcessId → Get process name and hierarchy for PID 2088
+wmic process get Name,ParentProcessId,ProcessId | find "192" → Search processes by number or string
+wmic process where processid=2088 get CommandLine → Show full command line for process 2088
+wmic process where "name='cmd.exe'" get ProcessId,ParentProcessId,CommandLine → Get process tree for specific executable
+
+Get-WmiObject Win32_Process → List all processes with detailed info
+Get-WmiObject Win32_Process -Filter "ProcessId=2088" | Select Name,ParentProcessId,ProcessId → Get parent-child hierarchy for PID 2088
+Get-WmiObject Win32_Process | Where-Object { $_.CommandLine -like "192" } → Search processes for IPs or commands
+Get-WmiObject Win32_Process -Filter "Name='cmd.exe'" | Select ProcessId,ParentProcessId,CommandLine → Inspect a specific process
+Get-CimInstance Win32_Process | Select Name,ProcessId,ParentProcessId,CommandLine → Newer alternative to WMIC
 
 
+🧩 System Startup and Persistence
+
+wmic startup get Caption,Command,Location → Show programs configured to run at startup
+start msconfig → Open System Configuration utility (startup/services control)
+reg query HKLM\Software\Microsoft\Windows\CurrentVersion\Run → Check startup entries in registry
+
+Get-CimInstance Win32_StartupCommand | Select Name,Command,Location,User → Show startup items for all users
+Get-ItemProperty 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Run' → Check system-wide startup programs
+Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run' → Check per-user startup programs
+Get-ScheduledTask | Where-Object { $_.State -eq 'Ready' } → List all scheduled tasks that could persist malware
+Get-Service | Where-Object { $_.StartType -eq 'Automatic' } → Identify services that start automatically
 
 
+🧱 Common Persistence Registry Paths
+
+HKLM\Software\Microsoft\Windows\CurrentVersion\Run → Programs that auto-start for all users
+HKCU\Software\Microsoft\Windows\CurrentVersion\Run → Programs that auto-start for current user
+HKLM\SYSTEM\CurrentControlSet\Services\ → Services that start automatically with Windows
+HKLM\Software\Microsoft\Active Setup\Installed Components → Components that execute once per user login
+HKCU\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\Shell → Custom shell entries that can persist malware
 
 
+💡 Additional Useful PowerShell Tools
+
+Get-WmiObject Win32_StartupCommand → List startup commands with paths and locations
+Get-EventLog -LogName Security -Newest 20 → Review recent security events
+Get-ScheduledTask → View all scheduled tasks
+Get-LocalUser → List local user accounts
+Get-LocalGroupMember Administrators → List users in the Administrators group
+Get-HotFix → Show installed patches and updates
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+https://www.revshells.com/
 
 
 
 -- Windows Core Processes -- 
+
+Process Investigation
+• Parent Process: Check if hierarchy matches the expected chain (e.g., wininit → services → svchost).
+• Child Process: Look for suspicious spawns (e.g., svchost starting cmd.exe).
+• Command Line Arguments: Review parameters (e.g., svchost -k netsvcs).
+• Process Names: Watch for typos or fake copies (e.g., svch0st.exe).
+• User Account: Confirm process runs under the expected account.
+• Image Path: Validate that it matches the real system directory (not %TEMP% or AppData).
+
+
+- Windows Core Process Hierarchy (Boot to User Session) -
+
+System
+• Kernel-mode system thread (manages CPU, memory, and drivers)
+• Image Path: None (or C:\Windows\System32\ntoskrnl.exe)
+• PID: 4
+• Parent: None (System Idle Process)
+• Number of Instances: 1
+• User Account: Local System
+• Start Time: At boot
+
+smss.exe (Session Manager Subsystem)
+• Manages user sessions and launches system processes
+• Spawns: wininit.exe, csrss.exe
+• Image Path: %SystemRoot%\System32\smss.exe
+• Parent: System (PID 4)
+• Number of Instances: 1 master, 1 child per session (child self-terminates)
+• User Account: Local System
+• Start Time: Within seconds of boot
+
+csrss.exe (Client/Server Runtime Subsystem)
+• Handles console windows, Windows API DLLs, and GUI shutdown tasks
+• Image Path: %SystemRoot%\System32\csrss.exe
+• Parent: smss.exe (orphan process)
+• Number of Instances: Two or more
+• User Account: Local System
+• Instances: Two or more
+• Start Time: Within seconds of boot
+
+wininit.exe (Windows Initialization)
+• Initializes system services (Session 0)
+• Spawns: services.exe, lsass.exe
+• Image Path: %SystemRoot%\System32\wininit.exe
+• Parent: smss.exe (orphan process)
+• Number of Instances: 1
+• User Account: Local System
+• Start Time: Within seconds of boot
+
+services.exe (Service Control Manager)
+• Manages starting, stopping, and interaction of Windows services
+• Updates the LastKnownGood CurrentControlSet registry value for recovery.
+• Spawns: multiple svchost.exe instances
+• Image Path: %SystemRoot%\System32\services.exe
+• Parent: wininit.exe
+• User Account: Local System
+• Start Time: Within seconds of boot
+
+svchost.exe (Service Host)
+• Hosts and manages Windows service DLLs
+• Runs with -k parameter to separate service groups
+• Image Path: %SystemRoot%\System32\svchost.exe
+• Parent: services.exe
+• Number of Instances: Many (typically 10+)
+• User Account: Local System / Network Service / Local Service / User
+• Start Time: Seconds after boot or when services start
+
+lsass.exe (Local Security Authority Subsystem Service)
+• Authenticates users and enforces local security policies
+• Writes events to the Security Event Log
+• Image Path: %SystemRoot%\System32\lsass.exe
+• Parent: wininit.exe
+• Number of Instances: 1
+• User Account: Local System
+• Start Time: Within seconds of boot
+
+winlogon.exe (Windows Logon)
+• Manages logon/logoff procedures
+• Loads user profiles (NTUSER.DAT)
+• Responds to Secure Attention Sequence (Ctrl+Alt+Del)
+• Image Path: %SystemRoot%\System32\winlogon.exe
+• Parent: smss.exe (orphan process)
+• Number of Instances: 1 or more
+• User Account: Local System
+• Start Time: Within seconds of boot (Session 1)
+
+explorer.exe (Windows Explorer)
+• Provides desktop, taskbar, Start menu, and file management GUI
+• Image Path: %SystemRoot%\explorer.exe
+• Parent: userinit.exe (orphan process)
+• Number of Instances: 1 or more
+• User Account: Logged-in user
+• Start Time: When interactive session begins
+
+
+🧩 What is an "orphan process"
+
+An "orphan process" is a process whose parent process has already terminated — but the process itself is still running. The parent process is gone, but the child process continues running.
+
+Example in Windows Boot
+
+Let’s take userinit.exe → explorer.exe as an example:
+When a user logs in, winlogon.exe launches userinit.exe.
+userinit.exe starts the user’s desktop environment by launching explorer.exe (the GUI).
+Once explorer.exe is successfully running, userinit.exe exits (terminates).
+explorer.exe keeps running — but now it has no living parent process.
+→ So it becomes an orphan process.
+
+Parent Process: userinit.exe (orphan process)
+
+✅ Legitimate orphan (normal) → System boot or user logon — processes like csrss.exe, wininit.exe, userinit.exe, or explorer.exe often become orphans naturally.
+⚠️ Suspicious orphan (abnormal) → Malware sometimes kills its parent process intentionally to hide its execution chain, leaving itself as an orphan — which can make it harder to trace how it started.
+
+
+
 -- The Windows Registry --  
+
+The registry on any Windows system contains the following five root keys:
+
+• HKEY_CURRENT_USER
+• HKEY_USERS
+• HKEY_LOCAL_MACHINE
+• HKEY_CLASSES_ROOT
+• HKEY_CURRENT_CONFIG
+
+HKEY_CURRENT_USER
+
+
+HKEY_USERS
+
+
+HKEY_LOCAL_MACHINE
+• Path: HKLM\
+• Purpose: Contains configuration data for the entire system, hardware, drivers, services, and installed software.
+• Important Subkeys
+  → HKLM\SYSTEM\CurrentControlSet\Services\ → Malicious drivers, unauthorized services, Attackers may create or modify services for persistence
+
+HKEY_CLASSES_ROOT
+
+
+HKEY_CURRENT_CONFIG
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 -- Windows Autoruns -- 
 -- Windows Service Analysis --  
 -- Windows Scheduled Tasks --  
