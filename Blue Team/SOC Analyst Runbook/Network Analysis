@@ -1,19 +1,217 @@
 
 --- Network Analysis ---
 
-- Network Security Theory  
-- Packet Capture and Flow Analysis 
-- Introduction to tcpdump 
-- tcpdump Capturing Network Traffic 
-- tcpdump Analyzing Network Traffic 
-- tcpdump Analyzing Network Traffic (Sample 2) 
-- tcpdump Challenge 1
-- Introduction to Wireshark 
-- Wireshark Capture and Display Filters 
-- Wireshark Statistics 
-- Wireshark Analyzing Network Traffic 
-- Wireshark Challenge 1
-- Intrusion Detection and Prevention Systems 
-- Introduction to Snort 
-- Snort Reading and Writing Rules 
-- Snort Intrusion Detection and Prevention 
+• Network Security Theory  
+• Packet Capture and Flow Analysis 
+• tcpdump 
+• tcpdump Capturing Network Traffic 
+• tcpdump Analyzing Network Traffic 
+• Wireshark Capture and Display Filters 
+• Wireshark Statistics 
+• Wireshark Analyzing Network Traffic 
+• Intrusion Detection and Prevention Systems 
+• Snort 
+• Snort Reading and Writing Rules 
+• Snort Intrusion Detection and Prevention 
+
+
+-- Network Security Theory --
+
+Internet Protocol (IP)
+• IP addressing
+• IP routing
+
+ping tcm-sec.com
+nslookup -type=A tcm-sec.com
+
+
+Transmission Control Protocol (TCP)
+• Connection-oriented – reliable
+• Three-way handshake
+• Flow and congestion control
+
+
+- Client and server communicate via TCP sockets -
+
+                   +----------------------------------------+
+                   |              Web Server                |
+                   |----------------------------------------|
+                   | IP: 40.122.39.20                       |
+                   | Port: 80 (HTTP)                        |
+                   +----------------------------------------+
+                                ^              |
+                                |  Response    |
+                                |  Source: 40.122.39.20:80
+                                |  Dest:   209.102.12.13:49152
+                                |              
+Request                         |              
+Source: 209.102.12.13:49152     |              
+Dest:   40.122.39.20:80         |              
+                                |              
+                                v              
++---------------------------------------------+
+|                 Client (User)               |
+|---------------------------------------------|
+| IP: 209.102.12.13                           |
+| Port: 49152 (Ephemeral)                     |
++---------------------------------------------+
+
+
+- Three-Way-Handshake -
+
+         +--------------------+                     +--------------------+
+         |     Client A       |                     |     Server B       |
+         +--------------------+                     +--------------------+
+                    |                                           |
+                    | -------- SYN (SEQ=100) -----------------> |
+                    |                                           |
+                    | <----- SYN-ACK (SEQ=300, ACK=101) ------- |
+                    |                                           |
+                    | ---- ACK (SEQ=101, ACK=301) ------------> |
+                    |                                           |
+         Connection Established (TCP Session Ready)
+                    |                                           |
+                    |           <--- Data Exchange --->          |
+                    |                                           |
+                    |                                           |
+        ========== Connection Termination (4-Way FIN) ==========
+                    |                                           |
+                    | ---- FIN (SEQ=500, ACK=700) ------------> |
+                    |                                           |
+                    | <----- ACK (SEQ=700, ACK=501) ----------- |
+                    |                                           |
+                    | <----- FIN (SEQ=700, ACK=501) ----------- |
+                    |                                           |
+                    | ---- ACK (SEQ=501, ACK=701) ------------> |
+                    |                                           |
+         Connection Closed Gracefully (Session Terminated)
+
+
+• Handshake: SYN → SYN-ACK → ACK establishes the connection.
+• Sequence (SEQ) starts with arbitrary numbers (e.g., 100, 300).
+• Acknowledgment (ACK) increments by 1 for the next expected byte.
+• Teardown: FIN → ACK → FIN → ACK closes both sides of the session safely.
+
+
+User Datagram Protocol (UDP)
+• Connectionless
+• Lightweight, low-overhead – speed over reliability
+• VoIP, video streaming, audio streaming
+
+
+Common Ports:
+21  - File Transfer Protocol (FTP)
+22  - Secure Shell (SSH)
+23  - Telnet
+25  - Simple Mail Transfer Protocol (SMTP)
+53  - Domain Name System (DNS)
+80  - HyperText Transfer Protocol (HTTP)
+110 - Post Office Protocol 3 (POP3)
+135 - Microsoft Remote Procedure Call (RPC)
+139 - NetBIOS
+143 - Internet Message Access Protocol (IMAP)
+389 - Lightweight Directory Access Protocol (LDAP)
+443 - HyperText Transfer Protocol Secure (HTTPS)
+445 - Server Message Block (SMB)
+3389 - Remote Desktop Protocol (RDP)
+8080 - HyperText Transfer Protocol (HTTP)
+
+
+Nslookup for Network Security:
+nslookup example.com → Basic domain lookup to find the A record (IP address) of a domain  
+nslookup 192.168.1.1 → Reverse DNS lookup to find the domain name of an IP address  
+nslookup example.com 8.8.8.8 → Query a specific DNS server for domain information  
+nslookup -type=mx example.com → Query MX (Mail Exchange) records for a domain  
+nslookup -type=ns example.com → Query NS (Name Server) records for a domain  
+nslookup -type=txt example.com → Query TXT (Text) records (e.g., SPF, DKIM) for a domain  
+nslookup -type=soa example.com → Query SOA (Start of Authority) record for a domain  
+nslookup -type=cname example.com → Query CNAME (Canonical Name) records for alias domains  
+nslookup -type=a example.com → Query the A record (IPv4 address) for a domain
+
+
+
+-- Packet Capture and Flow Analysis -- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- tcpdump -- 
+
+
+-- tcpdump Capturing Network Traffic -- 
+
+
+-- tcpdump Analyzing Network Traffic -- 
+
+
+-- Wireshark Capture and Display Filters -- 
+
+
+-- Wireshark Statistics -- 
+
+
+-- Wireshark Analyzing Network Traffic -- 
+
+
+-- Intrusion Detection and Prevention Systems -- 
+
+
+-- Snort --
+
+
+-- Snort Reading and Writing Rules -- 
+
+
+-- Snort Intrusion Detection and Prevention -- 
