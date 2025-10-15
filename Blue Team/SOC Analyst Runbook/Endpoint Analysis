@@ -1,1 +1,200 @@
 
+--- Endpoint Analysis ---
+
+• Endpoint Security Controls 
+• Windows Network Analysis 
+• Windows Process Analysis  
+• Windows Core Processes
+• The Windows Registry  
+• Windows Autoruns
+• Windows Service Analysis  
+• Windows Scheduled Tasks  
+• Windows Event Logs  
+• Introduction to Sysmon  
+• Sysmon Events  
+• Linux Network Analysis  
+• Linux Process Analysis  
+• Linux Cron Jobs  
+• Introduction to LimaCharlie  
+• LimaCharlie Endpoint Detection and Response  
+• LimaCharlie Deploying Endpoint Agents  
+
+
+-- Endpoint Security Controls --
+
+Endpoint Security Controls:
+
+• Antivirus / Antimalware
+  → Scans files and activities
+  → Matches patterns and signatures
+• Endpoint Detection and Response (EDR)
+  → Real-time monitoring and response
+  → Agent-based deployment
+  → Monitors process, file, registry, and network activity
+• Extended Detection and Response (XDR)
+  → Integration of multiple security controls and telemetry
+  → Runbooks and automated response to routine threats
+• Data Loss Prevention (DLP)
+  → Protects sensitive data at rest, transit, and in processing
+  → Access controls, data masking, and prevention
+• User and Entity Behavior Analytics (UBA)
+  → Monitors user behavior patterns
+  → Detects deviations from historic and contextual baselines
+  → Identifies insider threats, account compromise, and data exfiltration
+• HIDS / HIPS
+  → HIDS: Host-based Intrusion Detection System
+  → HIPS: Host-based Intrusion Prevention System
+• Host-based Firewall
+  → Controls incoming and outgoing traffic on a host
+
+Endpoint Security Monitoring
+
+• Process Execution
+  → Monitoring running processes
+  → Executable files, PIDs, and command-line arguments
+  → Parent-child process hierarchy
+• File System Changes
+  → Creation, modification, and deletion
+  → File Integrity Monitoring (FIM)
+• Network Connections
+  → Traffic and connections initiated from the endpoint
+  → Associated processes and executables
+• Registry Modifications
+  → Monitor registry keys and values
+  → Detect backdoors, persistence, and detection evasion
+
+
+
+-- Windows Network Analysis --
+
+🔧 CMD Network Commands
+
+net share → View local shares
+net share Exfil=C:\Users\admin\Downloads\exfil → Create a share named “Exfil” pointing to a folder (mount for sharing)
+net use X: \127.0.0.1\Exfil → Map network share Exfil to drive X:
+net use → Show mapped drives and active sessions
+net view → List computers and visible shares on the network
+net view \127.0.0.1\ → View shares on the local machine (by IP)
+net view \HOSTNAME → View shares on a specific host
+net share \127.0.0.1\ → Show local shares via IP path
+net session → Show active SMB sessions on this machine
+
+
+🌐 Network Statistics
+
+netstat -anob → Show all active connections with owning process/EXE
+netstat -anob [ESTABLISHED] → Show only established connections
+netstat -e → Display Ethernet statistics
+netstat -nr → Show routing table (numeric mode)
+netstat -S → Display per-protocol statistics
+netstat -vb → Show verbose info including the executable (admin required)
+
+
+📡 IP / ARP / Routing
+
+ipconfig /all → Show detailed adapter configuration
+arp -a → View ARP cache (IP-to-MAC mappings)
+route print → Display system routing table
+nbtstat -n → Show local NetBIOS name table
+nbtstat -A [IP] → Display remote NetBIOS information
+
+
+⚡ PowerShell Network Commands
+
+Get-NetAdapter → View network interface card info
+Get-NetIPAddress → Display IPv4 and IPv6 configuration
+Get-NetIPConfiguration → Show full IP configuration
+Get-NetRoute → Display routing table
+
+Get-NetTCPConnection → Show active TCP connections (netstat equivalent)
+Get-NetUDPEndpoint → Display active UDP ports
+
+Get-SmbShare → View SMB shared folders
+Get-SmbSession → Show active SMB sessions
+Get-SmbMapping → Display mapped network drives
+New-SmbShare -Name X -Path C:\ → Create a new SMB share
+
+Resolve-DnsName google.com → Perform DNS lookup (like nslookup)
+Test-Connection google.com → Ping alternative using PowerShell
+Test-NetConnection -Port 80 → Test port connectivity
+
+Get-NetFirewallRule → View firewall rules
+Get-NetFirewallProfile → Check firewall status
+
+
+🧠 WMI-Based Network Enumeration
+
+Get-WmiObject Win32_NetworkAdapterConfiguration → Show NICs with IPs, MACs, and gateways
+Get-WmiObject Win32_NetworkAdapter → Display all network adapters
+Get-WmiObject Win32_Share → List all network shares
+Get-WmiObject Win32_ServerConnection → Show current network sessions
+Get-WmiObject Win32_NetworkConnection → View mapped network drives
+
+
+💡 Other Useful Utilities
+
+whoami /groups → Show user group memberships
+nltest /dclist:domain → List domain controllers
+net config workstation → Show computer name and joined domain
+net time \server → Test time synchronization with a server
+nslookup → Perform DNS lookup
+ping → Test reachability and latency
+tracert → Trace network route to a host
+pathping → Combined ping + traceroute diagnostics
+
+
+https://learn.microsoft.com/en-us/sysinternals/downloads/tcpview
+
+
+
+-- Windows Process Analysis -- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Windows Core Processes -- 
+-- The Windows Registry --  
+-- Windows Autoruns -- 
+-- Windows Service Analysis --  
+-- Windows Scheduled Tasks --  
+-- Windows Event Logs --  
+-- Introduction to Sysmon --  
+-- Sysmon Events --  
+-- Linux Network Analysis --  
+-- Linux Process Analysis --  
+-- Linux Cron Jobs --  
+-- Introduction to LimaCharlie --  
+-- LimaCharlie Endpoint Detection and Response --  
+-- LimaCharlie Deploying Endpoint Agents -- 
+
+
+
+
+
+
