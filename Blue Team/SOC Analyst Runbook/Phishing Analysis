@@ -130,22 +130,24 @@ An email moves from the sender’s client through mail agents (MSA → MTA → M
 
 Look at these key points to find the true sender and verify authenticity:
 
-• Date and Time: – The exact date and time the email was sent; check for inconsistencies or delays between hops.
-• From: – The sender’s display name and email address (can be spoofed in phishing attempts).
-• To: – The recipient’s email address showing who the message was intended for.
-• Subject: – The subject line of the email, giving an idea of the message’s content.
-• Return-Path: – The real address used for mail delivery or bounces; useful for tracing the sending server.
-• Reply-To: – The address replies will go to (can differ from From; often abused in phishing).
-• Message-ID: – A unique identifier created by the sending mail server to track the message’s journey.
-• Received: – Lists all servers and IPs the email passed through; unexpected hops may indicate spoofing.
-• Authentication-Results: – Displays SPF, DKIM, and DMARC check results.
-• SPF Result: – Tells if the sender’s IP is authorized to send for that domain.
-• DKIM Signature: – Confirms if the message content and sender domain are genuine.
-• DMARC Policy: – Defines how the receiving server should handle SPF/DKIM failures.
-• Originating IP Address: – The first external IP in the Received chain (actual sending source).
-• Mail Server Hostnames: – The domain names of each mail server in the route.
-• X-Headers: – Custom headers added by servers or gateways (e.g., X-Originating-IP, X-Mailer) that may reveal the original sending system or tools.
-• X-Sender-IP: – Reveals the real IP address of the sender; useful for tracing origin and identifying malicious hosts.
+• Date and Time: The exact date and time the email was sent; check for inconsistencies or delays between hops.
+• From: The sender’s display name and email address (can be spoofed in phishing attempts).
+• To: The recipient’s email address showing who the message was intended for.
+• Subject: The subject line of the email, giving an idea of the message’s content.
+• Return-Path: The real address used for mail delivery or bounces; useful for tracing the sending server.
+• Sender: Address that appears to have sent the message.
+• Reply-To: The address replies will go to (can differ from From; often abused in phishing).
+• Message-ID: A unique identifier created by the sending mail server to track the message’s journey.
+• Received: Lists all servers and IPs the email passed through; unexpected hops may indicate spoofing.
+• Authentication-Results: Displays SPF, DKIM, and DMARC check results.
+• SPF Result: Tells if the sender’s IP is authorized to send for that domain.
+• DKIM Signature: Confirms if the message content and sender domain are genuine.
+• DMARC Policy: Defines how the receiving server should handle SPF/DKIM failures.
+• Originating IP Address: The first external IP in the Received chain (actual sending source).
+• Mail Server Hostnames: The domain names of each mail server in the route.
+• X-Headers: Custom headers added by servers or gateways (e.g., X-Originating-IP, X-Mailer) that may reveal the original sending system or tools.
+• X-Sender-IP: Reveals the real IP address of the sender; useful for tracing origin and identifying malicious hosts.
+
 
 X-Headers (Extended Email Headers)
 
