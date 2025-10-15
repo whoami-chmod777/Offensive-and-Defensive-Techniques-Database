@@ -11,13 +11,11 @@
 • Windows Scheduled Tasks  
 • Windows Event Logs  
 • Introduction to Sysmon  
-• Sysmon Events  
+• Sysmon   
 • Linux Network Analysis  
 • Linux Process Analysis  
 • Linux Cron Jobs  
-• Introduction to LimaCharlie  
-• LimaCharlie Endpoint Detection and Response  
-• LimaCharlie Deploying Endpoint Agents  
+
 
 
 -- Endpoint Security Controls --
@@ -375,55 +373,515 @@ The registry on any Windows system contains the following five root keys:
 • HKEY_CURRENT_CONFIG
 
 HKEY_CURRENT_USER
-
+• Path: HKCU\
+• Purpose: Settings specific to the currently logged-in user
+• Important Subkeys:
+  → HKCU\Software\Microsoft\Windows\CurrentVersion\Run → User-specific persistence
+  → HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs → Recent file access — useful in timeline analysis
+  → HKCU\Software\Microsoft\Windows\Shell\BagMRU → User interaction with folders
+  → HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\OpenSavePidlMRU → Files recently accessed via open/save dialogs
 
 HKEY_USERS
-
+• Path: HKU\<UserSID>\
+• Purpose: Contains user profile settings for all users
+• Useful for: Accessing another user’s HKCU equivalent when they are not logged in
+• Important Subkeys:
+  → Look for same keys as in HKCU, but under each SID (e.g., S-1-5-21-...).
 
 HKEY_LOCAL_MACHINE
 • Path: HKLM\
-• Purpose: Contains configuration data for the entire system, hardware, drivers, services, and installed software.
-• Important Subkeys
+• Purpose: Contains configuration data for the entire system, hardware, drivers, services, and installed software
+• Important Subkeys:
   → HKLM\SYSTEM\CurrentControlSet\Services\ → Malicious drivers, unauthorized services, Attackers may create or modify services for persistence
+  → HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run → Auto-start entries → Used for persistence by malware
+  → HKLM\SAM → Windows account credentials (protected) → Accessed during credential dumping attacks (e.g., Mimikatz)
+  → HKLM\SECURITY → LSA secrets, cached credentials → Targeted in credential attacks
 
 HKEY_CLASSES_ROOT
-
+• Path: HKCR\
+• Purpose: File association and COM object settings
+• Important Subkeys:
+  → Used in DLL hijacking or COM hijacking
+  → Malware may register malicious DLLs here for persistence
 
 HKEY_CURRENT_CONFIG
+• Path: HKCC\
+• Purpose: Dynamic configuration data — hardware profile used at startup.
+• Less relevant for persistence or IOC detection, but helpful for understanding device context.
 
 
+Tips for SOC Analysts
+• Use tools like:
+  → RegRipper, Autoruns, Sysinternals, FTK Imager, Velociraptor, KAPE
+• Correlate registry findings with:
+  → Event logs (EVTX)
+  → File system artifacts ($MFT, prefetch, shimcache)
+  → Memory analysis
+• Watch for anomalies like:
+  → Suspicious Run keys pointing to non-standard paths
+  → Services with strange names or binaries in C:\Users\ or AppData
+  → Unexpected registry changes outside patch windows
 
 
+- How to correlate registry findings with event logs, file system artifacts, and memory analysis -
+
+Goal: When you find a suspicious registry entry (e.g., a persistence key or malware path), correlate it with other artifacts to determine when, how, and by whom it was created or executed.
+
+🧩 1. Registry Findings
+You find this registry key: HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+→ Value: updatetool.exe = "C:\Users\Admin\AppData\Roaming\update.exe"
+
+This means there’s an autostart entry. Now you need to verify:
+• When was it created?
+• Which user or process created it?
+• Does the file update.exe actually exist?
+• Was it ever executed?
+
+🧾 2. Correlate with Event Logs (EVTX)
+Tools: Event Viewer, wevutil, EvtxECmd, or Chainsaw
+Goal: Find log entries showing creation, modification, or execution of the related file or process.
+
+Useful log sources:
+• Security.evtx → Logons, process creation (Event ID 4688)
+• System.evtx → Service and driver events
+• Application.evtx → Application-related events
+• Microsoft-Windows-PowerShell/Operational → Script activity
+
+Search for process creation events:
+Event ID 4688 → New Process Created
+Command Line: C:\Users\Admin\AppData\Roaming\update.exe
+
+💾 3. Correlate with File System Artifacts
+
+Tools:
+• MFTECmd.exe → Analyze $MFT (Master File Table)
+• PECmd.exe → Parse Prefetch files
+• AppCompatCacheParser.exe → Extract ShimCache entries
+• Timeline Explorer / Autopsy → Build timelines
+
+$MFT: Tracks file creation, modification, and deletion	update.exe created: 2025-10-12
+Prefetch: Shows if and when an executable was run	UPDATE.EXE-123456.pf → run count: 3
+ShimCache: Indicates that Windows has previously loaded the file	update.exe last seen: 2025-10-12 09:32
+
+This confirms execution evidence, timing, and frequency.
+
+🧬 4. Correlate with Memory Analysis
+
+Tools: Volatility3, Rekall
+Goal: Find traces of running or recently terminated processes, handles, and network connections.
+
+Volatility:
+vol.py -f memory.dmp windows.pslist | findstr update.exe
+vol.py -f memory.dmp windows.cmdline
+vol.py -f memory.dmp windows.netscan
+
+Results:
+• update.exe running under user Admin
+• Command line: C:\Users\Admin\AppData\Roaming\update.exe
+• Network connection: 185.192.xxx.xxx:443
+➡ Confirms the process was active in memory and had network activity.
+
+📅 5. Correlate into a Unified Timeline
+Use tools like Timeline Explorer, Timesketch, or even Excel to align timestamps from:
+• Registry hives
+• Event logs
+• File system artifacts
+• Memory dumps
+
+Example timeline:
+09:32 - Prefetch shows update.exe executed
+09:33 - Security log (4688): Process created
+09:34 - Registry key added to Run
+09:35 - update.exe connects to 185.192.xxx.xxx
+➡ This builds the full attack chain — persistence → execution → network activity.
 
 
+- Windows Registry via CLI -
 
+reg [add|delete|query|copy|save|load|unload|restore|compare|export|import] <KeyName> [Options]
 
-
-
-
-
-
-
-
-
+reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
+reg add "HKCU\Software\TestKey" /v "MaliciousRun" /t REG_SZ /d "C:\Evil\malware.exe" /f
+reg delete "HKCU\Software\TestKey" /f
+reg delete "HKCU\Software\TestKey" /v "MaliciousRun" /f
+reg export "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" C:\runkey_backup.reg
+reg import C:\runkey_backup.reg
+reg compare "HKCU\Software\Microsoft" "HKLM\Software\Microsoft"
 
 
 
 -- Windows Autoruns -- 
+
+Autostart Programs (Autoruns) 
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Run
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\RunOnce
+SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce
+SOFTWARE\Microsoft\Windows\CurrentVersion\policies\Explorer\Run
+SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+
+Autorun Registry Keys
+HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce
+HKLM\Software\Microsoft\Windows\CurrentVersion\Run
+HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce
+
+Service Configuration Keys
+HKLM\SYSTEM\CurrentControlSet\Services\{ServiceName}
+
+Scheduled Tasks
+%SystemRoot%\System32\Tasks
+HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache
+
+Suspicious Registry Indicators
+%TEMP%, %APPDATA%, %PUBLIC%, %USERPROFILE%
+UNC paths (\\192.168.x.x\share\malware.exe)
+
+Windows CLI
+reg add [RootKey\SubKey] /v ValueName /t Type /d Data [/f]
+reg query [RootKey\SubKey] [/v ValueName] [/s]
+reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Run"
+reg query "HKLM\Software\Microsoft\Windows\CurrentVersion\Run"
+reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v OneDrive
+reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion" /s
+
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v MyTool /t REG_SZ /d "C:\Tools\mytool.exe" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce" /v TempScript /t REG_SZ /d "C:\Temp\script.bat" /f
+
+PowerShell
+Get-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run"
+Get-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Run"
+Get-ItemProperty -Path "Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Run"
+Get-ItemProperty -Path "Registry::HKLM\Software\Microsoft\Windows\CurrentVersion\Run"
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name "MyTool" -Value "C:\Tools\mytool.exe"
+New-Item -Path "HKCU:\Software\MyMalware" -Force
+New-ItemProperty -Path "HKCU:\Software\MyMalware" -Name "Payload" -Value "evil.exe" -PropertyType String
+
+
+
 -- Windows Service Analysis --  
+
+services.msc
+
+Get-Service
+Get-Service -Name Spooler
+Get-Service -Name W*  
+
+Get-Service | Where-Object { $_.Status -eq 'Running' }
+Get-Service | Where-Object { $_.Status -eq 'Stopped' }
+Get-Service | Where-Object { $_.DisplayName -like "*Windows Update*" }
+
+Get-Service | Sort-Object Status, DisplayName
+Get-Service | Sort-Object Status | Format-Table -AutoSize
+
+Get-Service | Format-Table Name, DisplayName, Status, StartType
+
+Get-WmiObject -Class Win32_Service | Select Name, DisplayName, StartMode, State, StartName, PathName
+Get-WmiObject -Class Win32_Process | Select Name, ProcessId, ExecutablePath, CommandLine
+
+Get-WmiObject Win32_Service | Select-Object Name, DisplayName, StartMode, StartName, State, PathName
+
+Get-WmiObject -Class Win32_ComputerSystem | Select UserName
+Get-WmiObject -Class Win32_Product | Select Name, Version, InstallDate
+
+Get-WmiObject -Class Win32_NetworkAdapterConfiguration | Where-Object { $_.IPEnabled -eq $true } | Select Description, IPAddress, DefaultIPGateway, MACAddress
+Get-WmiObject -Class Win32_OperatingSystem | Select Caption, Version, BuildNumber, LastBootUpTime
+Get-WmiObject -Class Win32_StartupCommand | Select Name, Command, Location
+Get-WmiObject -Class Win32_Service -Filter "Name = 'SuspiciousService'" | Format-List *
+
+Get-WmiObject Win32_Service | Where-Object { $_.PathName -match "Users|AppData|Temp" } | Format-Table Name, PathName, StartName
+
+Get-CimInstance -ClassName Win32_Service
+
+Detection Tip:
+
+• C:\Users, C:\Users\Public, %TEMP%, %APPDATA%
+• With no digital signature
+• Sysmon Event ID 13, Registry Key Creation
+• Get-WinEvent -LogName System | Where-Object { $_.Id -eq 7045 } | Select TimeCreated, Message
+
+
+
 -- Windows Scheduled Tasks --  
+
+C:\Windows\System32\Tasks\
+
+HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\
+
+
+CLI:
+schtasks /query /fo LIST /v
+schtasks /query /tn "TaskName" /v /fo LIST
+
+schtasks /delete /tn "BadTask" /f
+
+Create Scheduled Task:
+schtasks /create /tn "<TaskName>" /tr "<Command>" /sc <Schedule> [options]
+schtasks /create /tn "DailyBackup" /tr "C:\Scripts\backup.bat" /sc daily /st 09:00
+schtasks /create /tn "UpdateHelper" /tr "C:\Users\Public\payload.exe" /sc onlogon /ru SYSTEM
+schtasks /create /tn "MonitorCheck" /tr "C:\Tools\monitor.exe" /sc hourly
+schtasks /create /tn "WinUpdateCheck" /tr "powershell.exe -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Users\Public\up.ps1" /sc onlogon /ru SYSTEM
+
+One time → once
+Every day → daily
+Every week → weekly
+At logon → onlogon
+At idle → onidle
+At startup → onstart
+Repeats → /mo (modifier), e.g. /sc minute /mo 5 = every 5 minutes
+
+
+PowerShell:
+Get-ScheduledTask
+Get-ScheduledTask -TaskName "TaskName" | Get-ScheduledTaskInfo
+Unregister-ScheduledTask -TaskName "BadTask" -Confirm:$false
+
+Get-ScheduledTask | Where-Object { $_.Actions.Execute -match "AppData|Temp|powershell|cmd" }
+
+
+
 -- Windows Event Logs --  
--- Introduction to Sysmon --  
--- Sysmon Events --  
--- Linux Network Analysis --  
+
+4720: A user account was created
+4722: A user account was enabled
+4723: An attempt was made to change an account's password
+4724: An attempt was made to reset an account's password
+4738: A user account was changed
+4725: A user account was disabled
+4726: A user account was deleted
+4732: A member was added to a security-enabled local group
+4688: A new process has been created
+1102: The audit log was cleared
+
+7045: A service was installed in the system
+7030: The Service Control Manager tried to take a corrective action (Restart the service)
+7035: The Service Control Manager is transitioning services to a running state
+7036: The Service Control Manager has reported that a service has entered the running state
+
+Critical Security Event IDs:
+4624	Successful logon
+4625	Failed logon
+4634	Logoff
+4648	Logon using explicit credentials
+4670	Permission on object changed
+4688	New process creation
+4697	Service installation
+4720	User account created
+4722	User account enabled
+4723	Password change
+4740	Account locked out
+1102	Security log cleared (highly suspicious)
+4723/4724	Password change/reset
+
+Start → Run → eventvwr.msc
+eventvwr
+
+- Key Event Log Categories -
+
+Security: Authentication, authorization, and audit logs (e.g., logons, privilege use)
+System: OS-level operations (e.g., driver failure, shutdown, restart)
+Application: App-specific events (e.g., errors, crashes)
+Setup: Windows setup and updates
+Forwarded Events: Logs from other systems (if configured via WEC)
+
+- wevtutil for SOC Analysten -
+
+wevtutil qe Security
+wevtutil qe Security /c:10 /f:text
+wevtutil qe Security /c:10 /f:text /rd:true
+wevtutil qe Security /c:10 /f:text /rd:true /q:"[System[(EventID=4624)]]"
+wevtutil qe Security "/q:*[System[(EventID=4624)]]" /f:text
+wevtutil qe Security /c:50 /f:text | findstr /i "4625"
+
+- Get-WinEvent PowerShell for SOC Analysts -
+
+Get-WinEvent -LogName System
+Get-WinEvent -LogName Security
+Get-WinEvent -LogName Security | Where-Object {$_.Id -eq 4625}
+
+Get-WinEvent -FilterHashtable @{logname="Security"; ID=4625}
+Get-WinEvent -FilterHashtable @{logname='Security'; ID=4624} -MaxEvents 2 | Format-List *
+Get-WinEvent -FilterHashtable @{LogName="Security"; Id=4624} | Select-Object TimeCreated, Id, Message
+
+Get-WinEvent -Path "C:\Windows\System32\winevt\Logs\Security.evtx"
+Get-WinEvent -LogName System -MaxEvents 10
+Get-WinEvent -LogName Security | Where-Object {$_.Message -like "*admin*"}
+
+$ids = 4624, 4625, 4634
+Get-WinEvent -FilterHashtable @{LogName='Security'; Id=$ids}
+Get-WinEvent -FilterHashtable @{LogName="Security"; Id=4740} | Select-Object TimeCreated, Message
+
+Get-WinEvent -ListLog *
+Get-WinEvent -ListLog Setup | Format-List -Property *
+Get-WinEvent -ListLog * -ComputerName localhost | Where-Object { $_.RecordCount }
+
+Get-WinEvent -ListProvider *
+(Get-WinEvent -ListLog Application).ProviderNames
+
+Get-WinEvent -ListProvider *Policy*
+(Get-WinEvent -ListProvider Microsoft-Windows-GroupPolicy).Events | Format-Table Id, Description
+
+$Event = Get-WinEvent -LogName 'Windows PowerShell'
+$Event.Count
+$Event | Group-Object -Property Id -NoElement | Sort-Object -Property Count -Descending
+$Event | Group-Object -Property LevelDisplayName -NoElement
+
+Get-WinEvent -Path 'C:\Windows\System32\winevt\Logs\Windows PowerShell.evtx'
+Get-WinEvent -Path "C:\Windows\System32\winevt\Logs\Microsoft-Windows-PowerShell%4Operational.evtx" -MaxEvents 100
+
+
+
+-- Sysmon --  
+
+sysmon.exe -accepteula -i sysmonconfig-export.xml
+sysmon.exe -c sysmonconfig-export.xml
+sysmon.exe -u
+
+- Sysmon Events -
+
+Event ID 1: Process Creation
+Event ID 1: Process Creation
+Event ID 3: Network ConnectionEvent ID 5: Process Terminated
+Event ID 7: Image Loaded
+Event ID 8: CreateRemoteThread
+Event ID 10: ProcessAccess
+Event ID 11: FileCreate
+Event ID 12: RegistryEvent (Object Create and Delete)
+Event ID 13: RegistryEvent (Value Set)
+Event ID 14: RegistryEvent (Key and Value Rename)
+Event ID 15: FileCreateStreamHash
+Event ID 22: DNSEvent (DNS query)
+Event ID 27: FileBlockExecutable
+Event ID 29: FileExecutableDetected
+
+- Powershell -
+
+Get-WinEvent -LogName "Microsoft-Windows-Sysmon/Operational" -> View all Sysmon logs
+
+Get-Process | Where-Object { $_.CPU -gt 100 } | Select-Object Name, CPU -> Monitor suspicious processes with high CPU usage
+
+Get-NetTCPConnection | Where-Object { $_.State -eq 'Listen' } | Select-Object LocalAddress, LocalPort -> Check for open/listening TCP ports
+
+Get-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*" | Select-Object DisplayName, DisplayVersion -> Scan installed software and versions for vulnerabilities
+
+Get-WinEvent -FilterHashtable @{LogName='Security'; ID=4625} | Select-Object TimeCreated, Id, LevelDisplayName, Message -> Extract failed login events (Event ID 4625)
+
+Get-WinEvent -FilterHashtable @{LogName="Microsoft-Windows-Sysmon/Operational"; Id=1} -> View Sysmon process creation events (Event ID 1)
+
+Get-WinEvent -FilterHashtable @{logname="Microsoft-Windows-Sysmon/Operational"; id=3} -MaxEvents 1 | Format-List * -> Show the most recent network connection event (Sysmon Event ID 3) with all details
+
+Get-WinEvent -LogName 'Microsoft-Windows-Sysmon/Operational' -FilterXPath "*[System/EventID=3 and EventData[Data[@Name='DestinationPort']='4444']]" | Format-List * -> Filter Sysmon network connection events (ID 3) where DestinationPort = 4444
+
+Get-WinEvent -LogName 'Microsoft-Windows-Sysmon/Operational' -FilterXPath "*[System/EventID=1 and EventData[Data[@Name='ProcessId']='4584']]" | Format-List * -> Get process creation events (Event ID 1) where ProcessId = 4584
+
+
+
+-- Linux Network Analysis -- 
+
+netstat -tulnp           
+netstat -an              
+netstat -rn             
+netstat -s            
+
+netstat -tn
+netstat -tnp
+netstat -antup
+
+ss -tulnp                 
+ss -an                   
+ss -s                
+
+ss -tnp
+ss src 127.0.0.1
+ss dst 127.0.0.1
+ss sport == 4444 -tnp
+ss dport == 4444 -tnp
+
+lsof
+lsof -u root
+lsof -i          
+lsof -i :80      
+lsof -nP -i      
+lsof -p 3610     
+lsof -iTCP -sTCP:LISTEN    -
+lsof +L1
+
+sha256sum <hash_value>
+
+
+
 -- Linux Process Analysis --  
+
+ps -aux    
+ps -ef   
+ps -u root
+ps -AFH 
+ps -AFH | less
+
+ps -p 3610
+ps -p 3610 -F
+ps --ppid 2941
+
+pstree
+pstree -p -s 3610
+
+top
+top -u root -c 
+top -u root -c -o -TIME+
+
+/proc$ ls -la
+/proc$ ls -la exe
+/proc$ strings exe
+
+/proc/3160$ cat env
+/proc/3160$ cat env | tr '\0' '\n'
+
+
+
 -- Linux Cron Jobs --  
--- Introduction to LimaCharlie --  
--- LimaCharlie Endpoint Detection and Response --  
--- LimaCharlie Deploying Endpoint Agents -- 
+
+crontab -l                     
+crontab -e                      
+crontab -r                     
+crontab -u <user> -l           
+ls -la /var/spool/cron/crontabs    
 
 
+- System-Wide Cron Jobs -
+
+cat /etc/crontab               
+ls /etc/cron.d/                
+ls /etc/cron.{hourly,daily,weekly,monthly} 
 
 
+- Loggingg & Debugging -
+
+grep CRON /var/log/syslog      
+tail -f /var/log/cron         
+journalctl -u cron            
+
+
+- Cron Syntax Strukture -
+
+# ┌──────── Minute (0 - 59)
+# │ ┌─────── Hour (0 - 23)
+# │ │ ┌───── Day of month (1 - 31)
+# │ │ │ ┌─── Month (1 - 12)
+# │ │ │ │ ┌─ Day of week (0 - 6) (Sunday=0 or 7)
+# │ │ │ │ │
+# * * * * *  command_to_execute
+
+
+- Examples -
+
+0 5 * * * /usr/bin/backup.sh             -- Every day at 5:00 AM  
+*/10 * * * * /usr/bin/check_disk.sh      -- Every 10 minutes  
+0 0 * * 0 /usr/bin/weekly_report.sh      -- Every Sunday at midnight  
+0 12 1 * * /usr/bin/monthly_cleanup.sh   -- On the 1st of each month at 12:00 PM  
+
+
+- Environment Variables in Cron -
+
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
 
