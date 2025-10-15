@@ -1,1 +1,176 @@
 
+
+Install / Launch
+--------------------
+
+Windows (winget):
+winget search Microsoft.PowerShell
+winget install --id Microsoft.PowerShell --source winget
+
+Linux (Ubuntu): sudo snap install powershell --classic
+
+macOS: 
+brew install powershell/tap/powershell
+PSVersionTable
+
+
+Get Help & Discover Commands
+-------------------------------
+
+Get-Help Get-Help
+Get-Help Get-Process
+Get-Help Get-Service
+Get-Command
+Get-Help -Name Get-Command -Detailed
+Update-Help
+
+
+Aliases
+-----------
+cd, mkdir, del
+
+
+Files & Folders
+-------------------
+
+Get-ChildItem
+Set-Location .\Documents\
+New-Item file.txt
+New-Item -ItemType Directory logs
+Remove-Item .\logs\
+Copy-Item file.txt file1.txt
+Move-Item .\file1.txt ..\Desktop\
+Get-Content .\file.txt
+
+
+Processes & Services
+------------------------
+
+Get-Process
+Get-Process -Name win*
+Stop-Process -Id 5432
+
+Get-Service
+Start-Service -Name Appinfo
+Stop-Service -Name Appinfo
+
+Get-Process | Sort CPU -Descending | Select -First 20
+
+
+Filtering / Piping
+----------------------
+
+Get-Process | Select-Object ProcessName, Id
+Get-Service | Where-Object Status -eq "Running"
+Select-String -Pattern "today" .\file.txt
+
+
+Local Users & Groups
+------------------------
+
+Get-LocalUser
+New-LocalUser -Name "j.doe" -Password (ConvertTo-SecureString 'password123' -AsPlainText -Force)
+Set-LocalUser -Name "j.doe" -Description "Test user"
+Disable-LocalUser -Name "j.doe"
+Enable-LocalUser -Name "j.doe"
+Remove-LocalUser -Name "j.doe"
+
+Get-LocalGroup
+New-LocalGroup -Name "Students"
+Set-LocalGroup -Name "Students" -Description "Improvise. Adapt. Overcome."
+Add-LocalGroupMember -Group "Students" -Member "j.doe"
+Remove-LocalGroupMember -Group "Students" -Member "j.doe"
+Remove-LocalGroup -Name "Students"
+
+
+Active Directory (RSAT/AD module)
+-------------------------------------
+
+Get-ADUser "j.doe"
+Get-ADUser -Filter *
+New-ADUser -Name "j.doe" -SamAccountName j.doe -AccountPassword (ConvertTo-SecureString "sifre123!" -AsPlainText -Force)
+Set-ADUser -Identity "j.doe" -Surname "Doe"
+Remove-ADUser "j.doe"
+
+Get-ADGroup "Students"
+Get-ADGroup -Filter *
+New-ADGroup -Name "Students" -GroupScope Universal
+Set-ADGroup -Identity "Students" -Description "Learn as if you were to live forever"
+Get-ADGroupMember -Identity "Students"
+Add-ADGroupMember -Identity "Students" -Members j.doe
+Remove-ADGroupMember -Identity "Students" -Member "j.doe"
+Remove-ADGroup "Students"
+
+
+Networking
+--------------
+
+Get-NetIPAddress
+ipconfig
+netstat -ano
+nslookup example.com
+arp -a
+Test-NetConnection
+Invoke-WebRequest -Uri "https://upload.wikimedia.org/wikipedia/commons/a/af/PowerShell_Core_6.0_icon.png" -OutFile "powershell.png"
+
+
+System / Info / Hashes
+---------------------------
+
+Get-ComputerInfo
+Get-WmiObject -Class win32_OperatingSystem
+Get-Hotfix
+Get-Service | Where-Object DisplayName -like '*Defender*'
+Get-ChildItem -Recurse *.* | Select-String -Pattern "SEARCH_STR"
+Get-Acl file.txt
+
+Get-FileHash file.txt
+Get-FileHash -Algorithm MD5 file.txt
+Get-FileHash -Algorithm SHA1 file.txt
+Get-FileHash -Algorithm SHA256 file.txt
+Get-FileHash -Algorithm SHA512 file.txt
+
+
+Scripting Basics
+---------------------
+
+# Variables
+$name = "John Doe"
+$age = 30
+$firstName, $lastName = "John", "Doe"
+
+# If / Else
+if ($age -gt 18) { Write-Host "Adult" } else { Write-Host "Kid" }
+
+# Switch
+$dayOfWeek = Get-Date -Format dddd
+switch ($dayOfWeek) {
+  "Monday" { "Start the week!" }
+  "Friday" { "Almost weekend!" }
+  Default { "Carry on." }
+}
+
+# Loops
+for ($i=1; $i -le 10; $i++) { Write-Host $i }
+
+$i=1
+while ($i -le 10) { Write-Host $i; $i++ }
+
+$i=1
+do { Write-Host $i; $i++ } while ($i -le 10)
+
+$names = "John","Jane","Doe"
+foreach ($name in $names) { Write-Host $name }
+
+
+Incident Examples
+---------------------
+
+Get-Process | Sort CPU -Descending | Select -First 20
+Get-NetTCPConnection | Sort-Object -Property State
+Get-ScheduledTask | Where {$_.State -ne 'Disabled'}
+Get-Service | Where-Object {$_.Status -eq 'Running'}
+Get-WinEvent -FilterHashtable @{LogName='Security'; StartTime=(Get-Date).AddHours(-1)} -MaxEvents 200
+Get-FileHash C:\temp\susp.exe -Algorithm SHA256
+
+
