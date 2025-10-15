@@ -1,0 +1,38 @@
+
+Aircrack-ng is fast and efficient Wi-Fi security testing tool with extensive functionality and strong community support
+
+
+-- Common Aircrack-ng Commands --
+
+Capture Packets: 
+airodump-ng <interface>
+
+Crack WEP Key: 
+aircrack-ng -b <BSSID> <capture_file>
+
+Crack WPA/WPA2-PSK Key: 
+aircrack-ng -w <wordlist> -b <BSSID> <capture_file>
+
+Monitor Mode: 
+airmon-ng start <interface>
+
+Deauthenticate Clients: 
+aireplay-ng --deauth <count> -a <BSSID> -c <client_MAC> <interface>
+
+Fake Authentication: 
+aireplay-ng -1 0 -e <ESSID> -a <BSSID> -h <MAC_address> <interface> 
+
+ARP Request Replay: 
+aireplay-ng -3 -b <BSSID> -h <MAC_address> <interface>
+
+Packet Injection Test:
+aireplay-ng -9 <interface>
+
+Stop Monitor Mode: 
+airmon-ng stop <interface>
+
+Help and Usage Information: 
+aircrack-ng -h
+aircrack-ng --help
+
+
