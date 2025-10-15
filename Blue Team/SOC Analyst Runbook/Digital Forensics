@@ -1,1 +1,59 @@
 
+--- Digital Forensics ---
+
+• The Digital Forensics Investigation Process  
+• Order of Volatility  
+• Chain of Custody  
+• FTK Imager  
+• FTK Imager: Forensic Image Acquisition 
+• FTK Imager: Memory Acquisition 
+• Windows Forensic Artifacts  
+• Windows Forensic Artifacts: User and System  
+• Windows Forensic Artifacts: Files  
+• Windows Forensic Artifacts: Program Execution 
+• LNK Files, Prefetch Files, and Jump Lists  
+• Windows Forensic Artifact Triage 
+
+
+-- The Digital Forensics Investigation Process --
+
+
+The Investigative Process for Digital Forensic Science
+------------------------------------------------------
+
++----------------+    +----------------+    +----------------+    +----------------+    +----------------+    +----------------+    +----------------+ 
+| Identification | -> |  Preservation  | -> |   Collection   | -> |  Examination   | -> |    Analysis    | -> |  Presentation  | -> |    Decision    |
++----------------+    +----------------+    +----------------+    +----------------+    +----------------+    +----------------+    +----------------+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Order of Volatility --  
+-- Chain of Custody --  
+-- FTK Imager --  
+-- FTK Imager: Forensic Image Acquisition -- 
+-- FTK Imager: Memory Acquisition -- 
+-- Windows Forensic Artifacts --  
+-- Windows Forensic Artifacts: User and System --  
+-- Windows Forensic Artifacts: Files --  
+-- Windows Forensic Artifacts: Program Execution -- 
+-- LNK Files, Prefetch Files, and Jump Lists --  
+-- Windows Forensic Artifact Triage -- 
