@@ -137,15 +137,15 @@ Packets → Header, Payload, and Trailer
 
 TCP/IP Encapsulation
 
-													                            	+-------------+
-												                            		|    Data     |  ← Application Layer
-												                            		+-------------+
-										                      +-------------+-------------+
-									                    	  | TCP Header  |    Data     |  ← Transport Layer
-										                      +-------------+-------------+
-							              +-------------+-------------+-------------+
-							              | IP Header   | TCP Header  |    Data     |  ← Network Layer
-							              +-------------+-------------+-------------+
+													    +-------------+
+												        |    Data     |  ← Application Layer
+												        +-------------+
+										  +-------------+-------------+
+									      | TCP Header  |    Data     |  ← Transport Layer
+										  +-------------+-------------+
+							+-------------+-------------+-------------+
+							| IP Header   | TCP Header  |    Data     |  ← Network Layer
+							+-------------+-------------+-------------+
 +-------------+-------------+-------------+-------------+-------------+
 | Frame Header| IP Header   | TCP Header  |    Data     | Frame Footer|  ← Network Access Layer
 +-------------+-------------+-------------+-------------+-------------+
