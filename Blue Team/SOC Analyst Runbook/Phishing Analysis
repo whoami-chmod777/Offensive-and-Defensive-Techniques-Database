@@ -407,8 +407,13 @@ Redirection Behavior: – Observe how the site redirects when opened safely.
 🔹 Using Sublime Text
 - Open the .eml file in Sublime Text.
 - Search for "http" or "https" to locate embedded URLs.
+- The <p> tag shows normal paragraph text.
 - Look for <a> tags to reveal hidden or disguised links.
+- The <a href="..."> tag shows the actual hyperlink destination (which may differ from the visible text).
 - This method allows visual inspection without activating the URL.
+   
+   <p>Need to access Google? <a href="https://www.google.com">Just click this text!</a></p>
+
 
 🔹 Using CyberChef
 - Tool: https://gchq.github.io/CyberChef/
