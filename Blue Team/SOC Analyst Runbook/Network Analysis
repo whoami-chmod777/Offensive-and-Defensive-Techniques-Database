@@ -10,7 +10,6 @@
 • Wireshark Capture and Display Filters 
 • Wireshark Statistics 
 • Wireshark Analyzing Network Traffic 
-• Intrusion Detection and Prevention Systems 
 • Snort 
 • Snort Reading and Writing Rules 
 • Snort Intrusion Detection and Prevention 
@@ -453,6 +452,7 @@ http.request.uri == "/service/"
 
 http.request.method == "GET"
 http.request.method == "POST"
+http.response.code == 200
 
 udp contains 81:60:03
 sip.To contains "a1762"
@@ -478,33 +478,371 @@ https://www.wireshark.org/docs/wsug_html_chunked/ChWorkBuildDisplayFilterSection
 
 -- Wireshark Statistics -- 
 
+Capture File Properties: Provides an overview of the capture, including traffic volume and duration.
+Resolved Addresses: Maps IP addresses to domain names (if available).
+Protocol Hierarchy: Shows the distribution of protocols used in the capture.
+Conversations: Displays communication between IP/MAC endpoints.
+Endpoints: Lists all unique endpoints involved in the capture (IP, MAC, etc.).
+IO Graphs: Visual representation of traffic over time.
+Flow Graph: Visualizes the flow of communication between endpoints.
+Packet Lengths: Shows the distribution of packet sizes in the capture.
+Service Response Time: Measures response times for specific services like DNS and HTTP.
+TCP Stream Graphs: Visualizes TCP stream data, including round-trip time and throughput.
+Following Streams: Enables inspection of specific TCP, UDP, or HTTP streams.
+HTTP Statistics: Provides detailed statistics on HTTP requests and responses.
+DNS Statistics: Displays details of DNS queries and responses.
+Exporting Objects: Allows exporting files, images, or other content transferred via HTTP, SMB, or other protocols.
+frame.marked == 1: Filter for specifically marked packets in Wireshark.
 
 
+- Wireshark Statistics for SOC Analysis -
 
-
-
-
-
-
-
-
-
-
-
-
+• Resolved Addresses: Helps analysts identify whether IPs map to legitimate or suspicious domains to assess if traffic is benign or malicious.
+• Endpoints: Provides an inventory of all devices in the capture, helping detect unusual or unauthorized systems.
+• Following Streams: Allows deep inspection of TCP, UDP, or HTTP conversations to uncover potential C2 traffic or data exfiltration.
+• frame.marked == 1: Used to flag and focus on critical packets for collaborative SOC investigations.
+• Exporting Objects: Extracts transferred files or payloads to analyze potential malware or data leakage.
 
 
 
 -- Wireshark Analyzing Network Traffic -- 
 
+• Set Time Step (UTC) → Adjust Wireshark’s time settings to UTC for consistency in analysis → Using UTC helps standardize timestamps, especially when correlating with logs from other systems
+• Check File Properties → Review file metadata such as capture duration and file size → Helps understand the scope and potential impact of captured events
+• Analyze Conversations (IPv4) → View top talkers and communication patterns for IPv4 packets → Reveals unusual or unauthorized communication between devices
+• Protocol Hierarchy → Check protocol hierarchy for an overview of protocols used → Highlights abnormal use of high-risk protocols like HTTP or SMB
+• Apply Display Filter (HTTP) → Filter for HTTP packets to focus on web traffic → Narrows analysis to possible web-based threats or data exfiltration
+• Follow HTTP Stream → View full conversations between client and server → Reveals exchanged content, possibly showing compromised data or credentials
+• Follow TCP Stream → Analyze detailed TCP-based communication → Identifies suspicious connections like command-and-control (C2) channels
+• HTTP Statistics → Review HTTP metrics such as traffic volume, methods, and responses → Detects anomalies like excessive POST requests suggesting exfiltration
+• Export Objects (HTTP) → Export HTTP-transferred files for deeper analysis → Enables malware or data leakage investigation
+• Export Objects (SMB) → Export SMB-shared files from the network → Useful for detecting lateral movement or malware propagation
+• Filter for ARP and Broadcast Traffic → Use arp and eth.dst == ff:ff:ff:ff:ff:ff to see ARP and broadcast packets → Detects discovery or network scanning attempts
+• Filter for ICMP Traffic → Filter icmp to inspect ping or error messages → Reveals reconnaissance attempts or misconfigurations
+• IP Address Filter → Use ip.addr == 10.0.0.1 to filter specific IP traffic → Helps isolate suspicious devices or targeted hosts
+• SMTP Filter → Filter smtp to review email-related traffic → Identifies potential phishing or email-based exfiltration
+• Analyze Suspicious File (86607.dat) → Export and analyze flagged or suspicious files → Enables malware inspection and forensic analysis
+• Calculate File Hash (SHA-256) → Use sha256sum to generate SHA-256 hash → Verifies file integrity and supports malware detection
+• Submit to VirusTotal → Upload file hash to VirusTotal → Checks for known malware using multiple antivirus engines
+• Submit to Malware Bazaar → Upload or search file in Malware Bazaar → Identifies related malware families or campaigns
+• Analyze with CyberChef → Use CyberChef for decoding or data extraction → Helps transform or analyze encoded/malicious data
 
--- Intrusion Detection and Prevention Systems -- 
 
 
 -- Snort --
 
+Snort is a flexible and powerful tool for network intrusion detection and prevention (IDS/IPS). It operates in multiple modes and helps to monitor, log, and prevent suspicious activities across networks.
+
+- Key Snort Modes -
+
+• Sniffer Mode: Monitors and displays network packets in real-time.
+• Packet Logger Mode: Logs packets to files for deeper analysis.
+• IDS/IPS Mode: Detects and prevents suspicious activities by analyzing packets against predefined rules.
+
+
+- Installation and Configuration -
+
+• Install Snort: sudo apt install snort
+• Identify Your Network Range: Use ifconfig or ip as to set up HOME_NET.
+• Rules and Configuration:
+  → Configuration file location: /etc/snort/snort.conf
+  → Back up your config file: sudo cp snort.conf snort.conf.bak
+  → Open config for editing: sudo nano snort.conf
+• Verify Configuration: Test setup with sudo snort -T -c /etc/snort/snort.conf
+
+
+- Common Snort Commands -
+
+Sniffer Mode: Sniffer mode captures packets in real-time and displays them in the console. Use this mode to monitor network traffic actively
++--------------------------------------------------+----------------------------------------------------------------------------+
+|                     Command                      |                         Description                         				|
++--------------------------------------------------+----------------------------------------------------------------------------+
+| sudo snort -i enp0s3			                   | Starts Snort in sniffer mode on the specified interface.     				|
+| sudo snort -i enp0s3 -e                          | Displays link-layer header data (e.g., MAC addresses).       				|
+| sudo snort -i enp0s3 -d                          | Shows application-layer data (packet payloads).              				|
+| sudo snort -i enp0s3 -v                          | Displays basic IP and TCP/UDP/ICMP information.              				|
+| sudo snort -i enp0s3 -X                          | Shows full packet data in both hex and ASCII.                				|
+| sudo snort -i enp0s3 -A console                  | Displays alerts directly in the console.                     				|
+| sudo snort -i enp0s3 -q                          | Runs in quiet mode, reducing startup messages.               				|
+| sudo snort -i enp0s3 -K ascii                    | Outputs packets in ASCII format (useful for readability).    				|
+| sudo snort -i enp0s3 -C                          | Strips down to only critical info for a cleaner display.     				|
+| curl http://example.com                          | Generates traffic for testing; monitor with Snort to see captured packets. |
++--------------------------------------------------+----------------------------------------------------------------------------+
+
+curl -s https://api.hackertarget.com/aslookup/?q=194.108.117.16
+whois 194.108.117.16 | grep -iE 'origin|originas|AS'
+
+
+
+Packet Logging: Packet logging mode saves packets to a log file, allowing for in-depth offline analysis.
++------------------------------------------------------------+-------------------------------------------------------------------+
+|                          Command                           |                         Description                          	 |
++------------------------------------------------------------+-------------------------------------------------------------------+
+| sudo snort -i enp0s3 -l /var/log/snort               		 | Starts Snort logging mode, saving logs to the specified directory |
+| sudo snort -i enp0s3 -l .                                  | Logs packets to the current directory.                   	     |
+| sudo snort -i enp0s3 -A fast                               | Logs alerts quickly in a simple format.               	         |
+| sudo snort -i enp0s3 -b                                    | Logs packets in binary (PCAP) format.                       		 |
+| sudo snort -i enp0s3 -q -l /var/log/snort                  | Quiet mode with minimal console output, logging to file.    		 |
+| sudo snort -i enp0s3 -K ascii                              | Logs packets in ASCII format for readability.                 	 |
+| sudo snort -i enp0s3 -A full -l /var/log/snort             | Logs packets with full details.                              	 |
+| sudo snort -i enp0s3 -s                                    | Enables syslog logging, sending alerts to syslog.           		 |
+| sudo snort -r /path/to/pcap_file.pcap                      | Reads and analyzes a saved pcap file.                         	 |
+| sudo tcpdump -r snort.log.17179612212                      | Use tcpdump to review the log file generated by Snort.        	 |
++------------------------------------------------------------+-------------------------------------------------------------------+
+
+
+Read Packet Logs: These commands allow you to review and analyze packet logs saved in Snort’s logging mode.
++------------------------------------------------------------------+-------------------------------------------------------------------------+
+|                            Command                               |                            Description                                  |
++------------------------------------------------------------------+-------------------------------------------------------------------------+
+| sudo snort -r <filename>                                         | Reads a saved packet capture file (PCAP format).                        |
+| tcpdump -r snort.log.17179612212                                 | Opens and reads the specified Snort log file using TCPdump.         	 |
+| sudo snort -r snort.log.17179612212                              | Analyzes a specific Snort log file.                                  	 |
+| tcpdump -r snort.log.17179612212 -nn                             | Reads Snort logs in TCPdump, disabling DNS lookups for faster analysis. |
+| sudo snort -r snort.log.17179612212 -X                           | Displays packet content in both hex and ASCII for detailed analysis. 	 |
+| sudo snort -r snort.log.17179612212 -A console                   | Displays alerts directly in the console from a saved capture file.   	 |
+| grep "alert" snort.log.17179612212                               | Searches for specific alerts within the log file.                   	 |
+| snort -r snort.log.17179612212 -q                                | Runs in quiet mode to avoid extra output during log review.         	 |
+| sudo tcpdump -A -r snort.log.17179612212                         | Reads logs in ASCII for readability.                                	 |
+| sudo snort -r snort.log.17179612212 -d                           | Shows application-layer data (packet payloads) for analysis.       	 |
+| cat /var/log/snort/alert                                         | Reads Snort’s alert file to review recorded alerts in real time.    	 |
++------------------------------------------------------------------+-------------------------------------------------------------------------+
+
+https://snort.org/
+
+
 
 -- Snort Reading and Writing Rules -- 
 
+Snort rules are written with specific syntax to detect and respond to potential network threats. Each rule is structured to match certain traffic patterns and specify actions when those patterns are found. Below is a breakdown of the components of a Snort rule and the general syntax:
+
+
+1. Basic Snort Rule Structure
+
+action protocol source_ip source_port -> destination_ip destination_port (options)
+
+alert icmp any any -> 8.8.8.8 any (msg:"ICMP traffic to 8.8.8.8 detected"; sid:1000001; rev:1;)
+
+• Action: Specifies what Snort should do if the rule is triggered (e.g., 'alert', 'log', 'pass', 'drop', 'reject').
+• Protocol: Defines the protocol to match (e.g., 'tcp', 'udp', 'icmp', 'ip').
+• Source IP and Port: Specifies the source IP address and port (can be 'any' for all addresses or ports).
+• Direction Operator: Specifies the direction of traffic. ('->' for unidirectional [source to dest] or '<->' for bidirectional).
+• Destination IP and Port: Specifies the destination IP address and port.
+
+2. Options Field
+
+Options provide specific conditions that must be met within a packet for a rule to trigger. The options field is enclosed in parentheses and consists of 'keyword:value;' pairs. Common keywords include
+
+• msg: A message describing the alert.
+• sid: A unique rule identifier.
+• rev: The revision number of the rule.
+• content: Specifies the content to search for within the packet (can use binary or ASCII data).
+• nocase: Used with 'content' to make the search case-insensitive.
+• depth: Specifies how far into the packet Snort should search.
+• offset: Specifies where to start searching within the packet.
+• within: Specifies the distance from the beginning of the 'content' match.
+• ttl, tos, id, seq: Match IP header values.
+
+
+Example Snort Rules
+
+Basic Rule - Detect ICMP Traffic (Ping): alert icmp any any -> any any (msg:"ICMP ping detected"; sid:1000001; rev:1;)
+Rule with Content Match - Detect HTTP GET Request: alert tcp any any -> any 80 (msg:"HTTP GET request detected"; content:"GET"; http_method; sid:1000002; rev:1;)
+Detect SSH Connection on Non-Standard Port: alert tcp any any -> any !22 (msg:"SSH connection on non-standard port"; content:"SSH"; depth:4; sid:1000003; rev:1;)
+Custom Rule to Detect SQL Injection Attempt: alert tcp any any -> any 80 (msg:"SQL Injection attempt"; content:"union select"; nocase; sid:1000004; rev:1;)
+
+
+- 'local.rules' and the '/etc/snort/snort.conf' -
+
+local.rules
+• What it is: A file where you can write your own Snort rules.
+• Purpose: Used for custom or organization-specific rules — things that aren’t included in the standard or community rule sets.
+• Example Use: You can make rules to detect a specific IP address, test a new rule, or monitor unique traffic in your network.
+• Location: /etc/snort/rules/local.rules.
+
+/etc/snort/snort.conf
+• What it is: The main configuration file that controls how Snort runs.
+• Purpose: It tells Snort how to work and which rule files to use, including local.rules.
+• What it includes: 
+  → Network Variables: e.g., HOME_NET defines which network to monitor.
+  → Rule Paths: where rule files are stored.
+  → Rule Loading: which rule files to load (like local.rules).
+  → Preprocessors: extra features (e.g., HTTP inspection).
+• Location: /etc/snort/snort.conf.
+
+How They Work Together
+• snort.conf is the main setup file — it loads local.rules and other rule files.
+• local.rules is where you add your own custom rules for detection or testing.
+
+
+Community Rules
+Community Rules are free, open-source intrusion detection and prevention (IDS/IPS) rules for Snort, managed by Cisco Talos Intelligence. They’re ideal for basic threat detection and testing without a subscription
+
+sudo wget https://www.snort.org/downloads/community/snort3-community-rules.tar.gz
+sudo tar -xzvf snort3-community-rules.tar.gz
+
+
 
 -- Snort Intrusion Detection and Prevention -- 
+
+Lets using Snort in offline/analysis mode to scan a packet capture (PCAP) for a specific indicator (HTTP requests whose URI contains ".exe"), print any matches to the console, inspect the matching packet payloads, then clean up logs.
+
+- Step-by-step what each line does and why -
+
+1. sudo wireshark 1.pcap → Manually inspect the capture in Wireshark first (visual check of traffic, URLs, headers).
+
+2. (rule): alert tcp any any -> any 80 (msg:"HTTP URI contains .exe"; content:"|2e|exe"; nocase; http_uri; sid:100001; rev:1;)
+→ A Snort rule that looks at HTTP request URIs and alerts if the URI contains .exe (case-insensitive). This is the detection logic you want Snort to apply
+
+3. sudo snort -c /etc/snort/snort.conf -q -r 1.pcap -A console
+→ Run Snort offline: load the config (-c), read the packets from 1.pcap (-r), be quiet on startup (-q), and print alerts to the console (-A console). Snort evaluates each packet against your rules and outputs any alerts.
+
+4. sudo snort -r /var/log/snort/snort.log.1717966005 -q -d
+→ Re-run Snort (or use Snort/tcpdump) to read an already created Snort log/pcap and show application-layer data (-d) so you can inspect payloads (e.g., the full HTTP header/body that caused the alert).
+
+5. sudo rm /var/log/snort/*
+→ Remove/clean log files after analysis (be careful — this deletes evidence; usually keep copies for investigations).
+
+What the workflow achieves (purpose):
+• Detect suspicious HTTP downloads (.exe) automatically with a rule.
+• Verify and inspect matches manually in Wireshark or by dumping payloads (-d).
+• Reproduce detection by running Snort against the same PCAP offline (safe, no live traffic).
+
+What happens when the rule triggers:
+• Snort matches .exe in the HTTP URI and generates an alert (message = “HTTP URI contains .exe”), logs it (typically under /var/log/snort/) and — because you used -A console — prints an alert line to your terminal.
+
+Note: The -k none argument turns off the checksum verification mode, which can sometimes cause packets to be missed
+
+
+nano /etc/snort/rules/local.rules
+sudo ls -la /var/log/snort
+sudo rm /var/log/snort/*
+
+sudo wireshark 1.pcap**
+
+alert tcp any any -> any 80 (msg:"HTTP URI contains .exe"; content:"|2e|exe"; nocase; http_uri; sid:100001; rev:1;)
+
+sudo snort -c /etc/snort/snort.conf -q -r 1.pcap -A console
+sudo snort -c /etc/snort/snort.conf -q -r 1.pcap -A console -k none
+sudo snort -r /var/log/snort/snort.log.1717966005 -q -d
+
+sudo rm /var/log/snort/*
+
+
+---------------------------------------------
+Content-Type: application-/x-msdownload
+
+sudo wireshark 1.pcap
+
+alert tcp any 80 -> any any (msg:"Potential .exe file download over HTTP"; content: "Content-Type: application/x-msdownload"; http_header; sid:100001; rev:1;)
+
+sudo snort -c /etc/snort/snort.conf -q -r 1.pcap -A console
+sudo snort -r /var/log/snort/snort.log.1717966529 -q -d
+sudo wireshark /var/log/snort/snort.log.1717966529
+
+sudo rm /var/log/snort/*
+
+---------------------------------------------
+File Signature: MZ and File Type: exe
+
+sudo wireshark 1.pcap
+
+alert tcp any 80 -> any any (msg: "HTTTP payload contains DOS MZ or PE executable file signature"; file_data; content:"|4D 5A|"; depth: 2; sid: 100001; rev:1)
+
+sudo snort -c /etc/snort/snort.conf -q -r 1.pcap -A console
+sudo snort -r /var/log/snort/snort.log.1717966529 -q -d
+sudo wireshark /var/log/snort/snort.log.1717966529
+
+sudo rm /var/log/snort/*
+
+---------------------------------------------
+Cobald Strike
+
+sudo wireshark 2.pcap
+
+alert tcp any any -> any any (msg:"Detected SSLoad activity via User-Agent"; content: "User-Agent: SSLoad/1.1"; http_header; nocase; sid: 100001; rev:1)
+
+sudo snort -c /etc/snort/snort.conf -q -r 2.pcap -A console
+sudo snort -r /var/log/snort/snort.log.1717966529 -q -d
+sudo wireshark /var/log/snort/snort.log.1717966529
+
+sudo rm /var/log/snort/*
+
+---------------------------------------------
+SSH Brute Force Attack
+
+sudo wireshark 3.pcap
+
+sudo alert tcp any any -> any 22 ( msg:"Possible SSH Brute Force Attack"; flow:to_server,established; threshold:type both, track by_src, count 5 , seconds 30; sid:1000001; rev:1; ) 
+sudo alert tcp any any -> any 22 ( msg:"Possible SSH Brute Force Attack"; flow:to_server,established; threshold:type threshold, track by_src, count 5 , seconds 30; sid:10000001; rev:1; ) 
+
+sudo snort -c /etc/snort/snort.conf -q -r 3.pcap -A console
+sudo snort -r /var/log/snort/snort.log.1717966529 -q -d
+sudo wireshark /var/log/snort/snort.log.1717966529
+
+sudo rm /var/log/snort/*
+
+
+-  A guide to Snort rules for Intrusion Detection and Prevention -
+
+• Action → Specifies what Snort should do when a rule is triggered (alert, log, pass, drop, reject, sdrop). → alert tcp $EXTERNAL_NET any -> $HOME_NET 80 (msg:"Potential attack"; sid:1000001;)
+• Protocol → Defines the protocol to monitor (e.g., TCP, UDP, ICMP). → alert tcp
+• Source IP/Port → Defines the source IP range and port to match; any can be used as a wildcard. → alert tcp $EXTERNAL_NET any
+• Direction → Specifies the traffic direction (-> or <->). → -> for one-way, <-> for bidirectional.
+• Destination IP/Port → Defines the destination IP range and port to match. → $HOME_NET 80
+• Message (msg) → Describes the rule alert in human-readable form. → (msg:"Potential XSS Attack"; …)
+• SID (sid) → Unique rule identifier required for all custom rules. → (sid:1000001;)
+• Rev (rev) → Revision number for tracking rule updates. → (rev:1;)
+• Content → Defines specific payload data to look for. → (content:"GET /admin";)
+• PCRE (pcre) → Matches content using regular expressions for flexible pattern searches. → (pcre:"/login/i";)
+• Thresholding → Limits how often an alert triggers (threshold, count, seconds). → (threshold:type limit, track by_src, count 1, seconds 60;)
+• Reference → Adds external references (e.g., CVEs or advisories). → (reference:cve,2023-0001;)
+• Flow → Defines the direction of traffic flow (e.g., established sessions). → (flow:to_server,established;)
+• Classtype → Specifies a predefined alert category (e.g., “attempted-admin”). → (classtype:attempted-admin;)
+• Metadata → Adds extra info for context (policy, deployment, or service). → (metadata:service http;)
+
+
+- Example Snort Rules -
+
+• alert icmp any any -> any any (msg:"ICMP Test"; sid:1000001; rev:1;) → Triggers on any ICMP packet (useful for detecting ping sweeps or ICMP-related attacks).
+• alert tcp any any -> any 80 (msg:"HTTP GET request"; content:"GET"; sid:1000002; rev:1;) → Detects HTTP GET requests on port 80, commonly used in web-based attacks.
+• alert tcp any any -> any 443 (msg:"TLS Handshake"; content:"ClientHello"; sid:1000003; rev:1;) → Identifies TLS handshakes, useful for analyzing encrypted traffic patterns.
+• alert tcp any any -> any 21 (msg:"FTP login attempt"; content:"USER"; sid:1000004; rev:1;) → Detects FTP login attempts by identifying the USER command.
+• alert tcp any any -> any 23 (msg:"Telnet Connection Attempt"; sid:1000005; rev:1;) → Detects Telnet connections, often risky due to plaintext credentials.
+• alert udp any any -> any 53 (msg:"DNS Query Detected"; sid:1000006; rev:1;) → Logs DNS queries, useful for tracking DNS usage and detecting data exfiltration.
+• alert tcp any any -> any 3306 (msg:"MySQL Login Attempt"; content:"root"; sid:1000007; rev:1;) → Detects login attempts on MySQL, especially using the root account.
+• alert tcp any any -> any 25 (msg:"SMTP Mail Detected"; sid:1000008; rev:1;) → Logs email traffic, useful for detecting spam or email-based attacks.
+• alert tcp any any -> any 22 (msg:"SSH Connection Attempt"; sid:1000009; rev:1;) → Detects SSH connection attempts, useful for monitoring secure shell access.
+• alert tcp any any -> any 3389 (msg:"RDP Connection Attempt"; sid:1000010; rev:1;) → Detects Remote Desktop Protocol (RDP) connections.
+• alert tcp any any -> any 1433 (msg:"MSSQL Connection Attempt"; sid:1000011; rev:1;) → Detects Microsoft SQL Server connection attempts.
+• alert udp any any -> any 69 (msg:"TFTP Traffic Detected"; sid:1000012; rev:1;) → Detects TFTP traffic, often seen in firmware updates or attacks.
+• alert tcp any any -> any 8080 (msg:"Web Proxy Access"; sid:1000013; rev:1;) → Detects web proxy usage (port 8080), often used for bypassing restrictions.
+• alert tcp any any -> any 80 (msg:"Possible SQL Injection"; content:"SELECT * FROM"; sid:1000014; rev:1;) → Detects possible SQL injection attempts in HTTP traffic.
+• alert tcp any any -> any 80 (msg:"Cross-Site Scripting Attempt"; content:"<script>"; sid:1000015; rev:1;) → Detects XSS (Cross-Site Scripting) attempts.
+• alert tcp any any -> any 80 (msg:"Directory Traversal"; content:"/../../"; sid:1000016; rev:1;) → Detects directory traversal attempts for unauthorized file access.
+• alert tcp any any -> any 80 (msg:"PHP Shell Access"; content:"/shell.php"; sid:1000017; rev:1;) → Detects attempts to access a known PHP web shell.
+• alert tcp any any -> any 80 (msg:"WordPress Login Attempt"; content:"wp-login"; sid:1000018; rev:1;) → Detects login attempts on WordPress sites.
+• alert tcp any any -> any 21 (msg:"FTP Data Transfer Detected"; content:"STOR"; sid:1000019; rev:1;) → Detects file uploads over FTP, useful for tracking data exfiltration.
+• alert tcp any any -> any 25 (msg:"Email with Attachment"; content:"Content-Disposition:"; sid:1000020; rev:1;) → Detects email messages containing attachments, potentially malicious.
+
+
+- Commands for reading and analyzing Snort log files -
+
+• sudo snort -r /var/log/snort/snort.log.1717966529 → Reads a specific Snort log file to review captured alerts or logs.
+• sudo snort -A console -q -r /var/log/snort/snort.log.1717966529 → Outputs alerts directly to the console in a concise format.
+• sudo snort -A full -l /var/log/snort -r /var/log/snort/snort.log.1717966529 → Reads logs with full details (header + payload) for deeper inspection.
+• sudo snort -dvr /var/log/snort/snort.log.1717966529 → Provides detailed (verbose) output showing both headers and payloads.
+
+• sudo tcpdump -r /var/log/snort/snort.log.1717966529 → Reads Snort log files in PCAP format using tcpdump for packet-level analysis.
+• sudo tcpdump -nn -r /var/log/snort/snort.log.1717966529 → Disables DNS/service resolution for faster, simpler log review.
+
+• wireshark /var/log/snort/snort.log.1717966529 → Opens the Snort log in Wireshark for graphical packet analysis.
+• grep "sid:1000001" /var/log/snort/alert → Searches for alerts with a specific SID in the alert log.
+• tail -f /var/log/snort/alert → Live-views new alerts in real time as Snort detects and logs them.
+
+
+References
+https://www.snort.org/ 
+http://snorpy.cyb3rs3c.net/
+https://docs.snort.org/welcome
+
