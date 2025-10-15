@@ -6,6 +6,7 @@
 • tcpdump 
 • tcpdump Capturing Network Traffic 
 • tcpdump Analyzing Network Traffic 
+• Wireshark 
 • Wireshark Capture and Display Filters 
 • Wireshark Statistics 
 • Wireshark Analyzing Network Traffic 
@@ -132,74 +133,366 @@ nslookup -type=a example.com → Query the A record (IPv4 address) for a domain
 
 -- Packet Capture and Flow Analysis -- 
 
+Packets → Header, Payload, and Trailer
 
+TCP/IP Encapsulation
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+													                            	+-------------+
+												                            		|    Data     |  ← Application Layer
+												                            		+-------------+
+										                      +-------------+-------------+
+									                    	  | TCP Header  |    Data     |  ← Transport Layer
+										                      +-------------+-------------+
+							              +-------------+-------------+-------------+
+							              | IP Header   | TCP Header  |    Data     |  ← Network Layer
+							              +-------------+-------------+-------------+
++-------------+-------------+-------------+-------------+-------------+
+| Frame Header| IP Header   | TCP Header  |    Data     | Frame Footer|  ← Network Access Layer
++-------------+-------------+-------------+-------------+-------------+
 
 
 
 -- tcpdump -- 
 
+TCPDump is a command-line packet capture and analysis tool (similar to Wireshark) that can be used without a GUI. It allows detailed filtering and can pipe data to other commands for advanced analysis.
+
+⚙️ Installation & Setup
+
+Install tcpdump: sudo apt-get install tcpdump
+Show network interfaces: ip link show
+List available interfaces for capture: tcpdump -D
+
+man tcpdump
+tcpdump -h
+sudo tcpdump -i enp0s3
+
+Output Formats:
+sudo tcpdump -i enp0s3
+sudo tcpdump -i enp0s3 -X → Capture packets in hex and ASCII
+sudo tcpdump -i enp0s3 -A → Capture packets in ASCII only
+
+
+tcpdump line full example output with sample
+
+18:36:02.472941 IP localhost.38230 > 146.75.123.52.https: Flags [P.], seq 3658750560:3658750661, ack 127669, win 65535, length 101
+
+1. Timestamp: '18:36:02.472941' - The exact time the packet was captured.
+2. Protocol: 'IP' - Indicates this is an IPv4 packet.
+3. Source: 'localhost.38230' - The source IP ('localhost' or '127.0.0.1') and the source port ('38230').
+4. The > in tcpdump output shows the direction of packet flow, indicating the source on the left is sending data to the destination on the right.
+5. Destination: '146.75.123.52.https' - The destination IP ('146.75.123.52') and the destination port ('https', which is port '443').
+
+6. Flags: '[P.]' - TCP flags:
+- S (SYN): Synchronize – Initiates a TCP connection.
+- F (FIN): Finish – Gracefully closes a TCP connection.
+- R (RST): Reset – Abruptly closes a TCP connection.
+- P (PSH): Push – Sends data immediately without waiting to fill the buffer.
+- . (ACK): Acknowledgment – Acknowledges received data.
+- U (URG): Urgent – Indicates that some data has priority and should be processed immediately.
+
+7. Sequence number: 'seq 3658750560:3658750661' - This shows that the packet contains data for byte sequence numbers '560' to '661'.
+8. Acknowledgment number: 'ack 127669' - The sender is acknowledging receipt of data up to byte '127669' from the other side.
+9. Window size: 'win 65535' - This is the flow control window size, indicating how much more data the sender can accept.
+10. Length: '101' - This packet has '101' bytes of payload data.
+
+
+https://www.tcpdump.org/index.html
+https://danielmiessler.com/p/tcpdump/
+https://cdn.comparitech.com/wp-content/uploads/2019/06/tcpdump-cheat-sheet-1.pdf
+
+
 
 -- tcpdump Capturing Network Traffic -- 
+
+tcpdump is a powerful command-line tool used to capture and analyze network traffic. It allows users to intercept packets sent or received over a network and inspect their contents.
+
+
+man tcpdump | less
+sudo tcpdump -i enp0s3 -n
+
+Capture Traffic without DNS Resolution (Display IP Addresses or Hostname):
+
+sudo tcpdump -i enp0s3 -n host example.com
+sudo tcpdump -i enp0s3 -n host 93.184.215.14
+sudo tcpdump -i enp0s3 -n src 93.184.215.14
+sudo tcpdump -i enp0s3 -n dst 93.184.215.14
+
+
+Capture Traffic Based on Network Segments:
+
+sudo tcpdump -i enp0s3 -n net 192.168.199.0/24
+sudo tcpdump -i enp0s3 -n src net 192.168.199.0/24 
+sudo tcpdump -i enp0s3 -n dst net 192.168.199.0/24 
+
+
+Capture Traffic Based on on Portnumber:
+
+sudo tcpdump -i enp0s3 -n port 3389
+sudo tcpdump -i enp0s3 -n src port 3389
+sudo tcpdump -i enp0s3 -n dst port 3389
+
+
+Capture Traffic Based on Logical Operators: 'and', 'or', 'not':
+
+sudo tcpdump -i enp0s3 -n  src 10.0.2.10 and dst port 3389
+sudo tcpdump -i enp0s3 -n  'src 10.0.2.10 and not port 22'
+sudo tcpdump -i enp0s3 -n  'src 10.0.2.15 and dst 40.123.123.124 and not (port 443 or port 22)'
+
+
+Capture Traffic Based on Protocols:
+
+sudo tcpdump -i enp0s3 -n tcp
+sudo tcpdump -i enp0s3 -n icmp
+sudo tcpdump -i enp0s3 -n not arp
+
+Save Capture into a File: sudo tcpdump -i enp0s3 -n -w /path/filename.pcap
+
+Read from a CaptureFile:
+
+sudo tcpdump -i enp0s3 -n -r /path/filename.pcap
+sudo tcpdump -i enp0s3 -n -r /path/filename.pcap icmp
+sudo tcpdump -i enp0s3 -n -r /path/filename.pcap tcp
+
++-------------------------------------------------------------------------------------------+
+|                            Useful tcpdump Command Examples (-n included)                  |
++--------------------------------------------+----------------------------------------------+
+| Command                                    | Description                                  |
++--------------------------------------------+----------------------------------------------+
+| sudo tcpdump -n                            | Capture all traffic (no DNS resolution).     |
+| sudo tcpdump -i eth0 -n                    | Capture traffic on a specific interface.     |
+| sudo tcpdump -c 10 -n                      | Capture only 10 packets and stop.            |
+| sudo tcpdump -w capture.pcap -n            | Save captured packets to a file.             |
+| sudo tcpdump -r capture.pcap -n            | Read packets from a saved file.              |
+| sudo tcpdump -i lo -n                      | Capture on the loopback interface.           |
+| sudo tcpdump -i eth0 -n port 80            | Capture only HTTP traffic (port 80).         |
+| sudo tcpdump -i eth0 -n host 192.168.1.10  | Capture traffic to/from a specific host.     |
+| sudo tcpdump -i eth0 -n tcp                | Capture only TCP traffic.                    |
+| sudo tcpdump -i eth0 -n udp                | Capture only UDP traffic.                    |
+| sudo tcpdump -i eth0 -n -X                 | Show packets in HEX and ASCII.               |
+| sudo tcpdump -i eth0 -n -A                 | Show packets in ASCII format only.           |
+| sudo tcpdump -i eth0 -n src 192.168.1.10   | Capture traffic from the source IP.          |
+| sudo tcpdump -i eth0 -n dst 192.168.1.10   | Capture traffic destined for the IP.         |
+| sudo tcpdump -i eth0 -n -vvv               | Maximum verbosity (detailed output).         |
+| sudo tcpdump -i eth0 -n 'tcp[13] & 2 != 0' | Capture only SYN packets (TCP handshake).    |
+| sudo tcpdump -i eth0 -n icmp               | Capture only ICMP (ping) traffic.            |
+| sudo tcpdump -i eth0 -n net 192.168.1.0/24 | Capture traffic for a specific subnet.       |
++--------------------------------------------+----------------------------------------------+
+| Example: sudo tcpdump -i eth0 -n port 443 -w https_traffic.pcap                           |
+| → Capture HTTPS traffic, disable DNS, and save to file.                                   |
++-------------------------------------------------------------------------------------------+
 
 
 -- tcpdump Analyzing Network Traffic -- 
 
+Step-by-Step Analysis 1
+
+tcpdump -r capture.pcap 
+tcpdump -r capture.pcap --count
+tcpdump -tt -r capture.pcap
+
+tcpdump -tt -r capture.pcap port 80 --count
+tcpdump -tt -r capture.pcap port 80
+
+tcpdump -tt -r capture.pcap port 80 and host 10.0.0.168
+tcpdump -tt -r capture.pcap port 80 and host 10.0.0.168 | grep -E "GET|POST"
+
+tcpdump -tt -r capture.pcap | grep "audiodg.exe"
+tcpdump -tt -r capture.pcap -A | grep "audiodg.exe" -A 500 | less
+
+tcpdump -r capture.pcap
+tcpdump -r capture.pcap --count
+tcpdump -r capture.pcap -c <number of packets>
+
+tcpdump -r capture.pcap -t
+tcpdump -r capture.pcap -tt
+tcpdump -r capture.pcap -ttt
+tcpdump -r capture.pcap -tttt
+
+
+Step-by-Step Analysis 2
+
+tcpdump -r capture.pcap --count
+tcpdump -tt -r capture.pcap -n tcp
+
+tcpdump -tt -r capture.pcap -n tcp | cut -d " " -f 3
+tcpdump -tt -r capture.pcap -n tcp | cut -d " " -f 3 | cut -d "." -f 1-4
+tcpdump -tt -r capture.pcap -n tcp | cut -d " " -f 3 | cut -d "." -f 1-4 | sort
+tcpdump -tt -r capture.pcap -n tcp | cut -d " " -f 3 | cut -d "." -f 1-4 | sort | uniq
+tcpdump -tt -r capture.pcap -n tcp | cut -d " " -f 3 | cut -d "." -f 1-4 | sort | uniq -c
+tcpdump -tt -r capture.pcap -n tcp | cut -d " " -f 3 | cut -d "." -f 1-4 | sort | uniq -c | sort -nr
+
+tcpdump -tt -r capture.pcap -n tcp | cut -d " " -f 5 | cut -d "." -f 1-4 | sort | uniq -c | sort -nr
+
+tcpdump -tt -r capture.pcap -n tcp and src 10.4.18.169 and dst 85.239.53.211 --count 
+tcpdump -tt -r capture.pcap -n tcp and src 10.4.18.169 and dst 85.239.53.211 | cut -d " " -f 3
+tcpdump -tt -r capture.pcap -n tcp and src 10.4.18.169 and dst 85.239.53.211 | cut -d " " -f 3 | cut -d "." -f 5
+
+tcpdump -tt -r capture.pcap -n tcp and src 10.4.18.169 and dst 85.239.53.211 | cut -d " " -f 3 | cut -d "." -f 5 | sort | uniq -c | sort -nr
+
+tcpdump -tt -r capture.pcap -n tcp and dst 10.4.18.169 and src 85.239.53.211 | cut -d " " -f 3 | cut -d "." -f 5 | sort | uniq -c | sort -nr
+
+tcpdump -tt -r capture.pcap src 10.4.18.169 and dst 85.239.53.211 | grep -E "GET|POST"
+tcpdump -tt -r capture.pcap src 10.4.18.169 and dst 85.239.53.211 -c 5
+tcpdump -tt -r capture.pcap src 10.4.18.169 and dst 85.239.53.211 -c 5 -A
+
+tcpdump -tt -r capture.pcap host 85.239.53.211
+tcpdump -tt -r capture.pcap host 85.239.53.211 -A | grep -i 'user\|pass\|login'
+tcpdump -tt -r capture.pcap host 85.239.53.211 -A | grep -i 'user\|pass\|login' | grep -v "User-Agent"
+tcpdump -tt -r capture.pcap host 85.239.53.211 -A | grep "filename"
+
+tcpdump -tt -r capture.pcap | grep t.me 
+tcpdump -tt -r capture.pcap host t.me -n
+
+tcpdump -tt -r capture.pcap | grep dll
+tcpdump -tt -r capture.pcap -A | grep dll -A 50 | less
+
+
+
+-- Wireshark --
+
+sudo apt install wireshark
+sudo add-apt-repository ppa:wireshark-dev/stable
+sudo apt update
+
+CLI commands:
+
+wireshark -h
+wireshark
+wireshark -i eth0
+wireshark file.pcap
+wireshark -i eth0 -k -w capture_output.pcap
+wireshark -v
+wireshark -r file.pcap
+wireshark -S
+wireshark -i eth0 -Y "http.request"
+
+
 
 -- Wireshark Capture and Display Filters -- 
 
+- Capture Filters -
+
+tcp, udp, icmp, not tcp
+
+host 172.18.5.4
+net 192.168.0.0/24
+net 192.168.0.0 mask 255.255.255.0
+
+src net 192.168.0.0/24 , src net 192.168.0.0 mask 255.255.255.0
+dst net 192.168.0.0/24 , dst net 192.168.0.0 mask 255.255.255.0
+
+port 53
+port not 53 and not arp
+tcp port 23 and host 10.0.0.5
+tcp port 23 and not src host 10.0.0.5
+
+host www.example.com and not (port 80)
+host www.example.com and not (port 80 or port 25)
+host www.example.com and not port 80 and not port 25
+
+ip
+not broadcast and not multicast
+
+
+- Display Filters -
+
+tcp, http, ip, dns, udp
+
+ip.addr == 192.168.1.1
+tcp.port == 443
+tcp.port eq 25 or icmp
+
+ip.src == 10.1.2.3
+ip.src != 10.0.0.5
+ip.src == 192.168.0.0/16 and ip.dst == 192.168.0.0/16
+
+tcp.window_size == 0 && tcp.flags.reset != 1
+smb || nbns || dcerpc || nbss || dns
+ls_ads.opnum==0x09
+
+udp[8:3]==81:60:03
+eth.addr[0:3]==00:06:5B
+
+udp contains 81:60:03
+sip.To contains "a1762"
+
+http.request.uri matches "gl=se$"
+
+ip.src != xxx.xxx.xxx.xxx && ip.dst != xxx.xxx.xxx.xxx && sip
+
+ip.addr == 10.43.54.65
+ip.src == 10.43.54.65 or ip.dst == 10.43.54.65
+ip.addr != 10.43.54.65
+ip.src != 10.43.54.65 or ip.dst != 10.43.54.65
+
+! ( ip.addr == 10.43.54.65 )
+! (ip.src == 10.43.54.65 or ip.dst == 10.43.54.65)
+
+== | != | > | < | >= | <=
+
+frame.len > 10
+frame.len < 128
+frame.len ge 0x100
+frame.len <= 0x20
+
+frame.time < "2022-01-01"
+frame.time == "Sep 26, 2004 23:18:04.954975"
+
+http.host matches "acme\\.(org|com|net)"
+
+tcp.flags.syn == True
+tcp.flags.syn == 1
+
+eth.dst == ff:ff:ff:ff:ff:ff
+eth.dst == ff-ff-ff-ff-ff-ff
+eth.dst == ffff.ffff.ffff
+
+http.request
+http.request.uri == "https://www.wireshark.org/"
+http.request.uri == "/service/"
+
+http.request.method == "GET"
+http.request.method == "POST"
+
+udp contains 81:60:03
+sip.To contains "a1762"
+
+http contains "login"
+http contains "service"
+http contains "audiodg.exe"
+
+http.request.uri contains "audiodg"
+http.request.uri contains "/login"
+
+http.host matches "acme\\.(org|com|net)"
+dns.qry.name == "example.com"
+dns.qry.name contains "www.\x77\x69\x72\x65\x73\x68\x61\x72\x6b.org"
+
+
+https://wiki.wireshark.org/CaptureFilters
+https://wiki.wireshark.org/DisplayFilters
+https://www.wireshark.org/docs/wsug_html_chunked/ChCapCaptureFilterSection
+https://www.wireshark.org/docs/wsug_html_chunked/ChWorkBuildDisplayFilterSection.html
+
+
 
 -- Wireshark Statistics -- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 -- Wireshark Analyzing Network Traffic -- 
