@@ -1,1 +1,27 @@
 
+--- Security Information and Event Management (SIEM) ---
+
+- SIEM Architecture
+- SIEM Deployment Models
+- Log Types
+- Log Formats
+- Common Attack Signatures: User Behavior
+- Common Attack Signatures: SQL Injection
+- Common Attack Signatures: Cross-Site Scripting
+- Common Attack Signatures: Command Injection
+- Common Attack Signatures: Path Traversal and LFI
+- Command Line Log Analysis
+- Pattern Matching
+- Structured Log Analysis
+- Introduction to Splunk
+- Splunk: Initial Walkthrough
+- Splunk: Importing and Exploring Events
+- Splunk: Search Processing Language (SPL)
+- Splunk: Search Commands
+- Splunk: Reports and Alerts
+- Splunk: Creating Dashboards
+- [Live] Splunk: Website Defacement Investigation
+- Splunk: Ransomware Challenge
+- Splunk: Deploying a Forwarder and Generating Real-Time Alerts
+- Section Cleanup
+- Quiz - SIEM
