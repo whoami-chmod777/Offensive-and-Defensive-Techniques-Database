@@ -15,7 +15,8 @@
 • Static MalDoc Analysis  
 • Static PDF Analysis  
 • Automated Email Analysis with PhishTool  
-• Reactive Phishing Defense  
+• Reactive Phishing Defense
+• Proactive Phishing Defense  
 • Phishing Analysis Report Template
 
 
@@ -146,7 +147,6 @@ Look at these key points to find the true sender and verify authenticity:
 • X-Headers: – Custom headers added by servers or gateways (e.g., X-Originating-IP, X-Mailer) that may reveal the original sending system or tools.
 • X-Sender-IP: – Reveals the real IP address of the sender; useful for tracing origin and identifying malicious hosts.
 
-
 How to Analyze the "Received" Chain:
 • Read from Bottom to Top: The bottom-most “Received” header shows the first mail server that handled the email, while the top one shows the final server that delivered it to the recipient.
 • Check for Unexpected Hops: If there are unknown, mismatched, or suspicious servers in the chain, it may indicate tampering, relaying through unauthorized systems, or redirection by malicious actors.
@@ -155,6 +155,14 @@ How to Analyze the "Received" Chain:
 Why it matters:
 • Analyzing the “Received” headers helps uncover spoofing attempts, misconfigured domains, or phishing attacks.
 • Validating these entries against SPF, DKIM, and DMARC records strengthens confidence in the email’s authenticity.
+
+
+cat sample.eml | less
+grep -i "from:" sample.eml
+grep -i "received" sample.eml
+grep -i "spf" sample.eml
+grep -i "dmarc" sample.eml
+grep -i "dkim" sample.eml
 
 
 https://www.iana.org/assignments/message-headers/message-headers.xhtml
@@ -395,6 +403,20 @@ Redirection Behavior: – Observe how the site redirects when opened safely.
   - "Extract URLs" → List all URLs from the message.
   - "Defang URL" → Safely modify links (e.g., hxxps[:] instead of https://).
 - Helps decode and examine malicious links securely.
+
+
+cat sample.eml | grep -i "<a href"
+cat sample.eml | grep -i "http"
+cat sample.eml | grep -oP 'https?://\S+'
+
+strings sample.eml | grep -i "http"
+strings sample.eml | grep -oP 'https?://\S+'
+
+curl -I <URL>
+nslookup <domain>
+whois <domain>
+dig +short <domain>
+
 
 Using Email IOC Extractor
 A Python script for automatic extraction of Indicators of Compromise (IOCs) from email files.
@@ -803,31 +825,54 @@ Get-MessageTrackingLog -EventId "Receive" -Start (Get-Date).AddDays(-5) -ResultS
 
 
 
+-- Proactive Phishing Defense ---
+
+Proactive phishing defense focuses on preventing phishing emails from reaching users and reducing overall attack exposure through layered protection and awareness.
+
+Email Filtering
+• Use email security appliances (e.g., Proofpoint, Microsoft Defender, Mimecast) to detect and block known malicious senders.
+• Enable tagging of external emails to warn users when messages originate outside the organization.
+
+URL Scanning and Blocking
+• Enable real-time URL inspection in the mail gateway to detect malicious links before delivery.
+• Block recently registered or suspicious domains using threat intelligence and domain reputation feeds.
+
+Attachment Filtering
+• Apply file extension blocking for risky file types (.exe, .js, .vbs, .iso, .scr).
+• Use sandboxing to detonate and analyze attachments before delivering them to users.
+
+Email Authentication Methods
+• Implement SPF, DKIM, and DMARC to authenticate legitimate senders and block spoofed emails.
+• Regularly review DMARC reports to detect unauthorized use of your domain.
+
+User Training
+• Conduct security awareness training on identifying phishing emails and reporting them safely.
+• Perform phishing simulation exercises to test and improve employee awareness.
+• Provide a reporting function (e.g., "Report Phish" button) for users to escalate suspicious messages to SOC.
+
+
+https://whois.domaintools.com/
+
+
+
 -- Phishing Analysis Report Template --  
 
-
-Phishing Analysis Report Template
 
 Headers
 ======================================
 Date:
 Subject:
-
 To:
 From:
-
 Reply-To:
 Return-Path:
-
 Sender IP:
 Resolve Host:
-
 Message-ID:
 
 
 URLs
 =======================================
-
 
 
 Attachments
@@ -842,22 +887,15 @@ Description
 ======================================
 
 
-
 Artifact Analysis
 ======================================
 Sender Analysis:
-
-
 URL Analysis:
-
-
 Attachment Analysis:
-
 
 
 Conclusion
 ======================================
-
 
 
 Defense Actions
@@ -865,7 +903,7 @@ Defense Actions
 
 
 
-
+--------------------------------------------------------------------------------------------------------------------
 
 
 
