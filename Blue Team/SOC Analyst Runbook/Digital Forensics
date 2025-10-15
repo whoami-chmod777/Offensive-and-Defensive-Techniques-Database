@@ -18,36 +18,109 @@
 -- The Digital Forensics Investigation Process --
 
 
-The Investigative Process for Digital Forensic Science
-------------------------------------------------------
-
 +----------------+    +----------------+    +----------------+    +----------------+    +----------------+    +----------------+    +----------------+ 
 | Identification | -> |  Preservation  | -> |   Collection   | -> |  Examination   | -> |    Analysis    | -> |  Presentation  | -> |    Decision    |
 +----------------+    +----------------+    +----------------+    +----------------+    +----------------+    +----------------+    +----------------+       
 
 
+1. Identification
+
+• Confirm that an incident or crime has occurred
+• Sources: victim reports, detections, audits
+• Prepare to respond: locate and preserve evidence
+• Define scope and focus of the investigation
+
+2. Preservation
+
+• Keep evidence intact and unaltered ("the system is a crime scene")
+• Capture a snapshot of the system’s current state
+• Identify relevant data (volatile / non-volatile)
+• Maintain chain of custody (who, what, when, where, why)
+• Secure physical and digital evidence
+
+3. Collection
+
+• Gather all identified evidence (devices, peripherals)
+• Ensure legal authority (warrant, consent, scope)
+• Collect volatile data first
+• Reduce irrelevant data
+• Document and verify integrity
+
+4. Examination
+
+• Inspect, analyze, and interpret evidence
+• Work with forensic images, not originals
+• Extract and translate raw data into readable form
+• Use a checklist for consistency
+• Discover hidden or deleted data
+
+5. Analysis
+
+• Interpret the evidence: how does it support the hypothesis, how does it refute the hypothesis, what does it mean in context
+• Data context: don’t analyze in a vacuum.
+• Iteration: analyze, ask new questions, re-analyze.
+• Relational analysis: links between people, places, systems, and events.
+• Functional analysis: how system/operational configurations relate to the incident.
+• Temporal analysis: timelines, sequences of activity, and pattern analysis.
 
 
+6. Presentation
 
+• Communicate the results: legal teams, executives, and decision makers.
+• Ensure clarity: findings should be understandable to both technical and non-technical audiences.
+• Guide the audience: let the evidence lead to logical conclusions; avoid speculation.
+• Executive summaries: highlight key results, significant findings, and clear explanations.
+• Comprehensive documentation: include tools used, evidence discovered, and reasoning behind relevance.
+• Reproducibility: another forensic analyst should be able to reach the same conclusion.
 
+7. Decision
 
-
-
-
-
-
-
-
-
-
-
-
-
+• Evaluate the results: review all findings, conclusions, and documentation for completeness and accuracy.
+• Make a decision: determine if the evidence and conclusions are sufficient, decide whether additional investigation is needed.
+• Prosecution or remediation: support legal proceedings by building a case and providing expert testimony, implement corrective or preventive measures within the organization.
 
 
 
 -- Order of Volatility --  
--- Chain of Custody --  
+
+The Order of Volatility defines the sequence in which digital evidence should be collected
+
++---------------------------+    +------------------------------------+    +----------------------------+    +----------------------------+    +---------------------------+    +---------------------------+
+|   CPU Registers and Cache | -> | RAM and Active Network Connections | -> | Temp Files and System Logs | -> |     Disk Storage Data      | -> |       Remote Logging      | -> |        Archive Media      |
++---------------------------+    +------------------------------------+    +----------------------------+    +----------------------------+    +---------------------------+    +---------------------------+
+
+1. CPU Registers and Cache
+• Processor Registers: Very fast, temporary storage inside the CPU; holds current instructions, storage addresses, and active data.
+• Cache Memory: Stores and returns frequently used instructions and data to speed up processing.
+• Running Processes: Currently active programs, including paths, PIDs, and command-line invocations.
+
+2. RAM and Active Network Connections
+• Random Access Memory (RAM): Short-lived data (session info, unsaved documents, process data).
+• Network Connections: Current TCP/UDP connections and open ports.
+• Routing Table: Lists pathways to network destinations.
+• ARP Cache: Maps IP addresses to MAC addresses.
+
+3. Temp Files and System Logs
+• Temporary Files: Downloads or temp configurations stored in %TEMP%, C:\Windows\Temp, /tmp.
+• Swap Files: Temporary memory space on disk used by the OS.
+• System and Application Logs: Contain event records but can be overwritten or cleared.
+
+4. Disk Storage Data
+• Hard Disk Drives (HDDs): Persistent system and user data.
+• Solid State Drives (SSDs): Faster but use TRIM/garbage collection, which can erase data.
+• System Configurations: OS components, installed software, user files, documents, executables, and backups.
+
+5. Remote Logging
+• Endpoint Telemetry: Local logs (system, security, app, network, DNS, etc.).
+• Centralized Log Collection: Logs aggregated on SIEM servers or cloud storage; replicated and managed with rotation policies.
+
+6. Archive Media
+• Long-term Storage: Backup tapes, optical disks (CDs/DVDs/Blu-rays), archival drives, or cloud archival storage.
+• Backups: Files and databases stored for recovery.
+• Security Controls: Ensure confidentiality, integrity, and availability of stored evidence.
+
+
+
 -- FTK Imager --  
 -- FTK Imager: Forensic Image Acquisition -- 
 -- FTK Imager: Memory Acquisition -- 
