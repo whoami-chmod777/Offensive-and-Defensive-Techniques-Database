@@ -5,12 +5,7 @@
 • Order of Volatility  
 • Chain of Custody  
 • FTK Imager  
-• FTK Imager: Forensic Image Acquisition 
-• FTK Imager: Memory Acquisition 
 • Windows Forensic Artifacts  
-• Windows Forensic Artifacts: User and System  
-• Windows Forensic Artifacts: Files  
-• Windows Forensic Artifacts: Program Execution 
 • LNK Files, Prefetch Files, and Jump Lists  
 • Windows Forensic Artifact Triage 
 
@@ -121,12 +116,371 @@ The Order of Volatility defines the sequence in which digital evidence should be
 
 
 
+-- Chain of Custody  --
+
+Chain of Custody
+
+The Chain of Custody (CoC) is the official process of documenting the handling of evidence — from the moment it is collected until it is presented in court or stored.
+It ensures that digital or physical evidence remains authentic, untampered, and legally admissible.
+
+• Tracking Evidence
+  → Records every step of evidence handling — from collection to presentation.
+  → Ensures the same evidence is presented in court that was originally collected.
+  → Maintains accountability for each person involved.
+
+• Documenting Possession
+  → Identifies all parties who handled or accessed the evidence (law enforcement, stakeholders, investigators, examiners).
+  → Each time evidence changes hands, a Chain of Custody form must be filled out and signed.
+
+• Storage Conditions
+  → Logs date, time, reason, and sending/receiving parties for every evidence transfer.
+  → Describes where and how evidence is stored (e.g., temperature, physical or digital security).
+
+
+Forensic Data Integrity
+
+Forensic Data Integrity ensures that digital evidence remains complete, authentic, and unaltered from the time it is collected until the end of the investigation.
+Maintaining integrity guarantees that the evidence is legally admissible and scientifically reliable.
+
+Write Blockers
+• Preserve the integrity of storage devices.
+• Prevent any write commands that could alter original data.
+• Can be hardware or software-based.
+• All analysis should be performed on forensic images, not the original drive.
+
+Evidence Bags
+• Contain and protect physical or digital evidence.
+• Tamper-resistant or tamper-evident for security.
+• Include labeling for case identification and documentation.
+
+Legal Holds
+• Place a litigation hold to prevent deletion or modification of relevant data.
+• Preserve evidence until the case or investigation is fully resolved.
+
+Documentation
+• Record all procedures, tools used, evidence conditions, and observations.
+• Provides transparency and reproducibility in the forensic process.
+
+
+
 -- FTK Imager --  
--- FTK Imager: Forensic Image Acquisition -- 
--- FTK Imager: Memory Acquisition -- 
+
+FTK Imager is a forensic tool by AccessData used to create precise, unaltered copies of digital evidence for analysis. It verifies data integrity through hash comparison, ensuring the image matches the original evidence exactly.
+
+🧰 FTK Imager: Forensic Image Acquisition
+
+• Open FTK Imager. 
+  → Launch the program on your analysis workstation.
+• Click File > Create Disk Image. 
+  → This begins the acquisition wizard.
+• Select Evidence Type. 
+  → Choose Physical Drive, Logical Drive or Image File, then click Next.
+• Select the Source Drive. 
+  → Pick the evidence disk or partition and click Finish.
+• Click Add to set destination. 
+  → Choose the image type — usually E01 (EnCase) or Raw (dd) — and click Next.
+• Enter Case Details. 
+  → Fill in examiner name, case number, and description (optional), then click Next.
+• Choose Destination Folder and File Name. 
+  → Browse to a secure location and click Finish.
+• Enable Verification. 
+  → Tick Verify images after creation to perform automatic hash validation.
+• Click Start. 
+  → The acquisition process begins.
+• Review the Hash Report. 
+  → Confirm that the pre- and post-acquisition hash values match.
+
+
+💽 Mounting Image To Drive
+
+• Open FTK Imager.
+• Click File > Image Mounting.
+• Browse and Select the Image File (.E01, .dd, etc.).
+• Choose Mounting Options: 
+  → Select Read-Only mode to preserve integrity.
+  → Choose a drive letter to assign.
+• Click Mount.
+  → The image appears as a virtual drive in Windows Explorer.
+• Access Files.
+  → You can now browse, open, or analyze contents without altering the original evidence.
+
+
+🔐 How to Extract Protected Files Using FTK Imager
+
+• Open the Image.
+  → Click File > Add Evidence Item and load the image file.
+• Navigate to Protected Files.
+  → Locate encrypted, restricted, or system-protected files in the directory tree.
+• Right-Click the File(s) → Export Files.
+  → Choose a safe output folder for extraction.
+• Decrypt or Access Protected Content (if credentials or keys are available).
+• Verify Integrity.
+  → Compare hash values before and after extraction to confirm authenticity.
+
+
+🧠 FTK Imager: Memory Acquisition
+
+• Open FTK Imager.
+• Click File > Capture Memory.
+• Select Destination Path.
+  → Choose where to save the memory dump (e.g., C:\Evidence\RAMdump.mem).
+• Enable Pagefile Capture (optional).
+  → Include pagefile.sys for extended memory content.
+• Click Capture Memory.
+  → The tool creates a .mem file of the system’s RAM.
+• Verify the Hash.
+  → Review the hash report to ensure integrity.
+
+
+🧩 Analyzing Image Dump
+
+• Open FTK Imager.
+• Click File > Add Evidence Item.
+• Select Evidence Type: choose Image File, then click Next.
+• Browse and Load the Image (e.g., .E01, .dd).
+• Expand the Folder Tree.
+  → View file system structure, deleted files, and metadata.
+• Preview Content.
+  → Use the lower pane to inspect text, hex, or file properties.
+• Export Evidence.
+  → Right-click any file or folder → Export Files for reporting or further analysis.
+
+
+
 -- Windows Forensic Artifacts --  
--- Windows Forensic Artifacts: User and System --  
--- Windows Forensic Artifacts: Files --  
--- Windows Forensic Artifacts: Program Execution -- 
+
+🖥️ System Hives
+
+Location: %SYSTEMROOT%\System32\Config
+
+• DEFAULT	HKEY_USERS\.DEFAULT
+• SAM	HKEY_LOCAL_MACHINE\SAM
+• SECURITY	HKEY_LOCAL_MACHINE\SECURITY
+• SOFTWARE	HKEY_LOCAL_MACHINE\SOFTWARE
+• SYSTEM	HKEY_LOCAL_MACHINE\SYSTEM
+
+👤 User Hives
+
+Location: %USERPROFILE%
+
+• Hive File	Registry Mapping
+• NTUSER.DAT	HKEY_CURRENT_USER
+• USRCLASS.DAT	HKEY_CURRENT_USER\Software\Classes
+
+File Download
+
+
+
+-- Files --
+
+Shell Bags
+• ShellBags are Windows Registry artifacts that store details about folders a user has accessed through Windows Explorer.
+• They record information such as view preferences (icons, list, details), window position and size, and sometimes the full path of the folder.
+• In digital forensics, ShellBags are highly valuable because they can reveal which directories a user has browsed — even if the folders or files themselves have been deleted.
+
+Current User (NTUSER.DAT)
+HKEY_CURRENT_USER\Software\Microsoft\Windows\Shell\Bags
+HKEY_CURRENT_USER\Software\Microsoft\Windows\Shell\BagMRU
+HKEY_CURRENT_USER\Software\Microsoft\Windows\ShellNoRoam\Bags
+HKEY_CURRENT_USER\Software\Microsoft\Windows\ShellNoRoam\BagMRU
+
+All Users (USRCLASS.DAT)
+HKEY_USERS\<SID>\Software\Microsoft\Windows\Shell\Bags
+HKEY_USERS\<SID>\Software\Microsoft\Windows\Shell\BagMRU
+HKEY_USERS\<SID>\Software\Microsoft\Windows\ShellNoRoam\Bags
+HKEY_USERS\<SID>\Software\Microsoft\Windows\ShellNoRoam\BagMRU
+
+
+LastVisitedPidMRU and OpenSavePidMRU
+• LastVisitedPidMRU and OpenSavePidMRU are related Windows artifacts stored in the user’s registry hives.
+• They are extremely useful in digital forensics because they track files and folders that a user has recently accessed, opened, or saved.
+• These entries can help investigators determine user activity, file interaction patterns, and potential data exfiltration behavior.
+
+OpenSaveMRU / OpenSavePidMRU
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\OpenSaveMRU
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\OpenSavePidMRU
+
+LastVisitedMRU / LastVisitedPidMRU
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\LastVisitedMRU
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\LastVisitedPidMRU
+
+
+RecentDocs
+Stores a list of recently opened documents by file type and extension.
+
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs
+
+
+RunMRU
+Stores commands and programs executed from the Windows Run dialog.
+
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+
+
+TypedPaths
+Stores paths typed into the Windows Explorer address bar.
+
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\TypedPaths
+
+
+-- Program Execution --
+
+UserAssist
+Tracks GUI-based program executions (ROT13 encoded).
+
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist\{GUID}\Count
+
+
+Autostart Programs (Autoruns)
+Lists programs configured to start automatically with Windows.
+
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Run
+NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\RunOnce
+SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce
+SOFTWARE\Microsoft\Windows\CurrentVersion\policies\Explorer\Run
+
+
+Services
+Contains information about the services that are installed on the system
+
+HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services
+
+
+Scheduled Tasks
+Stores programs or scripts configured to run at specific times or events.
+
+C:\Windows\System32\Tasks\
+HKLM\Software\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\Tree
+
+
+https://github.com/Ahmed-AL-Maghraby/Windows-Registry-Analysis-Cheat-Sheet
+https://cyber-ssct.com/SANS%20Digital%20Forensic%20Poster.pdf
+
+
+
 -- LNK Files, Prefetch Files, and Jump Lists --  
+
+Shortcut (LNK) Files
+A .lnk shortcut is a small Windows file that points to another file, folder, or program and stores metadata (including the target/source path) so Windows can open it quickly.
+
+Windows XP
+C:%USERPROFILE%\Recent
+
+Windows 7,8,10,11
+C:%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Recent\
+C:%USERPROFILE%\AppData\Roaming\Microsoft\Office\Recent\
+
+
+Prefetch files (PF)
+A Prefetch (.pf) file is a Windows system file that records execution and resource usage data for applications to speed up loading and provide evidence that a program ran.
+
+C:\Windows\Prefetch\
+
+
+Jump Lists
+A Jump List is a Windows artifact that tracks recently or frequently accessed files, folders, or tasks for specific applications, providing quick access through the taskbar or Start Menu and evidence of user activity.
+
+Command Line
+C:\Users\<username>\AppData\Roaming\Microsoft\Windows\Recent\AutomaticDestinations\
+C:\Users\<username>\AppData\Roaming\Microsoft\Windows\Recent\CustomDestinations\
+
+PowerShell
+Get-ChildItem "$env:APPDATA\Microsoft\Windows\Recent\AutomaticDestinations" | Select-Object Name, Length, CreationTime, LastWriteTime
+
+Get-ChildItem "$env:APPDATA\Microsoft\Windows\Recent\CustomDestinations" |
+>> Select-Object Name, Length, CreationTime, LastWriteTime
+
+
+
 -- Windows Forensic Artifact Triage -- 
+
+When performing a live response or forensic acquisition, it’s often not necessary to capture everything at once.
+Instead, focus on collecting a targeted set of high-value artifacts that reveal user activity, persistence mechanisms, logon behavior, and system usage.
+
+Two common tools for this workflow are:
+• KAPE/gkape – fast triage collection of predefined forensic artifacts.
+• FTK Imager – for creating forensic images of memory, drives, or selected files.
+
+
+1️⃣ Memory Capture (FTK Imager)
+
+• Open FTK Imager → File → Capture Memory.
+• Save the memory dump to an external drive.
+  → Optionally include pagefile.sys for swap analysis.
+• This allows later analysis of live processes, loaded drivers, network connections, and injected code.
+
+
+2️⃣ Physical Drive / Targeted Capture (KAPE or gkape)
+
+Using KAPE (kape.exe) or its GUI gkape, select targets for core forensic artifacts.
+
+Recommended Targets:
+• !BasicCollection – baseline Windows artifacts
+• !SANS_Triage – SANS standard triage set
+• $LogFile – NTFS transaction logs
+• $MFT – Master File Table (records all filesystem entries)
+• RecycleBin – deleted file evidence
+• RegistryHivesUsers – per-user registry data (NTUSER.DAT, UsrClass.dat)
+• RegistryHivesSystem – SYSTEM hive for OS configuration
+• RegistryHivesOther – SAM, SECURITY, SOFTWARE hives
+• Amcache – application execution evidence
+• LogFiles – system logs, trace data
+• LNKFilesAndJumpLists – recent file/document activity
+• Prefetch – program execution evidence
+
+✅ These provide comprehensive coverage of file system, registry, user activity, and execution history.
+
+.\kape.exe --tflush --target !SANS_Triage,RecycleBin,RegistryHives,$LogFile,$MFT,Amcache,LNKFilesAndJumpLists,LogFiles,Prefetch,RecycleBin_DataFiles,RecycleBin_InfoFiles,RegistryHivesSystem,RegistryHivesUser --gui
+
+
+3️⃣ Targeted File/Folder Imaging (FTK Imager – Custom Content)
+
+FTK Imager allows imaging of specific artifacts when full disk imaging isn't possible.
+
+1. In FTK Imager: File → Create Disk Image.
+2. Choose Custom Content Image.
+3.Add the following artifact locations:
+
+Artifacts to include:
+• $Recycle.Bin
+• Users (profiles, documents, browser data)
+• $LogFile, $MFT
+• pagefile.sys, swapfile.sys
+• Registry Hives:
+  → DEFAULT, SAM, SECURITY, SOFTWARE, SYSTEM
+  → Amcache.hve, RegBack (backup hives)
+• LogFiles, SRU (System Resource Usage Monitor)
+• NTUSER.DAT, UsrClass.dat
+• Event logs: *.evtx
+• Shortcuts and Execution Artifacts: *.lnk, *.pf, *.automaticDestinations-ms, *.customDestinations-ms
+
+4. Create the image and verify integrity with hash values.
+
+
+4️⃣ Why These Artifacts?
+
+• Memory dump: Captures volatile evidence (processes, malware, injected code).
+• $MFT, $LogFile, $UsnJrnl: Track filesystem changes and file existence.
+• Registry hives:	Show accounts, persistence, configuration.
+• Amcache / Shimcache:	Record executed programs.
+• Prefetch:	Reveal execution history, timestamps, run counts.
+• LNK & Jump Lists:	Indicate user document access.
+• Event logs:	Track logon/logoff, account creation, services.
+• Recycle Bin:	Show deleted files.
+• SRU (sru.db):	Record network and system resource usage.
+
+
+5️⃣ Output & Next Steps
+
+• KAPE: outputs artifacts in a structured folder (optionally compressed).
+• FTK Imager: produces an E01 or RAW image of selected content.
+• Both outputs can be analyzed using forensic tools such as:
+  → Autopsy, X-Ways, Magnet AXIOM, or Eric Zimmerman’s tools.
+
+
+
+
+
+
+
