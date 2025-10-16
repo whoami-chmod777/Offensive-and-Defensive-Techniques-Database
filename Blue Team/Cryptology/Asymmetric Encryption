@@ -1,0 +1,125 @@
+
+--- Asymmetric Encryption ---
+
+• Asymmetric Encryption Algorithms
+• Advantages and Disadvantages of Asymmetric Encryption
+• Public Key Infrastructure (PKI)
+• Digital Signatures
+• Applications of Asymmetric Encryption
+
+
+                      +------------------------------------+
+                      |       Asymmetric Encryption        |
+                      +------------------------------------+
+
+                             (Different Keys Used)
+
+                  +-----------+       +-----------+       +------------+
+                  | Public Key|-------|Diff. Keys |-------| Private Key|
+                  +-----------+       +-----------+       +------------+
+                      |                    |                        |
+                      |                    |                        |
+              +-------------+         +-------------+          +-------------+
+              |             |         |             |          |             |
+              |  Plain Text |--[🔓]-->| Cipher Text |--[🔐]-->|  Plain Text |
+              |             |         |             |          |             |
+              +-------------+         +-------------+          +-------------+
+                      |                    ^                         |
+                      |                    |                         |
+                      |                    |                         |
+                      +----- Encryption ---+------ Decryption -------+
+
+
+Asymmetric encryption is a method of encryption where two different keys are used for encryption and decryption processes. These keys are known as the public key and the private key. The public key is accessible to everyone, while the private key is known and protected only by its owner. Asymmetric encryption is more secure compared to symmetric encryption but is slower.
+
+
+-- Asymmetric Encryption Algorithms --
+
+1. RSA (Rivest-Shamir-Adleman)
+• Developed by Ron Rivest, Adi Shamir, and Leonard Adleman in 1977.
+• Used for both encryption and digital signatures.
+• Offers key lengths of 1024, 2048, and 4096 bits.
+• Its security is based on the difficulty of factoring large prime numbers.
+
+2. ECC (Elliptic Curve Cryptography)
+• Based on elliptic curve theory.
+• Provides similar security to RSA but with shorter key lengths (e.g., a 256-bit ECC key is equivalent in security to a 2048-bit RSA key).
+• Requires less computational power, making it ideal for mobile and IoT devices.
+
+3. ElGamal
+• Developed by Taher Elgamal in 1985.
+• Can be used for encryption and digital signatures.
+• Its security is based on the difficulty of solving the discrete logarithm problem.
+
+4. DSA (Digital Signature Algorithm)
+• Standardized by NIST in 1991 for digital signatures.
+• Used only for creating and verifying digital signatures.
+• Its security is based on the difficulty of solving the discrete logarithm problem.
+
+
+-- Advantages and Disadvantages of Asymmetric Encryption --
+
+Advantages
+• Key Distribution: The key distribution issues of symmetric encryption are resolved with asymmetric encryption. The public key can be shared with everyone, while the private key remains with the owner.
+• Security: The use of two keys enhances the system's security.
+• Authentication: Provides authentication through digital signatures and certificates.
+
+Disadvantages
+• Performance: Asymmetric encryption algorithms are slower compared to symmetric encryption algorithms.
+• Computational Power: Requires more computational resources.
+
+
+-- Public Key Infrastructure (PKI) --
+
+Public Key Infrastructure (PKI) uses digital certificates and certificate authorities (CAs) to securely distribute and manage public keys. The main components of PKI are:
+
+1. Certificate Authorities (CA)
+• Organizations that validate and secure public keys with digital certificates.
+• Perform certificate signing and revocation to ensure validity.
+
+2. Registration Authorities (RA)
+• Organizations that handle authentication and registration processes on behalf of certificate authorities.
+
+3. Digital Certificates
+• Digital documents containing a user's or device's public key and identity information.
+• Signed and validated by a certificate authority.
+
+4. Certificate Repositories
+• Databases where digital certificates are stored and managed.
+
+
+-- Digital Signatures --
+
+Digital signatures are used to verify the identity of the sender and ensure the integrity of a document or message. Digital signatures are typically created using asymmetric encryption algorithms.
+
+1. Creating a Digital Signature
+• The document's hash value is computed.
+• The hash value is encrypted with the sender's private key, creating the digital signature.
+
+2. Verifying a Digital Signature
+• The recipient recomputes the document's hash value.
+• The recipient decrypts the digital signature using the sender's public key and compares the obtained hash value.
+• If the two hash values match, the document's integrity and identity are verified.
+
+
+-- Applications of Asymmetric Encryption --
+
+1. SSL/TLS
+• Used to secure communication between web browsers and servers.
+• Provides website authentication and data integrity.
+
+2. Email Security
+• Encryption and digital signing of emails using protocols such as PGP (Pretty Good Privacy) and S/MIME (Secure/Multipurpose Internet Mail Extensions).
+
+3. VPN (Virtual Private Network)
+• Provides secure communication between remote networks.
+
+4. Digital Certificates and Authentication
+• Used for user authentication in e-commerce, banking, and other digital services.
+
+5. File and Data Encryption
+• Ensures the secure storage and transmission of sensitive data.
+
+
+
+
