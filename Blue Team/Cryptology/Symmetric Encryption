@@ -1,0 +1,42 @@
+
+--- Symmetric Encryption ---
+
+Symmetric Encryption Algorithms
+Block Ciphers
+Stream Ciphers
+
+
+Symmetric encryption is a method of encryption where the same key is used for both encryption and decryption. In this method, both the sender and the receiver share a secret key, which is used to encrypt and decrypt the data. Symmetric encryption is fast and efficient but can face challenges in key distribution and management.
+
+
+Symmetric Encryption Algorithms
+
+Symmetric encryption algorithms can be categorized into two main types: block ciphers and stream ciphers.
+
+Block Ciphers
+Block ciphers process data in fixed-size blocks, performing encryption and decryption operations on each block using a specific algorithm and key.
+
+1. DES (Data Encryption Standard)
+
+    Developed by IBM in the 1970s and accepted as a standard by the U.S. government in 1977.
+    Uses a 56-bit key length.
+    It is no longer widely used due to insufficient security.
+
+2. 3DES (Triple DES)
+
+    Developed to address the security weaknesses of DES.
+    Performs encryption using DES three times (encrypt-decrypt-encrypt).
+    Uses a 168-bit key length.
+
+3. AES (Advanced Encryption Standard)
+
+    Accepted as a standard by NIST (National Institute of Standards and Technology) in 2001.
+    Supports key lengths of 128, 192, and 256 bits.
+    It is widely used due to its security and speed.
+
+
+Stream Ciphers
+
+Stream ciphers process data as a stream of bits or bytes, performing encryption and decryption operations on the data stream. This method is especially suitable for encrypting data streams.
+
+
