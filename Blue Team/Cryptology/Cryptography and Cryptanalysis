@@ -1,0 +1,66 @@
+
+--- Cryptography and Cryptanalysis ---
+
+• What is Cryptography
+• Types of Cryptography
+• What is Cryptanalysis
+• Types of Cryptanalysis
+• Differences Between Cryptography and Cryptanalysis
+• Fundamental Principles of Cryptography
+• Cryptanalysis Techniques
+• Importance of Cryptography and Cryptanalysis
+
+
+-- What is Cryptograph --
+
+Cryptography is the science of using mathematical methods and algorithms to transmit and store information securely. The primary goals of cryptography are:
+
+• Confidentiality: Ensuring that information is readable only by authorized individuals.
+• Integrity: Protecting information against unauthorized alterations.
+• Authentication: Verifying the origin of the information.
+• Non-repudiation: Ensuring that the sender cannot deny having sent the information.
+
+
+-- Types of Cryptography --
+
+• Symmetric Cryptography: The same key is used for both encryption and decryption processes.
+• Asymmetric Cryptography: Different but mathematically related keys (public key and private key) are used for encryption and decryption processes.
+
+
+-- What is Cryptanalysis --
+
+Cryptanalysis comprises methods used to uncover weaknesses in cryptographic systems and break them. The purpose of cryptanalysis is to decode encrypted information without authorization. Cryptanalysis techniques are used to evaluate the security of cryptographic systems and identify vulnerabilities.
+
+
+-- Types of Cryptanalysis --
+
+• Breaking Attacks: Attacks aimed at obtaining the ciphertext or the key to decrypt the information.
+• Analysis Attacks: Attacks that investigate the weaknesses of the encryption algorithm or protocol.
+
+
+-- Differences Between Cryptography and Cryptanalysis --
+
+• Purpose: Cryptography aims to protect information, while cryptanalysis aims to obtain protected information.
+• Users: Cryptography is used by those seeking to protect information, whereas cryptanalysis is used by those aiming to decipher protected information.
+• Methods: Cryptography uses mathematical algorithms and protocols, whereas cryptanalysis exploits the weaknesses in these algorithms and protocols.
+
+
+-- Fundamental Principles of Cryptography --
+
+• Kerckhoffs's Principle: The security of a cryptosystem should depend on the secrecy of the key, not the algorithm.
+• Shannon's Uncertainty Theory: The ciphertext should not contain meaningful statistical structures and should appear random.
+
+
+-- Cryptanalysis Techniques --
+
+• Brute Force Attacks: These attacks aim to find the correct key by trying all possible keys.
+• Dictionary Attacks: These attacks aim to decrypt information by trying commonly used words and passwords.
+• Side-Channel Attacks: These attacks use auxiliary information, such as the time taken or the energy consumed by the encryption device, to decrypt information.
+• Statistical Attacks: These attacks aim to decrypt information by exploiting statistical properties of the ciphertext.
+
+
+-- Importance of Cryptography and Cryptanalysis --
+
+• Security: Cryptography is indispensable for ensuring data security.
+• Reliability: Cryptanalysis helps test the reliability of cryptographic systems.
+• Development: Cryptography and cryptanalysis are continually evolving and complement each other. New cryptographic techniques and algorithms are developed to address the vulnerabilities exposed by cryptanalysis methods.
