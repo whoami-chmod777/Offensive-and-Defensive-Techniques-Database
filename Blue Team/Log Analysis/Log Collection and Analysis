@@ -1,6 +1,5 @@
 
 1. Network Devices:
-
 • Firewalls
 • Intrusion Detection/Prevention Systems (IDS/IPS)
 • Routers and switches
@@ -9,7 +8,6 @@
 
 
 2. Servers and Hosts:
-
 • Windows event logs
 • Linux/Unix system logs
 • Application logs (e.g., web servers, database servers)
@@ -18,21 +16,18 @@
 
 
 3. Operating Systems:
-
 • Windows event logs
 • Linux/Unix system logs
 • macOS system logs
 
 
 4. Applications and Databases:
-
 • Web server logs (e.g., Apache, Nginx, IIS)
 • Database logs (e.g., MySQL, Oracle, SQL Server)
 • Application specific logs (e.g., ERP systems, CRM systems)
 
 
 5. Security Devices:
-
 • Security Information and Event Management (SIEM) logs
 • Intrusion Detection/Prevention Systems (IDS/IPS) logs
 • Data Loss Prevention (DLP) logs
@@ -40,53 +35,45 @@
 
 
 6. Cloud Services:
-
 • Cloud provider logs (e.g., AWS CloudTrail, Azure Monitor)
 • Cloud application logs (e.g., AWS S3 access logs, Azure App Service logs)
 
 
 1. Identity and Access Management:
-
 • Active Directory logs
 • LDAP server logs
 • Single Sign On (SSO) logs
 
 
 2. Endpoint Security:
-
 • Antivirus and endpoint protection logs
 • Host based intrusion detection system logs
 • User and system activity logs
 
 
 3. Physical Security:
-
 • Access control system logs
 • Video surveillance system logs
 • Alarm system logs
 
 
 4. Authentication and Authorization:
-
 • Authentication server logs (e.g., RADIUS, TACACS+)
 • VPN logs
 • Remote Desktop logs
 
 
 5. DNS and DHCP:
-
 • DNS server logs
 • DHCP server logs
 
 
 6. Email and Messaging:
-
 • Email server logs
 • Instant messaging logs
 • Collaboration platform logs (e.g., Microsoft Teams, Slack)
 
 
 7. Third Party Applications:
-
 • Logs from third party security solutions (e.g., vulnerability scanners, security analytics tools)
 • Logs from custom built applications
