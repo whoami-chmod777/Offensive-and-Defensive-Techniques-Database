@@ -7,7 +7,6 @@ What is the decoded message of the text that has been encoded using Hex Encoding
 
 54686542697274684F6656656E7573426F74746963656C6C69 ==> TheBirthOfVenusBotticelli
 
-
 -----------------------------------------------------------------------------------------------
 
 echo "54686542697274684F6656656E7573426F74746963656C6C69" | xxd -r -p
