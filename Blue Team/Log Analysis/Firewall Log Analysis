@@ -1,6 +1,10 @@
 
 --- Firewall Log Analysis ---
 
+• Sample Traffic Log and Key Fields
+• Key Log Fields Explained
+
+
 Firewalls are physical or virtual devices that control incoming and outgoing network traffic based on an organization’s cybersecurity policies. Each system or server may have its own firewall, or large organizations may deploy a centralized, public-facing firewall for network management. This ensures that all network communication passes through the firewall and is filtered according to predefined rules.
 
 As a critical security component, firewalls regulate network access within organizations. 
@@ -15,6 +19,71 @@ The most critical firewall logs pertain to traffic passing through the device. T
 • Interface Details
 • Geographic Location Data
 • Action Taken (allow/deny)
+
+
+-- Sample Traffic Log and Key Fields --
+
+date=2022-05-21 time=14:06:38 devname="FG500" devid="FG5HSTF109K" eventtime=1653131198230012501 tz="+0300" logid="0000000013" type="traffic" subtype="forward" level="notice" vd="root" srcip=172.14.14.26 srcname="CNL" srcport=50495 srcintf="ACC-LAN" srcintfrole="lan" dstip=142.250.186.142 dstport=443 dstintf="Wan" dstintfrole="wan" srccountry="Reserved" dstcountry="United States" sessionid=445180938 proto=6 action="accept" policyid=284 policytype="policy" poluuid="8ec32778-a70a-51ec-9265-8fdf896d07f1" service="HTTPS" trandisp="snat" transip=89.145.185.195 transport=50495 duration=72 sentbyte=2518 rcvdbyte=49503 sentpkt=13 rcvdpkt=42
+
+
+-- Key Log Fields Explained --
+
+• date= Date
+• time= Time
+• devname= Hostname
+• devid= Device ID
+• eventtime= 1653131198230012501
+• tz= time zone
+• logid= Log ID
+• type= Log Type (traffic, utm, event, etc.)
+• subtype= Sub Log Type (Forward, vpn, webfilter, virus, ips, system, etc.)
+• level= log level
+• srcip= Source IP Address
+• srcname= Source Hostname
+• srcport= Source Port
+• srcintf= Name of the Source Interface
+• srcintfrole= Role of the Source Interface
+• dstip= Destination IP Address
+• dstport= Destination Port
+• dstintf= Name of the Destination Interface
+• dstintfrole= Role of the Destination Interface
+• srccountry= Source IP information (Country)
+• dstcountry= Destination IP information (Country)
+• action= info on the action taken (drop, deny, accept, etc.)
+• service= service information
+• transip= NAT IP info (internal output of the private source address)
+• transport= NAT port info
+• duration= time elapsed
+• sentbyte= size of the packets sent (byte)
+• rcvdbyte= size of the packets received (byte)
+• sentpkt= number of the packets sent
+• rcvdpkt= number of the packets received
+
+When performing log analysis, the first thing to check is the IP and port information. Once we have this information, we should examine whether the traffic reached its target under the "action" field.
+
+
+As for action;
+
+• accept: Indicates that the packet passed successfully.
+• deny: Packet transmission is blocked, and a notification is returned to the source IP address.
+• drop: Packet transmission is blocked without notifying the source IP address.
+• close: Indicates that the communication was mutually terminated.
+• client-rst: Indicates that the communication was terminated by the client.
+• server-rst: Indicates that the communication was terminated by the server.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
