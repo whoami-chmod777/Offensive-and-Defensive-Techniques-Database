@@ -74,7 +74,27 @@ As for action;
 
 
 
-
+root@ip-172-31-6-7:~/Desktop/QuestionFiles# cat firewall.log 
+2021-08-30T00:00:17+03:00|Palo Alto Networks|type=TRAFFIC|src=156.33.252.38|dst=10.34.1.197|rule=INT-to-DMZ|srcport=20036|dstport=443|proto=tcp|action=allow|totalbytes=14095|dstbytes=8120|srcbytes=5975|totalpackets=16
+2021-08-30T00:00:19+03:00|Palo Alto Networks|type=TRAFFIC|src=156.33.252.38|dst=10.34.1.197|rule=INT-to-DMZ|srcport=20037|dstport=80|proto=tcp|action=deny|totalbytes=14095|dstbytes=8120|srcbytes=5975|totalpackets=42
+2021-08-30T00:00:21+03:00|Palo Alto Networks|type=TRAFFIC|src=156.33.252.38|dst=10.34.1.197|rule=INT-to-DMZ|srcport=20038|dstport=22|proto=tcp|action=deny|totalbytes=14095|dstbytes=8120|srcbytes=5975|totalpackets=34
+2021-08-30T00:00:23+03:00|Palo Alto Networks|type=TRAFFIC|src=156.33.252.38|dst=10.34.1.197|rule=INT-to-DMZ|srcport=20039|dstport=3389|proto=tcp|action=deny|totalbytes=14095|dstbytes=8120|srcbytes=5975|totalpackets=58
+2021-08-30T00:00:25+03:00|Palo Alto Networks|type=TRAFFIC|src=156.33.252.38|dst=10.34.1.197|rule=INT-to-DMZ|srcport=20031|dstport=1521|proto=tcp|action=allow|totalbytes=14095|dstbytes=8120|srcbytes=5975|totalpackets=54
+2021-08-30T00:00:27+03:00|Palo Alto Networks|type=TRAFFIC|src=156.33.252.38|dst=10.34.1.197|rule=INT-to-DMZ|srcport=20032|dstport=445|proto=tcp|action=deny|totalbytes=14095|dstbytes=8120|srcbytes=5975|totalpackets=31
+2021-08-30T00:00:29+03:00|Palo Alto Networks|type=TRAFFIC|src=156.33.252.38|dst=10.34.1.197|rule=INT-to-DMZ|srcport=20033|dstport=139|proto=tcp|action=deny|totalbytes=14095|dstbytes=8120|srcbytes=5975|totalpackets=12
+2021-08-30T00:00:31+03:00|Palo Alto Networks|type=TRAFFIC|src=156.33.252.38|dst=10.34.1.197|rule=INT-to-DMZ|srcport=20034|dstport=3306|proto=tcp|action=deny|totalbytes=14095|dstbytes=8120|srcbytes=5975|totalpackets=94
+2021-08-30T00:00:33+03:00|Palo Alto Networks|type=TRAFFIC|src=156.33.252.38|dst=10.34.1.197|rule=INT-to-DMZ|srcport=20035|dstport=1453|proto=tcp|action=deny|totalbytes=14095|dstbytes=8120|srcbytes=5975|totalpackets=87
+2021-08-30T00:00:35+03:00|Palo Alto Networks|type=TRAFFIC|src=156.33.252.38|dst=10.34.1.197|rule=INT-to-DMZ|srcport=20036|dstport=23|proto=tcp|action=deny|totalbytes=14095|dstbytes=8120|srcbytes=5975|totalpackets=67
+2021-08-30T00:00:37+03:00|Palo Alto Networks|type=TRAFFIC|src=156.33.252.38|dst=10.34.1.197|rule=INT-to-DMZ|srcport=20037|dstport=21|proto=tcp|action=deny|totalbytes=14095|dstbytes=8120|srcbytes=5975|totalpackets=98
+2021-08-30T00:00:39+03:00|Palo Alto Networks|type=TRAFFIC|src=156.33.252.38|dst=10.34.1.197|rule=INT-to-DMZ|srcport=20038|dstport=53|proto=tcp|action=allow|totalbytes=14095|dstbytes=8120|srcbytes=5975|totalpackets=78
+2021-08-30T00:00:41+03:00|Palo Alto Networks|type=TRAFFIC|src=156.33.252.38|dst=10.34.1.197|rule=INT-to-DMZ|srcport=20039|dstport=443|proto=tcp|action=allow|totalbytes=14095|dstbytes=8120|srcbytes=5975|totalpackets45
+2021-08-30T00:00:43+03:00|Palo Alto Networks|type=TRAFFIC|src=156.33.252.38|dst=10.34.1.197|rule=INT-to-DMZ|srcport=20040|dstport=443|proto=tcp|action=deny|totalbytes=14095|dstbytes=8120|srcbytes=5975|totalpackets=123
+2021-08-30T00:00:45+03:00|Palo Alto Networks|type=TRAFFIC|src=156.33.252.38|dst=10.34.1.197|rule=INT-to-DMZ|srcport=20041|dstport=443|proto=tcp|action=deny|totalbytes=14095|dstbytes=8120|srcbytes=5975|totalpackets=13
+2021-08-30T00:00:47+03:00|Palo Alto Networks|type=TRAFFIC|src=156.33.252.38|dst=10.34.1.197|rule=INT-to-DMZ|srcport=20042|dstport=443|proto=tcp|action=deny|totalbytes=14095|dstbytes=8120|srcbytes=5975|totalpackets=77
+2021-08-30T00:00:49+03:00|Palo Alto Networks|type=TRAFFIC|src=156.33.252.38|dst=10.34.1.197|rule=INT-to-DMZ|srcport=20043|dstport=443|proto=tcp|action=deny|totalbytes=14095|dstbytes=8120|srcbytes=5975|totalpackets=35
+2021-08-30T00:00:51+03:00|Palo Alto Networks|type=TRAFFIC|src=156.33.252.38|dst=10.34.1.197|rule=INT-to-DMZ|srcport=20044|dstport=443|proto=tcp|action=deny|totalbytes=14095|dstbytes=8120|srcbytes=5975|totalpackets=122
+2021-08-30T00:00:53+03:00|Palo Alto Networks|type=TRAFFIC|src=156.33.252.38|dst=10.34.1.197|rule=INT-to-DMZ|srcport=20045|dstport=443|proto=tcp|action=deny|totalbytes=14095|dstbytes=8120|srcbytes=5975|totalpackets=212
+2021-08-30T00:00:55+03:00|Palo Alto Networks|type=TRAFFIC|src=156.33.252.38|dst=10.34.1.197|rule=INT-to-DMZ|srcport=20046|dstport=443|proto=tcp|action=deny|totalbytes=14095|dstbytes=8120|srcbytes=5975|totalpackets=223root@ip-172-31-6-7:~/Desktop/QuestionFiles# 
 
 
 
