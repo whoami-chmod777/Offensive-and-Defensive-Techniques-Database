@@ -1,1 +1,23 @@
 
+HTML character entities are basically a set of characters (entity) used to represent few characters reserved by the HTML, especially invisible characters or characters difficult to type out using a regular keyboard. HTML provides some entity names and entity numbers to use these symbols.
+
+What is the decoded message of the text that has been encoded using HTML character entities encoding inside the file?
+
+&#70;&#105;&#115;&#104;&#101;&#114;&#109;&#101;&#110;&#65;&#116;&#83;&#101;&#97;&#84;&#117;&#114;&#110;&#101;&#114;
+
+&#70;&#105;&#115;&#104;&#101;&#114;&#109;&#101;&#110;&#65;&#116;&#83;&#101;&#97;&#84;&#117;&#114;&#110;&#101;&#114; ==> 
+
+
+
+
+
+
+
+
+
+
+
+
+CyberChef -> HTML Entity Decode
+
+https://gchq.github.io/CyberChef/
