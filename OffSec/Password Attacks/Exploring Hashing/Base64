@@ -1,1 +1,13 @@
 
+
+Base64 is a encoding algorithm that allows you to transform any characters into an alphabet which consists of Latin letters, digits, plus, and slash. Thanks to it, you can convert Chinese characters, emoji, and even images into a “readable” string, which can be saved or transferred anywhere.
+
+What is the decoded message of the text that has been encoded using Base64 inside the file?
+
+TW9uYUxpc2FEYVZpbmNp
+
+TW9uYUxpc2FEYVZpbmNp ==> MonaLisaDaVinci
+
+
+echo "TW9uYUxpc2FEYVZpbmNp" | base64 --decode
+MonaLisaDaVinci
