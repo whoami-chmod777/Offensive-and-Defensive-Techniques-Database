@@ -1,0 +1,127 @@
+
+--- Generic Log Analysis (Netflow) ---
+
+•  How NetFlow Works 
+
+
+Netflow is a network protocol that collects IP traffic information. Although it was developed by Cisco, it supports Netflow from different manufacturers. Some manufacturers support Sflow or different similar protocols. It is important for it to provide visibility on the network with this protocol regardless of its brand or the developer of the protocol.
+
+
+ -- How NetFlow Works  --
+
+NetFlow operates in a stateful manner, monitoring and reporting all IP traffic traversing the monitored interface. Each IP communication is defined as a flow, which represents a set of packets sharing key attributes between a source and destination.
+
+ Flow Attributes (Key Collected Data)
+
+• Source & Destination IP Addresses
+• Source & Destination Ports (Only for TCP/UDP protocols)
+• IP Protocol
+• Interface Information
+• IP Version (IPv4/IPv6)
+
+
+Note: NetFlow capable devices export data in binary format.
+
+timestamp : 2015-10-07T10:13:38.000274+1300
+flow_id : 35919104
+event_type : netflow
+src_ip : 130.216.30.131
+src_port : 53992
+dest_ip : 115.212.89.117
+dest_port : 1526
+proto : UDP
+netflow {5}
+  pkts : 1
+  bytes : 71
+  start : 2015-10-07T10:13:07.795117+1300
+  end : 2015-10-07T10:13:07.795117+1300
+  age : 0
+
+To generate NetFlow data, administrators configure NetFlow on supported routers or switches via the device’s command-line interface (CLI) or web interface. Once enabled, these devices export flow records to a NetFlow Collector or Analyzer. These reports visualize traffic patterns, and other insights based on the collected flows.
+
+
+With NetFlow outputs, you can:
+
+• Detect abnormal traffic spikes.
+• Identify data leaks.
+• Monitor unauthorized access to restricted systems.
+• Discover new/unrecognized IPs or devices.
+• Analyze first-time connections to critical systems.
+
+
+I this example the NTP service is definitely running on the target port 123
+
+timestamp : 2015-10-07T10:13:38.000274+1300
+flow_id : 35919104
+event_type : netflow
+src_ip : 130.216.30.131
+src_port : 53992
+dest_ip : 115.212.89.117
+dest_port : 123
+proto : UDP
+netflow {5}
+  pkts : 1
+  bytes : 71
+  start : 2015-10-07T10:13:07.795117+1300
+  end : 2015-10-07T10:13:07.795117+1300
+  age : 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
