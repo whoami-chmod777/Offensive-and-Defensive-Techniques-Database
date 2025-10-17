@@ -1,0 +1,20 @@
+
+--- Firewall Log Analysis ---
+
+Firewalls are physical or virtual devices that control incoming and outgoing network traffic based on an organization’s cybersecurity policies. Each system or server may have its own firewall, or large organizations may deploy a centralized, public-facing firewall for network management. This ensures that all network communication passes through the firewall and is filtered according to predefined rules.
+
+As a critical security component, firewalls regulate network access within organizations. 
+
+Modern firewalls have evolved beyond simple packet filtering (OSI Layer 3). With advanced modules, they can now inspect application-layer traffic (OSI Layer 7). Firewalls capable of identifying specific applications (such as HTTP, HTTPS, SSH, or DNS) are classified as Next-Generation Firewalls (NGFW).
+
+
+The most critical firewall logs pertain to traffic passing through the device. These typically include:
+
+• Timestamp
+• Source and Destination IP/Port
+• Interface Details
+• Geographic Location Data
+• Action Taken (allow/deny)
+
+
+
