@@ -1,1 +1,4 @@
 
+Uuencode (also called Uuencode/Uudecode) is a utility for encoding and decoding files. Originally this term stood for "UNIX-to-UNIX encoding" however this encoding and decoding utility is now commonly available on multiple platforms and in many clients. Uuencode translates or converts a file or e-mail attachment from its binary or bit-stream representation into the 7-bit ASCII set of text characters. This format is more easily handled by older systems which may not handle binary files well plus larger files can more easily be divided into several separate transmissions.
+
+What is the decoded message of the text that has been encoded using Uuencoding inside the file?
