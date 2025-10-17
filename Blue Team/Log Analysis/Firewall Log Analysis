@@ -3,6 +3,7 @@
 
 • Sample Traffic Log and Key Fields
 • Key Log Fields Explained
+• Firewall Log Example
 
 
 Firewalls are physical or virtual devices that control incoming and outgoing network traffic based on an organization’s cybersecurity policies. Each system or server may have its own firewall, or large organizations may deploy a centralized, public-facing firewall for network management. This ensures that all network communication passes through the firewall and is filtered according to predefined rules.
@@ -72,7 +73,7 @@ As for action;
 • server-rst: Indicates that the communication was terminated by the server.
 
 
-
+-- Firewall Log Example -
 
 root@ip-172-31-6-7:~/Desktop/QuestionFiles# cat firewall.log 
 2021-08-30T00:00:17+03:00|Palo Alto Networks|type=TRAFFIC|src=156.33.252.38|dst=10.34.1.197|rule=INT-to-DMZ|srcport=20036|dstport=443|proto=tcp|action=allow|totalbytes=14095|dstbytes=8120|srcbytes=5975|totalpackets=16
