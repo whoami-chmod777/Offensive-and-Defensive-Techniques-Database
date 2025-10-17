@@ -1,1 +1,13 @@
 
+SHA-1 (Secure Hash Algorithm 1) cryptographic algorithm which takes an input and produces a 160-bit (20-byte) hash value. This hash value is known as a message digest. This message digest is usually then rendered as a hexadecimal number which is 40 digits long.
+
+What is the original text of the data in the file that has been hashed using the SHA1 algorithm?
+
+7610bae85f2b530654cc716772f1fe653373e892
+
+7610bae85f2b530654cc716772f1fe653373e892 ==> 
+
+-------------------------------------------------------------------------
+
+
+
