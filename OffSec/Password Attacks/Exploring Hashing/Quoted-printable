@@ -1,1 +1,27 @@
+Quoted-printable is an encoding method defined in the MIME standard. It is used primarily to encode 8-bit text (such as text that includes foreign characters) into 7-bit US ASCII, creating a document that is mostly readable by humans, even in its encoded form. All MIME-compliant applications can decode quoted-printable text, though they may not necessarily be able to properly display the document as it was originally intended.
 
+What is the decoded message of the text that has been encoded using Quoted-printable encoding inside the file?
+
+=54=68=65=4E=69=67=68=74=57=61=74=63=68=52=65=6D=62=72=61=6E=64=74
+
+=54=68=65=4E=69=67=68=74=57=61=74=63=68=52=65=6D=62=72=61=6E=64=74 ==> TheNightWatchRembrandt
+
+-----------------------------------------------------------------------------------------
+
+echo "=54=68=65=4E=69=67=68=74=57=61=74=63=68=52=65=6D=62=72=61=6E=64=74" | \
+perl -MMIME::QuotedPrint -0777 -ne 'print decode_qp($_)'
+
+TheNightWatchRembrandt
+
+-----------------------------------------------------------------------------------------
+                                                                                                                                                                 
+echo "=54=68=65=4E=69=67=68=74=57=61=74=63=68=52=65=6D=62=72=61=6E=64=74" | \
+python3 -c "import quopri,sys; print(quopri.decodestring(sys.stdin.read()).decode())"
+
+TheNightWatchRembrandt
+
+-----------------------------------------------------------------------------------------
+
+CyberChef -> From_Quoted_Printable
+
+https://gchq.github.io/CyberChef/
