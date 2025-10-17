@@ -1,1 +1,19 @@
 
+Base32 encoding algorithm is designed to encode any data to 32-printable characters. It is similar to Base64 encoding, except that it uses an alphabet of 32 characters rather than 64. This alphabet consists of the characters A to Z, and numbers 2 to 7.
+
+What is the decoded message of the text that has been encoded using Base32 Encoding inside the file?
+
+KRUGKUDFOJZWS43UMVXGGZKPMZGWK3LPOJ4UIYLMNE======
+
+KRUGKUDFOJZWS43UMVXGGZKPMZGWK3LPOJ4UIYLMNE====== ==> ThePersistenceOfMemoryDali
+
+-----------------------------------------------------------------------------
+
+echo "KRUGKUDFOJZWS43UMVXGGZKPMZGWK3LPOJ4UIYLMNE======" | base32 --decode
+ThePersistenceOfMemoryDali
+
+-----------------------------------------------------------------------------
+
+CyberChef -> From_Base32
+
+https://gchq.github.io/CyberChef/
