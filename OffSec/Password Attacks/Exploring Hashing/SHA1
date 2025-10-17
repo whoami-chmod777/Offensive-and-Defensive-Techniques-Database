@@ -5,9 +5,18 @@ What is the original text of the data in the file that has been hashed using the
 
 7610bae85f2b530654cc716772f1fe653373e892
 
-7610bae85f2b530654cc716772f1fe653373e892 ==> 
+7610bae85f2b530654cc716772f1fe653373e892 ==> leonardo
+
+-------------------------------------------------------------------------
+
+echo "7610bae85f2b530654cc716772f1fe653373e892" > sha1.txt
+
+john --wordlist=/usr/share/wordlists/rockyou.txt --format=raw-sha1 sha1.txt    
 
 -------------------------------------------------------------------------
 
 
+Sha1 Encrypt & Decrypt
+
+https://md5decrypt.net/Sha1/
 
