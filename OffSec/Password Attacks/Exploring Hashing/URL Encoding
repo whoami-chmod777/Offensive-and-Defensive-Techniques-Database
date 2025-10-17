@@ -1,1 +1,7 @@
 
+URL Encoding converts reserved, unsafe, and non-ASCII characters in URLs to a format that is universally accepted and understood by all web browsers and servers. It first converts the character to one or more bytes. Then each byte is represented by two hexadecimal digits preceded by a percent sign (%) - (e.g. %xy). The percent sign is used as an escape character.
+
+What is the decoded message of the text that has been encoded using URL Encoding inside the file?
+
+%54%68%65%53%63%72%65%61%6D%4D%75%6E%63%68
+
