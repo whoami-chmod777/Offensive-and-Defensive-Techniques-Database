@@ -8,16 +8,23 @@ What is the decoded message of the text that has been encoded using Hex Encoding
 54686542697274684F6656656E7573426F74746963656C6C69 ==> TheBirthOfVenusBotticelli
 
 
+-----------------------------------------------------------------------------------------------
+
 echo "54686542697274684F6656656E7573426F74746963656C6C69" | xxd -r -p
 TheBirthOfVenusBotticelli
+
+-----------------------------------------------------------------------------------------------
                                                                                                                                                            
 echo "54686542697274684F6656656E7573426F74746963656C6C69" | perl -pe 's/([0-9A-Fa-f]{2})/chr(hex($1))/eg'
-TheBirthOfVenusBotticelli                                                                                                                                                                 
+TheBirthOfVenusBotticelli     
+
+-----------------------------------------------------------------------------------------------
 
 echo "54686542697274684F6656656E7573426F74746963656C6C69" | python3 -c "import sys, binascii; print(binascii.unhexlify(sys.stdin.read().strip()).decode())"
 
 TheBirthOfVenusBotticelli 
 
+-----------------------------------------------------------------------------------------------
 
 CyberChef -> From Hex
 https://gchq.github.io/CyberChef/
