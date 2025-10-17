@@ -5,3 +5,25 @@ What is the decoded message of the text that has been encoded using URL Encoding
 
 %54%68%65%53%63%72%65%61%6D%4D%75%6E%63%68
 
+%54%68%65%53%63%72%65%61%6D%4D%75%6E%63%68 ==> TheScreamMunch
+
+
+- Python -
+
+echo "%54%68%65%53%63%72%65%61%6D%4D%75%6E%63%68" | \ 
+python3 -c "import urllib.parse, sys; print(urllib.parse.unquote(sys.stdin.read()))"
+
+TheScreamMunch
+
+
+- Perl -
+
+echo "%54%68%65%53%63%72%65%61%6D%4D%75%6E%63%68" | \     
+perl -pe 's/%([0-9A-Fa-f]{2})/chr(hex($1))/eg'
+TheScreamMunch
+
+
+- Cyber Chef -
+
+URL_Decode
+https://gchq.github.io/CyberChef/
