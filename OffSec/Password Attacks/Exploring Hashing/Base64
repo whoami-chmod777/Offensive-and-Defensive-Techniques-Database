@@ -7,6 +7,13 @@ TW9uYUxpc2FEYVZpbmNp
 
 TW9uYUxpc2FEYVZpbmNp ==> MonaLisaDaVinci
 
+-------------------------------------------------------
 
 echo "TW9uYUxpc2FEYVZpbmNp" | base64 --decode
 MonaLisaDaVinci
+
+-------------------------------------------------------
+
+CyberChef -> From_Base64
+
+https://gchq.github.io/CyberChef/
