@@ -6,6 +6,7 @@
 • IPS log Details
 • Information Investigation
 • Suspicious Activities
+• Another sample IPS log
 
 
 The IDS/IPS concept and solutions are technologies developed at the point where only rule-based access controls of firewall devices are not sufficient in the security world. Roughly, while the firewall works on a rule basis so that red apples shall pass and yellows not, IDS/IPS solutions can check whether there are worms in the apple or not. In other words, it has a decision-making mechanism by inspecting the packet content. In this way, it can prevent suspicious/malicious packets/requests from reaching the target and prevents systems from being affected by this attack.
@@ -82,6 +83,12 @@ Following suspicious activities can be detected monitoring the IDS/IPS logs;
 • Dos/Ddos attacks
 • Trojan activities
 • Botnet activities
+
+
+-- Another sample IPS log --
+
+{"timestamp":"2022-06-13T08:25:36", "in_iface":"ens1f1", "event_type":"alert","vlan":1,"src_ip":"192.168.1.11", "src_port":53,"dest_ip":"172.16.2.25", "dest_port":1029,"proto":"UDP", "alert":{"action":"allowed", "gid":1, "signature_id":2811577, "rev":3, "signature":"ETPRO TROJAN Possible Virut DGA NXDOMAIN Responses", "category":"A Network Trojan was detected", "severity":1, "metadata":{"updated_at":["2021_09_22"],"created_at":["2015_06_18"]}}, "app_proto":"failed"}, "payload":"dnV5ZWltLmNvbQo=", "payload_printable":"vuyeim.com", "stream":0} 
+
 
 
 https://rules.emergingthreats.net/open/suricata-5.0/rules/
