@@ -1,1 +1,104 @@
 
+--- Proxy Log Analysis ---
+
+• Proxy Log Analysis
+• A sample Proxy Log
+ • Review the Proxy Log
+
+
+-- Proxy Log Analysis --
+
+The Proxy basically acts as a bridge between the endpoint and the internet. Organizations generally use proxy technology for purposes such as internet speed, centralized control and increasing the level of security. Requests made by the client reach the Proxy Server first and then the Internet. Proxies can basically work in 2 different types:
+
+Transparent Proxy: Target server that we access can see the real source IP address.
+Anonymous Proxy: Target server that we access cannot see the real source IP address. It sees the IP address of the proxy as the source IP address. Thus, it cannot obtain any information about the system that actually made the request in the background.
+
+   +---------+             +----------------+             +-----------+
+   |  Client |  Request →  |  Proxy Server  |  Request →  |  Internet |
+   | (User)  |  ← Reply    | (Cache/Filter) |  ← Reply    |  (Web)    |
+   +---------+             +----------------+             +-----------+
+
+
+The proxy working structure controls the access of systems (server, client, etc.) to services such as HTTP, HTTPS, FTP according to the determined policies and operates the actions taken according to the policies as block or pass actions.
+It basically queries the URL/domain to be accessed from the category database, and if the category is a risky category, a block action is applied, otherwise a pass action is applied. Since some systems do not need to reach any networks other than some certain ones, an implicit deny may be applied to all networks other than the ones that are needed to be accessed.
+
+
+-- A sample Proxy Log --
+
+date=2022-05-21 time=16:15:44 type="utm" subtype="webfilter" eventtype="urlfilter" level="warning" srcip=192.168.209.142 srcport=34280 srcintfrole="lan" dstip=54.20.21.189 dstport=443 dstintfrole="wan" service="HTTPS" hostname="android.prod.cloud.netflix.com" profile="Wifi-Guest" action="blocked" url="https://android.prod.cloud.netflix.com/" sentbyte=517 rcvdbyte=0 direction="outgoing" urlsource="Local URLfilter Block" msg="URL was blocked because it is in the URL filter list"
+
+
+-- Review the Proxy Log --
+
+• date= date information
+
+time= time information
+
+type= log type
+
+subtype= log sub type (values like forward, vpn, webfilter, virus, ips, system etc.)
+
+eventtype= event type that belongs to the sub type
+
+level= incident severity level
+
+srcip= source IP address
+
+srcport= source port information
+
+srcinfrole= source interface information
+
+dstip= destination IP address
+
+dstport= destination port information
+
+dstinfrole= destination interface information
+
+service= service information
+
+hostname= requested domain
+
+profile= source profile
+
+action= action information
+
+url= URL address requested
+
+sentbyte = size of data sent by bytes
+
+rcvdbyte= size of data received by bytes
+
+direction= direction of the traffic
+
+urlsource= URL sources
+
+• msg= message information
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
