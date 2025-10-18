@@ -1,1 +1,139 @@
 
+--- Web Log Analysis ---
+
+• A sample Web Server Log
+• Analyze Web Server Log
+• Request Method
+• Web Attack Types
+• Server Request + Response
+• Status Codes
+• Response Codes
+• User-Agent Information
+• Generate Findings
+• Sample Web Requests
+• Another Example of Web Server Log
+
+
+-- A sample web server log --
+
+71.16.45.142 - - [12/Dec/2021:09:24:42 +0200] "GET /?id=SELECT+*+FROM+users HTTP/1.1" 200 486 "-" "curl/7.72.0"
+
+
+-- Analyze Web Server Log --
+
+• Source IP: 71.16.45.142
+• Date: 12/Dec/2021:09:24:42 +0200
+• Request Method: GET
+• Requested URL: /?id=SELECT+*+FROM+users
+• Version Info: HTTP/1.1
+• Server Response: 200
+• Data Size: 486
+• User-Agent Info: curl/7.72.0
+
+
+-- Request Method --
+
+Indicates the method of the request within the web language. The main request methods are:
+
+• GET: It is used to retrieve data from the server.
+• POST: It is used to send data to the server. (such as picture, video)
+• DELETE: It is used to delete the data on the server.
+• PUT: It is used to send data to the server (sent data creates or updates files)
+• OPTIONS: Tells which methods the server accepts.
+
+Note: Usually (by default) web servers do not write the content of the data sent to the server by POST or PUT to the web log. Therefore, it is important to know this when analyzing web logs. 
+
+
+-- Web Attack Types --
+
+• HTML Injection
+/html_get.php?firstname=<...HTML tags...>&lastname=<...HTML tags...>&form=submit
+
+• XSS Attack
+/xss_get.php?firstname=<...script tags...>&lastname=<...script tags...>&form=submit
+
+• SQL Injection
+/sqli_1.php?title=<...SQL payload with quotes/union/select/...>&action=search
+
+• Directory Traversal Attack
+/script.php?page=../../../../../../etc/passwd
+
+
+-- Server Request + Response --
+
+Requested URL: Indicates the directory/file on the server the request was made. At the same time, if there is an attack, it can be detected. As in the example above, “SELECT+*+FROM+users” statements represent us a “SQL Injection” attack pattern. Examining URLs is very important in web log analysis
+Server Response: Server responds back to the requests with some number expressions. These response codes indicates whether the request is successful or unsuccessful.
+
+Let’s say you find the URL contains information about the sql injection attack vector while analyzing the web logs, then you should pay attention to the response of the web server;
+
+• If 200 is returned: The request has successfully reached the server and the server has responded successfully, and the attack has been successful. Sometimes, application glitches cause servers to respond back with 200 while they actually should return 404. In such cases, to clarify this it is necessary to query the URL and analyze the response given to the request.
+• If 404 is returned: The server returned "Not Found" because the requested url was not found on the server. In other words, we consider it as the attack failed.
+• If 500 is returned: The server could not interpret this request and a "Server Error" response was returned. In other words, we can interpret it as the attack failed. However, since these requests on the server side prevent the web service from working properly, it is considered as a DOS attack by causing a service interruption while the attacker wanted to make a web attack.
+
+
+-- Status Codes --
+
+• 200 (OK): The request was received successfully and the response was returned.
+• 301 (Permanent Redirect): The request was redirected to a different location.
+• 403 (Forbidden): Access to the data requested was not allowed.
+• 404 (Not Found): The requested content could not be found.
+• 503 (Service Unavailable): Occurs when the server service cannot respond.
+
+
+-- Response Codes --
+
+• Informational responses (100–199)
+• Successful responses (200–299)
+• Redirection messages (300–399)
+• Client error responses (400–499)
+• Server error responses (500–599)
+
+
+-- User-Agent Information --
+
+User-Agent Information: Indicates the application that was used for the request. User-Agent information will help understand whether the requests made are by a real user or an automated scanning tool during the web log analysis. Some of the automated web scanning tools are “nikto”, “nessus”, “nmap”. If we see "Mozilla, Chrome", or a similar web browser information on the User-Agent information section that means the request was made by a real user. However, the User-Agent information may be changed and so we should be aware of that and make sure to verify the information we see within the logs.
+If the web server you detect that it was attacked (through SQL injection, XSS attack, code injection, etc. methods) is behind the security devices (firewall, IPS/IDS, WAF, etc.) it means that this request (actually the attack) passes through these security devices. In summary, almost every detail is important to the analysts in the web log analysis.
+
+
+-- Generate Findings --
+
+Through the web logs, we can generate findings like below and use them in our analyses:
+
+• Web requests with attack vector (SQL Injection, XSS Attack, Code Injection, Directory Traversal)
+• Top requesting IP information
+• Most requested URL information
+• Most received HTTP response code
+• Detection of suspicious method usage (such as PUT, DELETE)
+
+
+-- Sample Web Requests --
+
+• Web Request: 192.168.8.11/bwapp/sqli_1.php?title=%25iron%27+union+select+1%2Cuser%28%29%2C3%2C4%2C5%2C6%2C7--+-+%25%27&action=search
+• Decoded Web Request: 192.168.8.11/bwapp/sqli_1.php?title=%iron' union select 1,user(),3,4,5,6,7-- - %'&action=search
+• Browser output of the Web request: http://192.168.8.11/sqli_1.php?title=%25iron%27+union+select+1%2Cuser%28%29%2C3%2C4%2C5%2C6%2C7--+-+%25%27&action=search
+
+
+-- Another Example of Web Server Log --
+
+192.168.8.54 - - [29/Jun/2022:07:42:48 +0300] "GET /bwapp/sqli_1.php?title=%25iron%27+union+select+1%2Cuser%28%29%2C3%2C4%2C5%2C6%2C7--+-+%25%27&action=search HTTP/1.1" 200 13539 "http://192.168.8.11/bwapp/sqli_1.php?title=&action=search" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
