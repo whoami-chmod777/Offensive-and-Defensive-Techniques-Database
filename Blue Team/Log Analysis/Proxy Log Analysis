@@ -3,7 +3,9 @@
 
 • Proxy Log Analysis
 • A sample Proxy Log
- • Review the Proxy Log
+• Review the Proxy Log
+• Suspicious Activities
+• Logs Examples
 
 
 -- Proxy Log Analysis --
@@ -75,10 +77,22 @@ urlsource= URL sources
 • msg= message information
 
 
+Proxy logs are one of the most important log types when a SOC analyst needs to check which domain/URL a system (server, client, etc.) is making a request to our internal systems and whether it was able to establish a successful connection.
 
 
+-- Suspicious Activities --
+
+We can detect following suspicious activities through reviewing the proxy logs:
+• Connections to/from suspicious URLs
+• Infected system detection
+• Detection of tunneling activities
 
 
+-- Proxy Logs Examples --
+
+Jun 17 10:47:00 10.10.18.11 CEF:0|Forcepoint|Security|8.5.4|194|Transaction blocked|7| act=blocked app=https dvc=10.10.18.11 dst=104.26.11.18 dhost=sentry-proxy.cargox.cc dpt=443 src=10.80.18.50 spt=61603 suser=Test_User requestMethod=POST requestClientApplication=Mozilla/5.0 (Windows NT 10.0; Win64; x64) cs1Label=Policy cs1=Block_Risk_Category_Policy(Servers) request=https://sentry-proxy.cargox.cc/api/3/envelope/?sentry_key\=e2506000e29247eba06eee9df3f011e0&sentry_version\=7 
+
+Mar 30 19:07:16 10.60.28.21 CEF:0|Forcepoint|Security|8.5.4|1900|Transaction permitted|164| act=permitted app=https dst=18.11.96.7 dhost=letsdefend.io dpt=443 src=172.20.40.42 spt=59228 suser=user1 requestMethod=CONNECT cs1Label=Policy cs1=default-user-policy request=https://letsdefend.io/ 
 
 
 
