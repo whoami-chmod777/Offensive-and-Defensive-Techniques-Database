@@ -1,1 +1,62 @@
 
+--- VPN Log Analysis ---
+
+• Sample VPN Log
+• Key Log Fields 
+• Critical elements to analyze
+
+
+VPN is the technology that allows you to connect to a local network that you are not physically connected to. Generally, organizations prefer this technology to access their internal systems remotely. 
+
+
+-- Sample VPN Log --
+
+date=2022-05-21 time=14:06:38 devname="FG500" devid="FG5HSTF109K" eventtime=1653134913959078891 tz="+0300" logid="0101039424" type="event" subtype="vpn" level="information" vd="root" logdesc="SSL VPN tunnel up" action="tunnel-up" tunneltype="ssl-web" tunnelid=462105151 remip=13.29.5.4 user="letsdefend-user" reason="login successfully" msg="SSL tunnel established"
+
+
+-- Key Log Fields --
+
+• date: Date of the event
+• time: Time of the event
+• devname: Hostname of the device
+• devid: Device ID
+• eventtime: Precise event timestamp (epoch format)
+• tz: Time zone offset
+• logid: Log ID number
+• type: Log Type (traffic, utm, event, etc.)
+• subtype: Sub Log Type (Forward, vpn, webfilter, virus, ips, system, etc.)
+• level: Severity level of the log
+• logdesc: Log description
+• action: Action taken by the system
+• tunneltype: VPN tunnel type (SSL, IPSec, etc.)
+• remip: IP address that established the VPN connection
+• user: Authenticated user information
+• reason: VPN Connection Request Result
+• msg: Detailed status message after access
+
+The most critical elements to analyze in VPN logs are:
+• The source IP address initiating the connection
+• The authenticated username
+• The access request result (success or failure status)
+
+The sample log provided represents a VPN service operating as a module on a firewall device. This is why the log shows:
+• type: "event"
+• subtype: "vpn"
+
+Following a successful VPN connection:
+• The system assigns an internal IP address for VPN access.
+• This assigned IP (tracked as tunnelip) may appear either:
+
+In the same log entry, or in a separate follow-up log
+• All subsequent network activity through the VPN will use “tunnelip” as the source address.
+
+Your firewall traffic logs will be created with the IP address specified in the "tunnelip" assigned to you as the source IP address in the network activities carried out over the VPN going forward.
+
+Scenario: After a phishing e-mail targeting the organization, it has been determined that some users in the organization opened this e-mail and entered their username and password information. For these users, it is necessary to check all the activities of these users in all services especially the ones publicly available accounts (i.e. VPN). The VPN logs of the relevant users should be analyzed. The successful access source IP and country information and whether these successful accesses are indeed made by the user should be further investigated.
+
+Following suspicious activities can be detected through the VPN logs:
+
+• Successful/Unsuccessful VPN accesses
+• Detection of brute-force attacks against VPN accounts
+• Detection of VPN accesses outside the specified countries
+• Detection of VPN accesses outside the specified time periods
