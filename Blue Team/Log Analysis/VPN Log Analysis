@@ -4,6 +4,7 @@
 • Sample VPN Log
 • Key Log Fields 
 • Critical elements to analyze
+• Another VPN Logs Example
 
 
 VPN is the technology that allows you to connect to a local network that you are not physically connected to. Generally, organizations prefer this technology to access their internal systems remotely. 
@@ -60,3 +61,11 @@ Following suspicious activities can be detected through the VPN logs:
 • Detection of brute-force attacks against VPN accounts
 • Detection of VPN accesses outside the specified countries
 • Detection of VPN accesses outside the specified time periods
+
+
+-- Another VPN Logs Example --
+
+2021-04-29T12:53:02+03:00|Palo Alto Networks|type=GLOBALPROTECT|stage=login|srcuser=letsdefend|srcregion=US|publicip=13.24.5.74|error=Invalid username or password|status=failure 2021-04-29T12:54:02+03:00|Palo Alto Networks|type=GLOBALPROTECT|stage=login|srcuser=letsdefend|srcregion=US|publicip=13.24.5.74|error=Invalid username or password|status=failure 2021-04-29T12:54:02+03:00|Palo Alto Networks|type=GLOBALPROTECT|stage=login|srcuser=user3|srcregion=US|publicip=13.24.5.74|error=Invalid username or password|status=failure 2021-04-29T12:55:02+03:00|Palo Alto Networks|type=GLOBALPROTECT|stage=login|srcuser=letsdefend|srcregion=US|publicip=13.24.5.74|error=Invalid username or password|status=failure 2021-03-29T12:58:30+03:00|Palo Alto Networks|type=GLOBALPROTECT|stage=login|srcuser=user1|srcregion=RO|publicip=188.24.50.4|error=|status=success 2021-04-29T12:56:02+03:00|Palo Alto Networks|type=GLOBALPROTECT|stage=login|srcuser=letsdefend|srcregion=US|publicip=13.14.85.74|error=Invalid username or password|status=failure 2021-04-29T12:57:02+03:00|Palo Alto Networks|type=GLOBALPROTECT|stage=login|srcuser=letsdefend|srcregion=US|publicip=13.24.5.74|error=Invalid username or password|status=failure 2021-04-29T12:54:02+03:00|Palo Alto Networks|type=GLOBALPROTECT|stage=login|srcuser=user3|srcregion=TR|publicip=176.54.55.74|error=Invalid username or password|status=failure 2021-03-29T12:58:10+03:00|Palo Alto Networks|type=GLOBALPROTECT|stage=login|srcuser=letsdefend|srcregion=US|publicip=13.24.5.74|error=|status=successroot@ip-172-31-0-114:~/Desktop/QuestionFiles# 
+
+
+
