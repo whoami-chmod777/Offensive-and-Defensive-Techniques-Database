@@ -122,7 +122,7 @@ Command(s):
 cat access.log | grep -o '".*"' | grep -v '"GET|POST|HEAD|PUT|DELETE|OPTIONS|HTTP'
 awk -F\" '{print $6}' access.log | sort | uniq
 awk -F\" '{print $6}' access.log | sort | uniq -c | sort -nr
-
+awk -F\" '{print $6}' access.log | sort | uniq -c | sort -nr | head -n 20
 
 
 
