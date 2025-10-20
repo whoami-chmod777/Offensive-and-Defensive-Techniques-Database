@@ -116,6 +116,15 @@ Command: cut access.log -d " " -f 9, grep "Mozilla/5.0 (Hydra)" access.log | awk
 Purpose: Identify clients/bots/tools making requests.
 Command: cut -d "\"" -f 6 access.log, cut -d "\"" -f 6 access.log | sort | uniq -c | sort -nr, grep "Mozilla/5.0 (Hydra)" access.log
 
+12. Identify the User Agent
+Purpose: Detect which clients or tools accessed the server.
+Command(s): 
+cat access.log | grep -o '".*"' | grep -v '"GET|POST|HEAD|PUT|DELETE|OPTIONS|HTTP'
+awk -F\" '{print $6}' access.log | sort | uniq
+awk -F\" '{print $6}' access.log | sort | uniq -c | sort -nr
+
+
+
 
 https://whois.domaintools.com/
 https://talosintelligence.com/
