@@ -79,6 +79,13 @@ Wireshark Filter → Destination Unreachable (Port Unreachable):
 • If the port is open we don't get a response back.
 • If we get an ICMP port unreachable response that means that the port is closed.
 
+States in UDP Scan
+• Open: When any UDP response is received from the target port.
+• Open|Filtered: When no response is received from the target port.
+• Closed: When an ICMP port unreachable error is received (type 3, code 3).
+• Filtered: When other ICMP unreachable errors are received (type 3, codes 1, 2, 9, 10, or 13).
+
+
 
 -- The Reason Option --
 
