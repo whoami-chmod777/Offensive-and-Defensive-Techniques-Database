@@ -1,0 +1,18 @@
+
+--- Overview ---
+
+Nmap is one of the most frequently used tools in the field of network security and penetration testing. In this section, we will explore the basic features and usage scenarios of Nmap, examining the variety and flexibility of this powerful tool.
+
+
+-- Stages of Scans with Nmap --
+
+When conducting an Nmap scan, the scanning process goes through a series of stages, starting from identifying targets to reporting the obtained information.
+
+1. Target Identification: Begins working on the targets specified by the user.
+2. Host Discovery: Various methods are used to detect active devices within the network.
+3. Port Scanning: Identifies open ports and the services running on them.
+4. Version Detection: Attempts to determine the versions of the services running on open ports.
+5. OS Detection: Gathers information about the operating systems of the devices.
+6. Traceroute: Determines the paths packets take to reach the target.
+7. NSE (Nmap Scripting Engine) Usage: Conducts various tests on targets using custom NSE scripts.
+8. Reporting: The scan results are reported in various formats.
