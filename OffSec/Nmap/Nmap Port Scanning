@@ -1,1 +1,121 @@
 
+
+--- Nmap Port Scanning ---
+
+• Port States
+• Popular TCP Ports
+• Popular UDP Ports 
+• 
+• 
+• 
+
+
+==========================
+ Popular TCP Ports
+==========================
+| Port | Service        | Description                                               |
+|------|----------------|-----------------------------------------------------------|
+| 80   | HTTP           | Standard port for web servers.                            |
+| 23   | Telnet         | Unencrypted remote management protocol. Less secure.      |
+| 443  | HTTPS          | Standard port for SSL encrypted web servers.              |
+| 21   | FTP            | File Transfer Protocol. Less secure.                      |
+| 22   | SSH            | Encrypted remote management protocol.                     |
+| 25   | SMTP           | Email transmission protocol. Insecure.                    |
+| 3389 | ms-term-server | Used for Microsoft Terminal Services.                     |
+| 110  | POP3           | Email retrieval protocol. Insecure.                       |
+| 445  | Microsoft-DS   | SMB communication in Microsoft Windows networks.          |
+| 139  | NetBIOS-SSN    | Microsoft Windows network services.                       |
+| 143  | IMAP           | Email retrieval protocol. Insecure.                       |
+| 53   | Domain         | Domain Name System (DNS).                                 |
+| 135  | MSRPC          | Microsoft Windows network services.                       |
+| 3306 | MySQL          | MySQL database servers.                                   |
+| 8080 | HTTP-Proxy     | Alternative web servers and HTTP proxy services.          |
+| 1723 | PPTP           | VPN setups.                                               |
+| 111  | RPCBind        | Maps SunRPC programs to related ports.                    |
+| 995  | POP3S          | Secure POP3 over SSL.                                     |
+| 993  | IMAPS          | Secure IMAP over SSL.                                     |
+| 5900 | VNC            | Graphical desktop sharing system. Insecure.               |
+
+
+==========================
+ Popular UDP Ports
+==========================
+| Port  | Service       | Description                                               |
+|-------|---------------|-----------------------------------------------------------|
+| 631   | IPP           | Internet Printing Protocol.                               |
+| 161   | SNMP          | Simple Network Management Protocol.                       |
+| 137   | NETBIOS-NS    | Windows network services.                                 |
+| 123   | NTP           | Network Time Protocol.                                    |
+| 138   | NETBIOS-DGM   | Windows network services.                                 |
+| 1434  | MS-SQL-DS     | Microsoft SQL Server.                                     |
+| 445   | Microsoft-DS  | Windows network services.                                 |
+| 135   | MSRPC         | Microsoft Windows network services.                       |
+| 67    | DHCPS         | DHCP Server.                                              |
+| 53    | Domain        | DNS Server.                                               |
+| 139   | NETBIOS-SSN   | Windows network services.                                 |
+| 500   | ISAKMP        | IPsec VPN setup.                                          |
+| 68    | DHCPC         | DHCP Client.                                              |
+| 520   | Route         | Routing Information Protocol (RIP).                       |
+| 1900  | UPNP          | Universal Plug and Play device discovery.                 |
+| 4500  | nat-t-ike     | NAT traversal for IPsec connections.                      |
+| 514   | Syslog        | UNIX logging service.                                     |
+| 49152 | Varies        | IANA-defined start of dynamic/private ports.              |
+| 162   | SNMPTrap      | SNMP traps (manager typically uses this port).            |
+| 69    | TFTP          | Trivial File Transfer Protocol.                           |
+
+
+
+-- Port States --
+
+Open: An application is actively accepting TCP connections or UDP packets on this port.
+Closed: A closed port is accessible (Nmap receives packets to it and responds with SYN/ACK), but there is no application listening on it. 
+Filtered: Nmap cannot determine whether the port is open because packet filtering prevents its probes from reaching the port. 
+Unfiltered: An unfiltered state means that a port is accessible but Nmap cannot determine whether it is open or closed.
+Open|Filtered: Nmap places a port in this state when it cannot determine whether the port is open or filtered. 
+Closed|Filtered: Nmap uses this state when it cannot determine if a port is closed or filtered.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hackviser (Port Scanning)
+-----------------------------
+
+nmap scanme.nmap.org
+nmap -F scanme.nmap.org
+nmap --top-ports 10 scanme.nmap.org
+
+nmap -p- scanme.nmap.org
+nmap -A scanme.nmap.org
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
