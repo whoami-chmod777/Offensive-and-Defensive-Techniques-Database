@@ -46,6 +46,7 @@ TCP 40430 → 80 [RST, ACK]
 -- Stealth (SYN) Scanning (-sS) --
 
 nmap -sS -p- 192.168.199.39
+nmap -sS -p22,113,139 scanme.nmap.org
 
 Wireshark Filter → Half-Open Scan:
 TCP 52796 → 25 [SYN]
