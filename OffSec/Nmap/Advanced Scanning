@@ -169,6 +169,7 @@ cd /tmp/webmap
 # Run Nmap and save the XML Report on /tmp/webmap
 nmap -sT -A -T4 -oX /tmp/webmap/myscan.xml 192.168.1.0/24
 
+
 == Nmap Scan ==
 
 cd /tmp/webmap
