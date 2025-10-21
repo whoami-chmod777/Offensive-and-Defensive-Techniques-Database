@@ -31,6 +31,13 @@ Wireshark activate firewall: No RST responses
 TCP    54    62346 → 139 [ACK] Seq=1 Ack=1 Win=1024 Len=0
 
 
+Responses in ACK Scan
+• TCP RST Response: Unfiltered,
+• No Response: Filtered,
+• ICMP Unreachable Error: Filtered.
+
+
+
 -- Packet Fragmentation --
 
 nmap -sS -f 192.168.199.41
