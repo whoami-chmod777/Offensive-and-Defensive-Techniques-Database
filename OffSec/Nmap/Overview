@@ -24,6 +24,8 @@ When conducting an Nmap scan, the scanning process goes through a series of stag
 
 -- Basic Usage --
 
+nmap [Scan Type(s)] [Options] {target specification}
+
 root💀hackerbox:~# nmap -h
 Nmap 7.94SVN ( https://nmap.org )
 Usage: nmap [Scan Type(s)] [Options] {target specification}
