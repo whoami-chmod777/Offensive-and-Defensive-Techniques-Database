@@ -268,12 +268,12 @@ nmap -iR 100 -p 80                             # 100 random IPs, port 80
 
 
 
+Hackviser (Host Discovery)
+-----------------------------
 
-
-
-
-
-
+nmap -sL stanford.edu/24
+nmap -sn stanford.edu/24
+nmap -Pn scanme.nmap.org
 
 
 
