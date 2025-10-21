@@ -111,6 +111,11 @@ cat win2k8.txt
 
 It's not effective against Windows operating systems !!! no-response means the port is open
 
+• Open|Filtered: If no response is received (even after retransmissions),
+• Closed: If a TCP RST packet is received,
+• Filtered: If ICMP unreachable error messages are received.
+
+
 # TCP Null Scan
 nmap -sN 192.168.199.39
 
