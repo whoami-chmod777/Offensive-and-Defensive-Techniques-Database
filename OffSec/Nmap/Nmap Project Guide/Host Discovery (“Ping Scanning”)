@@ -15,29 +15,69 @@
 
 -- Input From List (-iL) --
 
-nmap -iL hosts.txt  # liest Zielhosts aus der Datei 'hosts.txt' (ein Host pro Zeile) und scannt sie
-nmap -iL -  
+nmap -iL hosts.txt
+# read target hosts from the file 'hosts.txt' (one host per line) and scan them
+
+nmap -iL -
+# read target hosts from standard input (stdin). Example:
+# echo -e "192.0.2.5\n192.0.2.10" | nmap -iL -
 
 -- Choose Targets at Random (-iR <numtargets>) --
 
-nmap -iR 100  
-nmap -iR 0  
-nmap -sS -PS80 -iR 0 -p 80 
+nmap -iR 100
+# generate and scan 100 random targets (skips private/multicast/unallocated IPs)
+
+nmap -iR 0
+# generate random targets forever (until you interrupt the scan)
+
+nmap -sS -PS80 -iR 0 -p 80
+# SYN scan random targets, send TCP SYN probe to port 80 (-PS80), never-ending (-iR 0), limit to port 80
 
 -- Excluding Targets (--exclude, --excludefile <filename>) --
 
-nmap 64.13.134.52/24 --exclude scanme.nmap.org,insecure.org 
-nmap 64.13.134.52/24 --excludefile excluded.txt  
-nmap 10.0.0.0/8 --exclude 10.6.0.0/16,ultra-sensitive-host.company.com  
+nmap 64.13.134.52/24 --exclude scanme.nmap.org,insecure.org
+# scan the /24 around 64.13.134.52 but skip scanme.nmap.org and insecure.org (comma-separated excludes)
+
+nmap 64.13.134.52/24 --excludefile excluded.txt
+# scan the /24 around 64.13.134.52 but skip hosts/netblocks listed in excluded.txt (one entry per line)
+
+nmap 10.0.0.0/8 --exclude 10.6.0.0/16,ultra-sensitive-host.company.com
+# scan 10.0.0.0/8 but exclude the 10.6.0.0/16 subnet and the named host
 
 -- Practical Examples --
 
-nmap scanme.nmap.org, nmap scanme.nmap.org/32, nmap 64.13.134.52  
-nmap scanme.nmap.org/24, nmap 64.13.134.52/24, nmap 64.13.134.-, nmap 64.13.134.0-255  
-nmap 64.13.134.52/24 --exclude scanme.nmap.org,insecure.org  
-nmap 10.0.0.0/8 --exclude 10.6.0.0/16,ultra-sensitive-host.company.com  
-egrep '^lease' /var/lib/dhcp/dhcpd.leases | awk '{print $2}' | nmap -iL - 
-nmap -6 2001:800:40:2a03::3  
+nmap scanme.nmap.org
+# scan a single host by name
+
+nmap scanme.nmap.org/32
+# scan that single host using CIDR /32 (equivalent to the single host)
+
+nmap 64.13.134.52
+# scan a single IP address
+
+nmap scanme.nmap.org/24
+# scan the /24 network containing scanme.nmap.org
+
+nmap 64.13.134.52/24
+# scan the /24 network containing 64.13.134.52
+
+nmap 64.13.134.-
+# shorthand octet-range: scan 64.13.134.0-255
+
+nmap 64.13.134.0-255
+# explicit octet-range: scan 64.13.134.0 through 64.13.134.255
+
+nmap 64.13.134.52/24 --exclude scanme.nmap.org,insecure.org
+# scan the /24 but exclude specific hosts
+
+nmap 10.0.0.0/8 --exclude 10.6.0.0/16,ultra-sensitive-host.company.com
+# scan 10.0.0.0/8 but exclude a subnet and a named host
+
+egrep '^lease' /var/lib/dhcp/dhcpd.leases | awk '{print $2}' | nmap -iL -
+# extract IPs from DHCP leases file and pipe them to nmap (nmap reads targets from stdin)
+
+nmap -6 2001:800:40:2a03::3
+# scan the single IPv6 address 2001:800:40:2a03::3
 
 
 +----------------------------------------+
@@ -47,62 +87,129 @@ nmap -6 2001:800:40:2a03::3
 -- DNS Tricks --
 
 host -t ns target.com
+# query authoritative name servers (NS records) for target.com
+
 host -t a target.com
+# query A records (IPv4 addresses) for target.com
+
 host -t aaaa target.com
+# query AAAA records (IPv6 addresses) for target.com
+
 host -t mx target.com
+# query mail exchanger (MX) records for target.com
+
 host -t soa target.com
+# query the Start Of Authority (SOA) record for target.com
 
 host www.target.com
+# resolve www.target.com to IP(s) (forward DNS lookup)
+
 host ftp.target.com
+# resolve ftp.target.com to IP(s)
+
 host ns3.target.com
+# resolve ns3.target.com to IP(s)
 
 dig @ns2-auth.sprintlink.net -t AXFR target.com
+# attempt a DNS zone transfer (AXFR) for target.com from ns2-auth.sprintlink.net (often denied)
+
 dig @ns2.eppi.com -t AXFR cpsr.org
+# example successful AXFR from docs (cpsr.org) — demonstrates zone-transfer output
+
 cat hostnames.txt | xargs -n1 host
+# resolve each hostname listed in hostnames.txt by running 'host' once per line
 
 nmap -Pn -T4 --traceroute www.target.com
+# Nmap run against www.target.com:
+# -Pn : skip host discovery (treat host as up)
+# -T4 : faster timing template
+# --traceroute : perform traceroute and show network path (and reverse-DNS)
 
 -- Whois Queries Against IP Registries --
 
 whois 207.171.166.49
+# query whois for IP ownership and netblock info for 207.171.166.49
+
 whois -h whois.arin.net "n target*"
+# query ARIN for netblock handles/name entries matching "target*"
+
 whois -h whois.arin.net "o target*"
+# query ARIN for organization names matching "target*"
+
 whois -h whois.arin.net @target.com
+# query ARIN for entries referencing the contact/email domain target.com
 
 -- Internet Routing Information --
 
 sudo nmap -Pn -T4 --traceroute www.target.com
+# (same as above) Nmap with traceroute to reveal network path and reverse-DNS
+
 traceroute 207.171.166.49
+# classic traceroute showing router hops to 207.171.166.49
+
 telnet route-views.routeviews.org 23
+# connect to RouteViews (telnet port 23) to access BGP routing table collectors (read-only)
 
 http://asn.cymru.com/
+# Team Cymru ASN/IP lookup (web)
+
 http://www.robtex.com/as/
+# Robtex AS / prefix / DNS / routing lookup (web)
+
 http://routeviews.org
+# RouteViews BGP table archives (web)
 
 
 +----------------+
 | DNS Resolution | 
 +----------------+
 
-nmap -n 192.0.2.0/24 
-nmap -R 192.0.2.0/24 
-nmap --system-dns 192.0.2.0/24 
-nmap --dns-servers 8.8.8.8 192.0.2.0/24  
-nmap --dns-servers 8.8.8.8,1.1.1.1 192.0.2.0/24  
-nmap -Pn --dns-servers 8.8.8.8 192.0.2.55  
-nmap -sL --dns-servers 192.0.2.10 192.0.2.0/24  
-nmap -6 -R 2001:db8::/64  # scan IPv6 (system resolver always used for IPv6)
+nmap -n 192.0.2.0/24
+# do no reverse DNS lookups (faster; do not resolve hostnames)
+
+nmap -R 192.0.2.0/24
+# force reverse DNS lookups for all targets (even non-responsive ones)
+
+nmap --system-dns 192.0.2.0/24
+# use the system resolver (getnameinfo) instead of Nmap's parallel resolver (serial and slower)
+
+nmap --dns-servers 8.8.8.8 192.0.2.0/24
+# use the specified DNS server (8.8.8.8) for reverse DNS queries
+
+nmap --dns-servers 8.8.8.8,1.1.1.1 192.0.2.0/24
+# use multiple DNS servers (comma-separated) for reverse DNS queries
+
+nmap -Pn --dns-servers 8.8.8.8 192.0.2.55
+# skip host discovery (-Pn: treat host as up) and use 8.8.8.8 for reverse DNS
+
+nmap -sL --dns-servers 192.0.2.10 192.0.2.0/24
+# list-scan (show what would be scanned) and perform reverse DNS using 192.0.2.10
+
+nmap -6 -R 2001:db8::/64
+# IPv6 scan with forced reverse DNS resolution (IPv6 always uses system resolver)
 
 Example: try each candidate DNS server (repeat as needed)
 
 nmap -sL --dns-servers 192.0.2.10 192.0.2.0/24
+# list-scan using DNS server 192.0.2.10
+
 nmap -sL --dns-servers 192.0.2.11 192.0.2.0/24
+# list-scan using DNS server 192.0.2.11
+
 nmap -sL --dns-servers 192.0.2.12 192.0.2.0/24
+# list-scan using DNS server 192.0.2.12
 
 
 +-------------------------+
 | Host Discovery Controls | 
 +-------------------------+
+
+
+
+
+
+
+
 
 
 
