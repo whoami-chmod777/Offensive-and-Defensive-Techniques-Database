@@ -5,6 +5,25 @@
 • Parallelism
 • Host Timeout
 • Scan Delay
+• Timing Template Modes
+• Recommendations
+
+
+-- Timing Template Modes --
+
+• Paranoid (-T0) and Sneaky (-T1): These modes are designed to evade IDS (Intrusion Detection Systems) detection. They operate with a very low profile on the network, adding long delays between scans.
+• Polite (-T2): This mode slows down the scan speed to conserve bandwidth and target machine resources. It minimizes the impact on the network by performing slower scans.
+• Normal (-T3): This is Nmap's default mode and is used for scans performed without any extra options specified.
+• Aggressive (-T4): This mode speeds up the scans assuming your network is fast and reliable. It might compromise some accuracy to achieve faster results.
+• Insane (-T5): This assumes you have an extraordinarily fast network or are willing to risk lower accuracy for the sake of speed.
+
+
+-- Recommendations --
+
+• If you have a reliable broadband or Ethernet connection at a reasonable speed, it is recommended to use -T4. This is useful when scanning modern and reliable networks.
+• -T5 might be too aggressive for some users; this depends on your network's capacity and the desired level of stealth during the scan.
+• -T2 is typically used by those who do not want to draw attention but note that this mode significantly slows down the scan.
+• -T0 and -T1 can be useful for IDS evasion but can take an extraordinarily long time when scanning thousands of machines or ports.
 
 
 -- Timing Templates --
