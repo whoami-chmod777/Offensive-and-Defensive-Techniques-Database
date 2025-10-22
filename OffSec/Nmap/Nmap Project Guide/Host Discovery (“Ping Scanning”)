@@ -15,43 +15,89 @@
 
 -- Input From List (-iL) --
 
-nmap -iL hosts.txt  # read targets from file 'hosts.txt'
-nmap -iL -  # read targets from standard input (hyphen = stdin)
+nmap -iL hosts.txt 
+nmap -iL -  
 
 -- Choose Targets at Random (-iR <numtargets>) --
 
-nmap -iR 100  # generate and scan 100 random targets
-nmap -iR 0  # generate random targets forever (until interrupted)
-nmap -sS -PS80 -iR 0 -p 80  # SYN scan random targets, send TCP SYN probe to port 80, never-ending (-iR 0), limit to port 80
+nmap -iR 100  
+nmap -iR 0  
+nmap -sS -PS80 -iR 0 -p 80 
 
 -- Excluding Targets (--exclude, --excludefile <filename>) --
 
-nmap 64.13.134.52/24 --exclude scanme.nmap.org,insecure.org  # scan the /24 around 64.13.134.52 but skip scanme.nmap.org and insecure.org
-nmap 64.13.134.52/24 --excludefile excluded.txt  # scan the /24 around 64.13.134.52 but skip hosts/netblocks listed in excluded.txt (use file for excludes)
-nmap 10.0.0.0/8 --exclude 10.6.0.0/16,ultra-sensitive-host.company.com  # scan 10.0.0.0/8 but exclude the 10.6.0.0/16 subnet and the named host
+nmap 64.13.134.52/24 --exclude scanme.nmap.org,insecure.org 
+nmap 64.13.134.52/24 --excludefile excluded.txt  
+nmap 10.0.0.0/8 --exclude 10.6.0.0/16,ultra-sensitive-host.company.com  
 
 -- Practical Examples --
 
-nmap scanme.nmap.org, nmap scanme.nmap.org/32, nmap 64.13.134.52  # these three commands all scan the same single host (scanme.nmap.org resolves to 64.13.134.52)
-nmap scanme.nmap.org/24, nmap 64.13.134.52/24, nmap 64.13.134.-, nmap 64.13.134.0-255  # these four commands all scan the same /24 (64.13.134.0 through 64.13.134.255)
-nmap 64.13.134.52/24 --exclude scanme.nmap.org,insecure.org  # scan the /24 but exclude scanme.nmap.org and insecure.org
-nmap 10.0.0.0/8 --exclude 10.6.0.0/16,ultra-sensitive-host.company.com  # scan 10.0.0.0/8 but exclude 10.6.0.0/16 and the named host
-egrep '^lease' /var/lib/dhcp/dhcpd.leases | awk '{print $2}' | nmap -iL -  # extract IPs from DHCP leases and pipe them to nmap (-iL - reads from stdin)
-nmap -6 2001:800:40:2a03::3  # scan the single IPv6 address 2001:800:40:2a03::3
+nmap scanme.nmap.org, nmap scanme.nmap.org/32, nmap 64.13.134.52  
+nmap scanme.nmap.org/24, nmap 64.13.134.52/24, nmap 64.13.134.-, nmap 64.13.134.0-255  
+nmap 64.13.134.52/24 --exclude scanme.nmap.org,insecure.org  
+nmap 10.0.0.0/8 --exclude 10.6.0.0/16,ultra-sensitive-host.company.com  
+egrep '^lease' /var/lib/dhcp/dhcpd.leases | awk '{print $2}' | nmap -iL - 
+nmap -6 2001:800:40:2a03::3  
 
 
 +----------------------------------------+
 | Finding an Organization's IP Addresses | 
 +----------------------------------------+
 
+-- DNS Tricks --
 
+host -t ns target.com
+host -t a target.com
+host -t aaaa target.com
+host -t mx target.com
+host -t soa target.com
+
+host www.target.com
+host ftp.target.com
+host ns3.target.com
+
+dig @ns2-auth.sprintlink.net -t AXFR target.com
+dig @ns2.eppi.com -t AXFR cpsr.org
+cat hostnames.txt | xargs -n1 host
+
+nmap -Pn -T4 --traceroute www.target.com
+
+-- Whois Queries Against IP Registries --
+
+whois 207.171.166.49
+whois -h whois.arin.net "n target*"
+whois -h whois.arin.net "o target*"
+whois -h whois.arin.net @target.com
+
+-- Internet Routing Information --
+
+sudo nmap -Pn -T4 --traceroute www.target.com
+traceroute 207.171.166.49
+telnet route-views.routeviews.org 23
+
+http://asn.cymru.com/
+http://www.robtex.com/as/
+http://routeviews.org
 
 
 +----------------+
 | DNS Resolution | 
 +----------------+
 
+nmap -n 192.0.2.0/24 
+nmap -R 192.0.2.0/24 
+nmap --system-dns 192.0.2.0/24 
+nmap --dns-servers 8.8.8.8 192.0.2.0/24  
+nmap --dns-servers 8.8.8.8,1.1.1.1 192.0.2.0/24  
+nmap -Pn --dns-servers 8.8.8.8 192.0.2.55  
+nmap -sL --dns-servers 192.0.2.10 192.0.2.0/24  
+nmap -6 -R 2001:db8::/64  # scan IPv6 (system resolver always used for IPv6)
 
+Example: try each candidate DNS server (repeat as needed)
+
+nmap -sL --dns-servers 192.0.2.10 192.0.2.0/24
+nmap -sL --dns-servers 192.0.2.11 192.0.2.0/24
+nmap -sL --dns-servers 192.0.2.12 192.0.2.0/24
 
 
 +-------------------------+
