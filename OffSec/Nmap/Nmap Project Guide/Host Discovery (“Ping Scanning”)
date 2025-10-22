@@ -15,7 +15,7 @@
 
 -- Input From List (-iL) --
 
-nmap -iL hosts.txt 
+nmap -iL hosts.txt  # liest Zielhosts aus der Datei 'hosts.txt' (ein Host pro Zeile) und scannt sie
 nmap -iL -  
 
 -- Choose Targets at Random (-iR <numtargets>) --
