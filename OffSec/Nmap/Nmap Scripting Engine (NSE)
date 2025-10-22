@@ -68,8 +68,12 @@ PORT    STATE SERVICE
 
 
 
+Hackviser (Host Discovery)
+-----------------------------
 
-
+nmap -sC scanme.nmap.org
+nmap --script=vuln scanme.nmap.org
+nmap --script=http-brute --script-args 'http-brute.path=/admin' scanme.nmap.org
 
 
 
