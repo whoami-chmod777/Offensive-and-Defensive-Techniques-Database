@@ -1,0 +1,95 @@
+
+--- Host Discovery ("Ping Scanning") ---
+
+• Specifying Target Hosts and Networks
+• Finding an Organization's IP Addresses
+• DNS Resolution
+• Host Discovery Controls
+• Host Discovery Techniques
+• Putting It All Together: Host Discovery Strategies
+• Host Discovery Code Algorithms
+
++--------------------------------------+
+| Specifying Target Hosts and Networks |
++--------------------------------------+
+
+-- Input From List (-iL) --
+
+nmap -iL hosts.txt  # read targets from file 'hosts.txt'
+nmap -iL -  # read targets from standard input (hyphen = stdin)
+
+-- Choose Targets at Random (-iR <numtargets>) --
+
+nmap -iR 100  # generate and scan 100 random targets
+nmap -iR 0  # generate random targets forever (until interrupted)
+nmap -sS -PS80 -iR 0 -p 80  # SYN scan random targets, send TCP SYN probe to port 80, never-ending (-iR 0), limit to port 80
+
+-- Excluding Targets (--exclude, --excludefile <filename>) --
+
+nmap 64.13.134.52/24 --exclude scanme.nmap.org,insecure.org  # scan the /24 around 64.13.134.52 but skip scanme.nmap.org and insecure.org
+nmap 64.13.134.52/24 --excludefile excluded.txt  # scan the /24 around 64.13.134.52 but skip hosts/netblocks listed in excluded.txt (use file for excludes)
+nmap 10.0.0.0/8 --exclude 10.6.0.0/16,ultra-sensitive-host.company.com  # scan 10.0.0.0/8 but exclude the 10.6.0.0/16 subnet and the named host
+
+-- Practical Examples --
+
+nmap scanme.nmap.org, nmap scanme.nmap.org/32, nmap 64.13.134.52  # these three commands all scan the same single host (scanme.nmap.org resolves to 64.13.134.52)
+nmap scanme.nmap.org/24, nmap 64.13.134.52/24, nmap 64.13.134.-, nmap 64.13.134.0-255  # these four commands all scan the same /24 (64.13.134.0 through 64.13.134.255)
+nmap 64.13.134.52/24 --exclude scanme.nmap.org,insecure.org  # scan the /24 but exclude scanme.nmap.org and insecure.org
+nmap 10.0.0.0/8 --exclude 10.6.0.0/16,ultra-sensitive-host.company.com  # scan 10.0.0.0/8 but exclude 10.6.0.0/16 and the named host
+egrep '^lease' /var/lib/dhcp/dhcpd.leases | awk '{print $2}' | nmap -iL -  # extract IPs from DHCP leases and pipe them to nmap (-iL - reads from stdin)
+nmap -6 2001:800:40:2a03::3  # scan the single IPv6 address 2001:800:40:2a03::3
+
+
++----------------------------------------+
+| Finding an Organization's IP Addresses | 
++----------------------------------------+
+
+
+
+
++----------------+
+| DNS Resolution | 
++----------------+
+
+
+
+
++-------------------------+
+| Host Discovery Controls | 
++-------------------------+
+
+
+
+
++---------------------------+
+| Host Discovery Techniques | 
++---------------------------+
+
+
+
+
++----------------------------------------------------+
+| Putting It All Together: Host Discovery Strategies | 
++----------------------------------------------------+
+
+
+
+
+
++--------------------------------+
+| Host Discovery Code Algorithms | 
++--------------------------------+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
