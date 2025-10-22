@@ -5,6 +5,10 @@
 • NSE Syntax
 • Script Categories
 • Script acarsd-info
+• 
+• Script Categories
+• Using NSE Scripts
+
 
 
 -- Introduction To The NSE --
@@ -60,6 +64,93 @@ PORT    STATE SERVICE
 |   Admin E-mail: admin@acarsd
 |   Clients Connected: 1
 |_  Frequency: 131.7250 & 131.45
+
+
+
+
+
+
+
+
+
+-- Script Categories --
+
+• auth 
+This category deals with authentication credentials on the target system or bypassing them. 
+If you want to check if there is anonymous FTP access on a system, you can use the ftp-anon script. 
+Examples: x11-access, ftp-anon, oracle-enum-users.
+
+• broadcast
+Discovers hosts that are not listed on the command line by broadcasting on the local network. 
+You can use it to discover all SMB servers on your local network
+Examples: dns-sd, nbns-queries.
+
+• brute
+Uses brute-force attacks to guess authentication credentials on a remote server. 
+To test if a web application is protected by weak passwords, you can use the http-brute script. 
+Examples: http-brute, oracle-brute, snmp-brute.
+
+• default
+The default set of scripts executed when the -sC or -A options are used. 
+Use the default scripts to gather basic information about the services on your targets. 
+Examples: identd-owners, http-auth, ftp-anon.
+
+• discovery
+Actively tries to discover more information about the network. 
+If you want to get the HTML title of a web server, you can use the html-title script. 
+Examples: html-title, smb-enum-shares, snmp-sysdescr.
+
+• dos
+Conducts Denial of Service (DoS) testing. 
+To test if a web server is vulnerable to Slowloris attacks, you can use this script. 
+Examples: http-slowloris.
+
+• exploit
+Actively tries to exploit certain vulnerabilities. 
+To test for the Shellshock vulnerability, you can use the http-shellshock script. 
+Examples: jdwp-exec, http-shellshock.
+
+• external
+Sends data to a third-party database or other network sources. 
+To obtain whois information related to your target's IP address, you can use the whois-ip script. 
+Examples: whois-ip.
+
+• fuzzer
+Sends unexpected or random data to server software to try to find bugs or vulnerabilities
+You can use the dns-fuzz script to test the robustness of a DNS server
+Examples: dns-fuzz.
+
+• intrusive
+Scripts that may crash the target system, use significant resources, or be considered malicious by system administrators. 
+To detect open HTTP proxies on a network, you can use the http-open-proxy script. 
+Examples: http-open-proxy, snmp-brute
+
+• malware
+Tests whether the target platform is infected by malware or backdoors. 
+To check if a system is infected, you can use the auth-spoof script. 
+Examples: smtp-strangeport, auth-spoof.
+
+• safe
+Scripts designed not to crash services, consume significant bandwidth or resources, or exploit security holes. 
+To retrieve an SSH server's host key, you can use the ssh-hostkey script. 
+Examples: ssh-hostkey, html-title.
+
+• version
+A special category related to version detection functionality and cannot be explicitly selected. 
+Automatically run scripts in this category to detect specific service versions. 
+Examples: skypev2-version, pptp-version.
+
+• vuln
+Checks for known vulnerabilities and reports the findings. 
+To check for vulnerabilities on a system, you can use the realvnc-auth-bypass script. 
+Examples: realvnc-auth-bypass, afp-path-vuln.
+
+-- Using NSE Scripts --
+
+• Enable common scripts with the -sC  parameter 
+• Specify a custom set of scripts or script categories with the --script parameter
+• Customize some scripts with --script-args and --script-args-file options
+
 
 
 https://nmap.org/nsedoc/categories/auth.html
