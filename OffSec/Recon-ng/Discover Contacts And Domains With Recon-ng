@@ -1,0 +1,28 @@
+
+recon-ng can perform web-based reconnaissance and it can be used in social engineering engagements or for extracting information that exists on the web
+
+recon-ng > help
+recon-ng > modules
+recon-ng > use contacts_jigsaw
+recon-ng [contacts_jigsaw] > options
+recon-ng [contacts_jigsaw] > set company trustwave.com
+recon-ng [contacts_jigsaw] > run
+recon-ng [contacts_jigsaw] > back
+
+recon-ng > use hosts_google
+recon-ng [hosts_google] > options
+recon-ng [hosts_google] > set domain trustwave.com
+recon-ng [hosts_google] > run
+recon-ng [hosts_google] > back
+
+recon-ng > use output_htmlfile
+recon-ng [output_htmlfile] > options
+recon-ng [output_htmlfile] > set filename /home/netbiosx/trustwave.html
+recon-ng [output_htmlfile] > run
+recon-ng [output_htmlfile] > back
+
+recon-ng > workspaces
+recon-ng > workspaces create audit-2025
+recon-ng > workspaces select audit-2025
+recon-ng > workspaces
+recon-ng > exit
