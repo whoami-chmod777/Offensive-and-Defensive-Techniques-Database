@@ -2,10 +2,22 @@
 --- Discovering With Nmap ---
 
 • Discovering Oracle Accounts With Nmap
+• Information Gathering With Nmap
 
 
+-- Information Gathering With Nmap --
 
+We can use Nmap during the information gathering stage of a penetration test  by using scripts.
 
+nmap --script ip-geolocation-* athcon.org
+nmap --script whois scanme.org
+
+nmap -p80 --script http-google-email ioactive.com
+nmap -p80 --script http-email-harvest ioactive.com
+nmap -p80 --script http-google-email,http-email-harvest ioactive.com
+
+nmap -p80 --script dns-brute insecure.org
+nmap -p80 --script http-reverse-ip insecure.org
 
 
 -- Discovering Oracle Accounts With Nmap --
