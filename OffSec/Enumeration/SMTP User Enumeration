@@ -1,1 +1,5 @@
 
+SMTP is a service that can be found in most infrastructure penetration tests.This service can help the penetration tester to perform username enumeration via the EXPN and VRFY commands if these commands have not been disabled by the system administrator.
+The role of the EXPN command is to reveal the actual address of users aliases and lists of email and VRFY which can confirm the existance of names of valid users.
+
+
