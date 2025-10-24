@@ -1,1 +1,17 @@
 
+--- Introduction ---
+
+• Basic Terminology and Components
+
+
+
+-- Basic Terminology and Components --
+
+Module: Independent components designed to perform various tasks. Exploits, auxiliary modules, post-exploitation modules, and payloads fall into this category.
+Exploit: A program that takes advantage of a vulnerability and provides the attacker access to the target system. Exploits typically carry a payload and execute it on the target system.
+Payload: Code designed to execute on the target system when an exploit is successful. Payloads can be used to obtain privileges on the system, steal data, or alter system behavior.
+Auxiliary: Supportive modules that perform non-attack tasks such as vulnerability scanning and denial-of-service attacks.
+Shellcode: A type of payload used to execute arbitrary commands on the target system.
+Meterpreter: An advanced, multifunctional payload that provides an interactive shell. From the Meterpreter shell, you can download files, retrieve password hashes for user accounts, and pivot to other networks. Meterpreter operates in memory, making it difficult for intrusion detection systems to detect.
+Bind Shell Payload: Starts a listener on the exploited system and waits for the attacker's machine to connect to this listener.
+Reverse Shell Payload: Connects back to the attacker's machine as a command prompt.
