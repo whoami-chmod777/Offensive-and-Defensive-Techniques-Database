@@ -375,3 +375,38 @@ msf  payload(shell_bind_tcp) > generate -b '\x00\x44\x67\x66\xfa\x01\xe0\x44\x67
 
 
 -- Meterpreter --
+
+• Overview
+• Meterpreter Basics
+• Python Extension
+
+
+-- Overview --
+
+
+
+
+
+
+
+-- Meterpreter Basics --
+
+
+
+
+
+-- Python Extension --
+
+
+
+
+
+
+
+
+
+
+
+
+
+*
