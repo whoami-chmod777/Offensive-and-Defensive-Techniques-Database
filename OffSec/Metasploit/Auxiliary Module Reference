@@ -1,1 +1,17 @@
 
+--- Auxiliary Module Reference --
+
+Auxiliary Module 
+The Metasploit Framework includes hundreds of auxiliary modules that perform scanning, fuzzing, sniffing, and much more. Although these modules will not give you a shell, they are extremely valuable when conducting a penetration test.
+
+Auxiliary modules perform useful tasks such as:
+• Administration: Making changes, operating, or manipulating the target machine.
+• Analysis: Conducting analysis tasks such as password cracking.
+• Data Collection: Collecting, compiling, or organizing data from a single target.
+• Denial of Service: Crashing or slowing down a target machine or service.
+• Scanning: Scanning targets for known vulnerabilities.
+• Server Support: Running servers for common protocols such as SMB, FTP.
+
+
+
+
