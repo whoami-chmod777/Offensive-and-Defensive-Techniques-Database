@@ -1,0 +1,18 @@
+
+--- Encoders ---
+
+Encoders take the raw data of a payload and rearrange it using a specific encoding algorithm. This process masks characters that could cause issues on the target system or prevent the payload from working properly, commonly referred to as "bad characters."
+For instance, characters like null byte (\x00) in many systems signify the end of a string. If such characters are present in a payload, the system may not handle the payload correctly. Encoders help avoid such issues.
+
+
+Why Use Encoders
+
+• Masking Bad Characters: Bad characters can cause the payload to not work as expected on the target system. Encoders mask these characters to ensure the payload runs smoothly.
+• Bypassing Security Products: Antivirus software and other security products look for known malware signatures. Encoders make it harder for these security measures to detect the payload, increasing the chance of a successful attack.
+• Providing Flexibility: Different encoders can be customized for various situations and target systems. This allows the attacker to choose the most suitable encoding method based on their needs.
+
+
+msf6 > show encoders
+
+
+continue...
