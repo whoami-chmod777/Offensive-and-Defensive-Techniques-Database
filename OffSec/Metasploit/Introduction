@@ -15,3 +15,7 @@ Shellcode: A type of payload used to execute arbitrary commands on the target sy
 Meterpreter: An advanced, multifunctional payload that provides an interactive shell. From the Meterpreter shell, you can download files, retrieve password hashes for user accounts, and pivot to other networks. Meterpreter operates in memory, making it difficult for intrusion detection systems to detect.
 Bind Shell Payload: Starts a listener on the exploited system and waits for the attacker's machine to connect to this listener.
 Reverse Shell Payload: Connects back to the attacker's machine as a command prompt.
+
+
+
+*
