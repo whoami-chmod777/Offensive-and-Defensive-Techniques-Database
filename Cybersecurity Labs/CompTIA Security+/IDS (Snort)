@@ -1,1 +1,29 @@
 
+We will gain insights into Intrusion Detection Systems (IDS) and specifically explore the functionalities of Snort. 
+
+This lab exercise will provide us with a comprehensive comprehension of Intrusion Detection Systems (IDS) and Snort, augmented by valuable hands-on experience.
+
+
+Step 1: Open the lab link to access the both Kali machine and Ubuntu machine. The Attacker machine is Kali machine.
+
+Check the IP address of the Kali machine: ifconfig (10.10.16.3)
+
+Step 2: Click on the Target machine tab you will get access to the Ubuntu machine.
+
+Step 3: Check for the status of snort with the following command: systemctl status snort
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ifconfig
+systemctl status snort
