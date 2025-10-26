@@ -3,8 +3,7 @@
 
 • Introduction to IDS
 • Introduction to snort
-• 
-• 
+• Example Rule
 
 
 -- Introduction to IDS --
@@ -157,7 +156,9 @@ include $RULE_PATH/bad-traffic.rules
 #include $RULE_PATH/botnet-cnc.rules
 
 
-Example: In this demonstration, a custom rule has been crafted to monitor ICMP ping attempts. In the accompanying image, both the Attacker machine (Kali) and the Target machine (Ubuntu) are visible, providing a visual representation of the lab setup.
+- Example Rule -
+
+In this demonstration, a custom rule has been crafted to monitor ICMP ping attempts. In the accompanying image, both the Attacker machine (Kali) and the Target machine (Ubuntu) are visible, providing a visual representation of the lab setup.
 
 Disabled all community rules on the target machine by commenting them out.
 
