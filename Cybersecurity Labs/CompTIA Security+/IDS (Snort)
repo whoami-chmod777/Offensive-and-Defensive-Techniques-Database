@@ -12,18 +12,146 @@ Step 2: Click on the Target machine tab you will get access to the Ubuntu machin
 
 Step 3: Check for the status of snort with the following command: systemctl status snort
 
+Comment or Delete the Snort Community rules.
+
+ Step 4: Open the file explorer. Go to the following location /etc/snort/ and open the snort.conf file.
+
+Comment or Delete the following Snort community rules from line 578 to 696 line and Save the file.
+
+
+# # site specific rules
+# include $RULE_PATH/local.rules
+#
+# # The include files commented below have been disabled
+# # because they are not available in the stock Debian
+# # rules.  If you install the Sourcefire VRT please make
+# # sure you re-enable them again:
+#
+# #include $RULE_PATH/app-detect.rules
+# include $RULE_PATH/attack-responses.rules
+# include $RULE_PATH/backdoor.rules
+# include $RULE_PATH/bad-traffic.rules
+# #include $RULE_PATH/blacklist.rules
+# include $RULE_PATH/botnet-cnc.rules
+# include $RULE_PATH/browser-chrome.rules
+# include $RULE_PATH/browser-firefox.rules
+# include $RULE_PATH/browser-ie.rules
+# include $RULE_PATH/browser-other.rules
+# include $RULE_PATH/browser-plugins.rules
+# #include $RULE_PATH/browser-webkit.rules
+# include $RULE_PATH/chat.rules
+# #include $RULE_PATH/content-replace.rules
+# include $RULE_PATH/ddos.rules
+# include $RULE_PATH/dos.rules
+# include $RULE_PATH/dns.rules
+# include $RULE_PATH/dos.rules
+# include $RULE_PATH/experimental.rules
+# #include $RULE_PATH/exploit-kit.rules
+# include $RULE_PATH/ftp.rules
+# include $RULE_PATH/virus.rules
+# #include $RULE_PATH/voip.rules
+# #include $RULE_PATH/web-activex.rules
+# include $RULE_PATH/web-attacks.rules
+# include $RULE_PATH/web-cgi.rules
+# include $RULE_PATH/web-client.rules
+# include $RULE_PATH/web-coldfusion.rules
+# include $RULE_PATH/web-frontpage.rules
+# include $RULE_PATH/web-iis.rules
+# include $RULE_PATH/web-misc.rules
+# include $RULE_PATH/web-php.rules
+# include $RULE_PATH/x11.rules
+# include $RULE_PATH/community-sql-injection.rules
+# include $RULE_PATH/community-web-client.rules
+# include $RULE_PATH/community-web-dos.rules
+# include $RULE_PATH/community-web-iis.rules
+# include $RULE_PATH/community-web-misc.rules
+# include $RULE_PATH/community-web-php.rules
+# include $RULE_PATH/community-web-sql-injection.rules
+# include $RULE_PATH/community-web-client.rules
+# include $RULE_PATH/community-web-dos.rules
+# include $RULE_PATH/community-web-iis.rules
+# include $RULE_PATH/community-web-misc.rules
+# include $RULE_PATH/community-web-php.rules
+
+
+Step 5: Run the following command to validate the conf file changes. 
+
+snort -T -i ens5 -c /etc/snort/snort.conf
+
+As you can see the validation of the config file is success. Create rule for SSH attempt.
+
+Step 6: Open the local.rules file. 
+
+nano /etc/snort/rules/local.rules
+
+Write the following rule to alert for an SSH attempt and Save the file. 
+
+alert tcp any any -> $HOME_NET 22 (msg:"SSH attempt"; sid:1001; rev:1;)
+
+ The Snort rule is designed to generate an alert for any TCP traffic, regardless of source IP and port, directed towards any destination IP within the monitored network. Specifically, it looks for traffic on destination port 22, commonly associated with SSH. The alert message is "SSH attempt," and the rule has an ID of 1001 with revision 1.
+
+# $Id: local.rules,v 1.11 2004/07/23 20:15:44 bmc Exp $
+# -----------------
+# LOCAL RULES
+# -----------------
+# This file intentionally does not come with signatures.  Put your local
+# additions here.
+
+alert tcp any any -> $HOME_NET 22 (msg:"SSH attempt"; sid:1001; rev:1;)
+
+
+Check the interface and IP address of the Target machine: ifconfig
+
+Step 7: Run the following command to start monitoring in quiet mode. 
+
+snort -q -i ens5 -A console -c /etc/snort/snort.conf
+
+This command starts Snort in quiet mode (-q), uses the network interface ens5 (-i ens5), logs alerts to the console (-A console), and specifies the configuration file location as /etc/snort/snort.conf(-c /etc/snort/snort.conf).
+
+Step 8: Switch back to the Attacker machine and test the reachability of the Target machine by pinging it: ping x.x.x.x -c 4
+
+In the above image, we can observe that the Target machine is reachable.
+
+In the image below, you may observe the absence of logs on the target machine, despite Snort actively monitoring. This is attributed to our custom rule, specifically designed to trigger alerts exclusively for SSH attempts. As a result, the logging activity is responsive only to events meeting this specified criterion.
+
+Step 9: Initiate an SSH connection attempt from the Attacker machine using the following command: 
+
+Switch to the Target machine and you will see the alerts.
+
+The message "SSH attempt". The SSH connection Attempt from "source_IP" to "target_IP".
+
+root@ip-10-0-22-180:~# snort -q -i ens5 -A console -c /etc/snort/snort.conf
+12/12-05:16:10.471002 [**] [1:1001:1] SSH attempt [**] [Priority: 0] {TCP} 10.10.16.3:37448 -> 10.0.22.180:22
+12/12-05:16:10.473632 [**] [1:1001:1] SSH attempt [**] [Priority: 0] {TCP} 10.10.16.3:37448 -> 10.0.22.180:22
+12/12-05:16:10.474272 [**] [1:1001:1] SSH attempt [**] [Priority: 0] {TCP} 10.10.16.3:37448 -> 10.0.22.180:22
+12/12-05:16:10.504259 [**] [1:1001:1] SSH attempt [**] [Priority: 0] {TCP} 10.10.16.3:37448 -> 10.0.22.180:22
+12/12-05:16:10.508641 [**] [1:1001:1] SSH attempt [**] [Priority: 0] {TCP} 10.10.16.3:37448 -> 10.0.22.180:22
+12/12-05:16:10.510491 [**] [1:1001:1] SSH attempt [**] [Priority: 0] {TCP} 10.10.16.3:37448 -> 10.0.22.180:22
+12/12-05:16:10.520792 [**] [1:1001:1] SSH attempt [**] [Priority: 0] {TCP} 10.10.16.3:37448 -> 10.0.22.180:22
+
+
+References
+https://www.snort.org/
+https://www.geeksforgeeks.org/intrusion-detection-system-ids/
 
 
 
-
-
-
-
-
-
-
-
-
+>> Commands Summarization <<
 
 ifconfig
 systemctl status snort
+
+snort -T -i ens5 -c /etc/snort/snort.conf
+
+nano /etc/snort/rules/local.rules
+alert tcp any any -> $HOME_NET 22 (msg:"SSH attempt"; sid:1001; rev:1;)
+
+snort -q -i ens5 -A console -c /etc/snort/snort.conf
+
+ping x.x.x.x -c 4
+
+ssh root@x.x.x.x
+
+
+
+*
