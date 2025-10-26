@@ -19,26 +19,26 @@ Comment or Delete the Snort Community rules.
 Comment or Delete the following Snort community rules from line 578 to 696 line and Save the file.
 
 
-# # site specific rules
+# site specific rules
 # include $RULE_PATH/local.rules
 #
-# # The include files commented below have been disabled
-# # because they are not available in the stock Debian
-# # rules.  If you install the Sourcefire VRT please make
-# # sure you re-enable them again:
+# The include files commented below have been disabled
+# because they are not available in the stock Debian
+# rules.  If you install the Sourcefire VRT please make
+# sure you re-enable them again:
 #
-# #include $RULE_PATH/app-detect.rules
+# include $RULE_PATH/app-detect.rules
 # include $RULE_PATH/attack-responses.rules
 # include $RULE_PATH/backdoor.rules
 # include $RULE_PATH/bad-traffic.rules
-# #include $RULE_PATH/blacklist.rules
+# include $RULE_PATH/blacklist.rules
 # include $RULE_PATH/botnet-cnc.rules
 # include $RULE_PATH/browser-chrome.rules
 # include $RULE_PATH/browser-firefox.rules
 # include $RULE_PATH/browser-ie.rules
 # include $RULE_PATH/browser-other.rules
 # include $RULE_PATH/browser-plugins.rules
-# #include $RULE_PATH/browser-webkit.rules
+# include $RULE_PATH/browser-webkit.rules
 # include $RULE_PATH/chat.rules
 # #include $RULE_PATH/content-replace.rules
 # include $RULE_PATH/ddos.rules
@@ -46,11 +46,11 @@ Comment or Delete the following Snort community rules from line 578 to 696 line 
 # include $RULE_PATH/dns.rules
 # include $RULE_PATH/dos.rules
 # include $RULE_PATH/experimental.rules
-# #include $RULE_PATH/exploit-kit.rules
+# include $RULE_PATH/exploit-kit.rules
 # include $RULE_PATH/ftp.rules
 # include $RULE_PATH/virus.rules
-# #include $RULE_PATH/voip.rules
-# #include $RULE_PATH/web-activex.rules
+# include $RULE_PATH/voip.rules
+# include $RULE_PATH/web-activex.rules
 # include $RULE_PATH/web-attacks.rules
 # include $RULE_PATH/web-cgi.rules
 # include $RULE_PATH/web-client.rules
