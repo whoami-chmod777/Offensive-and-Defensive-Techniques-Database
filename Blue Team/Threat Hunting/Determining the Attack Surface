@@ -4,11 +4,18 @@
 • Determining the Attack Surface
 • Importance — Why It Matters
 • Domains
-Subdomains
-Websites (HTTP/HTTPS) 
-
-
-!!!! NOT FINISH !!!!
+• Subdomains
+• Websites (HTTP/HTTPS) 
+• Login Pages
+• Technologies on Websites (CMS / LIBRARIES)
+• IP Addresses
+• IP Blocks (CIDR) 
+• DNS Records
+• C-Level Employee Mails
+• Network Applications and Operating Systems
+• Bin Numbers and Swift Codes
+• SSL Certificates 
+• Notes / Best Practices
 
 
 -- Determining the Attack Surface --
@@ -73,18 +80,22 @@ s=BeautifulSoup(r.text,"html.parser")
 print("LOGIN" if s.find('input',{'type':'password'}) or "login" in r.text.lower() else "NO LOGIN")
 PY
 
-TECHNOLOGIES ON WEBSITES (CMS / LIBRARIES)
-Short description:
+
+-- Technologies on Websites (CMS / LIBRARIES) --
+
 Detecting CMS, frameworks, and libraries enables mapping to CVEs and prioritized patching/remediation decisions.
-Tools / Examples:
-Wappalyzer (browser extension) — open the site and click the icon
-whatcms.org/lookup/example.com
+
+Wappalyzer (Browser Extension) — open the site and click the icon
+whatcms.org
+https://whatcms.org/lookup/abanca.com
+
 Check page source for "/wp-content/", "meta generator", script paths
 
-IP ADDRESSES
-Short description:
+
+-- IP Addresses --
+
 IP addresses map hostnames to reachable network endpoints and running services; attackers target IPs directly, scan ports, and exploit vulnerable services — complete IP lists are essential for scanning, asset correlation, prioritization, and mapping to ASN/CIDR for exposure analysis.
-Tools / Examples:
+
 dig +short abanca.com
 nslookup abanca.com
 host abanca.com
@@ -95,59 +106,109 @@ for d in $(cat domains.txt); do dig +short $d | sed 's/$/  '"$d"'/'; done > doma
 cat domain_ips.txt | awk '{print $1}' | sort -u > ips.txt
 cat ips.txt | httpx -status-code -o ip_http_status.txt
 
-Shodan / SecurityTrails (passive, API example):
-
+Passive, API:
 shodan host <IP>
-SecurityTrails API: query IP/Domain (API key required)
 
-Note on active scans:
-nmap -sV -p- -oN nmap_full_scan.txt <ip_or_hostname>    # only with authorization
+SecurityTrails API: 
+query IP/Domain (API key required)
 
-IP BLOCKS (CIDR)
-Short description:
+Header APIKEY: YOUR_API_KEY
+Or header Authorization: Bearer YOUR_API_KEY
+
+curl -sS -H "APIKEY: YOUR_API_KEY" "https://api.securitytrails.com/v1/ping
+curl -sS -H "APIKEY: YOUR_API_KEY" "https://api.securitytrails.com/v1/domain/example.com
+curl -sS -H "APIKEY: YOUR_API_KEY" "https://api.securitytrails.com/v1/domain/example.com/whois
+curl -sS -H "APIKEY: YOUR_API_KEY" "https://api.securitytrails.com/v1/domain/example.com/associated
+curl -sS -H "APIKEY: YOUR_API_KEY" "https://api.securitytrails.com/v1/domain/ip/1.2.3.4
+curl -sS -H "APIKEY: YOUR_API_KEY" "https://api.securitytrails.com/v1/ips/1.2.3.4/whois
+curl -sS -H "APIKEY: YOUR_API_KEY" "https://api.securitytrails.com/v1/history/example.com/dns/A
+curl -sS -H "APIKEY: YOUR_API_KEY" "https://api.securitytrails.com/v1/ips/nearby/1.2.3.4
+
+Active Scans:
+nmap -sV -p- -oN nmap_full_scan.txt abanca.com
+
+
+-- IP Blocks (CIDR) --
+
 CIDR blocks aggregate contiguous IP resources of an organization; block detection enables wide-area inventorying, monitoring, and prioritization by exposure density.
-Tools / Examples:
+
 bgp.he.net — ASN & CIDR lookup
-whois <ip>  — check NetName/Org
+whois abanca.com  — check NetName/Org
 shodan search org:"Abanca"
 
-DNS RECORDS
-Short description:
+
+-- DNS Records --
+
 DNS records (A, MX, NS, TXT, CNAME) reveal infrastructure, mail flow, and delegation errors; unexpected records or changes are early indicators of compromise or shadow assets.
-Tools / Examples:
+
+SHOW ALL RECORDS (ANY)
+----------------------------------------------
 dig +nocmd abanca.com ANY +noall +answer
+dig abanca.com ANY
+
+QUERY A SPECIFIC NAMESERVER DIRECTLY
+----------------------------------------------
 dig +short ns2.abanca.com
+dig @ns2.abanca.com abanca.com A +short
+
+NDIVIDUAL RECORD TYPES
+----------------------------------------------
+dig abanca.com A +short
+dig abanca.com AAAA +short
+dig abanca.com MX +short
+dig abanca.com NS +short
+dig abanca.com TXT +short
+dig www.abanca.com CNAME +short
+dig abanca.com SOA +short
+dig -x 91.116.166.85 +short
+
+NSLOOKUP 
+----------------------------------------------
+nslookup -type=A abanca.com
+nslookup -type=AAAA abanca.com
+nslookup -type=MX abanca.com
+nslookup -type=NS abanca.com
+nslookup -type=TXT abanca.com
+nslookup -type=CNAME www.abanca.com
+nslookup -type=SOA abanca.com
+
 DNS change alerts: crt.sh / custom polling jobs
 
-C-LEVEL EMPLOYEE EMAILS
-Short description:
+
+-- C-Level Employee Mails --
+
 Executive email addresses are preferred targets for business email compromise (BEC) and whaling; a compromise can cause major financial loss and reputational damage — continuous monitoring, leak scans, DMARC/DKIM/SPF hardening, and strict access control are mandatory.
-Tools / Examples:
+
 SalesQL, RocketReach, Apollo, ContactOut (browser extensions) — open the LinkedIn profile and click the extension
 Have I Been Pwned API / internal credential monitoring feeds for leak scans
+
 Note:
 Respect ethics and data protection. Do not perform phishing or social-engineering tests without explicit authorization. Use test accounts or corporate authorization for active investigations.
 
-NETWORK APPLICATIONS & OPERATING SYSTEMS
-Short description:
-Detecting services and OS on open ports allows correlation with vulnerability feeds and targeted patching/hardening.
-Tools / Examples:
-Shodan / BinaryEdge / Zoomeye (passive)
-nmap -sV -O <ip>    # active — only with authorization
-curl -I [https://example.com](https://example.com)    # inspect header info
 
-BIN NUMBERS & SWIFT CODES (FINANCE)
-Short description:
+-- Network Applications and Operating Systems --
+
+Detecting services and OS on open ports allows correlation with vulnerability feeds and targeted patching/hardening.
+
+Shodan / BinaryEdge / Zoomeye (passive)
+nmap -sV -O abanca.com    # active — only with authorization
+curl -I abanca.com    # inspect header info
+
+
+-- Bin Numbers and Swift Codes --
+
 BINs (Issuer Identification Numbers) and SWIFT codes are critical transaction identifiers; monitoring them supports fraud detection, card misuse analysis, and regulatory auditing.
-Tools / Examples:
+
 bincheck.io  — search by bank name/country
 theswiftcodes.com / bank.codes — SWIFT lookup
 
-SSL CERTIFICATES
-Short description:
+
+-- SSL Certificates --
+
 Certificate Transparency logs and certificate SANs reveal subdomains and aliases; new or foreign certificates indicate shadow assets, misconfigured automation, or abuse.
-Tools / Examples:
+
 crt.sh/?q=%25abanca.com
+
 Censys — search for certificates containing "abanca.com"
 Automatic alerts: crt.sh watch / Censys monitoring
 
@@ -166,12 +227,13 @@ cat domain_ips.txt | awk '{print $1}' | sort -u > ips.txt
 
 nmap -sV -p- -oN nmap_full_scan.txt <ip>    # verify legal authorization
 
-NOTES / BEST PRACTICES
-Short description:
+
+-- Notes / Best Practices --
+
 Combine passive sources (WHOIS, CT logs, Shodan, Censys) with authorized, careful active testing (httpx, Nmap). Automate alerts (crt.sh, DNS change, Shodan) and version your inventory (CSV/CMDB). Perform active scans only with written authorization.
 
 
-
+*
 
 
 
