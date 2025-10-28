@@ -1,0 +1,217 @@
+
+--- Determining the Attack Surface ---
+
+• Determining the Attack Surface
+• Importance — Why It Matters
+• Domains
+Subdomains
+Websites (HTTP/HTTPS) 
+
+
+!!!! NOT FINISH !!!!
+
+
+-- Determining the Attack Surface --
+
+A complete, structured inventory of all externally visible assets of an organization (domains, subdomains, IPs, certificates, mail flows, etc.) that forms the basis for organization-specific threat intelligence (XTI).
+Tools: crt.sh, Censys, SecurityTrails, Shodan, httpx, dnslytics
+
+
+-- Importance — Why It Matters --
+
+Knowing the externally visible attack surface enables prioritization and operational actions: forgotten assets are discovered, risks are prioritized, and defenses are focused where attackers actually operate.
+
+SecurityTrails dashboard
+crt.sh
+Shodan
+
+
+-- Domains --
+
+Primary and secondary domains are the root exposure; misconfigured, expired, or improperly registered domains cause redirect, certificate, and takeover risks.
+
+whois abanca.com
+host.io (web/API) — Search for redirects / Co-Hosted Domains
+viewdns.info Reverse WHOIS — search by organization name
+
+
+-- Subdomains --
+
+Subdomains often host test, dev, or legacy services; they are frequently un-hardened and provide attackers with simple attack surfaces or takeover opportunities.
+
+assetfinder abanca.com
+assetfinder -sub-only abanca.com
+aquatone-discover -d abanca.com
+sublist3r -d abanca.com
+securitytrails.com/list/apex_domain/abanca.com
+
+
+-- Websites (HTTP/HTTPS) --
+
+Hosts answering HTTP(S) are active applications — they provide attack vectors (XSS, RCE, outdated CMS), header information, and technology fingerprints.
+
+cat domains.txt | http -o websites.txt
+httpx -l hosts.txt -status-code -o live.txt
+cat hosts.txt | httprobe
+
+
+-- Login Pages --
+
+Login pages are high-priority targets for credential stuffing, phishing, and account takeover; their discovery affects BEC and user protection strategies.
+
+• Is the word "Login" or its corresponding phrase in any language possible on the page?
+• Are form tags used on the page?
+• Are there expressions such as “Username” or “Password” in the placeholder section of the input fields on the page?
+• Are there “Login” or similar expressions in the title or header of the page?
+
+Python script (requests + BeautifulSoup) detects input[type="password"] or "login" in HTML:
+python3 - <<'PY'
+import requests
+from bs4 import BeautifulSoup
+r=requests.get("[https://example.com](https://example.com)", timeout=10)
+s=BeautifulSoup(r.text,"html.parser")
+print("LOGIN" if s.find('input',{'type':'password'}) or "login" in r.text.lower() else "NO LOGIN")
+PY
+
+TECHNOLOGIES ON WEBSITES (CMS / LIBRARIES)
+Short description:
+Detecting CMS, frameworks, and libraries enables mapping to CVEs and prioritized patching/remediation decisions.
+Tools / Examples:
+Wappalyzer (browser extension) — open the site and click the icon
+whatcms.org/lookup/example.com
+Check page source for "/wp-content/", "meta generator", script paths
+
+IP ADDRESSES
+Short description:
+IP addresses map hostnames to reachable network endpoints and running services; attackers target IPs directly, scan ports, and exploit vulnerable services — complete IP lists are essential for scanning, asset correlation, prioritization, and mapping to ASN/CIDR for exposure analysis.
+Tools / Examples:
+dig +short abanca.com
+nslookup abanca.com
+host abanca.com
+ping abanca.com
+
+Collect IPs from DNS (example workflow):
+for d in $(cat domains.txt); do dig +short $d | sed 's/$/  '"$d"'/'; done > domain_ips.txt
+cat domain_ips.txt | awk '{print $1}' | sort -u > ips.txt
+cat ips.txt | httpx -status-code -o ip_http_status.txt
+
+Shodan / SecurityTrails (passive, API example):
+
+shodan host <IP>
+SecurityTrails API: query IP/Domain (API key required)
+
+Note on active scans:
+nmap -sV -p- -oN nmap_full_scan.txt <ip_or_hostname>    # only with authorization
+
+IP BLOCKS (CIDR)
+Short description:
+CIDR blocks aggregate contiguous IP resources of an organization; block detection enables wide-area inventorying, monitoring, and prioritization by exposure density.
+Tools / Examples:
+bgp.he.net — ASN & CIDR lookup
+whois <ip>  — check NetName/Org
+shodan search org:"Abanca"
+
+DNS RECORDS
+Short description:
+DNS records (A, MX, NS, TXT, CNAME) reveal infrastructure, mail flow, and delegation errors; unexpected records or changes are early indicators of compromise or shadow assets.
+Tools / Examples:
+dig +nocmd abanca.com ANY +noall +answer
+dig +short ns2.abanca.com
+DNS change alerts: crt.sh / custom polling jobs
+
+C-LEVEL EMPLOYEE EMAILS
+Short description:
+Executive email addresses are preferred targets for business email compromise (BEC) and whaling; a compromise can cause major financial loss and reputational damage — continuous monitoring, leak scans, DMARC/DKIM/SPF hardening, and strict access control are mandatory.
+Tools / Examples:
+SalesQL, RocketReach, Apollo, ContactOut (browser extensions) — open the LinkedIn profile and click the extension
+Have I Been Pwned API / internal credential monitoring feeds for leak scans
+Note:
+Respect ethics and data protection. Do not perform phishing or social-engineering tests without explicit authorization. Use test accounts or corporate authorization for active investigations.
+
+NETWORK APPLICATIONS & OPERATING SYSTEMS
+Short description:
+Detecting services and OS on open ports allows correlation with vulnerability feeds and targeted patching/hardening.
+Tools / Examples:
+Shodan / BinaryEdge / Zoomeye (passive)
+nmap -sV -O <ip>    # active — only with authorization
+curl -I [https://example.com](https://example.com)    # inspect header info
+
+BIN NUMBERS & SWIFT CODES (FINANCE)
+Short description:
+BINs (Issuer Identification Numbers) and SWIFT codes are critical transaction identifiers; monitoring them supports fraud detection, card misuse analysis, and regulatory auditing.
+Tools / Examples:
+bincheck.io  — search by bank name/country
+theswiftcodes.com / bank.codes — SWIFT lookup
+
+SSL CERTIFICATES
+Short description:
+Certificate Transparency logs and certificate SANs reveal subdomains and aliases; new or foreign certificates indicate shadow assets, misconfigured automation, or abuse.
+Tools / Examples:
+crt.sh/?q=%25abanca.com
+Censys — search for certificates containing "abanca.com"
+Automatic alerts: crt.sh watch / Censys monitoring
+
+SYNOPSIS — QUICK COMMANDS (PASTE & COPY)
+whois abanca.com
+dig +short abanca.com
+nslookup abanca.com
+host abanca.com
+
+assetfinder abanca.com
+sublist3r -d abanca.com
+
+cat subs.txt | httpx -status-code -o live.txt
+for d in $(cat domains.txt); do dig +short $d | sed 's/$/  '"$d"'/'; done > domain_ips.txt
+cat domain_ips.txt | awk '{print $1}' | sort -u > ips.txt
+
+nmap -sV -p- -oN nmap_full_scan.txt <ip>    # verify legal authorization
+
+NOTES / BEST PRACTICES
+Short description:
+Combine passive sources (WHOIS, CT logs, Shodan, Censys) with authorized, careful active testing (httpx, Nmap). Automate alerts (crt.sh, DNS change, Shodan) and version your inventory (CSV/CMDB). Perform active scans only with written authorization.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Links
+
+https://host.io/
+https://viewdns.info/
+https://www.whoxy.com/
+https://dnslytics.com/
+https://securitytrails.com/app/auth/login?return=/list/apex_domain/abanca.com
+https://chromewebstore.google.com/detail/wappalyzer-technology-pro/gppongmhjkpfnbhagpmjfkannfbllamg?pli=1
+https://whatcms.org/
+https://bgp.he.net/
+https://bincheck.io/
+https://www.freebinchecker.com/
+https://bintable.com/
+https://crt.sh/
+https://search.censys.io/
+https://subdomainfinder.c99.nl/
+
+*
