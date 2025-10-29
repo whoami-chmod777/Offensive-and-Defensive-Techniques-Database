@@ -1,0 +1,251 @@
+
+--- Lets Defend SOC Alert Overview ---
+
+SOC101 - Phishing Mail Detected
+SOC102 - Proxy - Suspicious URL Detected
+SOC103 - Malicious APK Detected
+SOC104 - Malware Detected
+SOC105 - Requested T.I. URL address
+SOC106 - Found Suspicious File - TI Data
+SOC107 - Privilege Escalation Detected
+SOC108 - Malicious Remote Access Software Detected
+SOC109 - Emotet Malware Detected
+SOC110 - Proxy - Cryptojacking Detected
+SOC111 - Traffic to Malware Domain
+SOC112 - Traffic to Blacklisted IP
+SOC113 - Suspicious hh.exe Usage
+SOC114 - Malicious Attachment Detected - Phishing Alert
+SOC115 - Wscript.exe Usage as Dropper
+SOC116 - DNS Hijacking Detected
+SOC117 - Suspicious .reg File
+SOC118 - Internal Port Scan Activity
+SOC119 - Proxy - Malicious Executable File Detected
+SOC120 - Phishing Mail Detected - Internal to Internal
+SOC121 - Proxy - Malicious Executable File Detected
+SOC122 - Android Banker Malware Detected
+SOC123 - Enumeration Tool Detected
+SOC124 - Scheduled Task Created
+SOC125 - Suspicious Rundll32 Activity
+SOC126 - Suspicious New Autorun Value Detected
+SOC127 - SQL Injection Detected
+SOC128 - Malicious File Upload Attempt
+SOC129 - Successful Local File Inclusion
+SOC130 - Event Log Cleared
+SOC131 - Reverse TCP Backdoor Detected
+SOC132 - Same Malicious File Found on Multiple Sources
+SOC133 - Suspicious Request to New Registered Domain
+SOC134 - Suspicious WMI Activity
+SOC135 - Multiple FTP Connection Attempt
+SOC136 - Data Leak via Mailbox Forwarding Detected
+SOC137 - Malicious File/Script Download Attempt
+SOC138 - Detected Suspicious Xls File
+SOC139 - Meterpreter or Empire Activity
+SOC140 - Phishing Mail Detected - Suspicious Task Scheduler
+SOC141 - Phishing URL Detected
+SOC142 - Multiple HTTP 500 Response
+SOC143 - Password Stealer Detected
+SOC144 - New scheduled task created
+SOC145 - Ransomware Detected
+SOC146 - Phishing Mail Detected - Excel 4.0 Macros
+SOC147 - SSH Scan Activity
+SOC148 - Interaction with suspicious IP address detected
+SOC149 - Index Page Changed Unexpectedly
+SOC150 - Suspicious FTP Connections
+SOC151 - Unauthorized Root Access
+SOC152 - Encrypted Files Detected
+SOC153 - Suspicious Powershell Script Executed
+SOC154 - Service Configuration File Changed by Non Admin User
+SOC155 - Suspicious ssh login
+SOC155 - Suspicious SSH Login
+SOC156 - Unnormal Code/Command Execution
+SOC157 - Suspicious WAR File
+SOC158 - Hijacked NPM Package
+SOC159 - Karma Ransomware Attack
+SOC160 - ZBot Application Detected
+SOC161 - Log4j RCE Exploit
+SOC162 - Pwnkit (CVE-2021-4034) Detected - Auditd (pkexec)
+SOC163 - Suspicious Certutil.exe Usage
+SOC164 - Suspicious Mshta Behavior
+SOC165 - Possible SQL Injection Payload Detected
+SOC166 - Javascript Code Detected in Requested URL
+SOC167 - LS Command Detected in Requested URL
+SOC168 - Whoami Command Detected in Request Body
+SOC169 - Possible IDOR Attack Detected
+SOC170 - Passwd Found in Requested URL - Possible LFI Attack
+SOC171 - Spring4Shell Activity
+SOC172 - SSH Brute Force
+SOC173 - Follina 0-Day Detected
+SOC174 - DogWalk 0-Day Activity
+SOC175 - PowerShell Found in Requested URL - Possible CVE-2022-41082 Exploitation
+SOC176 - RDP Brute Force Detected
+SOC182 - 3CX DLL-Sideloading Attack Detected
+SOC177 - Multiple User Login Failures Detected on Same Machine
+SOC178 - WannaCry Ransomware Detected
+SOC179 - Successful Login from Same IP Address Detected after Multiple Failed Login Attempts on VPN
+SOC180 - BianLian Ransomware Detected
+SOC187 - Stealer Detected
+SOC181 - Possible Credential Dumping Activity Detected(Mimikatz)
+SOC183 - Suspicious WMI Activity Detected
+SOC184 - A Memory Corruption Detected (CVE-2017-11882)
+SOC185 - PsExec Service Execution Alert
+SOC189 - VBScript Suspicious Behavior Detected
+SOC186 - Possible Credential Theft Attempt Detected
+SOC188 - Pass the Hash Attack Detected
+SOC190 - Potential CVE-2023-21716 Detected
+SOC192 - Suspicious BITS Usage Detected
+SOC191 - Scr Hijack Detected
+SOC193 - Possible SSH Backdoor Detected
+SOC194 - Possible Reverse Shell Detected
+SOC195 - Successful Login from Same IP Address Detected after Multiple Failed Login Attempts
+SOC196 - Phishing Mail Includes Suspicious Link
+SOC197 - Scheduled Task Created
+SOC198 - Network Sniffed Detected
+SOC198 - Network Sniffer Detected
+SOC200 - A Service was installed by an unauthorized user
+SOC199 - Agenttesla Malware Detected
+SOC201 - "Guest" User was Enabled
+SOC203 - Microsoft Defender Real-Time Protection Was Disabled
+SOC202 - FakeGPT Malicious Chrome Extension
+SOC205 - Malicious Macro has been executed
+SOC204 - Powershell Encoded Command Detected
+SOC206 - Web Session Cookie Theft Attempt
+SOC207 - Anomalous File OPS
+SOC208 - Network Connection Detected from Unauthorized Port
+SOC209 - Phishing Alert - Suspicious URL Detected
+SOC210 - Possible Brute Force Detected on VPN
+SOC211 - Utilman.exe Winlogon Exploit Attempt
+SOC212 - Data Leakage - Mega Exfiltration
+SOC213 - Possible Data Exfiltration Detected
+SOC214 - Qakbot Data Theft
+SOC215 - Possible Zero Day Exploit Detected(CVE-2023-36884)
+SOC216 - Suspicious MSI Installation
+SOC217 - Trojan Detected
+SOC218 - In-Memory Shellcode Injection
+SOC220 - Big Head Ransomware IOC's Detected
+SOC219 - Apache Log4j Remote Code Execution Vulnerability (CVE-2021-44228)
+SOC221 - Possible WinRAR Zero-Day Activity
+SOC222 - Possible MalDoc in PDF was Detected
+SOC223 - Possible ICMP Tunneling Detected
+SOC224 - Encrypted C2 Traffic Detected
+SOC224 - Encrypted C2 Traffic Detected
+SOC225 - Suspicious ELF File Execution
+SOC226 - Attempt to Steal Credentials from the Bash History
+SOC227 - Microsoft SharePoint Server Elevation of Privilege - Possible CVE-2023-29357 Exploitation
+SOC229 - Possible C2 Connection Detected from Non-Standard Port
+SOC228 - ZeroFont Phishing Detected
+SOC230 - Sudoedit Execution Attempt Detected (CVE-2023-22809)
+SOC231 - Cisco IOS XE Web UI ZeroDay (CVE-2023-20198)
+SOC232 - Possible Looney Tunables Detected(CVE-2023-4911)
+SOC233 - Unauthorized Root Privilege Escalation Detected
+SOC234 - Possible Creation or Modification of /rc.local was Detected
+SOC236 - Hack Tool Executed
+SOC235 - Atlassian Confluence Broken Access Control 0-Day CVE-2023-22515
+SOC237 - Unauthorized Proxy Modification Attempt
+SOC238 - Suspicious Dynamic Resolution Detected
+SOC239 - Remote Code Execution Detected in Splunk Enterprise
+SOC240 - Potential Directory Traversal Attack Detected
+SOC241 - Obfuscated Data Exfiltration Attempt Detected
+SOC243 - Suspicious Web Requests Detected on Proxy
+SOC242 - Cryptominer Detected
+SOC244 - Potentially Malicious Process Started from Shortcut
+SOC246 - Forced Authentication Detected
+SOC245 - Proxy Settings Changed
+SOC247 - Possible DLL Sideloading Detected
+SOC248 - Unauthorized Alteration of the PowerShell Profile
+SOC249 - Port Scan Detected
+SOC250 - APT35 HyperScrape Data Exfiltration Tool Detected
+SOC252 - Unauthorized user created a new user
+SOC251 - Quishing Detected (QR Code Phishing)
+SOC253 - A Malicious Docker Container Executed
+SOC255 - Possible Token Manipulation Detected
+SOC254 - Apache OFBiz Auth Bypass and Code Injection 0-Day (CVE-2023-51467)
+SOC257 - VPN Connection Detected from Unauthorized Country
+SOC256 - Potential Webshell Upload on Web Application
+SOC258 - PAM Configuration Changed
+SOC259 - Windows Event Logging Disabled
+SOC261 - Privilege Escalation Detected via Docker API Exploitation
+SOC260 - Webshell Activity Detected
+SOC263 - Malicious DLL Detected
+SOC262 - ScreenConnect Authentication Bypass Exploitation Detected (CVE-2024-1709)
+SOC265 - Pikabot IOC's Detected
+SOC266 - Group Policy Object Has Changed
+SOC264 - EDR Log Retrieval Failure
+SOC267 - Attempt to Steal Credentials from the PowerShell History
+SOC268 - UAC Bypass Attempt via Fodhelper.exe
+SOC269 - Corporate Policy Violation - Insider Threat Activities Detected
+SOC271 - XZ/LIBLZMA Backdoor Implant Detected CVE-2024-3094
+SOC272 - Possible DNS Tunneling Detected
+SOC270 - AsyncRAT Malware Detected
+SOC273 - Sharpersist Windows Persistence Toolkit Executed
+SOC274 - Palo Alto Networks PAN-OS Command Injection Vulnerability Exploitation (CVE-2024-3400)
+SOC275 - Application Token Steal Attempt Detected
+SOC276 - Account Discovery Attempt Detected
+SOC278 - System Service Discovery Detected
+SOC277 - Fileless Malware Detected
+SOC279 - File and Directory Discovery Detected
+SOC280 - Password Policy Discovery Detected
+SOC281 - System Network Configuration Discovery Detected
+SOC282 - Phishing Alert - Deceptive Mail Detected
+SOC283 - Compromised Software Binary Detected
+SOC284 - Potential Network Sniffing Activity Detected
+SOC285 - Unusual Network Connection Discovery Detected
+SOC286 - Potential OS Discovery via WMIC.exe
+SOC288 - Security Software Discovery Detected
+SOC287 - Arbitrary File Read on Checkpoint Security Gateway [CVE-2024-24919]
+SOC289 - Suspicious Invoke-WebRequest Execution With DirectIP
+SOC291 - System Time Lookup Detected
+SOC292 - Possible PHP Injection Detected (CVE-2024-4577)
+SOC290 - EDR and Security Tools Process Enumeration
+SOC294 - Unauthorized Group Membership Enumeration Detected
+SOC295 - Potential Data Exfiltration Detected via FTP
+SOC293 - Exfiltration Over Pastebin Detected
+SOC296 - Suspicious Certificate Export via PowerShell
+SOC297 - File Permissions Modification Detected
+SOC299 - Potential UAC Bypass Attempt Detected
+SOC298 - LSA PPL Protection Disabled via Reg.EXE
+SOC301 - Suspicious BITS Transfer and Execution Detected
+SOC302 - Suspicious Base64 Encoding/Decoding Commands Detected
+SOC300 - Right-to-Left Override Detected
+SOC303 - Indirect Command Execution via Forfiles and PowerShell
+SOC305 - Execution with Hidden Window Detected
+SOC304 - Malicious Password Filter DLL Registration Detected
+SOC306 - Critical System File Deletion
+SOC307 - Windows Powershell Logging Disabled via Registry
+SOC308 - Suspicious Rundll32 Execution Detected
+SOC309 - UEFI Bootkit Detected
+SOC310 - XSL Script Execution Via WMIC.EXE
+SOC312 - Unauthorized Template Modification Detected
+SOC313 - Proxy Execution via MSBuild
+SOC315 - Suspicious Certificate Management Activity Detected
+SOC314 - Unauthorized Access to NTDS.dit File Detected
+SOC316 - SyncAppvPublishingServer Execution to Bypass Powershell Restriction
+SOC317 - Possible VM Detection Attempt
+SOC318 - Reflective Code Loading Attempt via PowerShell
+SOC311 - Process Hollowing Detected
+SOC319 - Suspicious DLL Execution Detected
+SOC320 - VPN Access During Outside of Business Hours
+SOC321 - Windows Defender Evasion Attempt
+SOC322 - Named Pipe Token Impersonation Detected
+SOC324 - Sudoers File Modification Detected
+SOC325 - Unauthorized Cloud Region Access Attempt Detected
+SOC327 - Suspicious Docker Image Creation Detected
+SOC326 - Impersonating Domain MX Record Change Detected
+SOC328 - Akira Ransomware IOC's Detected
+SOC329 - CUPS RCE Detection via IPP Injection (CVE-2024-47177)
+SOC330 - HTran network tunneling potentially associated with APT10 (MENUPASS) was detected
+SOC331 - Zebrocy Malware Activity Detected (APT28)
+SOC332 - CosmicDuke Malware Activity Detected (APT29)
+SOC333 - Denis Malware Activity Detected (APT32)
+SOC334 - Apache Tomcat RCE Exploitation Detected (CVE-2024-50379)
+SOC335 - CVE-2024-49138 Exploitation Detected
+SOC336 - Windows OLE Zero-Click RCE Exploitation Detected (CVE-2025-21298)
+SOC337 - Lazarus Phishing Campaign Detected (APT38)
+SOC338 - Lumma Stealer - DLL Side-Loading via Click Fix Phishing
+SOC339 - ZDI-CAN-25373 Windows Shortcut Exploit Detected
+SOC340 - Apache Tomcat Serialized Payload RCE (CVE-2025-24813)
+SOC341 - Local Privilege Escalation via chroot CVE-2025-32463
+SOC342 - CVE-2025-53770 SharePoint ToolShell Auth Bypass and RCE
+SOC343 - WinRAR Zero-Day Path Traversal Vulnerability (CVE-2025-8088)
+SOC344 - EDR Tampering Attempt via EDR-Freeze
+
+*
