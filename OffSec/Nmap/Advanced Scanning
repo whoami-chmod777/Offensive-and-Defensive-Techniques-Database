@@ -195,6 +195,7 @@ mv nmap.scanme.org nmap.scanme.xml
 
 == Own Example ==
 
+nmap -p 0- -sV -sS -T4 192.168.199.39
 nmap -p 0- -sV -sS -T4 192.168.199.39 -oX hackersploit2.org
 mv hackersploit2.org hackersploit2.xml
 
