@@ -1,0 +1,208 @@
+
+--- Shodan Dork Cheatsheet ---
+
+• General Search Queries
+• Applications and Services
+• Device and Service Identification
+• Network and Infrastructure Analysis
+• IoT and Connected Devices
+• Security and Vulnerability Research
+• Geographic and Demographic Analysis
+• Combined Queries
+
+
+-- General Search Queries --
+
+• city:”[city name]”: Devices in a specific city.
+• country:”[country code]”: Devices in a specified country.
+• geo:”[latitude],[longitude]”: Geographic location-specific devices.
+• hostname:”[hostname]”: Devices with a particular hostname.
+• net:”[IP range]”: Devices within a certain IP range.
+• os:”[operating system]”: Devices running a specific OS.
+• port:”[port number]”: Devices open on a specific port.
+• org:”[organization name]”: Devices related to a certain organization.
+• isp:”[ISP name]”: Devices using a specific ISP.
+• product:”[product name]”: Devices with a specific software/hardware.
+• version:”[version number]”: Devices on a particular software version.
+• has_screenshot:”true”: Devices with available screenshots.
+• ssl.cert.subject.cn:”[common name]”: SSL certificates with a specific CN.
+• http.title:”[title text]”: Web pages with a certain title.
+• http.html:”[HTML content]”: Web pages containing specific HTML.
+• http.status_code:[code]: Devices returning a specific HTTP status code.
+• ssl:”[SSL keyword]”: Devices with specific SSL configurations/details.
+• before:”[date]” / after:”[date]”: Devices online before/after a date.
+• bitcoin.ip:”[IP address]”: Bitcoin nodes by IP.
+• ssh.fingerprint:”[fingerprint]”: SSH servers with a specific fingerprint.
+
+
+-- Applications and Services --
+
+    product:”[product name]”: Devices running a specific product.
+    version:”[version]”: Devices with a specific version number.
+    webcam: Searches for internet-connected webcams.
+    “default password”: Devices using default passwords.
+    “server: Apache”: Finds Apache web servers.
+    ftp: Devices with FTP services.
+    “X-Powered-By: PHP/[version]”: PHP version-specific servers.
+    iis:[version number]: Servers running Microsoft IIS.
+    “Server: nginx”: Devices running Nginx server.
+    “MongoDB Server Information” port:27017: MongoDB databases on default port.
+    “CCTV”: Internet-connected CCTV cameras.
+    “PBX VoIP”: VoIP PBX systems.
+    “Elasticsearch”: Elasticsearch servers.
+    “OpenSSL”: Devices using OpenSSL.
+    “SCADA”: SCADA systems.
+    “VoIP Phone”: Internet-connected VoIP phones.
+
+
+-- Device and Service Identification --
+
+    asn:”[ASN]”: Devices associated with a specific ASN.
+
+    http.favicon.hash:[hash]: Web servers with a specific favicon hash.
+
+    ntp.ip:”[IP address]”: NTP servers related to a specific IP.
+
+    ssl.cert.issuer.cn:”[issuer CN]”: SSL certificates issued by a specific issuer.
+
+    http.component:”[component]”: Web applications using specific components.
+
+    http.robotstxt:”[content]”: Web servers with specific robots.txt content.
+
+    http.waf:”[WAF name]”: Identification of web application firewalls.
+
+    http.xssed:”[keyword]”: Web pages marked in XSSed database.
+
+    http.cookie:”[cookie name]”: Web servers setting a specific cookie.
+
+    http.useragent:”[user agent]”: Devices with a specific user agent.
+
+
+-- Network and Infrastructure Analysis --
+
+    not ssl: Devices not using SSL.
+
+    metadata:”[keyword]”: Searches for devices with specific metadata.
+
+    http.html_hash:[hash]: Identifies web pages with a specific HTML hash.
+
+    netblock:”[owner]”: Devices within a netblock owned by a specific entity.
+
+    asn:”[ASN]”: Devices associated with a specific ASN.
+
+    http.server_header:”[header content]”: Devices with specific server header responses.
+
+    udp: Devices with open UDP ports.
+
+    telnet: Devices accessible via Telnet.
+
+
+-- IoT and Connected Devices --
+
+    “smart tv”: Searches for internet-connected smart TVs.
+
+    “printer” “default password”: Printers possibly using default passwords.
+
+    “Raspberry Pi” port:22: Raspberry Pi devices with SSH enabled.
+
+    “thermostat” “wifi”: Wi-Fi-enabled thermostats.
+
+    “smart home”: Various smart home devices.
+
+    “IP camera” “default login”: IP cameras with default login credentials.
+
+    “smart meter”: Internet-connected smart meters.
+
+    “home automation”: Home automation systems.
+
+    “wearable”: Wearable technology devices.
+
+
+-- Security and Vulnerability Research --
+
+    ssl.cert.serial:”[serial number]”: SSL certificates by serial number.
+
+    “Server: Microsoft-HTTPAPI/2.0”: Devices running specific Microsoft HTTP services.
+
+    “Cisco IOS” “http auth”: Cisco IOS devices with HTTP authentication.
+
+    “default login” “router”: Routers with default login credentials.
+
+    “Hadoop NameNode”: Hadoop NameNode servers.
+
+    “Apache Struts” vuln: Apache Struts vulnerabilities.
+
+    “Tomcat” admin: Tomcat servers with admin panels.
+
+    “Docker” port:2375: Docker instances on default port.
+
+    vuln:”[CVE-ID]”: Searches for vulnerabilities with a specific CVE ID.
+
+    “200 OK” ssl: Servers with SSL certificates returning 200 OK.
+
+    “Server: Apache” -“mod_ssl” -“OpenSSL”: Apache servers potentially without SSL encryption.
+
+    ssl.cert.expired:”true”: Devices with expired SSL certificates.
+
+    “heartbleed” vuln: Searches for vulnerabilities related to Heartbleed.
+
+    http.component:”Drupal” vuln:”CVE-2018-7600″: Drupal sites vulnerable to a specific CVE.
+
+    “Authentication: disabled”: Devices with authentication disabled.
+
+    http.title:”Index of /”: Directories with potentially open indexes.
+
+    ssl:”TLSv1″: Searches for devices using the older TLSv1 protocol.
+
+    org:”[organization]” vuln:”[CVE-ID]”: Searches for vulnerabilities within a specific organization.
+
+    “EternalBlue” vuln: Devices vulnerable to EternalBlue.
+
+    “Joomla” vuln: Joomla sites with specific vulnerabilities.
+
+    “WordPress” vuln: WordPress sites with specific vulnerabilities.
+
+    “SQL Injection” vuln: Devices vulnerable to SQL Injection.
+
+    “DDoS” vuln: Devices potentially vulnerable to DDoS attacks.
+
+
+-- Geographic and Demographic Analysis --
+
+    city:”[city]” os:”[OS]”: Devices with a specific OS in a city.
+
+    country:”[country]” product:”[product]”: Specific devices in a country.
+
+    region:”[region]”: Devices in a specific region.
+
+    postal:”[postal code]”: Devices in a specific postal code.
+
+    latitude:”[latitude]” longitude:”[longitude]”: Devices at specific coordinates.
+
+    area:”[area code]”: Devices in a specific area code.
+
+
+-- Combined Queries --
+
+    os:”Linux” port:”22″ “SSH” country:”JP”: Linux devices with SSH in Japan.
+
+    product:”Apache” version:”2.4.7″ -“200 OK”: Apache servers not returning 200 OK.
+
+    city:”New York” os:”Windows” port:”3389″: Windows devices with RDP in New York.
+
+    net:”192.168.1.0/24″ webcam: Webcams in the 192.168.1.0/24 IP range.
+
+    org:”Google” ssl cert:”expired”: Expired SSL certificates in Google's infrastructure.
+
+    country:”DE” product:”MySQL” version:”5.5″ “default password”: MySQL databases in Germany.
+
+    “HTTP/1.1 401 Unauthorized” city:”London” port:”80″: Unauthorized HTTP responses in London.
+
+    “Server: Apache” -“Apache-Coyote” country:”BR”: Apache servers in Brazil.
+
+    hostname:”*.edu” vuln:”CVE-2019-11510″: Educational institutions vulnerable to CVE-2019-11510.
+
+    “IIS/8.0” -“X-Powered-By” net:”205.251.192.0/18″: IIS 8.0 servers in the specified range.
+
+
+*
