@@ -1,0 +1,100 @@
+
+--- Using Threat Intelligence ---
+
+• Extended Cyber Intelligence Cheat Sheet (XTI Structure)
+• External Attack Surface Management (EASM)
+• Digital Risk Protection (DRP)
+• Cyber Threat Intelligence (CTI)
+• Summary
+
+
+🧠 Extended Cyber Intelligence Cheat Sheet (XTI Structure)
+
+After interpreting collected data with the attack surface, it becomes usable Threat Intelligence (TI). TI is applied in 3 areas:
+
+• External Attack Surface Management (EASM)
+• Digital Risk Protection (DRP)
+• Cyber Threat Intelligence (CTI)
+
+Together they form XTI (Extended Threat Intelligence) — each consumes and uses intelligence differently.
+
+
+🌐 External Attack Surface Management (EASM)
+
+EASM manages and monitors an organization’s external assets (domains, IPs, servers, etc.). It detects unknown or forgotten assets and alerts when something changes or becomes risky.
+
+Key Alerts & Meanings:
+
+• New Digital Asset(s) Detected — A new domain/IP is found. Verify if it belongs to your organization.
+• Domain Information Change Detected — WHOIS info changed. Compare old/new data and confirm it’s authorized.
+• DNS Information Change Detected — DNS records modified. Check if it’s a legitimate or malicious change.
+• DNS Zone Transfer Detected — DNS zone transfer seen. Review configuration and confirm it’s expected.
+• Internal IP Address Detected — Internal IP exposed in public DNS. Contact DNS team to fix it.
+• Critical Open Port Detected — Port exposed via Shodan or scan data. Verify use or close it.
+• SMTP Open Relay Detected — Mail server allows open relay. Confirm settings with mail admin.
+• SPF/DMARC Record Not Found — Missing email security records. Configure SPF and DMARC correctly.
+• SSL Certificate Revoked/Expired — SSL expired or revoked. Renew immediately to avoid insecure communication.
+• Suspicious Website Redirection — Domain redirects to unknown site. Check for compromise.
+• Subdomain Takeover Detected — Subdomain hijacked. Investigate DNS and fix ownership.
+• Website Status Code Changed — Website returns different HTTP code. Check for downtime or error.
+• Vulnerability Detected — CVE or scan found on asset. Validate, patch, or update service quickly.
+
+Shodan: https://www.shodan.io
+Censys: https://censys.io
+BinaryEdge: https://www.binaryedge.io
+
+
+🛡️ Digital Risk Protection (DRP)
+
+Digital Risk Protection (DRP) maps all collected data to the organization’s assets. It protects brand reputation, prevents fraud, and monitors Deep & Dark Web threats.
+
+Key Alerts & Meanings:
+
+• Potential Phishing Domain Detected — Domain looks similar to yours. Inspect safely and request takedown if fake.
+• Rogue Mobile Application Detected — Fake or copied mobile app found. Analyze APK, remove malicious version.
+• IP Address Reputation — IP blacklisted or seen in bad activity. Investigate, clean, and restore reputation.
+• Impersonating Social Media Account Detected — Fake account mimics brand. Report and request removal.
+• Botnet Detected at Black Market — Your IP/domain in botnet data. Isolate, investigate, and reset credentials.
+• Suspicious Content Detected at Deep & Dark Web — Mention of your org on forums or leaks. Analyze and prepare defense.
+• Suspicious Content Detected at IM Platforms — Telegram/IRC chat mentions your org. Review context and act fast.
+• Stolen Credit Card Detected — Card data seen in dark web sale. Notify fraud team and cancel card.
+• Data Leak Detected on Code Repository — Sensitive data found on GitHub/S3/etc. Delete or request takedown immediately.
+• Company Info Detected on Malware Analysis Service — File sample mentions your org. Analyze sample and take action.
+• Employee or VIP Credential Detected — Leaked employee credentials found. Enforce password reset and security review.
+
+Tor Browser: https://www.torproject.org
+VirusTotal: https://www.virustotal.com
+Github: https://github.com
+Telegram: https://telegram.org
+
+
+🔍 Cyber Threat Intelligence (CTI)
+
+CTI tracks global cyber threats, ransomware trends, offensive IPs, and new attack campaigns. It provides context and awareness to strengthen proactive defense.
+
+Usage:
+
+• Integrate CTI feeds into SIEM, SOAR, and EDR tools.
+• Combine external intel with internal logs for best accuracy.
+• Monitor ongoing threat actor activities and vulnerabilities.
+
+MITRE CVE DB: https://cve.mitre.org
+Exploit DB: https://www.exploit-db.com
+Malpedia: https://malpedia.caad.fkie.fraunhofer.de
+
+
+
+🧩 Summary
+Area - Focus	Main Benefit
+EASM - Monitors external assets	Detects exposure and misconfigurations
+DRP - Protects brand & digital risks	Detects phishing, leaks, dark web threats
+CTI - Tracks global threat activity	Provides awareness and proactive defense
+
+
+
+*
+
+
+
+
+
