@@ -1,0 +1,16 @@
+
+--- Shodan Exploration ---
+
+Shodan queries are powerful. Each query reveals specific information. A collection of powerful Shodan queries for focused exploration and research.
+
+
+• webcam: General search for webcams.
+• port:80 webcam: Webcams accessible on port 80.
+• port:554 has_screenshot:true: Webcams with screenshots available.
+• port:80 title:"Network Camera": Webcams with "Network Camera" in the title on port 80.
+• http.title:"Network Camera": Webcams with "Network Camera" in the HTTP title.
+• product:"IP Camera": IP cameras.
+• city:"YourCity" webcam: Webcams in a specific city (replace "YourCity").
+• hostname:"*.example.com": Webcams on a specific domain (replace "example.com").
+• os:"Linux 2.6.22": Webcams with specific Linux version.
+• port:80 country:"YourCountry" webcam: Webcams in a specific country (replace "YourCountry").
