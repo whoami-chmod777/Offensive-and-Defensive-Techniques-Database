@@ -1,0 +1,122 @@
+
+--- Shodan Filter Reference ---
+
+• General
+• Screenshots
+• Cloud
+• HTTP
+• Bitcoin
+• Restricted
+• SNMP
+• SSL
+• NTP
+• Telnet
+• SSH
+• Search Query Examples 
+
+
+-- General --
+
+• all
+• asn
+• asset
+• city
+• country
+• cpe
+• device
+• geo
+• google_ads
+• google_analytics
+• google_tag_manager
+• has_ipv6
+• has_screenshot
+• has_ssl
+• has_vuln
+• hash
+• hostname
+• ip
+• isp
+• link
+• meta_pixel
+• net
+• org
+• os
+• port
+• postal
+• product
+• region
+• scan
+• shodan.module
+• state
+• tiktok_pixel
+• version
+• x_pixel
+
+
+-- Screenshots --
+
+
+
+-- Cloud --
+
+
+
+-- HTTP --
+
+
+
+-- Bitcoin --
+
+
+
+-- Restricted --
+
+
+
+-- SNMP --
+
+
+
+-- SSL --
+
+
+
+-- NTP --
+
+
+
+-- Telnet --
+
+
+
+-- SSH --
+
+
+
+
+
+-- Search Query Examples --
+
+Websites that require HTTPS connections: HTTP Strict-Transport-Security 
+Apache web servers: product:Apache 
+Services that have the word "Apache" in their headings: Apache
+Services with a hostname containing either "google.com" OR "facebook.com": hostname:google.com,facebook.com 
+
+Websites that have the word "Apache" in their HTML: http.html:Apache 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://www.shodan.io/search/filters
+
+*
