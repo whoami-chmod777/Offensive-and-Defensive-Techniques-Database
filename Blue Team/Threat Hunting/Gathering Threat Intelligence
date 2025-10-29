@@ -1,1 +1,109 @@
 
+--- Gathering Threat Intelligence ---
+
+• Shodan
+• Resources Providing
+IOCs
+Hacker Forums
+Ransomware Blogs
+Black Markets
+Chatters
+Code Repositories
+File Share Websites
+Public Buckets
+• Honeypots
+• SIEM / IDS / IPS / Firewalls
+
+
+
+-- Shodan --
+
+A web search engine for Internet-connected devices and open services. It helps find exposed servers, IoT, and devices across countries or organizations.
+
+https://www.shodan.io/
+https://developer.shodan.io/
+
+
+-- Resources Providing --
+
+Sites and feeds that publish observable threat data like malicious IPs, hashes, and domains. Use many sources and pull them often to reduce missed threats.
+
+https://abuse.ch/
+https://bazaar.abuse.ch/
+https://otx.alienvault.com/
+
+
+-- IOCs --
+
+Indicators of Compromise such as IPs, domains, file hashes, and C2 addresses used to detect and block attacks. Collect IOCs from many sources and apply whitelists/filters to lower false positives.
+
+https://www.virustotal.com/gui/home/upload
+https://hybrid-analysis.com/
+
+
+-- Hacker Forums --
+
+Online communities where threat actors post about planned attacks, sales of access, and tools. Monitoring these posts can reveal attack direction, targets, and methods.
+
+
+-- Ransomware Blogs
+
+Sites where ransomware groups publish victim data and announcements. These help track which groups target which organizations and countries. Onion directories (Tor required)
+
+https://www.torproject.org/
+
+
+-- Black Markets
+
+Marketplaces selling stolen data, RDP access, credit card dumps, and logs. They often require scripted scraping because APIs are usually not available.
+
+
+-- Chatters
+
+Messaging platforms (Telegram, Discord, IRC, ICQ) where threat actors share files, sell access, and coordinate. Monitor chats and record relevant posts for intel.
+
+https://web.telegram.org/a/
+https://discord.com/
+
+
+-- Code Repositories
+
+Public Git repositories may contain leaked credentials, API keys, or exploit code left accidentally. Use targeted searches (dorks) to find sensitive data and uploaded exploits.
+
+https://github.com/
+https://about.gitlab.com/
+
+
+-- File Share Websites
+
+Anonymous file hosting sites used to distribute stolen documents and data. Files often become indexed and can be discovered via dorking and automated scripts.
+
+https://wetransfer.com/
+https://www.mediafire.com/
+
+
+-- Public Buckets
+
+Cloud storage (S3, Azure Blob, Google Cloud Storage) unintentionally left public, exposing sensitive files. Brute-force and name-list techniques can discover such buckets for review.
+AWS S3 docs: https://docs.aws.amazon.com/s3
+
+https://docs.aws.amazon.com/s3/
+
+
+-- Honeypots
+
+Intentionally vulnerable systems that attract attackers so you can collect attacker IPs, tools, and behavior. Deploy or use public honeypots to gather fresh IOCs for your defenses.
+Examples/technologies: Kippo, Glastopf, ElasticHoney (search project pages on GitHub)
+
+
+-- SIEM / IDS / IPS / Firewalls
+
+Your internal security logs and blocked alerts are a primary intelligence source. Extract blocked IPs, hashes, and alerts from these products to stay one step ahead of attackers.
+
+
+
+
+
+
+
+
