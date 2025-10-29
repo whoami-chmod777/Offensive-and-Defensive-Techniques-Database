@@ -29,11 +29,12 @@ nmap -v 192.168.1.1
 nmap -oN output.txt 192.168.1.1
 nmap -oX output.xml 192.168.1.1
 
+
 nmap -sS -A -p21-443 nmap.scanme.org -oX nmap.scanme.org
 nmap -sS -A -p21-443 nmap.scanme.org -oN nmap.scanme.org
 nmap -sS -sV -p80,443 nmap.scanme.org -oX nmap.scanme.org
+nmap -p 0- -sV -sS -T4 192.168.199.39
 nmap -p 0- -sV -sS -T4 192.168.199.39 -oX hackersploit2.org
-
 
 nmap -sP 192.168.1.0/24 # Network Scan
 nmap -O -sV 192.168.1.1 # Operating System Fingerprinting
