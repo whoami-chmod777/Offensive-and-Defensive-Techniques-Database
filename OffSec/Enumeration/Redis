@@ -1,0 +1,43 @@
+
+Redis is an open-source, in-memory key-value database known for its high speed and versatility. It supports multiple data types and is widely used for caching, session management, and real-time applications.
+
+redis-cli
+Redis-cli is a command line tool used to manage and interact with the Redisdatabase system. 
+This tool facilitates operations such as adding, updating and retrieving data and managing database configuration by communicating directly with Redis servers.
+
+
+redis-cli -h <hostname> -p <port-number> --user <username> -a <password>
+
+PING: Checks if the Redis server is running.
+HELP: Provides information about commands.
+INFO: Provides information and statistics about the server.
+MONITOR: Listen for all requests received by the server in real time.
+SET: Set the string value of a key.
+GET: Get the value of a key.
+KEYS: Find all keys matching the given pattern.
+QUIT: Close the connection.
+
+
+root@hackerbox:~# redis -cli -h 172.20.12.188
+172.20.12.188:6379> config get dir
+
+root@hackerbox:~# redis-cli
+172.20.12.188:6379> HELP KEYS
+172.20.12.188:6379> INFO
+172.20.12.188:6379> SET example_key "example value"
+172.20.12.188:6379> GET example_key
+172.20.12.188:6379> KEYS *
+172.20.12.188:6379> GET "session:admin-001"
+
+
+
+
+
+
+
+
+
+
+
+
+https://redis.io/docs/latest/commands/
