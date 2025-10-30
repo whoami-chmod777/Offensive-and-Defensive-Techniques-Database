@@ -22,6 +22,8 @@ Although it typically communicates via a simple, plaintext protocol, it's import
 
 Granting unauthenticated access to Redis or utilizing common credentials can pose significant security risks, potentially exposing sensitive data and transactions to unauthorized users.
 
+Default Port: 6379
+
 
 -- Connect --
 
