@@ -12,6 +12,7 @@
 • Common Redis Commands
 • Redis Persistence Methods
 • Useful Tools
+• Security Misconfigurations
 • Challanges
 
 
@@ -266,6 +267,22 @@ redis-cli -h target.com
 | redis-dump                  | Backup tool            | Data extraction          |
 | Metasploit                  | Exploitation framework | Automated testing        |
 +-----------------------------+------------------------+--------------------------+
+
+
+-- Security Misconfigurations --
+
+❌ No authentication (no requirepass)
+❌ Weak password
+❌ Exposed to internet (bind 0.0.0.0)
+❌ Protected mode disabled
+❌ CONFIG command accessible
+❌ Dangerous commands not renamed
+❌ Lua scripting enabled
+❌ Module loading allowed
+❌ No SSL/TLS encryption
+❌ Writable directories accessible
+❌ No firewall restrictions
+❌ Default port (6379) exposed
 
 
 
