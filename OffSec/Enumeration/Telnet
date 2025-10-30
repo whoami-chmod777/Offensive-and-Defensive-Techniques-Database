@@ -24,12 +24,8 @@ telnet <target-ip> <target-port>
 -- Enumeration --
 
 nmap -p 23 X.X.X.X
-
-nmap -p 23 --script telnet-encrpytion X.X.X.X
-# Assessing Encryption on Telnet Server
-
-nmap -p 23 --script telnet-ntlm-info X.X.X.X
-# Extracting NTLM Authentication Details on Telnet Server
+nmap -p 23 --script telnet-encrpytion X.X.X.X  # Assessing Encryption on Telnet Server
+nmap -p 23 --script telnet-ntlm-info X.X.X.X   # Extracting NTLM Authentication Details on Telnet Server
 
 
 -- Banner Grabbing --
