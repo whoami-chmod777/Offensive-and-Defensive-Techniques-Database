@@ -19,6 +19,7 @@ nmap -p 20-23 192.168.1.1
 nmap -sS 192.168.1.1 # TCP Syn Scan
 nmap -sU 192.168.1.1
 nmap -sV 192.168.1.1 # Service Detection
+nmap -sV 192.168.1.1 -p1-1000 192.168.199.39
 nmap -sV --version-all 192.168.1.1
 nmap -O 192.168.1.1
 
