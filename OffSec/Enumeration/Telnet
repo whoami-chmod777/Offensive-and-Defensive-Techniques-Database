@@ -35,11 +35,8 @@ nc -nv X.X.X.X 23
 
 -- Attack Vectors --
 
-telnet X.X.X.X
-#provide username, do not provide any password
-
-telnet X.X.X.X
-# Common usernames and passwords: admin, administrator , root , user, or test
+telnet X.X.X.X  # provide username, do not provide any password
+telnet X.X.X.X  # Common usernames and passwords: admin, administrator , root , user, or test
 
 
 -- Bruteforcing Credentials --
