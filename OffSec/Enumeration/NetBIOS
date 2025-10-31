@@ -1,12 +1,67 @@
 
 --- NetBIOS ---
 
+• Connect
+• Enumeration
+• Attack Vectors
 
 
-
-NetBIOS (Network Basic Input/Output System) is a network protocol that allows applications on different computers to communicate within a local area network (LAN). It provides services for name resolution, session management, and datagram distribution. NetBIOS is commonly used in Windows networks and often runs alongside SMB. While largely replaced by modern protocols, NetBIOS is still found in many Windows environments.
-
-
-
+NetBIOS (Network Basic Input/Output System) is a network protocol that allows applications on different computers to communicate within a local area network (LAN). 
+It provides services for name resolution, session management, and datagram distribution. 
+NetBIOS is commonly used in Windows networks and often runs alongside SMB. 
+While largely replaced by modern protocols, NetBIOS is still found in many Windows environments.
 
 Default Ports: 137 (Name Service), 138 (Datagram), 139 (Session)
+
+
+-- Connect --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
