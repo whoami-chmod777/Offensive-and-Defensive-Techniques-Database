@@ -19,7 +19,6 @@
 Redis, an open-source tool licensed under BSD, functions as an in-memory data structure store, renowned for its key-value storage system and support for diverse data types. 
 It serves multiple roles such as a database, caching layer, and message broker. 
 Although it typically communicates via a simple, plaintext protocol, it's important to emphasize its ability to secure communications with SSL/TLS encryption.
-
 Granting unauthenticated access to Redis or utilizing common credentials can pose significant security risks, potentially exposing sensitive data and transactions to unauthorized users.
 
 Default Port: 6379
