@@ -1,9 +1,9 @@
 
 --- Example of Nmap Commands Used in CTF's ---
 
+
 nmap -h
 nmap --help
-
 
 nmap demo.ine.local (1,000 TCP ports)
 nmap -sU -p 50-200 demo.ine.local (UDP scan)
@@ -53,29 +53,42 @@ nmap -T4 192.168.1.1
 nmap --traceroute 192.168.1.1
 
 
+-- Hackviser --
+
+nmap 192.168.1.1
+nmap -p 22 192.168.1.1
+nmap -p 20-23 192.168.1.1
+nmap -sS 192.168.1.1
+nmap -sU 192.168.1.1
+nmap -sV 192.168.1.1
+nmap -O 192.168.1.1
+
+nmap -A 192.168.1.1
+nmap -sP 192.168.1.0/24
+nmap -v 192.168.1.1
+nmap -Pn 192.168.1.1
+nmap -O -sV 192.168.1.1
+
+nmap --script http-enum 192.168.1.1
+nmap --randomize-hosts 192.168.1.0/24
+nmap -exclude 192.168.1.1 192.168.1.0/24
+nmap --traceroute 192.168.1.1
+nmap -sV --version-all 192.168.1.1
+
+nmap 192.168.1.1 192.168.1.2
+nmap 192.168.1.0/24
+
+nmap -oN output.txt 192.168.1.1
+nmap -oX output.xml 192.168.1.1
+
+nmap -T4 192.168.1.1
+nmap -O -sV 192.168.1.1
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+*
 
 
 
