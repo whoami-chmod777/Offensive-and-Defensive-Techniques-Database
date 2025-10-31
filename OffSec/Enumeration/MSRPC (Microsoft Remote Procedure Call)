@@ -1,1 +1,152 @@
 
+--- MSRPC (Microsoft Remote Procedure Call) ---
+
+• Connect
+Enumeration
+
+
+• Recon
+• Banner Grabbing
+• Version and Configuration Check
+• 
+• Attack Vectors
+• Post-Exploitation
+• Common RDP Issues
+• CVE Exploits
+
+
+MSRPC (Microsoft Remote Procedure Call) is the modified version of DCE/RPC. It forms the basis of network-level service interoperability. MSRPC is the protocol standard for Windows processes that allows a program running on one host to execute a program on another host.
+
+Default Port: 135, 593
+
+
+-- Connect --
+
+nc -vn <TARGET_IP> 135
+nc -vn <TARGET_IP> 593
+
+
+-- Enumeration --
+
+nmap -p 135,593 --script=msrpc-enum <TARGET_IP>
+
+rpcclient -U "" -N <TARGET_IP>
+#empty username (-U "")
+#no password (-N)
+
+> serverinfo
+> lsaenumsid
+> netshareenumall
+
+Identifying Exposed RPC Services
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
