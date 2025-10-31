@@ -13,7 +13,8 @@
 • Reverse Shell over Website
 
 
-FTP (File Transfer Protocol) is a standard network protocol used for transferring files from one host to another over a TCP-based network, such as the Internet. It enables users to upload or download files, manage file directories on a remote server, and navigate the server's file system.
+FTP (File Transfer Protocol) is a standard network protocol used for transferring files from one host to another over a TCP-based network, such as the Internet. 
+It enables users to upload or download files, manage file directories on a remote server, and navigate the server's file system.
 FTP operates on a client-server model, where the client initiates a connection to the server to request files or submit files for storage.
 The protocol supports anonymous access, where users can log in with a common username like 'anonymous' or 'ftp', and authenticated access, where a username and password are required.
 
