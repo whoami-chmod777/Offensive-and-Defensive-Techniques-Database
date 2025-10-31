@@ -1,11 +1,41 @@
 
---- Overview ---
+--- Nmap ---
 
+• Purpose of Nmap
+• Core Features
 • Stages of Scans with Nmap
+• Common NMAP Commands
 • Basic Usage
 
 
+"Nmap" is an essential tool for any security professional. Its versatility and reliability make it a go-to solution for network exploration and security auditing." -Kevin Mitnick
+
 Nmap is one of the most frequently used tools in the field of network security and penetration testing. In this section, we will explore the basic features and usage scenarios of Nmap, examining the variety and flexibility of this powerful tool.
+
+
+-- Purpose of Nmap --
+
+Nmap (Network Mapper) is an open-source tool used for network discovery, host discovery and security scanning.
+
+• Network Discovery: Nmap scans a network to identify which devices are connected to target system and determine their IP addresses.
+• Port Scanning: Nmap can scan a device for open ports. This serves to inform the user of the tool which services are running and which ports are open.
+• Service Discovery: Nmap can determine which services (e.g. web server, email server) are running on open ports on the target system.
+• Operating System Detection: Nmap can determines the operating system of a target device.
+• Security Audits: Nmap can be used to scan for vulnerabilities and identify security weaknesses on the target device.
+• Script Support: Nmap includes a script engine that can be used to customize and automate their network scans by the Nmap users.
+
+
+-- Core Features --
+
+• Network Discovery
+• Port Scanning
+• Service and Version Detection
+• Operating System Detection
+• Scriptable Interaction with Network Services
+• Host and Network Mapping
+• Firewall and IDS Evasion Techniques
+• Customizable Output Formats
+• Performance and Scalability
 
 
 -- Stages of Scans with Nmap --
@@ -20,6 +50,31 @@ When conducting an Nmap scan, the scanning process goes through a series of stag
 6. Traceroute: Determines the paths packets take to reach the target.
 7. NSE (Nmap Scripting Engine) Usage: Conducts various tests on targets using custom NSE scripts.
 8. Reporting: The scan results are reported in various formats.
+
+
+-- Common NMAP Commands --
+
+Help and Usage Information ➜ nmap -h , nmap --help
+
+Basic Scan ➜ nmap <target_IP_address>
+
+Port Scanning ➜ nmap -p <port_number> <target_IP_adress> , nmap -p <source_port>-<destination_port> <target_IP_adress>
+
+Service and Version Detection ➜ nmap -sV <target_IP_adress>
+
+Operating System Detection ➜ nmap -O <target_IP_adress>
+
+Scanning All Devices on a Network ➜ nmap -sP <network_IP_range>
+
+Verbose Output ➜ nmap -v <target_IP_adress>
+
+TCP Syn Scan (Stealth Scan) ➜ nmap -sS <target_IP_adress>
+
+UDP Scan ➜ nmap -sU <target_IP_adress>
+
+Executing a Specific Script ➜ nmap --script <script_name> <target_IP_adress>
+
+Saving Output to a File ➜ nmap -oN <file_name> <target_IP_adress> , nmap -oX <file_name> <target_IP_adress>
 
 
 -- Basic Usage --
