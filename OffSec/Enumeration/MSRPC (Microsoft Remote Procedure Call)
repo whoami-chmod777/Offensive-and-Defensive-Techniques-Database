@@ -6,7 +6,9 @@
 • Attack Vectors
 
 
-MSRPC (Microsoft Remote Procedure Call) is the modified version of DCE/RPC. It forms the basis of network-level service interoperability. MSRPC is the protocol standard for Windows processes that allows a program running on one host to execute a program on another host.
+MSRPC (Microsoft Remote Procedure Call) is the modified version of DCE/RPC. 
+It forms the basis of network-level service interoperability. 
+MSRPC is the protocol standard for Windows processes that allows a program running on one host to execute a program on another host.
 
 Default Port: 135, 593
 
