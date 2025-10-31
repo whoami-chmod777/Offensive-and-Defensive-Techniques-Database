@@ -3,6 +3,7 @@
 
 • Connect
 • Recon
+Banner Grabbing
 • Enumeration
 • Attack Vectors
 • Post-Exploitation
@@ -19,27 +20,26 @@ Default Port: 21
 
 -- Connect --
 
+lftp X.X.X.X
+ftp <target-ip> <target-port>
 
-
-
-Connect Using FTP Command
-
-
-
+ftp://username:password@X.X.X.X
 
 
 -- Recon --
 
+nmap -p 21 X.X.X.X
 
 
+-- Banner Grabbing --
 
-
-
+nc -nv X.X.X.X 21
 
 
 -- Enumeration --
 
-
+nmap -p 21 --script ftp-features <target-ip>
+gobuster dir -u ftp://<target-ip> -w <wordlist-path>
 
 
 -- Attack Vectors --
@@ -49,3 +49,28 @@ Connect Using FTP Command
 
 
 -- Post-Exploitation --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
