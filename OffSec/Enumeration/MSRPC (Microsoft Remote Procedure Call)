@@ -2,17 +2,8 @@
 --- MSRPC (Microsoft Remote Procedure Call) ---
 
 • Connect
-Enumeration
-
-
-• Recon
-• Banner Grabbing
-• Version and Configuration Check
-• 
+• Enumeration
 • Attack Vectors
-• Post-Exploitation
-• Common RDP Issues
-• CVE Exploits
 
 
 MSRPC (Microsoft Remote Procedure Call) is the modified version of DCE/RPC. It forms the basis of network-level service interoperability. MSRPC is the protocol standard for Windows processes that allows a program running on one host to execute a program on another host.
@@ -28,7 +19,11 @@ nc -vn <TARGET_IP> 593
 
 -- Enumeration --
 
+➜ Nmap
+
 nmap -p 135,593 --script=msrpc-enum <TARGET_IP>
+
+➜ RPC Client
 
 rpcclient -U "" -N <TARGET_IP>
 #empty username (-U "")
@@ -38,22 +33,36 @@ rpcclient -U "" -N <TARGET_IP>
 > lsaenumsid
 > netshareenumall
 
-Identifying Exposed RPC Services
+➜ Identifying Exposed RPC Services
+
+Exposure of RPC services can be determined by querying the RPC locator service and individual endpoints using tools such as rpcdump. This tool identifies unique RPC services, denoted by IFID values, providing service details and communication bindings.
+
+rpcdump [-p port] <IP>
+
+➜ Metasploit
+
+use auxiliary/scanner/dcerpc/endpoint_mapper
+use auxiliary/scanner/dcerpc/hidden
+use auxiliary/scanner/dcerpc/management
+use auxiliary/scanner/dcerpc/tcp_dcerpc_auditor
 
 
+-- Attack Vectors --
+
+MSRPC has several interfaces that could be potentially exploited for gaining unauthorized access, remote command execution, enumerating users and domains, accessing public SAM database elements, remotely starting and stopping services, accessing and modifying the system registry, and more.
+
+• LSA interface (pipe\lsarpc)
+• LSA Directory Services (DS) interface (pipe\lsarpc)
+• LSA SAMR interface (pipe\samr)
+• Server services and Service control manager interface (pipe\svcctl), (pipe\srvsvc)
+• Remote registry service (pipe\winreg)
+• Task scheduler (pipe\atsvc)
+• DCOM interface (pipe\epmapper)
+
+nmap -p 135 --script=msrpc-dcom-interface-activation <TARGET_IP>
 
 
-
-
-
-
-
-
-
-
-
-
-
+*
 
 
 
