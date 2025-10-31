@@ -40,6 +40,7 @@ nc -nv X.X.X.X 21
 -- Enumeration --
 
 nmap -p 21 --script ftp-features <target-ip>
+nmap -sV --script=ftp-anon,ftp-brute <target-ip>
 gobuster dir -u ftp://<target-ip> -w <wordlist-path>
 
 
