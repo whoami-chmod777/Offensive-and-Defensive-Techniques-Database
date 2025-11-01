@@ -118,11 +118,15 @@ System / Info / Hashes
 ---------------------------
 
 Get-ComputerInfo
+Get-ComputerInfo | Select-Object WindowsVersion
+
 Get-WmiObject -Class win32_OperatingSystem
 Get-Hotfix
 Get-Service | Where-Object DisplayName -like '*Defender*'
 Get-ChildItem -Recurse *.* | Select-String -Pattern "SEARCH_STR"
+
 Get-Acl file.txt
+Get-Acl -Path "C:\junk\"
 
 Get-FileHash file.txt
 Get-FileHash -Algorithm MD5 file.txt
