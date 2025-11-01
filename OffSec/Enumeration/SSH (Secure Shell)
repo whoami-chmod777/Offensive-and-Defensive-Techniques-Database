@@ -1,0 +1,12 @@
+
+--- SSH (Secure Shell) ---
+
+
+Secure Shell (SSH) is a protocol used to securely connect to another computer over a network. It allows you to log into another computer, execute commands, and transfer files, all in a secure manner. This is because SSH encrypts your connection, making it difficult for hackers to intercept and understand the data being exchanged.
+It's commonly used by network administrators to control web servers, by developers to access programming environments, and by anyone needing secure access to a computer over the internet.
+
+Default Port: 22
+
+
+
+continuie
