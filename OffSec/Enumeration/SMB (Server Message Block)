@@ -43,6 +43,26 @@ smbclient -L //target.com -U username%password
 smbclient //target.com/sharename -U username
 smbclient //target.com/sharename -U username%password
 
+Command      Description
+--------      ----------------------------------------------------------
+ls, dir       List files and directories on the share
+cd            Change remote directory
+get           Download a file from the share
+mget          Download multiple files
+put           Upload a file
+mput          Upload multiple files
+del           Delete a file
+mkdir         Create a new directory
+rmdir         Remove a directory
+lcd           Change local working directory
+prompt        Toggle interactive prompt (for mget/mput)
+recurse       Toggle recursive mode (for directories)
+exit, quit    Close the SMB session
+
+Tip:
+You can type "help <command>" for more information on a specific command:
+smb: \> help get
+
 ⇒ Using smbmap
 smbmap -H target.com
 smbmap -H target.com -u username -p password
