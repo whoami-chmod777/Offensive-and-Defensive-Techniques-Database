@@ -236,6 +236,17 @@ wmic /node:another-host.com /user:username /password:password process call creat
 | umount            | Unmount an SMB/CIFS share                   | umount /mnt/point                             |
 +-------------------+---------------------------------------------+-----------------------------------------------+
 
+-- Common SMB Share Names --
+
++---------+---------------------------------------------------------------+
+| Share   | Description                                                   |
++---------+---------------------------------------------------------------+
+| C$      | Admin share giving access to the root of the C: drive.        |
+| D$      | Admin share giving access to the root of the D: drive.        |
+| ADMIN$  | Admin share pointing to the Windows directory (%WINDIR%).     |
+| IPC$    | Used for inter-process communication (no file access).        |
+| PRINT$  | Stores printer drivers and configs for network printers.      |
++---------+---------------------------------------------------------------+
 
 ➜ Reading a File inside smbclient
 ------------------------------------
@@ -254,6 +265,10 @@ Just rename it while downloading: smb: \Bird\> get .config config.txt
 Then, once it’s downloaded, leave smbclient and read it locally:
 smb: \Bird\> exit
 cat config.txt
+
+
+more .config
+
 
 *
 
