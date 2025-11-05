@@ -17,7 +17,8 @@ Default Port: 139, 445
 
 -- Connect --
 
-smbclient -L //target-ip
+smbclient -L //172.20.22.25
+smbclient -L //172.20.22.25 -N
 
 
 -- Recon --
