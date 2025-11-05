@@ -42,6 +42,8 @@ smbclient -L //target.com -U anonymous
 smbclient -L //target.com -U username%password
 smbclient //target.com/sharename -U username
 smbclient //target.com/sharename -U username%password
+smbclient --no-pass -L 172.20.22.25
+smbclient --no-pass \\\\172.20.22.25\\Projects
 
 Command      Description
 --------      ----------------------------------------------------------
