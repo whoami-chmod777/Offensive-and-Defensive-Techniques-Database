@@ -40,6 +40,7 @@ nmap --script smb-protocols -p 445 target.com
 ⇒ Using smbclient
 smbclient -L //target.com -U anonymous
 smbclient -L //target.com -U username%password
+smbclient //target.com/sharename -U username
 smbclient //target.com/sharename -U username%password
 
 ⇒ Using smbmap
