@@ -235,6 +235,23 @@ wmic /node:another-host.com /user:username /password:password process call creat
 +-------------------+---------------------------------------------+-----------------------------------------------+
 
 
+➜ Reading a File inside smbclient
+------------------------------------
+
+Inside smbclient, you cannot use Linux commands like "cat".
+Instead, you must first download the file to your local machine.
+
+Example: smb: \Bird\> get .config
+
+If you get an error like: Error opening local file .config
+
+That means smbclient is trying to save the file locally as ".config" (but your shell may block hidden filenames).  
+
+Just rename it while downloading: smb: \Bird\> get .config config.txt
+
+Then, once it’s downloaded, leave smbclient and read it locally:
+smb: \Bird\> exit
+cat config.txt
 
 *
 
