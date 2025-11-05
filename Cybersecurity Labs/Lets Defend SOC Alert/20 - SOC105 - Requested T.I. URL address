@@ -1,3 +1,18 @@
 
 --- 20 - SOC105 - Requested T.I. URL address ---
 
+High	Oct, 19, 2020, 09:54 PM	SOC105 - Requested T.I. URL address	20
+
+
+EventID : 20
+Event Time : Oct, 19, 2020, 09:54 PM
+Rule : SOC105 - Requested T.I. URL address
+Level : Security Analyst
+Source Address : 172.16.20.4
+Source Hostname : gitServer
+Destination Address : 151.101.112.133
+Destination Hostname : raw.github.com
+Username : gitUser
+Request URL : https://raw.githubusercontent.com/django/django/master/setup.py
+User Agent : Wget/1.19.4 (linux-gnu)
+Device Action : Allowed
