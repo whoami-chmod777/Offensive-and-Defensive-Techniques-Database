@@ -1,8 +1,6 @@
 
 --- MSSQL (Microsoft SQL Server) ---
 
-
-
 • Connect
 • Recon
 • Enumeration
@@ -13,33 +11,78 @@
 • Useful Tools
 • Security Misconfigurations to Test
 
+Microsoft SQL Server (MSSQL) is a relational database management system developed by Microsoft. 
+It's widely used in enterprise environments and integrates tightly with Windows infrastructure. 
+MSSQL offers powerful features including stored procedures, xp_cmdshell for command execution, and extensive Windows authentication integration.
+
+Default Port: 1433
+
+
+-- Connect --
+
+➜ Using mssqlclient.py (Impacket)
+
+mssqlclient.py DOMAIN/username:password@target.com
+mssqlclient.py sa:password@target.com -windows-auth
+mssqlclient.py username:password@target.com -db master
+mssqlclient.py username@target.com -hashes :NTHASH
+
+➜ Using sqsh
+
+sqsh -S target.com -U sa -P password
+sqsh -S target.com -U DOMAIN\\username -P password
+
+➜ 
+
+
+➜ 
+
+
+➜ 
+
+
+➜ 
 
 
 
 
 
 
-Connect
 
 
-Recon
-
-Enumeration
-
-Attack Vectors
 
 
-Post-Exploitation
-
-Common MSSQL Procedures
 
 
-Common MSSQL System Databases
 
 
-Useful Tools
 
-Security Misconfigurations to Test
+-- Recon --
+
+
+
+-- Enumeration --
+
+
+
+-- Attack Vectors --
+
+
+-- Post-Exploitation --
+
+
+
+-- Common MSSQL Procedures --
+
+
+-- Common MSSQL System Databases --
+
+
+-- Useful Tools --
+
+
+
+-- Security Misconfigurations to Test --
 
 
 *
