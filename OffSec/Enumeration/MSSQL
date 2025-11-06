@@ -9,6 +9,7 @@
 • Common MSSQL Procedures
 • Common MSSQL System Databases
 • Useful Tools
+• Enumerating Databases
 • Security Misconfigurations to Test
 
 Microsoft SQL Server (MSSQL) is a relational database management system developed by Microsoft. 
@@ -475,6 +476,22 @@ EXEC xp_cmdshell 'wmic /node:target-host process call create "cmd.exe /c payload
 | Nmap                          | Network scanner                         | Service detection                           |
 | Metasploit                    | Exploitation framework                  | Various MSSQL modules                       |
 +-------------------------------+-----------------------------------------+---------------------------------------------+
+
+
+-- Enumerating Databases --
+
++-----------------------------------------------+-------------------------------------------+
+| Description                                   | Command                                   |
++-----------------------------------------------+-------------------------------------------+
+| Show all databases                            | SHOW DATABASES;                           |
+| Switch to a specific database                 | USE <database_name>;                      |
+| Show all tables in the current database       | SHOW TABLES;                              |
+| Show the structure (columns) of a table       | DESCRIBE <table_name>;                    |
+| Show the structure of a specific table        | DESCRIBE myTable;                         |
+| Read all data from a table                    | SELECT * FROM <table_name>;               |
+| Read first 10 rows from a table               | SELECT * FROM <table_name> LIMIT 10;      |
++-----------------------------------------------+-------------------------------------------+
+
 
 
 -- Security Misconfigurations to Test --
