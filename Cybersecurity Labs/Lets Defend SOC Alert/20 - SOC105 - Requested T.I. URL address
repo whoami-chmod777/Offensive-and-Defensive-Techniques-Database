@@ -16,3 +16,58 @@ Username : gitUser
 Request URL : https://raw.githubusercontent.com/django/django/master/setup.py
 User Agent : Wget/1.19.4 (linux-gnu)
 Device Action : Allowed
+
+Taking Ownership. In the Investigation Channel create a case. The 'Case Management' page opens immediately, allowing you to start the playbook
+
+Incident Details
+Incident Name:	EventID: 20 - [SOC105 - Requested T.I. URL address]
+Description:	EventID: 20
+Incident Type:	ThreatIntel
+Created Date:	Nov, 08, 2025, 01:29 AM
+
+Launch the Playbook and Start Playbook!
+
+Analyze Threat Intel Data
+Analyze URL/IP address/Domain/Hash in 3rd party sandboxes. Please click "Malicious" if it is malicious and click "Non-malicious" if it isn't.
+You can use the free products/services below.
+
+• AnyRun
+• VirusTotal
+• URLHouse
+• URLScan
+• HybridAnalysis
+
+Email Analysis: not important
+-
+
+Analyze URLs/Attachments
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
