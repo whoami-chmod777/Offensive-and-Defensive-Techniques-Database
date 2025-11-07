@@ -26,6 +26,7 @@ showmount -e target.com
 # Mount NFS share
 mkdir /mnt/nfs
 mount -t nfs target.com:/share /mnt/nfs
+mount -t nfs target.com:/root /mnt/nfs_mount/
 
 # Mount with specific NFS version
 mount -t nfs -o vers=3 target.com:/share /mnt/nfs
