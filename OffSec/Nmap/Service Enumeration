@@ -36,6 +36,7 @@ nmap -sn --traceroute --script traceroute-geolocation nmap.scanme.org
 ls -al /usr/share/nmap/scripts | grep -e "ftp"    
 
 nmap -sV -p21 192.168.199.39 192.168.199.41
+nmap -sV -p21 -sC -A 192.168.199.39
 nmap -sS -p21 --script "ftp-*" 192.168.199.39 192.168.199.41
 nmap -sS -p21 --script ftp-anon,ftp-syst,tftp-enum,ftp-vsftpd-backdoor 192.168.199.39 192.168.199.41
 
