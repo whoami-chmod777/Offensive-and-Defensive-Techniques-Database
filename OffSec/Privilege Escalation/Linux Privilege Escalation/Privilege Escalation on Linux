@@ -11,7 +11,7 @@ The most common ways of privilege escalation on Linux systems are leveraging ker
 • Users
 • Networking information
 • Applications and services
-• 
+• Files and file systems
 • 
 • 
 • 
@@ -91,6 +91,53 @@ arp -e
 
 
 -- Applications and services --
+
+Knowing which services are running with root privileges can be very important for privilege escalation because exploiting them will result in root level access.
+
+Joomla installations contain a configuration file named 'configuration.php' and WordPress uses the 'wp-config.php' file for this purpose. 
+These configuration files contain valuable information such as the MySQL username and password.
+
+ps aux
+ps aux | grep
+
+Debian and derivatives use: dpkg -l
+Fedora based distros use: rpm -qa
+
+ls -ls /etc/ | grep .conf
+ls -ls /var/www/html/
+
+find /* -user root -perm -4000 -print 2>/dev/null
+
+
+-- Files and file systems --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
