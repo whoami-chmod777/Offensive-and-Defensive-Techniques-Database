@@ -1,1 +1,19 @@
 
+--- Linux Privilege Escalation ---
+
+• Privilege Escalation in Linux
+• Understanding Permissions in Linux
+• Spawning Root Shells
+• Privilege Escalation Tools
+• Kernel Exploits
+• Service Exploits
+• Weak File Permissions
+• Sudo
+• Cron Jobs
+• SUID / SGID Executables
+• Passwords & Keys
+• NFS
+
+
+-- Privilege Escalation in Linux --
+
