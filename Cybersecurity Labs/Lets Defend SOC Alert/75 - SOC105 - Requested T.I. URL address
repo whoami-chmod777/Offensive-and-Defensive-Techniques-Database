@@ -16,40 +16,9 @@ Request URL : https://bit.ly/TAPSCAN
 User Agent : Mozilla/5.0 (Windows NT 5.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36
 Device Action : Allowed
 
-Taking Ownership. In the Investigation Channel create a case. The 'Case Management' page opens immediately, allowing you to start the playbook
-
-Incident Details
-Incident Name:	EventID: 75 - [SOC105 - Requested T.I. URL address]
-Description:	EventID: 75
-Incident Type:	ThreatIntel
-Created Date:	Nov, 05, 2025, 11:24 PM
-
-Launch the Playbook and Start Playbook!
-
-Analyze Threat Intel Data
-Analyze URL/IP address/Domain/Hash in 3rd party sandboxes. Please click "Malicious" if it is malicious and click "Non-malicious" if it isn't.
-You can use the free products/services below.
-
-• AnyRun
-• VirusTotal
-• URLHouse
-• URLScan
-• HybridAnalysis
 
 
-Email Analysis: not important
--
-
-Analyze URLs/Attachments
-
-https://www.virustotal.com/gui/url/6bacb5686cd0a778532e6ca53026807bcbac02b6ce9a7a8f712c34d88276274b/detection
-https://www.virustotal.com/gui/url/9be65ece640c8a1703ddeccf016858e3ed31210d43ec710dc41690ab5cca5e0e/details
-https://unshorten.it/
-https://play.google.com/store/apps/details?id=pdf.tap.scanner
-https://hybrid-analysis.com/sample/f13085e5c1603a62751d72f7086b3dd6cc7ad4344c579fd47fb52026f7b66985/60b9fcc6cd8ade3ce97220fe
-
-
-Network and Log Analysis
+-- Network and Log Analysis --
 
 +------------------------+----------+--------------+-----------+----------------+------------+
 | DATE                   | TYPE     | SRC ADDRESS  | SRC PORT  | DEST. ADDRESS  | DEST. PORT |
@@ -60,7 +29,6 @@ Network and Log Analysis
 | Oct 19, 2020, 10:59 PM | Proxy    | 10.15.15.12  | 14774     | 172.217.169.206| 443        |
 | Oct 19, 2020, 11:06 PM | Firewall | 10.15.15.12  | 12441     | 140.82.121.4   | 443        |
 +------------------------+----------+--------------+-----------+----------------+------------+
-
 
 10.15.15.12 ⇒ 67.199.248.10 ⇒ URL: https://bit.ly/TAPSCAN
 10.15.15.12 ⇒ 13.95.16.245 ⇒ Request URL: https://www.teamviewer.com Request Method: GET Device Action: Allowed
