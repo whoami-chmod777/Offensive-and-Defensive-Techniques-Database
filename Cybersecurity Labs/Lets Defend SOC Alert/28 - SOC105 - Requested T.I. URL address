@@ -1,5 +1,15 @@
 
 --- 28 - SOC105 - Requested T.I. URL address ---
 
-
+EventID : 28
+Event Time : Oct, 29, 2020, 07:34 PM
+Rule : SOC105 - Requested T.I. URL address
+Level : Security Analyst
+Source Address : 172.16.17.47
+Source Hostname : BillPRD
+Destination Address : 115.99.150.132
+Username : Bill
+Request URL : http://115.99.150.132:56841/Mozi.m
+User Agent : Firewall Test - Dont Block
+Device Action : Blocked
 
