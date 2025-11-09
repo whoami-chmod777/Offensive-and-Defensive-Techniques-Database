@@ -19,43 +19,12 @@ Device Action : Allowed
 
 -- Threat Intel --
 
-
--- Log Management --
-
-
--- Endpoint Security --
-
-
--- Analysis Result --
-
-
--- Artifacts --
-
-
--- Analyst Note --
-
-
--- Close Alert --
-
-
-
-
-
-
+Oct, 14, 2020, 11:45 PM ⇒ Domain ⇒ raw.githubusercontent.com ⇒ spam ⇒ Anon
 
 
 -- Log Management --
 
-Field > Value
-type > Proxy
-source_address > 172.16.20.4
-source_port > 42212
-destination_address > 151.101.112.133
-destination_port > 443
-time > Oct, 19, 2020, 09:54 PM
-
-Raw Log
-URL > https://raw.githubusercontent.com/django/django/master/setup.py
+Oct, 19, 2020, 09:54 PM ⇒ 172.16.20.4 ⇒ 151.101.112.133 ⇒ URL: https://raw.githubusercontent.com/django/django/master/setup.py
 
 
 -- Endpoint Security --
@@ -69,7 +38,9 @@ Primary User: gitUser
 Client/Server: Server
 Last Login: Oct, 25, 2020, 11:36 PM
 
+
 Terminal History
+
 2020-10-19 17:10 > pwd
 2020-10-19 17:12 > ls
 2020-10-19 18:12 > wget -h
@@ -77,43 +48,38 @@ Terminal History
 2020-10-19 21:55 > cd
 
 
--- Threat Intel --
-
-Date: Oct, 14, 2020, 11:45 PM
-Data Type: Domain
-Data: raw.githubusercontent.com
-Tag: spam
-Data Source: Anon
-
-
 -- Analysis Result --
 
 Analyze Threat Intel Data: Non-Malicious
+Containment is not necessary for this alert.
 
 
 -- Artifacts --
 
-https://raw.githubusercontent.com/django/django/master/setup.py | Request URL
-raw.githubusercontent.com | Destination Hostname
-151.101.112.133 | Github Destination IP
-172.16.20.4 | gitServer Source Address
-87ae2debd885f006ecd75a3dd0cfb19bba38fdeb6341cddcffc63ef81e134184 | MD5 Hash Value
+hxxps[://]raw[.]githubusercontent[.]com/django/django/master/setup[.]py ⇒ Requested URL
+raw[.]githubusercontent[.]com ⇒ Destination Hostname
+151.101.112.133 ⇒ Github Destination IP
+172.16.20.4 ⇒ gitServer Source Address
+87ae2debd885f006ecd75a3dd0cfb19bba38fdeb6341cddcffc63ef81e134184 ⇒ Setup.py MD5 Hash Value
 
 
 -- Analyst Note --
 
-The rule SOC105 - Requested T.I. URL address was triggered when host gitServer (172.16.20.4), under user gitUser, accessed the domain raw.githubusercontent.com (151.101.112.133). The requested URL https://raw.githubusercontent.com/django/django/master/setup.py
+On Oct 19, 2020, at 09:54 PM, our SIEM detected a URL request from gitUser on gitServer. The requested URL “hxxps[://]raw[.]githubusercontent[.]com/django/django/master/setup[.]py” (IP: 151.101.112.133) was analyzed and verified as legitimate. 
+Endpoint logs showed normal developer activity, including pwd, ls, and wget -h (used to display wget help options before downloading), followed by wget to fetch the Django setup file.
+The file belongs to Django, a reputable Python web framework hosted on GitHub. After reviewing all details and confirming no malicious network indicators, this alert was classified as a false positive.
 
 
 -- Close Alert --
 
-The alert is a False Positive — legitimate GitHub activity mistakenly flagged due to a low-confidence threat intelligence tag.
+The alert was determined to be a false positive, resulting from legitimate GitHub activity that was incorrectly flagged because of a low-confidence threat intelligence indicator.
 
 
 
 https://www.virustotal.com/gui/url/a129d9a69a5feae5c6b26dd4976fc6d6cf7fc50862f81bd79b94129990f1816c
 https://www.virustotal.com/gui/ip-address/151.101.112.133
-https://www.virustotal.com/gui/file/87ae2debd885f006ecd75a3dd0cfb19bba38fdeb6341cddcffc63ef81e134184
+https://www.virustotal.com/gui/file/49699f5a203e401a898086664cda2c0f71783ac475ec599e8a680cfa6c540f94
+https://talosintelligence.com/reputation_center/lookup?search=151.101.112.133#ip-addresses
 
 https://app.letsdefend.io/monitoring?channel=investigation&event_id=20
 
