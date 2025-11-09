@@ -1,17 +1,20 @@
 
+--- 16 - SOC105 - Requested T.I. URL address ---
 
+High Sep, 20, 2020, 10:54 PM	SOC105 - Requested T.I. URL address - EventID: 16
 
-
-
-
-
-
-
-
-
-
-
-
+EventID : 16
+Event Time : Sep, 20, 2020, 10:54 PM
+Rule : SOC105 - Requested T.I. URL address
+Level : Security Analyst
+Source Address : 172.16.17.47
+Source Hostname : BillPRD
+Destination Address : 5.188.0.251
+Destination Hostname : pssd-ltdgroup.com
+Username : Mike01
+Request URL : https://pssd-ltdgroup.com
+User Agent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36 Edge/15.15063
+Device Action : Allowed
 
 
 
