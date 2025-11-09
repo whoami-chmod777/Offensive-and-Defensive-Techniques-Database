@@ -16,6 +16,12 @@ User Agent : Mozilla/5.0 (Windows NT 5.1; Win64; x64) AppleWebKit/537.36 (KHTML,
 Device Action : Allowed
 
 
+Data Collection:
+External sources: Publicly available reports, news feeds, forums, and blogs where cybercriminals or threat actors might share techniques or vulnerabilities.
+Internal sources: Logs, network traffic, security alerts, and incident data within an organization.
+Open-source intelligence (OSINT): Information from publicly available platforms like social media, websites, or GitHub.
+Dark web and deep web intelligence: Monitoring hidden or encrypted parts of the internet where malicious activities may be discussed or sold.
+
 
 -- Threat Intel --
 
