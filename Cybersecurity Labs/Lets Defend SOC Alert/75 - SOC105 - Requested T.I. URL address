@@ -19,7 +19,7 @@ Device Action : Allowed
 
 -- Threat Intel --
 
-Mar, 07, 2021, 05:29 PM > Domain > bit.ly > spam > Anon
+Mar, 07, 2021, 05:29 PM ⇒ Domain ⇒ bit.ly ⇒ spam ⇒ Anon
 
 
 -- Log Management --
@@ -29,24 +29,16 @@ Mar, 07, 2021, 05:47 PM ⇒ 10.15.15.12 ⇒ 67.199.248.10 ⇒ URL: https://bit.l
 
 -- Endpoint Security --
 
+Endpoint Security: MarksPhone 10.15.15.12
 
--- Analysis Result --
-
-
--- Artifacts --
-
-
--- Analyst Note --
-
-
--- Close Alert --
-
-
-
-
-
-
-
+Hostname: MarksPhone
+Domain: -
+IP Address: 10.15.15.12
+Bit Level: 64
+OS: Android 9.0, Pie
+Primary User: MarksPhone
+Client/Server: Client
+Last Login: Oct, 10, 2020, 03:28 PM
 
 
 -- Network and Log Analysis --
@@ -62,65 +54,45 @@ Mar, 07, 2021, 05:47 PM ⇒ 10.15.15.12 ⇒ 67.199.248.10 ⇒ URL: https://bit.l
 +------------------------+----------+--------------+-----------+----------------+------------+
 
 10.15.15.12 ⇒ 67.199.248.10 ⇒ URL: https://bit.ly/TAPSCAN
-10.15.15.12 ⇒ 13.95.16.245 ⇒ Request URL: https://www.teamviewer.com Request Method: GET Device Action: Allowed
-10.15.15.12 ⇒ 172.217.169.206 ⇒ URL: https://play.google.com/store/apps
-10.15.15.12 ⇒ 140.82.121.4 ⇒ URL: https://github.com/googleprojectzero/domato
 
 https://www.virustotal.com/gui/url/6bacb5686cd0a778532e6ca53026807bcbac02b6ce9a7a8f712c34d88276274b/detection
 https://hybrid-analysis.com/sample/f13085e5c1603a62751d72f7086b3dd6cc7ad4344c579fd47fb52026f7b66985
 
 
-Endpoint Analysis
-
-Endpoint Security: MarksPhone 10.15.15.12
-
-Hostname: MarksPhone
-Domain: -
-IP Address: 10.15.15.12
-Bit Level: 64
-OS: Android 9.0, Pie
-Primary User: MarksPhone
-Client/Server: Client
-Last Login: Oct, 10, 2020, 03:28 PM
-
-
-Threat Intel
-
-The Threat Intel tab analyze Indicators of Compromise (IOCs)
-
-
-➜ Analysis Result
+-- Analysis Result --
 
 Non-malicious
 
-+---------------------------+----------------------+----------------+----------------------+------------------------------------------------------------+
-| Value                    | Comment              | Type           | Verdict              | Notes                                                      |
-+---------------------------+----------------------+----------------+----------------------+------------------------------------------------------------+
-| 10.15.15.12              | Source Address       | IP Address     | Non-malicious        | Private/internal IP (RFC1918 range)                        |
-| 7.199.248.10             | Destination Address  | IP Address     | Needs investigation  | Public IP – check VirusTotal or AbuseIPDB                  |
-| https://bit.ly/TAPSCAN   | Request URL          | URL Address    | Suspicious           | Shortened URL – expand and scan on VirusTotal/URLScan       |
-+---------------------------+----------------------+----------------+----------------------+------------------------------------------------------------+
 
-Analyst Note. Please enter your analysis comments.
+-- Artifacts --
 
-The internal host (10.15.15.12) initiated a connection to an
-external IP (7.199.248.10) via a shortened URL (https://bit.ly/TAPSCAN).
-
-• 10.15.15.12 is a private RFC1918 address and is non-malicious.
-• 7.199.248.10 is a public IP; reputation unknown. Requires verification using VirusTotal and AbuseIPDB to determine if it is associated with command-and-control (C2) activity or abuse.
-• The Bit.ly URL (https://bit.ly/TAPSCAN) is suspicious, as URL shorteners are frequently used to obscure phishing or malware delivery links. It should be expanded using an
-  unshortening service (e.g., checkshorturl.com) and the resolved URL should be scanned in VirusTotal and URLScan.io.
-
-Initial assessment suggests potential malicious activity due to the use of a shortened URL pointing to an unknown external IP. Recommend further investigation and blocking of destination IP
-pending confirmation.
+10.15.15.12 ⇒ PDF Scanner app
+67.199.248.10 ⇒ bit.ly
+hxxtps://bit.ly/TAPSCAN ⇒ Investigation Request URL
 
 
-Closing the Alert. 
-The alert needs to be analyzed to determine if it is a true positive or a false positive. 
+-- Analyst Note --
 
-Alert identified as false positive. Source IP (10.15.15.12) belongs to internal network.
-No malicious activity observed. No outbound C2 or suspicious connections detected.
+On Mar 07, 2021, at 05:47 PM our SOC alerted on a Requested T.I. URL address. We did an investigation on the addresses included in the alert.
+A mobile endpoint named (MarksPhone) “10.15.15[.]12” was observed communicating out to “67.199.248[.]10”.
+The destination IP “67.199.248[.]10” was confirmed as non-malicious with it being owned by bit[.]ly. The company deals with URL shorteners and QR codes. The requested URL hxxps://bit.ly/TAPSCAN when analyzed redirects the requestor to Google’s Play Store. The app requested from the Play Store is the “PDF Scanner app – TapScanner”.
+This alert is a false positive and the ticket can now be closed out.
 
 
-https://app.letsdefend.io/case-management/casedetail/wh0am1_777/75
+-- Close Alert --
+
+False Positive and no further action is required.
+
+
+
+https://www.virustotal.com/gui/url/6bacb5686cd0a778532e6ca53026807bcbac02b6ce9a7a8f712c34d88276274b/detection
+https://www.virustotal.com/gui/ip-address/67.199.248.10
+https://talosintelligence.com/reputation_center/lookup?search=67.199.248.10#ip-addresses
+https://hybrid-analysis.com/sample/f13085e5c1603a62751d72f7086b3dd6cc7ad4344c579fd47fb52026f7b66985
+https://urlscan.io/result/019a691a-3d70-71a7-a11e-5843e3678271/
+https://bitly.com/
+
+https://app.letsdefend.io/monitoring?channel=investigation&event_id=75
+
+*
 
