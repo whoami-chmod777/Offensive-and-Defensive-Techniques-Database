@@ -18,27 +18,94 @@ Device Action : Blocked
 
 -- Threat Intel --
 
+Oct, 29, 2020, 07:43 PM ⇒ http://115.99.150.132:56841/Mozi.m ⇒ malware ⇒ Abuse ch
+
 
 -- Log Management --
+
+Oct, 29, 2020, 07:34 PM ⇒ 172.16.17.47 ⇒ 115.99.150.132
+
+Request URL: http://115.99.150.132:56841/Mozi.m
+Request Method: GET
+Device Action: Blocked
+Process: chrome.exe
+Parent Process: explorer.exe
+Parent Process MD5: 8b88ebbb05a0e56b7dcc708498c02b3e
+
+
+
+[Oct, 29, 2020, 07:34 PM] source_address=172.16.17.47 source_port=46938 destination_address=115.99.150.132 destination_port=56841 raw_log: {'Request URL': 'http://115.99.150.132:56841/Mozi.m', 'Request Method': 'GET', 'Device Action': 'Blocked', 'Process': 'chrome.exe', 'Parent Process': 'explorer.exe', 'Parent Process MD5': '8b88ebbb05a0e56b7dcc708498c02b3e'}
+
+
+source_address ⇒ 172.16.17.47
+source_port ⇒ 46938
+
+destination_address ⇒ 115.99.150.132
+destination_port ⇒ 56841
+
+time ⇒ Oct, 29, 2020, 07:34 PM
+
+Request URL ⇒ http://115.99.150.132:56841/Mozi.m
+Request Method ⇒ GET
+Device Action ⇒ Blocked
+
+Process ⇒ chrome.exe
+Parent Process ⇒ explorer.exe
+
+Parent Process MD5 ⇒ 8b88ebbb05a0e56b7dcc708498c02b3e
 
 
 -- Endpoint Security --
 
-
--- Network and Log Analysis --
+Hostname: BillPRD
+Domain: LetsDefend
+IP Address: 172.16.17.47
+Bit Level: 64
+OS: Windows 10
+Primary User: Bill01
+Client/Server: Client
+Last Login: Jan, 31, 2021, 07:56 PM
 
 
 -- Analysis Result --
 
+Analyze Threat Intel Data: Malicious
+Containment is not necessary for this alert.
+
 
 -- Artifacts --
+
+172[.]16[.]17[.]47 ⇒ BillPRD Source Address
+115[.]99[.]150[.]132 ⇒ Threat Actor
+hxxp[://]115[.]99[.]150[.]132:56841/Mozi[.]m ⇒ Requested URL
+hathway.com ⇒ Domain
+8b88ebbb05a0e56b7dcc708498c02b3e ⇒ Parent Process MD5 Hash Value
 
 
 -- Analyst Note --
 
+On Oct 29, 2020, at 07:34 PM, our SIEM generated an alert for a suspicious Threat Intelligence URL. The identified address, “hxxp[://]115[.]99[.]150[.]132:5684/Mozi[.]m,” was reported as malicious by an external Abuse.ch feed.
+Further verification through the Hybrid Analysis sandbox confirmed that the URL was indeed linked to malicious activity, and the IP “115.99.150[.]132” was traced to a source in India.
+However, this traffic was part of a controlled internal test for firewall evaluation. The SOC team had been informed in advance to disregard this specific connection. Despite that, the endpoint protection system successfully blocked the attempted communication.
+
 
 -- Close Alert --
 
+False Positiv
+
+On Oct 29, 2020, at 07:34 PM, the SIEM detected activity involving a Threat Intelligence URL. The URL “hxxp[://]115[.]99[.]150[.]132:5684/Mozi[.]m” was flagged as malicious by an external Abuse.ch feed. The associated file (Mozi.m) is linked to the Mozi botnet, which is commonly used in DDoS campaigns and other malicious network operations.
+To validate the finding, the URL was analyzed using Hybrid Analysis, which confirmed the presence of malicious behavior and identified the IP “115.99.150[.]132” as originating from India.
+Upon further review, it was determined that this traffic was part of a planned internal test for firewall evaluation. The SOC team had been informed beforehand to disregard this IP. Despite this, the endpoint protection system successfully blocked the attempted connection, demonstrating effective defensive controls.
+
+
+
+https://www.virustotal.com/gui/url/95f3eda1ff810022df76400ab1d5f2e4ac44817f116678132486fc92ec6aab46/detection
+https://www.virustotal.com/gui/ip-address/115.99.150.132
+https://www.virustotal.com/gui/file/9e1ec8b43a88e68767fd8fed2f38e7984357b3f4186d0f907e62f8b6c9ff56ad 
+https://www.abuseipdb.com/check/115.99.150.132
+https://hybrid-analysis.com/sample/7ab6edc11ac77ea69f06d628f59ec68751b8b8f72d81ce73c37f24fdb5c172c6
+https://app.any.run/tasks/5971fb6e-9ba2-41c0-9a84-b18df8ba2427
+https://any.run/report/95f3eda1ff810022df76400ab1d5f2e4ac44817f116678132486fc92ec6aab46/5971fb6e-9ba2-41c0-9a84-b18df8ba2427
 
 
 *
