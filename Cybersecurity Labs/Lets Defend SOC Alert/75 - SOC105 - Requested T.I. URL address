@@ -66,16 +66,16 @@ Non-malicious
 
 -- Artifacts --
 
-10.15.15.12 ⇒ PDF Scanner app
-67.199.248.10 ⇒ bit.ly
+10[.]15[.]15[.]12 ⇒ PDF Scanner app
+67[.]199[.]248[.]10 ⇒ bit.ly
 hxxtps[://]bit[.]ly/TAPSCAN ⇒ Investigation Request URL
 
 
 -- Analyst Note --
 
 On Mar 07, 2021, at 05:47 PM our SOC alerted on a Requested T.I. URL address. We did an investigation on the addresses included in the alert.
-A mobile endpoint named (MarksPhone) "10.15.15[.]12" was observed communicating out to "67.199.248[.]10".
-The destination IP "67.199.248[.]10" was confirmed as non-malicious with it being owned by bit[.]ly. The company deals with URL shorteners and QR codes. The requested URL hxxps[://]bit[.]ly/TAPSCAN when analyzed redirects the requestor to Google’s Play Store. The app requested from the Play Store is the "PDF Scanner app – TapScanner".
+A mobile endpoint named (MarksPhone) "10[.]15[.]15[.]12" was observed communicating out to "67[.]199[.]248[.]10".
+The destination IP "67[.]199[.]248[.]10" was confirmed as non-malicious with it being owned by bit[.]ly. The company deals with URL shorteners and QR codes. The requested URL hxxps[://]bit[.]ly/TAPSCAN when analyzed redirects the requestor to Google’s Play Store. The app requested from the Play Store is the "PDF Scanner app – TapScanner".
 This alert is a false positive and the ticket can now be closed out.
 
 
