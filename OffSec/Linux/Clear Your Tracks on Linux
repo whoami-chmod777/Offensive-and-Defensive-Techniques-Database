@@ -1,0 +1,113 @@
+
+--- Clear Your Tracks on Linux ---
+
+• auth.log
+• kern.log
+• Clear Your Tracks with Shred
+• Delete The History and Clear Your Tracks
+• Command history
+• Automate the Cleaning of (any) Files 
+• Secure-Delete
+• Install Wipe
+• Some other Tricks
+• Don't forgot to remove the Browser History 
+• Linux distribution Tails
+• 
+• 
+• 
+• 
+• 
+• 
+
+
+
+-- auth.log --
+
+sudo nano /var/log/auth.log
+
+
+-- kern.log --
+
+cat /var/log/kern.log
+sudo dmesg
+
+
+-- Clear Your Tracks with Shred --
+
+But why don’t we just simply delete all those files, because all the deleted files can be recovered, and deleting them with shred it actually wipes them permanently
+Shred actually renames the file, and changes it to 0’s so many times, and at the end removes it completely.
+
+shred -h
+man shred
+
+shred -zxuvf (Name of your file)
+
+-z, --zero     add a final overwrite with zeros to hide shredding
+-x, --exact    do not round file sizes up to the next full block; this is the default for non-regular files
+-u             deallocate and remove file after overwriting
+-v, --verbose  show progress
+-n, --iterations=N  overwrite N times instead of the default (3)
+
+
+-- Delete The History and Clear Your Tracks --
+
+cat ~/.bash_history
+> ~/.bash_history
+
+
+-- Command history --
+
+echo $HISTFILE
+export HISTSIZE=0
+
+
+-- Automate the Cleaning of (any) Files --
+
+sudo crontab -e
+00 23 * * * shed~/dev/null > ~/.bash_history && cat /dev/null > .bash_hystory
+
+
+-- Secure-Delete --
+
+Secure-Delete is a set of tools for Linux operating system and they provide advanced techniques for permanent removal of files.
+
+sudo apt install secure-delete
+
+⇒ srm, smem, sfill, sswap
+
+srm --help
+smem --help
+sfill --help
+sswap --help
+
+-- Install Wipe --
+
+Wipe was originally developed to securely erase files from magnetic media. Wipe repeatedly overwrites special patterns to the files to be destroyed, using the fsync() call and/or the O_SYNC bit to force disk access. In normal mode, 34 patterns are used (of which 8 are random)
+
+sudo apt install wipe
+
+man wipe
+wipe -h
+
+sudo wipe filename
+sudo wipe -r directory name
+
+
+-- Some other Tricks --
+
+➜ Check for hidden files: ls -altr
+➜ Check what are the currently open files on the system: sudo lsof | grep .log
+➜ Check what are the recent documents on the system: sudo find / -cmin 0 -print
+
+
+-- Don't forgot to remove the Browser History --
+
+Obviously, you should also think about your browser history, your cookies and so many other things.
+
+
+-- Linux distribution Tails --
+
+A good option is to use a Tails for example, which you install on a USB. After shutting down or restarting the system, all downloaded files, browser history, etc. - are deleted.
+
+
+*
