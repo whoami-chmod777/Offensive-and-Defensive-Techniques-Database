@@ -71,7 +71,7 @@ This indicates a malicious document (likely a macro dropper or phishing lure) co
 172[.]16[.]17[.]47 ⇒ Source Address
 5[.]188[.]0[.]251 ⇒ Destination Address
 https://pssd-ltdgroup.com ⇒ Request URL
-hxxps[://]pssd-ltdgroup[.]com.xlsm ⇒ Malicious XLSM Document
+Krankheitsmeldung_092020_07.xlsm ⇒ Malicious XLSM Document
 14970ce0a3d03c46a4180db69866d0d1 ⇒ File Hash (MD5)
 AS202422 (G-Core Labs S.A.) ⇒ ASN
 
