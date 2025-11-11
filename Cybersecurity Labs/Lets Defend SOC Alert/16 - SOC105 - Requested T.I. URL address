@@ -20,15 +20,36 @@ Device Action : Allowed
 
 -- Threat Intel --
 
-Threat intelligence refers to the collection, analysis, and sharing of information about potential or existing cyber threats. 
-It helps organizations understand the tactics, techniques, and procedures (TTPs) used by cybercriminals, hackers, and other malicious actors. 
-This knowledge enables organizations to better prepare for, prevent, and respond to cyberattacks.
+No Threat Intel
 
 
 -- Log Management --
 
+Sep, 20, 2020, 10:54 PM ⇒ Proxy ⇒ 172.16.17.47 ⇒ 5.188.0.251
+URL: https://pssd-ltdgroup.com
+Sep, 20, 2020, 10:54 PM ⇒ Firewall ⇒ 172.16.17.47 ⇒ 5.188.0.251
+Main Process: Krankheitsmeldung_092020_07.xlsm
+Request URL: https://pssd-ltdgroup.com
+
+[Sep, 20, 2020, 10:54 PM] source_address=172.16.17.47 source_port=54211 destination_address=5.188.0.251 destination_port=443 raw_log: {'Main Process': 'Krankheitsmeldung_092020_07.xlsm', 'Request URL': 'https://pssd-ltdgroup.com'}
+
+Firewall
+source_address ➜ 172.16.17.47
+destination_address ➜ 5.188.0.251
+time: Sep, 20, 2020, 10:54 PM
+
+Main Process: Krankheitsmeldung_092020_07.xlsm
+Request URL: https://pssd-ltdgroup.com
+
+[Sep, 20, 2020, 10:54 PM] source_address=172.16.17.47 source_port=54211 destination_address=5.188.0.251 destination_port=443 raw_log: {'URL': 'https://pssd-ltdgroup.com'}
+
 
 -- Endpoint Security --
+
+MD5 Hash: 14970ce0a3d03c46a4180db69866d0d1
+Path: c:/users/Bill/desktop/Krankheitsmeldung_092020_07.xlsm
+Username: Bill01
+Start Time: 20.09.2020 22:51
 
 
 -- Network and Log Analysis --
@@ -37,15 +58,41 @@ This knowledge enables organizations to better prepare for, prevent, and respond
 -- Analysis Result --
 
 This URL is malicious
-Containment is not necessary for this alert
+Containment Required: Yes
 
-Containment plays a pivotal role in cybersecurity by limiting the impact of security incidents, protecting data and operations, facilitating effective incident response, preserving evidence for forensic analysis, and ensuring compliance with legal and regulatory requirements.
+The file Krankheitsmeldung_092020_07.xlsm (MD5: 14970ce0a3d03c46a4180db69866d0d1) was executed on host BillPRD (172.16.17.47) and initiated a network request to https://pssd-ltdgroup.com (IP: 5.188.0.251).
+According to VirusTotal, 48/66 vendors flagged the file as malicious and 15/98 vendors flagged the domain as malicious. 
+The IP address belongs to AS202422 (G-Core Labs S.A.), known for hosting malware-related content. 
+This indicates a malicious document (likely a macro dropper or phishing lure) connecting to a known malicious C2 infrastructure.
 
 
 -- Artifacts --
 
+172[.]16[.]17[.]47 ⇒ Source Address
+5[.]188[.]0[.]251 ⇒ Destination Address
+https://pssd-ltdgroup.com ⇒ Request URL
+hxxps[://]pssd-ltdgroup[.]com.xlsm ⇒ Malicious XLSM Document
+14970ce0a3d03c46a4180db69866d0d1 ⇒ File Hash (MD5)
+AS202422 (G-Core Labs S.A.) ⇒ ASN
+
 
 -- Analyst Note --
 
+The investigation confirms malicious activity initiated from host BillPRD through execution of a malicious macro-enabled Excel document, Krankheitsmeldung_092020_07.xlsm. 
+The file attempted to contact the known malicious domain pssd-ltdgroup.com (5.188.0.251). 
+VirusTotal results validate this as a true positive malware infection attempt. 
+Containment and eradication actions have been recommended to prevent further compromise. 
+Additional monitoring should be performed to ensure no persistence or lateral movement occurred.
+
 
 -- Close Alert --
+
+True Positive
+
+The analysis confirms that the file Krankheitsmeldung_092020_07.xlsm (MD5: 14970ce0a3d03c46a4180db69866d0d1) was executed on the host BillPRD (172.16.17.47) 
+and established a connection to the domain pssd-ltdgroup.com (5.188.0.251), which has been identified as malicious.
+Both VirusTotal and external threat intelligence feeds classify the domain and the file as malicious.
+
+
+*
+
