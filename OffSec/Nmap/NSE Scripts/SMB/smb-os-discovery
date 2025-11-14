@@ -1,0 +1,14 @@
+
+Script Summary
+
+
+
+
+
+
+nmap --script smb-os-discovery.nse -p445 127.0.0.1
+sudo nmap -sU -sS --script smb-os-discovery.nse -p U:137,T:139 127.0.0.1
+
+
+
+https://nmap.org/nsedoc/scripts/smb-os-discovery.html
