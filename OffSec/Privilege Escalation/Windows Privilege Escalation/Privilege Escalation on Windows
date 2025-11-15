@@ -1,1 +1,61 @@
 
+We will have a look at some common Windows privilege escalation techniques. We will start with the basics of gathering relevant system information that can be useful in the process of escalating privileges, such as hotfixes, installed software and configuration.
+Then we will learn about unquoted binary service paths, AlwaysInstallElevated settings, unattended installation files and some other techniques. We will end with some common Windows local privilege escalation exploits and useful scripts and tools that can assist in the process of privilege escalation on Windows systems.
+
+• Gather system information for privilege escalation
+• Unquoted Service Paths
+• Modifying the binary service path
+• AlwaysInstallElevated setting
+• Unattended Installs
+• Bypassing UAC with Metasploit
+• Windows Exploit Suggester
+• WMI Hotfixes
+• WinPEAS
+• Scripts & Tools
+• Common Exploits
+
+
+-- Gather system information for privilege escalation --
+
+
+
+-- Unquoted Service Paths --
+
+
+
+-- Modifying the binary service path --
+
+
+
+-- AlwaysInstallElevated setting --
+
+
+
+-- Unattended Installs --
+
+
+
+-- Bypassing UAC with Metasploit --
+
+
+
+-- Windows Exploit Suggester --
+
+
+
+-- WMI Hotfixes --
+
+
+
+-- WinPEAS --
+
+
+
+-- Scripts & Tools --
+
+
+
+-- Common Exploits --
+
+
+*
