@@ -1,10 +1,7 @@
 
 Statistically, most organizations are using Windows operating systems on servers and workstations. But if you take a broader look at the complete infrastructure you will also encounter a lot of devices running on Linux. Examples of devices that are very likely to run a Linux operating system are firewalls, routers, VOIP servers, NAS and webservers. These kinds of devices are very critical for a company’s infrastructure with severe consequences when they are compromised.
-
 It happens very often that system administrators in Windows environments overlook the Linux devices for many reasons. One of these reasons is the lack of knowledge about how to maintain Linux systems and how to secure them. This can result in critical Linux devices being the weakest link in the security chain and become a great security threat. Therefore, it is very important as a penetration tester to focus not only on Windows systems because they cover 90% of the company’s devices but also on (critical) Linux systems.
-
 The most common ways of privilege escalation on Linux systems are leveraging kernel vulnerabilities, misconfigurations and vulnerable software to execute arbitrary code under root privileges. New kernel vulnerabilities occur on a regular basis and often involve a wide range of kernel versions. A recently discovered example of a kernel vulnerability allowing for privilege escalation is the DirtyCOW vulnerability affecting hundreds of Linux kernel versions. Also misconfigurations in files, services and security mechanisms and out of date software commonly allow for privilege escalation.
-
 
 • Gather system information for privilege escalation
 • Collecting system information manually
