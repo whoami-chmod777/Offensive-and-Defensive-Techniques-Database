@@ -17,9 +17,37 @@ Then we will learn about unquoted binary service paths, AlwaysInstallElevated se
 
 -- Gather system information for privilege escalation --
 
+systeminfo
+systeminfo | findstr /B /C:"OS Name" /C:"OS Version"
+netstat -ano
+
+netsh firewall show state
+netsh firewall show config
+
+schtasks /query /fo LIST /v
+tasklist /SVC
+net start
+
+DRIVERQUERY
+wmic qfe get Caption,Description,HotFixID,InstalledOn
+
+dir /s *password*
+findstr /si password *.txt
 
 
 -- Unquoted Service Paths --
+
+The Unquoted Service Paths vulnerability is a vulnerability that arises out of the way Windows interprets a file path for a service binary (executable). 
+File paths that contain spaces, should be enclosed in double quotes. If not, there’s a potential Unquoted Service Path vulnerability.
+
+To successfully exploit this vulnerability, we need three things:
+• A service with an "unquoted" binary path containing one or more spaces in the path.
+• Write permissions for any of the folders containing spaces.
+• A way to reboot the service or system in order to execute a payload.
+
+
+
+
 
 
 
