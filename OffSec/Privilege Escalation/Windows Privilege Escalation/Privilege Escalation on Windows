@@ -259,10 +259,12 @@ https://github.com/PowerShellEmpire/PowerTools/tree/master/PowerUp
 • Windows Vista/2008 6.1.6001 x32,
 • Windows 7 6.2.7600 x32,
 • Windows 7/2008 R2 6.2.7600 x64.
+
 https://www.exploit-db.com/exploits/15609/
 
 ➜ Microsoft Windows 7 SP1 (x86) – ‘WebDAV’ Privilege Escalation (MS16-016)
 • Windows 7 SP1 x86 (build 7601)
+
 https://www.exploit-db.com/exploits/39432/
 
 And here’s a pre-compiled version that pops a system shell within the same session instead of in a new window:
@@ -270,6 +272,7 @@ https://www.exploit-db.com/exploits/39788/
 
 ➜ Microsoft Windows 7 SP1 (x86) – Privilege Escalation (MS16-014)
 • Windows 7 SP1 x86
+
 https://www.exploit-db.com/exploits/40039/
 
 ➜ Microsoft Windows 7 < 10 / 2008 < 2012 R2 (x86/x64) – Privilege Escalation (MS16-032)
@@ -277,11 +280,13 @@ https://www.exploit-db.com/exploits/40039/
 • Windows 8 x86/x64
 • Windows 10
 • Windows Server 2008-2012R2
+
 https://www.exploit-db.com/exploits/39719/
 
 ➜ CVE-2017-0213: Windows COM Elevation of Privilege Vulnerability
 • Windows 10 (1511/10586, 1607/14393 & 1703/15063)
 • Windows 7 SP1 x86/x64
+
 https://www.exploit-db.com/exploits/42020/
 
 Precompiled exploits:
@@ -290,34 +295,132 @@ https://github.com/SecWiki/windows-kernel-exploits/tree/master/CVE-2017-0213
 
 ➜ CVE-2019-1253: Windows Elevation of Privilege Vulnerability
 • Windows 10 (all versions) that are not patched with September (2019) update
+
 https://github.com/padovah4ck/CVE-2019-1253
 
-➜ 
+➜ CVE-2019-0836: Microsoft Windows 10 1809
+• Windows 10 (1607,1703, 1709, 1803, 1809)
+• Windows 7 and Windows 8.1
+• Windows server 2008 (R2), 2012 (R2), 2016 (Server Core) and 2019 (Server Core)
 
+https://www.exploit-db.com/exploits/46718
+https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2019-0836
+https://www.rapid7.com/db/vulnerabilities/msft-cve-2019-0836
 
-➜ 
+➜ CVE-2020-0601: Windows CryptoAPI Spoofing Vulnerability
+This vulnerability exists in the way Windows CryptoAPI (Crypt32.dll) validates Elliptic Curve Cryptography (ECC) certificates. 
+An attacker can use a spoofed code-signing certificate to sign malicious executables, making it appear the executable is from a trusted, legitimate source. 
+A successful attack allows the attacker to conduct a man-in-the-middle attack and decrypt confidential information on user connections to the affected software.
+• Windows 10
+• Windows Server 2016
+• Windows Server 2019
 
+https://www.rapid7.com/db/vulnerabilities/msft-cve-2020-0601/
+https://www.trendmicro.com/en_us/research/20/b/an-in-depth-technical-analysis-of-curveball-cve-2020-0601.html
+https://msrc.microsoft.com/update-guide/en-US/vulnerability/CVE-2020-0601
 
-➜ 
+➜ CVE-2020-1472: (Zerologon) Netlogon Elevation of Privilege Vulnerability
+Zerologin is a privilege escalation vulnerability that exists in a vulnerable Netlogon secure channel connection to a domain controller, using the Netlogon Remote Protocol (MS-NRPC). 
+An unauthenticated attacker can use MS-NRPC to connect to a domain controller to obtain domain administrator access.
+• Windows Server 2008
+• Windows Server 2012(R2)
+• Windows Server 2016
+• Windows Server 2019
 
+https://nvd.nist.gov/vuln/detail/cve-2020-1472
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1472
+https://www.rapid7.com/db/vulnerabilities/msft-cve-2020-1472/
+https://msrc.microsoft.com/update-guide/vulnerability/CVE-2020-1472
+https://www.crowdstrike.com/blog/cve-2020-1472-zerologon-security-advisory/
 
-➜ 
+➜ CVE-2021-34527: Windows Print Spooler RCE
+The Windows printer spooler vulnerability applies to a Windows component that is responsible for controlling print queues. The vulnerability can be exploited for privilege escalation.
+• Windows 7 and Windows 8.1
+• Windows 10
+• Windows Server 2012, Windows Server 2016
 
+https://vulcan.io/blog/fixing-cve-2021-34527/
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-34527
+https://www.rapid7.com/blog/post/2021/06/30/cve-2021-1675-printnightmare-patch-does-not-remediate-vulnerability/
 
-➜ 
+➜ CVE-2021-26855: Exchange ProxyLogon
+Recently, many critical vulnerabilities (with exploits) have been identified in multiple versions of Microsoft Exchange server. 
+Many of these vulnerabilities are present in the internet facing parts of Microsoft exchange and can be exploited through a low privileged user. 
+The ProxyLogon vulnerability is classified as a critical Server-side request forgery (SSRF) and authentication bypass vulnerability.
+• Microsoft Exchange Server 2013
+• Microsoft Exchange Server 2016
+• Microsoft Exchange Server 2019
 
+https://msrc.microsoft.com/update-guide/en-US/vulnerability/CVE-2021-26855
+https://nvd.nist.gov/vuln/detail/CVE-2021-26855
 
-➜ 
+➜ CVE-2021-42278 and CVE-2021-42287: noPac Privilege Escalation
+These are both vulnerabilities in Microsoft domain controllers, with CVE-2021-42287 affecting Active Directory Domain Services (AD DS) and CVE-2021-42278 affecting Security Account Manager (SAM). 
+When both vulnerabilities are combined, they allow an attacker to perform privilege escalation.
+• Windows Server 2008
+• Windows Server 2012(R2)
+• Windows Server 2016
+• Windows Server 20H2
 
+https://msrc.microsoft.com/update-guide/vulnerability/CVE-2021-42278
+https://msrc.microsoft.com/update-guide/vulnerability/CVE-2021-42287
 
-➜ 
+➜ CVE-2022-37969: Windows Common Log File System Driver Privilege Escalation
+This vulnerability resides in the Windows Common Log File System Driver (CLFS.sys) and allows an attacker to perform privilege escalation to gain SYSTEM privileges.
+• Windows 10
+• Windows 11
 
+https://github.com/fortra/CVE-2022-37969
+https://www.zscaler.com/blogs/security-research/technical-analysis-windows-clfs-zero-day-vulnerability-cve-2022-37969-part
+https://msrc.microsoft.com/update-guide/vulnerability/CVE-2022-37969
 
-➜ 
+➜ CVE-2023-28293: Windows Kernel Elevation of Privilege Vulnerability
+This vulnerability resides in the Windows kernel and allows an attacker to perform privilege escalation.
+• Windows 10
+• Windows 11
+• Windows Server 2008, 2012, 2016
+• Windows Server 2019
+• Windows Server 2022
 
-
-➜ 
-
+https://www.exploit-db.com/exploits/51544
+https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-28293
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-28293
 
 
 *
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
