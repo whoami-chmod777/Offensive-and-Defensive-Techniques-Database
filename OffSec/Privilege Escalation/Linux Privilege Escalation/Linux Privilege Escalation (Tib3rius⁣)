@@ -17,3 +17,51 @@
 
 -- Privilege Escalation in Linux --
 
+Our ultimate goal with privilege escalation in Linux is to gain a shell running as the root user.
+Privilege escalation can be simple (e.g. a kernel exploit) or require a lot of reconnaissance on the compromised system.
+In a lot of cases, privilege escalation may not simply rely on a single misconfiguration, but may require you to think, and combine multiple misconfigurations.
+All privilege escalations are effectively examples of access control violations.
+Access control and user permissions are intrinsically linked.
+
+
+-- Understanding Permissions in Linux --
+
+➜ Users, Groups, and Files & Directories
+
+At a basic level, permissions in Linux are a relationship between users, groups, and files & directories.
+Users can belong to multiple groups. Groups can have multiple users. 
+Every file and directory defines its permissions in terms of a user, a group, and “others” (all other users).
+
+⇒
+
+
+⇒
+
+
+⇒
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
