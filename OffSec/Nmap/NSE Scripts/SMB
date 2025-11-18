@@ -242,3 +242,8 @@ smb2-capabilities
 smb2-security-mode
 smb2-time
 smb2-vuln-uptime
+
+
+https://nmap.org/nsedoc/scripts/
+
+*
