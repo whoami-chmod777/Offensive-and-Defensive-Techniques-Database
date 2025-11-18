@@ -1,0 +1,402 @@
+
+--- HTTP Scripts ---
+
+http-adobe-coldfusion-apsa1301
+http-affiliate-id
+http-apache-negotiation
+http-apache-server-status
+http-aspnet-debug
+http-auth
+http-auth-finder
+http-avaya-ipoffice-users
+http-awstatstotals-exec
+http-axis2-dir-traversal
+http-backup-finder
+http-barracuda-dir-traversal
+http-bigip-cookie
+http-brute
+http-cakephp-version
+http-chrono
+http-cisco-anyconnect
+http-coldfusion-subzero
+http-comments-displayer
+http-config-backup
+http-cookie-flags
+http-cors
+http-cross-domain-policy
+http-csrf
+http-date
+http-default-accounts
+http-devframework
+http-dlink-backdoor
+http-dombased-xss
+http-domino-enum-passwords
+http-drupal-enum
+http-drupal-enum-users
+http-enum
+http-errors
+http-exif-spider
+http-favicon
+http-feed
+http-fetch
+http-fileupload-exploiter
+http-form-brute
+http-form-fuzzer
+http-frontpage-login
+http-generator
+http-git
+http-gitweb-projects-enum
+http-google-malware
+http-grep
+http-headers
+http-hp-ilo-info
+http-huawei-hg5xx-vuln
+http-icloud-findmyiphone
+http-icloud-sendmsg
+http-iis-short-name-brute
+http-iis-webdav-vuln
+http-internal-ip-disclosure
+http-joomla-brute
+http-jsonp-detection
+http-litespeed-sourcecode-download
+http-ls
+http-majordomo2-dir-traversal
+http-malware-host
+http-mcmp
+http-method-tamper
+http-methods
+http-mobileversion-checker
+http-ntlm-info
+http-open-proxy
+http-open-redirect
+http-passwd
+http-php-version
+http-phpmyadmin-dir-traversal
+http-phpself-xss
+http-proxy-brute
+http-put
+http-qnap-nas-info
+http-referer-checker
+http-rfi-spider
+http-robots.txt
+http-robtex-reverse-ip
+http-robtex-shared-ns
+http-sap-netweaver-leak
+http-security-headers
+http-server-header
+http-shellshock
+http-sitemap-generator
+http-slowloris
+http-slowloris-check
+http-sql-injection
+http-stored-xss
+http-svn-enum
+http-svn-info
+http-title
+http-tplink-dir-traversal
+http-trace
+http-traceroute
+http-trane-info
+http-unsafe-output-escaping
+http-useragent-tester
+http-userdir-enum
+http-vhosts
+http-virustotal
+http-vlcstreamer-ls
+http-vmware-path-vuln
+http-vuln-cve2006-3392
+http-vuln-cve2009-3960
+http-vuln-cve2010-0738
+http-vuln-cve2010-2861
+http-vuln-cve2011-3192
+http-vuln-cve2011-3368
+http-vuln-cve2012-1823
+http-vuln-cve2013-0156
+http-vuln-cve2013-6786
+http-vuln-cve2013-7091
+http-vuln-cve2014-2126
+http-vuln-cve2014-2127
+http-vuln-cve2014-2128
+http-vuln-cve2014-2129
+http-vuln-cve2014-3704
+http-vuln-cve2014-8877
+http-vuln-cve2015-1427
+http-vuln-cve2015-1635
+http-vuln-cve2017-1001000
+http-vuln-cve2017-5638
+http-vuln-cve2017-5689
+http-vuln-cve2017-8917
+http-vuln-misfortune-cookie
+http-vuln-wnr1000-creds
+http-waf-detect
+http-waf-fingerprint
+http-webdav-scan
+http-wordpress-brute
+http-wordpress-enum
+http-wordpress-users
+http-xssed
+https-redirect
+
+
+http-adobe-coldfusion-apsa1301
+http-affiliate-id
+
+-- http-apache-negotiation --
+
+Checks if the target http server has mod_negotiation enabled. This feature can be leveraged to find hidden resources and spider a web site using fewer requests.
+
+nmap --script=http-apache-negotiation --script-args http-apache-negotiation.root=/root/ <target>
+
+PORT   STATE SERVICE
+80/tcp open  http
+|_http-apache-negotiation: mod_negotiation enabled
+
+
+-- http-apache-server-status --
+
+Attempts to retrieve the server-status page for Apache webservers that have mod_status enabled. If the server-status page exists and appears to be from mod_status the script will parse useful information such as the system uptime, Apache version and recent HTTP requests.
+
+nmap -p80 --script http-apache-server-status <target>
+nmap -sV --script http-apache-server-status <target>
+
+PORT   STATE SERVICE
+80/tcp open  http
+| http-apache-server-status:
+|   Heading: Apache Server Status for example.com (via 127.0.1.1)
+|   Server Version:  Apache/2.4.12 (Ubuntu)
+|   Server Built:  Jul 24 2015 15:59:00
+|   Server Uptime:   53 minutes 31 seconds
+|   Server Load:  0.00 0.01 0.05
+|   VHosts:
+|_    www.example.com:80  GET /server-status HTTP/1.1
+
+
+http-aspnet-debug
+http-auth
+http-auth-finder
+http-avaya-ipoffice-users
+http-awstatstotals-exec
+http-axis2-dir-traversal
+http-backup-finder
+http-barracuda-dir-traversal
+http-bigip-cookie
+http-brute
+http-cakephp-version
+http-chrono
+http-cisco-anyconnect
+http-coldfusion-subzero
+http-comments-displayer
+http-config-backup
+http-cookie-flags
+http-cors
+http-cross-domain-policy
+http-csrf
+http-date
+http-default-accounts
+http-devframework
+http-dlink-backdoor
+http-dombased-xss
+http-domino-enum-passwords
+http-drupal-enum
+http-drupal-enum-users
+
+
+-- http-enum --
+
+Enumerates directories used by popular web applications and servers.
+
+nmap -sV --script=http-enum <target>
+
+Interesting ports on test.skullsecurity.org (208.81.2.52):
+PORT   STATE SERVICE REASON
+80/tcp open  http    syn-ack
+| http-enum:
+|   /icons/: Icons and images
+|   /images/: Icons and images
+|   /robots.txt: Robots file
+|   /sw/auth/login.aspx: Citrix WebTop
+|   /images/outlook.jpg: Outlook Web Access
+|   /nfservlets/servlet/SPSRouterServlet/: netForensics
+|_  /nfservlets/servlet/SPSRouterServlet/: netForensics
+
+
+http-errors
+http-exif-spider
+http-favicon
+http-feed
+http-fetch
+http-fileupload-exploiter
+http-form-brute
+http-form-fuzzer
+http-frontpage-login
+http-generator
+http-git
+http-gitweb-projects-enum
+http-google-malware
+http-grep
+http-headers
+http-hp-ilo-info
+http-huawei-hg5xx-vuln
+http-icloud-findmyiphone
+http-icloud-sendmsg
+http-iis-short-name-brute
+http-iis-webdav-vuln
+http-internal-ip-disclosure
+http-joomla-brute
+http-jsonp-detection
+http-litespeed-sourcecode-download
+http-ls
+http-majordomo2-dir-traversal
+http-malware-host
+http-mcmp
+http-method-tamper
+
+
+-- http-methods --
+
+Finds out what options are supported by an HTTP server by sending an OPTIONS request. Lists potentially risky methods. It tests those methods not mentioned in the OPTIONS headers individually and sees if they are implemented. Any output other than 501/405 suggests that the method is if not in the range 400 to 600. If the response falls under that range then it is compared to the response from a randomly generated method.
+
+nmap --script http-methods <target>
+nmap --script http-methods --script-args http-methods.url-path='/website' <target>
+
+PORT   STATE SERVICE REASON
+80/tcp open  http    syn-ack
+| http-methods:
+|_  Supported Methods: GET HEAD POST OPTIONS
+
+
+-- http-mobileversion-checker --
+
+http-ntlm-info
+http-open-proxy
+http-open-redirect
+http-passwd
+http-php-version
+http-phpmyadmin-dir-traversal
+http-phpself-xss
+http-proxy-brute
+http-put
+http-qnap-nas-info
+http-referer-checker
+http-rfi-spider
+
+
+-- http-robots.txt --
+
+Checks for disallowed entries in /robots.txt on a web server.
+
+nmap -sV -sC <target>
+
+80/tcp  open   http    syn-ack
+|  http-robots.txt: 156 disallowed entries (40 shown)
+|  /news?output=xhtml& /search /groups /images /catalogs
+|  /catalogues /news /nwshp /news?btcid=*& /news?btaid=*&
+|  /setnewsprefs? /index.html? /? /addurl/image? /pagead/ /relpage/
+|  /relcontent /sorry/ /imgres /keyword/ /u/ /univ/ /cobrand /custom
+|  /advanced_group_search /googlesite /preferences /setprefs /swr /url /default
+|  /m? /m/? /m/lcb /m/news? /m/setnewsprefs? /m/search? /wml?
+|_ /wml/? /wml/search?
+
+
+http-robtex-reverse-ip
+http-robtex-shared-ns
+http-sap-netweaver-leak
+
+
+-- http-security-headers --
+
+Checks for the HTTP response headers related to security given in OWASP Secure Headers Project and gives a brief description of the header and its configuration value.
+
+nmap -p <port> --script http-security-headers <target>
+
+80/tcp open  http    syn-ack
+| http-security-headers:
+|   Strict_Transport_Security:
+|     Header: Strict-Transport-Security: max-age=15552000; preload
+|   Public_Key_Pins_Report_Only:
+|     Header: Public-Key-Pins-Report-Only: max-age=500; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="; pin-sha256="r/mIkG3eEpVdm+u/ko/cwxzOMo1bk4TyHIlByibiA5E="; pin-sha256="q4PO2G2cbkZhZ82+JgmRUyGMoAeozA+BSXVXQWB8XWQ="; report-uri="http://reports.fb.com/hpkp/"
+|   X_Frame_Options:
+|     Header: X-Frame-Options: DENY
+|     Description: The browser must not display this content in any frame.
+|   X_XSS_Protection:
+|     Header: X-XSS-Protection: 0
+|     Description: The XSS filter is disabled.
+|   X_Content_Type_Options:
+|     Header: X-Content-Type-Options: nosniff
+|     Will prevent the browser from MIME-sniffing a response away from the declared content-type.
+|   Content-Security-Policy:
+|     Header: Content-Security-Policy: script-src 'self'
+|     Description: Loading policy for all resources type in case of a resource type dedicated directive is not defined (fallback).
+|   X-Permitted-Cross-Domain-Policies:
+|     Header: X-Permitted-Cross-Domain-Policies: none
+|     Description : No policy files are allowed anywhere on the target server, including this master policy file.
+|   Cache_Control:
+|     Header: Cache-Control: private, no-cache, no-store, must-revalidate
+|   Pragma:
+|     Header: Pragma: no-cache
+|   Expires:
+|_    Header: Expires: Sat, 01 Jan 2000 00:00:00 GMT
+
+
+http-server-header
+http-shellshock
+http-sitemap-generator
+http-slowloris
+http-slowloris-check
+http-sql-injection
+http-stored-xss
+http-svn-enum
+http-svn-info
+http-title
+http-tplink-dir-traversal
+http-trace
+http-traceroute
+http-trane-info
+http-unsafe-output-escaping
+http-useragent-tester
+http-userdir-enum
+http-vhosts
+http-virustotal
+http-vlcstreamer-ls
+http-vmware-path-vuln
+http-vuln-cve2006-3392
+http-vuln-cve2009-3960
+http-vuln-cve2010-0738
+http-vuln-cve2010-2861
+http-vuln-cve2011-3192
+http-vuln-cve2011-3368
+http-vuln-cve2012-1823
+http-vuln-cve2013-0156
+http-vuln-cve2013-6786
+http-vuln-cve2013-7091
+http-vuln-cve2014-2126
+http-vuln-cve2014-2127
+http-vuln-cve2014-2128
+http-vuln-cve2014-2129
+http-vuln-cve2014-3704
+http-vuln-cve2014-8877
+http-vuln-cve2015-1427
+http-vuln-cve2015-1635
+http-vuln-cve2017-1001000
+http-vuln-cve2017-5638
+http-vuln-cve2017-5689
+http-vuln-cve2017-8917
+http-vuln-misfortune-cookie
+http-vuln-wnr1000-creds
+http-waf-detect
+http-waf-fingerprint
+http-webdav-scan
+http-wordpress-brute
+http-wordpress-enum
+http-wordpress-users
+http-xssed
+https-redirect
+
+
+
+
+
+
+https://nmap.org/nsedoc/scripts/
+
+*
