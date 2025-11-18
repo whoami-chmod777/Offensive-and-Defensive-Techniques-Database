@@ -1,0 +1,41 @@
+
+-- Script Summary --
+
+
+
+
+nmap -p <port> --script http-security-headers <target>
+
+80/tcp open  http    syn-ack
+| http-security-headers:
+|   Strict_Transport_Security:
+|     Header: Strict-Transport-Security: max-age=15552000; preload
+|   Public_Key_Pins_Report_Only:
+|     Header: Public-Key-Pins-Report-Only: max-age=500; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="; pin-sha256="r/mIkG3eEpVdm+u/ko/cwxzOMo1bk4TyHIlByibiA5E="; pin-sha256="q4PO2G2cbkZhZ82+JgmRUyGMoAeozA+BSXVXQWB8XWQ="; report-uri="http://reports.fb.com/hpkp/"
+|   X_Frame_Options:
+|     Header: X-Frame-Options: DENY
+|     Description: The browser must not display this content in any frame.
+|   X_XSS_Protection:
+|     Header: X-XSS-Protection: 0
+|     Description: The XSS filter is disabled.
+|   X_Content_Type_Options:
+|     Header: X-Content-Type-Options: nosniff
+|     Will prevent the browser from MIME-sniffing a response away from the declared content-type.
+|   Content-Security-Policy:
+|     Header: Content-Security-Policy: script-src 'self'
+|     Description: Loading policy for all resources type in case of a resource type dedicated directive is not defined (fallback).
+|   X-Permitted-Cross-Domain-Policies:
+|     Header: X-Permitted-Cross-Domain-Policies: none
+|     Description : No policy files are allowed anywhere on the target server, including this master policy file.
+|   Cache_Control:
+|     Header: Cache-Control: private, no-cache, no-store, must-revalidate
+|   Pragma:
+|     Header: Pragma: no-cache
+|   Expires:
+|_    Header: Expires: Sat, 01 Jan 2000 00:00:00 GMT
+
+
+
+https://nmap.org/nsedoc/scripts/http-security-headers.html
+
+*
