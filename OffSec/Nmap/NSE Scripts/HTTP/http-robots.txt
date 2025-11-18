@@ -1,0 +1,22 @@
+
+-- Script Summary --
+
+
+
+
+
+nmap -sV -sC <target>
+
+80/tcp  open   http    syn-ack
+|  http-robots.txt: 156 disallowed entries (40 shown)
+|  /news?output=xhtml& /search /groups /images /catalogs
+|  /catalogues /news /nwshp /news?btcid=*& /news?btaid=*&
+|  /setnewsprefs? /index.html? /? /addurl/image? /pagead/ /relpage/
+|  /relcontent /sorry/ /imgres /keyword/ /u/ /univ/ /cobrand /custom
+|  /advanced_group_search /googlesite /preferences /setprefs /swr /url /default
+|  /m? /m/? /m/lcb /m/news? /m/setnewsprefs? /m/search? /wml?
+|_ /wml/? /wml/search?
+
+
+
+https://nmap.org/nsedoc/scripts/http-robots.txt.html
