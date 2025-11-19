@@ -2,17 +2,7 @@
 In this lab, we will explore the fundamentals of firewalls, delve into the features of the Windows Firewall, and develop the ability to create rules.
 
 • Introduction to Firewall 
-➜ What is a Firewall
-➜ Firewall: Hardware or Software
-➜ Why Firewall
-➜ Types of firewalls
-
 • Introduction to Windows Defender Firewall 
-➜ What is Windows Defender firewall
-➜ Turn Windows Defender Firewall on or Off
-➜ Allow an app or feature through Windows Defender firewall
-➜ Advanced settings
-
 • Example
 • Lab
 
@@ -137,7 +127,7 @@ The ping is success.
 After a successful port scan, it was observed that ports 135 and 139 remained unscanned, as the rule blocks them.
 
 
---- Lab ---
+-- Lab --
 
 Step 1: Check the IP address of the Kali machine with: ifconfig (10.10.49.3)
 
