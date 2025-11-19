@@ -1,6 +1,190 @@
 
 In this lab, we will explore the fundamentals of firewalls, delve into the features of the Windows Firewall, and develop the ability to create rules.
 
+• Introduction to Firewall 
+➜ What is a Firewall
+➜ Firewall: Hardware or Software
+➜ Why Firewall
+➜ Types of firewalls
 
-Objective 1: Introduction to Firewall and Windows Defender firewall.
+• Introduction to Windows Defender Firewall 
+➜ What is Windows Defender firewall
+➜ Turn Windows Defender Firewall on or Off
+➜ Allow an app or feature through Windows Defender firewall
+➜ Advanced settings
+
+• Example
+• Lab
+
+
+-- Introduction to Firewall --
+
+➜ What is a Firewall
+A firewall is a network security device or software that monitors and controls incoming and outgoing network traffic based on predetermined security rules. It acts as a barrier between a trusted internal network and untrusted external networks, such as the Internet. The primary purpose of a firewall is to establish a security perimeter that helps prevent unauthorized access to or from private networks.
+Firewalls work by examining and managing data packets as they pass through the network. They use a set of predetermined rules to decide whether to allow, block, or filter traffic. The goal is to ensure that only legitimate and authorized communications are allowed while blocking or restricting potentially harmful or unauthorized access.
+
+➜ Firewall: Hardware or Software
+
+Firewalls can be implemented as both hardware devices and software applications.
+
+⇒ Hardware Firewalls: These are physical devices dedicated to the task of filtering network traffic. They are often deployed at the perimeter of a network, acting as a barrier between the internal network and the external world. Hardware firewalls are commonly found in routers and other network appliances
+⇒ Software Firewalls: These are programs or applications that run on general-purpose computers or servers. They can be installed on individual devices or servers to provide protection at the software level. Software firewalls are commonly used on individual computers, and they often come with features like packet filtering, stateful inspection, and application-layer filtering.
+
+Organizations often use a combination of hardware and software firewalls to create a multi-layered defense strategy, known as defense-in-depth
+
+➜ Why Firewall
+
+The need for firewalls arises from the increasing threats and vulnerabilities present in today's interconnected digital world. Several reasons highlight the importance of firewalls:
+
+⇒ Network Security: Firewalls help protect networks from unauthorized access, hacking attempts, and other malicious activities. They act as a barrier against cyber threats.
+⇒ Data Protection: Firewalls safeguard sensitive data by controlling and monitoring the flow of information in and out of a network. This is crucial for protecting confidential information and complying with privacy regulations.
+⇒ Access Control: Firewalls enforce access control policies, determining which users or systems are allowed or denied access to specific resources. This helps in preventing unauthorized users from gaining entry.
+⇒ Preventing Malware: Firewalls can block malicious software, such as viruses, worms, and trojans, from entering a network. 
+
+They play a crucial role in preventing the spread of malware within an organization.
+
+➜ Types of firewalls
+
+There are several types of firewalls, each with its own characteristics and functionalities. Some common types include:
+
+⇒ Packet Filtering Firewalls: These examine data packets and make decisions to allow or block based on predefined rules. Packet filtering is typically done at the network layer (Layer 3) of the OSI model.
+⇒ Stateful Inspection Firewalls: Also known as dynamic packet filtering, these firewalls keep track of the state of active connections and make decisions based on the context of the traffic. This allows them to make more informed decisions about whether to permit or deny traffic.
+⇒ Application-level Gateways (Proxy Firewalls): Proxy firewalls, also known as Application-level Gateways, operate at the application layer and act as intermediaries between two end systems. They filter incoming traffic, disguising clients' identities when communicating with web servers. Unlike basic firewalls, proxy firewalls forward requests on behalf of clients, enhancing security by protecting client identity and sensitive information. After establishing a connection, the proxy firewall scrutinizes incoming data packets for potential threats before transferring them to the client, thereby adding an extra layer of security to network communication.
+
+
+-- Introduction to Windows Defender Firewall --
+
+➜ What is Windows Defender firewall
+
+Windows Defender Firewall helps prevent hackers and malicious software from gaining access to your PC through the internet or a network. It acts as a barrier, monitoring and controlling incoming and outgoing network traffic based on predefined security rules. Allowing users to manage which apps can communicate through the firewall empowers them to control their system's network access.
+
+Your organization might require you to turn on Windows Defender Firewall before accessing their network resources from your device. This is because the firewall plays a crucial role in securing your computer and preventing unauthorized access, ensuring a higher level of protection against potential threats.
+
+⇒ Firewall profiles: Windows Firewall offers three network profiles: domain, private and public. The network profiles are used to assign rules. For example, you can allow a specific application to communicate on a private network, but not on a public network.
+⇒ Domain network: The domain network profile is automatically applied to a device that is joined to an Active Directory domain, when it detects the availability of a domain controller. This network profile cannot be set manually.
+⇒ Private network: The private network profile is designed for private networks such as a home network. It can be set manually on a network interface by an administrator.
+⇒ Public network: The public network profile is designed with higher security in mind for public networks, like Wi-Fi hotspots, coffee shops, airports, hotels, etc. It's the default profile for unidentified networks.
+
+➜ Turn Windows Defender Firewall on or Off
+
+It refers to the ability to enable or disable the Windows Defender Firewall on a Windows operating system. This feature provides users with control over the firewall's status, allowing them to customize the security settings on their system.
+You can enable notifications, which are configuration options allowing users to control how they receive alerts related to the firewall's activities.
+• Enabling Windows Defender Firewall: When the firewall is turned on, it actively monitors and manages incoming and outgoing network traffic based on predefined security rules. Enabling the firewall is crucial for protecting the system from unauthorized access, malware, and other potential security threats.
+• Disabling Windows Defender Firewall: Users have the option to turn off the firewall if needed. However, this action should be approached with caution, as it leaves the system more vulnerable to network-based threats. Disabling the firewall might be necessary in certain scenarios, such as troubleshooting network issues or when using a third-party firewall solution.
+
+➜ Allow an app or feature through Windows Defender firewall
+
+It is a feature in Windows Defender Firewall that allows users to control which applications are permitted to send and receive data over a network. When this feature is enabled, it grants specific applications the necessary permissions to communicate through the firewall.
+• Default Settings: Windows Defender Firewall comes with default settings, and most common applications are automatically allowed to communicate through the firewall. However, users can review and modify these settings based on their preferences.
+• Enabling or Disabling Access: Users have the flexibility to enable or disable network access for specific applications. Enabling an app allows it to communicate through the firewall, while disabling it blocks network communication.
+
+You can edit the permissions of the listed apps. You can also add apps to the list by clicking on Allow another app.
+
+➜ Advanced settings
+
+Windows Defender Firewall with Advanced Security on Local Computer is an enhanced configuration interface designed for managing firewall settings on Windows operating systems. This advanced security component offers additional features and precise control over firewall rules and policies. The term "on local computer" signifies that the settings are specific to the individual computer where they are applied. In contrast to basic Windows Defender Firewall settings accessible through the Control Panel or Windows Security, this advanced security tool provides a centralized and comprehensive management interface for more sophisticated control and configuration.
+
+⇒ Inbound and Outbound Rules: Users can set up both inbound and outbound rules to control traffic entering and leaving the computer. This level of control is especially useful for fine-tuning security configurations based on specific networking requirements.
+  ► Inbound rules focus on controlling traffic from external sources attempting to connect to a device or network.
+  ► Outbound rules regulate outgoing traffic from a computer, controlling which applications are allowed to communicate with external servers, services, or the internet.
+
+Users have the ability to create their own rules in Windows Firewall by simply clicking on New Rule. This feature allows for the customization of inbound or outbound traffic preferences. For inbound rules, users can specify criteria such as source and destination IP addresses, ports, and protocols. Similarly, for outbound rules, users can define criteria based on source applications, destination IP addresses, ports, and protocols.
+
+
+-- Example --
+
+In this example, we'll demonstrate how to create rules to block a specific port for any IP address. This scenario allows us to perform tasks such as pinging and scanning ports on the Windows machine from the Kali machine.
+
+➜ Step 1: Initiate a ping to the Windows machine and perform a port scan using the Kali machine. IP address of the Windows machine
+
+Pinging from Kali machine using the command: ping 10.0.31.104 -c 4
+
+Port Scan from Kali machine using the command: nmap 10.0.31.104
+
+Starting Nmap 7.92 ( https://nmap.org ) at 2023-12-15 11:41 IST
+Nmap scan report for target.ine.local (10.0.31.104)
+Host is up (0.0024s latency).
+Not shown: 995 filtered tcp ports (no-response)
+PORT     STATE SERVICE
+135/tcp  open  msrpc
+139/tcp  open  netbios-ssn
+445/tcp  open  microsoft-ds
+3389/tcp open  ms-wbt-server
+5357/tcp open  wsdapi
+
+Nmap done: 1 IP address (1 host up) scanned in 4.75 seconds
+
+Let's Block the ports 135 and 139.
+
+➜ Step 2: Creating inbound rule.
+
+New Rule. Choose port option and click next.
+
+Choose TCP, specify the port number (135,139), and click Next.
+
+➜ Step 3: Choose the Block option and click Next.
+
+You may leave it to default and click Next.
+
+Give the Rule name and click Finish.
+
+➜ Step 4: Return to the Attacker machine, and when you initiate a ping, the rule should not impact it.
+
+The ping is success.
+
+➜ Step 5: Start the port scan.
+
+After a successful port scan, it was observed that ports 135 and 139 remained unscanned, as the rule blocks them.
+
+
+--- Lab ---
+
+Step 1: Check the IP address of the Kali machine with: ifconfig (10.10.49.3)
+
+Note down the IP address of the machine.
+
+Step 2: Get the IP address of the Windows machine with: ipconfig (10.2.29.70)
+
+Step 3: Ping the Windows from the Kali machine with: ping 10.2.29.70
+
+The Ping failed. The reason is because the Windows Firewall is Turned ON for Security reasons. Click on Advanced Settings to write the inbound rules.
+
+Step 4: Click on Inbound Rules and click on New Rule.. button. Choose Custom and click on Next.
+
+Choose All programs and click Next.
+
+Step 5: Choose protocol type to ICMPv4 and Click on Customize button.
+
+Choose an Echo request option. Let's filter the IP.
+
+Step 6: In the remote IP address, choose these IP address and click on Add button.
+
+Input the Kali machine IP address (10.10.49.3). Click the Next button.
+
+Choose Allow the connection and click the Next button.
+
+Leave the "Profiles" as default and click the Next button.
+
+Name the rule "Allow Ping From Kali" and click the Finish button as shown in the image.
+
+You can see the rule is created with the configuration that we set.
+
+Step 7: Now, go to Attacker Machine and Start pining the Windows machine.
+
+You can see that we can ping from the Kali machine.
+
+
+*
+
+
+
+
+
+
+
+
+
+
+
+
 
