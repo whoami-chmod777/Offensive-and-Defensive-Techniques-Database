@@ -1,0 +1,29 @@
+
+--- Intro ---
+
+Web applications can be found everywhere nowadays, from open source systems to custom build applications and web interfaces to control hardware such as a firewall. 
+Dynamic web applications (such as the content management systems WordPress and Joomla and e-commerce systems like Magento and Woocommerce) are often coded using server-side scripting languages like PHP and can offer a large attack surface. 
+Because these web applications are so widespread, a single vulnerability can leave millions of systems at risk and, consequently, they have become popular targets for hackers. 
+The wide range of vulnerabilities not only impacts on the core systems, but extends also to 3rd party components and plugins. 
+For example, PHPMailer is a popular web application used extensively to handle e-mail and forms and a recently discovered Remote Code Execution (RCE) vulnerability (found in software versions prior to PHPMailer 5.2.22) has left millions of websites exposed.
+
+These days, anyone can set up a website using a content management system and use plugins to add e-commerce, maintenance and sharing functionality without writing a single line of code. 
+Unfortunately, the quality of coding on these plugins varies greatly and a poorly coded plugin can seriously impact security. 
+Anyone with basic coding skills can write a plugin and offer them for download. 
+The combination of all these factors causes widespread web applications like CMS to become popular and often easy targets for hackers with malicious intends.
+
+So far we’ve only talked about open source web applications and extensions but web application vulnerabilities are not just limited to open source systems. 
+They also exist in web applications that require licensing, or those that are custom build for one or maybe a few companies. 
+For licensed and custom-build software it’s less common that you’ll find publicly available exploits on sites like Exploit-db because fewer bug hunters have access to test this software and publish exploits. 
+In this case you would have to test applications yourself using different applications and techniques in order to find vulnerabilities.
+
+In the sections we will have a look at how web applications are vulnerable and how their vulnerabilities can be exploited. 
+In particular we will focus on Local File Inclusion, SQL injection, Cross Site Scripting, code execution and file upload vulnerabilities. 
+As a penetration tester you will encounter a lot of web applications and you need to know the content of this chapter inside out.
+Sometimes you will find it easier to understand a web application vulnerability if you control both the attacking side and the target host. 
+That way you can test certain conditions and evaluate errors in log files. If you run up against errors you cannot solve, we suggest you download the application to your attack box and see if you can exploit it locally.
+
+
+*
+
+
