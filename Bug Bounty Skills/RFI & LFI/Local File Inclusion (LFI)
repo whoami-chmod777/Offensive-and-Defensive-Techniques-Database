@@ -1,1 +1,5 @@
 
+Local File Inclusion (LFI) vulnerabilities allow an attacker to use specifically crafted requests to read local files on the web server (including log files and configuration files containing password hashes or even clear text passwords). 
+LFI vulnerabilities can also lead to remote code execution on the target web server and a denial of service (DoS).
+
+
