@@ -1,1 +1,6 @@
 
+Remote File Inclusions (RFI) are very similar to LFI but affect files on remote servers instead of files on the local web server. 
+Remote files can include malicious code that executes on the server in the context of the user running the web server or on any client devices that visit a compromised webpage.
+
+
+
