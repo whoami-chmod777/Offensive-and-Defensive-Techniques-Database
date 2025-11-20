@@ -1,0 +1,38 @@
+
+--- Remote Code Execution ---
+
+Remote Code Execution vulnerabilities allow the attacker to execute arbitrary code on the target machine through a web application (meaning the attacker can execute any code s/he wants ‘arbitrarily’ on the target machine). 
+Remote Code Execution is also sometimes referred to as code injection, but should not be mistaken with remote command execution. 
+With remote command execution the commands are directly executed on the underlying operating system. 
+In remote code execution vulnerabilities, however, the injected code is executed by the web application in the language it is running on. 
+So, for instance, if a WordPress CMS running on PHP is vulnerable to a remote code execution vulnerability, the attacker will be limited to injecting and executing PHP code.
+
+A common way of exploiting remote code execution vulnerabilities is by injecting code that allows the attacker to execute system commands. 
+Commonly used functions are shellexec() in PHP and the system command in Perl. 
+By using code that is able to execute system commands we can convert remote code execution to remote command execution which is a lot more powerful (and dangerous). 
+The ability to execute system commands on the remote target means we are just one step away from converting this to a more interactive shell.
+
+
+
+-- Remote Code Execution example --
+
+PHP code is vulnerable to remote code execution
+
+<?php $code = $_GET['code'];
+eval($code); ?>
+
+The next step would be to inject our desired modification into the code parameter as follows: http://[IP]/rce.php?code=phpinfo();
+
+Execute system commands with the php system() function: http://[IP]/rce.php?code=system('id');
+
+http://[IP]/rce.php?code=echo shell_exec('/sbin/ifconfig eth0');
+
+
+
+https://www.php.net/manual/en/function.shell-exec.php
+https://secure.php.net/manual/en/function.exec.php
+https://secure.php.net/manual/en/function.system.php
+https://secure.php.net/manual/en/function.shell-exec.php
+https://secure.php.net/manual/en/function.passthru.php
+
+*
