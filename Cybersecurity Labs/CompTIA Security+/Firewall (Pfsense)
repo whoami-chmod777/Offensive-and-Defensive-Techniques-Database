@@ -1,0 +1,205 @@
+
+Within this GNS3 configuration, there are a Kali Linux machine, two vpcs, and a pfSense firewall, establishing a comprehensive network. With the help of Kali Linux, the pfSense web GUI can be accessed through the URL http://10.0.0.1.
+
+• Objective 1: Introduction to Firewall and pfsense.
+• Objective 2: Implement a basic firewall rule to block ICMP packets.
+
+
+-- Objective 1: Introduction to Firewall and pfsense --
+
+➜ Introduction to Firewall
+  ⇒ What is a Firewall?
+  ⇒ Firewall: Hardware or Software
+  ⇒ Why Firewall?
+  ⇒ Types of firewalls?
+
+➜ Introduction to pfsense
+  ⇒ What is pfsense?
+  ⇒ What does pfSense stand for/mean
+
+➜ User Interface (WebGUI)
+
+
+
+➜ Introduction to Firewall
+
+-- What is a Firewall --
+
+A firewall is a network security device or software that monitors and controls incoming and outgoing network traffic based on predetermined security rules. 
+It acts as a barrier between a trusted internal network and untrusted external networks, such as the internet. 
+The primary purpose of a firewall is to establish a security perimeter that helps prevent unauthorized access to or from private networks.
+
+Firewalls work by examining and managing data packets as they pass through the network. 
+They use a set of predetermined rules to decide whether to allow, block, or filter traffic. 
+The goal is to ensure that only legitimate and authorized communications are allowed while blocking or restricting potentially harmful or unauthorized access.
+
+-- Firewall: Hardware or Software --
+
+Firewalls can be implemented as both hardware devices and software applications.
+• Hardware Firewalls: These are physical devices dedicated to the task of filtering network traffic. They are often deployed at the perimeter of a network, acting as a barrier between the internal network and the external world. Hardware firewalls are commonly found in routers and other network appliances.
+• Software Firewalls: These are programs or applications that run on general-purpose computers or servers. They can be installed on individual devices or servers to provide protection at the software level. Software firewalls are commonly used on individual computers, and they often come with features like packet filtering, stateful inspection, and application-layer filtering.
+
+Organizations often use a combination of hardware and software firewalls to create a multi-layered defense strategy, known as defense-in-depth
+
+-- Why Firewall --
+
+The need for firewalls arises from the increasing threats and vulnerabilities present in today's interconnected digital world. 
+
+Several reasons highlight the importance of firewalls:
+• Network Security: Firewalls help protect networks from unauthorized access, hacking attempts, and other malicious activities. They act as a barrier against cyber threats.
+• Data Protection: Firewalls safeguard sensitive data by controlling and monitoring the flow of information in and out of a network. This is crucial for protecting confidential information and complying with privacy regulations.
+• Access Control: Firewalls enforce access control policies, determining which users or systems are allowed or denied access to specific resources. This helps in preventing unauthorized users from gaining entry.
+• Preventing Malware: Firewalls can block malicious software, such as viruses, worms, and trojans, from entering a network. They play a crucial role in preventing the spread of malware within an organization.
+
+-- Types of firewalls --
+
+There are several types of firewalls, each with its own characteristics and functionalities. Some common types include:
+
+• Packet Filtering Firewalls: These examine data packets and make decisions to allow or block based on predefined rules. Packet filtering is typically done at the network layer (Layer 3) of the OSI model.
+• Stateful Inspection Firewalls: Also known as dynamic packet filtering, these firewalls keep track of the state of active connections and make decisions based on the context of the traffic. This allows them to make more informed decisions about whether to permit or deny traffic.
+• Application-level Gateways (Proxy Firewalls): Proxy firewalls, also known as Application-level Gateways, operate at the application layer and act as intermediaries between two end systems. They filter incoming traffic, disguising clients' identities when communicating with web servers. Unlike basic firewalls, proxy firewalls forward requests on behalf of clients, enhancing security by protecting client identity and sensitive information. After establishing a connection, the proxy firewall scrutinizes incoming data packets for potential threats before transferring them to the client, thereby adding an extra layer of security in network communication.
+
+
+➜ Introduction to pfsense
+
+-- What is pfsense --
+
+The pfSense Project is an open-source distribution of FreeBSD designed as a firewall and router, managed through a user-friendly web interface called WebGUI. 
+Users do not need prior FreeBSD knowledge to deploy pfSense, and it offers a powerful firewall and routing platform with various features. 
+The software's package system enables expandability without compromising security. 
+
+-- What does pfSense stand for/mean --
+
+The early tag line for the pfSense open-source project was "making sense of pf", referring to the packet filter technology at the core of the project.
+PF in FreeBSD can perform many of the basic packet filtering and QoS firewall tasks that pfSense software provides, however, pfSense software makes it easier to manage, monitor, and maintain. 
+It accomplishes this by layering an easy to use GUI and customized services on top of the operating system and relevant packages, resulting in a complete firewall/router/VPN solution that is capable of much more than the sum of the underlying components.
+
+
+➜ User Interface (WebGUI)
+
+Logging in and Navigating the WebGUI: 
+1. Accessing pfSense: To access the pfSense WebGUI, you typically open a web browser and enter the IP address of your pfSense router in the address bar.
+2. Login Credentials: You'll be prompted to log in with your pfSense username and password. The default credentials are usually "admin" for the username and "pfsense" for the password, but it's crucial to change these defaults for security reasons. 
+3. Navigating the Interface: Once logged in, you'll be presented with the WebGUI. The interface is organized into menus, and you can navigate through different sections to configure various aspects of pfSense.
+
+⇒ Dashboard Overview:
+
+The pfSense dashboard provides a snapshot of the system's status and key information. It includes widgets that display real-time data such as system resource usage.
+
+⇒ Firewall
+
+The menu of the pfSense firewall, which comprises various sections, including aliases, NAT, rules, schedules, traffic shaper, and virtual IP. Our main emphasis is on the creation of rules.
+
+Aliases: 
+Aliases define a group of ports, hosts, or networks. Aliases can be referenced by firewall rules, port forwards, outbound NAT rules, and other places in the firewall. 
+Using aliases results in rulesets that are significantly shorter, self-documenting, and more manageable.
+Aliases are located at Firewall > Aliases. 
+The page is divided into separate tabs for each type of alias: IP, Ports, URLs, and the All tab which shows every alias in one large list. 
+When creating an alias, add it to any tab and it will be sorted to the correct location based on the type chosen.
+
+Network Address Translation (NAT): 
+Network Address Translation (NAT) is commonly used to connect multiple computers with private IPv4 addresses to the Internet using a single public IPv4 address. 
+pfSense software facilitates simple as well as advanced NAT configurations, accommodating networks with multiple public IP addresses. 
+NAT configuration involves outbound and inbound directions: 
+  ► Outbound NAT: Outbound NAT governs the translation of traffic departing from a local network towards a remote network, such as the Internet.
+  ► Inbound NAT: Inbound NAT handles traffic entering from a remote network. Port forwards are a common type of inbound NAT, widely recognized by administrators.
+
+Schedules: 
+Time-based rules allow firewall rules to be activated during specified days and/or time ranges. 
+Time-based rules function the same as any other rule, except they are effectively not present in the ruleset outside of their scheduled times. 
+  ► Logic: When dealing with time-based rules, the schedule determines when to apply the action specified in the firewall rule. 
+    When the current time or date is not covered by the schedule, the firewall acts as if the rule is not there. 
+    For example, a rule that passes traffic on Saturdays will only block it on other days if a separate block rule exists underneath it. 
+    The rules are processed from the top-down, the same as other firewall rules. 
+    The first match is used, and once a match is found, that action is taken if the rule is in schedule, and no other rules are evaluated.
+
+Traffic Shaper: 
+Traffic shaping, or network Quality of Service (QoS), is a means of prioritizing network traffic. Without traffic shaping, packets are processed on a first in/first out basis by the firewall. 
+QoS offers a means of prioritizing different types of traffic, ensuring that high priority services receive the bandwidth they need before lesser priority services.
+
+Virtual IP Addresses: 
+Some types of interfaces on pfSense software can utilize more than one IP address at a time. 
+The primary IP address for an interface comes from the interface settings, while Virtual IP (VIP) addresses facilitate the use of additional IP addresses in conjunction with NAT or local services. 
+  ► Types: pfSense offers four types of Virtual IP addresses: IP Alias, CARP, Proxy ARP, and Other. 
+  The choice depends on specific use cases. Typically, IP Alias, Proxy ARP, or CARP is needed when pfSense must respond to ARP requests for a Virtual IP. 
+  The "Other" type is useful when ARP is unnecessary, as seen in scenarios where additional public IP addresses are routed to the WAN IP. 
+  For Proxy ARP and Other VIPs, pfSense doesn't respond to ICMP echo requests by default, requiring NAT configurations for ping functionality.
+
+Rules: 
+Rules are configurations that define how traffic should be handled by the firewall. 
+These rules are set up to control the flow of data in and out of the network, enforcing security policies and allowing or blocking specific types of traffic based on defined criteria. 
+Rules are typically associated with network interfaces, such as LAN, WAN, or other configured interfaces.
+
+In pfSense, firewall rules are evaluated in a top-down manner, with packets being matched against rules from the top of the list to the bottom. 
+The first rule that meets the criteria of the packet is applied. If no rule is found to match the packet, the default is a "Deny All" rule, is applied. 
+The order of rules is crucial, more specific rules should be placed higher in the list to ensure they are evaluated first.
+
+  ► Floating rules: Floating Rules in pfSense are advanced rules that offer more complex actions compared to rules on interface or group tabs. 
+    These rules can operate on multiple interfaces in both inbound and outbound directions. 
+    While the inclusion of inbound and outbound filtering increases complexity and the potential for user error, floating rules can be beneficial in specific applications. 
+    Typically, most firewall configurations do not require floating rules, or they may only be present for purposes like traffic shaping.
+
+  ► WAN: In pfSense, rules for the WAN (Wide Area Network) interface are crucial for controlling the traffic entering your network from the external world (typically the internet). 
+    These rules help define how the firewall should handle incoming traffic, enforcing security policies and allowing or blocking specific types of data based on the configured criteria. 
+   
+  ► LAN: In pfSense, rules for the LAN (Local Area Network) interface are used to control the traffic leaving your local network and entering other networks, including the internet. 
+    These rules help enforce security policies and determine how different types of traffic are handled. 
+    By default, the only entries are the Default allow LAN to any rules for IPv4 and IPv6. 
+    The anti-lockout rule is designed to prevent administrators from accidentally locking themselves out of firewall management services.
+    We can perform the following actions on the rules add, edit, disable, save, etc..,
+
+
+
+-- Objective 2: Implement a basic firewall rule to block ICMP packets --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+•
+➜ 
+⇒
+->
+►
+
+*
+
+
+
+
+
+
+
+
+
+
+
+
