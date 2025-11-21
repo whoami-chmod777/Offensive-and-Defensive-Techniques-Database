@@ -7,17 +7,17 @@ Within this GNS3 configuration, there are a Kali Linux machine, two vpcs, and a 
 
 -- Objective 1: Introduction to Firewall and pfsense --
 
-➜ Introduction to Firewall
-  ⇒ What is a Firewall?
-  ⇒ Firewall: Hardware or Software
-  ⇒ Why Firewall?
-  ⇒ Types of firewalls?
+Introduction to Firewall
+• What is a Firewall?
+• Firewall: Hardware or Software
+• Why Firewall?
+• Types of firewalls?
 
-➜ Introduction to pfsense
-  ⇒ What is pfsense?
-  ⇒ What does pfSense stand for/mean
+Introduction to pfsense
+• What is pfsense?
+• What does pfSense stand for/mean
 
-➜ User Interface (WebGUI)
+User Interface (WebGUI)
 
 
 
@@ -117,7 +117,7 @@ Traffic Shaper:
 Traffic shaping, or network Quality of Service (QoS), is a means of prioritizing network traffic. Without traffic shaping, packets are processed on a first in/first out basis by the firewall. 
 QoS offers a means of prioritizing different types of traffic, ensuring that high priority services receive the bandwidth they need before lesser priority services.
 
-Virtual IP Addresses: 
+Virtual IP Addresses:
 Some types of interfaces on pfSense software can utilize more than one IP address at a time. 
 The primary IP address for an interface comes from the interface settings, while Virtual IP (VIP) addresses facilitate the use of additional IP addresses in conjunction with NAT or local services. 
   ► Types: pfSense offers four types of Virtual IP addresses: IP Alias, CARP, Proxy ARP, and Other. 
@@ -152,54 +152,58 @@ The order of rules is crucial, more specific rules should be placed higher in th
 
 -- Objective 2: Implement a basic firewall rule to block ICMP packets --
 
+Step 1: Utilize the given credentials for logging in Kali
+
+Username: kali
+Password: kali
+
+After logging in, you will get into the Kali desktop
 
 
+Step 2: Check the reachability of the network from PC1, ping the PC2. Use the command: ping 10.0.1.2
+
+Ping pfsense's IP 10.0.1.1. Use the command: ping 10.0.1.1
+
+Ping Kali-linux. Use the command: ping 10.0.0.3
 
 
+Step 3: In Kali Linux navigate to the URL: http://10.0.0.1 (pfSense)
+
+Use the following credentials to log in. 
+
+Username: admin
+Password: pfsense
+
+Upon Successful login, you will see the dashboard.
 
 
+Step 4: Navigate to the Firewall menu, select Rules, and then choose "LAN"
+
+Click on the "Add" button to initiate the creation of a new rule.
+
+Specify the action as "Block" and the protocol as "ICMP."
+
+Ensure the Source is set to PC1's IP (10.0.0.2), and the Destination is PC2's IP (10.0.1.2), and click on the Save button.
 
 
+Step 5: Once the rule is created, review the order and click on Apply Change.
 
 
+Step 6: Return to the PC1 console and attempt to ping PC2 (10.0.1.2)
+
+Use the command: ping 10.0.1.2
+
+The ping fails, indicating the successful application of the firewall rule.
+
+Now, verify that the ping succeeds for IP addresses "10.0.0.3" and "10.0.1.1."
+
+Use the command ping 10.0.0.3 and ping 10.0.1.1
 
 
+https://docs.netgate.com/pfsense/en/latest/firewall/index.html
+https://www.simplilearn.com/tutorials/cyber-security-tutorial/what-is-firewall#how_does_a_firewall_work
+https://www.geeksforgeeks.org/computer-networks/types-of-network-firewall/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-•
-➜ 
-⇒
-->
-►
 
 *
-
-
-
-
-
-
-
-
-
-
-
 
