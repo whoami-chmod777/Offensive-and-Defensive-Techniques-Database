@@ -14,7 +14,7 @@ The ability to execute system commands on the remote target means we are just on
 
 
 
--- Remote Code Execution example --
+-- Remote Code Execution Example --
 
 PHP code is vulnerable to remote code execution
 
@@ -26,6 +26,55 @@ The next step would be to inject our desired modification into the code paramete
 Execute system commands with the php system() function: http://[IP]/rce.php?code=system('id');
 
 http://[IP]/rce.php?code=echo shell_exec('/sbin/ifconfig eth0');
+
+
+-- Another Example --
+
+A simple example of code that is vulnerable to remote command execution can be created by replacing the eval function with a system, exec or shell exec function like this:
+
+$code = $_GET['command'];
+shell_exec($command);
+
+Instead of inserting PHP code in the command parameter we can now insert system commands. 
+
+
+-- RCE vulnerability in FreePBX --
+
+FreePBX is a web-based open source GUI for managing an open source communication server called Asterix (PBX)
+
+File : functions.inc.php
+
+function get_headers_assoc($url) {
+    global $amp_conf;
+    if ($amp_conf['MODULEADMINWGET']) {
+        FreePBX::Curl()->setEnvVariables();
+        exec("wget --spider --server-response -q ".$url." 2>&1", $wgetout, $exitstatus);
+        $headers = array();
+        if($exitstatus == 0 && !empty($wgetout)) {
+            foreach($wgetout as $value) {
+                $ar = explode(':', $value);
+                $key = trim($ar[0]);
+                if(isset($ar[1])) {
+                    $value = trim($ar[1]);
+                    $headers[strtolower($key)] = trim($value);
+                }
+            }
+        }
+    }
+
+    // the $url is not being sanitized before being passed to the 'exec' function
+    // which leads to a Command execution flaw
+    // The function is being called at
+}
+
+
+In line 26 the exec() PHP command executes wget with a URL that is not sanitized. Were an attacker to control the contents of the $url variable, the remote command execution implications become obvious.
+
+Line 26: exec("wget --spider --server-response -q ".$url." 2>&1", $wgetout, $exitstatus);
+
+
+
+
 
 
 
