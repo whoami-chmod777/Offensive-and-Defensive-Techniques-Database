@@ -92,22 +92,216 @@ In networking, a protocol is a specified way of formatting data so that any netw
 • Encapsulating Security Protocol (ESP): Encrypts the IP header and payload of each packet, adding its own header and trailer. In transport mode, ESP encrypts only the payload.
 • Internet Key Exchange (IKE): Internet Key Exchange (IKE) is a crucial network security protocol designed to dynamically exchange encryption keys and establish Security Associations (SAs) between two devices, ensuring secure communication. SAs form the basis for shared security attributes between network entities. Using the Key Management Protocol, particularly the Internet Security Association and Key Management Protocol (ISAKMP), IKE sets up the SAs and establishes direct connections between hosts using IPsec. IKE provides message content protection and serves as an open framework for implementing standard algorithms like SHA and MD5. Through the application of these algorithms, unique identifiers are generated for each packet, enabling devices to verify packet correctness. Unauthorized packets are promptly discarded, preserving the integrity and security of the communication process.
 
-
-
-
 ➜ What is the difference between IPsec tunnel mode and IPsec transport mode
 
+The distinction between IPsec tunnel mode and transport mode lies in how they secure communication:
+• Tunnel mode: In tunnel mode, the complete original IP packet, which includes the header and payload, is encrypted and inserted into the brand-new IP packet. This mode is normally used for network-to-network connections.
+• Transport mode: Transport mode encrypts only the payload (records) of the authentic IP packet, leaving the IP header intact. Typically used for end-to-end communication between hosts or gadgets.
 
 
+-- Create an IPsec Site-to-Site VPN between the Headquarters network and Brach network. --
+
+Step 1: Ping the PC2 from PC1 to verify the connectivity. Use the command: ping 10.0.22.2
+
+Let's confirm whether the communication between both PCs is encrypted or not.
+
+Step 2: Right-click on the node which connects the Internet and Branch.
+
+Click on Start capture as shown in the image. Click on OK in the packet capture dialogue box.
+
+Step 3: Now, ping PC2 from PC1. Use the command ping 10.0.22.2
+
+You will notice no encryption; the source and destination are also visible. Close the wireshark. Now, let's create an IPsec Site-to-Site VPN.
+
+Step 4: Double click on the Headquaters(HQ) router. Once the terminal opens then, press the enter key.
+
+Write the following command to start configuring:
+
+configure terminal
+
+➜ Configuring ISAKMP
+
+crypto isakmp policy 1
+ encryption aes 128
+ authentication pre-share
+ group 2
+ hash sha
+
+ This sets up the ISAKMP (Internet Security Association and Key Management Protocol) policy. It specifies the encryption algorithm (AES with a key length of 128 bits), authentication method (pre-shared key), group (Diffie-Hellman Group 2), and hash algorithm (SHA).
+
+➜ Configuring IPsec
+
+crypto isakmp key 6 referux123 address 0.0.0.0
+crypto ipsec transform-set OUR-SET esp-aes 128 esp-sha-hmac
+exit
+
+The first line configures the pre-shared key (referux123) for authentication and associates it with the remote peer's IP address (0.0.0.0).
+The second line defines an IPsec transform set named OUR-SET. It specifies the use of AES with a key length of 128 bits for encryption and SHA for integrity.
+
+➜ Access Control List (ACL) Configuration
+
+ip access-list extended 100
+permit ip 10.0.11.0 0.0.0.255 10.0.22.0 0.0.0.255
+
+This ACL (Access Control List) with ID 100 permits IP traffic from the source IP range 10.0.11.0/24 to the destination IP range 10.0.22.0/24.
+
+➜ Crypto Map Configuration
+
+crypto map OUR-MAP 1 ipsec-isakmp
+ match address 100
+ set peer 10.0.23.1
+ set transform-set OUR-SET
+
+This configures a crypto map named OUR-MAP. It associates the previously defined ISAKMP policy (ipsec-isakmp refers to ISAKMP policy 1) and specifies the ACL (100) for matching traffic. It sets the remote peer's IP address to 10.0.23.1 and associates the transform set (OUR-SET) for the IPsec parameters.
+
+➜ Configuring Interface
+
+int Gi0/1
+ crypto map OUR-MAP
+
+This applies the crypto map (OUR-MAP) to the GigabitEthernet0/1 interface, effectively enabling the IPSec VPN on this interface.
 
 
+Below are the full commands for setting up: 
+
+conf t
+crypto isakmp policy 1
+encryption aes 128
+authentication pre-share
+group 2
+hash sha
+
+crypto isakmp key 6 referux123 address 0.0.0.0
+crypto ipsec transform-set OUR-SET esp-aes 128 esp-sha-hmac
+exit
+
+ip access-list extended 100
+permit ip 10.0.11.0 0.0.0.255 10.0.22.0 0.0.0.255
+exit
+
+crypto map OUR-MAP 1 ipsec-isakmp
+match address 100
+set peer 10.0.23.1
+set transform-set OUR-SET
+exit
+
+int Gi0/1
+crypto map OUR-MAP
+end
+wr
 
 
+Step 5: Similarly, double-click on the Branch router. Once the terminal is opened, press the enter key and start the configuration mode
 
-•
-➜ 
-⇒
-->
-►
+Write the following command to start configuring: crypto isakmp enable
+
+This command enables the ISAKMP (Internet Security Association and Key Management Protocol) on the router. ISAKMP is used to establish a secure communication channel (VPN) between two devices.
+
+➜ ISAKMP Policy Configuration
+
+crypto isakmp policy 1
+encryption aes 128
+authentication pre-share
+group 2
+hash sha
+exit
+
+• Initiates the configuration of an ISAKMP policy (Policy 1) on the Branch router.
+• Specifies the encryption algorithm as AES with a key length of 128 bits.
+• Sets the authentication method to pre-shared keys.
+• Specifies the Diffie-Hellman group to be used during the key exchange process as Group 2.
+• Defines the hash algorithm as SHA.
+
+➜ Pre-Shared Key Configuration & IPsec Transform Set Configuration
+
+crypto isakmp key 6 referux123 address 0.0.0.0
+crypto ipsec transform-set OUR-SET esp-aes 128 esp-sha-hmac
+exit
+
+• Configures the pre-shared key (referux123) for authenticating the VPN connection.
+• 0.0.0.0 indicates that this key is used for any remote IP address.
+• Defines the IPsec transform set named OUR-SET.
+• Specifies the use of AES with a key length of 128 bits for encryption and SHA for integrity.
+
+➜ Access Control List (ACL) Configuration
+
+ip access-list extended 100
+permit ip 10.0.22.0 0.0.0.255 10.0.11.0 0.0.0.255
+exit
+
+• Creates an extended ACL (Access Control List) with ID 100.
+• Permits IP traffic from the source IP range 10.0.22.0/24 to the destination IP range 10.0.11.0/24
+
+➜ Crypto Map Configuration
+
+crypto map OUR-MAP 1 ipsec-isakmp
+match address 100
+set peer 10.0.12.1
+set transform-set OUR-SET
+exit
+
+• Initiates the configuration of a crypto map named OUR-MAP.
+• Associates it with both IPsec and ISAKMP.
+• Specifies that it should match traffic based on ACL 100.
+• Sets the remote peer's IP address to 10.0.12.1.
+• Associates the transform set (OUR-SET) with this crypto map entry.
+
+➜ Applying Crypto Map to an Interface
+
+int Gi0/1
+crypto map OUR-MAP
+end
+
+• Enters the configuration mode for interface GigabitEthernet0/1.
+• Applies the crypto map (OUR-MAP) to this interface, enabling the VPN on that interface.
+
+
+Below are the full commands for setting up th ipsec site-to-site vpn
+
+conf t
+crypto isakmp enable
+crypto isakmp policy 1
+encryption aes 128
+authentication pre-share
+group 2
+hash sha
+exit
+
+crypto isakmp key 6 referux123 address 0.0.0.0
+crypto ipsec transform-set OUR-SET esp-aes 128 esp-sha-hmac
+exit
+
+ip access-list extended 100
+permit ip 10.0.22.0 0.0.0.255 10.0.11.0 0.0.0.255
+exit
+
+crypto map OUR-MAP 1 ipsec-isakmp
+match address 100
+set peer 10.0.12.1
+set transform-set OUR-SET
+exit
+
+int Gi0/1
+crypto map OUR-MAP
+end
+wr
+
+
+Step 6: Restart the packet capture process between the Internet and the branch router
+
+Right-click on the node. Stop the capturing. Now, click on the Start capture. Start the wireshark to see the traffic flow
+
+Step 7: Open the PC1 and start pinging the PC2.
+
+Open Wireshark to observe network traffic. You will observe changes in both the source and destination IP address, along with the presence of packet encryption. Notably, the packet encryption initiates as it departs from the HQ router.
+
+Close the wireshark. When a packet leaves the Branch router, the packets will be decrypted, and they will reach the destination.
+
+Step 8: Start capturing traffic between branch rounter and PC2.
+
+Ping PC2 from PC1. You will see the traffic has been decrypted while leaving the Branch router.
+
+The lab has bben completed.
+
 
 *
