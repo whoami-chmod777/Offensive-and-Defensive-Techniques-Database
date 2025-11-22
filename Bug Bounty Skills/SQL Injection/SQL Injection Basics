@@ -1,0 +1,59 @@
+
+--- SQL Injection Basics ---
+
+• How do SQL injection attacks work
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+
+
+-- How do SQL injection attacks work --
+
+In an SQL injection attack, the attacker modifies existing SQL queries by inserting (or ‘injecting’) specifically crafted user input which fools the system into providing more access than intended by the developers of the web application.
+
+➜ Regular interaction between user, web server and database server.
+
+The visitor sends a web request to the web server and requests the information connected with his/her own user id. 
+The web server uses this user input to generate an SQL query for the database server. 
+At the code level, the SQL query requests all fields from the users table where the user ID equals one. 
+The database server executes the query and returns the result set to the web server. 
+The web server uses this result set to generate the response page for the visitor. 
+Finally, the browser loads the page and the visitor is provided with a webpage containing his/her user information.
+
+
+
+
+
+➜ Attacker manipulating user input to perform a SQL injection attack.
+
+In this scenario the attacker modifies the usual web request so that the web server generates a SQL query requesting information for all users instead of just one (legitimate) user. 
+The database server responds to the SQL query with the full data containing all users. 
+This result set is then processed by the web server and the result is displayed to the attacker. 
+The attacker has successfully performed an SQL injection attack and retrieved more information from the database than the web application designers intended with this functionality. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
