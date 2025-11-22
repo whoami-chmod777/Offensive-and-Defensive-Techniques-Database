@@ -8,6 +8,7 @@ SQLMap supports a wide range of database management systems such as MySQL, Postg
 • Enumerating the Database 
 • Downloading and Uploading Files
 • SQLMap OS-Shell
+• SQL Injection countermeasures
 
 
 ➜ Verbosity level
@@ -54,6 +55,23 @@ sqlmap -u "http://10.11.1.250/dvwa/vulnerabilities/sqli/?id=1&Submit=Submit#" --
 We can also use the built-in os-shell function to execute system commands. SQLMap returns a shell (indicated by the os-shell>) to run commands on the underlying system. 
 
 sqlmap -u "http://10.11.1.250/dvwa/vulnerabilities/sqli/?id=1&Submit=Submit#" --cookie "PHPSESSID=5ee561bcdd7a6e01960b0ceded6b1f3b; security=low" --batch --dbms="MySQL 5.0" --os-shell
+
+
+➜ SQL Injection countermeasures
+
+Generally speaking, SQL injection vulnerabilities can be easily avoided in your code. Most such vulnerabilities are introduced by using dynamic queries that entail some kind of user input.
+
+Countermeasures include:
+
+• Use prepared statements with parameterized queries. Prepared statements are effective against SQL injection attacks when properly implemented.
+• Use stored procedures. While not always safe from SQL injection they can be implemented in a safe way by using parameters instead of dynamic user input.
+• Apply the principle of least privileges and permissions to database user accounts. Restrict access to databases and tables and functions will minimize the impact if the server is breached and limit an attacker’s privileges on the database server.
+• Create a role for executing stored procedures with execute only rights instead of a role that has full rights.
+• Validate all untrusted data, such as user input, by constraining and sanitizing all input server side. There are many ways to validate user input, a good start is to check the input for type, length and range. You should also blacklist characters that might pose a risk, or even better whitelist those characters allowed as user input. Use escape routines to handle special characters.
+• Perform validation of untrusted data on the server side. Client-side validation can easily be circumvented using a browser and additional tools.
+• Do not disclose error information by using structured exception handling.
+• Encrypt sensitive data and use strong, secure hashing algorithms for passwords.
+• Use a Web Application Firewall (WAF) to protect web applications.
 
 
 
