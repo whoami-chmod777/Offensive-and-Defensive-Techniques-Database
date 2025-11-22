@@ -2,7 +2,7 @@
 --- SQL Injection Basics ---
 
 • How do SQL injection attacks work
-• 
+• Basic SQL Injection example
 • 
 • 
 • 
@@ -24,16 +24,77 @@ The database server executes the query and returns the result set to the web ser
 The web server uses this result set to generate the response page for the visitor. 
 Finally, the browser loads the page and the visitor is provided with a webpage containing his/her user information.
 
-
-
-
-
 ➜ Attacker manipulating user input to perform a SQL injection attack.
 
 In this scenario the attacker modifies the usual web request so that the web server generates a SQL query requesting information for all users instead of just one (legitimate) user. 
 The database server responds to the SQL query with the full data containing all users. 
 This result set is then processed by the web server and the result is displayed to the attacker. 
 The attacker has successfully performed an SQL injection attack and retrieved more information from the database than the web application designers intended with this functionality. 
+
+
+-- Basic SQL Injection Example --
+
+$userid = $_GET['UserID'];
+SQL = "SELECT * FROM Users WHERE UserID = $userid";
+
+SELECT * FROM Users WHERE UserID = 12345;
+
+If we insert '0 OR 1=1' as the UserID (we’re assuming that UserID 0 does not exist). Since 'OR 1=1' always evaluates to true, the SQL query will return all user records
+
+SELECT * FROM Users WHERE UserID = 0 OR 1=1;
+
+***************************************************************************************************
+
+<?php
+
+if(isset($_GET['Submit'])){
+
+    // Retrieve data
+
+    $id = $_GET['id'];
+
+    $getid = "SELECT first_name, last_name FROM users WHERE user_id = '$id'";
+    $result = mysql_query($getid) or die('<pre>' . mysql_error() . '</pre>' );
+
+    $num = mysql_numrows($result);
+
+    $i = 0;
+
+    while ($i < $num) {
+
+        $first = mysql_result($result,$i,"first_name");
+        $last  = mysql_result($result,$i,"last_name");
+
+        echo '<pre>';
+        echo 'ID: ' . $id . '<br>First name: ' . $first . '<br>Surname: ' . $last;
+        echo '</pre>';
+
+        $i++;
+
+    }
+}
+?>
+
+When the form is submitted the user input for the ‘id’ GET form variable is stored in the $id PHP variable. 
+The $getid PHP variable in the next line contains the SQL query that selects the first_name and last_name field from table users where the user_id matches input submitted in the GET form (user_id=’$id’). 
+This is because the result of the query is ‘true’
+
+SELECT first_name, last_name FROM users WHERE user_id = '1';
+
+0' or '0'='0
+SELECT first_name, last_name FROM users WHERE user_id = '0' or '0'='0';
+
+***************************************************************************************************
+
+
+
+
+
+
+
+
+
+
 
 
 
