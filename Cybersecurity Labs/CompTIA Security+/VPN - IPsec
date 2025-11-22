@@ -1,1 +1,113 @@
 
+VPN - IPsec, or Virtual Private Network with Internet Protocol Security, is a protocol suite used to secure communication over the internet. It combines the IPsec protocol suite with VPN technologies to establish a secure and encrypted connection. 
+
+--- Objective 1: Introduction to VPN ---
+
+Introduction to VPN
+• What is a VPN
+• Types of VPN
+• Types of VPN Protocols
+• What is IPsec VPN
+• How does IPsec work
+• What protocols are used in IPsec
+• What is the difference between IPsec tunnel mode and IPsec transport mode
+
+
+--- Objective 2: Create an IPsec VPN tunnel ---
+
+Create an IPsec Site-to-Site VPN between the Headquarters network and Brach network.
+
+
+-- Introduction to VPN --
+
+➜ What is a VPN
+
+A Virtual Private Network (VPN) is a technology that allows users to establish a secure and encrypted connection over the Internet. The primary purpose of a VPN is to create a private network over a public network, such as the Internet, enabling users to send and receive data as if their devices were directly connected to a private network, even if they are physically located in different geographical locations.
+
+Here are the key features and functions of a VPN:
+• Encryption: VPNs use encryption protocols to secure the data transmitted between the user's device and the private network. This encryption helps protect sensitive information from interception or unauthorized access.
+• Secure Connection: By creating a secure and encrypted "tunnel" over the Internet, VPNs ensure that data remains confidential and secure during transmission. This is crucial, especially when accessing public Wi-Fi networks or when transmitting sensitive information.
+• Anonymity and Privacy: VPNs can provide a degree of anonymity by masking the user's IP address. This makes it more difficult for third parties to track and monitor the user's online activities.
+
+➜ Types of VPN
+
+There are two main types of VPNs: Remote access VPN and site-to-site VPN. Both VPN solutions solve the same problems using different methods. The end goal is still protecting company resources from unauthorized access.
+
+• Remote Access VPN: A Remote Access VPN (Virtual Private Network) is a type of VPN that allows individual users to connect securely to a private network from a remote location, typically over the Internet. The primary purpose of a remote access VPN is to enable employees, telecommuters, or mobile users to access the resources and services of a private network as if they were physically present in the same location as the network.
+• Site-to-Site VPN: A Site-to-Site VPN, also known as a Router-to-Router VPN, is commonly utilized by large companies to establish secure communication between networks in different office locations. This type of VPN allows the creation of a virtual network that connects the local area networks (LANs) of different sites. 
+
+Here are some key points:
+• Large Company Usage: Site-to-site VPNs are especially suitable for large organizations with multiple branch offices or locations. These offices can securely communicate with each other over the Internet, creating a seamless and integrated network.
+• Intranet-based VPN: When a Site-to-Site VPN is used to connect the networks of different offices within the same company, it is referred to as an Intranet-based VPN. This is a common scenario where the organization's various branches are interconnected securely.
+• Extranet-based VPN: If companies decide to use Site-to-Site VPNs to connect to the network of another company, it is termed an Extranet-based VPN. This enables secure communication between the networks of separate entities, facilitating collaboration and resource sharing.
+• Secure Router Connections: The VPN connection is established between routers at each office location. These routers play a crucial role in encrypting and securing the data that flows between the connected networks.
+
+➜ Types of VPN Protocols
+
+Virtual Private Networks (VPNs) utilize various tunnelling protocols, serving as rules for data transmission, impacting both speed and security. Here's a summary of popular VPN protocols:
+
+Internet Protocol Security (IPSec):
+• Functionality: Ensures secure data exchange through session authentication and double-layer encryption.
+• Use Cases: Commonly used in Site-to-Site VPN setups for its compatibility and added security through protocol combinations.
+
+Layer 2 Tunneling Protocol (L2TP):
+• Functionality: Establishes a secure tunnel between two connection points, employing an additional tunnelling protocol (usually IPSec) for data encryption.
+• Use Cases: Popular in Site-to-Site setups, especially when heightened security is required.
+
+Point-to-Point Tunneling Protocol (PPTP):
+• Functionality: Creates a tunnel with a PPTP cipher, but its outdated encryption makes it vulnerable to brute-force attacks.
+• Use Cases: Rarely used due to security concerns; replaced by more advanced encryption methods.
+
+SSL and TLS:
+        Functionality: Protocols commonly associated with securing HTTPS web pages; restricts user access to specific applications.
+        Use Cases: Typically used in remote access VPNs, requiring no additional software due to widespread browser support.
+
+OpenVPN:
+• Functionality: Open-source protocol, an enhancement of SSL/TLS with robust cryptographic algorithms for high security.
+• Variants: Available in UDP (faster, fewer data checks) and TCP (slower but better data integrity) versions.
+• Use Cases: Versatile and secure, popular for both remote access and Site-to-Site VPNs, though setup and compatibility can vary.
+
+Secure Shell (SSH):
+• Functionality: Generates an encrypted connection with port forwarding for remote access; suitable for accessing office desktops from home.
+• Consideration: Requires close supervision due to potential security risks; mainly used in remote access setups.
+
+➜ What is IPsec VPN
+
+IPsec is a secure network protocol suite used in computing for authenticating and encrypting data packets, ensuring secure communication between two computers over an Internet Protocol network. Commonly employed in virtual private networks (VPNs), IPsec involves protocols for mutual authentication, cryptographic key negotiation, and protection of data flows between a pair of hosts (host-to-host), between a pair of security gateways (network-to-network), or between a security gateway and a host (network-to-host). The suite offers cryptographic security services, including network-level peer authentication, data origin authentication, data integrity, data confidentiality through encryption, and protection against replay attacks.
+
+➜ How does IPsec work
+
+IPsec establishes secure connections through a series of steps:
+• Key Exchange: Devices engaged in IPsec connection exchange keys, which are strings of random characters used for encryption and decryption. This key exchange ensures that both devices can decipher each other's messages.
+• Packet Headers and Trailers: Data sent over a network is broken into packets containing payload (actual data) and headers (information about the data). IPsec adds authentication and encryption headers to packets and trailers after the payload.
+• Authentication: IPsec provides authentication for each packet, acting as a stamp of authenticity to verify that packets come from a trusted source and haven't been tampered.
+• Encryption: IPsec encrypts the payload and IP header of each packet, ensuring the security and privacy of the transmitted data.
+• Transmission: Encrypted IPsec packets travel across networks using a transport protocol. IPsec often uses UDP for transport, allowing packets to pass through firewalls.
+• Decryption: At the destination, the received packets are decrypted, making the delivered data accessible to applications.
+
+➜ What protocols are used in IPsec
+
+In networking, a protocol is a specified way of formatting data so that any networked computer can interpret the data. IPsec is not one protocol, but a suite of protocols. The following protocols make up the IPsec suite: 
+• Authentication Header (AH): Verifies the source and integrity of data packets, acting like a tamper-proof seal. AH headers don't provide encryption but ensure data authenticity.
+• Encapsulating Security Protocol (ESP): Encrypts the IP header and payload of each packet, adding its own header and trailer. In transport mode, ESP encrypts only the payload.
+• Internet Key Exchange (IKE): Internet Key Exchange (IKE) is a crucial network security protocol designed to dynamically exchange encryption keys and establish Security Associations (SAs) between two devices, ensuring secure communication. SAs form the basis for shared security attributes between network entities. Using the Key Management Protocol, particularly the Internet Security Association and Key Management Protocol (ISAKMP), IKE sets up the SAs and establishes direct connections between hosts using IPsec. IKE provides message content protection and serves as an open framework for implementing standard algorithms like SHA and MD5. Through the application of these algorithms, unique identifiers are generated for each packet, enabling devices to verify packet correctness. Unauthorized packets are promptly discarded, preserving the integrity and security of the communication process.
+
+
+
+
+➜ What is the difference between IPsec tunnel mode and IPsec transport mode
+
+
+
+
+
+
+
+
+•
+➜ 
+⇒
+->
+►
+
+*
