@@ -1,0 +1,26 @@
+
+--- Linux Privilege Escalation ---
+
+Windows / Linux Local Privilege Escalation Workshop
+https://github.com/sagishahar/lpeworkshop
+
+LinEnum
+https://github.com/rebootuser/LinEnum
+
+Linux Privilege Escalation Check Script
+https://github.com/linted/linuxprivchecker
+
+Linux-Smart-Enumeration
+https://github.com/diego-treitos/linux-smart-enumeration
+
+Reverse Shell Generator
+https://github.com/mthbernardes/rsg
+
+BeRoot Project
+https://github.com/AlessandroZ/BeRoot
+
+Reverse Shell Cheat Sheet | Pentestmonkey
+https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet
+
+Unix-Privesc-Check | Pentestmonkey
+https://pentestmonkey.net/tools/audit/unix-privesc-check
