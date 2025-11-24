@@ -81,6 +81,7 @@ Brute force attacks are mostly encountered in the following areas in institution
 • Hashcat: Hashcat supports five unique modes of attack for over 300 highly-optimized hashing algorithms. hashcat currently supports CPUs, GPUs, and other hardware accelerators on Linux, and has facilities to help distribute password cracking.
 • Ncrack: a tool for cracking network authentication. It can be used on Windows, Linux, and BSD. It was built to help companies secure their networks by proactively testing all their hosts and networking devices for poor passwords.
 • Hydra: Hydra is a parallelized login cracker which supports numerous protocols to attack. It is very fast and flexible, and new modules are easy to add.
+• Crowbar: Crowbar (formerly Levye) is a brute-force tool focused on attacking services that rely on key-based or certificate-based authentication. It supports SSH key brute forcing, OpenVPN authentication attacks, RDP, and VNC. Crowbar is particularly useful when an attacker has obtained private keys or configuration files and wants to test them against remote services.
 
 
 -- How to Avoid Brute Force Attacks --
