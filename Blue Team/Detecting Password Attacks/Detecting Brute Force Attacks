@@ -5,45 +5,176 @@ Brute force attacks are a frequently preferred attack technique by attackers as 
 
 We will focus on what brute force attacks are and how these attacks can be detected
 
-• What is brute force attack?
-• Brute force attacks types
-• Online and offline brute force attacks
-• Applications and protocols that are vulnerable to brute force attacks
-• Tools used in brute force attacks
-• Preventing brute force attacks
-• Brute force attack detection examples
+• Brute Force Attacks
+• Protocol/Services That Can Be Attacked by Brute Force
+• Tools Used in a Brute Force Attacks
+• How to Avoid Brute Force Attacks?
+• SSH Brute Force Attack Detection Example
+• HTTP Login Brute Force Attack Detection Example
+• Windows Login Brute Force Detection Example
 
 
--- Brute force attacks types --
+-- Brute Force Attacks --
+
+Brute force attack is the name given to the activity performed to find any username, password or directory on the web page or an encryption key by trial and error method. 
+The duration of the attack will vary according to the length of the sensitive data sought. If attempts are being made for a simple password or a username, this may take a short time or it may take years for complex expressions.
+
+➜ Online Brute force attacks
+
+In online brute force attacks, the attacker and the victim are online at the same time and contact each other depending on the situation. It is also possible to categorize these attacks as Active and Passive.
+
+⇒ Passive Online Brute Force Attacks: 
+
+In passive online brute force attacks, the attacker and the victim are on the same network, but do not have direct contact with each other. Usually, the attacker tries to obtain the password in passive ways without establishing a one-to-one connection with the victim machine.
+
+Man in the Middle: In this attack style, traffic related to the environment and the target machine is listened to and the password etc. is attempted to be captured.
+Sniffing: Sniffing style attacks are effective if there is a connection on the same network and a network a hub is used in the system because the hub sends a package to all the ports the whole LAN can see this package. If switches are used, these will filter what is to be sent to the target system, and sniffing is not effective here. 
+
+⇒ Active Online Brute Force Attacks
+
+In active online brute force attacks, the attacker communicates directly with the victim machine and makes the necessary trials to the relevant service on the victim machine. 
+For example, user/password attempts made to a web server, email server, SSH service, RDP service or a database service can be given as an example for this title.
+
+➜ Offline Brute force attacks
+
+Offline brute-force attacks are used for previously captured encrypted or hashed data. 
+In this type of attack, the attacker does not need to establish an active connection directly with the victim machine. 
+Attacker can perform an offline attack on the password file that he/she somehow gained access to. 
+
+Examples:  Capturing packets on wireless networks, Capturing a package with a mitm attack, Dumping hashes from db with a SQLi weakness, SAM or NTDS.dit database on Windows systems
+
+⇒ Dictionary Attacks
+
+This is a problem caused by the use of a common password. This is an attack method that usually occurs as a result of more than one person using the same password accidentally. 
+First, the attacker creates a dictionary for himself from the passwords he will try. He can find a prepared dictionary on the internet or create it as he wishes. Then, each word in this dictionary is tested on the target system as a password.
+
+⇒ Brute Force Attacks
+
+Brute force attacks are a method performed by trying all possibilities in a certain range one by one
+
+⇒ Rainbow Table Attacks
+
+All password possibilities in a certain range are calculated with the relevant function in a rainbow attack. For example, we should calculate the MD5 values of all possible passwords up to 4 digits in advance.
+In this attack type, the attacker quickly compares the pre-calculated hash file with the password summary he wants to crack and obtains the password if there is a  match. 
+The biggest problem here is to calculate these hashes or to somehow get access to the calculated form. 
 
 
+-- Protocol/Services That Can Be Attacked by Brute Force --
 
--- Online and offline brute force attacks --
+Brute force attacks are mostly encountered in the following areas in institutions.
 
-
-
--- Applications and protocols that are vulnerable to brute force attacks --
-
-
-
--- Tools used in brute force attacks --
-
-
-
--- Preventing brute force attacks --
+• Web application login pages
+• RDP services
+• SSH services
+• Mail server login pages
+• LDAP services
+• Database services(mssql,mysql, postgresql, oracle, etc.)
+• Web application home directories(directory brute force)
+• DNS servers, in order to detect DNS records (dns brute force)
 
 
+-- Tools Used in a Brute Force Attacks --
 
--- Brute force attack detection examples --
+• Aircrack-ng: aircrack-ng is an 802.11a/b/g WEP/WPA cracking program that can recover a 40-bit, 104-bit, 256-bit or 512-bit WEP key once enough encrypted packets have been gathered. Also it can attack WPA1/2 networks with some advanced methods or simply by brute force.
+• John the Ripper: John the Ripper is a tool designed to help systems administrators to find weak (easy to guess or crack through brute force) passwords, and even automatically mail users alert them about it, if it is desired. Runs on 15 different platforms including Unix, Windows, and OpenVMS. 
+• L0phtCrack: a tool for cracking Windows passwords. It uses rainbow tables, dictionaries, and multiprocessor algorithms.
+• Hashcat: Hashcat supports five unique modes of attack for over 300 highly-optimized hashing algorithms. hashcat currently supports CPUs, GPUs, and other hardware accelerators on Linux, and has facilities to help distribute password cracking.
+• Ncrack: a tool for cracking network authentication. It can be used on Windows, Linux, and BSD. It was built to help companies secure their networks by proactively testing all their hosts and networking devices for poor passwords.
+• Hydra: Hydra is a parallelized login cracker which supports numerous protocols to attack. It is very fast and flexible, and new modules are easy to add.
 
 
+-- How to Avoid Brute Force Attacks --
+
+To protect your organization from brute force attack, enforce the use of strong passwords. 
+
+➜ Best Practices for passwords:
+
+• Never use information that can be found online (like names of family members).
+• Have as many characters as possible.
+• Combine letters, numbers, and symbols.
+• Minimum 8 characters.
+• Each user account is different.
+• Avoid common patterns.
+
+➜ Ways how to protect users from brute-force attacks as administrators of an organization:
+
+• Lock Policy - After a certain number of failed login attempts, you can lock accounts and then unlock them as an administrator.
+• Progressive delays - You can lock accounts for a limited time after a certain number of failed login attempts. 
+• Recaptcha - With tools such as Captcha-reCAPTCHA, you can make it mandatory for users to complete simple tasks in order to log on to a system. 
+• Strong Password Policy - You can force users to define long and complex passwords and force them to change their password periodically.
+• 2FA - It is the method where a second verification is required from the user with an additional verification mechanism (SMS,mail,token,push notification, etc.) after entering the username and password.
+
+➜ Brute Force Attack Detection
+
+Specific rules are usually defined on SIEM systems to detect brute force attacks. When defining these rules, we consider how many unsuccessful login attempts are made by the user within a certain period of time. 
+While analyzing the relevant alarms, the logs of the trial protocol/application are examined and the necessary inferences are made.
 
 
+-- SSH Brute Force Attack Detection Example --
+
+➜ View on a Linux machine logs with the contents of the "/var/log/auth.log.1" file and failed login attempts: cat auth.log.1 | grep "Failed password" | cut -d " " -f10 | sort | uniq -c | sort
+➜ Locate the IP addresses that made these attempts: cat auth.log.1 | grep "Failed password" | cut -d " " -f12 | sort | uniq -c | sort
+➜ Successfully loged users: cat auth.log.1 | grep "Accepted password"
 
 
+-- HTTP Login Brute Force Attack Detection Example --
+
+In HTTP login brute force attacks, the attacker usually tries a password with a dictionary attack on a login page. In order to analyze this, the content of the relevant log file should be opened with a text editor and the logs should be examined. 
+An HTTP login brute force attack. It is seen that the user found the password by successfully entering the password after a certain number of unsuccessful login attempts. 
+Here, the difference between the package sizes in the response returned to failed login attempts and the package sizes in the response returned to successful login attempts is clearly seen. 
+
+173.249.51.74 - - [24/Sep/2021:14:04:20 +0000] "POST /bWAPP/login.php HTTP/1.1" 200 4092 "http://3.128.26.67:8090/bWAPP/login.php" "Mozilla/5.0"
+173.249.51.74 - - [24/Sep/2021:14:04:22 +0000] "POST /bWAPP/login.php HTTP/1.1" 200 4092 "http://3.128.26.67:8090/bWAPP/login.php" "Mozilla/5.0"
+173.249.51.74 - - [24/Sep/2021:14:04:23 +0000] "POST /bWAPP/login.php HTTP/1.1" 200 4092 "http://3.128.26.67:8090/bWAPP/login.php" "Mozilla/5.0"
+173.249.51.74 - - [24/Sep/2021:14:04:24 +0000] "POST /bWAPP/login.php HTTP/1.1" 200 4092 "http://3.128.26.67:8090/bWAPP/login.php" "Mozilla/5.0"
+173.249.51.74 - - [24/Sep/2021:14:04:26 +0000] "POST /bWAPP/login.php HTTP/1.1" 200 4092 "http://3.128.26.67:8090/bWAPP/login.php" "Mozilla/5.0"
+173.249.51.74 - - [24/Sep/2021:14:04:27 +0000] "POST /bWAPP/login.php HTTP/1.1" 200 4092 "http://3.128.26.67:8090/bWAPP/login.php" "Mozilla/5.0"
+173.249.51.74 - - [24/Sep/2021:14:04:29 +0000] "POST /bWAPP/login.php HTTP/1.1" 200 4092 "http://3.128.26.67:8090/bWAPP/login.php" "Mozilla/5.0"
+173.249.51.74 - - [24/Sep/2021:14:04:31 +0000] "POST /bWAPP/login.php HTTP/1.1" 200 4092 "http://3.128.26.67:8090/bWAPP/login.php" "Mozilla/5.0"
+173.249.51.74 - - [24/Sep/2021:14:04:32 +0000] "POST /bWAPP/login.php HTTP/1.1" 200 4092 "http://3.128.26.67:8090/bWAPP/login.php" "Mozilla/5.0"
+173.249.51.74 - - [24/Sep/2021:14:04:36 +0000] "POST /bWAPP/login.php HTTP/1.1" 200 4092 "http://3.128.26.67:8090/bWAPP/login.php" "Mozilla/5.0"
+173.249.51.74 - - [24/Sep/2021:14:04:38 +0000] "POST /bWAPP/login.php HTTP/1.1" 200 4092 "http://3.128.26.67:8090/bWAPP/login.php" "Mozilla/5.0"
+173.249.51.74 - - [24/Sep/2021:14:04:39 +0000] "POST /bWAPP/login.php HTTP/1.1" 200 4092 "http://3.128.26.67:8090/bWAPP/login.php" "Mozilla/5.0"
+173.249.51.74 - - [24/Sep/2021:14:04:41 +0000] "POST /bWAPP/login.php HTTP/1.1" 200 4092 "http://3.128.26.67:8090/bWAPP/login.php" "Mozilla/5.0"
+173.249.51.74 - - [24/Sep/2021:14:04:42 +0000] "POST /bWAPP/login.php HTTP/1.1" 200 4092 "http://3.128.26.67:8090/bWAPP/login.php" "Mozilla/5.0"
+173.249.51.74 - - [24/Sep/2021:14:04:44 +0000] "POST /bWAPP/login.php HTTP/1.1" 200 4092 "http://3.128.26.67:8090/bWAPP/login.php" "Mozilla/5.0"
+173.249.51.74 - - [24/Sep/2021:14:04:46 +0000] "POST /bWAPP/login.php HTTP/1.1" 200 4092 "http://3.128.26.67:8090/bWAPP/login.php" "Mozilla/5.0"
+173.249.51.74 - - [24/Sep/2021:14:04:44 +0000] "POST /bWAPP/login.php HTTP/1.1" 200 4092 "http://3.128.26.67:8090/bWAPP/login.php" "Mozilla/5.0"
+173.249.51.74 - - [24/Sep/2021:14:04:46 +0000] "POST /bWAPP/login.php HTTP/1.1" 200 6 "http://3.128.26.67:8090/bWAPP/login.php" "Mozilla/5.0"
+173.249.51.74 - - [24/Sep/2021:14:04:44 +0000] "POST /bWAPP/login.php HTTP/1.1" 200 4092 "http://3.128.26.67:8090/bWAPP/login.php" "Mozilla/5.0"
+173.249.51.74 - - [24/Sep/2021:14:04:46 +0000] "POST /bWAPP/login.php HTTP/1.1" 200 4092 "http://3.128.26.67:8090/bWAPP/login.php" "Mozilla/5.0"
+173.249.51.74 - - [24/Sep/2021:14:04:44 +0000] "POST /bWAPP/login.php HTTP/1.1" 200 4092 "http://3.128.26.67:8090/bWAPP/login.php" "Mozilla/5.0"
+173.249.51.74 - - [24/Sep/2021:14:04:46 +0000] "POST /bWAPP/login.php HTTP/1.1" 200 6 "http://3.128.26.67:8090/bWAPP/login.php" "Mozilla/5.0
+173.249.51.74 - - [24/Sep/2021:14:04:42 +0000] "POST /bWAPP/login.php HTTP/1.1" 200 4092 "http://3.128.26.67:8090/bWAPP/login.php" "Mozilla/5.0"
+173.249.51.74 - - [24/Sep/2021:14:04:44 +0000] "POST /bWAPP/login.php HTTP/1.1" 200 4092 "http://3.128.26.67:8090/bWAPP/login.php" "Mozilla/5.0"
+173.249.51.74 - - [24/Sep/2021:14:04:46 +0000] "POST /bWAPP/login.php HTTP/1.1" 200 4092 "http://3.128.26.67:8090/bWAPP/login.php" "Mozilla/5.0"
+173.249.51.74 - - [24/Sep/2021:14:04:44 +0000] "POST /bWAPP/login.php HTTP/1.1" 200 4092 "http://3.128.26.67:8090/bWAPP/login.php" "Mozilla/5.0"
 
 
+-- Windows Login Brute Force Detection Example --
 
+• Windows Login Records (4624)
+• Windows RDP Brute Force Detection (4625)
+
+Considering the general situation, a login activity appears in all successful or unsuccessful cyberattacks. 
+
+➜ Windows Login Records
+
+When an unsuccessful login operation is made the "Event ID 4624 – An account was successfully logged on" hsd been generated.
+
+To reach the result, we open the “Event Viewer” and select “Security” logs. Create a filter for the “4624” Event ID.
+
+When we look at the “Logon Type” field, we see the value 10. This indicates that you are logged in with “Remote Desktop Services” or “Remote Desktop Protocol”.
+
+https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4624
+
+➜ Windows RDP Brute Force Detection
+
+When an unsuccessful login operation is made on RDP, the "Event ID 4625 - An account failed to log on" log is generated.
+
+When we look at the dates, we see that the logs are formed one after the other
+
+*
 *
 
 
