@@ -1,0 +1,137 @@
+
+--- Sysmon Event ID 1 ---
+
+• This is an event from Sysmon
+• Description Fields in 1
+• Examples of 1
+• Mini-Seminars Covering Event ID 1
+
+1: Process creation 
+
+
+-- This is an event from Sysmon --
+
+The process creation event provides extended information about a newly created process. The full command line provides context on the process execution. The ProcessGUID field is a unique value for this process across a domain to make event correlation easier. The hash is a full hash of the file with the algorithms in the HashType field.
+
+
+-- Description Fields in 1  --
+
+• Log Name
+• Source
+• Logged
+• Event ID
+• Task Category
+• Level
+• Keywords
+    User
+• Computer
+    OpCode
+    Description
+    RuleName
+    UtcTime
+    ProcessGuid
+    ProcessId
+    Image
+    FileVersion
+    Description
+    Product
+    Company
+    OriginalFileName
+    CommandLine
+    CurrentDirectory
+    User
+    LogonGuid
+    LogonId
+    TerminalSessionId
+    IntegrityLevel
+    Hashes
+    ParentProcessGuid
+    ParentProcessId
+    ParentImage
+    ParentCommandLine
+• ParentUser
+
+
+-- Examples of 1 --
+
+Process Create:
+RuleName: - 
+UtcTime: 2024-04-28 22:08:22.025
+ProcessGuid: {a23eae89-bd56-5903-0000-0010e9d95e00}
+ProcessId: 6228
+Image: C:\Windows\System32\wbem\WmiPrvSE.exe
+FileVersion: 10.0.22621.1 (WinBuild.160101.0800)
+Description: WMI Provider Host
+Product: Microsoft® Windows® Operating System
+Company: Microsoft Corporation
+OriginalFileName: Wmiprvse.exe
+CommandLine: C:\Windows\system32\wbem\wmiprvse.exe -secured -Embedding
+CurrentDirectory: C:\Windows\system32\
+User: NT AUTHORITY\NETWORK SERVICE
+LogonGuid: {a23eae89-b357-5903-0000-002005eb0700}
+LogonId: 0x7EB05
+TerminalSessionId: 1
+IntegrityLevel: System
+Hashes: SHA1=91180ED89976D16353404AC982A422A707F2AE37,MD5=7528CCABACCD5C1748E63E192097472A,SHA256=196CABED59111B6C4BBF78C84A56846D96CBBC4F06935A4FD4E6432EF0AE4083,IMPHASH=144C0DFA3875D7237B37631C52D608CB
+ParentProcessGuid: {a23eae89-bd28-5903-0000-00102f345d00}
+ParentProcessId: 580
+ParentImage: C:\Windows\System32\svchost.exe
+ParentCommandLine: C:\Windows\system32\svchost.exe -k DcomLaunch -p
+ParentUser: NT AUTHORITY\SYSTEM
+
+
+Event XML:
+
+ <Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+    <System>
+        <Provider Name="Microsoft-Windows-Sysmon" Guid="{5770385F-C22A-43E0-BF4C-06F5698FFBD9}" />
+        <EventID>1</EventID>
+        <Version>5</Version>
+        <Level>4</Level>
+        <Task>1</Task>
+        <Opcode>0</Opcode>
+        <Keywords>0x8000000000000000</Keywords>
+        <TimeCreated SystemTime="2024-04-28T22:08:22.025812200Z" />
+        <EventRecordID>757</EventRecordID>
+        <Correlation />
+        <Execution ProcessID="3216" ThreadID="3964" />
+        <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+        <Computer>rfsH.lab.local</Computer>
+        <Security UserID="S-1-5-18" />
+    </System>
+
+    <EventData>
+        <Data Name="RuleName">-</Data>
+        <Data Name="UtcTime">2024-04-28 22:08:22.025</Data>
+        <Data Name="ProcessGuid">{A23EAE89-BD56-5903-0000-0010E9D95E00}</Data>
+        <Data Name="ProcessId">6228</Data>
+        <Data Name="Image">C:\Windows\System32\wbem\WmiPrvSE.exe</Data>
+        <Data Name="FileVersion">10.0.22621.1 (WinBuild.160101.0800)</Data>
+        <Data Name="Description">WMI Provider Host</Data>
+        <Data Name="Product">Microsoft® Windows® Operating System</Data>
+        <Data Name="Company">Microsoft Corporation</Data>
+        <Data Name="OriginalFileName">Wmiprvse.exe</Data>
+        <Data Name="CommandLine">C:\Windows\system32\wbem\wmiprvse.exe -secured -Embedding</Data>
+        <Data Name="CurrentDirectory">C:\Windows\system32\</Data>
+        <Data Name="User">LAB\rsmith</Data>
+        <Data Name="LogonGuid">{A23EAE89-B357-5903-0000-002005EB0700}</Data>
+        <Data Name="LogonId">0x7eb05</Data>
+        <Data Name="TerminalSessionId">1</Data>
+        <Data Name="IntegrityLevel">System</Data>
+        <Data Name="Hashes">SHA1=91180ED89976D16353404AC982A422A707F2AE37,MD5=7528CCABACCD5C1748E63E192097472A,SHA256=196CABED59111B6C4BBF78C84A56846D96CBBC4F06935A4FD4E6432EF0AE4083,IMPHASH=144C0DFA3875D7237B37631C52D608CB</Data>
+        <Data Name="ParentProcessGuid">{A23EAE89-BD28-5903-0000-00102F345D00}</Data>
+        <Data Name="ParentProcessId">580</Data>
+        <Data Name="ParentImage">C:\Windows\System32\svchost.exe</Data>
+        <Data Name="ParentCommandLine">C:\Windows\system32\svchost.exe -k DcomLaunch -p</Data>
+        <Data Name="ParentUser">NT Authority\SYSTEM</Data>
+    </EventData>
+
+
+-- Mini-Seminars Covering Event ID 1 --
+
+https://www.ultimatewindowssecurity.com/webinars/register.aspx?id=1438
+https://www.ultimatewindowssecurity.com/webinars/register.aspx?id=2650
+
+*
+
+
