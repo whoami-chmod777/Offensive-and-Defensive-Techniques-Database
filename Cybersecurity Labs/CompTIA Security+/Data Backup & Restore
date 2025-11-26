@@ -1,1 +1,103 @@
 
+--- Data Backup & Restore ---
+
+In the context of disaster recovery, data backup plays a fundamental role as a proactive measure to mitigate the impact of unforeseen events. 
+Data backup involves creating duplicate copies of essential files, applications, and system configurations, storing them separately from the primary data source. 
+These backups serve as a critical resource during disaster recovery efforts. Key considerations for effective data backup include determining backup frequency, selecting appropriate storage solutions, and implementing automation. 
+In the event of a disaster, such as natural calamities, cyber-attacks, or hardware failures, the primary data may be compromised or inaccessible. 
+Data backups become the cornerstone of recovery efforts by providing a reliable and up-to-date copy of the data. This enables organizations to restore their systems and operations to a functional state before the disaster occurred.
+
+
+Objective: Perform a local backup and restore of the /important_files directory using the Deja Dup tool.
+
+• Task 1: Backup the /important_files directory.
+• Task 2: Simulate data loss by deleting the /important_files directory.
+• Task 3: Restore the files.
+• Conclusion
+
+The tool for this lab is Deja Dup.
+
+
+-- Task 1: Backup the /important_files directory --
+
+Step 2: Check the directory that we want to backup.
+
+# ls -lah /
+# cd /important_files
+
+root@ip-10-2-16-125:/important_files# ls -la
+total 24
+drwxr-xr-x  2 root root 4096 Jan 11  2024 .
+drwxr-xr-x 21 root root 4096 Nov 26 12:01 ..
+-rw-r--r--  1 root root  476 Jan 11  2024 confidential_data.txt
+-rw-r--r--  1 root root  718 Jan 11  2024 financial_reports.xml
+-rw-r--r--  1 root root  541 Jan 11  2024 research_report.txt
+-rw-r--r--  1 root root  342 Jan 11  2024 sensor_readings.json
+root@ip-10-2-16-125:/important_files# 
+
+
+Step 3: Open Deja Dup. It is also called Backups.
+
+Déjà Dup is a simple backup tool that focuses on ease of use and recovering from personal, accidental data loss. It hides the complexity of backing up the Right Way (encrypted, off-site, and regular) and uses duplicity as the backend.
+The Overview pane displays two options: Restore to start a restore process and Back Up Now to manually start the backup process.
+
+Step 4: The Folders to save pane allows you to add one or more folders to backup. Click on the + sign and add the /important_files directory.
+
+Step 5: The Folders to ignore pane allows you to specify folders that you don't want to backup. Skip this for now.
+
+Step 6: The Storage location pane allows you to specify a storage location for your backup data. 
+
+Since, we are performing a local backup, let's create a backup directory. Run the following command: mkdir /var/mybackups
+
+Now, set the storage location to Local Folder and set the backup folder to /var/mybackups.
+
+Step 7: The Scheduling pane allows you to enable automatic backups and set the backup interval as well. It also provides an option to specify how long should the old backups be kept before they are automatically deleted to save storage space.
+For now, leave it as it is. We will be performing a manual backup.
+
+Step 8: Now, once we have set all our preferences, go to the Overview pane and click on Back Up Now option.
+
+You will be prompted for an encryption password to password-protect your backup. You will need this password when restoring your files. Set a desired password, say MyB@ckup09.
+
+Click on Forward. The backup process will begin and will be done in a minute.
+
+Step 9: Once the backup is done, you will see the backup related files in your /var/mybackups directory. Use the command: 
+
+# cd /var/mybackups
+# ls -l
+
+
+-- Task 2: Simulate data loss by deleting the /important_files directory --
+
+Step 10: Let's simulate a data loss scenario by deleting the /important_files directory. Use the command: rm -r /important_files
+
+The directory is gone. However, since we created a backup before, let's try to restore the files.
+
+
+-- Task 3: Restore the files --
+
+Step 11: On the Overview pane in Deja Dup, click on Restore.
+
+Step 12: You will be prompted for the backup location from where the files have to be restored. Our backup location was /var/mybackups and has been selected by default. Click on Forward. 
+
+Next, you will be asked for the date of the backup from which to restore. There is only one date. Click on Forward.
+
+Next, you will be asked for the restore location. Let's set it to Desktop and click on Forward. Finally, click on Restore.
+
+You will be prompted for the encryption password that you used when performing the backup i.e. MyB@ckup09. Enter this password and then click on Forward.
+
+Once the restore completes, you will see the following: "Restore Finished"
+
+The restored imortant_files directory is present on the Desktop.
+
+
+-- Conclusion --
+
+In this lab, we performed a local backup and restore of a directory using the Deja Dup tool. 
+This exercise showcased the importance of backups and the ease with which users can implement secure data protection measures. 
+By utilizing data backup tools, individuals and organizations can ensure the availability and recoverability of their data in the face of unforeseen events, contributing to a comprehensive data management and disaster recovery strategy.
+
+
+
+https://apps.gnome.org/en-GB/DejaDup/
+
+*
