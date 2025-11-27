@@ -197,6 +197,7 @@ We will see how to identify the underlying technologies of a website. Determinin
 ➜ Tools and Methods Used
 
 ⇒ Online Tools
+
 Web-based tools provide technological information about a website. These tools analyze websites and determine the technologies used. 
 Popular tools such as BuiltWith and Wappalyzer allow you to quickly identify the technologies used by a website
 
@@ -204,12 +205,14 @@ https://builtwith.com/
 https://www.wappalyzer.com/
 
 ⇒ Browser Extensions
+
 Browser extensions like Wappalyzer and WhatRuns are also very useful for identifying technologies used on websites. These extensions provide instant information about the technologies on the websites you visit.
 
 https://www.wappalyzer.com/
 https://www.whatruns.com/
 
 ⇒ Command-Line Tools
+
 Tools like Curl can be used to query HTTP headers from web servers. These headers can reveal hints about the server software, CMS system, and sometimes the programming language used.
 
 ➜ Curl Command
@@ -284,6 +287,130 @@ Technologies used in websites often require the addition of specific HTML tags. 
 
 -- Internet Archive - Wayback Machine --
 
+The Internet Archive, also known as the Wayback Machine, can be described as a digital time capsule of the internet. Since 1996, it has stored archived copies of web pages, allowing users to access their previous states.
+
+The Wayback Machine is an archiving service that tracks changes in web pages over time. Users can view past versions of billions of web pages through this service.
+
+
+-- Uses of the Wayback Machine --
+
+• Research: Wayback Machine can be used to gather information about old news, articles, and publications.
+• Security Analysis: Cybersecurity experts can use this tool to examine the past states of malicious websites or phishing sites.
+• Lost Content: When websites are updated or shut down, Wayback Machine can serve as a resource for users who need old content.
+
+The Wayback Machine is a unique tool for exploring the history of the internet, accessing old content, and seeing how websites have changed over time.
+
+https://web.archive.org/
+
+
+-- Google Dorks --
+
+Google Dorks is the practice of using specialized search queries in the Google search engine to find sensitive information, public data, and security vulnerabilities.
+
+Google Dorks are queries that use Google's advanced search operators to quickly locate specific information. 
+These operators allow you to search within specific file types, on certain websites, or for pages containing particular text.
+
+
+➜ Basic Google Dork Operators
+
++----------------+--------------------------------------------------------+-------------------------+
+| Operator       | Description                                            | Example                 |
++----------------+--------------------------------------------------------+-------------------------+
+| site           | Searches within a specific site.                       | site:example.com        |
++----------------+--------------------------------------------------------+-------------------------+
+| filetype       | Searches for a specific file type.                     | filetype:pdf            |
++----------------+--------------------------------------------------------+-------------------------+
+| inurl          | Finds pages with a specific text in the URL.           | inurl:login             |
++----------------+--------------------------------------------------------+-------------------------+
+| intext         | Searches for specific text within the content of a     | intext:"error"          |
+|                | web page.                                              |                         |
++----------------+--------------------------------------------------------+-------------------------+
+| intitle        | Searches for specific text within the page title.      | intitle:"index of"      |
++----------------+--------------------------------------------------------+-------------------------+
+
+➜ Using Google Dorks
+
+Define Your Goal: Determine what kind of information you want to find. This could be a specific file type, sensitive information, or identifying security vulnerabilities.
+Use Operators: Use appropriate Google Dork operators to achieve your goals. Combine operators to obtain more specific results.
+
+➜ Example Application
+
+site:youtube.com filetype:pdf
+
+➜ Google Hacking Database
+
+Google Hacking Database (GHDB) is a collection of various search queries used by hackers and security researchers to find security vulnerabilities, sensitive information, and other related data through the Google search engine. 
+This database contains search documents specifically designed to discover potentially dangerous and vulnerable web resources.
+
+site:github.com "BEGIN OPENSSH PRIVATE KEY"	
+ext:nix "BEGIN OPENSSH PRIVATE KEY"	
+inurl:home.htm intitle:1766	
+intitle:"SSL Network Extender Login" -checkpoint.com	
+intext:"siemens" & inurl:"/portal/portal.mwsl"	
+Google Dork Submisson For GlobalProtect Portal	
+inurl:"cgi-bin/koha"	
+intext:"aws_access_key_id" | intext:"aws_secret_access_key" filetype:json | filetype:yaml	
+intext:"proftpd.conf" "index of"	
+site:.edu filetype:xls "root" database	
+intitle:index of /etc/ssh	
+"START test_database" ext:log	
+"Header for logs at time" ext:log	
+intext:"dhcpd.conf" "index of"	
+site:uat.* * inurl:login
+...
+...
+...
+
+https://www.exploit-db.com/google-hacking-database
+
+
+-- Meta Files --
+
+
+As the internet has grown, websites have become more complex, requiring constant effort to secure and maintain their security. 
+Websites contain various meta files intended for different purposes that are accessed by bots, search engines, and users.
+
+• robots.txt
+• Meta Tags
+• Sitemap
+• security.txt
+• humans.txt
+
+
+-- robots.txt --
+
+
+
+-- Meta Tags --
+
+
+-- Sitemap --
+
+
+
+-- security.txt --
+
+
+
+
+-- humans.txt --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -303,25 +430,6 @@ Technologies used in websites often require the addition of specific HTML tags. 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
--- Google Dorks --
-
-
--- Meta Files --
 
 
 -- DNS Enumeration --
