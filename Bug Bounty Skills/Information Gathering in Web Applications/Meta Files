@@ -1,0 +1,207 @@
+
+As the internet has grown, websites have become more complex, requiring constant effort to secure and maintain their security. Websites contain various meta files intended for different purposes that are accessed by bots, search engines, and users. In this section, we will explore how to analyze meta files to gather information about websites.
+
+• robots.txt
+• Meta Tags
+• Sitemap
+• security.txt
+• humans.txt
+
+
+-- robots.txt --
+
+Websites being crawled by bots, search engines, and other automated processes need guidelines on how to access content and which sections to avoid. These guidelines are typically provided through the robots.txt file. This file, located in the root directory of the site, contains rules that direct bots on how to crawl the site.
+
+➜ Structure of robots.txt
+
+The robots.txt file is generally structured with three main directives: "User-agent," "Disallow," and "Allow"
+
+⇒ User-agent: Specifies which bot or crawler the rule applies to. For example, "User-agent: Googlebot" specifies rules for only Google's bot, while "User-agent: *" sets rules for all bots.
+⇒ Disallow: Specifies the site content or directories that bots are prohibited from accessing. For example, "Disallow: /private" prevents bots from accessing the "/private" directory.
+⇒ Allow: Specifies that certain content within a path that has been disallowed is accessible. For example, "Disallow: /folder" and "Allow: /folder/index.html" would block access to all files in the "/folder" except for "/folder/index.html."
+
+➜ Use of robots.txt
+
+The robots.txt file is used by site owners to control how their site is crawled. However, it's important to note that the directives in this file are not enforceable and some bots may ignore these rules.
+
+➜ Analyzing robots.txt
+
+Examining the robots.txt file can provide insights into which sections of a site exist. Developers may inadvertently include paths to admin panels in this file. For example, finding an entry like "Disallow: example.com/adminpanel" could offer valuable insights to cybersecurity experts. This file is accessible directly in the site's root directory and can be retrieved using tools like curl or wget, or a web browser.
+
+root💀hackerbox:~# curl --get https://www.youtube.com/robots.txt
+# robots.txt file for YouTube
+# Created in the distant future (the year 2000) after
+# the robotic uprising of the mid 90's which wiped out all humans.
+
+User-agent: Mediapartners-Google*
+Disallow:
+
+User-agent: *
+Disallow: /comment
+Disallow: /feeds/videos.xml
+Disallow: /get_video
+Disallow: /get_video_info
+Disallow: /get_midroll_info
+Disallow: /live_chat
+Disallow: /login
+Disallow: /qr
+Disallow: /results
+Disallow: /signup
+Disallow: /t/terms
+Disallow: /timedtext_video
+Disallow: /verify_age
+Disallow: /watch_ajax
+Disallow: /watch_fragments_ajax
+Disallow: /watch_popup
+Disallow: /watch_queue_ajax
+
+Sitemap: https://www.youtube.com/sitemaps/sitemap.xml
+Sitemap: https://www.youtube.com/product/sitemap.xml
+
+
+-- Meta Tags --
+
+Web pages use various meta tags to better organize and understand the information they contain. These tags are usually found in the <head> section of the HTML document and guide how the site should be understood by search engines and other web services.
+
+➜ Robots Meta Tag
+
+The robots meta tag provides directives on how a particular web page should be indexed or followed by search engines. If a page doesn't contain an entry like <meta name="robots" ...>, it defaults to INDEX,FOLLOW under the "Robots Exclusion Protocol," meaning search engines can index the page and follow links on it. However, with the "NOINDEX" and "NOFOLLOW" values, this behavior can be changed:
+
+• NOINDEX: Prevents a specific page from being indexed by search engines.
+• NOFOLLOW: Prevents the page's links from being followed.
+
+➜ Various Informative Meta Tags
+
+Organizations place various informative meta tags in their pages to support technology, provide social network previews, handle search engine indexing, and more. These tags can provide testers with valuable insights into the technologies used, additional paths to discover, and functions defined. Examples of such tags found in the source code of a web page:
+
+• og:title, og:description: Define the title and description that appear when the page is shared on social networks.
+• og:image: Defines the image that appears when a link to the page is shared on social media platforms.
+• twitter:card, twitter:image, twitter:creator: Contain information about how the page appears when shared on Twitter.
+• apple-mobile-web-app-title, msapplication-TileColor: Used for site-specific app shortcuts on mobile devices and Windows.
+
+These tags play a crucial role in the promotion and accessibility of a web page's content.
+
+
+-- Sitemap --
+
+In the penetration testing process, thoroughly analyzing the target system is critically important. Examining the sitemap provides valuable insights into the structure and potential weak points of the target system.
+A sitemap lists all the pages, files, and their relationships within a web application or site. This provides penetration testers with a significant starting point to understand and explore the application's overall structure. In particularly broad and complex applications, it may facilitate access to some deep or hidden sections.
+Obtaining the sitemap.xml file of a target site is important. This file is typically located in the site's root directory and is accessible directly. It can be easily examined using command-line tools (e.g., wget, curl).
+
+root💀hackerbox:~# curl --get https://www.google.com/sitemap.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.google.com/schemas/sitemap/0.84">
+  <sitemap>
+    <loc>https://www.google.com/gmail/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.google.com/forms/sitemaps.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.google.com/slides/sitemaps.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.google.com/sheets/sitemaps.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.google.com/drive/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.google.com/docs/sitemaps.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.google.com/get/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.google.com/travel/flights/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.google.com/admob/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.google.com/business/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.google.com/services/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.google.com/partners/about/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.google.com/adwords/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.google.com/search/about/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.google.com/adsense/start/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.google.com/retail/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.google.com/sitemap_search.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.google.com/webmasters/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.google.com/chromebook/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.google.com/chrome/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.google.com/calendar/about/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.google.com/photos/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.google.com/nonprofits/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.google.com/finance/sitemap.xml</loc>
+</sitemapindex>
+
+
+-- security.txt --
+
+The security.txt file defines the security policies and contact details of target systems. Defined by IETF as RFC 9116, this format helps in the disclosure of security vulnerabilities. During penetration testing, the security.txt file is interesting for various reasons, including discovering more resources and paths, gathering open-source intelligence, finding bug bounty information, and social engineering.
+
+The security.txt file can be found in the root directory of the web server or in the .well-known/ directory. For example:
+
+• https://example.com/security.txt
+• https://example.com/.well-known/security.txt
+
+Analyzing this file can provide important information about the security policies and contact methods of the target organization. It may also contain guidelines on how to report security issues.
+
+root💀hackerbox:~# curl --get https://github.com/.well-known/security.txt
+Contact: https://hackerone.com/github
+Acknowledgments: https://hackerone.com/github/hacktivity
+Preferred-Languages: en
+Canonical: https://github.com/.well-known/security.txt
+Policy: https://bounty.github.com
+Hiring: https://github.careers
+Expires: 2024-04-27T13:11:03z
+
+This example contains contact information and security policies that can be used for reporting security issues.
+Analyzing the security.txt file provides valuable information about the target systems. This information is crucial during the process of contacting the target organization, ethically reporting security vulnerabilities, and assessing potential weak points.
+
+
+-- humans.txt --
+
+While technical configurations and security vulnerabilities are often the focus during the deep analysis and identification of potential weak points in target systems, understanding the human element behind the target organization is also important. The humans.txt file offers a unique opportunity in this regard. This file is an attempt to recognize the people behind a website and contains information about the individuals who contribute to building the site. It may include information related to careers or jobs and can offer interesting opportunities for penetration testers.
+The humans.txt file can provide valuable insights into the team behind the target system. This information can include the roles of team members, their areas of expertise, and the projects they have contributed to. Such information can be used during the planning and execution of offensive cybersecurity techniques like social engineering attacks.
+
+root💀hackerbox:~# curl --get https://www.google.com/humans.txt
+Google is built by a large team of engineers, designers, researchers, robots, and others in many different sites across the globe. It is updated continuously, and built with more tools and technologies than we can shake a stick at. If you'd like to help us out, see careers.google.com.
+
+This example states that Google is built by a global team and is continuously updated. It also provides a career site for those interested in contributing.
+The humans.txt file should be considered a resource during penetration testing and offensive cybersecurity activities. This file offers opportunities to better understand the human element behind the target organization and the technologies used. As part of an effective penetration testing strategy, analyzing the humans.txt file plays a significant role in planning and executing targeted attacks on the organization.
+
+
+*
+
+
+
