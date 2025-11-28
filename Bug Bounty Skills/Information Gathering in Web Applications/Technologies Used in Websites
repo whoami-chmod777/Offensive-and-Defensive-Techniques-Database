@@ -1,0 +1,99 @@
+
+Websites are built using various technologies and tools, including server software, programming languages, frameworks, database systems, and more. 
+We will see how to identify the underlying technologies of a website. Determining the technologies used in a website is crucial for identifying potential security vulnerabilities.
+
+• Tools and Methods Used
+• Curl Command
+• Common Technology Identification Indicators
+
+➜ Tools and Methods Used
+
+⇒ Online Tools
+
+Web-based tools provide technological information about a website. These tools analyze websites and determine the technologies used. 
+Popular tools such as BuiltWith and Wappalyzer allow you to quickly identify the technologies used by a website
+
+https://builtwith.com/
+https://www.wappalyzer.com/
+
+⇒ Browser Extensions
+
+Browser extensions like Wappalyzer and WhatRuns are also very useful for identifying technologies used on websites. These extensions provide instant information about the technologies on the websites you visit.
+
+https://www.wappalyzer.com/
+https://www.whatruns.com/
+
+⇒ Command-Line Tools
+
+Tools like Curl can be used to query HTTP headers from web servers. These headers can reveal hints about the server software, CMS system, and sometimes the programming language used.
+
+➜ Curl Command
+
+root💀hackerbox:~# curl --head https://wordpress.org
+HTTP/2 200 
+server: nginx
+date: Thu, 28 Mar 2024 10:44:38 GMT
+content-type: text/html; charset=UTF-8
+vary: Accept-Encoding
+strict-transport-security: max-age=3600
+x-olaf: ⛄
+link: <https://wordpress.org/wp-json/>; rel="https://api.w.org/"
+link: <https://wordpress.org/wp-json/wp/v2/pages/457>; rel="alternate"; type="application/json"
+link: <https://w.org/>; rel=shortlink
+x-frame-options: SAMEORIGIN
+alt-svc: h3=":443"; ma=86400
+x-nc: HIT ord 2
+
+From the head request, we discovered that the wordpress.org site is running on an nginx web server.
+
+➜  Common Technology Identification Indicators
+
+⇒ Cookies
+
+Web technologies often create specific cookies in browsers. The names of these cookies can include references to the technologies used.
+
++-------------------+----------------------------------------------+
+| Framework         | Cookie                                       |
++-------------------+----------------------------------------------+
+| Zope              | zope3                                        |
+| CakePHP           | cakephp                                      |
+| Kohana            | kohanasession                                |
+| Laravel           | laravel_session                              |
+| phpBB             | phpbb3_                                      |
+| WordPress         | wp-settings                                  |
+| 1C-Bitrix         | BITRIX_                                      |
+| AMFcms            | AMP                                          |
+| Django CMS        | django                                       |
+| DotNetNuke        | DotNetNukeAnonymous                          |
+| e107              | e107_tz                                      |
+| EPiServer         | EPiTrace, EPiServer                          |
+| Graffiti CMS      | graffitibot                                  |
+| Hotaru CMS        | hotaru_mobile                                |
+| ImpressCMS        | ICMSession                                   |
+| Indico            | MAKCSESSION                                  |
+| InstantCMS        | InstantCMS[logdate]                          |
+| Kentico CMS       | CMSPreferredCulture                          |
+| MODx              | SN4[{12ymb}]                                 |
+| TYPO3             | fe_typo_user                                 |
+| Dynamicweb        | Dynamicweb                                   |
+| LEPTON            | lep[some_numeric_value]+sessionid            |
+| Wix               | Domain=wix.com                               |
+| VIVVO             | VivvoSessionId                               |
++-------------------+----------------------------------------------+
+
+⇒ HTML Source Code
+
+Technologies used in websites often require the addition of specific HTML tags. These tags may include references to the technologies used.
+
++--------------+-------------------------------------------------------------------------------------------------------------+
+| Application  | Keyword                                                                                                     |
++--------------+-------------------------------------------------------------------------------------------------------------+
+| WordPress    | <meta name="generator" content="WordPress 3.9.2" />                                                         |
+| phpBB        | <body id="phpbb">                                                                                           |
+| Mediawiki    | <meta name="generator" content="MediaWiki 1.21.9" />                                                        |
+| Joomla       | <meta name="generator" content="Joomla! - Open Source Content Management" />                                |
+| Drupal       | <meta name="Generator" content="Drupal 7 (http://drupal.org)" />                                            |
+| DotNetNuke   | <meta name="generator" content="DNN Platform - [http://www.dnnsoftware.com](http://www.dnnsoftware.com)" /> |
++--------------+-------------------------------------------------------------------------------------------------------------+
+
+*
