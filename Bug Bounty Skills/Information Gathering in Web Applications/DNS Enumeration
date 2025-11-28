@@ -1,1 +1,358 @@
 
+DNS, short for Domain Name System, is one of the cornerstones of the internet. 
+It is used to translate domain names into IP addresses, making it easier for humans to access websites without needing to remember numerical IP addresses. 
+DNS functionality is critical for the smooth operation of the internet.
+
+• Why DNS is Needed
+• Domain Organization
+• DNS Record Types
+• DNS Enumeration
+• DNSdumpster
+• host
+• dig
+• 
+• 
+
+
+
+-- Why DNS is Needed --
+
+• Humans find it difficult to remember numerical IP addresses.
+• IP addresses may not be static; thus, domain names need to be translated into IP addresses.
+• Quick and accurate resolution of domain names to IP addresses is essential for the smooth functioning of the internet.
+
+
+-- Domain Organization --
+
+DNS is well-organized to manage millions of website IP addresses quickly and efficiently.
+
+• DNS Record: Information that associates a domain name with an IP address on the internet.
+• Name Server: Servers that translate domain names into IP addresses and host this information.
+
+
+-- DNS Record Types --
+
++------------+--------------------------------------------------------------------------------------------+
+| Record Type| Description                                                                                |
++------------+--------------------------------------------------------------------------------------------+
+| A          | Stands for "Address" and translates a domain name to an IPv4 address.                      |
+| AAAA       | Translates a domain name to an IPv6 address, also known as "quad-A."                       |
+| CNAME      | Short for "Canonical Name," it allows one domain name to redirect to another domain name.  |
+| MX         | Short for "Mail Exchange," specifies which server handles email for the domain.            |
+| NS         | Stands for "Name Server," indicates which DNS server holds the domain's DNS records.       |
+| PTR        | Reverse DNS record mapping an IP address to a domain name (used for spam control).         |
+| SOA        | "Start of Authority" record; contains basic zone info incl. the server managing the zone.  |
+| SRV        | "Service" record indicating which port/IP a specific service or protocol is accessed on.   |
+| TXT        | Text-based info such as SPF or DKIM for email verification.                                |
++------------+--------------------------------------------------------------------------------------------+
+
+
+-- DNS Enumeration --
+
+DNS Enumeration is a reconnaissance technique aimed at understanding the surface area of a target system. 
+This technique seeks to obtain various significant pieces of information, such as DNS record types, host names, IP addresses, and more, depending on the target system's configuration.
+
+
+-- DNSdumpster --
+
+DNSdumpster.com is a popular online tool among cybersecurity professionals and network administrators. 
+This web-based tool provides comprehensive DNS information and domain mapping capabilities for a specific domain. 
+The goal is to deeply analyze a domain's DNS configuration for use in security audits or network management.
+
+https://dnsdumpster.com/
+
+
+-- host --
+
+The host command is a simple yet powerful command-line tool for performing DNS queries. 
+It can translate domain names to IP addresses, query mail servers (MX records), and find NS (Name Server) records for domains. 
+It is commonly found on Linux and Unix-like operating systems.
+
+root💀hackerbox:~# host youtube.com
+youtube.com has address 172.217.17.110
+youtube.com has IPv6 address 2a00:1450:4017:810::200e
+youtube.com mail is handled by 0 smtp.google.com.
+
+
+-- dig --
+
+dig (Domain Information Groper) is a more advanced tool for querying DNS. It offers advanced query options and output formatting features, making it a preferred choice for system administrators and network professionals.
+
+• Simple DNS Query
+• Querying A Records
+• Querying AAAA Records
+• Querying MX Records
+• Querying NS Records
+• Querying SOA Records
+• Querying TXT Records
+• Querying PTR Records (Reverse DNS Lookup)
+• Querying CNAME Records
+• nslookup
+• Another nslookup Examples
+
+
+➜ Simple DNS Query
+
+root💀hackerbox:~# dig youtube.com
+
+; <<>> DiG 9.10.6 <<>> youtube.com
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 22383
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 512
+;; QUESTION SECTION:
+;youtube.com.			IN	A
+
+;; ANSWER SECTION:
+youtube.com.		300	IN	A	172.217.17.110
+
+;; Query time: 98 msec
+;; SERVER: 8.8.8.8#53(8.8.8.8)
+;; WHEN: Thu Mar 28 17:20:41 +03 2024
+;; MSG SIZE  rcvd: 56
+
+➜ Querying A Records
+
+Returns the IPv4 address of a domain name.
+
+root💀hackerbox:~# dig A youtube.com
+
+; <<>> DiG 9.10.6 <<>> A youtube.com
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 30413
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 512
+;; QUESTION SECTION:
+;youtube.com.			IN	A
+
+;; ANSWER SECTION:
+youtube.com.		115	IN	A	172.217.17.110
+
+;; Query time: 86 msec
+;; SERVER: 8.8.8.8#53(8.8.8.8)
+;; WHEN: Thu Mar 28 17:23:47 +03 2024
+;; MSG SIZE  rcvd: 56
+
+➜ Querying AAAA Records
+
+root💀hackerbox:~# dig AAAA youtube.com
+
+; <<>> DiG 9.10.6 <<>> AAAA youtube.com
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 20780
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 512
+;; QUESTION SECTION:
+;youtube.com.			IN	AAAA
+
+;; ANSWER SECTION:
+youtube.com.		300	IN	AAAA	2a00:1450:4017:810::200e
+
+;; Query time: 94 msec
+;; SERVER: 8.8.8.8#53(8.8.8.8)
+;; WHEN: Thu Mar 28 17:25:10 +03 2024
+;; MSG SIZE  rcvd: 68
+
+➜ Querying MX Records
+
+Lists the email servers assigned for a domain.
+
+root💀hackerbox:~# dig MX youtube.com
+
+; <<>> DiG 9.10.6 <<>> MX youtube.com
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 53477
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 512
+;; QUESTION SECTION:
+;youtube.com.			IN	MX
+
+;; ANSWER SECTION:
+youtube.com.		300	IN	MX	0 smtp.google.com.
+
+;; Query time: 107 msec
+;; SERVER: 8.8.8.8#53(8.8.8.8)
+;; WHEN: Thu Mar 28 17:25:55 +03 2024
+;; MSG SIZE  rcvd: 68
+
+➜ Querying NS Records
+
+Returns the name servers of a domain name.
+
+root💀hackerbox:~# dig NS youtube.com
+
+; <<>> DiG 9.10.6 <<>> NS youtube.com
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 45397
+;; flags: qr rd ra; QUERY: 1, ANSWER: 4, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 512
+;; QUESTION SECTION:
+;youtube.com.			IN	NS
+
+;; ANSWER SECTION:
+youtube.com.		21600	IN	NS	ns4.google.com.
+youtube.com.		21600	IN	NS	ns2.google.com.
+youtube.com.		21600	IN	NS	ns1.google.com.
+youtube.com.		21600	IN	NS	ns3.google.com.
+
+;; Query time: 100 msec
+;; SERVER: 8.8.8.8#53(8.8.8.8)
+;; WHEN: Thu Mar 28 17:26:55 +03 2024
+;; MSG SIZE  rcvd: 119
+
+➜ Querying SOA Records
+
+Returns the Start of Authority (SOA) record of a domain, containing basic information about the DNS zone.
+
+root💀hackerbox:~# dig SOA youtube.com
+
+; <<>> DiG 9.10.6 <<>> SOA youtube.com
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 5695
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 512
+;; QUESTION SECTION:
+;youtube.com.			IN	SOA
+
+;; ANSWER SECTION:
+youtube.com.		60	IN	SOA	ns1.google.com. dns-admin.google.com. 619472145 900 900 1800 60
+
+;; Query time: 92 msec
+;; SERVER: 8.8.8.8#53(8.8.8.8)
+;; WHEN: Thu Mar 28 17:27:44 +03 2024
+;; MSG SIZE  rcvd: 97
+
+➜ Querying TXT Records
+
+Returns the text (TXT) records set for a domain, often used in mechanisms such as SPF and DKIM for email verification.
+
+root💀hackerbox:~# dig TXT youtube.com
+
+; <<>> DiG 9.10.6 <<>> TXT youtube.com
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 44530
+;; flags: qr rd ra; QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 512
+;; QUESTION SECTION:
+;youtube.com.			IN	TXT
+
+;; ANSWER SECTION:
+youtube.com.		3600	IN	TXT	"google-site-verification=QtQWEwHWM8tHiJ4s-jJWzEQrD_fF3luPnpzNDH-Nw-w"
+youtube.com.		3600	IN	TXT	"facebook-domain-verification=64jdes7le4h7e7lfpi22rijygx58j1"
+youtube.com.		3600	IN	TXT	"v=spf1 include:google.com mx -all"
+
+;; Query time: 104 msec
+;; SERVER: 8.8.8.8#53(8.8.8.8)
+;; WHEN: Thu Mar 28 17:28:32 +03 2024
+;; MSG SIZE  rcvd: 239
+
+➜ Querying PTR Records (Reverse DNS Lookup)
+
+Determines which domain name corresponds to an IP address.
+
+root💀hackerbox:~# dig -x 172.217.17.110
+
+; <<>> DiG 9.10.6 <<>> -x 172.217.17.110
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 34152
+;; flags: qr rd ra; QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 512
+;; QUESTION SECTION:
+;110.17.217.172.in-addr.arpa.	IN	PTR
+
+;; ANSWER SECTION:
+110.17.217.172.in-addr.arpa. 8008 IN	PTR	sof02s47-in-f14.1e100.net.
+110.17.217.172.in-addr.arpa. 8008 IN	PTR	ams15s29-in-f110.1e100.net.
+110.17.217.172.in-addr.arpa. 8008 IN	PTR	ams15s29-in-f14.1e100.net.
+
+;; Query time: 59 msec
+;; SERVER: 8.8.8.8#53(8.8.8.8)
+;; WHEN: Thu Mar 28 17:30:45 +03 2024
+;; MSG SIZE  rcvd: 156
+
+➜ Querying CNAME Records
+
+Returns the alias or canonical name of a domain name.
+
+root💀hackerbox:~# dig CNAME youtube.com
+
+; <<>> DiG 9.10.6 <<>> CNAME youtube.com
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 53554
+;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 512
+;; QUESTION SECTION:
+;youtube.com.			IN	CNAME
+
+;; AUTHORITY SECTION:
+youtube.com.		60	IN	SOA	ns1.google.com. dns-admin.google.com. 619472145 900 900 1800 60
+
+;; Query time: 95 msec
+;; SERVER: 8.8.8.8#53(8.8.8.8)
+;; WHEN: Thu Mar 28 17:31:40 +03 2024
+;; MSG SIZE  rcvd: 97
+
+➜ nslookup
+
+nslookup is another command-line tool used for performing DNS queries. It can operate in both interactive and command modes, resolving IP addresses to domain names and querying various DNS records (A, MX, TXT, NS, etc.).
+
+root💀hackerbox:~# nslookup google.com
+Server:		8.8.8.8
+Address:	8.8.8.8#53
+
+Non-authoritative answer:
+Name:	google.com
+Address: 216.58.212.14
+
+➜ Another nslookup Examples
+
+nslookup -type=A example.com
+nslookup -type=AAAA example.com
+nslookup -type=MX example.com
+nslookup -type=NS example.com
+nslookup -type=TXT example.com
+nslookup -type=SOA example.com
+nslookup -type=CNAME www.example.com
+nslookup -type=PTR 8.8.8.8
+nslookup -type=SRV _sip._tcp.example.com
+
+
+⇒ One-line (non-interactive)
+
+nslookup -type=<RECORD> <DOMAIN>
+
+⇒ Interaktiv
+
+nslookup
+> set type=<RECORD>
+> <DOMAIN>
+
+
+*
