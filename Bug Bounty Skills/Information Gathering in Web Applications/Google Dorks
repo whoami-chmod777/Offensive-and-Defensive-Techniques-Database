@@ -1,0 +1,61 @@
+
+Google Dorks is the practice of using specialized search queries in the Google search engine to find sensitive information, public data, and security vulnerabilities.
+
+Google Dorks are queries that use Google's advanced search operators to quickly locate specific information. 
+These operators allow you to search within specific file types, on certain websites, or for pages containing particular text.
+
+
+➜ Basic Google Dork Operators
+
++----------------+--------------------------------------------------------+-------------------------+
+| Operator       | Description                                            | Example                 |
++----------------+--------------------------------------------------------+-------------------------+
+| site           | Searches within a specific site.                       | site:example.com        |
++----------------+--------------------------------------------------------+-------------------------+
+| filetype       | Searches for a specific file type.                     | filetype:pdf            |
++----------------+--------------------------------------------------------+-------------------------+
+| inurl          | Finds pages with a specific text in the URL.           | inurl:login             |
++----------------+--------------------------------------------------------+-------------------------+
+| intext         | Searches for specific text within the content of a     | intext:"error"          |
+|                | web page.                                              |                         |
++----------------+--------------------------------------------------------+-------------------------+
+| intitle        | Searches for specific text within the page title.      | intitle:"index of"      |
++----------------+--------------------------------------------------------+-------------------------+
+
+➜ Using Google Dorks
+
+Define Your Goal: Determine what kind of information you want to find. This could be a specific file type, sensitive information, or identifying security vulnerabilities.
+Use Operators: Use appropriate Google Dork operators to achieve your goals. Combine operators to obtain more specific results.
+
+➜ Example Application
+
+site:youtube.com filetype:pdf
+
+➜ Google Hacking Database
+
+Google Hacking Database (GHDB) is a collection of various search queries used by hackers and security researchers to find security vulnerabilities, sensitive information, and other related data through the Google search engine. 
+This database contains search documents specifically designed to discover potentially dangerous and vulnerable web resources.
+
+site:github.com "BEGIN OPENSSH PRIVATE KEY"	
+ext:nix "BEGIN OPENSSH PRIVATE KEY"	
+inurl:home.htm intitle:1766	
+intitle:"SSL Network Extender Login" -checkpoint.com	
+intext:"siemens" & inurl:"/portal/portal.mwsl"	
+Google Dork Submisson For GlobalProtect Portal	
+inurl:"cgi-bin/koha"	
+intext:"aws_access_key_id" | intext:"aws_secret_access_key" filetype:json | filetype:yaml	
+intext:"proftpd.conf" "index of"	
+site:.edu filetype:xls "root" database	
+intitle:index of /etc/ssh	
+"START test_database" ext:log	
+"Header for logs at time" ext:log	
+intext:"dhcpd.conf" "index of"	
+site:uat.* * inurl:login
+...
+...
+...
+
+https://www.exploit-db.com/google-hacking-database
+
+
+*
