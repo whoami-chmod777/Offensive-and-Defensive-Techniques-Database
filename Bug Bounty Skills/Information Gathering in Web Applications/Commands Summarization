@@ -102,29 +102,44 @@ nslookup
 > <DOMAIN>
 
 
+-- theHarvester --
+
+root💀hackerbox:~# theHarvester -h
+
+root💀hackerbox:~# theHarvester -d example.com -b google
+root💀hackerbox:~# theHarvester -d example.com -b google,bing,linkedin
+root💀hackerbox:~# theHarvester -d example.com -b all
+root💀hackerbox:~# theharvester --domain kali.org -b all
+
+root💀hackerbox:~# theHarvester -d example.com -b google -l 500
+root💀hackerbox:~# theHarvester -d example.com -b google -s 100
+root💀hackerbox:~# theHarvester -d example.com -b google -f report
+root💀hackerbox:~# theHarvester -d example.com -b google -f report -t xml
+root💀hackerbox:~# theHarvester -d example.com -b google -f report -t json
+
+root💀hackerbox:~# theHarvester -d example.com -b dnsbrute
+root💀hackerbox:~# theHarvester -d example.com -b shodan
+root💀hackerbox:~# theHarvester -d example.com -b bingvhost
+root💀hackerbox:~# theHarvester -d example.com -b dnsreverse
+root💀hackerbox:~# theHarvester -d example.com -b dnssearch
+
+root💀hackerbox:~# theHarvester -d example.com -b dnssearch -n 8.8.8.8
+root💀hackerbox:~# theHarvester -d example.com -b google -p http://127.0.0.1:8080
+root💀hackerbox:~# theHarvester -d example.com -b google -v
+
+
 -- Other Discovery Tools --
 
-
-
-
-
-
-
-
-
-
-
-
+https://viewdns.info/
+https://sitereport.netcraft.com/
+https://mxtoolbox.com/SuperTool.aspx
 
 
 -- Subdomain Enumeration --
 
-
-
-
-
-
-
+root💀hackerbox:~# gobuster dns -w /root/Desktop/misc/SecLists/Discovery/DNS/subdomains-top1million-5000.txt -d facebook.com
+root💀hackerbox:~# gobuster vhost -w /root/Desktop/misc/SecLists/Discovery/DNS/subdomains-top1million-5000.txt -u https://facebook.com
+root💀hackerbox:~# gobuster vhost -u https://example.com -w /path/to/wordlist --exclude-length 1542
 
 
 -- File and Directory Scanning --
