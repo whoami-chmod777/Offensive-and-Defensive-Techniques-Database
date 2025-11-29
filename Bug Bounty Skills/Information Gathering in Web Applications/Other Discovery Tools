@@ -9,21 +9,89 @@ There are many tools available for gathering information about websites. Let's c
 
 -- theHarvester --
 
+theHarvester is an open-source intelligence (OSINT) gathering tool. It collects information such as email addresses, subdomains, IP addresses, and people associated with a target from various sources.
 
+root💀hackerbox:~# theharvester --domain kali.org -b all
+*******************************************************************
+*  _   _                                            _             *
+* | |_| |__   ___    /\  /\__ _ _ ____   _____  ___| |_ ___ _ __  *
+* | __|  _ \ / _ \  / /_/ / _` | '__\ \ / / _ \/ __| __/ _ \ '__| *
+* | |_| | | |  __/ / __  / (_| | |   \ V /  __/\__ \ ||  __/ |    *
+*  \__|_| |_|\___| \/ /_/ \__,_|_|    \_/ \___||___/\__\___|_|    *
+*                                                                 *
+* theHarvester 4.6.0                                              *
+* Coded by Christian Martorella                                   *
+* Edge-Security Research                                          *
+* cmartorella@edge-security.com                                   *
+*                                                                 *
+*******************************************************************
+
+[*] Target: kali.org 
+
+<SNIP>
+
+[*] Hosts found: 286
+---------------------
+*.kali.org
+10cake.kali.org
+10year.kali.org
+2Fdocs.kali.org
+2Ftools.kali.org
+API count exceeded - Increase Quota with Membershipmail2.kali.org:52.44.83.41
+aphrodite.kali.org
+apollo.kali.org
+apollo.kali.org:23.239.31.82
+ar.docs.kali.org
+ar.docs.kali.org:50.116.58.136
+archive-11.kali.org
+archive-2.kali.org
+archive-3.kali.org
+archive-4.kali.org
+
+<SNIP>
 
 
 -- Netcraft - Site Report --
 
+Netcraft Site Report is an online tool that provides detailed information about a website, including the technologies used, SSL certificate information, hosting provider, and other relevant details.
 
+https://sitereport.netcraft.com/
 
 
 -- viewdns.info --
 
+viewdns.info is a comprehensive collection of online DNS tools that allow access to DNS records, IP location, reverse DNS lookups, WHOIS queries, and much more.
+
+https://viewdns.info/
 
 
 -- mxtoolbox.com --
 
+mxtoolbox.com is an online tool that can perform DNS lookups, blacklist checks, SSL/TLS certificate status checks, and much more, with an emphasis on MX records.
 
-
+https://mxtoolbox.com/SuperTool.aspx
 
 *
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
