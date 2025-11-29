@@ -1,1 +1,149 @@
 
+Subdomain enumeration is crucial for identifying security vulnerabilities, understanding network configurations, and expanding the scope of web application assessments. 
+Tools like gobuster and ffuf are commonly used for subdomain scanning. Let's explore how to use the gobuster tool for subdomain enumeration.
+
+• Gobuster
+• DNS Mode
+• VHOST Mode
+
+
+-- Gobuster --
+
+Gobuster is a scanning tool that allows you to discover hidden directories, files, subdomains, and much more on web servers.
+
+
+-- DNS Mode --
+
+The DNS mode of gobuster is designed to discover subdomains under a specific domain. This mode tries possible subdomains for a target domain using a wordlist and determines which subdomains are active.
+
+root💀hackerbox:~# gobuster dns -w /root/Desktop/misc/SecLists/Discovery/DNS/subdomains-top1million-5000.txt -d facebook.com
+===============================================================
+Gobuster v3.6
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Domain:     facebook.com
+[+] Threads:    10
+[+] Timeout:    1s
+[+] Wordlist:   /root/Desktop/misc/SecLists/Discovery/DNS/subdomains-top1million-5000.txt
+===============================================================
+Starting gobuster in DNS enumeration mode
+===============================================================
+Found: www.facebook.com
+Found: m.facebook.com
+Found: arena.facebook.com
+Found: safety.facebook.com
+Found: monster.facebook.com
+Found: solutions.facebook.com
+Found: touch.facebook.com
+Found: polaris.facebook.com
+Found: vs.facebook.com
+Found: gl.facebook.com
+Found: east.facebook.com
+Found: comet.facebook.com
+Found: tcs.facebook.com
+Found: michael.facebook.com
+Found: m.dev.facebook.com
+Found: sia.facebook.com
+<SNIP>
+Found: housing.facebook.com
+Found: impact.facebook.com
+Found: ais.facebook.com
+Found: ja.facebook.com
+Found: ig.facebook.com
+Found: apex.facebook.com
+Found: lds.facebook.com
+Found: extern.facebook.com
+Found: imc.facebook.com
+Found: opensource.facebook.com
+Found: ibm.facebook.com
+Found: sanantonio.facebook.com
+Found: bloom.facebook.com
+Found: www.hr.facebook.com
+Found: faith.facebook.com
+Found: move.facebook.com
+Found: betty.facebook.com
+Progress: 4989 / 4990 (99.98%)
+===============================================================
+Finished
+===============================================================
+
+
+-- VHOST Mode --
+
+The VHOST mode targets multiple websites hosted under different names on the same server. Many organizations host multiple sites on a single server using virtual hosts to efficiently use resources. 
+The VHOST mode of gobuster is designed to discover these virtual hosts and uncover potentially hidden or forgotten websites.
+
+Using the VHOST mode requires a target and a wordlist. This mode fuzzes the HTTP Host header to test for the existence of different sites hosted on the same IP address.
+
+root💀hackerbox:~# gobuster vhost -w /root/Desktop/misc/SecLists/Discovery/DNS/subdomains-top1million-5000.txt -u https://facebook.com
+===============================================================
+Gobuster v3.6
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:             https://facebook.com
+[+] Method:          GET
+[+] Threads:         10
+[+] Wordlist:        /root/Desktop/misc/SecLists/Discovery/DNS/subdomains-top1million-5000.txt
+[+] User Agent:      gobuster/3.6
+[+] Timeout:         10s
+[+] Append Domain:   false
+===============================================================
+Starting gobuster in VHOST enumeration mode
+===============================================================
+Found: whm Status: 400 [Size: 1542]
+Found: ftp Status: 400 [Size: 1542]
+Found: www Status: 400 [Size: 1542]
+Found: pop Status: 400 [Size: 1542]
+Found: webmail Status: 400 [Size: 1542]
+Found: webdisk Status: 400 [Size: 1542]
+Found: smtp Status: 400 [Size: 1542]
+Found: cpanel Status: 400 [Size: 1542]
+Found: mail Status: 400 [Size: 1542]
+Found: localhost Status: 400 [Size: 1542]
+Found: ns1 Status: 400 [Size: 1542]
+Found: ns2 Status: 400 [Size: 1542]
+Found: autodiscover Status: 400 [Size: 1542]
+Found: autoconfig Status: 400 [Size: 1542]
+Found: ns Status: 400 [Size: 1542]
+Found: blog Status: 400 [Size: 1542]
+<SNIP>
+Found: v2 Status: 400 [Size: 1542]
+Found: db1 Status: 400 [Size: 1542]
+Found: builder.cp Status: 400 [Size: 1542]
+Found: mailserver Status: 400 [Size: 1542]
+Found: travel Status: 400 [Size: 1542]
+Found: cbf2 Status: 400 [Size: 1542]
+Found: s114 Status: 400 [Size: 1542]
+Found: spp Status: 400 [Size: 1542]
+Found: trident Status: 400 [Size: 1542]
+Found: mirror2 Status: 400 [Size: 1542]
+Found: s112 Status: 400 [Size: 1542]
+Found: nnov Status: 400 [Size: 1542]
+Found: www.china Status: 400 [Size: 1542]
+Found: sonia Status: 400 [Size: 1542]
+Found: alabama Status: 400 [Size: 1542]
+Found: photogallery Status: 400 [Size: 1542]
+Found: blackjack Status: 400 [Size: 1542]
+Found: lex Status: 400 [Size: 1542]
+Found: hathor Status: 400 [Size: 1542]
+Found: inc Status: 400 [Size: 1542]
+Found: xmas Status: 400 [Size: 1542]
+Found: common-sw1 Status: 400 [Size: 1542]
+Found: tulip Status: 400 [Size: 1542]
+Found: and Status: 400 [Size: 1542]
+Found: vo Status: 400 [Size: 1542]
+Found: betty Status: 400 [Size: 1542]
+Found: www.msk Status: 400 [Size: 1542]
+Found: pc2 Status: 400 [Size: 1542]
+Found: schools Status: 400 [Size: 1542]
+Progress: 4989 / 4990 (99.98%)
+===============================================================
+Finished
+===============================================================
+
+To filter the results effectively, we can exclude responses of a certain size using the --exclude-length  option. The following command will exclude responses that are 1542 bytes in size
+
+gobuster vhost -u https://example.com -w /path/to/wordlist --exclude-length 1542
+
+
+*
