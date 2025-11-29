@@ -1,0 +1,142 @@
+
+-- Whois --
+
+root💀hackerbox:~# whois google.com
+
+https://lookup.icann.org/en
+https://www.whois.com/whois/
+https://whois.domaintools.com/
+
+
+-- Technologies Used in Websites --
+
+root💀hackerbox:~# curl --head https://wordpress.org
+
+Cookies
+HTML Source Code
+
+https://builtwith.com/
+https://www.wappalyzer.com/
+https://www.wappalyzer.com/
+https://www.whatruns.com/
+
+
+-- Internet Archive - Wayback Machine --
+
+https://web.archive.org/
+
+
+-- Google Dorks --
+
+site:example.com    
+filetype:pdf    
+inurl:login
+intext:"error"  
+intitle:"index of"    
+
+https://gbhackers.com/latest-google-dorks-list/
+https://www.exploit-db.com/google-hacking-database
+https://github.com/Proviesec/google-dorks/tree/main
+https://github.com/Proviesec/google-dorks/blob/main/all-google-dorks.txt
+
+
+-- Meta Files --
+
+root💀hackerbox:~# curl --get https://www.youtube.com/robots.txt
+root💀hackerbox:~# curl --get https://www.google.com/sitemap.xml
+
+root💀hackerbox:~# curl --get https://github.com/security.txt
+root💀hackerbox:~# curl --get https://github.com/.well-known/security.txt
+
+root💀hackerbox:~# curl --get https://www.google.com/humans.txt
+
+og:title, og:description
+og:image
+twitter:card, twitter:image, twitter:creator
+apple-mobile-web-app-title, msapplication-TileColor
+
+
+-- DNS Enumeration --
+
++------------+--------------------------------------------------------------------------------------------+
+| Record Type| Description                                                                                |
++------------+--------------------------------------------------------------------------------------------+
+| A          | Stands for "Address" and translates a domain name to an IPv4 address.                      |
+| AAAA       | Translates a domain name to an IPv6 address, also known as "quad-A."                       |
+| CNAME      | Short for "Canonical Name," it allows one domain name to redirect to another domain name.  |
+| MX         | Short for "Mail Exchange," specifies which server handles email for the domain.            |
+| NS         | Stands for "Name Server," indicates which DNS server holds the domain's DNS records.       |
+| PTR        | Reverse DNS record mapping an IP address to a domain name (used for spam control).         |
+| SOA        | "Start of Authority" record; contains basic zone info incl. the server managing the zone.  |
+| SRV        | "Service" record indicating which port/IP a specific service or protocol is accessed on.   |
+| TXT        | Text-based info such as SPF or DKIM for email verification.                                |
++------------+--------------------------------------------------------------------------------------------+
+
+https://dnsdumpster.com/
+
+root💀hackerbox:~# host youtube.com
+
+root💀hackerbox:~# dig youtube.com
+root💀hackerbox:~# dig A youtube.com
+root💀hackerbox:~# dig AAAA youtube.com
+root💀hackerbox:~# dig MX youtube.com
+root💀hackerbox:~# dig NS youtube.com
+root💀hackerbox:~# dig SOA youtube.com
+root💀hackerbox:~# dig TXT youtube.com
+root💀hackerbox:~# dig -x 172.217.17.110 [PTR Records (Reverse DNS Lookup)]
+root💀hackerbox:~# dig CNAME youtube.com
+
+root💀hackerbox:~# nslookup google.com
+nslookup -type=A example.com
+nslookup -type=AAAA example.com
+nslookup -type=MX example.com
+nslookup -type=NS example.com
+nslookup -type=TXT example.com
+nslookup -type=SOA example.com
+nslookup -type=CNAME www.example.com
+nslookup -type=PTR 8.8.8.8
+nslookup -type=SRV _sip._tcp.example.com
+
+nslookup
+> set type=<RECORD>
+> <DOMAIN>
+
+
+-- Other Discovery Tools --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Subdomain Enumeration --
+
+
+
+
+
+
+
+
+
+-- File and Directory Scanning --
+
+
+
+
+
+
+
+
+
+
+
+*
