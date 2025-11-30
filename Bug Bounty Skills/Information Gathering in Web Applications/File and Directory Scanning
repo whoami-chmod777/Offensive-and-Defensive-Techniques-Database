@@ -1,1 +1,35 @@
 
+In web applications, file and directory scanning is a method commonly used by security professionals. This process involves querying the underlying file and directory structure of web applications. 
+The goal is to uncover hidden files, administrative panels, backup files, and directories potentially containing sensitive information.
+
+There are many tools available for file and directory scanning, including gobuster and ffuf
+
+➜ Gobuster dir Mode
+
+Let's examine the dir mode of the gobuster tool, which we can use for directory scanning.
+
+# gobuster dir -u http://example.com -w /path/to/wordlist.txt
+
+➜ Directory Scanning
+
+Let's perform a directory scan on a target system with the command below. We specify the wordlist with the -w parameter and the target with the -u parameter. In this scan, we used the directory-list-1.0.txt list as the wordlist.
+
+# gobuster dir -u 172.20.8.56 -w /root/Desktop/misc/SecLists/Discovery/Web-Content/directory-list-1.0.txt
+
+➜ File/Page Scanning
+
+et's perform a file/page scan on a target system with the command below. We specify the wordlist with the -w parameter, the target with the -u parameter, and the extensions with the --extensions parameter. 
+The -v parameter is used for verbose output. Let's use the following command to detect files with the .php extension.
+
+# gobuster dir -u 172.20.8.56 -w /root/Desktop/misc/SecLists/Discovery/Web-Content/common.txt --extensions php -v
+
+
+
+
+
+
+
+
+
+
+*
