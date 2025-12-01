@@ -15,6 +15,40 @@ root💀hackerbox:~# curl --head https://wordpress.org
 Cookies
 HTML Source Code
 
+root💀hackerbox:~# curl -v http://172.20.5.112/
+*   Trying 172.20.5.112:80...
+* Connected to 172.20.5.112 (172.20.5.112) port 80
+* using HTTP/1.x
+> GET / HTTP/1.1
+> Host: 172.20.5.112
+> User-Agent: curl/8.14.1
+> Accept: */*
+> 
+* Request completely sent off
+< HTTP/1.1 200 OK
+< Date: Mon, 01 Dec 2025 21:39:45 GMT
+< Server: Apache/2.4.56 (Debian)
+< Set-Cookie: SubscriptionType=free
+< X-Description: important data can be found in the header
+< Content-Length: 55
+< Content-Type: text/html; charset=UTF-8
+< 
+<html>
+<head>
+</head>
+<body>
+it works;
+</body>
+</html>
+* Connection #0 to host 172.20.5.112 left intact
+
+
+root💀hackerbox:~# curl -v http://172.20.5.112/ 2>&1 | grep -i set-cookie
+< Set-Cookie: SubscriptionType=free
+< Set-Cookie: SubscriptionType=admin
+< Set-Cookie: SubscriptionType=premium
+
+
 https://builtwith.com/
 https://www.wappalyzer.com/
 https://www.wappalyzer.com/
