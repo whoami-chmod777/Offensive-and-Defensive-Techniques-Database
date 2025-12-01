@@ -42,7 +42,6 @@ it works;
 </html>
 * Connection #0 to host 172.20.5.112 left intact
 
-
 root💀hackerbox:~# curl -v http://172.20.5.112/ 2>&1 | grep -i set-cookie
 < Set-Cookie: SubscriptionType=free
 < Set-Cookie: SubscriptionType=admin
