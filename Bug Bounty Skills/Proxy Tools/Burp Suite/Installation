@@ -1,1 +1,42 @@
 
+To download the latest version of Burp Suite, visit the Burp Suite Releases page on Port Swigger's official website. 
+It is recommended to select and download the installation file suitable for your operating system and then perform the installation. 
+For Kali Linux users, the Burp Suite Community edition comes pre-installed with the operating system.
+
+Supported operating systems: JAR, Linux (ARM), Linux (x64), macOS (Apple Silicon), macOS (Intel), Windows (ARM), Windows (x64).
+
+
+-- Getting Started --
+
+Upon starting Burp Suite, users are presented with a project and configuration interface that allows them to create a new project or load an existing one. 
+This interface serves as a starting point to define the working environment and configure the settings of the tools to be used in Burp Suite.
+
+
+-- Project Type Interface --
+
+When starting Burp Suite, you need to choose one of three basic project types offered:
+
+• Temporary Project: This option allows you to quickly start a project without leaving any trace on the disk. In this mode, all data is stored in RAM and is erased when Burp Suite is closed.
+• New Project: Allows you to start a project from scratch by configuring advanced project settings as well as basic information like the project's name.
+• Open Existing Project: Suitable for loading a previously saved project and continuing from where you left off. By selecting a saved project file, you can quickly access previous work.
+
+
+-- Configuration Interface --
+
+After selecting the project type, you can configure settings for various modules and tools within Burp Suite. These settings include:
+
+• Use Burp Defaults: This option starts the project using Burp Suite’s default configuration settings.
+• Load from Configuration File: This option allows you to select a file containing customized configuration settings and start the project with those settings. It is particularly suitable for advanced users who want to use pre-configured or customized settings for specific testing needs.
+
+
+*
+
+
+
+
+
+
+
+
+
+https://portswigger.net/burp/releases#community
