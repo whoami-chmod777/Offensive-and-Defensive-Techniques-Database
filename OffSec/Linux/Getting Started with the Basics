@@ -1,6 +1,13 @@
 
 --- Getting Started with the Basics ---
 
+OVERVIEW
+INTRODUCTORY TERMS
+A TOUR OF KALI
+LINUX FILESYSTEM (TOP-LEVEL)
+...
+
+
 
 OVERVIEW
 ------------------------------------------------------------
@@ -9,6 +16,7 @@ OVERVIEW
 • Shell (bash) = command interpreter; Terminal = CLI window.
 • root (superuser) can do anything; avoid routine work as root.
 • Filesystem is logical, rooted at “/” (not C:).
+
 
 INTRODUCTORY TERMS
 ------------------------------------------------------------
@@ -21,6 +29,7 @@ root            Administrator/superuser account.
 Script          Series of commands (bash, Python, Perl, Ruby).
 Shell           Command environment; we use bash.
 Terminal        Command line interface.
+
 
 A TOUR OF KALI
 ------------------------------------------------------------
@@ -44,6 +53,7 @@ LINUX FILESYSTEM (TOP-LEVEL)
 /lib             # essential libraries
 /usr/bin /usr/sbin /usr/lib   # more binaries/libraries
 
+
 BASIC COMMANDS
 ------------------------------------------------------------
 Where am I?
@@ -63,11 +73,13 @@ kali >ls
 kali >ls -l         # long listing
 kali >ls -la        # include hidden files
 
+
 HELP & MANUALS
 ------------------------------------------------------------
 kali >aircrack-ng --help
 kali >nmap -h
 kali >man aircrack-ng      # q to quit
+
 
 FINDING STUFF
 ------------------------------------------------------------
@@ -95,6 +107,7 @@ Syntax: find <startdir> <options> <expression>
 By exact name:
 kali >find / -type f -name apache2
 kali >find / -name "notes.txt"
+kali >find /home/socmas -name *egg*
 
 Limit scope for speed:
 kali >find /etc -type f -name apache2
@@ -110,6 +123,7 @@ kali >find /home/user -type d -name "Project*"
 Wildcard quick ref:
 *  any chars    ? one char    [c,b] one of set
 
+
 FILTERING OUTPUT (grep + pipes)
 ------------------------------------------------------------
 List all processes:
@@ -119,6 +133,7 @@ Find apache2 in the list:
 kali >ps aux | grep apache2
 root 4851 0.2 0.7 37548 7668 ? Ss 10:14 0:00 /usr/sbin/apache2 -k start
 --snip--
+
 
 CREATING & VIEWING FILES
 ------------------------------------------------------------
@@ -143,6 +158,7 @@ Everyone in IT security without hacking skills is in the dark
 Create empty/update timestamp:
 kali >touch newfile
 
+
 DIRECTORIES & FILE OPERATIONS
 ------------------------------------------------------------
 Make directory:
@@ -165,10 +181,12 @@ kali >rmdir newdirectory   # fails if not empty
 Remove directory recursively (DANGER):
 kali >rm -r newdirectory
 
+
 SAFETY NOTES
 ------------------------------------------------------------
 • Don’t do routine work as root; attackers who compromise root own the box.
 • Be careful with: rm -r, wildcards, and commands run as root.
+
 
 EXERCISES
 ------------------------------------------------------------
@@ -191,3 +209,5 @@ EXERCISES
    kali >mkdir hackerdirectory
    kali >touch hackerdirectory/hackedfile
    kali >cp hackerdirectory/hackedfile /root/secretfile
+
+*
