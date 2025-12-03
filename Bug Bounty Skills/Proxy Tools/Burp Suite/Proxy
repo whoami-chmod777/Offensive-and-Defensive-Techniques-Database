@@ -1,1 +1,81 @@
 
+The Proxy tool is used to monitor, analyze, and manipulate network traffic. It has the ability to capture, inspect, and modify requests and responses made over HTTP and HTTPS protocols. It is commonly used to identify security vulnerabilities.
+
+The concept of a Proxy can be defined as a server that acts as an intermediary for communication between networked computers. It aims to protect users' privacy, enhance security, control access, and regulate network traffic while accessing the internet or other resources within the network. Proxies offer protection against security threats by hiding users' real IP addresses and filtering data traffic. They can also provide additional functions such as content filtering, access restrictions, and speed optimization.
+
+Intercept
+
+The Intercept On/Off feature allows real-time interception and detailed inspection of network traffic. When the "Intercept is on" option is active, all HTTP/HTTPS traffic passing through the Proxy is intercepted. In "Intercept is off" mode, the traffic flows uninterrupted.
+
+Additionally, right-clicking on a blank spot brings up a menu with actions that can be performed on the request. This menu includes options to send the request to other Burp Suite tools, copy the address, or view the address in the browser.
+
+Additional Functions in Intercept
+
+Within intercept mode, various additional functions are available to manage the flow of traffic.
+
+    Forward: Forwards the selected request or response to the target.
+    Drop: Disposes of the selected request or response.
+    On/Off Action: Controls the automatic turning on or off of intercept.
+
+    Open Browser: Opens a specially prepared browser with Chromium infrastructure for Burp Suite, without requiring external browser use, certificate, and proxy settings.
+
+HTTP History
+
+HTTP History lists all HTTP and HTTPS requests and responses that pass through the Proxy with details like timestamp, URL, HTTP method, and status code. This section keeps a detailed record of the activities, enabling retrospective analysis.
+
+Details of the selected request from the list are shown at the bottom as Request and Response. Additionally, right-clicking on any request in the list brings up a menu with actions that can be performed on the request.
+
+WebSockets History
+
+WebSockets History allows monitoring and recording data transmitted over WebSockets.
+
+WebSocket is a communication protocol that provides full-duplex, real-time communication between the browser and the server. It is used in applications like instant messaging, live notifications, and online games by maintaining an open connection for continuous data exchange.
+
+Proxy Settings
+
+Proxy settings provide access to advanced features like managing listening ports, SSL certificates, and automatic browser configuration.
+
+    Proxy Listeners: Proxy listeners determine the IP addresses and ports through which Burp Suite will listen to network traffic. Multiple listeners can be added, and each can be configured separately.
+
+The Burp Suite Proxy port number or address can be edited with the 'Edit' button or a new listening point can be created with the 'Add' button.
+
+    Request Interception Rules: Allows detailed specification of which requests will be intercepted and examined. Custom filters and conditions can be defined.
+
+In the example rule shown in the image, file extensions that should not match the captured requests are specified. Values matching the specified filter are not captured. This way, unwanted unnecessary traffic is not displayed.
+
+    Response Interception Rules: Provides the creation of rules that determine how responses from the server will be handled. Similar to requests, conditions can be defined for intercepting specific responses.
+
+In the example rule shown in the image, the HTTP status code of the responses to be captured is specified.
+
+Using External Browsers and Certificate Management
+
+Where the browser with Burp Suite-specific certificate and proxy settings is not desired, an external browser can be used.
+
+Note: If using Burp Suite’s internal browser, this section’s steps are not necessary.
+
+Burp Suite supports installing a certificate on an external browser and connecting it to Burp Suite. This allows browsers to securely examine SSL traffic captured by Burp Suite. Also, it allows the use of a preferred browser other than the Burp Browser. To capture traffic for an application using SSL, a certificate must be installed.
+
+Configuring Burp Suite Proxy Settings
+
+To access the Proxy panel, click on the "Proxy" tab in the upper left corner of Burp Suite and then on the "Options" sub-tab. Click the "Add" button to add a new listening port and configure your proxy listening settings. It typically uses the default 127.0.0.1 address and port 8080. Activate your proxy server by checking the "Running" option.
+
+Configuring Proxy Settings on the Browser
+
+Go to your browser's settings and find the network or proxy settings section. Select the "Manual proxy configuration" option and enter 127.0.0.1 for the HTTP Proxy address, and 8080 for the Port. This will route all your browser traffic through Burp Suite.
+
+FoxyProxy is a browser extension that makes it easy to manage your proxy settings. If you prefer not to configure proxy settings in the browser settings, you can use this extension. After installing the extension from the browser extension store, click the FoxyProxy icon and access the "Options" menu. Create a new proxy profile and configure it with the address 127.0.0.1 and port 8080, matching Burp Suite’s listening settings. When this profile is active, your browser traffic will be routed through Burp Suite.
+
+Generating and Downloading the Burp Suite Certificate
+
+To intercept SSL traffic, you need to install the Burp Suite certificate on your browser. Go to the "Proxy" > "Options"
+ tab in Burp Suite and click on "Import / export CA certificate." Click the "Export" button to save the certificate in "Der" format and save the file to your computer.
+
+It is also possible to download the certificate through the browser. Visit the http://burp address. Click the 'CA Certificate' button at the top right, and a "Der" extension certificate will be downloaded.
+
+Installing the Certificate on the Browser
+
+Steps to install the certificate may vary depending on the browser. Go to the browser settings and find the "Privacy and Security" section. Under "Manage Certificates", switch to "Trusted Root Certification Authorities" and use the "Import" option to install the Burp Suite certificate.
+
+
+
+*
