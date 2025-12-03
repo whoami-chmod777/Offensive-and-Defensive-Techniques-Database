@@ -1,1 +1,32 @@
 
+The Dashboard is the main page of Burp Suite and provides a quick overview of ongoing work. Its primary features include:
+
+• Vulnerability Scanning: Options to start or pause vulnerability scans are available. This allows for managing current scanning sessions. A new vulnerability scan can be initiated by clicking the "New scan" button on the Dashboard. This feature is available in the Professional edition.
+• Task List: Contains a list of active and completed tasks. Tasks can be viewed along with their configuration details and status information.
+• Security Alerts: Lists vulnerabilities and alerts detected during security scans. Each alert includes a detailed description, affected area, and recommended solutions.
+
+-- Task Management --
+
+From the Dashboard, users can add new tasks, check the status of ongoing tasks, and switch between tasks.
+
+• Adding a New Task: To add a new task, click the "New live task" button on the Dashboard and fill in the necessary information.
+• Checking Task Status: Each task is accompanied by an icon indicating its current status. These icons show whether the task is active, completed, or paused.
+
+
+-- Security Alerts and Information --
+
+Security alerts provide information about potential vulnerabilities found in web applications. Each alert includes the following information:
+
+• Vulnerability Type: The type of security vulnerability detected.
+• Affected Area: The area where the vulnerability was detected.
+• Description and Recommendations: A detailed description of the vulnerability and recommendations on how to remediate it.
+
+
+-- Settings and Customization --
+
+The Settings text and settings icon located in the upper right corner of the Dashboard allow users to customize their Burp Suite settings. In this section, important configurations such as proxy settings, scanning speed, and automatic updates can be configured.
+
+
+
+
+*
