@@ -1,1 +1,37 @@
 
+The Target tool is found in the top toolbar of Burp Suite. It displays information about the target site or sites for web application security testing. This panel consists of two main tabs: Site Map and Scope.
+
+• Site Map: This tab provides a tree view of the tested web sites. Here, files and directories following the site's URL structure can be seen.
+• Scope: Used to define the scope of the security test, specifying which targets will be tested and which will be excluded.
+
+
+-- Site Map --
+
+The Site Map tab provides a structural view of the web application. Discoveries can be enriched with automated and manual tools. Key features include:
+
+• Filtering: Filters can be used to hide certain types of files (e.g., images or stylesheets) or show only requests with specific HTTP methods (GET, POST, etc.).
+• Detailed View: For each URL, the requests made and responses received can be examined in detail. This is critical for the detection of security vulnerabilities.
+
+Clicking on any request in the list displays the request and response details at the bottom of the list.
+
+• Request: An HTTP request is an action taken by a client to communicate with a web server, using specific HTTP methods to retrieve or send data.
+• Response: An HTTP response is a reply from a web server to a client's HTTP request. It includes the status of the requested resource, information about the server, and optionally, the requested resource itself.
+
+Right-clicking on any record in the list brings up a menu with actions that can be performed on the request. This menu includes options to send the request to other Burp Suite tools, copy the address, or view the address in the browser.
+
+
+-- Scope --
+
+Defining the scope correctly is essential for directing the security test accurately and efficiently. The Scope tab offers functionality to meet this need:
+
+• Add and Remove: Websites or URLs can be added to or removed from the test scope. This is important to focus the testing process and reduce false positives or unnecessary traffic.
+• Advanced Filters: Scope can be defined according to specific URL patterns, providing more detailed control.
+
+
+-- Issue Definitions --
+
+Contains a list and details of potential security vulnerabilities present in Burp Suite's knowledge base. In this tab, security vulnerabilities can be viewed, and detailed information such as the description, reference sources, and risk status of any selected vulnerability can be accessed.
+
+
+
+*
