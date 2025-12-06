@@ -1,1 +1,61 @@
 
+Medium	Mar, 07, 2021, 05:47 PM	SOC105 - Requested T.I. URL address	75	ThreatIntel
+
+EventID :
+77
+Event Time :
+Mar, 13, 2021, 08:20 PM
+Rule :
+SOC138 - Detected Suspicious Xls File
+Level :
+Security Analyst
+Source Address :
+172.16.17.56
+Source Hostname :
+Sofia
+File Name :
+ORDER SHEET & SPEC.xlsm
+File Hash :
+7ccf88c0bbe3b29bf19d877c4596a8d4
+File Size :
+2.66 Mb
+Device Action :
+Allowed
+File (Password:infected) :
+Download
+
+
+Data Collection:
+
+
+
+-- Threat Intel --
+
+
+
+-- Log Management --
+
+
+-- Endpoint Security --
+
+
+-- Network and Log Analysis --
+
+
+-- Analysis Result --
+
+This URL is malicious
+Containment is not necessary for this alert
+
+Containment plays a pivotal role in cybersecurity by limiting the impact of security incidents, protecting data and operations, facilitating effective incident response, preserving evidence for forensic analysis, and ensuring compliance with legal and regulatory requirements.
+
+
+-- Artifacts --
+
+
+-- Analyst Note --
+
+
+-- Close Alert --
+
+
