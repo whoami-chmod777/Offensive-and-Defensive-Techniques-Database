@@ -1,0 +1,128 @@
+
+Our web server has been compromised, and it's up to you to investigate the breach. Dive into the system, analyze logs, dissect network traffic, and uncover clues to identify the attacker and determine the extent of the damage
+
+• What is the IP address of the server targeted by the attacker's brute-force attack
+• Which directory was targeted by the attacker's brute-force attempt
+• Identify the correct username and password combination used for login
+• How many user accounts did the attacker attempt to compromise via RDP brute-force
+• What is the "clientName" of the attacker's machine
+• When did the user last successfully log in via SSH, and who was it
+• How many unsuccessful SSH connection attempts were made by the attacker
+
+
+➜ What is the IP address of the server targeted by the attacker's brute-force attack
+
+Inspect the HTTP traffic.
+
+Statistics Conversations > Statistics Endpoints
+
+Filter > http
+
+
+➜ Which directory was targeted by the attacker's brute-force attempt
+
+Review the request logs in pcap.
+
+http://51.116.96.181/index.php
+
+
+➜ Identify the correct username and password combination used for login.
+
+Analyze packet details with login correct and find the username and password.
+We need to figure out what we are searching for exactly. For each HTTP POST request, the web server returns a response
+
+Filter > http
+
+Search > Packet details > String > '>Incorrect</p>
+Search > Packet details > String > '>Correct</p>
+
+<p style="color: red;">Correct</p>
+<form method="post">
+  <label for="username">Username:</label><br>
+  <input type="text" id="username" name="username"><br>
+  <label for="password">Password:</label><br>
+  <input type="password" id="password" name="password"><br><br>
+  <input type="submit" value="Login">
+</form>
+
+
+➜ How many user accounts did the attacker attempt to compromise via RDP brute-force?
+
+Examine all user attempts by analyzing RDP traffic.
+
+Filter > rdp
+Filter > rdp.userName
+Filter > rdp.neg_type == 0x01
+
+Filter > ip.src==192.168.190.137 && ip.dst==51.116.96.181
+Filter > ip.src==192.168.190.137 && ip.dst==51.116.96.181 && http
+
+File > Export Packet Dissections > As Plain Text
+
+cat HTTPexport.txt | grep -i "username" | uniq
+cat HTTPexport.txt | grep -i "username" | uniq | wc -l
+
+root@ip-172-31-11-214:~/Desktop/ChallengeFile/BruteForce# cat rdpuser_export.txt | grep -i  username | uniq
+    Form item: "username" = "t3m0"
+    Form item: "username" = "MoSalah"
+    Form item: "username" = "Messi"
+    Form item: "username" = "web-hacker"
+    Form item: "username" = "Kareem"
+    Form item: "username" = "Mostafa"
+    Form item: "username" = "mmox"
+root@ip-172-31-11-214:~/Desktop/ChallengeFile/BruteForce# 
+
+
+➜ What is the "clientName" of the attacker's machine
+
+Look into RDP packet details that contain "ClientData" info in PCAP.
+
+Filter > rdp
+
+Search > Packet details > String > clientName
+
+GENERIC-CONFERENCE-CONTROL 1.124
+Remote Desktop Protocol
+ ClientData
+  clientCoreData
+    headerType: clientCoreData (0xc001)
+    headerLength: 234
+    versionMajor: 12
+    versionMinor: 8
+    desktopWidth: 1024
+    desktopHeight: 768
+    colorDepth: 8 bits-per-pixel (bpp) (0xca01)
+    SASSequence: 43523
+    keyboardLayout: 1033
+    clientBuild: 18363
+    clientName: t3m0-virtual-ma *
+    keyboardType: IBM enhanced (101-key or 102-key) keyboard (4)
+    keyboardSubType: 0
+    keyboardFunctionKey: 12
+    imeFileName: 0000000000000000000000000000000000000000000000000000000000000000
+    postBeta2ColorDepth: 8 bits-per-pixel (bpp) (0xca01)
+    clientProductId: 1
+    serialNumber: 0
+    highColorDepth: 24-bit RGB mask (0x0018)
+    supportedColorDepths: 0x000f
+
+
+➜ When did the user last successfully log in via SSH, and who was it
+
+Search the "accepted password" in "auth.log" for SSH login details.
+
+# cat auth.log | grep "Accepted password"
+
+
+➜ How many unsuccessful SSH connection attempts were made by the attacker
+
+Check the logs for failed SSH connections
+
+cat auth.log | grep "Failed password" 
+cat auth.log | grep "Failed password" | head -n 10
+cat auth.log | grep "Failed password" | wc -l
+
+
+*
+
+
