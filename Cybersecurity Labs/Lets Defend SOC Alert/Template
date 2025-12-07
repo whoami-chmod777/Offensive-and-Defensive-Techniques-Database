@@ -46,6 +46,8 @@ Containment is not necessary for this alert
 
 Containment plays a pivotal role in cybersecurity by limiting the impact of security incidents, protecting data and operations, facilitating effective incident response, preserving evidence for forensic analysis, and ensuring compliance with legal and regulatory requirements.
 
+Since we found active malware that wasn’t stopped automatically, we needed to act fast! The next step is Containment.
+
 
 -- Artifacts --
 
