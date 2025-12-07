@@ -1,61 +1,118 @@
 
 Medium	Mar, 07, 2021, 05:47 PM	SOC105 - Requested T.I. URL address	75	ThreatIntel
 
-EventID :
-77
-Event Time :
-Mar, 13, 2021, 08:20 PM
-Rule :
-SOC138 - Detected Suspicious Xls File
-Level :
-Security Analyst
-Source Address :
-172.16.17.56
-Source Hostname :
-Sofia
-File Name :
-ORDER SHEET & SPEC.xlsm
-File Hash :
-7ccf88c0bbe3b29bf19d877c4596a8d4
-File Size :
-2.66 Mb
-Device Action :
-Allowed
-File (Password:infected) :
-Download
-
-
-Data Collection:
-
+EventID : 77
+Event Time : Mar, 13, 2021, 08:20 PM
+Rule : SOC138 - Detected Suspicious Xls File
+Level : Security Analyst
+Source Address : 172.16.17.56
+Source Hostname : Sofia
+File Name : ORDER SHEET & SPEC.xlsm
+File Hash : 7ccf88c0bbe3b29bf19d877c4596a8d4
+File Size : 2.66 Mb
+Device Action : Allowed
+File (Password:infected) : Download
 
 
 -- Threat Intel --
 
+No Threat Intel
 
 
 -- Log Management --
 
+Src Address: 172.16.17.56:52155
+Dest. Address: 177.53.143.89:443
+
+Data: ....5...1..K|ÍtV.kE...Ù.c..b§.7rÊb.?&........ÿ..
+
+
+Src Address: 172.16.17.56:52155
+Dest. Address: 177.53.143.89:44
+
+Data: ....}...y..K|Í|.....y.<§¢jJê#.....mrZ¡.Ã..../.5....À.À.À.À..2.8.......8ÿ.............................
+
+**************************************************************************************************************************
+
+[Mar, 13, 2021, 08:20 PM] source_address=172.16.17.56 source_port=52155 destination_address=177.53.143.89 destination_port=443 raw_log: {'Data': '....5...1..K|ÍtV.kE...Ù.c..b§.7rÊb.?&........ÿ..'}
+
+
+type : Firewall
+
+source_address : 172.16.17.56
+source_port : 52155
+
+destination_address : 177.53.143.89
+
+destination_port : 443
+
+time : Mar, 13, 2021, 08:20 PM
+
+Raw Log Data : ....5...1..K|ÍtV.kE...Ù.c..b§.7rÊb.?&........ÿ..
+
+
+[Mar, 13, 2021, 08:20 PM] source_address=172.16.17.56 source_port=52155 destination_address=177.53.143.89 destination_port=443 raw_log: {'Data': '....}...y..K|Í|.....y.<§¢jJê#.....mrZ¡.Ã..../.5....À.À.À.À..2.8.......8ÿ.............................'}
+
+type : Firewall
+
+source_address : 172.16.17.56
+source_port : 52155
+
+destination_address : 177.53.143.89
+destination_port : 443
+
+time : Mar, 13, 2021, 08:20 PM
+
+Raw Log Data : 
+
+....}...y..K|Í|.....y.<§¢jJê#.....mrZ¡.Ã..../.5....À.À.À.À..2.8.......8ÿ.......................
+
+...}...y..K|Í|.....y.<§¢jJê#.....mrZ¡.Ã..../.5....À.À.À.À..2.8.......8ÿ.............................
+
 
 -- Endpoint Security --
 
-
--- Network and Log Analysis --
+Hostname: Sofia
+IP Address: 172.16.17.56
+OS: Windows 10
+Client/Server: Client
+Primary User: Sofia2020
 
 
 -- Analysis Result --
 
-This URL is malicious
-Containment is not necessary for this alert
+File is Malicious
+Containment Required: Yes
+Malware quarantined: No 
 
-Containment plays a pivotal role in cybersecurity by limiting the impact of security incidents, protecting data and operations, facilitating effective incident response, preserving evidence for forensic analysis, and ensuring compliance with legal and regulatory requirements.
+The malware isn’t quarantined because it was executed and the ‘Device Action’ is set to ‘Allowed.
 
 
 -- Artifacts --
 
+Source Address : 172[.]16[.]17[.]56
+Destination Address : 177[.]53[.]143[.]89
+File Name : ORDER SHEET & SPEC.xlsm
+MD5 Hash : 7ccf88c0bbe3b29bf19d877c4596a8d4
+Request URL: hxxps[://]multiwaretecnologia[.]com[.]br/js/Podaliri4[.]exe
+Domane: multiwaretecnologia[.]com[.]br
+
 
 -- Analyst Note --
+
+A suspicious macro-enabled Excel file (ORDER SHEET & SPEC.xlsm) was detected and allowed on host Sofia. 
+Subsequent firewall logs captured outbound traffic from the same endpoint to a known malicious domain. 
+External analysis (VirusTotal, Filescan) confirms that the file hash is associated with malware distributing additional payloads via remote URLs. 
+Indicators strongly suggest an initial compromise and active malware attempting command-and-control (C2) communication.
 
 
 -- Close Alert --
 
+True Positive
 
+Upon download of the macro-enabled file ORDER SHEET & SPEC.xlsm, the endpoint (Sofia – 172.16.17.56) initiated outbound connections to 177.53.143.89:443, a known malicious IP associated with the domain multiwaretecnologia[.]com[.]br. 
+This domain hosts the malicious executable Podaliri4.exe. VirusTotal and Filescan reports confirm the file hash (7ccf88c0bbe3b29bf19d877c4596a8d4) as malicious. 
+Behavior is consistent with a Trojan downloader attempting to retrieve secondary payloads or establish C2 communication. Host isolation and remediation steps are required.
+
+
+*
