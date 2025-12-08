@@ -1,0 +1,22 @@
+
+-- Email Forensics Introduction --
+
+• Understanding Email Protocol
+• Email Forensics Tools
+• Email Header Analysis
+• Email Body Analysis
+• Email Attachment Analysis
+• Identifying and Analyzing Email Threats
+
+
+➜ Understanding Email Protocols: The focus of this lesson is the operation of protocols such as SMTP, IMAP, and POP, which are the foundation of e-mail communication, and their security vulnerabilities. There will be a discussion of the basic principles of the protocols, their role in the exchange of e-mail, and their security vulnerabilities.
+
+➜ Email Forensics Tools: The tools, software, and techniques used to analyze email will be examined in this lesson. It will focus on how forensic processes use and apply these tools.
+
+➜ Email Header Analysis: This lesson will discuss how to analyze email headers to obtain information such as sender, recipient, date, and IP address and how to use this information in criminal investigations.
+
+➜ Email Body Analysis: This lesson will cover how to examine email body content, email body text, HTML content, and embedded elements, including email body language, link security, deceptive language, and malicious scripts. Methods for detecting social engineering tactics and content spoofing attempts will also be provided.
+
+➜ Email Attachment Analysis: Analyzing email attachments and detecting malware and other dangerous content is the objective of this lesson. It will focus on how to safely analyze attachments, which tools to use, and how to quarantine potentially harmful attachments. Contextual analysis of attachments and behavioral analysis techniques will also be covered.
+
+➜ Identifying and Analyzing Email Threats: In this lesson, you will learn how to identify and analyze phishing, spam, and other malicious e-mail threats. It will identify common attack tactics, threat vectors, and defense mechanisms against these attacks.
