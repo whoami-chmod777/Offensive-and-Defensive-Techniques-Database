@@ -21,30 +21,23 @@ The sender's email server then connects to the recipient's email server, forward
 Security and Vulnerabilities: One of the disadvantages of SMTP from a security point of view is that it does not encrypt the contents of the message by default (unencrypted), which leaves the contents of the message vulnerable to interception or modification. 
 However, with additional security measures such as TLS (Transport Layer Security), these weaknesses can be minimized. 
 
+
 Let's follow the flow of the email as it goes from Bob to Alice. 
 
-Step-1 : 
-Bob opens his email application, enters Alice's email address (Alice@yahoo.com), types his message, and sends it. 
+Step-1 : Bob opens his email application, enters Alice's email address (Alice@yahoo.com), types his message, and sends it. 
 
-Step-2 : 
-The email application communicates with Bob's email server and forwards Bob's typed email to Bob's email server, where it is stored for later delivery to the email address 'Alice@yahoo.com'. 
+Step-2 : The email application communicates with Bob's email server and forwards Bob's typed email to Bob's email server, where it is stored for later delivery to the email address 'Alice@yahoo.com'. 
 
-Step-3 : 
-Bob's email server sees a message waiting to be sent to "Alice@yahoo.com". To send this message, it contacts the 'yahoo.com' mail server. 
-This is where SMTP comes in. SMTP is the protocol that is in charge of the communication between these two e-mail servers. In this scenario, Bob's email server acts as an SMTP client and Alice's email server as an SMTP server. 
+Step-3 : Bob's email server sees a message waiting to be sent to "Alice@yahoo.com". To send this message, it contacts the 'yahoo.com' mail server. This is where SMTP comes in. SMTP is the protocol that is in charge of the communication between these two e-mail servers. In this scenario, Bob's email server acts as an SMTP client and Alice's email server as an SMTP server. 
 
-Step-4 : 
-After the initial SMTP handshake between the Gmail and Yahoo mail servers, the SMTP client sends Bob's message to Alice's mail server. 
+Step-4 : After the initial SMTP handshake between the Gmail and Yahoo mail servers, the SMTP client sends Bob's message to Alice's mail server. 
 
-Step-5 : 
-Alice's mail server receives the message and stores it in Alice's mailbox so that Alice can read it later. 
+Step-5 : Alice's mail server receives the message and stores it in Alice's mailbox so that Alice can read it later. 
 
-Step-6 : 
-Alice uses Microsoft Outlook to retrieve the messages from her mailbox and reads the message that Bob has sent to her by e-mail. 
+Step-6 : Alice uses Microsoft Outlook to retrieve the messages from her mailbox and reads the message that Bob has sent to her by e-mail. 
 
 
-SMTP is a text-based protocol of commands and responses. 
-The SMTP client sends SMTP commands, while the SMTP server responds to these commands with numeric codes.
+SMTP is a text-based protocol of commands and responses. The SMTP client sends SMTP commands, while the SMTP server responds to these commands with numeric codes.
 Some of the commands used in the SMTP protocol are 'EHLO', 'MAIL FROM', 'RCPT TO', 'DATA' and 'QUIT' and their descriptions are as follows: 
 
 EHLO : Used by the SMTP client to authenticate itself during communication with the server and to obtain a list of commands supported by the server.
