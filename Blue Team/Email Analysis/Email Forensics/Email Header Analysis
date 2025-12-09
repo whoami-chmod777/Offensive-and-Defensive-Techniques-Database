@@ -1,1 +1,24 @@
 
+Email header analysis, as the name suggests, is the analysis of the information in the header of an email message. 
+Email headers contain information such as where the message came from, how it was routed, and which servers were involved in the transmission process. 
+Therefore, the information gained can be used to verify the email, detect spam, and investigate security breaches.
+
+• What are the Components of Email Headers
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- What are the Components of Email Headers --
