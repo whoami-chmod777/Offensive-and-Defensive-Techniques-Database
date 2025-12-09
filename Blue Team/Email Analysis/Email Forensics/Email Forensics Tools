@@ -1,1 +1,97 @@
 
+Email forensics tools are used to obtain information that can be used as evidence in legal proceedings by analyzing email traffic and content. These tools can examine email headers, bodies, attachments, and even metadata like timestamps and IP addresses. 
+
+• Wireshark
+• NetworkMiner 
+• The Sleuth Kit (with Autopsy) 
+
+
+-- Wireshark --
+
+Overview: Wireshark is a powerful, industry-recognized tool for capturing and analyzing network traffic. It supports email protocols (SMTP, IMAP, POP3) and can examine the data passing over these protocols in detail. 
+Email forensics use: It can be used to observe how email is sent and received across the network, detecting protocol errors and security vulnerabilities. 
+You can use the 'smtp' filter to filter and examine only network traffic belonging to the SMTP protocol when analyzing traffic on Wireshark. 
+
+Filter > smtp
+
+Right-click and select 'Follow TCP Stream' to see the SMTP traffic from start to finish. 
+
+
+--  NetworkMiner --
+
+Overview: NetworkMiner is a passive network monitoring and forensic analysis tool. It can analyze network traffic and extract data such as email messages. 
+Email forensics use: It can be used to examine email communications and file transfers from network traffic. 
+You can analyze the 'SMTP' protocol in network traffic with the Network Miner application. In the "Session" tab, you can examine the sessions set up and identify possible e-mail traffic. 
+
+You can enter keywords (ehlo, rcpt to, mail from, data) for network traffic analysis and reporting in the Keywords tab. 
+
+You can also view and analyze detailed information about the hosts you are in contact with from the 'Hosts' tab. 
+
+
+--  The Sleuth Kit (with Autopsy) --
+
+Overview : The Sleuth Kit, when used with Autopsy, provides a set of tools for digital forensic investigations and a user-friendly graphical interface. 
+Email Forensics use : It can be used to extract email data from disc images, and examine and report on email archives. 
+
+Autopsy's Email Parser module recognizes MBOX, EML, and PST format files based on file signatures, extracts emails from them, and creates a blackboard for each of them. 
+This module skips known files and creates a whiteboard artifact for each message. It adds email attachments as derived files. 
+
+To perform email forensics operations with Autopsy, we will add the '.eml' file from the 'Add a data source' section. Then select 'Generate new hostname based on data source name' and continue with 'Next'. 
+Select “Logical Files” as the data source then click “Next”. 
+Select “.eml” files with “Add”  then continue by clicking “Next”. 
+
+In the 'Configure Ingest' step, select the modules and tools to be used for data source processing. Ensure that 'Email Parser' is selected here. 
+
+Then click on “Finish” and start the analysis process. You can find and examine details in the analysis report. 
+
+
+➜ Data Artifacts
+
+Forensic analysis perspective : Every finding and piece of data should be considered as potential evidence. Information from email accounts may contain metadata that can be linked to a crime or that can verify the identity of the user. 
+How to analyze : Each relevant piece of data must be analyzed in the context of the people the user was interacting with, the timeline, and the content of the email. 
+
+➜ Communication Accounts 
+
+Forensic analysis perspective : Communication accounts can reveal links to individuals or groups that may be particularly relevant to criminal activity. They can also reveal the use of multiple accounts or suspicious activity. 
+How to analyze : Analyze contact accounts for patterns of use and associated email addresses. Anomalous activity or suspicious accounts may require further investigation. 
+
+➜ Email
+
+Forensic analysis perspective : All emails found and processed on the system may reveal information about a crime or malicious activity.
+How to analyze : Analyze each email's sender and recipient information, subject lines, and message content to identify any malicious content or deceptive links. 
+
+➜ E-Mail Messages
+
+Forensic analysis perspective : Email messages extracted from the investigated system play a key role in understanding the chronology of the incident and the nature of the crime.
+How to analyze : Analyze each message in detail, focusing on technical details such as unusual text patterns, hidden messages, or email headers. 
+
+➜ Metadata
+
+Forensic analysis perspective : Metadata contains information such as file creation and modification dates, which is essential for placing file accesses on a timeline.
+How to analyze : Compare file creation and modification times, file ownership, and access times to the crime timeline. 
+
+➜ Analysis Results 
+
+Forensic analysis perspective : The analysis results provide an overview of the case under investigation and highlight important data.
+How to analyze : Examine the results of the analysis modules and interpret the findings. 
+
+➜ Keyword Hits 
+
+Forensic analysis perspective : Keyword scans help to quickly identify important information through specific terms or phrases.
+How to analyze: Evaluate matches found in keyword scans in terms of the context and significance of the relevant content and, if appropriate, include them as potential evidence. 
+
+
+*
+
+
+
+
+
+
+
+
+
+
+
+
+
