@@ -4,8 +4,8 @@ Email headers contain information such as where the message came from, how it wa
 Therefore, the information gained can be used to verify the email, detect spam, and investigate security breaches.
 
 • What are the Components of Email Headers
-
-
+• Email Header Analysis
+• How to analyze E-mail Header Inf
 
 
 
@@ -22,3 +22,108 @@ Therefore, the information gained can be used to verify the email, detect spam, 
 
 
 -- What are the Components of Email Headers --
+
+➜ From
+This field shows who sent the email message. It is usually in the form of an email address and plays a key role in identifying the sender. 
+
+Significance: It is a critical element in authenticating and assessing the trustworthiness of the sender. It is often tampered with during spoofing or phishing attacks.
+Attack Vector Analysis: The 'From' field is examined to detect any forgery of the sender's identity. Verifying the legitimacy of an email address is a critical step in identifying phishing and spoofing attacks. 
+
+➜ To
+This field shows the recipient(s) to whom the message was sent. There can be more than one recipient, and each recipient is separated from the others by a comma. 
+
+Significance: Identifies recipients and describes who the message is for, also used for group communications or distribution lists.
+Attack Vector Analysis: The 'To' field specifies the target users or groups. This insight is particularly important for spear-phishing or targeted attacks. If the recipients are unexpected or irrelevant groups, it may raise suspicion. 
+
+➜  Subject Line
+It is a short text that contains the topic of the email and allows recipients to get an idea of the content of the message at first sight. 
+
+Significance: The subject line is an important factor in attracting the recipient's attention and prioritizing the message. Spam filters scan subject lines to evaluate the content.
+Attack vector analysis: The subject field often contains deceptive messages. Subject lines that are provocative or require immediate action, used in fraud or social engineering attempts, can be easily not recognized by examination. 
+
+➜  Date
+This field contains the date and time at which the message was sent. The format is generally following the RFC 2822 standard. 
+
+Significance: Timestamps are used to verify that the message arrived on time and to list events chronologically
+Attack vector analysis: The Date field provides the time the email was sent, and this information can be used to detect time-based attack patterns or spam campaigns. In addition, timestamp tampering is also considered a sign of fraud. 
+
+➜ Received
+It contains the address of each server through which the email passes and the date and time of the operation on those servers. For each pass, there is a "Received" line. 
+
+Significance : It is used to trace the routing path of the email and to identify servers that may be suspicious. Forensically, this information is valuable to verify the origin of emails and to investigate security breaches.
+Attack Vector Analysis : The "Received" section contains a sequential list of the servers the email has passed through, which is used to determine if the email has passed through potentially suspicious or malicious servers. It can also help identify cases where the message is routed in unexpected ways. 
+
+➜ MIME-Version
+It specifies the version of the Multipurpose Internet Mail Extensions (MIME) used by the e-mail message.
+
+Significance : It defines how email content is formatted and encoded, ensuring that multi-part messages and non-text content are handled correctly.
+Attack Vector Analysis : "MIME version specifies the MIME standard used; outdated or incompatible versions can increase the likelihood of malicious content. This field is particularly important when analyzing complex malicious email content. 
+
+➜ Content-Type
+It provides information about the content of the email body, e.g., and can take values like "text/plain", "text/html" or the more complex "multipart/mixed".
+
+Significance: It instructs the recipient's email client on how to display the message. HTML content, images, and other media types are handled this way.
+Attack Vector Analysis: The "content-type" information is used to evaluate which content is safe and which is not, by specifying the type of content. For example, "text/html" might contain malicious HTML scripts or hidden iframes. 
+
+➜ Message-ID
+It is a unique identifier generated for each email that identifies the message, usually containing a complex sequence and the @ character.
+
+Significance: It is used to track email traffic, refer to specific messages, and organize email conversations, also utilized by spam detection systems.
+Attack Vector Analysis: Since Message-ID provides a unique identifier, if these identifiers do not match the expected format, this may indicate forgery or spamming. It is also used to help understand the relationship between email chains. 
+
+
+--  Email Header Analysis --
+
+Email header analysis is an important process for understanding the source and direction of email, security threat identification, and general email traffic management. 
+
+➜  How to collect Email Header metadata
+
+• Using the email client to view header information
+• Store header information
+• Automatic collection tools 
+
+
+-- How to analyze E-mail Header Info --
+
+➜ Timestamp and Path Analysis
+
+Each 'Received' line needs to be analyzed because these lines contain the servers through which the email has passed and the timestamp details marked on each server. 
+
+➜ Verification of sender and recipient information 
+
+Fields such as 'From', 'To', and 'CC' reveal the parties involved in the communication. 
+Note that the 'display name' shown in the email application may not be the same as the real name. 
+
+➜ Examination of Technical Parameters 
+
+Fields such as 'MIME-Version' and 'Content-Type' indicate how and in what format the message is being sent. 
+Mismatched or outdated MIME versions can be an indicator of malicious activity. Spam and scam emails often use complex content types (e.g. multipart/related). The content-type field can provide clues to help investigate these emails further.
+
+
+
+*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
