@@ -1,1 +1,99 @@
 
+Intruder is designed within Burp Suite to create customized attacks to automatically test security vulnerabilities. It is particularly used for payload trials, fuzzing, and brute-force attacks in form or parameter fields. 
+In the Community version, its slow scanning speed results in lower performance.
+
+• Positions
+• Usage
+• Payloads
+• Resource Pool
+• Settings
+• Starting the Attack
+
+
+To use Intruder, right-click on any request listed in areas such as Site Map or HTTP History and select "Send to Intruder." To send a request intercepted on the Proxy page to the Intruder tool, right-click on an empty area and select "Send to Intruder."
+
+-- Positions --
+
+The Positions tab allows specifying the areas where the attack will be executed and data will be altered. It defines which parameters or data points will be targeted in the attack.
+This section provides several "Attack Type" options that determine how payloads will be distributed during the attack. 
+
+• Sniper: Used when aiming to try many different payloads for a single parameter. Ideal for form fields like username or URL parameters.
+• Battering Ram: Used when the same payload needs to be tested on multiple parameters. Ideal for testing security flaws like XSS where the same payload's effect on multiple input points needs to be observed.
+• Pitchfork: Used when different payloads need to be tried on all parameters in a cross manner. For example, element from the first payload list is tried for the first parameter, element from the second payload list for the second parameter, and then crossing over the lists.
+• Cluster Bomb: Used when separate payloads for all parameters are to be tried without crossover. Element from the first payload list is tried for the first parameter, while the second payload list is used for the second parameter.
+
+
+-- Usage --
+
+1. Automatic Position Defining: Intruder automatically analyzes the loaded request and suggests positions for likely variables. Use the "Clear" button to remove automatically selected positions.
+2. Manual Position Adjustment: Positions can be selected manually according to specific needs. This is done by enclosing the start and end markers indicated by the “§” symbol. Select the target points with the cursor and click the "Add" button to perform this action.
+3. Position Types: Based on the attack type, different position types like "Sniper," "Battering Ram," "Pitchfork," or "Cluster Bomb" can be selected.
+
+
+-- Payloads --
+
+• Payload Sets: Allows defining and managing different payload lists, each ready to use within Burp Suite with its dataset.
+• Payload Settings: Loading the selected payload list and adding new payloads is done here.
+• Payload Processing: Allows defining special rules to be applied to payloads before they are sent (e.g., encoding, modifying data).
+• Payload Encoding: Determines how sent payloads will be encoded (URL encoding, HTML encoding, etc.), ensuring proper formatting for different target environments.
+
+
+-- Resource Pool --
+
+The Resource Pool is used to manage the resource consumption of Intruder attacks. It is designed to control the number of simultaneous requests and overall resource usage.
+
+
+-- Settings --
+
+Settings are used to customize various aspects of Intruder attacks. These settings include details such as how the attack is conducted, timeout durations, and HTTP headers.
+
+
+-- Starting the Attack --
+
+In the Positions tab, target parameters are selected, and in the Payloads tab, the dataset is loaded. If needed, configurations in other sections are completed. 
+Once all setup is done, the attack is started by clicking the "Start Attack" button in the upper right corner.
+
+The attack window contains the Request and Response details of the attempts made. The list of tested payloads includes information such as HTTP status code and response size. 
+Response details can be examined to identify the correct payload. In this example, since all HTTP status codes are the same (200), status codes are not helpful. 
+Response size indicating a different value is noticed, and the correct password is identified as "lifehack."
+
+
+
+
+*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
