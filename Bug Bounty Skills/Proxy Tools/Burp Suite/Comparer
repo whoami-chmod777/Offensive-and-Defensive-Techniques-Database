@@ -1,1 +1,28 @@
 
+Comparer enables the comparison and analysis of differences between two or more data pieces. 
+This tool is particularly useful during security testing to identify subtle differences between similar operations or to understand the structural differences between two different session tokens. 
+
+• Types of Data Comparison
+• Data Entry
+• Comparison and Analysis
+
+
+-- Types of Data Comparison --
+
+• Bytes Mode: Designed for comparing data at the byte level. Binary files, images, or encrypted data can be compared in this mode.
+• Words Mode: Used for comparing text-based data. Contents such as HTML code, JSON responses, or plain text can be analyzed in this mode.
+
+
+-- Data Entry --
+
+• Manual Input: Data to be compared can be directly typed or pasted into the Comparer interface.
+• Sending from Other Tools: Data captured using other Burp Suite tools like Proxy or Repeater can be directly sent to Comparer using the "Send to Comparer" option.
+
+
+-- Comparison and Analysis --
+
+When the comparison process is initiated, Comparer visually highlights the differences between the two data sets. In Words mode, different lines or characters of text are marked with color codes. In Bytes mode, differences at the byte level are displayed.
+
+
+
+*
