@@ -1,1 +1,98 @@
 
+Email Attachment Analysis is the process of detecting security threats and malicious content by examining the attachments of inbound and outbound email messages.
+This analysis consists of three main phases: static analysis, dynamic analysis, and signature-based detection. 
+
+• Static Analysis
+• Static Analysis Sample Scenario 
+• Dynamic Analysis 
+• Dynamic Analysis Sample Scenario
+
+
+-- Static Analysis --
+
+Static analysis examines the basic characteristics of email attachments. To determine whether a file is suspicious or malicious, static details such as file type, size, and metadata are evaluated.
+
+• File types: Certain file types (e.g. .exe, .scr, .rar) are common carriers of malware. These types are automatically flagged for further investigation.
+• File sizes: Abnormally large or small file sizes might indicate the presence of hidden content.
+• Metadata: Metadata, such as file creation and modification dates and author information, provides important clues about the file's origin and history. 
+
+
+-- Static Analysis Sample Scenario --
+
+Let's say you received a PDF file by email. The source of the file is suspicious because it was received unexpectedly. 
+
+➜ Check the file signature and type
+
+The file's MIME type and signature are checked to determine what type of file it really is.
+Note that this step is necessary as, for example, a file ending in "exe" may be masked as ".pdf". 
+
+➜ Compare hash values
+
+The hash value of the file is obtained and compared with hash values in various malware databases. 
+
+➜ Content analysis
+
+With the help of PDF reader and editor software, the text, images, and embedded objects in the file are analyzed. PDF files often contain malicious JavaScript code. 
+
+➜ String analysis
+
+Extract plaintext (character strings) within the file and search for suspicious content such as malicious commands or IP addresses.
+
+The most popular static analysis tools available online are: VirusTotal, Hybrid analysis
+
+You can also view 'Connected URLs', 'Connected Domains', and 'Connected IP Addresses' in the 'Relationships' tab, as shown below. 
+
+
+-- Dynamic Analysis --
+
+Dynamic analysis is the real-time execution of e-mail attachments in a sandbox environment. This method aims to detect malicious activity by observing the behavioral characteristics of the emails attached. 
+
+• Sandbox Environment : E-mail attachments are executed in an isolated virtual machine or container. In this way, malware cannot cause damage to real systems. 
+• Behavior Monitoring : The file's access to system resources, communication over the network, and other operating system interactions are monitored, which is vital as malware often tends to copy itself, steal data, or spread to other systems. 
+
+
+-- Dynamic Analysis Sample Scenario --
+
+A file with the extension "docx" is received by email. The file content encourages the recipient to open an important work-related document. 
+
+➜ Execution in a sandbox environment
+
+Run the file in an isolated virtual machine or sandbox environment so that the behavior of the malware can be observed without any damage to the computer. 
+
+➜ Network activity monitoring
+
+Monitor whether the file attempts to access the Internet and whether the file communicates to suspicious servers. 
+
+➜ Monitoring File and Registry changes
+
+Record the changes to the system made by the file, including changes to the file and registry entries. 
+
+➜ Behavior monitoring
+
+Detect possible malicious behavior of the malware (e.g. keystroke logger activity, suspicious file creation processes). 
+
+The most popular dynamic analysis tools available online are: Any.Run, Cuckoo Sandbox, Joe Sandbox, VMRay
+
+
+*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
