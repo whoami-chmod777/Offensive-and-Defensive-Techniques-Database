@@ -1,1 +1,47 @@
 
+Repeater is a tool that allows manual modification and resending of requests. This feature is important during security testing to observe how the target application responds.
+To use Repeater, you first need to capture a request. This request can be captured using Burp Suite's Proxy module or sent to Repeater from another Burp Suite tool.
+
+1. Capturing a Request: Use Burp Suite's Proxy feature to capture a request from network traffic.
+2. Sending to Repeater: Right-click on the captured request and select "Send to Repeater."
+3. Editing and Sending: Navigate to the Repeater tab. Locate the fields in the request that you want to modify and make the necessary changes. Once the changes are complete, click the "Send" button to resend the request.
+
+-- Response --
+
+After the request is sent, the response is displayed on the right side of the Repeater interface. Information such as the HTTP response code, response headers, and response content can be accessed from here. Examining the responses helps understand how the target application reacts to different requests.
+
+• Changing Methods: You can change the HTTP method, such as GET or POST.
+• Editing URLs: You can modify the URL of the request.
+• Headers and Parameters: You can edit HTTP headers and the data being sent, such as form data.
+
+
+
+
+*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
