@@ -1,1 +1,20 @@
 
+Organizer is a tool designed to help systematically store findings, notes, and observations obtained during the testing process. This feature simplifies the management and reporting of information gathered about the application or systems being tested.
+
+• Adding a New Note
+• Classification
+
+
+-- Adding a New Note --
+
+• Add Note: Click on the "Add note" button to add a new note. These notes can contain details about specific findings, important information about a particular feature of the tested application, or potential security vulnerabilities.
+• Details: In the opened window, a title and details can be added to the note. Optionally, the note can be assigned to a specific category, making it easier to filter and manage the notes later.
+
+
+-- Classification --
+
+When right-clicking on an item in the list, various actions can be performed. For example, with the Highlight feature, rows can be color-coded. The Status feature allows you to assign statuses such as New, In Progress, or Done to the items.
+
+
+
+*
