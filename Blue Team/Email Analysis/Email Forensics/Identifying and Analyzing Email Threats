@@ -1,1 +1,186 @@
 
+I will explains the most common attack vectors with examples and how they should be considered in the email forensics process.
+
+• Phishing
+• Spear Phishing 
+• Spam
+• Malware
+• Business Email Compromise (BEC) 
+• Email Spoofing 
+• Domain Impersonation 
+• Credential Harvesting 
+• Whaling
+• Extortion
+• Brand Impersonation
+• Data Exfiltration 
+
+
+-- Phishing --
+
+Phishing is sending fake emails to users to redirect them to websites that appear legitimate but are in fact malicious. Their purpose is usually to steal the user's personal information, banking details, or login credentials. 
+
+• For example : An email that appears to be from a bank asks users to click on a link to update their account information. 
+• Analysis points: The legitimacy of the sender's address, the language and tone of the text, linguistic analysis, and the security of the links should all be checked. 
+
+Received: from mail.illegitimateserver.com (unknown [198.51.100.0])
+    by smtp.yourcompanydomain.com (Postfix) with ESMTPS id 4C1F1A1D53
+    for <employee@yourcompanydomain.com>; Tue, 3 May 2024 09:33:07 +0200 (CEST)
+Received-SPF: fail (smtp.yourcompanydomain.com: domain of support@wellknownbank.com does not designate 198.51.100.0 as permitted sender)
+Received-From-MTA: dns; mail.illegitimateserver.com
+Authentication-Results: smtp.yourcompanydomain.com;
+        spf=fail smtp.mailfrom=support@wellknownbank.com;
+        dmarc=fail action=none header.from=wellknownbank.com;
+From: "Well-Known Bank Support" <support@wellknownbank.com>
+To: employee@yourcompanydomain.com
+Subject: Urgent Account Verification Required
+Date: Tue, 3 May 2024 09:33:07 +0200
+Message-ID: <561f73e6f4c9bdaa@illegitimateserver.com>
+MIME-Version: 1.0
+Content-Type: text/html;
+X-Priority: 1
+X-MSMail-Priority: High
+Reply-To: support@wellknownbank.com
+
+[Phishing message content designed to trick the employee into giving up sensitive information goes here]
+
+The 'Received-SPF' and 'Authentication-Results' show that SPF and DMARC validation failed, indicating that the email did not come from the legitimate-looking domain 'wellknownbank.com'. 
+The support address in the 'From' header impersonates a legitimate bank, but the email was actually sent from a spoofed source on the 'mail.illegitimateserver.com' domain, and the 'Message-ID' header points to that server.
+
+
+-- Spear Phishing  --
+
+It is a personalized phishing attack that targets a specific individual or organization. The aim is to gain the victim's trust by using information that has been previously gathered. 
+
+• For example : An email pretending to be from the CEO of a company instructing the finance department to make an urgent payment.
+• Analysis points : Any targeting of personal data and custom content should be carefully considered. 
+
+
+-- Spam --
+
+The term for large amounts of unsolicited or junk email, often containing advertising and sometimes malware. 
+
+• For example: Emails offering free products, pharmaceutical promotions, or fake competitions.
+• Analysis points: Look out for unsolicited content, signs of bulk sending, and repetitive message patterns. You should analyze email headers and send times. 
+
+
+-- Malware --
+
+Be wary of emails containing malware. This category includes viruses, Trojans, ransomware, and other malicious programs delivered via email attachments or malicious links. 
+
+• For example : An employee opens an email attachment that appears to be work-related and their computer gets infected with ransomware. 
+• Analysis points : Watch out for malicious attachments, macros, and executables. 
+
+Use dynamic analysis techniques to monitor attachment behavior and detect malicious payloads. 
+
+
+--  Business Email Compromise (BEC) --
+
+BEC is financial fraud through the impersonation or compromise of administrator accounts. 
+
+• For example : Fraudulent payment instructions are sent to suppliers after the email account of a company's CFO is compromised.
+• Analysis points: Authorisation requests and urgent and unusual financial requests in the content are red flags. 
+
+Received: from externalmailserver.com (externalmailserver.com. [203.0.113.5])
+    by mx.yourcompanydomain.com with ESMTP id x7s17297718ede.93.2024.04.28.08.10.10
+    for <ceo@yourcompanydomain.com>; Mon, 28 Apr 2024 08:10:10 -0700 (PDT)
+Received-SPF: pass (externalmailserver.com: domain of executiveassistant@yourcompanydomain.com designates 203.0.113.5 as permitted sender) client-ip=203.0.113.5;
+Authentication-Results: mx.yourcompanydomain.com;
+    dkim=pass header.i=@yourcompanydomain.com header.s=selector1 header.b="dvb...Q==";
+    spf=pass (externalmailserver.com: domain of executiveassistant@yourcompanydomain.com designates 203.0.113.5 as permitted sender)
+    smtp.mailfrom=executiveassistant@yourcompanydomain.com;
+    dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=yourcompanydomain.com
+From: "John Doe, CEO" <ceo@yourcompanydomain.com>
+To: accounting@yourcompanydomain.com
+Date: Mon, 28 Apr 2024 08:10:10 -0700 (PDT)
+Subject: Urgent Wire Transfer Request
+Reply-To: ceo@yourcompanydomain.com
+Message-ID: <CAP1234567890.abcdefgfhijkl@externalmailserver.com>
+X-Mailer: Microsoft Outlook 16.0
+Thread-Index: AdV2SZ2fS2D2/ROE2T/SAeN+9Hb2jPQ==
+Content-Language: en-us
+
+[The email body requesting an urgent wire transfer goes here]
+
+Check the identity of the sender and the consistency of the communication style with earlier emails. 
+The 'From' and 'Reply-To' headers show the email address of the company's CEO, but the 'Received' and 'Message-ID' headers reveal that the email was actually sent from a different server (externalmailserver.com and IP 203.0.113.5).
+The Received-SPF and Authentication-Results headers confirm that the sender has permission to send messages from the domain yourcompanydomain.com. 
+However, this could be a sign that the attacker is manipulating SPF records and other authentication protocols.
+
+
+--  Email Spoofing --
+
+Spoofing is deceiving the recipient by forging the sender's email address or other header information. 
+
+• For example: An attacker can request sensitive information from employees by sending an email impersonating a company executive. 
+• Analysis points: Check the From, Return-Path, and Reply-To headers, as well as the IP address and domain details, to identify spoofing indicators. 
+
+Received: from mailserver.example.com (mailserver.example.com. [192.0.2.1])
+    by mx.example.net with ESMTPS id f1234567890
+    for <victim@example.net>; Wed, 28 Apr 2024 12:00:00 -0400 (EDT)
+From: "Trusted Company" <contact@trustedcompany.com>
+To: victim@example.net
+Date: Wed, 28 Apr 2024 12:00:00 -0400
+Subject: Urgent Account Update Required
+Reply-To: contact@trustedcompany.com
+X-Mailer: TrustedMailer
+Message-ID: <1234567890@mailserver.example.com>
+
+[The email body goes here]
+
+The email address of a trusted company appears in the 'From' and 'Reply-To' fields in this example. However, the 'Received' field shows that the email came from a different server (mailserver.example.com and IP 192.0.2.1). 
+This is an indication that the true sender address is being masked and that the email is potentially being used for spoofing purposes.
+In reality, the "From" and "Reply-To" addresses are likely to be spoofed. The real sender address can be revealed by the IP address or server name in the "Received" field. 
+
+
+--  Domain Impersonation --
+
+ Domain impersonation is the act of imitating a domain name that is real and trusted. Attackers can mislead buyers by slightly altering the domain name or using a similar-sounding name. 
+
+• For example: Attackers can mislead users by using 'examp1e.com' instead of 'example.com'. 
+• Analysis points: URLs that look similar but contain different characters should be carefully examined to spot subtle changes in domain names. DNS queries and WHOIS information should be used to verify domains. 
+
+
+-- Credential Harvesting --
+
+Credential harvesting involves generating emails to steal usernames, passwords, and other credentials. 
+
+• For example: A phishing email that tricks a user into entering login details via a form.
+• Analysis points: Forms and login page links should be checked, as should the security status of websites targeted by emailed URLs. 
+
+
+-- Whaling --
+
+It's a type of spear-phishing that targets senior executives and aims to commit large-scale fraud or steal data. 
+
+• For example: A CEO receives an email claiming to be from the company's legal department. The email asks for sensitive case information.
+• Analysis points: Tailored and detailed content aimed at senior executives should be monitored. Emails with unusual details of sender information and requests should be highlighted. 
+
+
+-- Extortion --
+
+It is an email containing a ransom demand. Attackers may threaten users to disclose sensitive information or lock down data with ransomware. 
+
+• For example: A user receives an email containing a threat to disclose their personal information in exchange for money.
+• Analysis points: Threatening content and ransom demands should be detected in the email. Requests that include user information and are often made under time pressure should be analyzed. 
+
+
+-- Brand Impersonation --
+
+It is a form of forgery that uses the name and look of a well-known brand. Such emails are often designed to look like the brand's official emails. 
+
+• For example: An email pretending to be from a popular technology company may ask users to verify their account.
+• Analysis points: Brand logos, color schemes, and communication styles may be mimicked. Visuals and content should be checked against the brand's official sources and verified. 
+
+
+-- Data Exfiltration --
+
+It is the unauthorized exfiltration of sensitive data. Leaking sensitive information via email falls into this category. 
+
+• For example: An employee emailing confidential company project details to a competitor.
+• Analysis points: Avoid the unauthorized disclosure of confidential data by checking email attachments and text content to ensure no information is leaked outside the organization. 
+
+
+
+*
+
+
