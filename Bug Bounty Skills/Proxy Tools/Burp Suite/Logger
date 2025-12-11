@@ -1,1 +1,9 @@
 
+The Logger tool in Burp Suite keeps a record of all requests and responses that occur while Burp Suite is being used. This is crucial for examining the actions taken during security testing, debugging, and identifying potential security vulnerabilities.
+
+The main difference between Logger and HTTP History is that Logger records all types of traffic information passing through Burp Suite, providing a broader scope of monitoring. 
+In contrast, HTTP History focuses more on the traffic that results from manual tests and user interactions. 
+
+Both tools offer valuable information for security testing and application analysis but should be chosen based on the intended use.
+
+
