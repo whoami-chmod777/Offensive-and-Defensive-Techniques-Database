@@ -1,1 +1,47 @@
 
+The Decoder tool in Burp Suite is used to analyze and transform encoded, encrypted, or obfuscated data. This tool simplifies the analysis of data encountered during security testing. 
+In addition to decoding, it also has capabilities to encode or encrypt data using existing methods.
+
+• Entering Data
+• Decoding Data
+• Some Supported Encoding Methods
+• Some Supported Hashing Methods
+
+
+-- Entering Data --
+
+• Manual Input: Data to be decoded can be directly typed or pasted into the text box in the Decoder tab.
+• Sending from Other Tools: Data captured using other Burp Suite tools like Proxy or Repeater can be directly sent to Decoder using the "Send to Decoder" option.
+
+
+-- Decoding Data --
+
+In the Decoder interface, the format of the data to be decoded is selected.
+
+• Smart Decode: Automatically detects and decodes the type of encoding.
+• Unicode Encoding/Decoding: Converts text to Unicode codes or decodes from these codes to text.
+
+
+-- Some Supported Encoding Methods --
+
+• Decode URL
+• Decode HTML
+• Decode Base64
+• Decode ASCII Hex
+• Decode Hex
+• Decode Octal
+• Decode Binary
+• Decompress GZIP
+
+
+-- Some Supported Hashing Methods--
+
+• MD2
+• MD4
+• MD5
+• SHA-1
+• SHA-256
+• SHA-512
+
+
+*
