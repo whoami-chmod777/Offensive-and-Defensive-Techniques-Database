@@ -1,1 +1,22 @@
 
+Sequencer is a tool used to test the security of session tokens and other data used in web applications. 
+Sequencer analyzes the randomness and unpredictability of these tokens, thereby assessing the likelihood that an attacker could carry out attacks such as session hijacking.
+
+• Capturing Data with Sequencer
+• Analysis Process
+
+
+-- Capturing Data with Sequencer --
+
+1. Capturing Traffic via Proxy: Using Burp Suite's Proxy feature, capture the flow of traffic from the web application. This typically includes token values generated during login processes or other sensitive operations.
+2. Sending Data to Sequencer: Right-click on any captured request and choose the "Send to Sequencer" option to send the relevant data to Sequencer.
+
+
+-- Analysis Process --
+
+1. Token Selection: In the Sequencer interface, select the data you want to analyze. This could be a session token, CSRF token, or other similar data.
+2. Data Collection: Sequencer needs to collect a sufficient number of samples to evaluate token security. By clicking the "Start live capture" button, Sequencer starts collecting token samples. For statistically valid results, thousands of samples are typically required.
+3. Analysis: Various tests are applied to the collected data to evaluate randomness and unpredictability. Sequencer uses the results of these tests to generate a detailed report on the security of the tokens.
+
+
+*
