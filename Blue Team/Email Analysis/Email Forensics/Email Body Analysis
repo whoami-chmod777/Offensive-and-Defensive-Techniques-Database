@@ -1,1 +1,91 @@
 
+As the name suggests, email body analysis is the process of analyzing the main content of an email message, including text and rich text formats such as HTML, images, links, and other media types contained in the sent message. 
+The purpose of the analysis is to ensure the security of the information in the body and to identify any malicious or suspicious content. 
+
+• Content Extraction 
+• Text Analysis 
+• Link Analysis 
+• HTML and Embedded Code Analysis 
+
+
+-- Content Extraction  --
+
+• What to look for: All text, images, HTML, and other multimedia should be removed from the body of the email. All of this content should be in an accessible and processable format for further analysis .
+• Main Objective: To securely isolate all email content and make it available for analysis.
+• Note: Email attachments can also be exported. 
+
+➜ Autopsy 
+
+• Under the 'Communication accounts' tab, you will find your email accounts. 
+• The Metadata tab contains metadata information about the .eml file. 
+• Under the 'Keyword Hits' tab, you can see how often each email address appears. 
+• By using Autopsy's Score feature, you can identify and investigate in detail whether the .eml file you're scanning contains a "bad" or "suspicious" element.
+
+
+--  Text Analysis --
+
+• What to look for: The linguistic structure of the email text, the phrases used, keywords, and anomalies in the use of language should be examined as they are important in identifying attempted fraud such as social engineering or phishing attacks.
+• Objective: To verify the information given in the text and determine if it contains any misleading or deceptive information. 
+
+➜ Text Analysis Steps 
+
+Linguistic structure analysis
+
+  • Language and tone: Is the language used formal or boring and inaccurate? The use of informal, imprecise language is a common feature of phishing emails.
+  • Urgency: Does the email request urgent action? Phishing emails often use phrases that force the recipient to take immediate action. 
+
+Phrases and keywords 
+
+  • Threatening phrases: Does the message contain threatening phrases, such as account suspension? Such phrases are designed to provoke an emotional response from the recipient, causing them to act impulsively.
+  • Keywords: Words and phrases such as "verification", "urgent",and  "will be suspended" should be monitored. 
+
+Anomalies in language use 
+
+  • Grammatical errors: Does the email contain grammar mistakes? Phishing emails often do not fully adhere to grammar rules.
+  • Analysis of links:  Does the link sent take you to a reliable source? Is the URL that appears when you hover your mouse over the link the same as the URL that is clicked on? This is an often-used method used to redirect people to malicious sites. 
+
+General assessment
+
+  • The sender's email address: Does the email come from an expected and recognizable address? Could it be a fraudulent address?
+  • Context evaluation: Is the message consistent with the status or past activities of the recipient? For example, a verification request from a service the receiver has not used may raise suspicion. 
+  • Subject title: Note that "Account Need Update" is grammatically incorrect. The grammatically correct phrase would be "Account Needs Update". In English, verbs with a singular subject usually take the suffix "-s". Such mistakes can indicate that the message is not from an official source.
+  • Greeting: "Dear user" is usually informal and very general. More formal and credible emails usually use the recipient's name ("Dear [first name],").
+  • Threatening language: "Your account will be temporarily suspended" is often used in phishing emails to put pressure on the recipient. Formal and trustworthy messages usually use clear and non-threatening language about what the recipient needs to do.
+  • Grammar and structure: The grammatical structure of the content is inadequate and incorrect. In particular, the phrase "Due to update in systems" is grammatically incorrect. A more correct use of the phrase should be "Due to an update in our systems,".
+  • Link text: Link text such as "[Verify Account]" does not give the user clear information about where they are being directed. Trustworthy email typically uses clear and comprehensible link text (such as "Click here to verify your account on our official website").
+
+
+-- Link Analysis --
+
+  • What to look for: Evaluate the security status of all body URLs. Check whether these URLs lead to malicious or fraudulent websites. The true destinations of shortened links should be clarified.
+  • Objective: To detect potentially malicious links and to protect users from links that lead to malicious websites. 
+
+➜ Autopsy 
+
+  • You can use the "Keyword Search" feature to extract all URLs in .eml with Autopsy. 
+
+
+--  HTML and Embedded Code Analysis --
+
+  • What to look for: Embedded JavaScript, CSS, and other active codes in HTML content should be carefully examined, as these pieces of code may contain malicious scripts or be designed to collect user information.
+  • Objective: To determine whether embedded codes and scripts are malicious or not, and to assess whether the email content is safe for users. 
+  • For example an email attachment, is encoded using base64. Encoded data like this needs to be decoded first. 
+
+➜ Autopsy 
+
+  • The decoded version of the encoded data can be displayed by Autopsy. Alternatively, you can use online tools to decode Base64 encoded data. 
+  • Click on the appropriate .eml file and you will find attachments in the Attachments tab. Right-click on the attachment and select 'View file in directory' or select the appropriate .eml file under 'LogicalFileSet' to list the files it contains.
+
+
+
+
+*
+
+
+
+
+
+
+
+
+
