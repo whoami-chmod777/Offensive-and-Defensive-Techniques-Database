@@ -1,0 +1,21 @@
+
+The Post-Incident Activity step covers the applications to be carried out after the incident response.
+
+Lesson Learned
+
+Lesson Learned is one of the most important steps. The cybersecurity incident should be evaluated from the beginning and what can be done better to avoid or prevent another cybersecurity incident should be discussed. 
+A cybersecurity incident is inevitable, but it does not mean that we cannot learn from these incidents and be more prepared for the next incident.
+
+A Lesson Learned meeting should be held about the cybersecurity incident with all the teams involved. The points to be discussed in the lesson learned meetings published by NIST are listed below:
+
+• What happened exactly, and at what times?
+• How well did staff and management perform in dealing with the incident? Were the documented procedures followed? Were they adequate?
+• What information was needed sooner?
+• Were any steps or actions taken that might have inhibited the recovery?
+• What would the staff and management do differently the next time a similar incident occurs?
+• How could information sharing with other organizations have been improved?
+• What corrective actions can prevent similar incidents in the future?
+• What precursors or indicators should be watched for in the future to detect similar incidents?
+• What additional tools or resources are needed to detect, analyze, and mitigate future incidents?
+
+After the incident, a complete incident response report should be prepared and stored in a safe place.
