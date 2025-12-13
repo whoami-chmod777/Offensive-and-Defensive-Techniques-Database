@@ -1,0 +1,78 @@
+
+The Containment, Eradication and Recovery step includes isolation, cleaning of the indicators/persistence methods used in the attack and restoring the systems.
+
+• Containment
+• Eradication
+• Recovery
+
+
+-- Containment --
+
+The containment step is where the attacker is isolated so that they cannot cause any further damage. Since delaying the containment step is risky, it should be carried out as soon as the event is detected and confirmed as a cybersecurity incident.
+
+Containment methods may change depending on the type of the cyber security incident. Some containment methods that can be applied are:
+
+• Placing the device in an isolated network segment,
+• Stopping the affected services,
+• Turning off the device,
+• Disconnecting the device from the network,
+• Disable the user’s account on the corporate network.
+
+Current EDR products come with containment feature. With this feature, the device on which the agent is installed is separated from the network and communicated only with the EDR central server. 
+In this way, while performing live analysis on the device, the isolation of the device is also ensured.
+You should create a complete containment strategy during the preparation phase.
+Since you cannot isolate critical servers directly from the network, it is highly recommended to prepare a separate containment procedure for critical applications/servers.
+
+
+-- Eradication --
+
+The eradication step includes activities such as cleaning the malicious software left by the attacker, disabling the compromised users, deleting the users created by the attacker.
+The most important point that should not be forgotten in this step is that the indicators belonging to the attack are recorded as evidence before they are deleted. 
+For example, before deleting a malicious software used in the attack from the server, it is necessary to take a screenshot of the folder where the malware is located, to save the hash information of the malware, and to record a copy of the malware in an isolated environment.
+
+Activities to be done in the eradication step can be listed as;
+
+• Cleaning the files uploaded by the attacker,
+• Disabling/deleting Compromised users,
+• Deleting users created by the attacker,
+• Mitigate the identified vulnerabilities,
+• Termination of actively running processes.
+
+
+-- Recovery --
+
+The recovery phase includes restoring the affected servers/devices/services to their previous operating state and confirming their proper functioning.
+The recovery phase varies from organization to organization. Make sure your organization has a proper Recovery strategy.
+Strategies that can be applied in the recovery phase can be listed as;
+
+• Returning to pre-compromise backup
+• Rebuilding systems from scratch
+• Replacing compromised files with clean versions
+• Installing patches
+• Changing passwords
+• Tightening network perimeter security
+
+
+*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
