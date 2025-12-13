@@ -1,1 +1,102 @@
 
+The Detection and Analysis is the step in which the cybersecurity incident is detected and investigated in depth.
+
+• Detection
+• Verification
+• Prioritization
+• Notification
+• Analysis
+
+
+-- Detection --
+
+Every cybersecurity incident starts with detection.
+Cybersecurity events can be transmitted to you through different channels. 
+For example, it can be through a triggered SIEM rule, an alert triggered by the security products you have installed, the IT team stating that the system is slowing down, or a notification sent to you via the contact form of your organization.
+
+
+-- Verification --
+
+Things would be even easier if every detection was a cybersecurity incident, but it is not like that all the time. 
+Instead of diving directly into the incident response process, first, the detection is to be verified and evaluated if it is indeed a cybersecurity incident or a false positive.
+
+A SOC analyst solves hundreds of SIEM alerts (detections) in his/her daily work routine. Can you imagine each of these being a real cybersecurity incidents?
+
+As an incident responder, you must first confirm the accuracy of the detection you receive and whether it is a cybersecurity incident. 
+For example, you have a detection from your IT team indicating some abnormalities on the extension of the files on the server. 
+If you assume that it is directly caused by ransomware and the incident response processes and isolate the server, you may cause some unnecessary service interruption. 
+You must first verify the incoming detection. So, the first thing you need to do is to verify if the file has indeed an abnormal extension. Remember that correct detection does not always prove that it is a cybersecurity incident. 
+Even if the file extension is abnormal, someone with access to the server may have done this by mistake. 
+What you need to do is to investigate the reason why the extension of the file is an abnormal extension (For example, to investigate the Sysmon Logs to be able to understand who modified the file and what process he/she used to do this). 
+After you complete your investigation, you may find out that a bored IT personnel may have done this.
+
+As you can see in our example, before starting the incident response processes, it is extremely important to confirm the accuracy of the incoming detection and whether it is really a cybersecurity incident or not.
+
+If you really think there is a cybersecurity incident, you should start collecting and recording the evidence. You can use the issue tracking system to record information, evidence and actions about the event. The information that should be included in the issue tracking system recommended by NIST is as follows:
+
+• The current status of the incident (new, in progress, forwarded for investigation, resolved, etc.) 
+• A summary of the incident
+• Indicators related to the incident
+• Other incidents related to this incident
+• Actions taken by all incident handlers on this incident
+• Chain of custody, if applicable
+• Impact assessments related to the incident
+• Contact information for other involved parties (e.g., system owners, system administrators)
+• A list of evidence gathered during the incident investigation
+• Comments from incident handlers
+• Next steps to be taken (e.g., rebuild the host, upgrade an application).
+
+Since incident response information contains critical data, it is necessary to keep this information up-to-date at all times and to limit the number of the users who can access this information.
+
+
+-- Prioritization --
+
+You may be exposed to more than one cybersecurity incident at the same time. The approach of responding to the cybersecurity incidents on a "first come first serve" basis is not correct. 
+You should prioritize the incidents from the severity, criticality, impact area, potential damages, etc. perspective and start handling these incidents according to this prioritization.
+You can use the categories published by NIST when prioritizing cyber security events
+
+• Functional Impact of the Incident
+• Information Impact of the Incident
+• Recoverability from the Incident
+
+
+-- Notification --
+
+After the verification of the detection, the confirmation of the cybersecurity incident and prioritization, the relevant authorities should be informed.
+It is extremely important to have a documentation prepared that describes who to contact with along with their contact information at the time of cybersecurity incident detection. 
+This will help the incident response team to act quickly by knowing the correct point of contacts and contacting them within the short period of time. 
+
+
+-- Analysis --
+
+The analysis step is where the activities of the attacker are analyzed. In this step, every single detail should be analyzed from the moment of attacker's first access step to his/her most recent activities on the corporate systems.
+
+➜ Analyzing the Root Cause
+
+When responding to cybersecurity incidents, our priority should be to detect the attacker's access method and stop this access.
+Let's think about a scenario where an attacker gains access to the system by exploiting a vulnerability that he/she detected in the Web application. 
+If you try to delete the malicious software leveraged by the attacker from the servers before finding the attacker's initial access method, the attacker will exploit the vulnerability in the web application again and access the server again to install the malware. For this reason, first of all, the root cause should be detected and remediated.
+After the root cause is detected, we should run the Containment, Eradication & Recovery step to prevent the attacker from compromising the systems again during the incident response efforts. After this step, the attacker's other activities should be analyzed by going back to the Analysis step.
+
+➜ Analyzing Other Activities
+
+During the incident response, after eliminating the possibility of the attacker to access the systems again through the initial access method, other activities should also be analyzed.
+Detection & Analysis and Containment, Eradication & Recovery steps are in a continuous cycle within themselves. Devices and users found to be compromised should be isolated from the network quickly.
+
+
+*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
