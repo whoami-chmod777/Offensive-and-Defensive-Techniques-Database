@@ -1,0 +1,107 @@
+
+The preparation step covers the preparations made before intervening in cyber security incidents. The preparations to be made in this step ensure that the cyber incident response is carried out correctly and smoothly.
+
+Incident Handling steps prepared by NIST shows that the Preparation is the first and the most important step of the Incident Response process to avoid potential incidents. 
+The last step which is the Post-Incident Activity is also the step before the Preparation step within the Incident Response Life Cycle.
+This shows that the preparation step is always a progressive process and it should be improved all the time in accordance with the experiences and the “lesson learned” after each security incident.
+The preparation step covers all the preparations related to incident response processes. 
+It covers many topics like preparation of plan/procedure/policies for incident response processes, establishment and the training of the incident response team, installing and maintaining the security tools like IPS/IDS/EDR properly, preparing equipments that would be used during incident response, training employees on social engineering, etc.
+The preparation step has no boundaries. Everything that will facilitate cybersecurity incident response and everything that will prevent cybersecurity incidents from occurring is considered as a part of the Preparation step.
+
+• Communication
+• Inventory List
+• Documentation
+• Network Topologies
+• Incident Handling Software and Hardwares
+• Preventing Incidents
+
+
+-- Communication --
+
+Incident responders are in constant communications with different teams and individuals during the incident response. 
+It is of critical importance to create a list of point of contacts and their contact information that may be needed at the time of the incident response as well as to prepare the documentation that includes the critical information on who to contact with who and how to contact with these people.
+Since the internal communication network may have also been compromised at the time of the incident, communications should be carried out through different channels during the incident response. 
+For this reason, separate telephones and lines to be used by the incident responders during the incident response process should be prepared in advance.
+When creating contact lists, creating a separate list of external contacts will facilitate your incident response processes.
+It is also recommended to create a war room to be used during the cyber security incident. (War rooms are the rooms where people gather and strategies and plans are discussed to solve problems.)
+
+
+-- Inventory List --
+
+Preparing a properly created and constantly updated inventory list will directly facilitate your incident response processes. 
+You should have the information of all the critical systems, especially critical servers (Web servers, FTP servers, Exchange servers, SWIFT servers etc.) information should be kept updated at all times. 
+Inventory lists that are not kept updated will impact the incident response processes critically, cause waste of time and wrong decisions during the incident response process. 
+By looking at an inventory list that is not kept up to date, you will most probably miss critical inventory that you actually need to check but is not on the list. 
+For example, if 10.75.11.10 IP address seems to belong to "Web-Server" according to an outdated inventory list, but if it actually belongs to a different server, it will confuse things, cause a waste of time and it will delay the necessary actions to be taken on time. 
+Keeping the inventory list up-to-date is a laborious task, and so you should utilize some helpful solutions to make it easy.
+
+
+-- Documentation --
+
+Documentation describing the incident response processes should be prepared and the incident response team should be familiar with these documentations. 
+This will ensure that every team member will follow the plans, procedures, and policies correctly and the incident response process will go as smooth as possible.
+A separate plan, policy, and procedure should be prepared for each important activity. 
+For example, preparing a separate plan, policy, and procedure on how to handle cybersecurity incidents, for containment, for clarifying how to communicate with internal and external teams during the incident response.
+It is recommended to create report templates in order to shorten the report preparation processes after incident response.
+Prepared documentation should be checked and updated periodically.
+
+
+-- Network Topologies --
+
+Network topologies have critical importance to understand the activities and analyze the attack successfully during incident response.
+Network topologies should be kept updated regularly to ensure that they have the correct network information, diagrams and connections, etc.
+
+
+-- Incident Handling Software and Hardwares --
+
+You should prepare the hardware and software that has to be utilized during the incident response in advance.
+
+• Digital Forensics Workstations and/or backup devices
+• Laptops
+• Blank removable media & hard disks
+• Forensics and Incident Handling Software
+
+
+-- Preventing Incidents --
+
+The preparation step also includes the preparations for the prevention of cybersecurity incidents before they occur. 
+Organizations should make the necessary investments in this regard and provide multi-layered protection by deploying different security solutions such as EDR, IPS/IDS, Antivirus, WAF, Firewall, DLP.
+
+At the same time, the awareness level of employees against social engineering attacks should be increased by performing social engineering tests regularly.
+Organizations must establish an official incident response capability by law. According to the documentation shared by NIST, this capability includes the following actions:
+
+• Creating an incident response policy and plan 
+• Developing procedures for performing incident handling and reporting 
+• Setting guidelines for communicating with outside parties regarding incidents 
+• Selecting a team structure and staffing model 
+• Establishing relationships and lines of communication between the incident response team and other groups, both internal (e.g., legal department) and external (e.g., law enforcement agencies) 
+• Determining what services the incident response team should provide 
+• Staffing and training the incident response team
+
+Since the preparations step will directly affect the incident response processes, managers must ensure that these preparations are implemented correctly. 
+You can test your readiness through tabletop exercises and improve your preparation before encountering a real incident.
+
+
+
+
+*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ *
