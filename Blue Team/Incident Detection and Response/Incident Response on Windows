@@ -17,6 +17,31 @@ Dive into essential techniques for detecting, analyzing, and mitigating security
 
 -- How to Create Incident Response Plan --
 
+Incident response is an approach to managing a security incident process. An incident response plan is needed to approach security incidents systematically. A successful incident response plan includes the following 6 stages
+
+• Preparation
+
+
+➜ Preparation
+
+It is important in terms of saving time that all data can be examined from a single point with a central log collection system that can manage large files. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 -- Incident Response Procedure --
