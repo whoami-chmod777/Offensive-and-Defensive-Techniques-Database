@@ -1,1 +1,171 @@
 
+--- Insecure Direct Object Reference (IDOR) Introduction ---
+
+• Why does this happen so often
+• Identity Defines Our Reach
+• Iterate Digits, Observe Responses
+• In Disguise: Obvious References
+• In Digests, Objects Remain
+• It's Deterministic, Obviously Reproducible
+• Improve Design, Obliterate Risk
+
+
+Have you ever seen a link that looks like this: https://awesome.website.thm/TrackPackage?packageID=1001?
+
+When you saw a link like this, have you ever wondered what would happen if you simply changed the packageID to 11 or 12? In its simplest form, this can be a potential case for IDOR. 
+
+IDOR stands for Insecure Direct Object Reference and is a type of access control vulnerability. Web applications often use references to determine what data to return when you make a request. 
+However, if the web server doesn't perform checks to ensure you are allowed to view that data before sending it, it can lead to serious sensitive information disclosure.
+
+-- Why does this happen so often --
+
+We need to understand references and web development a bit more to answer this. Let's take a look at what a table storing these package numbers from our link example could look like:
+
++-----------+--------------+-------------------------------+------------------+
+| packageID | person       | address                       | status           |
++-----------+--------------+-------------------------------+------------------+
+| 1001      | Alice Smith  | 123 Main St, Springfield      | Delivered        |
+| 1002      | Bob Johnson  | 42 Elm Ave, Shelbyville       | In Transit       |
+| 1003      | Carol White  | 9 Oak Rd, Capital City        | Out for Delivery |
+| 1004      | Daniel Brown | 77 Pine St, Ogdenville        | Pending          |
+| 1005      | Eve Martinez | 5 Maple Ln, North Haverbrook  | Returned         |
++-----------+--------------+-------------------------------+------------------+
+
+If the user wants to know the status of their package and makes a web request, the simplest method is to allow the user to supply their packageID. We recover data from the database using the simplest SQL query of:
+
+SELECT person, address, status FROM Packages WHERE packageID = value;
+
+However, since packageID is a sequential number, it becomes pretty obvious to guess the packageIDs of other customers, and since the web application isn't verifying that the person making the request is the same person as the one who owns the package, an IDOR vulnerability appears, allowing attackers to recover the details for packages belonging to other users. 
+Even worse is when a feature like this doesn't require a user to authenticate, then there would be no way to even tell who is making the request! To dive a bit deeper, we need to understand authentication, authorization, and privilege escalation.
+
+The full term, Insecure Direct Object Reference, sounds fancy, but it doesn’t really describe what’s going wrong. The "Direct Object Reference" part just means that a system uses an ID (like /user/1) to point to something. 
+That’s not the problem. The real issue is that the system doesn’t check whether the person making the request is allowed to access it.
+
+That’s why I prefer to call it an Authorization Bypass instead. It explains exactly what’s happening: someone is bypassing the rules that decide who can see or change something. 
+Whether the ID is a number, a hash, or a random string, the risk stays the same if the server doesn’t verify access. 
+
+
+-- Identity Defines Our Reach --
+
+To understand the root cause of IDOR, it is important to understand the basic principles of authentication and authorization:
+
+• Authentication: The process by which you verify who you are. For example, supplying your username and password.
+• Authorization: The process by which the web application verifies your permissions. For example, are you allowed to visit the admin page of a web application, or are you allowed to make a payment using a specific account?
+
+You may think that authentication only happens once when you supply your username and password, but that is actually not the case! After providing your credentials, you receive a cookie or a token, called session information. 
+Every subsequent request you make to the application includes this session information, which is verified by the application. This initial verification process is still authentication and happens for each request. 
+This is why websites will often redirect you back to the login page. It means your session information has expired, and thus, you need to reauthenticate with your credentials to receive new session information.
+
+Authorization cannot happen before authentication. If the application doesn't know who you are, it cannot verify what permissions your user has. This is very important to remember. 
+If your IDOR doesn't require you to authenticate (login or provide session information), such as in our package tracking example, we will have to fix authentication first before we can fix the authorization issue of making sure that users can only get information about packages they own.
+
+The last bit of theory to cover is privilege escalation types:
+
+• Vertical privilege escalation: This refers to privilege escalation where you gain access to more features. For example, you may be a normal user on the application, but can perform actions that should be restricted for an administrator.
+• Horizontal privilege escalation: This refers to privilege escalation where you use a feature you are authorized to use, but gain access to data that you are not allowed to access. For example, you should only be able to see your accounts, not someone else's accounts.
+
+IDOR is usually a form of horizontal privilege escalation. You are allowed to make use of the track package functionality.
+
+
+-- Iterate Digits, Observe Responses --
+
+Let's start by using the Developer Tools of our browser to better understand what is happening in the background. Right-click on the page and click Inspect, then click on the Network tab. 
+
+Now let's refresh the page and see what requests are being made. 
+
+Let's take a closer look at the view_accountinfo request. Click on it: GET http://10.10.205.159/api/parents/view_accountinfo?user_id=10
+
+We can see that the user_id with the value of 10 was used for the request. If we click and expand the Response tab, we can see that this user_id corresponds to our user:
+
+{
+  "user_id": 10,
+  "username": "niels",
+  "email": "niels@webmail.thm",
+  "firstname": "Niels",
+  "lastname": "Tester",
+  "id_number": "NIELS-001",
+  "address1": "42 chill Street",
+  "address2": "Apt 1",
+  "city": "TryTown",
+  "state": "THM",
+  "postal_code": "42424",
+  "country": "Netherlands",
+  "children": [ ... ]
+}
+
+This tells us that the application is using our user_id as the reference for getting details. 
+
+Let's see what happens when we change this. In the Developer Tools, navigate to the Storage tab and expand the Local Storage dropdown on the left side and click the URL inside it.
+
+auth_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwLCJyb2xlIjoicCIsImF1dGgiOiJ3NjI0MzgzMjN9.Lhmi7elybf2tkZNanbxwwtcWJ7TQ2JMt6olY5RN8d9I
+user_token: {"user_id":10,"email":"niels","role":"parent","name":"niels"}
+
+Let's change the user_id to 11 and see what happens. Double-click on the Value field of the auth_user data entry, update the user_id to 11 and save it by pressing Enter. Now refresh the page. All of a sudden it seems like you are a completely different user!
+
+This is the simplest form of IDOR. Simply changing the user_id to something else means we can see other users' data. Some IDORs might be slightly more hidden. 
+
+
+-- In Disguise: Obvious References --
+
+Sometimes, IDOR may not be as simple as just a number. In certain cases, encoding may have been used. On the loaded profile, click the eye icon next to the first child as shown on the image below.
+
+Now go back to the Network tab and take a look at the requests being made; you should see a request like this: GET http://10.10.117.95/api/child/b64/Mg==
+
+Simply put, the Mg== is just the base64 encoded version of the number 2. You could still perform IDOR using this request, but you would have to base64 encode the number first.
+
+
+-- In Digests, Objects Remain --
+
+Encoding isn't the only thing that can be used to hide potential IDOR vulnerabilities. Sometimes the values may look like a hash, such as MD5 or SHA1. 
+If you want to see what that would look like, take a look at the request that happens when you click the edit icon next to a child.
+
+It looks like this: GET http://10.10.117.95/api/child/md5/c81e728d9d4c2f636f067f89cc14862c
+
+While the string may look random, upon further investigation, you can see that it is a type of hash. If we understand what value was used to generate the hash, we can perform an IDOR attack by simply replicating the hashing function. 
+Using something like a hash identifier can help you quickly understand what hashing algorithm is being used and can often tell you what data was hashed.
+
+
+-- It's Deterministic, Obviously Reproducible --
+
+Sometimes you have to dig quite deep for IDOR. Sometimes IDOR is not as clear. Sometimes the IDOR stems from the actual algorithm being used. In this last case, let's take a look at our vouchers. 
+While the values may look random, we need to investigate what algorithm was used to generate them. Their format looks like a UUID, so let's use a website such as UUID Decoder to try to understand what UUID format was used. 
+
+Copy one of the vouchers to the website for decoding, and you should see something like this: UUID 37f0010f-a489-11f0-ac99-026ccd7fd769
+
+
+Results:
++-----------------------+--------------------------------------------+
+| Field                 | Value                                      |
++-----------------------+--------------------------------------------+
+| UUID                  | 37f0010f-a489-11f0-ac99-026ccd7fd769       |
+| Standard Format       | 37f0010f-a489-11f0-ac99-026ccd7fd769       |
+| Single Integer Value  | 74353712535972022174065751739197806441     |
+| Version               | 1 (time and node based)                    |
+| Variant               | DCE 1.1, ISO/IEC 11578:1996                |
+| Contents - Time       | 2025-10-08 20:56:10.443598.3 UTC           |
+| Contents - Clock      | 11417 (usually random)                     |
+| Contents - Node       | 02:6c:cd:f7:d7:69 (local unicast)          |
++-----------------------+--------------------------------------------+
+
+
+While these look completely random, we can see that the UUID version 1 was used. The issue with UUID 1 is that if we know the exact date when the code was generated, we can recover the UUID. 
+For example, suppose we knew the elves always generated vouchers between 20:00 - 21:00. 
+In that case, we can create UUIDs for that entire time period (3600 UUIDs since we have 60 minutes, and 60 seconds in a minute), which we could use in a brute force attack to aim to recover a valid voucher and get more gifts.
+
+
+-- Improve Design, Obliterate Risk --
+
+The best way to stop IDOR is to make sure the server checks who is asking for the data every time. It's not enough to hide or change the ID number; the system must confirm that the logged-in user is authorized to see or change that information.
+
+Don't rely on tricks like Base64 or hashing the IDs; those can still be guessed or decoded. Instead, keep all the real permission checks on the server. Whenever a request comes in, check: "Does this user own or have permission to view this item?"
+
+Use random or hard-to-guess IDs for public links, but remember that random IDs alone don't make your app safe. Always test your app by trying to open another user's data and making sure it's blocked. 
+Finally, record and monitor failed access attempts; they can be early signs of someone trying to exploit an IDOR.
+
+
+
+https://www.uuidtools.com/decode
+https://hashes.com/en/tools/hash_identifier
+
+
+*
