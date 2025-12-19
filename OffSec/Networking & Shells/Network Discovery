@@ -1,1 +1,58 @@
 
+--- Network Discovery ---
+
+1. Know your target
+2. Scan the IP for open ports, especially common ones like 22 for SSH and 80 for HTTP.
+3. Explore what's behind the open ports, maybe it's a vulnerable web server running on port 80.
+4. Exploit the exposed service, find a way in.
+
+• Discovering Exposed Services
+• On-Host Service Discovery
+
+
+-- Discovering Exposed Services --
+
+➜ The Simplest Port Scan: 
+
+root@attackbox:~# nmap 10.81.164.144
+
+➜ Scanning Whole Range
+
+root@attackbox:~# nmap -p- --script=banner 10.81.164.144
+
+➜ Using FTP Client
+
+root@attackbox:~# ftp 10.81.164.144 21212 (anonymous)
+ftp> get tbfc_qa_key1 -
+
+➜ Port Scan Modes
+
+root@attackbox:~# nc -v 10.81.164.144 25251
+
+➜ TCP and UDP Ports
+
+root@attackbox:~# nmap -sU 10.81.164.144
+
+
+-- On-Host Service Discovery --
+
+➜ Listing Listening Ports
+
+tbfcapp@tbfc-devqa01:~$ netstat -tunlp
+tbfcapp@tbfc-devqa01:~$ ss -tunlp
+
+➜ Enumerating MySQL Tables
+
+tbfcapp@tbfc-devqa01:~$ mysql -D tbfcqa01 -e "show tables;"            
+tbfcapp@tbfc-devqa01:~$ mysql -D tbfcqa01 -e "select * from flags;"    
+
+
+
+
+
+*
+
+
+
+
+
