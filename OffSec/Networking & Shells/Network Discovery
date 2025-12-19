@@ -47,9 +47,6 @@ tbfcapp@tbfc-devqa01:~$ mysql -D tbfcqa01 -e "show tables;"
 tbfcapp@tbfc-devqa01:~$ mysql -D tbfcqa01 -e "select * from flags;"    
 
 
-
-
-
 *
 
 
