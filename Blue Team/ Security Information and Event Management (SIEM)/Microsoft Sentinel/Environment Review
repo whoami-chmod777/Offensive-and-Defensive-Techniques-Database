@@ -1,0 +1,8 @@
+
+Before proceeding with alert triaging, let’s first review the lab environment.
+
+To get started, head over to the Azure Portal and search for Microsoft Sentinel.
+
+Then, click the Sentinel instance, go to the Logs tab and select the custom log table named Syslog_CL.
+
+After running the query, the logs for this lab environment should be rendered.
