@@ -1,4 +1,9 @@
 
+--- Investigation Proper ---
+
+Microsoft Sentinel in Action
+In-Depth Log Analysis
+
 
 -- Microsoft Sentinel in Action --
 
@@ -28,4 +33,71 @@ By analysing which alerts share the same entities, we can start to trace the att
 
 
 
+-- In-Depth Log Analysis --
+
+With the initial triage complete, now examines the raw evidence behind these alerts. The next task involves diving into the underlying log data within Microsoft Sentinel to validate the alerts and uncover the exact attacker actions that triggered them. 
+By analysing authentication attempts, command executions, and system changes, begin piecing together the full story of how the attack unfolded.
+
+If we go back to the alert's full details view, we can try clicking the Events from the Evidence section.
+
+From this view, we can definitely see the actual name of the kernel module installed in each machine and the time it was installed.
+
+Diving deeper into this, we can try checking the raw events from a single host through a custom query. To do this, let's change the view into an editable KQL query and find all the events triggered from app-02.
+
+1. Press the Simple mode dropdown from the upper-right corner and select KQL mode.
+2. Modify the query with the following KQL query below.
+
+set query_now = datetime(2025-10-30T05:09:25.9886229Z);
+Syslog_CL
+| where host_s == 'app-02'
+| project _timestamp_t, host_s, Message
+
+3. Press the Run button and wait for the results.
+
+After executing the query, it can be seen that multiple potentially suspicious events occurred around the installation of the kernel module.
+
+1. Execution of the cp (copy) command to create a shadow file backup.
+2. Addition of the user account Alice to the sudoers group.
+3. Modification of the backupuser account by root.
+4. Insertion of the malicious_mod.ko module.
+5. Successful SSH authentication by the root user.
+
+Based on the surrounding events, including the execution of the cp command to create a shadow file backup, the addition of the user account Alice to the sudoers group, the modification of the backupuser account by root, and the successful SSH authentication by the root user, this activity appears highly unusual. 
+The sequence suggests potential privilege escalation and persistence behaviour, indicating that the event may not be part of normal system operations and warrants further investigation.
+
+
 *
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
