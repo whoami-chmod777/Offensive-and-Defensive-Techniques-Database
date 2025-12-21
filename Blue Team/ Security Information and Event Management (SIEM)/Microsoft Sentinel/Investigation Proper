@@ -1,0 +1,31 @@
+
+
+-- Microsoft Sentinel in Action --
+
+To start the activity, navigate to Microsoft Sentinel and select your dedicated Sentinel instance. Then, under the Threat management dropdown, select the Incidents tab to view the incidents triggered during the current timeframe. 
+You may also press the << button to expand the view as shown in the image below.
+
+Note 1: In case the alerts do not appear, refresh your browser page
+Note 2: In case you see no incidents, ensure you have set a custom date range for the incidents
+
+Since we focus on addressing the most critical threats first, we’ll begin with the high-severity alerts. These represent potential compromise points or privilege-escalation activities that could lead to complete host control if left unchecked.
+
+To begin the triage, we’ll examine one high-severity incident in detail: the Linux PrivEsc—Kernel Module Insertion alert. By clicking the alert, additional details appear on the right-hand side.
+
+Upon checking the alert, as seen in the above image, the following details can be initially inferred:
+
+1. There are three events related to the alert.
+2. The alert was recently created (note that this varies based on your instance).
+3. There are three entities involved in the alert.
+4. The alert is classified as a Privilege Escalation tactic.
+
+We can get further details from here by clicking the View full details button.
+In the new view, we can see that in addition to the details shown in the summary, we can also view the possible Incident Timeline and Similar Incidents.
+
+You may notice that several alerts point to the same affected entities. This helps us understand the relationship and the possible sequence of events that impact the same host or user.
+When multiple alerts are linked to a single entity, such as the same machine, user, or IP address, it typically indicates that these detections are not isolated incidents, but somewhat different stages of the same intrusion.
+By analysing which alerts share the same entities, we can start to trace the attack path, from the initial access to privilege escalation and persistence.
+
+
+
+*
