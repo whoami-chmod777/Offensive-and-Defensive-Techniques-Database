@@ -1,0 +1,86 @@
+
+--- Alert Triaging Primer ---
+
+• Alert Triaging
+• Diving Deeper into an Alert
+
+
+-- Alert Triaging --
+
+When alerts start flooding in, jumping straight into each one isn't efficient since not all alerts are equal. Some are noise, others are false positives, and a few may indicate real threats in progress
+
+This is where alert triaging becomes critical. Triaging helps security teams identify which alerts deserve immediate attention, which can be deprioritised, and which can be safely ignored for a moment.
+
+When multiple alerts appear, analysts should have a consistent method to assess and prioritise them quickly. 
+There are many factors you can consider when triaging, but these are the fundamental ones that should always be part of your process of identifying and evaluating alerts:
+
++----------------------+-----------------------------------------------------------------------------+------------------------------------------------------------------------+
+| Key Factors          | Description                                                                 | Why It Matters?                                                        |
++----------------------+-----------------------------------------------------------------------------+------------------------------------------------------------------------+
+| Severity Level       | Review the alert's severity rating, ranging from Informational to Critical. | Indicates the urgency of response and potential business risk.         |
++----------------------+-----------------------------------------------------------------------------+------------------------------------------------------------------------+
+| Timestamp and        | Identify when the alert was triggered and check for related activity        | Helps identify ongoing attacks or patterns of repeated behaviour.      |
+| Frequency            | before and after that time.                                                 |                                                                        |
++----------------------+-----------------------------------------------------------------------------+------------------------------------------------------------------------+
+| Attack Stage         | Determine which stage of the attack lifecycle this alert indicates          | It gives insight into how far the attacker may have progressed and     |
+|                      | (reconnaissance, persistence, or data exfiltration).                        | their objective.                                                       |
++----------------------+-----------------------------------------------------------------------------+------------------------------------------------------------------------+
+| Affected Asset       | Identify the system, user, or resource involved and assess its              | Prioritises response based on the asset's importance and the potential |
+|                      | importance to operations.                                                   | impact of compromise.                                                  |
++----------------------+-----------------------------------------------------------------------------+------------------------------------------------------------------------+
+
+In short, these four represent the essential dimensions of triage:
+
+• Severity: How bad?
+• Time: When?
+• Context: Where in the attack lifecycle?
+• Impact: Who or what is affected?
+
+They form a balanced foundation that's simple enough for analysts to apply quickly but comprehensive enough for informed decisions.
+
+After reviewing these factors, decide on your next step: escalate to the incident response team, perform a deeper investigation, or close the alert if it's confirmed to be a false positive. 
+A structured triage process like this helps ensure that time and resources are focused on what truly matters.
+
+
+-- Diving Deeper into an Alert --
+
+After identifying which alerts deserve further attention, it's time to dig into the details. Follow these steps to investigate and correlate effectively:
+
+• Investigate the alert in detail: Open the alert and review the entities, event data, and detection logic. Confirm whether the activity represents real malicious behaviour.
+• Check the related logs: Examine the relevant log sources. Look for patterns or unusual actions that align with the alert.
+• Correlate multiple alerts: Identify other alerts involving the same user, IP address, or device. Correlation often reveals a broader attack sequence or coordinated activity.
+• Build context and a timeline: Combine timestamps, user actions, and affected assets to reconstruct the sequence of events. This helps determine if the attack is ongoing or has already been contained.
+• Decide on the following action: If there are indicators of compromise, escalate to the incident response team. Investigate further if more evidence or correlation is needed. Close or suppress if the alert is a confirmed false positive, and update detection rules accordingly.
+• Document findings and lessons learned: Keep a clear record of the analysis, decisions, and remediation steps. Proper documentation strengthens SOC processes and supports continuous improvement.
+
+
+
+*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
