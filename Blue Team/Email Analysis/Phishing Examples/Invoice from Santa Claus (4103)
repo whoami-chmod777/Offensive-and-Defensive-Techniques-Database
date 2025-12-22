@@ -1,0 +1,87 @@
+
+Message overview
+
+From "service@paypal.com" <service@paypal.com>
+To "naeryn@tbfc.com" <naeryn@tbfc.com>
+Date Fri, 12 Dec 2025 10:36:44 -0700
+
+HTML preview
+
+
+Attachments
+
+No attachment found.
+
+
+Headers
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Received: from DM6PR07MB6956.namprd07.prod.outlook.com (2603:10b6:5:1eb::9) by MN2PR07MB8048.namprd07.prod.outlook.com with HTTPS; Fri, 12 Dec 2025 14:16:12 +0000 |
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Received: from MW4PR03CA0341.namprd03.prod.outlook.com (2603:10b6:303:dc::16) by DM6PR07MB6956.namprd07.prod.outlook.com (2603:10b6:5:1eb::9) with Microsoft SMTP Server (version=TLS1_2 cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384); Fri, 12 Dec 2025 14:16:06 +0000 |
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Received: from CO1PEPF000042AD.namprd03.prod.outlook.com (2603:10b6:303:dc:cafe::7a) by MW4PR03CA0341.outlook.office365.com with Microsoft SMTP Server via Frontend Transport; Fri, 12 Dec 2025 14:16:06 +0000 |
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Authentication-Results: spf=fail sender-ip=209.222.82.143 smtp.mailfrom=Danielle378.onmicrosoft.com; dkim=fail header.d=paypal.com; dmarc=fail action=oreject header.from=paypal.com; compauth=none reason=451 |
++--------------------------------------------------------------------------------------------------------------+
+| Received-SPF: Fail sender-ip=209.222.82.143 helo=outbound-ip122b.ess.barracuda.com                              |
++--------------------------------------------------------------------------------------------------------------+
+| DKIM-Signature: v=1 a=rsa-sha256 d=paypal.com s=pp-dkim1 bh=QAx3vqqhWgVnrGUcDi7Oo1ydwDuOHlIzBFxro/aNaEQ=       |
++--------------------------------------------------------------------------------------------------------------+
+| Content-Transfer-Encoding: quoted-printable                                                                   |
++--------------------------------------------------------------------------------------------------------------+
+| Content-Type: text/html; charset="UTF-8"                                                                      |
++--------------------------------------------------------------------------------------------------------------+
+| Date: Fri, 12 Dec 2025 10:36:44 -0700                                                                          |
++--------------------------------------------------------------------------------------------------------------+
+| Message-ID: <7B.C4.04011.01E8CC66@ccg13mail05>                                                                  |
++--------------------------------------------------------------------------------------------------------------+
+| Subject: Invoice from Santa Claus (4103)                                                                       |
++--------------------------------------------------------------------------------------------------------------+
+| To: "naeryn@tbfc.com" <naeryn@tbfc.com>                                                                         |
++--------------------------------------------------------------------------------------------------------------+
+| From: "service@paypal.com" <service@paypal.com>                                                                |
++--------------------------------------------------------------------------------------------------------------+
+| Return-Path: bounces+SRS=qVbic=PZ@bbunny378.onmicrosoft.com                                                     |
++--------------------------------------------------------------------------------------------------------------+
+| MIME-Version: 1.0                                                                                              |
++--------------------------------------------------------------------------------------------------------------+
+
+
+
+Links detected
+
+https://www.paypalobjects.com/digitalassets/c/system-triggered-email/n/layout/fonts/PayPalOpen/PayPalOpen-Regular.otf
+https://www.paypalobjects.com/digitalassets/c/system-triggered-email/n/layout/fonts/PayPalOpen/PayPalOpen-Regular.woff2
+https://www.paypalobjects.com/digitalassets/c/system-triggered-email/n/layout/fonts/PayPalOpen/PayPalOpen-Regular.woff
+https://www.paypalobjects.com/digitalassets/c/system-triggered-email/n/layout/fonts/PayPalOpen/PayPalOpen-Medium.otf
+https://www.paypalobjects.com/digitalassets/c/system-triggered-email/n/layout/fonts/PayPalOpen/PayPalOpen-Medium.woff2
+https://www.paypalobjects.com/digitalassets/c/system-triggered-email/n/layout/fonts/PayPalOpen/PayPalOpen-Medium.woff
+https://www.paypalobjects.com/digitalassets/c/system-triggered-email/n/layout/fonts/PayPalOpen/PayPalOpen-Bold.otf
+https://www.paypalobjects.com/digitalassets/c/system-triggered-email/n/layout/fonts/PayPalOpen/PayPalOpen-Bold.woff2
+https://www.paypalobjects.com/digitalassets/c/system-triggered-email/n/layout/fonts/PayPalOpen/PayPalOpen-Bold.woff
+https://www.paypalobjects.com/digitalassets/c/system-triggered-email/n/layout/images/paypal-rebranding/pp-logo-in-circle-2x.png
+https://www.paypal.com/invoice/payerView/details/INV2-DQKT-267K-H7JK-2PE7?locale.x=en_US&amp;v=1&amp;utm_source=unp&amp;utm_medium=email&amp;utm_campaign=RT000238&amp;utm_unptid=ad876434-63b5-11ef-9e2f-ac1f6bdab585&amp;ppid=RT000238&amp;cnac=US&amp;rsta=en_US%28en-US%29&amp;cust=&amp;unptid=ad876434-63b5-11ef-9e2f-ac1f6bdab585&amp;calc=b97c6970b5319&amp;unp_tpcid=invoice-buyer-notification&amp;page=main%3Aemail%3ART000238&amp;pgrp=main%3Aemail&amp;e=cl&amp;mchn=em&amp;s=ci&amp;mail=sys&amp;appVersion=1.275.0&amp;tenant_name=&amp;xt=145585%2C134644%2C104038&amp;link_ref=details_inv2-dqkt-267k-h7jk-2pe7
+https://www.paypal.com/invoice/payerView/details/INV2-DQKT-267K-H7JK-2PE7?locale.x=en_US&amp;action=report-spam&amp;v=1&amp;utm_source=unp&amp;utm_medium=email&amp;utm_campaign=RT000238&amp;utm_unptid=ad876434-63b5-11ef-9e2f-ac1f6bdab585&amp;ppid=RT000238&amp;cnac=US&amp;rsta=en_US%28en-US%29&amp;cust=&amp;unptid=ad876434-63b5-11ef-9e2f-ac1f6bdab585&amp;calc=b97c6970b5319&amp;unp_tpcid=invoice-buyer-notification&amp;page=main%3Aemail%3ART000238&amp;pgrp=main%3Aemail&amp;e=cl&amp;mchn=em&amp;s=ci&amp;mail=sys&amp;appVersion=1.275.0&amp;tenant_name=&amp;xt=145585%2C134644%2C104038&amp;link_ref=details_inv2-dqkt-267k-h7jk-2pe7
+https://www.paypalobjects.com/digitalassets/system-triggered-email/warning.png
+https://www.paypal.com/tc/webapps/mpp/security/comFri-scams?v=1&amp;utm_source=unp&amp;utm_medium=email&amp;utm_campaign=RT000238&amp;utm_unptid=ad876434-63b5-11ef-9e2f-ac1f6bdab585&amp;ppid=RT000238&amp;cnac=US&amp;rsta=en_US%28en-US%29&amp;cust=&amp;unptid=ad876434-63b5-11ef-9e2f-ac1f6bdab585&amp;calc=b97c6970b5319&amp;unp_tpcid=invoice-buyer-notification&amp;page=main%3Aemail%3ART000238&amp;pgrp=main%3Aemail&amp;e=cl&amp;mchn=em&amp;s=ci&amp;mail=sys&amp;appVersion=1.275.0&amp;tenant_name=&amp;xt=145585%2C134644%2C104038&amp;link_ref=security_comFri-scams
+https://www.paypalobjects.com/digitalassets/c/system-triggered-email/n/layout/images/paypal-rebranding/footer-logo-with-crop-2x.png
+https://www.paypal.com/us/smarthelp/home?v=1&amp;utm_source=unp&amp;utm_medium=email&amp;utm_campaign=RT000238&amp;utm_unptid=ad876434-63b5-11ef-9e2f-ac1f6bdab585&amp;ppid=RT000238&amp;cnac=US&amp;rsta=en_US%28en-US%29&amp;cust=&amp;unptid=ad876434-63b5-11ef-9e2f-ac1f6bdab585&amp;calc=b97c6970b5319&amp;unp_tpcid=invoice-buyer-notification&amp;page=main%3Aemail%3ART000238&amp;pgrp=main%3Aemail&amp;e=cl&amp;mchn=em&amp;s=ci&amp;mail=sys&amp;appVersion=1.275.0&amp;tenant_name=&amp;xt=145585%2C134644%2C104038&amp;link_ref=smarthelp_home
+https://www.paypal.com/us/webapps/mpp/paypal-safety-and-security?v=1&amp;utm_source=unp&amp;utm_medium=email&amp;utm_campaign=RT000238&amp;utm_unptid=ad876434-63b5-11ef-9e2f-ac1f6bdab585&amp;ppid=RT000238&amp;cnac=US&amp;rsta=en_US%28en-US%29&amp;cust=&amp;unptid=ad876434-63b5-11ef-9e2f-ac1f6bdab585&amp;calc=b97c6970b5319&amp;unp_tpcid=invoice-buyer-notification&amp;page=main%3Aemail%3ART000238&amp;pgrp=main%3Aemail&amp;e=cl&amp;mchn=em&amp;s=ci&amp;mail=sys&amp;appVersion=1.275.0&amp;tenant_name=&amp;xt=145585%2C134644%2C104038&amp;link_ref=mpp_paypal-safety-and-security
+https://www.paypal.com/us/webapps/mpp/mobile-apps?v=1&amp;utm_source=unp&amp;utm_medium=email&amp;utm_campaign=RT000238&amp;utm_unptid=ad876434-63b5-11ef-9e2f-ac1f6bdab585&amp;ppid=RT000238&amp;cnac=US&amp;rsta=en_US%28en-US%29&amp;cust=&amp;unptid=ad876434-63b5-11ef-9e2f-ac1f6bdab585&amp;calc=b97c6970b5319&amp;unp_tpcid=invoice-buyer-notification&amp;page=main%3Aemail%3ART000238&amp;pgrp=main%3Aemail&amp;e=cl&amp;mchn=em&amp;s=ci&amp;mail=sys&amp;appVersion=1.275.0&amp;tenant_name=&amp;xt=145585%2C134644%2C104038&amp;link_ref=mpp_mobile-apps
+https://twitter.com/PayPal?v=1%2C0.1&amp;utm_source=unp&amp;utm_medium=email&amp;utm_campaign=RT000238&amp;utm_unptid=ad876434-63b5-11ef-9e2f-ac1f6bdab585&amp;ppid=RT000238&amp;cnac=US&amp;rsta=en_US%28en-US%29&amp;cust=&amp;unptid=ad876434-63b5-11ef-9e2f-ac1f6bdab585&amp;calc=b97c6970b5319&amp;unp_tpcid=invoice-buyer-notification&amp;page=main%3Aemail%3ART000238&amp;pgrp=main%3Aemail&amp;e=cl&amp;mchn=em&amp;s=ci&amp;mail=sys&amp;appVersion=1.275.0&amp;tenant_name=&amp;xt=145585%2C134644%2C104038&amp;link_ref=twitter.com_paypal
+https://www.paypalobjects.com/digitalassets/c/system-triggered-email/n/layout/images/quantum_leap/footer-social-icons_x.png
+https://www.instagram.com/paypal/?v=1%2C0.1&amp;utm_source=unp&amp;utm_medium=email&amp;utm_campaign=RT000238&amp;utm_unptid=ad876434-63b5-11ef-9e2f-ac1f6bdab585&amp;ppid=RT000238&amp;cnac=US&amp;rsta=en_US%28en-US%29&amp;cust=&amp;unptid=ad876434-63b5-11ef-9e2f-ac1f6bdab585&amp;calc=b97c6970b5319&amp;unp_tpcid=invoice-buyer-notification&amp;page=main%3Aemail%3ART000238&amp;pgrp=main%3Aemail&amp;e=cl&amp;mchn=em&amp;s=ci&amp;mail=sys&amp;appVersion=1.275.0&amp;tenant_name=&amp;xt=145585%2C134644%2C104038&amp;link_ref=www.instagram.com_paypal
+https://www.paypalobjects.com/digitalassets/c/system-triggered-email/n/layout/images/paypal-rebranding/footer-social-icons_instagram-2x.png
+https://www.facebook.com/PayPalUSA?v=1%2C0.1&amp;utm_source=unp&amp;utm_medium=email&amp;utm_campaign=RT000238&amp;utm_unptid=ad876434-63b5-11ef-9e2f-ac1f6bdab585&amp;ppid=RT000238&amp;cnac=US&amp;rsta=en_US%28en-US%29&amp;cust=&amp;unptid=ad876434-63b5-11ef-9e2f-ac1f6bdab585&amp;calc=b97c6970b5319&amp;unp_tpcid=invoice-buyer-notification&amp;page=main%3Aemail%3ART000238&amp;pgrp=main%3Aemail&amp;e=cl&amp;mchn=em&amp;s=ci&amp;mail=sys&amp;appVersion=1.275.0&amp;tenant_name=&amp;xt=145585%2C134644%2C104038&amp;link_ref=www.facebook.com_paypalusa
+https://www.paypalobjects.com/digitalassets/c/system-triggered-email/n/layout/images/paypal-rebranding/footer-social-icons_facebook-2x.png
+http://www.linkedin.com/company/1482?trk=tyah&amp;v=1&amp;utm_source=unp&amp;utm_medium=email&amp;utm_campaign=RT000238&amp;utm_unptid=ad876434-63b5-11ef-9e2f-ac1f6bdab585&amp;ppid=RT000238&amp;cnac=US&amp;rsta=en_US%28en-US%29&amp;cust=&amp;unptid=ad876434-63b5-11ef-9e2f-ac1f6bdab585&amp;calc=b97c6970b5319&amp;unp_tpcid=invoice-buyer-notification&amp;page=main%3Aemail%3ART000238&amp;pgrp=main%3Aemail&amp;e=cl&amp;mchn=em&amp;s=ci&amp;mail=sys&amp;appVersion=1.275.0&amp;tenant_name=&amp;xt=145585%2C134644%2C104038&amp;link_ref=company_1482
+https://www.paypalobjects.com/digitalassets/c/system-triggered-email/n/layout/images/paypal-rebranding/footer-social-icons_linkedin-2x.png
+https://www.paypal.com/us/webapps/mpp/security/suspicious-activity?v=1&amp;utm_source=unp&amp;utm_medium=email&amp;utm_campaign=RT000238&amp;utm_unptid=ad876434-63b5-11ef-9e2f-ac1f6bdab585&amp;ppid=RT000238&amp;cnac=US&amp;rsta=en_US%28en-US%29&amp;cust=&amp;unptid=ad876434-63b5-11ef-9e2f-ac1f6bdab585&amp;calc=b97c6970b5319&amp;unp_tpcid=invoice-buyer-notification&amp;page=main%3Aemail%3ART000238&amp;pgrp=main%3Aemail&amp;e=cl&amp;mchn=em&amp;s=ci&amp;mail=sys&amp;appVersion=1.275.0&amp;tenant_name=&amp;xt=145585%2C134644%2C104038&amp;link_ref=security_suspicious-activity
+https://www.paypal.com/selfhelp/home?v=1&amp;utm_source=unp&amp;utm_medium=email&amp;utm_campaign=RT000238&amp;utm_unptid=ad876434-63b5-11ef-9e2f-ac1f6bdab585&amp;ppid=RT000238&amp;cnac=US&amp;rsta=en_US%28en-US%29&amp;cust=&amp;unptid=ad876434-63b5-11ef-9e2f-ac1f6bdab585&amp;calc=b97c6970b5319&amp;unp_tpcid=invoice-buyer-notification&amp;page=main%3Aemail%3ART000238&amp;pgrp=main%3Aemail&amp;e=cl&amp;mchn=em&amp;s=ci&amp;mail=sys&amp;appVersion=1.275.0&amp;tenant_name=&amp;xt=145585%2C134644%2C104038&amp;link_ref=selfhelp_home
+https://www.paypal.com/us/smarthelp/article/why-am-i-receiving-emails-from-paypal-when-i-dont-have-an-account-faq4172?v=1&amp;utm_source=unp&amp;utm_medium=email&amp;utm_campaign=RT000238&amp;utm_unptid=ad876434-63b5-11ef-9e2f-ac1f6bdab585&amp;ppid=RT000238&amp;cnac=US&amp;rsta=en_US%28en-US%29&amp;cust=&amp;unptid=ad876434-63b5-11ef-9e2f-ac1f6bdab585&amp;calc=b97c6970b5319&amp;unp_tpcid=invoice-buyer-notification&amp;page=main%3Aemail%3ART000238&amp;pgrp=main%3Aemail&amp;e=cl&amp;mchn=em&amp;s=ci&amp;mail=sys&amp;appVersion=1.275.0&amp;tenant_name=&amp;xt=145585%2C134644%2C104038&amp;link_ref=article_why-am-i-receiving-emails-from-paypal-when-i-dont-have-an-account-faq4172
+https://t.paypal.com/ts?v=1&amp;utm_source=unp&amp;utm_medium=email&amp;utm_campaign=RT000238&amp;utm_unptid=ad876434-63b5-11ef-9e2f-ac1f6bdab585&amp;ppid=RT000238&amp;cnac=US&amp;rsta=en_US%28en-US%29&amp;cust=&amp;unptid=ad876434-63b5-11ef-9e2f-ac1f6bdab585&amp;calc=b97c6970b5319&amp;unp_tpcid=invoice-buyer-notification&amp;page=main%3Aemail%3ART000238&amp;pgrp=main%3Aemail&amp;e=op&amp;mchn=em&amp;s=ci&amp;mail=sys&amp;appVersion=1.275.0&amp;tenant_name=&amp;xt=145585%2C134644%2C104038&amp;link_ref=t.paypal.com_ts
+
+
+https://10-82-132-33.reverse-proxy.cell-prod-eu-west-1c.vm.tryhackme.com/
+
