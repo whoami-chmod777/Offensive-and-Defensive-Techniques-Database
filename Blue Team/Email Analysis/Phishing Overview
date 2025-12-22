@@ -70,6 +70,26 @@ A two-step technique:
 • DNS Server Poisoning
 
 
+-- Typosquatting and Punycode --
+
+Typosquatting is when an attacker registers a common misspelling of an organisation's domain. For example, glthub.com instead of github.com (note that there is an L instead of an i).                            
+
+   Legitimate Domain          Typosquatted Domain        Technique
+   ------------------         --------------------       ----------------
+   google.com           ----->   gougle.com                 Typo
+   github.com           ----->   gIthub.com                 Typo (capital I)
+   amazon.com           ----->   amozon.com                 Typo
+   victoriassecret.com  ----->   victoriasecret.com         Missing letter
+   homedepot.com        ----->   hoemdepot.com              Letters reversed
+
+
+Punycode is a special encoding system that converts Unicode characters (used in writing systems like Chinese, Cyrillic, and Arabic) into ASCII. When typing punycodes in the browser URL bar, this will be translated into ASCII format, which is the accepted format by DNS.
+
+With that resource, attackers can replace identical Latin letters; for example, a standard Latin a could be replaced with a Greek α.
+
+An easy way to identify punycodes is by looking at the field Return-Path in the email headers. On the opened email, go down to the headers preview, and you will see the ACE prefix and the encoded non-ASCII characters!
+
+
 -- Phishing Analysis Methodology --
 
 1. Initial Triage
