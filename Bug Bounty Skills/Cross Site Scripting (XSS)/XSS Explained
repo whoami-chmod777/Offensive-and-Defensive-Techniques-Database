@@ -1,0 +1,159 @@
+
+--- XSS Explained ---
+
+• Reflected XSS
+• Stored XSS
+• Protecting against XSS
+• Exploiting Reflected XSS
+• Exploiting Stored XSS
+
+
+Let's review some key material regarding potential attacks on websites like this portal, specifically Cross-Site Scripting (XSS). 
+
+XSS is a web application vulnerability that lets attackers inject malicious code (usually JavaScript) into input fields that reflect content viewed by other users (e.g., a form or a comment in a blog). 
+When an application doesn't properly validate or escape user input, that input can be interpreted as code rather than harmless text. 
+This results in malicious code that can steal credentials, deface pages, or impersonate users. Depending on the result, there are various types of XSS.  We focus on Reflected XSS and Stored XSS.
+
+-- Reflected XSS --
+
+You see reflected variants when the injection is immediately projected in a response. Imagine a toy search function in an online toy store, you search via: 
+
+https://trygiftme.thm/search?term=gift
+
+But imagine you send this to your friend who is looking for a gift for their nephew (please don't do this):
+
+https://trygiftme.thm/search?term=<script>alert( atob("VEhNe0V2aWxfQnVubnl9") )</script>
+
+➜ Impact
+
+You could act, view information, or modify information that your friend or any user could do, view, or access. It's usually exploited via phishing to trick users into clicking a link with malicious code injected.
+
+
+-- Stored XSS --
+
+A Stored XSS attack occurs when malicious script is saved on the server and then loaded for every user who views the affected page. 
+Unlike Reflected XSS, which targets individual victims, Stored XSS becomes a "set-and-forget" attack, anyone who loads the page runs the attacker’s script.
+
+To understand how this works, let’s use the example of a simple blog where users can submit comments that get displayed below each post.
+
+➜ Normal Comment Submission
+
+POST /post/comment HTTP/1.1
+Host: tgm.review-your-gifts.thm
+
+postId=3
+name=Tony Baritone
+email=tony@normal-person-i-swear.net
+comment=This gift set my carpet on fire but my kid loved it!
+
+➜ Malicious Comment Submission (Stored XSS Example)
+
+If the application does not sanitize or filter input, an attacker can submit JavaScript instead of a comment:
+
+POST /post/comment HTTP/1.1
+Host: tgm.review-your-gifts.thm
+
+postId=3
+name=Tony Baritone
+email=tony@normal-person-i-swear.net
+comment=<script>alert(atob("VEhNe0V2aWxfU3RvcmVkX0VnZ30="))</script> + "This gift set my carpet on fire but my kid loved it!"
+
+Because the comment is saved in the database, every user who opens that blog post will automatically trigger the script.
+
+This lets the attacker run code as if they were the victim in order to perform malicious actions such as: 
+
+• Steal session cookies
+• Trigger fake login popups
+• Deface the page
+
+
+-- Protecting against XSS --
+
+Each service is different, and requires a well-thought-out, secure design and implementation plan, but key practices you can implement are:
+
+• Disable dangerous rendering raths: Instead of using the innerHTML property, which lets you inject any content directly into HTML, use the textContent property instead, it treats input as text and parses it for HTML.
+• Make cookies inaccessible to JS: Set session cookies with the HttpOnly, Secure, and SameSite attributes to reduce the impact of XSS attacks.
+• Sanitise input/output and encode: 
+  In some situations, applications may need to accept limited HTML input—for example, to allow users to include safe links or basic formatting. However it's critical to sanitize and encode all user-supplied data to prevent security vulnerabilities. 
+  Sanitising and encoding removes or escapes any elements that could be interpreted as executable code, such as scripts, event handlers, or JavaScript URLs while preserving safe formatting.
+
+
+-- Exploiting Reflected XSS --
+
+To exploit reflected XSS, we can use test payloads to check if the app runs the code injected. 
+
+<script>alert('Reflected Meow Meow')</script>
+
+Inject the code by adding the payload to the search bar and clicking " Search Messages". If it shows the alert text, we have confirmed reflected XSS. So, what happened?
+
+• The search input is reflected directly in the results without encoding
+• The browser interprets your HTML/JavaScript as executable code
+• An alert box appeared, demonstrating successful XSS execution
+
+You can track the behaviour and how the system interprets your actions by checking the " System Logs".
+
+[2025-10-13 07:50:14] [ACCESS] IP: 127.0.0.1 | Page accessed: /?search=%3Cscript%3Ealert%28%27Testing+Meow+Meow%27%29%3C%2Fscript%3E | User-Agent
+
+
+-- Exploiting Stored XSS --
+
+In Stored XSS the vector must be different, as it needs to be persisted
+
+Looking at the website, we can see that you are able to send messages, which are stored on the server to view later (as opposed to searching, which is stored temporarily on the client side).
+
+Navigate to the message form, and enter the malicious payload we used before (others work too): 
+
+<script>alert('Stored Meow Meow')</script>
+
+Click the " Send Message" button. Because messages are stored on the server, every time you navigate to the site or reload, the alert will display.
+
+
+
+https://portswigger.net/web-security/cross-site-scripting/cheat-sheet
+
+
+
+
+*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
