@@ -1,0 +1,228 @@
+
+--- YARA Overview ---
+
+• YARA Overview
+• YARA Values
+• YARA Rules
+• Strings
+• Conditions
+• YARA Study Use Cases
+
+
+-- YARA Overview --
+
+YARA is a tool built to identify and classify malware by searching for unique patterns, the digital fingerprints left behind by attackers. 
+Imagine it as a detective’s notebook for cyber defenders: instead of dusting for prints, YARA scans code, files, and memory for subtle traces that reveal a threat’s identity.
+
+YARA gives defenders the power to detect malware by its behavior and patterns, not just by name. YARA allows you to define your own rules, providing your own view of what constitutes "malicious" behavior. 
+And you’re not alone, many YARA rules have already been written by defenders
+
+In what situations might defenders rely on this tool?
+
+• Post-incident analysis: when the security team needs to verify whether traces of malware found on one compromised host still exist elsewhere in the environment.
+• Threat Hunting: searching through systems and endpoints for signs of known or related malware families.
+• Intelligence-based scans: applying shared YARA rules from other defenders or kingdoms to detect new indicators of compromise.
+• Memory analysis: examining active processes in a memory dump for malicious code fragments.
+
+
+-- YARA Values --
+
+With YARA, you're not waiting for an antivirus update or a third-party alert. You have the power to create your own rules, detect new variants, and act before the threat spreads
+
+• Speed: quickly scans large sets of files or systems to identify suspicious ones.
+• Flexibility: detects everything from text strings to binary patterns and complex logic.
+• Control: lets analysts define exactly what they consider malicious.
+• Shareability: rules can be reused and improved by other defenders across kingdoms.
+• Visibility: helps connect scattered clues into a clear picture of the attack.
+
+
+-- YARA Rules --
+
+A YARA rule is built from several key elements:
+
+• Metadata: information about the rule itself: who created it, when, and for what purpose.
+• Strings: the clues YARA searches for: text, byte sequences, or regular expressions that mark suspicious content.
+• Conditions: the logic that decides when the rule triggers, combining multiple strings or parameters into a single decision.
+
+Together, these three parts form the foundation of every YARA rule. Here’s how it looks in practice:
+
+rule TBFC_KingMalhare_Trace
+{
+    meta:
+        author = "Defender of SOC-mas"
+        description = "Detects traces of King Malhare’s malware"
+        date = "2025-10-10"
+    strings:
+        $s1 = "rundll32.exe" fullword ascii
+        $s2 = "msvcrt.dll" fullword wide
+        $url1 = /http:\/\/.*malhare.*/ nocase
+    condition:
+        any of them
+}
+
+
+-- Strings --
+
+As mentioned earlier, strings are the clues that YARA searches for when scanning files, memory, or other data sources. They represent the signatures of malicious activity in fragments of text, bytes, or patterns that can reveal the presence of code. 
+In YARA, there are three main types of strings, each with its own purpose
+
+• Text strings
+• Hexadecimal strings
+• Regular expression strings
+
+➜ Text strings
+
+Text strings are the simplest and most common type used in YARA rules. They represent words or short text fragments that might appear in a file, script, or memory. 
+By default, YARA treats text strings as ASCII and case-sensitive, but you can modify how they behave using special modifiers - small keywords added after the string definition. 
+
+rule TBFC_KingMalhare_Trace
+{
+    strings:
+        $TBFC_string = "Christmas"
+
+    condition:
+        $TBFC_string 
+}
+
+⇒ Case-insensitive strings - nocase
+
+Adding the nocase modifier makes the match ignore letter casing, so "Christmas", "CHRISTMAS", or "christmas" will all trigger the same result.
+
+strings:
+    $xmas = "Christmas" nocase
+
+⇒ Wide-character strings - wide, ascii
+
+Many Windows executables use two-byte Unicode characters. Adding wide tells YARA to also look for this format, while ascii enforces a single-byte search
+
+strings:
+    $xmas = "Christmas" wide ascii
+
+⇒ XOR strings - xor
+
+Using the xor modifier, YARA automatically checks all possible single-byte XOR variations of a string - revealing what attackers tried to conceal.
+
+strings:
+    $hidden = "Malhare" xor
+
+⇒ Base64 strings - base64, base64wide
+
+With these modifiers, YARA decodes the content and searches for the original pattern, even when it’s hidden in encoded form.
+
+strings:
+    $b64 = "SOC-mas" base64
+
+➜ Hexadecimal strings
+
+Hex strings allow YARA to search for specific byte patterns, written in hexadecimal notation. This is useful when defenders need to detect malware fragments like file headers, shellcode, or binary signatures that can't be represented as plain text.
+
+rule TBFC_Malhare_HexDetect
+{
+    strings:
+        $mz = { 4D 5A 90 00 }   // MZ header of a Windows executable
+        $hex_string = { E3 41 ?? C8 G? VB }
+
+    condition:
+        $mz and $hex_string
+}
+
+➜ Regular expression strings
+
+Not all traces follow a fixed pattern. Sometimes, the code mutates, small changes in file names, URLs, or commands make it harder to detect using plain text or hex strings.
+Regex allows defenders to write flexible search patterns that can match multiple variations of the same malicious string.
+It's especially useful for spotting URLs, encoded commands, or filenames that share a structure but differ slightly each time.
+
+rule TBFC_Malhare_RegexDetect
+{
+    strings:
+        $url = /http:\/\/.*malhare.*/ nocase
+        $cmd = /powershell.*-enc\s+[A-Za-z0-9+/=]+/ nocase
+
+    condition:
+        $url and $cmd
+}
+
+
+-- Conditions --
+
+When YARA should decide that a threat has been found? That logic lives inside the condition section, the heart of every YARA rule.
+The condition tells YARA when the rule should trigger based on the results of all the string checks. Think of it as the final decision point.
+
+• Match a single string
+• Match any string
+• Match all strings
+• Combine logic using: and, or, not
+• Use comparisons like: filesize, entrypoint, or hash
+
+
+➜ Match a single string
+
+The simplest condition, the rule triggers if one specific string is found. 
+
+condition:
+    $xmas
+
+➜ Match any string
+
+When multiple strings are defined, the rule can be configured to trigger as soon as any one of them is found. This approach is useful for detecting early signs of compromise; even a single matching clue can be enough to raise attention.
+
+condition:
+    any of them
+
+➜ Match all strings
+
+To make the rule stricter, you can require that all defined strings appear together. This approach reduces false positives; YARA will only flag a file if every indicator matches.
+
+condition:
+    all of them
+
+➜ Combine logic using: and, or, not
+
+Defenders often need more control over how rules behave. Logical operators let you combine multiple checks into one condition, just like building a small defensive strategy.
+
+condition:
+    ($s1 or $s2) and not $benign
+
+This means the rule will trigger if either $s1 or $s2 is found, but not $benign. In other words: detect suspicious code, but ignore harmless system files.
+
+➜ Use comparisons like: filesize, entrypoint, or hash
+
+YARA can also check file properties, not just contents. For example, you can detect files that are unusually small or large, a common trick used to disguise payloads.
+
+condition:
+    any of them and (filesize < 700KB)
+
+Here, the rule will trigger only when one of the strings matches and the file size is smaller than 700KB.
+
+
+-- YARA Study Use Cases --
+
+rule TBFC_Simple_MZ_Detect
+{
+    meta:
+        author = "TBFC SOC L2"
+        description = "IcedID Rule"
+        date = "2025-10-10"
+        confidence = "low"
+
+    strings:
+        $mz   = { 4D 5A }                        // "MZ" header (PE file)
+        $hex1 = { 48 8B ?? ?? 48 89 }            // malicious binary fragment
+        $s1   = "malhare" nocase                 // story / IOC string
+
+    condition:
+        all of them and filesize < 10485760     // < 10MB size
+}
+
+
+yara -r icedid_starter.yar C:\icedid_starter  C:\Users\WarevilleElf\AppData\Roaming\TBFC_Presents\malhare_gift_loader.exe
+
+We can use the man yara command to find out what flags could be useful
+
+• -r - Allows YARA to scan directories recursively and follow symlinks
+• -s - Prints the strings found within files that match the rule
+
+Putting everything together, this YARA command recursively scans the C:\ drive using the icedid_starter.yar rule file and can optionally display the matching strings when using -s.
+
+
+*
