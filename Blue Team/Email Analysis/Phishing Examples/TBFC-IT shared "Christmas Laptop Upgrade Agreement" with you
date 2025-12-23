@@ -1,1 +1,77 @@
 
+> Message overview <
+
+From TBFC-IT <tbfc-it@tbƒc.com>
+To Savoy <savoys@tbfc.com>
+Date Fri, 12 Dec 2025 17:29:34 +0000
+HTML preview
+
+
+> HTML preview <
+
+TBFC-IT shared a file with you
+
+Here's the document that TBFC-IT shared with you.
+
+"Christmas Laptop Upgrade Agreement"
+
+
+> Attachments <
+
+No attachment found.
+
+
+> Headers <
+
+Received: from SJ1PR12MB6028.namprd12.prod.outlook.com (2603:10b6:a03:489::8) by BN8PR12MB4980.namprd12.prod.outlook.com with HTTPS; Fri, 12 Dec 2025 17:29:47 +0000
+Received: from DB9PR01CA0021.eurprd01.prod.exchangelabs.com (2603:10a6:10:1d8::26) by SJ1PR12MB6028.namprd12.prod.outlook.com (2603:10b6:a03:489::8) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7677.30; Fri, 12 Dec 2025 17:29:45 +0000
+Received: from DB9PR01MB10075.eurprd01.prod.exchangelabs.com (2603:10a6:10:1d8:cafe::1) by DB9PR01CA0021.outlook.office365.com (2603:10a6:10:1d8::26) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7677.34 via Frontend Transport; Fri, 12 Dec 2025 17:29:44 +0000
+Received: from DB8PR06CA0016.eurprd06.prod.outlook.com (2603:10a6:10:100::29) by DB9PR01MB10075.eurprd01.prod.exchangelabs.com (2603:10a6:10:30a::7) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7698.21; Fri, 12 Dec 2025 17:29:41 +0000
+Received: from DB3PEPF0000885B.eurprd02.prod.outlook.com (2603:10a6:10:100:cafe::76) by DB8PR06CA0016.outlook.office365.com (2603:10a6:10:100::29) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7677.32 via Frontend Transport; Fri, 12 Dec 2025 17:29:41 +0000
+Received: from dispatch1-us1.ppe-hosted.com (148.163.129.48) by DB3PEPF0000885B.mail.protection.outlook.com (10.167.242.6) with Microsoft SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.7677.15 via Frontend Transport; Fri, 12 Dec 2025 17:29:40 +0000
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com (mail-mw2nam04lp2173.outbound.protection.outlook.com [104.47.73.173]) using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits) by mx1-us1.ppe-hosted.com (PPE Hosted ESMTP Server) with ESMTPS id 262CC60007C for <savoys@tbfc.com>; Fri, 12 Dec 2025 17:29:37 +0000 (UTC)
+Received: from DS0PR06MB9272.namprd06.prod.outlook.com (2603:10b6:8:129::21) by BL4PR06MB9684.namprd06.prod.outlook.com (2603:10b6:208:4dc::15) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7698.22; Fri, 12 Dec 2025 17:29:34 +0000
+Received: from DS0PR06MB9272.namprd06.prod.outlook.com ([fe80::297f:3d1e:7d4d:6b52]) by DS0PR06MB9272.namprd06.prod.outlook.com ([fe80::297f:3d1e:7d4d:6b52%4]) with mapi id 15.20.7698.014; Fri, 12 Dec 2025 17:29:34 +0000
+From: TBFC-IT <tbfc-it@tbƒc.com>
+To: Savoy <savoys@tbfc.com>
+Subject: TBFC-IT shared "Christmas Laptop Upgrade Agreement" with you
+Date: Fri, 12 Dec 2025 17:29:34 +0000
+Accept-Language: en-US
+Content-Language: en-US
+Received-SPF: Pass (protection.outlook.com: domain of tbƒc.com designates 148.163.129.48 as permitted sender) receiver=protection.outlook.com; client-ip=148.163.129.48; helo=dispatch1-us1.ppe-hosted.com; pr=C
+Authentication-Results: spf=pass (sender IP is 148.163.129.48) smtp.mailfrom=tbƒc.com; dkim=pass (signature was verified) header.d=NETORGFT5333146.onmicrosoft.com; dmarc=none action=none header.from=tbƒc.com; compauth=pass reason=109
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NETORGFT5333146.onmicrosoft.com; s=selector1-NETORGFT5333146-onmicrosoft-com; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck; bh=VpUaEZsM02olFjPbW9CqXrwP+IlK++M1QazeU9FUD7c=; b=Ebcwp+HuNVOehTJhb55dRU4XvieFAmSt+8jC7a2yTtUpDrWtjljjuqVMir1PfVtI1Q0S87xX0ndPbVoMI+3SQZGJEJDhR+RUepuEGGG9R/hAWdcpVKK9ooLtgqLoEO5swHYj4zpi3vTbgzZnsu2xUQYOv5/yo/R3Bx5QKhJFehg=
+Authentication-Results-Original: dkim=none (message not signed) header.d=none; dmarc=none action=none header.from=tbƒc.com;
+Content-Type: multipart/related; boundary="_007_Shared38d34a130c05000ccea71df3ea86d641af84506f8b848fb9e_"; type="multipart/alternative"
+Return-Path: <tbfc-it@xn--tbc-n5a.com>
+MIME-Version: 1.0
+
+
+> Links detected <
+
+https://microsoftooline.co
+https://www.microsoft.com/en-us/privacy/privacystatement
+http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd
+http://www.w3.org/1999/xhtml
+https://static2.sharepointonline.com/files/fabric/assets/fonts/segoeui-westeuropean/segoeui-light.woff2
+https://static2.sharepointonline.com/files/fabric/assets/fonts/segoeui-westeuropean/segoeui-light.woff
+https://static2.sharepointonline.com/files/fabric/assets/fonts/segoeui-westeuropean/segoeui-light.ttf
+https://static2.sharepointonline.com/files/fabric/assets/fonts/segoeui-westeuropean/segoeui-semilight.woff2
+https://static2.sharepointonline.com/files/fabric/assets/fonts/segoeui-westeuropean/segoeui-semilight.woff
+https://static2.sharepointonline.com/files/fabric/assets/fonts/segoeui-westeuropean/segoeui-semilight.ttf
+https://static2.sharepointonline.com/files/fabric/assets/fonts/segoeui-westeuropean/segoeui-regular.woff2
+https://static2.sharepointonline.com/files/fabric/assets/fonts/segoeui-westeuropean/segoeui-regular.woff
+https://static2.sharepointonline.com/files/fabric/assets/fonts/segoeui-westeuropean/segoeui-regular.ttf
+https://static2.sharepointonline.com/files/fabric/assets/fonts/segoeui-westeuropean/segoeui-semibold.woff2
+https://static2.sharepointonline.com/files/fabric/assets/fonts/segoeui-westeuropean/segoeui-semibold.woff
+https://static2.sharepointonline.com/files/fabric/assets/fonts/segoeui-westeuropean/segoeui-semibold.ttf
+http://microsoftooline.co
+https://aka.ms/privacy
+https://southcentralusr-notifyp.svc.ms:443/api/v2/tracking/method/View?mi=nQ8xfUXZIkuNvJuouYwfQg
+
+
+https://10-81-128-148.reverse-proxy.cell-prod-eu-west-1b.vm.tryhackme.com/
+
+
+*
+
