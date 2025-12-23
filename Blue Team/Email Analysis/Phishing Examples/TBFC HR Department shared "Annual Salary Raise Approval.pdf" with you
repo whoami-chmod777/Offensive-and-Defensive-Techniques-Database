@@ -1,1 +1,62 @@
 
+> Message overview <
+
+From TBFC HR Department <no-reply@dropbox.com>
+To Neymar Junior <neymar.junior@tbfc.com>
+Date Fri, 12 Dec 2025 21:00:16 +0000
+
+
+> HTML Preview <
+
+> Attachments <
+
+No attachment found.
+
+
+> Headers <
+
+Received: from CYYPR12MB8853.namprd12.prod.outlook.com (::1) by BN8PR12MB4978.namprd12.prod.outlook.com with HTTPS; Fri, 12 Dec 2025 21:00:27 +0000
+Received: from PR3PR09CA0015.eurprd09.prod.outlook.com (2603:10a6:102:b7::20) by CYYPR12MB8853.namprd12.prod.outlook.com (2603:10b6:930:cb::7) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7611.21; Fri, 12 Dec 2025 21:00:25 +0000
+Received: from PR3PR01MB6764.eurprd01.prod.exchangelabs.com (2603:10a6:102:b7:cafe::73) by PR3PR09CA0015.outlook.office365.com (2603:10a6:102:b7::20) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.21 via Frontend Transport; Fri, 12 Dec 2025 21:00:24 +0000
+Received: from DU2P250CA0005.EURP250.PROD.OUTLOOK.COM (2603:10a6:10:231::10) by PR3PR01MB6764.eurprd01.prod.exchangelabs.com (2603:10a6:102:69::21) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.21; Fri, 12 Dec 2025 21:00:19 +0000
+Received: from DB1PEPF0003922F.eurprd03.prod.outlook.com (2603:10a6:10:231:cafe::ff) by DU2P250CA0005.outlook.office365.com (2603:10a6:10:231::10) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7611.30 via Frontend Transport; Fri, 12 Dec 2025 21:00:19 +0000
+Received: from a60-157.smtp-out.us-west-2.amazonses.com (54.240.60.157) by DB1PEPF0003922F.mail.protection.outlook.com (10.167.8.102) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7633.15 via Frontend Transport; Fri, 12 Dec 2025 21:00:18 +0000
+Authentication-Results: spf=pass (sender IP is 54.240.60.157) smtp.mailfrom=email.dropbox.com; dkim=pass (signature was verified) header.d=dropbox.com; dkim=pass (signature was verified) header.d=amazonses.com; dmarc=pass action=none header.from=dropbox.com; compauth=pass reason=100
+Received-Spf: Pass (protection.outlook.com: domain of email.dropbox.com designates 54.240.60.157 as permitted sender) receiver=protection.outlook.com; client-ip=54.240.60.157; helo=a60-157.smtp-out.us-west-2.amazonses.com; pr=C
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; s=b55ck4kgrdgjxhl3qlcrbmzyg4d26eak; d=dropbox.com; t=1717016416; h=Content-Type:MIME-Version:From:To:CC:Subject:Date:Message-ID:Reply-To; bh=43982798473YTHIUERHGC99842374HWECRUHEW9R8EWRUCW==; b=dsf s7s7f98dsfds7fs98dfusd8fuds8fud8sfcjsd==
+Dkim-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; s=7v7vs6w47njt4pimodk5mmttbegzsi6n; d=amazonses.com; t=1717016416; h=Content-Type:MIME-Version:From:To:CC:Subject:Date:Message-ID:Reply-To:Feedback-ID; bh=fsdjknfskjdfnsdjkfns32424234jk23b4kh==; b=fihsdufys86r4yt386rh3r8hf3789qhf8fh38hf63823uhei2hjwehdfjwfhiywgfuyg2863b==
+Content-Type: multipart/mixed; boundary="----sinikael-?=_1-17170166112790.013752983326257961"
+MIME-Version: 1.0
+From: TBFC HR Department <no-reply@dropbox.com>
+To: Neymar Junior <neymar.junior@tbfc.com>
+Subject: TBFC HR Department shared "Annual Salary Raise Approval.pdf" with you
+Date: Fri, 12 Dec 2025 21:00:16 +0000
+Message-Id: 3612436312273@us-west-2.amazonses.com
+Reply-To: hr.tbfc@outlook.com
+Return-Path: 345675444334263@email.dropbox.com
+
+
+> Links detected <
+
+http://www.w3.org/TR/REC-html40/loose.dtd
+http://www.w3.org/1999/xhtml
+https://www.dropbox.com/static/fonts/proximanova/proxima-nova-regular.otf
+https://www.dropbox.com/static/fonts/atlasgrotesk/AtlasGrotesk-Regular.otf
+https://www.dropbox.com/static/fonts/sharpgrotesk/SharpGroteskDBMedium22.woff
+https://aka.ms/LearnAboutSenderIdentification
+https://assets.dropbox.com/email/en/receiving-experience/folder.gif
+https://www.<span
+https://www.dropbox.com/l/scl/AACsXe1xmrtqdCP5FFny-TmiHK765YmIjLdd
+https://assets.dropbox.com/email/en/receiving-experience/Open@3x.png
+http://schema.org
+https://apps.apple.com/us/app/dropbox-cloud-photo-storage/id327630330
+https://assets.dropbox.com/email/en/receiving-experience/Apple@3x.png
+https://play.google.com/store/apps/details?id=com.dropbox.android
+https://assets.dropbox.com/email/en/receiving-experience/Android@3x.png
+https://www.dropbox.com/l/AACe5cKHnMcy0cgJYjm5ph112TKs_M/report_abuse
+https://www.dropbox.com/l/AADZZLWLrhI5L-fultNxt2K3HkZlozz5AqQ
+
+
+https://10-81-154-58.reverse-proxy.cell-prod-eu-west-1b.vm.tryhackme.com/
+
+*
