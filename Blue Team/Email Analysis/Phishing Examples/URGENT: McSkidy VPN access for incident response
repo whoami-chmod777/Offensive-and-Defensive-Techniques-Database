@@ -1,1 +1,58 @@
 
+> Message overview <
+
+From McSkidy <mcskiddyy202512@gmail.com>
+To TBFC Blue Team <blueteam@tbfc.com>
+Date Sun, 14 Dec 2025 04:05:09 +0000
+
+
+> HTML Preview <
+
+Team,
+
+McSkidy here — I'm currently unreachable by phone. We have an ongoing incident and need the Blue Team to get remote access now to investigate. 
+Please create a new VPN access for me immediately. Send the access to my personal email address mcskiddyy202512@gmail.com
+
+Name	McSkidy
+Team	Blue Team
+Reason	Emergency incident response
+
+This is urgent — please action immediately.
+
+— McSkidy
+
+
+> Attachments <
+
+No attachment found.
+
+
+> Headers <
+
+Received: from DU0PR01MB9023.eurprd01.prod.exchangelabs.com (2603:10a6:10:35a::19) by DU2PR01MB8429.eurprd01.prod.exchangelabs.com with HTTPS; Fri, 14 Dec 2025 04:05:13 +0000
+Received: from AS9PR06CA0298.eurprd06.prod.outlook.com (2603:10a6:20b:45a::6) by DU0PR01MB9023.eurprd01.prod.exchangelabs.com (2603:10a6:10:35a::19) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7849.22; Fri, 14 Dec 2025 04:05:11 +0000
+Received: from AM2PEPF0001C70C.eurprd05.prod.outlook.com (2603:10a6:20b:45a:cafe::35) by AS9PR06CA0298.outlook.office365.com (2603:10a6:20b:45a::6) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7849.22 via Frontend Transport; Fri, 14 Dec 2025 04:05:10 +0000
+Received: from mail-wm1-f67.google.com (209.85.128.67) by AM2PEPF0001C70C.mail.protection.outlook.com (10.167.16.200) with Microsoft SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.7849.8 via Frontend Transport; Fri, 14 Dec 2025 04:05:10 +0000
+Received: from 341605307468 named unknown by gmailapi.google.com with HTTPREST; Fri, 14 Dec 2025 04:05:09 +0000
+Authentication-Results: spf=pass (sender IP is 209.85.128.67) smtp.mailfrom=gmail.com; dkim=pass (signature was verified) header.d=gmail.com; dmarc=pass header.from=gmail.com; compauth=pass reason=111
+Received-SPF: Pass (protection.outlook.com: domain of gmail.com designates 209.85.128.67 as permitted sender) receiver=protection.outlook.com; client-ip=209.85.128.67; helo=mail-wm1-f67.google.com; pr=C
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=google; t=1723608310; x=1724213110; darn=gmail.com; h=to:subject:message-id:date:mime-version:from:user-agent:in-reply-to:references:from:to:cc:subject:date:message-id:reply-to; bh=JPDbPId0FhMLkx73Fa1XuTA6b3dKaoyqn+GhtJVVee8=; b=kJMBe6v7T9QfTTit+Mgzzz6yhBWoJ5CD5kzCtfRBMD7ashn/0Z6/IPJK9Z/oIUsdZcIxbB/maStZuBudhionCY3YhpHaZWLPlXBPxTT5dEJwirMhaGJO5FQfeWecRKrjHsrd+p9Y4sB3iKAvKWrKTtsEw1uAQU7n/V9tELTcD/jFYWPEOpNQLwemT2gQPfakGOWM37jCwro32pw2LBAeKZmxw9jZ4HI0csFdC1OQ/VicCdmrXVB51bze2aRyAqDtGap4oYWV3C9ZcGL/F/yTg1gNYO19mrFbfgv230pCkwaPPE3DGSG/DDxSIKSSNebp8AOcJ1Jy/kJAvM4B3F2JcA==
+In-Reply-To: <CAGVzd0Ec0WvV-YdSDHasdhm2d4JX9PsE8XSzrkNFB20Qd-MwENQ@mail.gmail.com>
+From: McSkidy <mcskiddyy202512@gmail.com>
+MIME-Version: 1.0
+Date: Sun, 14 Dec 2025 04:05:09 +0000
+Message-ID: <CAGVzd0ERMObw8GhH+bMsXYkKdFyfHL0npp+mM04e1GJonK44wg@mail.gmail.com>
+Subject: URGENT: McSkidy VPN access for incident response
+To: TBFC Blue Team <blueteam@tbfc.com>
+Content-Type: multipart/mixed; boundary="----sinikael-?=_1-17236083563470.6207944771923966"
+Return-Path: <mcskiddyy202512@gmail.com>
+Content-Transfer-Encoding: 7bit
+
+
+> Links detected <
+
+No direct links were found in the selected email.
+
+
+https://10-81-128-148.reverse-proxy.cell-prod-eu-west-1b.vm.tryhackme.com/
+
