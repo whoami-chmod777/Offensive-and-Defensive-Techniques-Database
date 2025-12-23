@@ -7,5 +7,6 @@
 • Create a YARA rule to detect any GIF89a files under 50 KB in size (Detect_GIF89a_Less50KB.yara)
 • Create a YARA rule to detect any GIF89a files over 50 KB in size (Detect_GIF89a_Over50KB.yar)
 • Create a YARA rule to parse through the content of executables and detect any embedded OpenSSH private key files. Run it recursively against the /YARA/Challenges/ folder (Detect_Embedded_OpenSSH_PrivKey)
-• 
-• 
+
+
+*
