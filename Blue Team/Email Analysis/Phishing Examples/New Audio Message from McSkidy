@@ -25,27 +25,33 @@ Play-Now.mp3-29a-otpqw-warq-29.html attachment; filename="Play-Now.mp3-29a-otpqw
 
 > Headers <
 
+Received: from DU2PR08MB10188.eurprd08.prod.outlook.com (2603:10a6:10:46f::12) by AM9PR08MB6004.eurprd08.prod.outlook.com with HTTPS; Fri, 12 Dec 2025 11:55:03 +0000
+Received: from AS9PR04CA0039.eurprd04.prod.outlook.com (2603:10a6:20b:46a::33) by DU2PR08MB10188.eurprd08.prod.outlook.com (2603:10a6:10:46f::12) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7897.13; Fri, 12 Dec 2025 11:53:15 +0000
+Received: from AMS0EPF0000014F.eurprd05.prod.outlook.com (2603:10a6:20b:46a:cafe::22) by AS9PR04CA0039.outlook.office365.com (2603:10a6:20b:46a::33) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7875.21 via Frontend Transport; Fri, 12 Dec 2025 11:53:12 +0000
+Authentication-Results: spf=fail (sender IP is 173.243.133.97) smtp.mailfrom=tbfc.com; dkim=fail (signature did not verify) header.d=tbfc.com; dmarc=fail action=none header.from=tbfc.com; compauth=none reason=405
+Received-SPF: Fail (protection.outlook.com: domain of transitioning tbfc.com discourages use of 173.243.133.97 as permitted sender)
+Received: from gw3097.weakmail.com (173.243.133.97) by AMS0EPF0000014F.mail.protection.outlook.com (10.167.16.251) with Microsoft SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.7897.11 via Frontend Transport; Fri, 12 Dec 2025 11:53:12 +0000
+Authentication-Results-Original: gw3097.weakmail.com; spf=permerror (weakmail.com: 143.55.232.2 is neither permitted nor denied by domain of bounce+35b744.72834a-calls.com@tbfc.com) smtp.mailfrom=bounce+35b744.72834a-calls.com@tbfc.com; dkim=pass header.i=@tbfc.com;
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=tbfc.com; q=dns/txt; s=k1; t=1724068357; x=1724075557; h=Date: Message-ID: Reply-To: Subject: Subject: From: From: To: To: MIME-Version: Content-Type: Sender: Sender; bh=1hyA4Zf4UdXyZQc/DeMDyIR/aSSwcpbJiVyJDmICRf8=; b=McN4GKhl/iGM4CE5jLkj+uRdimBAEQy6PZNZmk+z3zRBD1iVRhyjiEgHssl/4ySAucnw62yRUuq7ybYwVjO9BBnu+wDpqH9XNTZ2CFnxNDyXcSo4d6V2R7Slw/FZJckToLLrJPDCgS2akm5Zl48ItvtYPoH1I+820FqJDFKHJYI=
+Sender: calls@tbfc.com
+Content-Type: multipart/related; boundary="===============1384656496240588532=="
+To: tarron@tbfc.com
+From: McSkidy Missed Call Notifier <calls@tbfc.com>
+Subject: New Audio Message from McSkidy
+Reply-To: TBFC <noreply@tbfc.com>
+Message-ID: <172406835482.169035.18309037092888188755@27-tyral>
+Date: Sun, 12 Oct 2025 18:12:34 +0000
+Return-Path: zxwsedr@easterbb.com
+MIME-Version: 1.0
+
+
+> Links detected <
+
+No direct links were found in the selected email.
 
 
 
 
+https://10-81-154-58.reverse-proxy.cell-prod-eu-west-1b.vm.tryhackme.com/
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-https://10-82-132-33.reverse-proxy.cell-prod-eu-west-1c.vm.tryhackme.com/
