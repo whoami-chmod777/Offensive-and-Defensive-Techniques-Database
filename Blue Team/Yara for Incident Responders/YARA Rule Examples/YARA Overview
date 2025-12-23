@@ -222,7 +222,7 @@ We can use the man yara command to find out what flags could be useful
 • -r - Allows YARA to scan directories recursively and follow symlinks
 • -s - Prints the strings found within files that match the rule
 
-
+Putting everything together, this YARA command recursively scans the C:\ drive using the icedid_starter.yar rule file and can optionally display the matching strings when using -s.
 
 
 *
