@@ -5,6 +5,7 @@
 • Why Spam Is Not Phishing
 • Phishing Takeover
 • Trending Phishing
+• Phishing Signals – Cheat Sheet
 
 
 -- Phishing Overview --
@@ -142,6 +143,111 @@ A Fake Microsoft Login Page sample. We can observe the fake domain microsoftonli
 
 Side-channel communication occurs when an attacker moves the conversation off email to another channel, such as SMS, WhatsApp/Telegram, a phone or video call, a texted link, or a shared document platform, to continue the social engineering in a platform without the company's control.
 
+
+-- Phishing Signals – Cheat Sheet --
+
+• Impersonation
+• Sense of Urgency
+• Social Engineering Text
+• External Sender Domain
+• Spoofing
+• Side Channel Communication Attempt
+• Fake Login Page
+• Malicious Attachment
+• Fake Invoice
+• Typosquatting / Punycode
+
+➜ Impersonation
+
+The sender pretends to be a trusted person, team, or organization.
+
+• Claims to be HR, IT, Finance, Management
+• Brand name in display name but email domain doesn’t truly belong
+• Uses trusted platforms (Dropbox, DocuSign, Google) to look legitimate
+• "Shared a document with you" pretending to be internal
+ 
+Example: "TBFC HR Department" sent via Dropbox → not an internal HR system
+
+➜ Sense of Urgency
+
+Creates pressure to act quickly to reduce critical thinking.
+
+• Financial or HR topics (salary, payroll, bonuses)
+• Deadlines, approvals, missed calls
+• Emotional pressure even without the word "urgent"
+
+Example: "Annual Salary Raise Approval.pdf"
+
+➜ Social Engineering Text
+
+Manipulates human trust, curiosity, fear, or reward instead of using malware.
+
+• Realistic business scenarios
+• Polite, professional tone
+• Uses authority ("HR", “Finance”)
+• Asks you to review, approve, or confirm
+
+Example: "You have a pending document regarding your salary raise"
+
+➜ External Sender Domain
+
+Email comes from outside the organization.
+
+• Sender domain ≠ company domain
+• External email banner
+
+Example: no-reply@dropbox.com → external to TBFC
+
+➜ Spoofing
+
+The sender forges the email identity.
+
+• SPF = fail
+• DKIM = fail
+• DMARC = fail
+• Fake From address
+
+➜ Side Channel Communication Attempt
+
+Tries to move you to another communication channel.
+
+• "Call this number"
+• "Text me on WhatsApp"
+• "Reply to this personal email"
+• "Contact me outside the system"
+
+➜ Fake Login Page
+
+Attempts to steal credentials via a look-alike login page.
+
+• "Sign in to view document"
+• Login page mimics Microsoft, Google, Dropbox
+• URL slightly different
+
+➜ Malicious Attachment
+
+Attachment contains malware or malicious macros.
+
+• .exe, .js, .iso, .html
+• Office files requesting macros
+• Unexpected ZIPs
+
+➜ Fake Invoice
+
+Claims you owe money or received an invoice you didn’t expect.
+
+• Unexpected billing
+• Payment requests
+• Threats of charges
+
+
+➜ Typosquatting / Punycode
+
+Domain looks correct but is slightly altered.
+
+• micros0ft.com
+• paypaI.com
+• Unicode characters
 
 
 *
