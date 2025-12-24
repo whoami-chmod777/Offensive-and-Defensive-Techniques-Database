@@ -28,6 +28,42 @@ Containers share the host OS kernel, isolating only applications and their depen
 Virtual machines are ideal for running multiple different operating systems or legacy applications, while containers excel at deploying scalable, portable micro-services.
 
 
+======================== MACHINE VIRTUALIZATION ======================
+
+        +---------+        +---------+        +---------+
+        |  App1   |        |  App2   |        |  App3   |
+        +---------+        +---------+        +---------+
+        | Bins/Lib|        | Bins/Lib|        | Bins/Lib|
+        +---------+        +---------+        +---------+
+        | GuestOS |        | GuestOS |        | GuestOS |
+        +---------+        +---------+        +---------+
+
+-----------------------------------------------------------------------
+                         Hypervisor
+-----------------------------------------------------------------------
+                         Infrastructure
+=======================================================================
+
+
+
+============================== CONTAINERS ==============================
+
+ +-------------------+   +-------------------+   +-------------------+
+ |       App1        |   |       App2        |   |       App3        |
+ |     Bins/Lib      |   |     Bins/Lib      |   |     Bins/Lib      |
+ |   (Dev / Test)    |   |    (Staging)      |   |     (Prod)        |
+  +-------------------+   +-------------------+   +-------------------+
+
+-------------------------------------------------------------------------
+                        Container Engine
+-------------------------------------------------------------------------
+                        Operating System
+-------------------------------------------------------------------------
+                        Infrastructure
+==========================================================================
+
+
+
 -- Applications at Scale --
 
 Microservices are a switch in the style of application architecture, where before it was a lot more common to deploy apps in a monolithic fashion (built as a single unit, a single code base, usually as a single executable ), more and more companies are choosing to break down their application into parts based on business function. 
