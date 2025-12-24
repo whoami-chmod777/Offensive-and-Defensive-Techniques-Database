@@ -1,0 +1,209 @@
+
+--- Windows Registry Forensics ---
+
+• Windows Registry
+• Example 
+• Registry Forensics
+• Practical
+
+
+
+-- Windows Registry --
+
+The registry contains all the information that the Windows OS needs for its functioning (like a brain). 
+It is made up of several separate files, each storing information on different configuration settings. These files are known as Hives.
+These Registry Hives contain binary data that cannot be opened directly from the file. So, double-clicking them would only display things you won't ever understand. 
+
++-------------+-------------------------------------------+-----------------------------------------------------------------+
+| Hive Name   | Contains                                  | Location                                                        |
++-------------+-------------------------------------------+-----------------------------------------------------------------+
+| SYSTEM      | - Services                                 | C:\Windows\System32\config\SYSTEM                              |
+|             | - Mounted Devices                          |                                                                |
+|             | - Boot Configuration                       |                                                                |
+|             | - Drivers                                  |                                                                |
+|             | - Hardware                                 |                                                                |
++-------------+-------------------------------------------+-----------------------------------------------------------------+
+| SECURITY    | - Local Security Policies                  | C:\Windows\System32\config\SECURITY                            |
+|             | - Audit Policy Settings                    |                                                                |
++-------------+-------------------------------------------+-----------------------------------------------------------------+
+| SOFTWARE    | - Installed Programs                       | C:\Windows\System32\config\SOFTWARE                            |
+|             | - OS Version and other info                |                                                                |
+|             | - Autostarts                               |                                                                |
+|             | - Program Settings                         |                                                                |
++-------------+-------------------------------------------+-----------------------------------------------------------------+
+| SAM         | - Usernames and their Metadata             | C:\Windows\System32\config\SAM                                 |
+|             | - Password Hashes                          |                                                                |
+|             | - Group Memberships                        |                                                                |
+|             | - Account Statuses                         |                                                                |
++-------------+-------------------------------------------+-----------------------------------------------------------------+
+| NTUSER.DAT  | - Recent Files                             | C:\Users\username\NTUSER.DAT                                   |
+|             | - User Preferences                         |                                                                |
+|             | - User-specific Autostarts                 |                                                                |
++-------------+-------------------------------------------+-----------------------------------------------------------------+
+| USRCLASS.DAT| - Shellbags                                | C:\Users\username\AppData\Local\Microsoft\Windows\USRCLASS.DAT |
+|             | - Jump Lists                               |                                                                |
++-------------+-------------------------------------------+-----------------------------------------------------------------+
+
+Note: The configuration settings stored in each hive listed above are just a few examples. Each hive stores more than these.
+
+The Windows OS has a built-in tool known as the Registry Editor, which allows you to view all the registry data available in these hives. 
+
+Registry Key contains these registry hive's data
+
++--------------+-----------------------------------------------------------+
+| Hive on Disk | Where You See It in Registry Editor                       |
++--------------+-----------------------------------------------------------+
+| SYSTEM       | HKEY_LOCAL_MACHINE\SYSTEM                                 |
++--------------+-----------------------------------------------------------+
+| SECURITY     | HKEY_LOCAL_MACHINE\SECURITY                               |
++--------------+-----------------------------------------------------------+
+| SOFTWARE     | HKEY_LOCAL_MACHINE\SOFTWARE                               |
++--------------+-----------------------------------------------------------+
+| SAM          | HKEY_LOCAL_MACHINE\SAM                                    |
++--------------+-----------------------------------------------------------+
+| NTUSER.DAT   | HKEY_USERS\<SID> and HKEY_CURRENT_USER                    |
++--------------+-----------------------------------------------------------+
+| USRCLASS.DAT | HKEY_USERS\<SID>\Software\Classes                         |
++--------------+-----------------------------------------------------------+
+
+The SYSTEM, SOFTWARE, SECURITY, and SAM hives are under the HKLM key. NTUSER.DAT and USRCLASS.DAT are located under HKEY_USERS (HKU) and HKEY_CURRENT_USER (HKCU).
+
+Note: The other two keys (HKEY_CLASSES_ROOT (HKCR) and HKEY_CURRENT_CONFIG (HKCC)) are not part of any separate hive files. They are dynamically populated when Windows is running.
+
+
+-- Example --
+
+• Example 1: View Connected USB Devices
+• Example 2: View Programs Run by the User
+
+➜ Example 1: View Connected USB Devices
+
+The registry stores information on the USB devices that have been connected to the system. This information is present in the SYSTEM hive. To view it: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USBSTOR
+
+➜ Example 2: View Programs Run by the User
+
+The registry stores information on the programs that the user ran using the Run dialog Win + R. This information is present in the NTUSER.DAT. To view it: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
+
+
+-- Registry Forensics --
+
+Since the registry contains a wide range of data about the Windows system, it plays a crucial role in forensic investigations. Registry forensics is the process of extracting and analyzing evidence from the registry. 
+In Windows digital forensic investigations, investigators analyze registry, event logs, file system data, memory data, and other relevant data to construct the whole incident timeline. 
+
++--------------------------------------------------------------------------+-------------------------------------------------------------------------------+
+| Registry Key                                                             | Importance                                                                    |
++--------------------------------------------------------------------------+-------------------------------------------------------------------------------+
+| HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist       | Stores information on recently accessed applications launched via the GUI.    |
++--------------------------------------------------------------------------+-------------------------------------------------------------------------------+
+| HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\TypedPaths       | Stores all paths and locations typed by the user in the Explorer address bar. |
++--------------------------------------------------------------------------+-------------------------------------------------------------------------------+
+| HKLM\Software\Microsoft\Windows\CurrentVersion\App Paths                 | Stores the paths of applications.                                             |
++--------------------------------------------------------------------------+-------------------------------------------------------------------------------+
+| HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\WordWheelQuery   | Stores all search terms typed by the user in the Explorer search bar.         |
++--------------------------------------------------------------------------+-------------------------------------------------------------------------------+
+| HKLM\Software\Microsoft\Windows\CurrentVersion\Run                       | Stores programs configured to automatically start when the user logs in.      |
++--------------------------------------------------------------------------+-------------------------------------------------------------------------------+
+| HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs       | Stores information about files the user has recently accessed.                |
++--------------------------------------------------------------------------+-------------------------------------------------------------------------------+
+| HKLM\SYSTEM\CurrentControlSet\Control\ComputerName\ComputerName           | Stores the computer’s name (hostname).                                       |
++--------------------------------------------------------------------------+-------------------------------------------------------------------------------+
+| HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall                 | Stores information about installed programs.                                  |
++--------------------------------------------------------------------------+-------------------------------------------------------------------------------+
+
+Numerous other registry keys can be used for extracting important evidence from a Windows system during an incident investigation. The investigation of these registry keys during forensics cannot be done via the built-in Registry Editor tool. 
+It is because the Registry analysis cannot be done on the system under investigation (due to the chance of modification), so we collect the Registry Hives and open them offline into our forensic workstation. 
+
+To solve this problem, there are some tools built for registry forensics. In this task you will use the Registry Explorer tool which is a registry forensics tool. 
+It is open source and can parse the binary data out of the registry, and we can analyze it without the fear of modification.
+
+
+-- Practical --
+
+In this practical example, we will use the Registry Explorer tool to analyze the Registry Hives from the compromised system, dispatch-srv01. The Registry Hives have been collected and are available in the folder C:\Users\Administrator\Desktop\Registry Hives.
+
+Step 1: Launch Registry Explorer
+
+Step 2: Load the Registry Hives
+
+⇒ Click the File option from the top menu
+⇒ Select Load hive from the dropdown
+
+Step 3: Handling Dirty Hives
+
+While loading Registry Hives, it is important to know that these Registry Hives can sometimes be "dirty" when collected from live systems, meaning they may have incomplete transactions. To ensure clean loading:
+
+⇒ On the Load hives pop-up, navigate to C:\Users\Administrator\Desktop\Registry Hives
+⇒ Select the desired hive file (e.g., SYSTEM)
+⇒ Hold SHIFT, then press Open to load associated transaction log files. This ensures you get a clean, consistent hive state for analysis.
+⇒ You'll be prompted with a message indicating successful replay for transaction logs
+⇒ Repeat the same process for all the other hives you want to load
+
+Step 4: Investigating Registry Keys
+
+After loading the SYSTEM hive, you can navigate to specific registry keys for investigation
+
+⇒ ROOT\ControlSet001\Control\ComputerName\ComputerName
+
+Now that you understand how to load hives and navigate in Registry Explorer, you're ready to begin your forensics investigation and uncover evidence!
+
+*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
