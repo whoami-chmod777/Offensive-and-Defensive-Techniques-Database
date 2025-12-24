@@ -1,6 +1,0 @@
-index=web sourcetype=access_combined 
-| table clientip,bytes,status,method,productid
-
-index=web sourcetype=access_combined
-| table clientip, bytes, status, method, productId
-| rename method as "HTTP Method", status as "HTTP Status", clientip as Client_IPAddress
