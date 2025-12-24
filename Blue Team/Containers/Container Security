@@ -109,6 +109,26 @@ By running docker ps again, we can confirm we can perform Docker commands and in
 
 Access the deployer container, which is a privileged container. Run the following command: docker exec -it deployer bash
 
+run Docker commands inside the container
+
+
+mrbombastic@tryhackme-2204:~$ docker exec -it uptime-checker sh
+/ # ls -la /var/run/docker.sock
+srw-rw----    1 root     121        0 Dec 24 09:48 /var/run/docker.sock
+/ #
+/ # docker ps
+CONTAINER ID   IMAGE                    COMMAND                  CREATED          STATUS          PORTS                                      NAMES
+55c2440f75fd   uptime-checker:latest    "/docker-entrypoint…"    25 minutes ago   Up 25 minutes   0.0.0.0:5003->80/tcp, [::]:5003->80/tcp   uptime-checker
+85ba875d5834   wareville-times:latest   "/docker-entrypoint…"    25 minutes ago   Up 25 minutes   0.0.0.0:5002->80/tcp, [::]:5002->80/tcp   wareville-times
+89616833018    dasherrap:latest          "python app.py"          25 minutes ago   Up 25 minutes   0.0.0.0:5001->5000/tcp, [::]:5001->5000/tcp dasherrap
+9ebe6bc7ca68   deployer:latest           "tail -f /dev/null"     25 minutes ago   Up 25 minutes                                              deployer
+/ #
+/ # docker exec -it deployer bash
+deployer@9ebe6bc7ca68:/app$ whoami
+deployer
+deployer@9ebe6bc7ca68:/app$
+
+
 
 *
 
