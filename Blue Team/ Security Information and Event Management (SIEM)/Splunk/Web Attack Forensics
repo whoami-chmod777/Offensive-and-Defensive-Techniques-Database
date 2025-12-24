@@ -1,0 +1,66 @@
+
+--- Web Attack Forensics ---
+
+Make sure to adjust the Splunk time range to include the time of the events (e.g., "Last 7 days" or "All time"). If the default range is too narrow, you may see "No results found."
+
+• Suspicious Web Commands
+• Server-Side Errors or Command Execution
+• Suspicious Process Creation
+• Attacker Enumeration Activity
+• Base64-Encoded PowerShell Payloads
+
+
+-- Detect Suspicious Web Commands --
+
+Search for HTTP requests that might show malicious activity for any HTTP requests that include signs of command execution attempts, such as cmd.exe, PowerShell, or Invoke-Expression.
+At this step, we are primarily interested in base64-encoded strings, which may reveal various types of activities. 
+Once you spot encoded PowerShell commands, decode them using base64decode.org or your favourite base64 decoder to understand what the attacker was trying to do
+
+Query: index=windows_apache_access (cmd.exe OR powershell OR "powershell.exe" OR "Invoke-Expression") | table _time host clientip uri_path uri_query status
+
+
+-- Server-Side Errors or Command Execution in Apache Error Logs --
+
+In this stage, we will focus on inspecting web server error logs, as this would help us uncover any malicious activity. 
+This query inspects the Apache error logs for signs of execution attempts or internal failures caused by malicious requests. 
+Please make sure you select View: Raw from the dropdown menu above the Event display field.
+
+Query: index=windows_apache_error ("cmd.exe" OR "powershell" OR "Internal Server Error")
+
+If a request like /cgi-bin/hello.bat?cmd=powershell triggers a 500 “Internal Server Error,” it often means the attacker’s input was processed by the server but failed during execution, a key sign of exploitation attempts.
+
+
+-- Trace Suspicious Process Creation From Apache --
+
+Explore Sysmon for other malicious executable files that the web server might have spawned
+This query focuses on process relationships from Sysmon logs, specifically when the parent process is Apache (httpd.exe).
+Select View: Table on the dropdown menu above the Event display field.
+
+Query: index=windows_sysmon ParentImage="*httpd.exe"
+
+Typically, Apache should only spawn worker threads, not system processes like cmd.exe or powershell.exe.
+
+
+-- Confirm Attacker Enumeration Activity --
+
+This query looks for command execution logs where cmd.exe ran the command whoami.
+Attackers often use the whoami command immediately after gaining code execution to determine which user account their malicious process is running as.
+
+Query: index=windows_sysmon *cmd.exe* *whoami*
+
+
+-- Identify Base64-Encoded PowerShell Payloads --
+
+Find all successfully encoded commands.
+This query detects PowerShell commands containing -EncodedCommand or Base64 text, a common technique attackers use to hide their real commands.
+
+index=windows_sysmon Image="*powershell.exe" (CommandLine="*enc*" OR CommandLine="*-EncodedCommand*" OR CommandLine="*Base64*")
+
+
+
+*
+
+
+
+
+
