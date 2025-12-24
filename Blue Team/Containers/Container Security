@@ -6,6 +6,7 @@
 • Applications at Scale
 • Docker
 • Escape Attack & Sockets
+• Challenge
 
 
 -- What Are Containers --
@@ -89,6 +90,33 @@ For example, creating a privileged container with access to the public internet 
 Containers use a client-server setup on the host. The CLI tools act as the client, sending requests to the container daemon, which handles the actual container management and execution. 
 The runtime exposes an API server via Unix sockets (runtime sockets) to handle CLI and daemon traffic. 
 If an attacker can communicate with that socket from inside the container, they can exploit the runtime (this is how we would create the privileged container with internet access).
+
+
+-- Challenge --
+
+Investigate the Docker layers and restore the defaced Hopperoo website to its original service: DoorDasher. 
+
+Let's check which services are running with Docker. Run the following command: docker ps
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
