@@ -98,26 +98,16 @@ Investigate the Docker layers and restore the defaced Hopperoo website to its or
 
 Let's check which services are running with Docker. Run the following command: docker ps
 
+Let's explore the uptime-checker: docker exec -it uptime-checker sh
 
+Check the socket access by running: ls -la /var/run/docker.sock
 
+The Docker documentation mentions that by default, there is a setting called "Enhanced Container Isolation" which blocks containers from mounting the Docker socket to prevent malicious access to the Docker Engine. 
+In some cases, like when running test containers, we need Docker socket access. The socket provides a means to access containers via the API directly. 
 
+By running docker ps again, we can confirm we can perform Docker commands and interact with the API; in other words, we can perform a Docker Escape attack! 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Access the deployer container, which is a privileged container. Run the following command: docker exec -it deployer bash
 
 
 *
