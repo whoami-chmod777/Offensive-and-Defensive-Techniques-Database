@@ -1,0 +1,69 @@
+
+--- Encoding and Decoding ---
+
+• Encoding and Decoding
+• CyberChef Overview
+• Simple Example
+• Inspecting Web Pages
+
+
+-- Encoding and Decoding --
+
+Encoding is a method to transform data to ensure compatibility between different systems. It differs from encryption in purpose and process. Decoding is the process of converting encoded data back to its original, readable, and usable form.
+
++-----------+---------------------------+---------------------------+
+|           | Encoding                  | Encryption                |
++-----------+---------------------------+---------------------------+
+| Purpose   | Compatibility, Usability  | Security, Confidentiality |
+| Process   | Standardized              | Algorithm + Key           |
+| Security  | No                        | Yes                       |
+| Speed     | Fast                      | Slow                      |
+| Examples  | Base64                    | TLS                       |
++-----------+---------------------------+---------------------------+
+
+
+-- CyberChef Overview --
+
+CyberChef is also known as the Cyber Swiss Army Knife. 
+
++------------+----------------------------------------------------------+
+| Area       | Description                                              |
++------------+----------------------------------------------------------+
+| Operations | Repository of diverse CyberChef capabilities             |
+| Recipe     | Fine-tune and chain the operations area                  |
+| Input      | Here you provide the input for your recipe               |
+| Output     | Here is the output of your recipe                        |
++------------+----------------------------------------------------------+
+
+
+-- Simple Example --
+
+Open either the online CyberChef version in your regular browser, or use the offline CyberChef version available in the bookmarks section of the AttackBox. 
+Drag and drop the To Base64 operation from the Operations area on the left side to the Recipe area in the center, and add IamRoot into the Input area.
+
+Add another operation, From Base64, to show the initial input again, showcasing chain operations.
+
+Note: You can enable/disable an operation in the recipe by toggling the middle button on the right of the operation.
+
+
+-- Inspecting Web Pages --
+
+Besides the rendered content of a web page, your browser usually receives and can show additional information. For this challenge, you will get the chance to have a deeper look at that information and put it to good use.
+
++------------------+----------------------------------------------------------------------------------+
+| Browser          | Menu path                                                                        |
++------------------+----------------------------------------------------------------------------------+
+| Chrome           | More tools > Developer tools                                                     |
+| Firefox          | Menu (≡) > More tools > Web Developer Tools                                      |
+| Microsoft Edge   | Settings and more (...) > More tools > Developer tools                           |
+| Opera            | Developer > Developer tools                                                      |
+| Safari           | Develop > Show Web Inspector                                                     |
+|                  | (Requires enabling the "Develop" menu in Preferences > Advanced)                 |
++------------------+----------------------------------------------------------------------------------+
+
+
+
+
+https://cyberchef.io/
+
+*
