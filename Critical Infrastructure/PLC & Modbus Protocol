@@ -1,0 +1,124 @@
+
+--- PLC & Modbus Protocol ---
+
+• What is a PLC
+• What is Modbus
+• Modbus Data Types
+• Modbus Addressing
+• Modbus TCP vs Serial Modbus
+• The Security Problem
+
+
+-- What is a PLC --
+
+A PLC (Programmable Logic Controller) is an industrial computer designed to control machinery and processes in real-world environments. Unlike your laptop or smartphone, PLCs are purpose-built machines engineered for extreme reliability and harsh conditions.
+
+PLCs are designed to:
+
+• Survive harsh environments - They operate flawlessly in extreme temperatures, constant vibration, dust, moisture, and electromagnetic interference. A PLC controlling warehouse robotics might endure freezing temperatures in winter storage areas and scorching heat near packaging machinery.
+• Run continuously without failure - PLCs operate 24/7 for years, sometimes decades, without rebooting. Industrial facilities can't afford downtime for software updates or system restarts. When a PLC starts running, it's expected to keep running indefinitely.
+• Execute control logic in real-time - PLCs respond to sensor inputs within milliseconds. When a package reaches the end of a conveyor belt, the PLC must instantly activate the robotic arm to catch it. These timing requirements are critical for safety and efficiency.
+• Interface directly with physical hardware - PLCs connect directly to sensors (measuring temperature, pressure, position, weight) and actuators (motors, valves, switches, robotic arms). They speak the electrical language of industrial machinery.
+
+
+-- What is Modbus --
+
+Modbus is the communication protocol that industrial devices use to talk to each other. Created in 1979 by Modicon (now Schneider Electric), it's one of the oldest and most widely deployed industrial protocols in the world. Its longevity isn't due to sophisticated features—quite the opposite. Modbus succeeded because it's simple, reliable, and works with almost any device.
+
+Think of Modbus as a basic request-response conversation:
+
+• Client (your computer): "PLC, what's the current value of register 0?"
+• Server (the PLC): "Register 0 currently holds the value 1."
+
+This simplicity makes Modbus easy to implement and debug, but it also means security was never a consideration. There's no authentication, no encryption, no authorisation checking. Anyone who can reach the Modbus port can read or write any value. It's the equivalent of leaving your house unlocked with a sign saying "Come in, everything's accessible!"
+
+
+-- Modbus Data Types --
+
+Modbus organises data into four distinct types, each serving a specific purpose in industrial automation:
+
++-------------------+------------------------------+-----------+--------------------------------------------------+
+| Type              | Purpose                      | Values    | Example Use Cases                                |
++-------------------+------------------------------+-----------+--------------------------------------------------+
+| Coils             | Digital outputs (on/off)     | 0 or 1    | Motor running? Valve open? Alarm active?         |
+| Discrete Inputs   | Digital inputs (on/off)      | 0 or 1    | Button pressed? Door closed? Sensor triggered?   |
+| Holding Registers | Analogue outputs (numbers)   | 0–65535   | Temperature setpoint, motor speed, zone select   |
+| Input Registers   | Analogue inputs (numbers)    | 0–65535   | Current temperature, pressure, flow rate         |
++-------------------+------------------------------+-----------+--------------------------------------------------+
+
+The distinction between inputs and outputs is important. Coils and Holding Registers are writable—you can change their values to control the system. 
+Discrete Inputs and Input Registers are read-only—they reflect sensor measurements that you observe but cannot directly modify.
+
+
+-- Modbus Addressing --
+
+Each data point in Modbus has a unique address—think of it like a house number on a street. When you want to read or write a specific value, you reference it by its address number.
+
+Critical detail: Modbus addresses start at 0, not 1. This zero-indexing catches many beginners off guard. When documentation mentions "Register 0," it literally means the first register, not the second.
+
+Examples from the TBFC system:
+
+• Holding Register 0 (HR0) = Package type selector
+• Holding Register 1 (HR1) = Delivery zone
+• Holding Register 4 (HR4) = System signature
+• Coil 10 (C10) = Inventory verification flag
+• Coil 11 (C11) = Protection mechanism flag
+• Coil 15 (C15) = Self-destruct status
+
+
+-- Modbus TCP vs Serial Modbus --
+
+Originally, Modbus operated over serial connections using RS-232 or RS-485 cables. Devices were physically connected in a network, and this physical isolation provided a degree of security—you needed physical access to the wiring to intercept or inject commands.
+
+Modern industrial systems use Modbus TCP, which encapsulates the Modbus protocol inside standard TCP/IP network packets. Modbus TCP servers listen on port 502 by default.
+
+This network connectivity brings enormous benefits—remote monitoring, easier integration with business systems, and centralised management. But it also exposes these historically isolated systems to network-based attacks.
+
+
+-- The Security Problem --
+
+Modbus has no built-in security mechanisms:
+
+• No authentication: The protocol doesn't verify who's making requests. Any client can connect and issue commands.
+• No encryption: All communication happens in plaintext. Anyone monitoring network traffic can see exactly what values are being read or written.
+• No authorisation: There's no concept of permissions. If you can connect, you can read and write anything.
+• No integrity checking: Beyond basic checksums for transmission errors, there's no cryptographic verification that commands haven't been tampered with.
+
+Modern security solutions exist—VPNs, firewalls, Modbus security gateways—but they're add-ons, not part of the protocol itself. 
+Many industrial facilities haven't implemented these protections, either due to cost concerns, compatibility issues with legacy equipment, or a simple lack of awareness.
+
+
+*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
