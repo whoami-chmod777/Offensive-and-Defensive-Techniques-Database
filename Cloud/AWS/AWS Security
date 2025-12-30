@@ -153,18 +153,120 @@ Looks like Sir Carrotbane has access to enumerate all the different kinds of use
 
 -- Assuming Roles --
 
+• Enumerating Roles
+• Assuming Role
 
 
+➜ Enumerating Roles
+
+The sts:AssumeRole action allows to assume roles. 
+
+Listing the existing roles in the account: aws iam list-roles
+
+Check the inline policies: aws iam list-role-policies --role-name bucketmaster
+
+Check attached policies: aws iam list-attached-role-policies --role-name bucketmaster
+
+Check grants permissions to a policy: aws iam get-role-policy --role-name bucketmaster --policy-name BucketMasterPolicy
 
 
+{
+    "Roles": [
+        {
+            "Path": "/",
+            "RoleName": "bucketmaster",
+            "RoleId": "AROARZPUZDIKJJZ6OWN27",
+            "Arn": "arn:aws:iam::123456789012:role/bucketmaster",
+            "CreateDate": "2025-11-26T01:54:01.342203+00:00",
+            "AssumeRolePolicyDocument": {
+                "Statement": [
+                    {
+                        "Action": "sts:AssumeRole",
+                        "Effect": "Allow",
+                        "Principal": {
+                            "AWS": "arn:aws:iam::123456789012:user/sir.carrotbane"
+                        }
+                    }
+                ],
+                "Version": "2012-10-17"
+            },
+            "MaxSessionDuration": 3600
+        }
+    ]
+}
 
 
+{
+    "RoleName": "bucketmaster",
+    "PolicyName": "BucketMasterPolicy",
+    "PolicyDocument": {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Action": [
+                    "s3:ListAllMyBuckets"
+                ],
+                "Effect": "Allow",
+                "Resource": "*",
+                "Sid": "ListAllBuckets"
+            },
+            {
+                "Action": [
+                    "s3:ListBucket"
+                ],
+                "Effect": "Allow",
+                "Resource": [
+                    "arn:aws:s3:::easter-secrets-123145",
+                    "arn:aws:s3:::bunny-website-645341"
+                ],
+                "Sid": "ListBuckets"
+            },
+            {
+                "Action": [
+                    "s3:GetObject"
+                ],
+                "Effect": "Allow",
+                "Resource": "arn:aws:s3:::easter-secrets-123145/*",
+                "Sid": "GetObjectsFromEasterSecrets"
+            }
+        ]
+    }
 
 
+We can see that the bucketmaster role can perform three different actions (ListAllBuckets, ListBucket and GetObject) on some resources of a service named S3. 
 
+➜ Assuming Role
 
+To gain privileges assigned by the bucketmaster role, we need to assume it. We can use AWS STS to obtain the temporary credentials that enable us to assume this role. 
 
+Command: aws sts assume-role --role-arn arn:aws:iam::123456789012:role/bucketmaster --role-session-name TBFC
 
+This command will ask STS, the service in charge of AWS security tokens, to generate a temporary set of credentials to assume the bucketmaster role. The temporary credentials will be referenced by the session-name "TBFC"
+
+{
+    "Credentials": {
+        "AccessKeyId": "ASIARZPUZDIKDM4AUIJK",
+        "SecretAccessKey": "WUzUY46CdgMOLkhuO5llc4G0W92QUaOBNhhzfmSm",
+        "SessionToken": "FQoGZXIvYXdzEBYaDdK2KFhRR9GhgoUk9LmzZZjzjJw+r++BFMc7nXyjTE3swUL4ddYyyl47fn6DJeR760L2LxSI+5ur33zUe8b5HwaSqkAbb4xXZdGkvcBv0VWVaLYAMHbbOs7M6WT7ffgcW7Z0bj4I3lB9sN056nuKvcmOG7PQpu/+1wZ2hq1e77/toQKKO+UkhCJU+qMK9iNChMfnuJvFciudTVuyqgG2lhbLK53WWnFxVCHhzjNnCZzZ5QzlBockhcZAq/tVUsp4IVFcz/cOqnT5Xdb5Ovz2Wc9nHOjrRjApIWqNqNb+Saj37le7FZEytuYlpSRtG1QP7n6vdtGPBb1t1ywT2So=",
+        "Expiration": "2025-11-26T03:40:11.117460+00:00"
+    },
+    "AssumedRoleUser": {
+        "AssumedRoleId": "AROARZPUZDIKJJZ6OWN27:TBFC",
+        "Arn": "arn:aws:sts::123456789012:assumed-role/bucketmaster/TBFC"
+    },
+    "PackedPolicySize": 6
+}
+
+The output will provide us the credentials we need to assume this role, specifically the AccessKeyID, SecretAccessKey and SessionToken. 
+To be able to use these, run the following commands in the terminal, replacing with the exact credentials that you received on running the assume-role command
+
+user@machine$ export AWS_ACCESS_KEY_ID="ASIAxxxxxxxxxxxx"
+user@machine$ export AWS_SECRET_ACCESS_KEY="abcd1234xxxxxxxxxxxx"
+user@machine$ export AWS_SESSION_TOKEN="FwoGZXIvYXdzEJr..."
+
+Once we have done that, we can officially use the permissions granted by the bucketmaster role. 
+
+Check the correctly assumed role: aws sts get-caller-identity
 
 
 -- Grabbing a file from S3 --
