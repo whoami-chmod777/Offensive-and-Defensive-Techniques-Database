@@ -1,1 +1,200 @@
 
+--- AWS Security ---
+
+• Introduction
+• IAM: Users, Roles, Groups and Policies
+• Enumerating User's Permissions
+• Assuming Roles
+• Grabbing a file from S3
+
+
+-- Introduction --
+
+AWS accounts can be accessed programmatically by using an Access Key ID and a Secret Access Key. The AWS CLI will look for credentials at ~/.aws/credentials, where you should see something similar to the following:
+
+aws_access_key_id = AKIAU2VYTBGYOYXYZXYZ
+aws_secret_access_key = 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
+
+Amazon Security Token Service (STS) allows us to utilise the credentials of a user that we have saved during our AWS CLI configuration. We can use the get-caller-identity call to retrieve information about the user we have configured for the AWS CLI. 
+
+Let's run the following command: aws sts get-caller-identity
+
+user@machine$ aws sts get-caller-identity
+{
+    "UserId": "AIDAU2VYTBGYOHNOCJMX3",
+    "Account": "332173347248",
+    "Arn": "arn:aws:iam::332173347248:user/sir.carrotbane"
+}
+
+Seeing the output, the elf was overjoyed. The credentials work, and as can be seen by the name at the end, they belong to Sir Carrotbane. The elf can now attempt to regain access to the cloud network using these credentials.
+
+
+-- IAM: Users, Roles, Groups and Policies --
+
+• IAM Overview
+• IAM Users
+• IAM Groups
+• IAM Roles
+• IAM Policies
+
+
+➜ IAM Overview
+
+Amazon Web Services utilises the Identity and Access Management (IAM) service to manage users and their access to various resources, including the actions that can be performed against those resources. 
+Therefore, it is crucial to ensure that the correct access is assigned to each user according to the requirements. 
+Misconfiguring IAM has led to several high-profile security incidents in the past, giving attackers access to resources they were not supposed to access. 
+Companies like Toyota, Accenture and Verizon have been victims of such attacks in the past, often exposing customer data or sensitive documents. 
+
+➜ IAM Users
+
+A user represents a single identity in AWS. Each user has a set of credentials, such as passwords or access keys, that can be used to access resources. Furthermore, permissions can be granted at a user level, defining the level of access a user might have.
+
+➜ IAM Groups
+
+Multiple users can be combined into a group. This can be done to ease the access management for multiple users. 
+For example, in an organisation employing hundreds of thousands of people, there might be a handful of people who need write access to a certain database. 
+Instead of granting access to each user individually, the admin can grant access to a group and add all users who require write access to that group. When a user no longer needs access, they can be removed from the group.
+
+➜ IAM Roles
+
+An IAM Role is a temporary identity that can be assumed by a user, as well as by services or external accounts, to get certain permissions. 
+Think of Sir Carrotbane, and how, depending on the battle ahead, he might need to assume the role of an attacker or a defender. 
+When becoming an attacker, he will get permission to wield his shiny swords, but when assuming the role of a defender, he will instead get permission to carry a shield to better defend King Malhare.
+
+➜ IAM Policies
+
+Access provided to any user, group or role is controlled through IAM policies. A policy is a JSON document that defines the following:
+
+• What action is allowed (Action)
+• On which resources (Resource)
+• Under which conditions (Condition)
+• For whom (Principal)
+
+Consider the following hypothetical policy:
+      
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowSpecificUserReadAccess",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::123456789012:user/Alice"
+      },
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Resource": "arn:aws:s3:::my-private-bucket/*"
+    }
+  ]
+}
+
+    
+-- Enumerating User's Permissions --
+
+➜ Enumerating Users
+
+Let's begin by enumerating users. We can start interacting with the AWS CLI to find more information.
+
+See lists of all users: aws iam list-users
+
+➜ Enumerating User Policies
+
+Policies can be inline or attached. 
+
+Inline policies are assigned directly in the user (or group/role) profile and hence will be deleted if the identity is deleted. These can be considered as hard-coded policies as they are hard-coded in the identity definitions. 
+Attached policies, also called managed policies, can be considered reusable. An attached policy requires only one change in the policy, and every identity that policy is attached to will inherit that change automatically.
+
+Let's see assigned inline policies: aws iam list-user-policies --user-name sir.carrotbane 
+
+Let's see assigned attached policies: aws iam list-attached-user-policies --user-name sir.carrotbane
+
+Let's see group membership: aws iam list-groups-for-user --user-name sir.carrotbane
+
+Check grants permissions to a policy: aws iam get-user-policy --policy-name POLICYNAME --user-name sir.carrotbane
+
+{
+    "UserName": "sir.carrotbane",
+    "PolicyName": "POLICYNAME",
+    "PolicyDocument": {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Action": [
+                    "iam:ListUsers",
+                    "iam:ListGroups",
+                    "iam:ListRoles",
+                    "iam:ListAttachedUserPolicies",
+                    "iam:ListAttachedGroupPolicies",
+                    "iam:ListAttachedRolePolicies",
+                    "iam:GetUserPolicy",
+                    "iam:GetGroupPolicy",
+                    "iam:GetRolePolicy",
+                    "iam:GetUser",
+                    "iam:GetGroup",
+                    "iam:GetRole",
+                    "iam:ListGroupsForUser",
+                    "iam:ListUserPolicies",
+                    "iam:ListGroupPolicies",
+                    "iam:ListRolePolicies",
+                    "sts:AssumeRole"
+                ],
+                "Effect": "Allow",
+                "Resource": "*",
+                "Sid": "ListIAMEntities"
+            }
+        ]
+    }
+}
+
+
+Looks like Sir Carrotbane has access to enumerate all the different kinds of users, groups, roles and policies (IAM entities), but that is about it
+
+
+-- Assuming Roles --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Grabbing a file from S3 --
+
+
+
+
+
+
+
+*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
