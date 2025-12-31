@@ -23,13 +23,33 @@
 
 -- Core Features --
 -- Data sources --
+
+
 -- Common Amass Commands --
-    1. Basic Usage
-    2. File Input
-    3. Output to File
-    4. Brute Force Subdomain Enumeration
-    5. DNS Resolution
-    6. Verbose Output
-    7. Data Sources
-    8. Help and Usage Information
+
+1. Basic Usage
+
+amass enum -d <target_domain>
+
+2. File Input
+
+
+3. Output to File
+
+
+4. Brute Force Subdomain Enumeration
+
+
+5. DNS Resolution
+
+
+6. Verbose Output
+
+
+7. Data Sources
+
+
+8. Help and Usage Information
+
+
 -- Output Examples of Amass Commands --
