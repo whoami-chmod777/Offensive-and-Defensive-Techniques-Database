@@ -241,7 +241,7 @@ To gain privileges assigned by the bucketmaster role, we need to assume it. We c
 
 Command: aws sts assume-role --role-arn arn:aws:iam::123456789012:role/bucketmaster --role-session-name TBFC
 
-This command will ask STS, the service in charge of AWS security tokens, to generate a temporary set of credentials to assume the bucketmaster role. The temporary credentials will be referenced by the session-name "TBFC"
+This command will ask STS, the service in charge of AWS security tokens, to generate a temporary set of credentials to assume the bucketmaster role. The temporary credentials will be referenced by the session-name "TBFC" (you can set any name you want for the session).
 
 {
     "Credentials": {
@@ -271,11 +271,17 @@ Check the correctly assumed role: aws sts get-caller-identity
 
 -- Grabbing a file from S3 --
 
+Before we continue, we need to know what exactly is S3. Amazon S3 stands for Simple Storage Service. It is an object storage service provided by Amazon Web Services that can store any type of object such as images, documents, logs and backup files. 
+Companies often use S3 to store data for various reasons, such as reference images for their website, documents to be shared with clients, or files used by internal services for internal processing. 
+Any object you store in S3 will be put into a "Bucket". You can think of a bucket as a directory where you can store files, but in the cloud.
 
+➜ Listing Contents From a Bucket
 
+List the available S3 buckets: aws s3api list-buckets
 
+Check out the contents of this directory: aws s3api list-objects --bucket easter-secrets-123145
 
-
+Copy files to the local machine: aws s3api get-object --bucket easter-secrets-123145 --key cloud_password.txt cloud_password.txt
 
 *
 
