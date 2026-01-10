@@ -1,0 +1,203 @@
+
+--- curl ---
+
+Hand-On Web Exploitation
+HTTP Requests
+curl Cheat Sheet
+
+
+-- Hand-On Web Exploitation --
+
+curl https://curl.ctfio.com	#Basic Request
+
+curl https://curl.ctfio.com/endpoint_1	#Choosing a Path
+
+curl https://curl.ctfio.com/endpoint_2?show=flag	#Query Strings
+
+curl -X POST https://curl.ctfio.com/endpoint_3	#Method Type
+
+curl -X POST https://curl.ctfio.com/endpoint_4 -d "show=flag"	#Post Data
+
+curl https://curl.ctfio.com/endpoint_5 -H "Show: flag"	#Headers
+
+curl https://curl.ctfio.com/endpoint_6 -H "Cookie: show=flag"	#Cookies
+curl https://curl.ctfio.com/endpoint_6 -b "show=flag"	#Cookies
+
+curl https://curl.ctfio.com/endpoint_7?show=fl%26ag	 #URL Encoding
+
+curl -u admin:password https://curl.ctfio.com/endpoint_8	#Authorization by username and password
+curl https://curl.ctfio.com/endpoint_8 -H "Authorization: Basic YWRtaW46cGFzc3dvcmQ="	#Authorization by Authorization header
+
+
+========================
+      HTTP Requests
+========================
+
+200: Make a successful request
+
+curl https://82jeah50.eu2.ctfio.com/
+
+
+301: Permanent Redirect
+
+curl https://82jeah50.eu2.ctfio.com/redirect
+
+
+302: Temporary Redirect
+
+curl https://82jeah50.eu2.ctfio.com/redirect2
+
+
+404: Page Not Found
+
+curl https://82jeah50.eu2.ctfio.com/missing
+
+
+405: Invalid Request Type
+
+curl -X POST https://82jeah50.eu2.ctfio.com/method
+
+
+400: Client side error, missing parameters
+
+curl "https://82jeah50.eu2.ctfio.com/params?id=1"
+
+
+401: Authentication Errors
+
+curl -H "X-Token: 12345" https://82jeah50.eu2.ctfio.com/authenticate
+
+
+403: Forbidden Requests
+
+curl -H "X-Token: 12345" https://82jeah50.eu2.ctfio.com/protected
+
+
+201: Creating a resource
+
+curl -X POST -d "username=test&password=pass123" \https://82jeah50.eu2.ctfio.com/create
+
+
+Delete Method
+
+curl -X DELETE https://82jeah50.eu2.ctfio.com/delete-account
+
+
+Passing Cookies
+
+curl -b "admin=1" https://82jeah50.eu2.ctfio.com/cookie
+
+
+TIP: Use 'man curl' or 'curl --help all' for full options.
+
+
+
+ ____ _   _ ____  _       ____ _   _ _____    ____  _   _ _____ _____ _____
+ / ___| | | |  _ \| |     / ___| | | | ____|  / ___|| | | | ____| ____|_   _|
+| |   | | | | |_) | |    | |   | |_| |  _|    \___ \| |_| |  _| |  _|   | |
+| |___| |_| |  _ <| |___ | |___|  _  | |___    ___) |  _  | |___| |___  | |
+ \____|\___/|_| \_\_____| \____|_| |_|_____|  |____/|_| |_|_____|_____| |_|
+
+           curl commands (authorized testing / debugging)
+------------------------------------------------------------------------------
+
+BASICS
+  curl https://example.com
+  curl -v https://example.com                 # verbose (request/response)
+  curl -i https://example.com                 # include response headers
+  curl -I https://example.com                 # HEAD request (headers only)
+  curl -s https://example.com                 # silent
+  curl -S -s https://example.com              # silent but show errors
+  curl -L https://example.com                 # follow redirects
+  curl --http1.1 https://example.com          # force HTTP/1.1
+  curl --http2 https://example.com            # use HTTP/2 if supported
+
+
+METHODS
+  curl -X GET  https://example.com/resource
+  curl -X POST https://example.com/resource
+  curl -X PUT  https://example.com/resource/1
+  curl -X PATCH https://example.com/resource/1
+  curl -X DELETE https://example.com/resource/1
+
+
+QUERY / URL ENCODING
+  curl "https://example.com/search?q=test&page=2"
+  curl  https://curl.ctfio.com/endpoint_2?show=flag 
+  curl -G https://example.com/search --data-urlencode "q=hello world"
+
+
+HEADERS
+  curl -H "Accept: application/json" https://example.com/api
+  curl -H "User-Agent: curl-lab/1.0" https://example.com
+  curl -H "X-Request-Id: 123" https://example.com
+
+
+JSON BODY
+  curl -X POST https://example.com/api/items \
+    -H "Content-Type: application/json" \
+    -d '{"name":"widget","qty":2}'
+
+
+FORM / FILE UPLOAD (multipart)
+  curl -X POST https://example.com/upload \
+    -F "meta={\"tag\":\"demo\"};type=application/json" \
+    -F "file=@./report.pdf"
+
+
+RAW DATA / FILE AS BODY
+  curl -X POST https://example.com/ingest \
+    -H "Content-Type: text/plain" \
+    --data-binary @./payload.txt
+
+
+AUTHENTICATION
+  curl -u "suggested-user:secret" https://example.com/private     # Basic auth
+  curl -H "Authorization: Bearer TOKEN" https://example.com/api   # Bearer token
+  curl --oauth2-bearer TOKEN https://example.com/api              # alt form
+
+
+COOKIES
+  curl -c cookies.txt https://example.com/login                   # save cookies
+  curl -b cookies.txt https://example.com/account                 # send cookies
+  curl -b "session=abc123" https://example.com                    # inline cookie
+
+
+DOWNLOADS
+  curl -O https://example.com/file.zip                            # keep name
+  curl -o out.zip https://example.com/file.zip                    # custom name
+  curl -C - -O https://example.com/big.iso                        # resume
+  curl --limit-rate 200k -O https://example.com/big.iso           # throttle
+
+
+TIMEOUTS / RETRIES
+  curl --connect-timeout 5 --max-time 20 https://example.com
+  curl --retry 3 --retry-delay 2 --retry-all-errors https://example.com
+
+
+TLS / CERTS (for debugging your own endpoints)
+  curl --tlsv1.2 https://example.com
+  curl --cacert ./ca.pem https://internal.example.com
+  curl --cert ./client.crt --key ./client.key https://mtls.example.com
+  curl -k https://example.com                                     # INSECURE (lab only)
+
+
+PROXIES (legit debugging)
+  curl -x http://127.0.0.1:8080 https://example.com               # HTTP proxy
+  curl --socks5 127.0.0.1:9050 https://example.com                # SOCKS5 proxy
+
+
+DIAGNOSTICS
+  curl -w "\nHTTP:%{http_code}  Time:%{time_total}s  Size:%{size_download}\n" \
+    -o /dev/null -s https://example.com
+
+
+PARALLEL (curl 7.66+)
+  curl --parallel --parallel-immediate -O https://example.com/a -O https://example.com/b
+
+
+SAVE REQUEST/RESPONSE (reproducibility)
+  curl --trace-ascii trace.txt https://example.com
+  curl --dump-header headers.txt https://example.com
+
+
