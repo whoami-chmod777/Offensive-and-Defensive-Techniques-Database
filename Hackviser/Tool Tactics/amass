@@ -98,12 +98,51 @@ amass --help
 
 -- Output Examples of Amass Commands --
 
+-- Output Examples of Amass Commands --
+
++-------------------------------+-------------------------------------------+
+| Command                       | Example Usage                             |
++-------------------------------+-------------------------------------------+
+| Basic Usage                   | amass enum -d example.com                 |
++-------------------------------+-------------------------------------------+
+| File Input                    | amass enum -df domains.txt                |
++-------------------------------+-------------------------------------------+
+| Output to File                | amass enum -d example.com -o results.txt  |
++-------------------------------+-------------------------------------------+
+| JSON Output                   | amass enum -d example.com -o results.json |
++-------------------------------+-------------------------------------------+
+| CSV Output                    | amass enum -d example.com -o results.csv  |
++-------------------------------+-------------------------------------------+
+| Verbose Output                | amass enum -d example.com -v              |
++-------------------------------+-------------------------------------------+
+| Silent Mode                   | amass enum -d example.com -silent         |
++-------------------------------+-------------------------------------------+
+| Brute Force Enumeration       | amass enum -d example.com -brute -w list  |
++-------------------------------+-------------------------------------------+
+| DNS Resolution                | amass resolve -d example.com              |
++-------------------------------+-------------------------------------------+
+| Include Specific Domain       | amass enum -d example.com -include sub    |
++-------------------------------+-------------------------------------------+
+| Exclude Specific Domain       | amass enum -d example.com -exclude sub    |
++-------------------------------+-------------------------------------------+
+| Rate Limit                    | amass enum -d example.com -rl 100          |
++-------------------------------+-------------------------------------------+
+| Timeout Configuration         | amass enum -d example.com -timeout 10     |
++-------------------------------+-------------------------------------------+
+| Data Sources                  | amass enum -d example.com -src             |
++-------------------------------+-------------------------------------------+
+| Passive Mode                  | amass enum -passive -d example.com        |
++-------------------------------+-------------------------------------------+
+| Active Mode                   | amass enum -active -d example.com         |
++-------------------------------+-------------------------------------------+
+| Version Information           | amass -version                            |
++-------------------------------+-------------------------------------------+
+| Output Format                 | amass enum -d example.com -o out -format  |
++-------------------------------+-------------------------------------------+
 
 
 
-
-
-
+*
 
 
 
