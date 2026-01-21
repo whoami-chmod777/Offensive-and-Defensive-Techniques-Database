@@ -55,14 +55,14 @@ It is widely used among security professionals and researchers to discover asset
 
 -- Common Amass Commands --
 
-1. Basic Usage: This command discovers subdomains for the specified target domain: amass enum -d <target_domain>
-2. File Input: This command reads a list of domains from a file and discovers subdomains for each one: amass enum -df <file>
-3. Output to File: This command saves the discovered subdomains in a specified output file. This gives the Amass tool the ability for post-test analysis: amass enum -d <target_domain> -o <output_file>
-4. Brute Force Subdomain Enumeration: Use brute forcing to discover subdomains with a wordlist: amass enum -d <target_domain> -brute -w <wordlist>
-5. DNS Resolution: Resolve discovered subdomains to their respective IP addresses: amass resolve -d <target_domain>
-6. Verbose Output: amass enum -d <target_domain> -v
-7. Data Sources: amass enum -d <target_domain> -src
-8. Help and Usage Information: amass -h, amass --help
+1. Basic Usage. This command discovers subdomains for the specified target domain: amass enum -d <target_domain>
+2. File Input. This command reads a list of domains from a file and discovers subdomains for each one: amass enum -df <file>
+3. Output to File. This command saves the discovered subdomains in a specified output file. This gives the Amass tool the ability for post-test analysis: amass enum -d <target_domain> -o <output_file>
+4. Brute Force Subdomain Enumeration. Use brute forcing to discover subdomains with a wordlist: amass enum -d <target_domain> -brute -w <wordlist>
+5. DNS Resolution. Resolve discovered subdomains to their respective IP addresses: amass resolve -d <target_domain>
+6. Verbose Output. amass enum -d <target_domain> -v
+7. Data Sources. amass enum -d <target_domain> -src
+8. Help and Usage Information. amass -h, amass --help
 
 
 -- Output Examples of Amass Commands --
