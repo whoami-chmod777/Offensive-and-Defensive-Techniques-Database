@@ -51,13 +51,13 @@ That's why assetfinder is a tool to help us obtain subdomains of our target. Ass
 
 -- Common Assetfinder Commands --
 
-1. Basic Usage: This command discovers subdomains for the specified target domain: assetfinder <target_domain>
-2. File Input: This command reads a list of domains from a file and discovers subdomains for each one: assetfinder -subs-only -f <file>
-3. Output to File: This command saves the discovered subdomains to a specified output file: assetfinder <target_domain> -o <output_file>
-4. Include or Exclude Specific Domains: This command allows users to include or exclude specific domains during the discovery process: assetfinder --include <domain> <target_domain>, assetfinder --exclude <domain> <target_domain>
-5. Custom User-Agent: This command sets a custom User-Agent string for the requests made by Assetfinder: assetfinder -user-agent "<User-Agent>"
-6. Verbose Output: This command enables verbose output for detailed information about the discovery process: assetfinder -v <target_domain>
-7. Help and Usage Information: Displays help information, including available commands and options for using Assetfinder: assetfinder -h, assetfinder --help
+1. Basic Usage. This command discovers subdomains for the specified target domain: assetfinder <target_domain>
+2. File Input. This command reads a list of domains from a file and discovers subdomains for each one: assetfinder -subs-only -f <file>
+3. Output to File. This command saves the discovered subdomains to a specified output file: assetfinder <target_domain> -o <output_file>
+4. Include or Exclude Specific Domains. This command allows users to include or exclude specific domains during the discovery process: assetfinder --include <domain> <target_domain>, assetfinder --exclude <domain> <target_domain>
+5. Custom User-Agent. This command sets a custom User-Agent string for the requests made by Assetfinder: assetfinder -user-agent "<User-Agent>"
+6. Verbose Output. This command enables verbose output for detailed information about the discovery process: assetfinder -v <target_domain>
+7. Help and Usage Information. Displays help information, including available commands and options for using Assetfinder: assetfinder -h, assetfinder --help
 
 
 -- Output Examples of Assetfinder Commands --
