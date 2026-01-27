@@ -1,0 +1,136 @@
+
+--- Detecting Network Attacks with Wireshark ---
+
+====================================================================
+WIRESHARK DISPLAY FILTERS – NETWORK ATTACK DETECTION CHEAT SHEET
+====================================================================
+
+In this article, we will be looking on Wireshark display filters and see how we could detect various network attacks with them in Wireshark.
+The purpose of this notes is to provide a list of actionable and practical methods for detecting these network attacks using Wireshark filters.
+
+--------------------------------------------------------------------
+TABLE OF CONTENTS
+--------------------------------------------------------------------
+
+• Detection of host discovery (recon)
+  - ARP scanning
+  - IP Protocol scan
+  - ICMP ping sweeps
+  - TCP ping sweeps
+  - UDP ping sweeps
+
+• Detection of network port scanning
+  - TCP SYN / stealth scan
+  - TCP Connect() scan
+  - TCP Null scan
+  - TCP FIN scan
+  - TCP Xmass scan
+  - UDP port scan
+
+• Detection of network attacks
+  - ARP poisoning
+  - ICMP flood
+  - VLAN hopping
+  - Unexplained packet loss
+
+• Detection of wireless network attacks
+  - Client deauthentication
+  - Client disassociation
+  - Fake AP beacon flood
+  - Authentication denial of service
+
+====================================================================
+1. DETECTION OF HOST DISCOVERY (RECON)
+====================================================================
+
+This section contains Wireshark filters that could help in identifying adversaries trying to discover alive systems on the network during the reconnaissance phase.
+
+---------------------+-------------------------------------------+----------------------------
+Technique            | Wireshark Display Filter                  | Command / Tool
+---------------------+-------------------------------------------+----------------------------
+ARP scanning         | arp.dst.hw_mac == 00:00:00:00:00:00       | arp-scan -l
+IP protocol scan     | icmp.type == 3 and icmp.code == 2         | nmap -sO <target>
+ICMP ping sweep      | icmp.type == 8 or icmp.type == 0          | nmap -sn -PE <subnet>
+TCP ping sweeps      | tcp.dstport == 7                          | nmap -sn -PS/-PA <subnet>
+UDP ping sweeps      | udp.dstport == 7                          | nmap -sn -PU <subnet>
+---------------------+-------------------------------------------+----------------------------
+
+
+====================================================================
+2. DETECTION OF NETWORK PORT SCANNING
+====================================================================
+
+This section contains Wireshark filters useful for identifying various network port scans, port sweeps and enumeration techniques commonly used by attackers.
+
+-----------------------+-----------------------------------------------------------------------
+Technique              | Wireshark Display Filter
+-----------------------+-----------------------------------------------------------------------
+TCP SYN / stealth scan | tcp.flags.syn == 1 and tcp.flags.ack == 0 and tcp.window_size <= 1024
+TCP Connect() scan     | tcp.flags.syn == 1 and tcp.flags.ack == 0 and tcp.window_size > 1024
+TCP Null scan          | tcp.flags == 0
+TCP FIN scan           | tcp.flags == 0x001
+TCP Xmass scan         | tcp.flags.fin == 1 && tcp.flags.push == 1 && tcp.flags.urg == 1
+UDP port scan          | icmp.type == 3 and icmp.code == 3
+-----------------------+-----------------------------------------------------------------------
+
+-----------------------+-------------------------------------
+Technique              | Typical Command / Tool
+-----------------------+-------------------------------------
+TCP SYN / stealth scan | nmap -sS <target>
+TCP Connect() scan     | nmap -sT <target>
+TCP Null scan          | nmap -sN <target>
+TCP FIN scan           | nmap -sF <target>
+TCP Xmass scan         | nmap -sX <target>
+UDP port scan          | nmap -sU <target>
+-----------------------+-------------------------------------
+
+
+====================================================================
+3. DETECTION OF NETWORK ATTACKS
+====================================================================
+
+This section contains Wireshark filters useful for identifying active network attacks such as poisoning, flooding or misconfiguration abuse.
+
+------------------------+----------------------------------------------------------------
+Technique               | Wireshark Display Filter
+------------------------+----------------------------------------------------------------
+ARP poisoning           | arp.duplicate-address-detected or arp.duplicate-address-frame
+ICMP flood              | icmp and data.len > 48
+VLAN hopping            | dtp or vlan.too_many_tags
+Unexplained packet loss | tcp.analysis.lost_segment or tcp.analysis.retransmission
+------------------------+----------------------------------------------------------------
+
+------------------------+-----------------------------------
+Technique               | Typical Command / Tool
+------------------------+-----------------------------------
+ARP poisoning           | arpspoof, ettercap
+ICMP flood              | fping, hping
+VLAN hopping            | yersinia, frogger
+Unexplained packet loss | n/a
+------------------------+-----------------------------------
+
+
+====================================================================
+4. DETECTION OF WIRELESS NETWORK ATTACKS
+====================================================================
+
+This section contains Wireshark filters useful for identifying common wireless attacks such as deauthentication, disassociation and denial of service against wireless clients or access points.
+
+-----------------------------+------------------------------
+Technique                    | Wireshark Display Filter
+-----------------------------+------------------------------
+Client deauthentication      | wlan.fc.type_subtype == 12
+Client disassociation        | wlan.fc.type_subtype == 10
+Fake AP beacon flood         | wlan.fc.type_subtype == 8
+Authentication denial of svc | wlan.fc.type_subtype == 11
+-----------------------------+------------------------------
+
+-----------------------------+------------------------------
+Technique                    | Typical Command / Tool
+-----------------------------+------------------------------
+Client deauthentication      | aireplay-ng, mdk3, mdk4
+Client disassociation        | mdk3, mdk4
+Fake AP beacon flood         | mdk3, mdk4
+Authentication denial of svc | mdk3, mdk4
+-----------------------------+------------------------------
+
