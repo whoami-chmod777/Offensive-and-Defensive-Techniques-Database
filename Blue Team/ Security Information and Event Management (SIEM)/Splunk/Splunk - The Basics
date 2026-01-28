@@ -7,6 +7,7 @@ Iwill explore the basics of Splunk and its functionalities, and how it provides 
 • Splunk Components
 • Navigating Splunk
 • Adding Data
+• Syntax Examples 
 
 
 -- Splunk Components --
@@ -68,31 +69,56 @@ The next section is Explore Splunk . This panel contains quick links to add data
 
 The last section is the Home Dashboard. By default, no dashboards are displayed. You can choose from a range of dashboards readily available within your Splunk instance. 
 You can select a dashboard from the dropdown menu or by visiting the dashboards listing page.
-
 You can also create dashboards and add them to the Home Dashboard. The dashboards you create can be viewed separately from the other dashboards by clicking on the Yours tab.
 
-Please review the Splunk documentation on Navigating Splunk here.
 
 https://docs.splunk.com/Documentation/Splunk/8.1.2/SearchTutorial/NavigatingSplunk
 
 
-
 -- Adding Data --
 
+Splunk can ingest any data. According to the Splunk documentation, when data is added to Splunk, the data is processed and transformed into a series of individual events. 
+The data sources can be event logs, website logs, firewall logs, etc. The data sources are grouped into categories.
+
++------------------------+--------------------------------------------------------------------------------------------+
+| Data source            | Description                                                                                |
++------------------------+--------------------------------------------------------------------------------------------+
+| Files and directories  | Most data that you might be interested in comes directly from files and directories.       |
+| Network events         | The Splunk software can index remote data from any network port and SNMP events            |
+|                        | from remote devices.                                                                       |
+| IT Operations          | Data from IT Ops, such as Nagios, NetApp, and Cisco.                                       |
+| Cloud services         | Data from Cloud services, such as AWS and Kinesis.                                         |
+| Database services      | Data from databases such as Oracle, MySQL, and Microsoft SQL Server.                       |
+| Security services      | Data from security services such as McAfee, Microsoft Active Directory, and                |
+|                        | Symantec Endpoint Protection.                                                              |
+| Virtualization services| Data from virtualization services such as VMware and XenApp.                               |
+| Application servers    | Data from application servers such as JMX & JMS, WebLogic, and WebSphere.                  |
+| Windows sources        | The Windows version of Splunk software accepts a wide range of Windows-specific            |
+|                        | inputs, including Windows Event Log, Windows Registry, WMI, Active Directory,              |
+|                        | and Performance monitoring.                                                                |
+| Other sources          | Other input sources are supported, such as FIFO queues and scripted inputs for getting     |
+|                        | data from APIs and other remote data interfaces.                                           |
++------------------------+--------------------------------------------------------------------------------------------+
+
+In this task, we're going to focus on VPN logs. We're presented with the following screen when we click on the Add Data link on the Splunk home screen.
+
+We will use the Upload Option to upload the data from our local machine.
+
+
+-- Syntax Examples --
+
+index=vpn_logs
+index=vpn_logs UserName=Maleena
+index=vpn_logs Source_ip="107.14.182.38"
+index="vpn_logs" Source_Country!=France
+
+index="vpn_logs" Source_ip="107.3.206.58" 
+| stats count
 
 
 
 
-
-
-
-
-
-
-
-
-
-
+*
 
 
 
