@@ -45,45 +45,35 @@ Let's look at each section of this home screen.
 
 ➜ Splunk Bar
 
-The top panel is the Splunk Bar: 
+The top panel is the Splunk Bar. In the Splunk Bar, we have the following options available:
 
-An image showing the Splunk Bar
-
-In the Splunk Bar, we have the following options available:
-
-    Messages: View system-level notifications and messages.
-    Settings: Configure Splunk instance settings.
-    Activity: Review the progress of search jobs and processes.
-    Help: View tutorials and documentation.
-    Find: Search across the App.
+• Messages: View system-level notifications and messages.
+• Settings: Configure Splunk instance settings.
+• Activity: Review the progress of search jobs and processes.
+• Help: View tutorials and documentation.
+• Find: Search across the App.
 
 The Splunk Bar, allows users to switch between installed Splunk apps instead of using the Apps panel.
 
-Apps Panel  
+➜ Apps Panel  
 
 Next is the Apps Panel. This panel shows the apps installed for the Splunk instance. The default app for every Splunk installation is Search & Reporting. 
-
-An image showing the App Panel
-
 You can also switch between the Splunk Apps directly from the Splunk Bar, as shown below, without using the Apps Panel.
 
-Shows App Bar
-
-Explore Splunk 
+➜ Explore Splunk 
 
 The next section is Explore Splunk . This panel contains quick links to add data to the Splunk instance, add new Splunk apps, and access the Splunk documentation. 
 
-An image showing the option to add data, access documentation, and add new Splunk apps
+➜ Splunk Dashboard
 
-Splunk Dashboard
-
-The last section is the Home Dashboard. By default, no dashboards are displayed. You can choose from a range of dashboards readily available within your Splunk instance. You can select a dashboard from the dropdown menu or by visiting the dashboards listing page.
-
-An image showing the Splunk dashboard
+The last section is the Home Dashboard. By default, no dashboards are displayed. You can choose from a range of dashboards readily available within your Splunk instance. 
+You can select a dashboard from the dropdown menu or by visiting the dashboards listing page.
 
 You can also create dashboards and add them to the Home Dashboard. The dashboards you create can be viewed separately from the other dashboards by clicking on the Yours tab.
 
 Please review the Splunk documentation on Navigating Splunk here.
+
+https://docs.splunk.com/Documentation/Splunk/8.1.2/SearchTutorial/NavigatingSplunk
 
 
 
