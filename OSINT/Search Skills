@@ -58,7 +58,51 @@ You can check more advanced controls in various search engines in advanced searc
 
 -- Specialized Search Engines--
 
+If we talk about Specialized Search Engines we refer to search engines used to find specific types of results.
 
+• Shodan
+• Censys
+• VirusTotal
+• Have I Been Pwned
+
+
+➜ Shodan
+
+Shodan is a search engine for devices connected to the Internet. It allows you to search for specific types and versions of servers, networking equipment, industrial control systems, and IoT devices.
+
+Example: apache 2.4.1
+
+Consider visiting Shodan Search Query Examples for more examples. Furthermore, you can check Shodan trends for historical insights if you have a subscription.
+
+https://www.shodan.io/
+https://www.shodan.io/search/examples
+https://trends.shodan.io/
+
+
+➜ Censys
+
+Censys appears similar to Shodan. However, Shodan focuses on Internet-connected devices and systems, such as servers, routers, webcams, and IoT devices. 
+Censys, on the other hand, focuses on Internet-connected hosts, websites, certificates, and other Internet assets. 
+Some of its use cases include enumerating domains in use, auditing open ports and services, and discovering rogue assets within a network.
+
+https://search.censys.io/
+https://docs.censys.com/docs/ls-introductory-use-cases
+
+
+➜ VirusTotal
+
+VirusTotal is an online website that provides a virus-scanning service for files using multiple antivirus engines. 
+It allows users to upload files or provide URLs to scan them against numerous antivirus engines and website scanners in a single operation. 
+They can even input file hashes to check the results of previously uploaded files.
+
+https://www.virustotal.com/gui/home/upload
+
+
+➜ Have I Been Pwned
+
+Have I Been Pwned (HIBP) does one thing; it tells you if an email address has appeared in a leaked data breach. Finding one’s email within leaked data indicates leaked private information and, more importantly, passwords. 
+
+https://haveibeenpwned.com/
 
 
 -- Vulnerabilities and Exploits--
