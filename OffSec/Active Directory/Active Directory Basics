@@ -169,26 +169,37 @@ We have both groups and OUs. While both are used to classify users and computers
 
 -- Managing Users in AD --
 
+Your first task as the new domain administrator is to check the existing AD OUs and users, as some recent changes have happened to the business. 
+
+• Deleting extra OUs and users
+• Delegation
 
 
+-- Deleting extra OUs and users --
+
+The first thing you should notice is that there is an additional department OU in your current AD configuration that doesn't appear in the chart. We've been told it was closed due to budget cuts and should be removed from the domain. 
+
+If you try to right-click and delete the OU, you will get the following error: "Active Directory Domain Services. You do not have sufficient privileges to delete <object>, or this object is protected from accidental deletion."
+
+By default, OUs are protected against accidental deletion. To delete the OU, we need to enable the Advanced Features in the View menu.
+
+This will show you some additional containers and enable you to disable the accidental deletion protection. To do so, right-click the OU and go to Properties. You will find a checkbox in the Object tab to disable the protection.
+
+Be sure to uncheck the box and try deleting the OU again. You will be prompted to confirm that you want to delete the OU, and as a result, any users, groups or OUs under it will also be deleted.
 
 
+-- Delegation --
 
+One of the nice things you can do in AD is to give specific users some control over some OUs. 
+This process is known as delegation and allows you to grant users specific privileges to perform advanced tasks on OUs without needing a Domain Administrator to step in.
 
+One of the most common use cases for this is granting IT support the privileges to reset other low-privilege users' passwords.
 
+PS C:\Users\phillip> Set-ADAccountPassword sophie -Reset -NewPassword (Read-Host -AsSecureString -Prompt 'New Password') -Verbose
 
+Force a password reset at the next logon
 
-
-
-
-
-
-
-
-
-
-
-
+PS C:\Users\phillip> Set-ADUser -ChangePasswordAtLogon $true -Identity sophie -Verbose
 
 
 
