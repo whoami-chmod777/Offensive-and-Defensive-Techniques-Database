@@ -168,7 +168,9 @@ C:\>taskkill /S system /U username /P password /FI "IMAGENAME eq note*"
 C:\>chkdsk
 C:\>driverquery
 C:\>sfc /scannow
+
 C:\>/?
+C:\>shutdown /? | more
 
 
 *
