@@ -129,6 +129,7 @@ C:\example>rmdir backup_files
 
 C:\Users>type password.txt
 C:\Users>more secret.txt
+C:\Users>dir | more
 
 C:\example>copy test.txt test2.txt
 C:\example>move file1.txt C:\Temp\
@@ -141,7 +142,11 @@ C:\example>erase test2.txt
 
 List the running processes: tasklist, tasklist /?, tasklist /FI "imagename eq sshd.exe"
 Terminate any task With process ID (PID): taskkill /PID target_pid
+Checks the file system and disk volumes for errors and bad sectors: chkdsk
+Displays a list of installed device drivers: driverquery
+Scans system files for corruption and repairs them if possible: sfc /scannow
 
+It is equally important to know that /? can be used with most commands to display a help page !!!
 
 
 ➜ Commands Overview
@@ -159,6 +164,11 @@ C:\>taskkill /F /FI "PID ge 1000" /FI "WINDOWTITLE ne untitle*"
 C:\>taskkill /F /FI "USERNAME eq NT AUTHORITY\SYSTEM" /IM notepad.exe
 C:\>taskkill /S system /U domain\username /FI "USERNAME ne NT*" /IM *
 C:\>taskkill /S system /U username /P password /FI "IMAGENAME eq note*"
+
+C:\>chkdsk
+C:\>driverquery
+C:\>sfc /scannow
+C:\>/?
 
 
 *
