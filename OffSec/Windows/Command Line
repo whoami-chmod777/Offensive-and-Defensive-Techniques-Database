@@ -1,40 +1,164 @@
 
+--- Command Line ---
 
-Navigation
-------------
-
-dir
-cd
-cd .
-cd ..
-
-
-File Operations
-------------------
-
-mkdir Logs
-rmdir Logs
-copy file.txt file1.txt
-move file1.txt C:\Temp\
-del file.txt
+• Introduction
+• Basic System Information 
+• Network Troubleshooting
+• File and Disk Management
+• Task and Process Management
 
 
-Network
-----------
-ipconfig
-netstat -ano
-nslookup example.com
-arp -a
+-- Introduction --
+
+Everyone prefers a graphical user interface (GUI) until they master a command-line interface (CLI). There are many reasons for that. One reason is that GUIs are usually intuitive. 
+If someone offers you a GUI interface you are unfamiliar with, you can quickly poke around and discover a non-trivial part. Compare this with dealing with a CLI, i.e., a prompt.
+
+CLI interfaces usually have a learning curve; however, as you master the command line, you will find it faster and more efficient. 
+Consider this trivial example: How many clicks do you need to find your IP address using the graphical desktop? Using the command-line interface, you don’t even need to raise your hands off the keyboard. 
+Let’s say you want to recheck your IP address. You need to issue the same command instead of moving the mouse pointer to every corner of your screen.
+
+There are many other advantages to using a CLI besides speed and efficiency. We will mention a few:
+
+• Lower resource usage: CLIs require fewer system resources than graphics-intensive GUIs. In other words, you can run your CLI system on older hardware or systems with limited memory. If you are using cloud computing, your system will require lower resources, which in turn will lower your bill.
+• Automation: While you can automate GUI tasks, creating a batch file or script with the commands you need to repeat is much easier.
+• Remote management: CLI makes it very convenient to use SSH to manage a remote system such as a server, router, or an IoT device. This approach works well on slow network speeds and systems with limited resources.
 
 
-System Tasks
---------------
+-- Basic System Information --
 
-systeminfo
-tasklist
-taskkill /PID 5432 /F
-wmic os get caption,version
+Before issuing commands, we should note that we can only issue the commands within the Windows Path. You can issue the command set to check your path from the command line. 
+The terminal output below shows the path where MS Windows will execute commands, as indicated by the line starting with Path=.
+
+C:\>set
+ALLUSERSPROFILE=C:\ProgramData
+[...]
+LOGNAME=strategos
+NUMBER_OF_PROCESSORS=2
+OS=Windows_NT
+Path=C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Windows\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps;C:\Users\strategos\AppData\Local\Microsoft\WindowsApps;
+[...]
+
+Check your path from the command line: set
+Let’s use the ver command to determine the operating system (OS) version: ver                                                                                                                                              
+
+We can run the systeminfo command to list various information about the system such as OS information, system details, processor and memory: systeminfo
+You can pipe it through more if the output is too long. Then, you can view it page after page by pressing the space bar button: driverquery | more
+
+Provides help information for a specific command: help 
+Clears the Command Prompt screen: cls  
+Check the hostname: hostname
+
+➜ Commands Overview
+
+C:\>set
+C:\>ver
+C:\>systeminfo
+C:\>driverquery | more
+C:\>help
+C:\>cls 
+C:\>hostname
+
+
+-- Network Troubleshooting --
+
+Check your network information: ipconfig
+Get more information about your network configuration: ipconfig /all 
+
+Check the connectivity to the destination: ping target_name
+Trace the network route: tracert target_name
+Network diagnostics that combines the functionality of tracert and ping: pathping target_name
+
+Looks up a host or domain and returns its IP address: nslookup example.com, nslookup example.com 1.1.1.1
+Displays current network connections and listening ports: netstat, netstat -h, netstat -ano, netstat -abon
+
+Displays ARP table entries locally: arp -a
+
+➜ Commands Overview
+
+C:\>ipconfig
+C:\>ipconfig /all
+C:\>ping example.com
+C:\>tracert example.com
+C:\>pathping example.com
+C:\>nslookup example.com
+C:\>nslookup example.com 1.1.1.1
+C:\>netstat
+C:\>netstat -h
+C:\>netstat -ano
+C:\>netstat -abon
+C:\>arp -a
+
+
+-- File and Disk Management --
+
+Working With Directories: cd, cd ., cd ..,  cd target_directory
+
+Displays system files: dir
+Displays hidden and system files as well: dir /a 
+Displays files in the current directory and all subdirectories: dir /s 
+
+Represent visually the child directories and subdirectories: tree
+
+Create a directory: mkdir directory_name
+Delete a directory: rmdir directory_name
+
+View text files: type
+Display enough text file contents to fill your terminal window: more 
+
+Copy files from one location to another: copy test.txt test2.txt
+Move files: move 
+
+Delete a file: del, erase 
+
+We can use the wildcard character * to refer to multiple files. For example, copy *.md C:\Markdown will copy all files with the extension md to the directory C:\Markdown.
+
+➜ Commands Overview
+
+C:\Users\strategos>cd
+C:\Users\strategos>cd .
+C:\Users\strategos>cd ..
+C:\Users\strategos>cd target_directory
+
+C:\Users\strategos>dir 
+C:\Users\strategos>dir /a 
+C:\Users\strategos>dir /s 
+
+C:\Users\strategos>tree
+C:\example>mkdir backup_files
+C:\example>rmdir backup_files
+
+C:\Users>type password.txt
+C:\Users>more secret.txt
+
+C:\example>copy test.txt test2.txt
+C:\example>move file1.txt C:\Temp\
+
+C:\Users>del file.txt
+C:\example>erase test2.txt
+
+
+-- Task and Process Management --
+
+List the running processes: tasklist, tasklist /?, tasklist /FI "imagename eq sshd.exe"
+Terminate any task With process ID (PID): taskkill /PID target_pid
 
 
 
+➜ Commands Overview
 
+C:\>tasklist
+C:\>tasklist /?
+C:\>tasklist /FI "imagename eq sshd.exe"
+
+C:\>taskkill /PID 4567
+C:\>taskkill /PID 5432 /F
+C:\>taskkill /IM notepad.exe
+C:\>taskkill /PID 1230 /PID 1241 /PID 1253 /T
+C:\>taskkill /F /IM cmd.exe /T
+C:\>taskkill /F /FI "PID ge 1000" /FI "WINDOWTITLE ne untitle*"
+C:\>taskkill /F /FI "USERNAME eq NT AUTHORITY\SYSTEM" /IM notepad.exe
+C:\>taskkill /S system /U domain\username /FI "USERNAME ne NT*" /IM *
+C:\>taskkill /S system /U username /P password /FI "IMAGENAME eq note*"
+
+
+*
