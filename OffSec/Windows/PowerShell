@@ -1,4 +1,156 @@
 
+--- PowerShell ---
+
+• What Is PowerShell
+• PowerShell Basics
+• Navigating the File System and Working with Files
+• Piping, Filtering, and Sorting Data
+• System and Network Information
+• Real-Time System Analysis
+• Scripting
+
+
+-- What Is PowerShell --
+
+PowerShell is a powerful tool from Microsoft designed for task automation and configuration management. It combines a command-line interface and a scripting language built on the .NET framework. 
+Unlike older text-based command-line tools, PowerShell is object-oriented, which means it can handle complex data types and interact with system components more effectively. 
+Initially exclusive to Windows, PowerShell has lately expanded to support macOS and Linux, making it a versatile option for IT professionals across different operating systems.
+
+➜ A Brief History of PowerShell
+
+PowerShell was developed to overcome the limitations of existing command-line tools and scripting environments in Windows. 
+In the early 2000s, as Windows was increasingly used in complex enterprise environments, traditional tools like cmd.exe and batch files fell short in automating and managing these systems. 
+Microsoft needed a tool that could handle more sophisticated administrative tasks and interact with Windows’ modern APIs.
+
+Jeffrey Snover, a Microsoft engineer, realised that Windows and Unix handled system operations differently—Windows used structured data and APIs, while Unix treated everything as text files. 
+This difference made porting Unix tools to Windows impractical. Snover’s solution was to develop an object-oriented approach, combining scripting simplicity with the power of the .NET framework. 
+Released in 2006, PowerShell allowed administrators to automate tasks more effectively by manipulating objects, offering deeper integration with Windows systems.
+
+As IT environments evolved to include various operating systems, the need for a versatile automation tool grew. In 2016, Microsoft responded by releasing PowerShell Core, an open-source and cross-platform version that runs on Windows, macOS, and Linux.
+
+➜ The Power in PowerShell
+
+To fully grasp the power of PowerShell, we first need to understand what an object is in this context.
+
+In programming, an object represents an item with properties (characteristics) and methods (actions). For example, a car object might have properties like Color, Model, and FuelLevel, and methods like Drive(), HonkHorn(), and Refuel().
+
+Similarly, in PowerShell, objects are fundamental units that encapsulate data and functionality, making it easier to manage and manipulate information. 
+An object in PowerShell can contain file names, usernames or sizes as data (properties), and carry functions (methods) such as copying a file or stopping a process.
+
+The traditional Command Shell’s basic commands are text-based, meaning they process and output data as plain text. Instead, when a cmdlet (pronounced command-let) is run in PowerShell, it returns objects that retain their properties and methods. 
+This allows for more powerful and flexible data manipulation since these objects do not require additional parsing of text.
+
+
+
+-- PowerShell Basics --
+
+• Launching PowerShell
+• Basic Syntax: Verb-Noun
+• Basic Cmdlets
+• Where to Find and Download Cmdlets
+
+
+
+
+
+
+➜ Launching PowerShell
+
+PowerShell can be launched in several ways, depending on your needs and environment. If you are working on a Windows system from the graphical interface (GUI), these are some of the possible ways to launch it:
+
+• Start Menu: Type powershell in the Windows Start Menu search bar, then click on Windows PowerShell or PowerShell from the results.
+• Run Dialog: Press Win + R to open the Run dialog, type powershell, and hit Enter.
+• File Explorer: Navigate to any folder, then type powershell in the address bar, and press Enter. This opens PowerShell in that specific directory.
+• Task Manager: Open the Task Manager, go to File > Run new task, type powershell, and press Enter.
+
+Alternatively, PowerShell can be launched from a Command Prompt (cmd.exe) by typing powershell, and pressing Enter.
+
+captain@THEBLACKPEARL C:\Users\captain>powershell
+
+➜ Basic Syntax: Verb-Noun
+
+PowerShell commands are known as cmdlets (pronounced command-lets)
+
+Cmdlets follow a consistent Verb-Noun naming convention. This structure makes it easy to understand what each cmdlet does. The Verb describes the action, and the Noun specifies the object on which action is performed. 
+
+• Get-Content: Retrieves (gets) the content of a file and displays it in the console.
+• Set-Location: Changes (sets) the current working directory.
+
+➜ Basic Cmdlets
+
+To list all available cmdlets, functions, aliases, and scripts that can be executed in the current PowerShell session, we can use Get-Command. It’s an essential tool for discovering what commands one can use.
+
+For each CommandInfo object retrieved by the cmdlet, some essential information (properties) is displayed on the console. It’s possible to filter the list of commands based on displayed property values. 
+For example, if we want to display only the available commands of type “function”, we can use -CommandType "Function".
+
+Another essential cmdlet to keep in our tool belt is Get-Help: it provides detailed information about cmdlets, including usage, parameters, and examples. It’s the go-to cmdlet for learning how to use PowerShell commands.
+
+PowerShell includes aliases —which are shortcuts or alternative names for cmdlets— for many traditional Windows commands. Indispensable for users already familiar with other command-line tools, Get-Alias lists all aliases available. 
+For example, dir is an alias for Get-ChildItem, and cd is an alias for Set-Location.
+
+
+PS C:\Users\captain> Get-Command
+PS C:\Users\captain> Get-Command -CommandType "Function"
+PS C:\Users\captain> Get-Help Get-Date
+
+PS C:\Users\captain> Get-Help Set-NetFirewallRule
+PS C:\Users\captain> Get-Help Set-NetFirewallRule -Examples
+PS C:\Users\captain> Get-Help Set-NetFirewallRule -Detailed
+PS C:\Users\captain> Get-Help Set-NetFirewallRule -Full
+PS C:\Users\captain> Get-Help Set-NetFirewallRule -Detailed
+PS C:\Users\captain> Get-Help Set-NetFirewallRule -Online
+ 
+PS C:\Users\captain> Get-Alias
+
+
+➜ Where to Find and Download Cmdlets
+
+Another powerful feature of PowerShell is the possibility of extending its functionality by downloading additional cmdlets from online repositories.
+
+NOTE: Please note that the cmdlets listed in this section require a working internet connection to query online repositories. 
+
+To search for modules (collections of cmdlets) in online repositories like the PowerShell Gallery, we can use Find-Module. Sometimes, if we don’t know the exact name of the module, it can be useful to search for modules with a similar name.
+We can achieve this by filtering the Name property and appending a wildcard (*) to the module’s partial name, using the following standard PowerShell syntax: Cmdlet -Property "pattern*".
+
+Once identified, the modules can be downloaded and installed from the repository with Install-Module, making new cmdlets contained in the module available for use.
+
+
+PS C:\Users\captain> Find-Module -Name "PowerShell*"   
+PS C:\Users\captain> Install-Module -Name "PowerShellGet"
+
+
+-- Navigating the File System and Working with Files --
+
+
+
+
+-- Piping, Filtering, and Sorting Data --
+
+
+
+
+
+-- System and Network Information --
+
+
+
+
+
+-- Real-Time System Analysis --
+
+
+
+
+-- Scripting --
+
+
+
+•
+➜ 
+⇒
+->
+►
+
 
 Install / Launch
 --------------------
