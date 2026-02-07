@@ -41,18 +41,12 @@ The traditional Command Shell’s basic commands are text-based, meaning they pr
 This allows for more powerful and flexible data manipulation since these objects do not require additional parsing of text.
 
 
-
 -- PowerShell Basics --
 
 • Launching PowerShell
 • Basic Syntax: Verb-Noun
 • Basic Cmdlets
 • Where to Find and Download Cmdlets
-
-
-
-
-
 
 ➜ Launching PowerShell
 
@@ -90,6 +84,7 @@ For example, dir is an alias for Get-ChildItem, and cd is an alias for Set-Locat
 
 
 PS C:\Users\captain> Get-Command
+PS C:\Users\captain> Get-Command -Name Remove*
 PS C:\Users\captain> Get-Command -CommandType "Function"
 PS C:\Users\captain> Get-Help Get-Date
 
@@ -101,7 +96,6 @@ PS C:\Users\captain> Get-Help Set-NetFirewallRule -Detailed
 PS C:\Users\captain> Get-Help Set-NetFirewallRule -Online
  
 PS C:\Users\captain> Get-Alias
-
 
 ➜ Where to Find and Download Cmdlets
 
@@ -122,6 +116,22 @@ PS C:\Users\captain> Install-Module -Name "PowerShellGet"
 -- Navigating the File System and Working with Files --
 
 
+
+
+
+
+
+
+
+
+
+PS C:\Users\captain> Get-ChildItem 
+PS C:\Users\captain> Set-Location -Path ".\Documents"
+PS C:\Users\captain\Documents> New-Item -Path ".\captain-cabin\captain-wardrobe" -ItemType "Directory"
+PS C:\Users\captain\Documents> Remove-Item -Path ".\captain-cabin\captain-wardrobe\captain-boots.txt"
+PS C:\Users\captain\Documents> Copy-Item -Path .\captain-cabin\captain-hat.txt -Destination .\captain-cabin\captain-hat2.txt
+PS C:\Users\captain\Documents> Get-ChildItem -Path ".\captain-cabin\" 
+PS C:\Users\captain\Documents\captain-cabin> Get-Content -Path ".\captain-hat.txt"
 
 
 -- Piping, Filtering, and Sorting Data --
