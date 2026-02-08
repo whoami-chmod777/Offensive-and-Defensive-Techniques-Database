@@ -115,26 +115,82 @@ PS C:\Users\captain> Install-Module -Name "PowerShellGet"
 
 -- Navigating the File System and Working with Files --
 
+PowerShell provides a range of cmdlets for navigating the file system and managing files, many of which have counterparts in the traditional Windows CLI.
 
+Get-ChildItem lists the files and directories in a location specified with the -Path parameter. If no Path is specified, the cmdlet will display the content of the current working directory.
 
+To navigate to a different directory, we can use the Set-Location cmdlet.
 
+To create an item in PowerShell, we can use New-Item. We will need to specify the path of the item and its type (whether it is a file or a directory). The Remove-Item cmdlet removes both directories and files.
 
+We can copy or move files and directories alike, using respectively Copy-Item (equivalent to copy) and Move-Item (equivalent to move).
 
-
-
-
+To read and display the contents of a file, we can use the Get-Content cmdlet, which works similarly to the type command in Command Prompt (or cat in Unix-like systems).
 
 
 PS C:\Users\captain> Get-ChildItem 
+PS C:\Users\captain\Documents> Get-ChildItem -Path ".\captain-cabin\"
 PS C:\Users\captain> Set-Location -Path ".\Documents"
+
 PS C:\Users\captain\Documents> New-Item -Path ".\captain-cabin\captain-wardrobe" -ItemType "Directory"
+PS C:\Users\captain\Documents> New-Item -Path ".\captain-cabin\captain-wardrobe\captain-boots.txt" -ItemType "File"     
+
+PS C:\Users\captain\Documents> Remove-Item -Path ".\captain-cabin\captain-wardrobe"
 PS C:\Users\captain\Documents> Remove-Item -Path ".\captain-cabin\captain-wardrobe\captain-boots.txt"
+ 
 PS C:\Users\captain\Documents> Copy-Item -Path .\captain-cabin\captain-hat.txt -Destination .\captain-cabin\captain-hat2.txt
-PS C:\Users\captain\Documents> Get-ChildItem -Path ".\captain-cabin\" 
+
 PS C:\Users\captain\Documents\captain-cabin> Get-Content -Path ".\captain-hat.txt"
 
 
 -- Piping, Filtering, and Sorting Data --
+
+Piping is a technique used in command-line environments that allows the output of one command to be used as the input for another. This creates a sequence of operations where the data flows from one command to the next. 
+Represented by the | symbol, piping is widely used in the Windows CLI, as introduced earlier in this module, as well as in Unix-based shells.
+
+For example, if you want to get a list of files in a directory and then sort them by size, you could use the following command in PowerShell: Get-ChildItem | Sort-Object Length
+
+Beyond sorting, PowerShell provides a set of cmdlets that, when combined with piping, allow for advanced data manipulation and analysis.
+
+To filter objects based on specified conditions, returning only those that meet the criteria, we can use the Where-Object cmdlet. For instance, to list only .txt files: Get-ChildItem | Where-Object -Property "Extension" -eq ".txt"
+
+• -ne: "not equal". This operator can be used to exclude objects from the results based on specified criteria.
+• -gt: "greater than". This operator will filter only objects which exceed a specified value. It is important to note that this is a strict comparison, meaning that objects that are equal to the specified value will be excluded from the results.
+• -ge: "greater than or equal to". This is the non-strict version of the previous operator. A combination of -gt and -eq.
+• -lt: "less than". Like its counterpart, "greater than", this is a strict operator. It will include only objects which are strictly below a certain value.
+• -le: "less than or equal to". Just like its counterpart -ge, this is the non-strict version of the previous operator. A combination of -lt and -eq.
+
+Objects can also be filtered by selecting properties that match (-like) a specified pattern: Get-ChildItem | Where-Object -Property "Name" -like "ship*" 
+
+Select specific properties from objects or limit the number of objects returned. It’s useful for refining the output to show only the details one needs: Get-ChildItem | Select-Object Name,Length
+
+Select-String cmdlet searches for text patterns within files, similar to grep in Unix-based systems or findstr in Windows Command Prompt: Select-String -Path ".\captain-hat.txt" -Pattern "hat"
+
+The Select-String cmdlet fully supports the use of regular expressions (regex). This advanced feature allows for complex pattern matching within files, making it a powerful tool for searching and analysing text data.
+
+
+PS C:\Users\captain\Documents\captain-cabin> Get-ChildItem | Sort-Object Length
+PS C:\Users\captain\Documents\captain-cabin> Get-ChildItem | Where-Object -Property "Extension" -eq ".txt" 
+PS C:\Users\captain\Documents\captain-cabin> Get-ChildItem | Where-Object -Property "Name" -like "ship*"  
+PS C:\Users\captain\Documents\captain-cabin> Get-ChildItem | Where-Object Length -GT 100
+
+PS C:\Users\captain\Documents\captain-cabin> Get-ChildItem | Select-Object Name,Length 
+PS C:\Users\captain\Documents\captain-cabin> Get-ChildItem | Sort-Object Length -Descending
+PS C:\Users\captain\Documents\captain-cabin> Get-ChildItem | Sort-Object Length -Descending | Select-Object -First 1
+PS C:\Users\captain\Documents\captain-cabin> Get-ChildItem | Select-Object -First 1
+PS C:\Users\captain\Documents\captain-cabin> Get-ChildItem | Select-Object Name,Length -Last 1
+
+PS C:\Users\captain\Documents\captain-cabin> Select-String -Path ".\captain-hat.txt" -Pattern "hat" 
+
+
+
+
+
+
+
+
+
+
 
 
 
