@@ -82,7 +82,6 @@ Another essential cmdlet to keep in our tool belt is Get-Help: it provides detai
 PowerShell includes aliases —which are shortcuts or alternative names for cmdlets— for many traditional Windows commands. Indispensable for users already familiar with other command-line tools, Get-Alias lists all aliases available. 
 For example, dir is an alias for Get-ChildItem, and cd is an alias for Set-Location.
 
-
 PS C:\Users\captain> Get-Command
 PS C:\Users\captain> Get-Command -Name Remove*
 PS C:\Users\captain> Get-Command -CommandType "Function"
@@ -108,7 +107,6 @@ We can achieve this by filtering the Name property and appending a wildcard (*) 
 
 Once identified, the modules can be downloaded and installed from the repository with Install-Module, making new cmdlets contained in the module available for use.
 
-
 PS C:\Users\captain> Find-Module -Name "PowerShell*"   
 PS C:\Users\captain> Install-Module -Name "PowerShellGet"
 
@@ -127,7 +125,6 @@ We can copy or move files and directories alike, using respectively Copy-Item (e
 
 To read and display the contents of a file, we can use the Get-Content cmdlet, which works similarly to the type command in Command Prompt (or cat in Unix-like systems).
 
-
 PS C:\Users\captain> Get-ChildItem 
 PS C:\Users\captain\Documents> Get-ChildItem -Path ".\captain-cabin\"
 PS C:\Users\captain> Set-Location -Path ".\Documents"
@@ -139,7 +136,6 @@ PS C:\Users\captain\Documents> Remove-Item -Path ".\captain-cabin\captain-wardro
 PS C:\Users\captain\Documents> Remove-Item -Path ".\captain-cabin\captain-wardrobe\captain-boots.txt"
  
 PS C:\Users\captain\Documents> Copy-Item -Path .\captain-cabin\captain-hat.txt -Destination .\captain-cabin\captain-hat2.txt
-
 PS C:\Users\captain\Documents\captain-cabin> Get-Content -Path ".\captain-hat.txt"
 
 
@@ -168,7 +164,6 @@ Select-String cmdlet searches for text patterns within files, similar to grep in
 
 The Select-String cmdlet fully supports the use of regular expressions (regex). This advanced feature allows for complex pattern matching within files, making it a powerful tool for searching and analysing text data.
 
-
 PS C:\Users\captain\Documents\captain-cabin> Get-ChildItem | Sort-Object Length
 PS C:\Users\captain\Documents\captain-cabin> Get-ChildItem | Where-Object -Property "Extension" -eq ".txt" 
 PS C:\Users\captain\Documents\captain-cabin> Get-ChildItem | Where-Object -Property "Name" -like "ship*"  
@@ -183,31 +178,212 @@ PS C:\Users\captain\Documents\captain-cabin> Get-ChildItem | Select-Object Name,
 PS C:\Users\captain\Documents\captain-cabin> Select-String -Path ".\captain-hat.txt" -Pattern "hat" 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 -- System and Network Information --
 
+The Get-ComputerInfo cmdlet retrieves comprehensive system information, including operating system information, hardware specifications, BIOS details, and more. 
 
+Get-LocalUser lists all the local user accounts on the system. The default output displays, for each user, username, account status, and description.
 
+Get-NetIPConfiguration provides detailed information about the network interfaces on the system, including IP addresses, DNS servers, and gateway configurations.
+
+In case we need specific details about the IP addresses assigned to the network interfaces, the Get-NetIPAddress cmdlet will show details for all IP addresses configured on the system, including those that are not currently active.
+
+PS C:\Users\captain> Get-ComputerInfo
+PS C:\Users\captain> Get-LocalUser
+PS C:\Users\captain> Get-NetIPConfiguration
+PS C:\Users\captain> Get-NetIPAddress
 
 
 -- Real-Time System Analysis --
 
+Get-Process provides a detailed view of all currently running processes, including CPU and memory usage, making it a powerful tool for monitoring and troubleshooting.
 
+Get-Service allows the retrieval of information about the status of services on the machine, such as which services are running, stopped, or paused.
+
+To monitor active network connections, Get-NetTCPConnection displays current TCP connections, giving insights into both local and remote endpoints. 
+This cmdlet is particularly handy during an incident response or malware analysis task, as it can uncover hidden backdoors or established connections towards an attacker-controlled server.
+
+Get-FileHash is a useful cmdlet generating file hashes, which is particularly valuable in incident response, threat hunting, and malware analysis, as it helps verify file integrity and detect potential tampering.
+
+You can also view the Alternate Data Streams (ADS) attached to a file through PowerShell
+
+PS C:\Users\Alex\Documents> Get-Item -Path "C:\House\house_log.txt" -Stream *
+
+PSPath        : Microsoft.PowerShell.Core\FileSystem::C:\House\house_log.txt::$DATA
+PSParentPath  : Microsoft.PowerShell.Core\FileSystem::C:\House
+PSChildName   : house_log.txt::$DATA
+PSDrive       : C
+PSProvider    : Microsoft.PowerShell.Core\FileSystem
+PSIsContainer : False
+FileName      : C:\House\house_log.txt
+Stream        : :$DATA
+Length        : 13
+
+PSPath        : Microsoft.PowerShell.Core\FileSystem::C:\House\house_log.txt:housinginfo
+PSParentPath  : Microsoft.PowerShell.Core\FileSystem::C:\House
+PSChildName   : house_log.txt:housinginfo
+PSDrive       : C
+PSProvider    : Microsoft.PowerShell.Core\FileSystem
+PSIsContainer : False
+FileName      : C:\House\house_log.txt
+Stream        : housinginfo
+Length        : 21
+
+In the output above, you can see two streams that are attached to the file C:\House\house_log.txt:
+
+• :$DATA is the default data stream of every NTFS file. It contains the normal file contents and is not an ADS.
+• housinginginfo is the Alternate Data Stream (ADS) added to this file. It appears as house_log.txt:housinginfo, which means an extra hidden stream named housinginfo is attached to this file.
+
+PS C:\Users\captain> Get-Process
+PS C:\Users\captain> Get-Service
+PS C:\Users\captain> Get-Service | Where-Object Status -eq Running 
+PS C:\Users\captain> Get-NetTCPConnection
+
+PS C:\Users\captain\Documents\captain-cabin> Get-FileHash -Path .\ship-flag.txt    
+PS C:\Users\Alex\Documents> Get-Item -Path "C:\House\house_log.txt" -Stream *
 
 
 -- Scripting --
+
+Scripting is the process of writing and executing a series of commands contained in a text file, known as a script, to automate tasks that one would generally perform manually in a shell, like PowerShell.
+
+Simply speaking, scripting is like giving a computer a to-do list, where each line in the script is a task that the computer will carry out automatically. 
+This saves time, reduces the chance of errors, and allows to perform tasks that are too complex or tedious to do manually
+
+Invoke-Command is essential for executing commands on remote systems, making it fundamental for system administrators, security engineers and penetration testers. 
+Invoke-Command enables efficient remote management and—combining it with scripting—automation of tasks across multiple machines. 
+It can also be used to execute payloads or commands on target systems during an engagement by penetration testers—or attackers alike.
+
+
+PS C:\Users\captain> Get-Help Invoke-Command -examples
+PS C:\Users\captain> Invoke-Command -ComputerName RoyalFortune -ScriptBlock { Get-Service }
+
+➜ Invoke-Command Examples
+
+Invoke-Command -FilePath c:\scripts\test.ps1 -ComputerName Server01
+
+Invoke-Command -ComputerName Server01 -Credential Domain01\User01 -ScriptBlock {
+    Get-Culture
+}
+
+$s = New-PSSession -ComputerName Server02 -Credential Domain01\User01
+Invoke-Command -Session $s -ScriptBlock { Get-Culture }
+
+Invoke-Command -ComputerName Server02 -ScriptBlock { $p = Get-Process PowerShell }
+Invoke-Command -ComputerName Server02 -ScriptBlock { $p.VirtualMemorySize }
+$s = New-PSSession -ComputerName Server02
+Invoke-Command -Session $s -ScriptBlock { $p = Get-Process PowerShell }
+Invoke-Command -Session $s -ScriptBlock { $p.VirtualMemorySize }
+
+$command = {
+    Get-EventLog -LogName 'Windows PowerShell' |
+        Where-Object { $_.Message -like '*certificate*' }
+}
+Invoke-Command -ComputerName S1, S2 -ScriptBlock $command
+
+$parameters = @{
+  ComputerName      = 'Server01', 'Server02', 'TST-0143', 'localhost'
+  ConfigurationName = 'MySession.PowerShell'
+  ScriptBlock       = { Get-EventLog 'Windows PowerShell' }
+}
+Invoke-Command @parameters
+
+$version = Invoke-Command -ComputerName (Get-Content Machines.txt) -ScriptBlock {
+    (Get-Host).Version
+}
+
+$s = New-PSSession -ComputerName Server01, Server02
+Invoke-Command -Session $s -ScriptBlock { Get-EventLog system } -AsJob
+$j = Get-Job
+$j | Format-List -Property *
+$results = $j | Receive-Job
+
+$Log = 'Windows PowerShell'
+Invoke-Command -ComputerName Server01 -ScriptBlock {
+    Get-EventLog -LogName $Using:Log -Newest 10
+}
+
+Invoke-Command -ComputerName S1, S2 -ScriptBlock { Get-Process PowerShell }
+Invoke-Command -ComputerName S1, S2 -HideComputerName -ScriptBlock {
+    Get-Process PowerShell
+}
+
+$parameters = @{
+    ComputerName = 'Server01'
+    ScriptBlock  = {
+        Param ($param1, $param2)
+        Get-ChildItem -Name $param1 -Include $param2
+    }
+    ArgumentList = 'a*', '*.pdf'
+}
+Invoke-Command @parameters
+
+$parameters = @{
+    ComputerName = 'Server01'
+    ScriptBlock  = { Get-ChildItem $args[0] $args[1] }
+    ArgumentList = 'C:\Test', '*.txt*'
+}
+Invoke-Command @parameters
+
+$parameters = @{
+    ComputerName = (Get-Content Servers.txt)
+    FilePath     = 'C:\Scripts\Sample.ps1'
+    ArgumentList = 'Process', 'Service'
+}
+Invoke-Command @parameters
+
+$LiveCred = Get-Credential
+$parameters = @{
+  ConfigurationName = 'Microsoft.Exchange'
+  ConnectionUri     = 'https://ps.exchangelabs.com/PowerShell'
+  Credential        = $LiveCred
+  Authentication    = 'Basic'
+  ScriptBlock       = { Set-Mailbox Dan -DisplayName 'Dan Park' }
+}
+Invoke-Command @parameters
+
+$so = New-PSSessionOption -SkipCACheck -SkipCNCheck -SkipRevocationCheck
+$parameters = @{
+    ComputerName  = 'server01'
+    UseSSL        = $true
+    ScriptBlock   = { Get-HotFix }
+    SessionOption = $so
+    Credential    = 'server01\user01'
+}
+Invoke-Command @parameters
+
+$max = New-PSSessionOption -MaximumRedirection 1
+$parameters = @{
+  ConnectionUri    = 'https://ps.exchangelabs.com/PowerShell'
+  ScriptBlock      = { Get-Mailbox dan }
+  AllowRedirection = $true
+  SessionOption    = $max
+}
+Invoke-Command @parameters
+
+Enable-WSManCredSSP -Role Client -DelegateComputer Server02
+$s = New-PSSession Server02
+Invoke-Command -Session $s -ScriptBlock { Enable-WSManCredSSP -Role Server -Force }
+$parameters = @{
+  Session        = $s
+  ScriptBlock    = { Get-Item \\Net03\Scripts\LogFiles.ps1 }
+  Authentication = 'CredSSP'
+  Credential     = 'Domain01\Admin01'
+}
+Invoke-Command @parameters
+
+$parameters = @{
+  ComputerName          = (Get-Content -Path C:\Test\Servers.txt)
+  InDisconnectedSession = $true
+  FilePath              = '\\Scripts\Public\ConfigInventory.ps1'
+  SessionOption         = @{
+      OutputBufferingMode = 'Drop'
+      IdleTimeout         = [timespan]::FromHours(12)
+  }
+}
+Invoke-Command @parameters
+
+
 
 
 
