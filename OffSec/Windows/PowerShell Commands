@@ -1,0 +1,411 @@
+
+PowerShell is a powerful command-line shell that supports scripting languages and provides tools for managing computer resources locally and remotely.
+
+• PowerShell Cmdlets: Verb-Noun Structure
+• Understanding Parameters in PowerShell Commands
+• Basic Commands to Get Started
+• Displaying File System Contents
+• Working with Objects
+• Checking Basic System Information
+• Navigating Directories: Set-Location and Get-ChildItem
+• Creating, Copying and Deleting Files: New-Item, Copy-Item, Remove-Item
+• Checking Folder Contents and Searching: Get-ChildItem, Select-String 
+• Managing System Services: Get-Service, Start-Service, Stop-Service
+• Working with Processes: Get-Process, Start-Process, Stop-Process
+• Accessing and Monitoring System Logs: Get-EventLog, Get-WinEvent
+• Reading and Writing to Files: Get-Content, Set-Content, Out-File
+• Exporting and Importing Data: Export-Csv, Import-Csv
+• Managing and Converting Data Formats: ConvertTo-Html, ConvertTo-Json
+• Checking Connectivity: Test-Connection, Resolve-DnsName
+• Working with Remote Sessions: Enter-PSSession, Exit-PSSession
+• Managing Remote Commands: Invoke-Command, New-PSSession
+• PowerShell Execution Policy: Get-ExecutionPolicy, Set-ExecutionPolicy
+• Managing Permissions and Roles: Get-ACL, Set-ACL
+• System Information Retrieval: Get-ComputerInfo, Get-Host, Get-WmiObject
+• Using Get-Help and Get-Command for Command Reference
+• Exploring Object Properties with Get-Member 
+• Creating Custom Aliases and Functions for Efficiency
+• Another Examples
+
+
+-- PowerShell Cmdlets: Verb-Noun Structure --
+
+Get: Retrieves data
+Set: Modifies the properties of an object
+Add: Adds an item to a collection
+Stop: Stops a process or service
+Start: Starts a process or service
+Clear: Removes all the items from a collection
+
+
+-- Understanding Parameters in PowerShell Commands --
+
+Copy-Item "C:\File1.txt" "D:\Backup\"
+Get-Process -Name "notepad" -Id 1234
+Remove-Item "C:\temp\file.txt" -Confirm
+Get-MyProcess -ProcessName "chrome"
+
+
+-- Basic Commands to Get Started --
+
+Get-Help
+Get-Help Get-ChildItem
+Get-Help Get-ChildItem -examples
+Get-Command *Service*
+
+
+-- Displaying File System Contents --
+
+Get-ChildItem
+Get-ChildItem D:\Office
+
+
+-- Working with Objects --
+
+Get-Process -Name "notepad"
+Get-Process | Where-Object {$_.CPU -gt 10}
+Get-Process | Where-Object { $_.Name -eq "notepad" } | ForEach-Object { Stop-Process -Id $_.Id }
+
+
+-- Checking Basic System Information --
+
+Get-Service | Where-Object { $_.Status -eq 'Running' }
+Get-EventLog -LogName System -Newest 10
+Get-NetAdapterStatistics -Name "Wi-fi"
+
+
+-- Navigating Directories: Set-Location and Get-ChildItem --
+
+Set-Location -Path "D:\Office\Project"
+Get-ChildItem, dir, ls
+Get-ChildItem "D:\Office\Project"dir  "D:\Office\Project"
+Get-ChildItem "D:\Office\Project" -file
+dir  "D:\Office\Project" -directory
+
+
+-- Creating, Copying and Deleting Files: New-Item, Copy-Item, Remove-Item --
+
+New-Item -Path "D:\Office \Project\myfile.txt" -ItemType File
+Copy-Item -Path "D:\Office \Project\myfile.txt" -Destination "D:\Office \Project\startup\myfile.txt"
+Remove-Item -Path "D:\Office \Project\myfile.txt"
+Remove-Item -Path "D:\Office \Project" -Recurse
+
+
+-- Checking Folder Contents and Searching: Get-ChildItem, Select-String --
+
+Get-ChildItem -Path "D:\Office\Project" -Filter "*.txt"
+Get-ChildItem -Path "D:\Office\Project" -Hidden
+Select-String -Path "D:\Office\Project\projectlogs.txt" -Pattern "error"
+
+
+-- Managing System Services: Get-Service, Start-Service, Stop-Service --
+
+Get-Service -Name "*SQL*"
+Get-Service -DisplayName "Windows *"
+Get-Service | Where-Object {$_.StartType -eq "Automatic"}
+Start-Service -Name "spooler"
+Stop-Service -Name "autotimesvc"
+
+
+-- Working with Processes: Get-Process, Start-Process, Stop-Process --
+
+Get-Process -Name notepad
+Get-Process | Format-Table Name, Id, CPU -AutoSize
+Start-Process chrome.exe "https://www.google.com"
+Start-Process -FilePath "notepad.exe"
+Start-Process -FilePath "notepad.exe" -PassThruWrite-Host "Notepad started."Start-Sleep -Seconds 5write-host "waiting for 5 seconds"stop-process -name notepadWrite-host "Notepad stopped"
+Stop-Process -Name notepad
+Stop-Process -Name notepad, chrome
+
+
+-- Accessing and Monitoring System Logs: Get-EventLog, Get-WinEvent --
+
+Get-EventLog -LogName Application -EntryType Error -newest 10
+Get-WinEvent -LogName Application -MaxEvents 10
+
+
+-- Reading and Writing to Files: Get-Content, Set-Content, Out-File -- 
+
+Get-Content -Path "D:\Office\Project\myfile.txt"
+Get-Content -Path "D:\Office\Project\myfile.txt" -TotalCount 5
+Set-Content -Path "D:\Office\Project\myfile.txt"" -Value "Welcome to PowerShell blog"
+Add-Content -Path "D:\Office\Project\myfile.txt" -Value "Are you new to PowerShell?"
+"Hello, World!" | Out-File -FilePath "D:\Office\Project\myfile.txt "
+
+
+-- Exporting and Importing Data: Export-Csv, Import-Csv --
+
+Get-Process -Name notepad | Select-Object Name, Id, CPU | Export-Csv -Path "D:\Office\Project\Processes.csv" -NoTypeInformation
+Import-Csv -Path "D:\Office\Project\Processes.csv" | ForEach-Object { Get-Process -Id $_.Id }
+
+
+-- Managing and Converting Data Formats: ConvertTo-Html, ConvertTo-Json --
+
+Get-Process -Name "notepad" , "chrome" | Select-Object Name, Id, CPU | ConvertTo-Html -Property Name, Id, CPU -Title "Process Report" | Out-File "D:\Office\Project\ProcessReport.html"
+Get-Process -Name "notepad" , "chrome"  | Select-Object Name, Id, CPU, StartTime| ConvertTo-Json -Depth 2 | Out-File "D:\Office\Project\Processes.json"
+
+
+-- Checking Connectivity: Test-Connection, Resolve-DnsName --
+
+Test-Connection -ComputerName google.com
+Test-Connection -ComputerName "google.com" , "microsoft.com" , "192.168.0.1"
+Test-NetConnection -ComputerName google.com -Port 443
+Resolve-DnsName -Name DC1
+Resolve-DnsName -Name 192.168.0.108
+
+
+-- Working with Remote Sessions: Enter-PSSession, Exit-PSSession --
+
+Enable-PSRemoting -Force
+Enter-PSSession -ComputerName "DC1"
+Exit-PSSession
+
+
+-- Managing Remote Commands: Invoke-Command, New-PSSession --
+
+Invoke-Command -ComputerName DC1 -ScriptBlock { Get-Process -Name Notpad }
+$session = New-PSSession -ComputerName DC1
+Enter-PSSession -Session $session
+Get-Process notepad
+
+
+-- PowerShell Execution Policy: Get-ExecutionPolicy, Set-ExecutionPolicy --
+
+Types of Execution Policy
+• Restricted — No scripts are allowed to run; only interactive commands can be executed. This is the default for new installations of Windows.
+• AllSigned — Only scripts signed by a trusted publisher can run. The system prompts the user to confirm the publisher of a script, even if it was previously trusted.
+• RemoteSigned — Locally created scripts can run without signing. A trusted publisher must sign scripts downloaded from the internet.
+• Unrestricted — All scripts can run without restriction. Prompts for confirmation when running scripts downloaded from the internet.
+• Bypass — No restrictions or warnings; all scripts can run regardless of origin.
+• Undefined — No execution policy is set in the current scope. The system inherits the execution policy from a broader scope, e.g., LocalMachine.
+
+Scopes for Execution Policy
+• CurrentUser — Affects the user currently logged in and persists for future sessions of that user.
+• LocalMachine — Applies to all users and sessions on the computer. Requires administrative privileges to modify.
+• Process — Affects the current PowerShell session only. Does not persist after the session ends.
+
+Get-ExecutionPolicy
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
+
+
+-- Managing Permissions and Roles: Get-ACL, Set-ACL --
+
+Get-Acl -Path "D:\Office\Project\Processes.csv"
+$SourcefileACL = Get-Acl -Path "D:\Office\Project\Processes.csv"
+Set-ACL -Path "D:\Office\Project\Processes1.json" -AclObject $SourceACL
+Get-Acl -Path "D:\Office\Project\Processes1.json"
+
+
+-- Securing Scripts with Certificates: Set-AuthenticodeSignature, ConvertTo-SecureString --
+
+New-SelfSignedCertificate -Type CodeSigningCert -Subject "CN=MyCert" -CertStoreLocation Cert:\CurrentUser\My
+$cert = Get-ChildItem Cert:\CurrentUser\My | Where-Object { $_.Subject -like '*MyCert*' }
+Set-AuthenticodeSignature -FilePath "C:\Temp\Script.ps1" -Certificate $cert
+Get-AuthenticodeSignature -FilePath "C:\Temp\Script.ps1"
+
+$securePsw = ConvertTo-SecureString "MyPassword123" -AsPlainText -Force
+$securePsw | ConvertFrom-SecureString | Out-File "D:\Office\Project\EncryptedPassword.txt"
+
+
+-- System Information Retrieval: Get-ComputerInfo, Get-Host, Get-WmiObject --
+
+Get-ComputerInfo
+Get-ComputerInfo | Select-Object CsName, WindowsVersion, WindowsBuildLabEx, OsArchitecture
+Get-ComputerInfo -Property "OS*"
+Get-Host
+(Get-Host).Version(Get-Host).Name
+
+Get-WmiObject -Class Win32_OperatingSystem
+Get-WmiObject -Class Win32_BIOS
+Get-WmiObject -Class Win32_Processor | Select-Object Name, NumberOfCores, MaxClockSpeed
+
+
+-- Using Get-Help and Get-Command for Command Reference --
+
+Get-Help Get-Process
+Get-Command Get-Process
+Get-Command *Service*
+
+
+-- Exploring Object Properties with Get-Member --
+
+Get-Date | Get-Member -MemberType property
+
+
+-- Creating Custom Aliases and Functions for Efficiency --
+
+New-Alias -Name p -Value Get-Process
+function ListAndCountFiles { param ( [string]$directory ) Get-ChildItem -Path $directory $fileCount = (Get-ChildItem -Path $directory).Count Write-Host "Total files in $($directory): $fileCount"}
+ListAndCountFiles -directory "C:\Temp"
+
+
+-- Another Examples --
+
+➜ Install / Launch
+
+Windows (winget):
+winget search Microsoft.PowerShell
+winget install --id Microsoft.PowerShell --source winget
+
+Linux (Ubuntu): sudo snap install powershell --classic
+
+macOS: 
+brew install powershell/tap/powershell
+PSVersionTable
+
+
+➜ Get Help & Discover Commands
+
+Get-Help Get-Help
+Get-Help Get-Process
+Get-Help Get-Service
+Get-Command
+Get-Help -Name Get-Command -Detailed
+Update-Help
+
+
+➜ Aliases
+
+cd, mkdir, del
+
+
+➜ Files & Folders
+
+Get-ChildItem
+Set-Location .\Documents\
+New-Item file.txt
+New-Item -ItemType Directory logs
+Remove-Item .\logs\
+Copy-Item file.txt file1.txt
+Move-Item .\file1.txt ..\Desktop\
+Get-Content .\file.txt
+
+
+➜ Processes & Services
+
+Get-Process
+Get-Process -Name win*
+Stop-Process -Id 5432
+
+Get-Service
+Start-Service -Name Appinfo
+Stop-Service -Name Appinfo
+
+Get-Process | Sort CPU -Descending | Select -First 20
+
+
+➜ Filtering / Piping
+
+Get-Process | Select-Object ProcessName, Id
+Get-Service | Where-Object Status -eq "Running"
+Select-String -Pattern "today" .\file.txt
+
+
+➜ Local Users & Groups
+
+Get-LocalUser
+New-LocalUser -Name "j.doe" -Password (ConvertTo-SecureString 'password123' -AsPlainText -Force)
+Set-LocalUser -Name "j.doe" -Description "Test user"
+Disable-LocalUser -Name "j.doe"
+Enable-LocalUser -Name "j.doe"
+Remove-LocalUser -Name "j.doe"
+
+Get-LocalGroup
+New-LocalGroup -Name "Students"
+Set-LocalGroup -Name "Students" -Description "Improvise. Adapt. Overcome."
+Add-LocalGroupMember -Group "Students" -Member "j.doe"
+Remove-LocalGroupMember -Group "Students" -Member "j.doe"
+Remove-LocalGroup -Name "Students"
+
+
+➜ Active Directory (RSAT/AD module)
+
+Get-ADUser "j.doe"
+Get-ADUser -Filter *
+New-ADUser -Name "j.doe" -SamAccountName j.doe -AccountPassword (ConvertTo-SecureString "sifre123!" -AsPlainText -Force)
+Set-ADUser -Identity "j.doe" -Surname "Doe"
+Remove-ADUser "j.doe"
+
+Get-ADGroup "Students"
+Get-ADGroup -Filter *
+New-ADGroup -Name "Students" -GroupScope Universal
+Set-ADGroup -Identity "Students" -Description "Learn as if you were to live forever"
+Get-ADGroupMember -Identity "Students"
+Add-ADGroupMember -Identity "Students" -Members j.doe
+Remove-ADGroupMember -Identity "Students" -Member "j.doe"
+Remove-ADGroup "Students"
+
+
+➜ Networking
+
+Get-NetIPAddress
+ipconfig
+netstat -ano
+nslookup example.com
+arp -a
+Test-NetConnection
+Invoke-WebRequest -Uri "https://upload.wikimedia.org/wikipedia/commons/a/af/PowerShell_Core_6.0_icon.png" -OutFile "powershell.png"
+
+
+➜ System / Info / Hashes
+
+Get-ComputerInfo
+Get-ComputerInfo | Select-Object WindowsVersion
+
+Get-WmiObject -Class win32_OperatingSystem
+Get-Hotfix
+Get-Service | Where-Object DisplayName -like '*Defender*'
+Get-ChildItem -Recurse *.* | Select-String -Pattern "SEARCH_STR"
+
+Get-Acl file.txt
+Get-Acl -Path "C:\junk\"
+
+Get-FileHash file.txt
+Get-FileHash -Algorithm MD5 file.txt
+Get-FileHash -Algorithm SHA1 file.txt
+Get-FileHash -Algorithm SHA256 file.txt
+Get-FileHash -Algorithm SHA512 file.txt
+
+
+➜ Scripting Basics
+
+# Variables
+$name = "John Doe"
+$age = 30
+$firstName, $lastName = "John", "Doe"
+
+# If / Else
+if ($age -gt 18) { Write-Host "Adult" } else { Write-Host "Kid" }
+
+# Switch
+$dayOfWeek = Get-Date -Format dddd
+switch ($dayOfWeek) {
+  "Monday" { "Start the week!" }
+  "Friday" { "Almost weekend!" }
+  Default { "Carry on." }
+}
+
+# Loops
+for ($i=1; $i -le 10; $i++) { Write-Host $i }
+
+$i=1
+while ($i -le 10) { Write-Host $i; $i++ }
+
+$i=1
+do { Write-Host $i; $i++ } while ($i -le 10)
+
+$names = "John","Jane","Doe"
+foreach ($name in $names) { Write-Host $name }
+
+
+➜ Incident Examples
+
+Get-Process | Sort CPU -Descending | Select -First 20
+Get-NetTCPConnection | Sort-Object -Property State
+Get-ScheduledTask | Where {$_.State -ne 'Disabled'}
+Get-Service | Where-Object {$_.Status -eq 'Running'}
+Get-WinEvent -FilterHashtable @{LogName='Security'; StartTime=(Get-Date).AddHours(-1)} -MaxEvents 200
+Get-FileHash C:\temp\susp.exe -Algorithm SHA256
+
+
+*
