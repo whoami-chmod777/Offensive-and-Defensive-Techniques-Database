@@ -14,11 +14,120 @@ Learn how TLS, SSH, and VPN can secure your network traffic.
 
 
 -- Introduction
--- TLS
--- HTTPS
--- SMTPS, POP3S, and IMAPS
--- SSH
--- SFTP and FTPS
--- VPN
--- Closing Notes
+
+In the Networking Core Protocols are used to browse the web and access email, among others. 
+These protocols work great; however, they cannot protect the confidentiality, integrity, or authenticity of the data transferred. 
+
+In simpler terms, when we say that confidentiality is not protected, it means that someone watching the packets can read your password or credit card information when sent over HTTP. Similarly, they can access your private documents when sent via email. As for not protecting the integrity of the data, it means that an adversary can change the contents of the transferred data; in other words, if you authorise the payment of one hundred pounds, they can easily change it to another value, such as eight hundred pounds. Authenticity means ensuring we are talking with the correct server, not a fake one. Important online transactions are risky without ensuring confidentiality, integrity, and authenticity.
+
+
+Transport Layer Security (TLS) is added to existing protocols to protect communication confidentiality, integrity, and authenticity. Consequently, HTTP, POP3, SMTP, and IMAP become HTTPS, POP3S, SMTPS, and IMAPS, where the appended “S” stands for Secure. 
+
+Similarly, it is deemed insecure to remotely access a system using the TELNET protocol; Secure Shell (SSH) was created to provide a secure way to access remote systems. 
+Furthermore, SSH is an extensible protocol that offers added security features for other protocols.
+
+
+-- TLS --
+
+The first step for every server (or client) that needs to identify itself is to get a signed TLS certificate. Generally, the server administrator creates a Certificate Signing Request (CSR) and submits it to a Certificate Authority (CA); the CA verifies the CSR and issues a digital certificate. Once the (signed) certificate is received, it can be used to identify the server (or the client) to others, who can confirm the validity of the signature. For a host to confirm the validity of a signed certificate, the certificates of the signing authorities need to be installed on the host. In the non-digital world, this is similar to recognising the stamps of various authorities. The screenshot below shows the trusted authorities installed in a web browser.
+
+
+-- HTTPS --
+
+
+
+HTTP relies on TCP and uses port 80 by default.
+
+• Secure authentication: Besides password-based authentication, SSH supports public key and two-factor authentication.
+• Confidentiality: OpenSSH provides end-to-end encryption, protecting against eavesdropping. Furthermore, it notifies you of new server keys to protect against man-in-the-middle attacks.
+• Integrity: In addition to protecting the confidentiality of the exchanged data, cryptography also protects the integrity of the traffic.
+• Tunneling: SSH can create a secure “tunnel” to route other protocols through SSH. This setup leads to a VPN-like connection.
+• X11 Forwarding: If you connect to a Unix-like system with a graphical user interface, SSH allows you to use the graphical application over the network.
+
+
+
+
+
+
+
+
+-- SMTPS, POP3S, and IMAPS --
+
+SFTP stands for SSH File Transfer Protocol and allows secure file transfer. It is part of the SSH protocol suite and shares the same port number, 22. If enabled in the OpenSSH server configuration, you can connect using a command such as sftp username@hostname. Once logged in, you can issue commands such as get filename and put filename to download and upload files, respectively. Generally speaking, SFTP commands are Unix-like and can differ from FTP commands.
+
+
+
+
+
+-- SSH --
+
+OpenSSH offers several benefits:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- SFTP and FTPS --
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- VPN --
+
+Consider a company with offices in different geographical locations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Closing Notes --
+
+
+
 
