@@ -24,7 +24,6 @@ Wireshark is an open-source, cross-platform network packet analyser tool capable
 • Merge PCAP Files
 • View File Details
 
-
 Wireshark is one of the most potent traffic analyser tools available in the wild. There are multiple purposes for its use:
 
 • Detecting and troubleshooting network problems, such as network load failure points and congestion.
@@ -128,7 +127,6 @@ We can see seven distinct layers to the packet: frame/packet,source [MAC],source
 • Time Display Format
 • Expert Info
 
-
 ➜ Packet Numbers
 
 Wireshark calculates the number of investigated packets and assigns a unique number for each packet. This helps the analysis process for big captures and makes it easy to go back to a specific point of an event.
@@ -211,7 +209,6 @@ It will show the packet number, summary, group protocol and total occurrence.
 Apply as Column
 Follow Stream
 Simple Display Filter Queries
-
 
 Wireshark has a powerful filter engine that helps analysts to narrow down the traffic and focus on the event of interest. Wireshark has two types of filtering approaches: capture and display filters. 
 Capture filters are used for "capturing" only the packets valid for the used filter. Display filters are used for "viewing" the packets valid for the used filter.
