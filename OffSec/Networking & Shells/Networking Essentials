@@ -3,27 +3,91 @@
 
 Explore networking protocols from automatic configuration to routing packets to the destination.
 
-• Introduction
 • DHCP: Give Me My Network Settings
 • ARP: Bridging Layer 3 Addressing to Layer 2 Addressing
 • ICMP: Troubleshooting Networks
-• Routing
 • NAT
-
-
--- Introduction --
 
 
 -- DHCP: Give Me My Network Settings --
 
+ DHCP is an application-level protocol that relies on UDP; the server listens on UDP port 67, and the client sends from UDP port 68. Your smartphone and laptop are configured to use DHCP by default.
+
+DHCP follows four steps: Discover, Offer, Request, and Acknowledge (DORA):
+
+• DHCP Discover: The client broadcasts a DHCPDISCOVER message seeking the local DHCP server if one exists.
+• DHCP Offer: The server responds with a DHCPOFFER message with an IP address available for the client to accept.
+• DHCP Request: The client responds with a DHCPREQUEST message to indicate that it has accepted the offered IP.
+• DHCP Acknowledge: The server responds with a DHCPACK message to confirm that the offered IP address is now assigned to this client.
+           
+user@TryHackMe$ tshark -r DHCP-G5000.pcap -n
+    1   0.000000      0.0.0.0 → 255.255.255.255 DHCP 342 DHCP Discover - Transaction ID 0xfb92d53f
+    2   0.013904 192.168.66.1 → 192.168.66.133 DHCP 376 DHCP Offer    - Transaction ID 0xfb92d53f
+    3   4.115318      0.0.0.0 → 255.255.255.255 DHCP 342 DHCP Request  - Transaction ID 0xfb92d53f
+    4   4.228117 192.168.66.1 → 192.168.66.133 DHCP 376 DHCP ACK      - Transaction ID 0xfb92d53f
+
+• The client starts without any IP network configuration. It only has a MAC address. In the first and third packets, DHCP Discover and DHCP Request, the client searching for a DHCP server still has no IP network configuration and has not yet used the DHCP server’s offered IP address. Therefore, it sends packets from the IP address 0.0.0.0 to the broadcast IP address 255.255.255.255.
+• As for the link layer, in the first and third packets, the client sends to the broadcast MAC address, ff:ff:ff:ff:ff:ff (not shown in the output above). The DHCP server offers an available IP address along with the network configuration in the DHCP offer. It uses the client’s destination MAC address. (It used the proposed IP address in this example system.)
+        
 
 -- ARP: Bridging Layer 3 Addressing to Layer 2 Addressing --
+
+The two common data link layers we use are Ethernet (IEEE 802.3) and WiFi (IEEE 802.11). 
+
+However, the devices on the same Ethernet network do not need to know each other’s MAC addresses all the time; they only need to know each other’s MAC addresses while communicating.
+
+A MAC address is a 48-bit number typically represented in hexadecimal notation; for example, 7C:DF:A1:D3:8C:5C and 44:DF:65:D8:FE:6C
+
+Address Resolution Protocol (ARP) makes it possible to find the MAC address of another device on the Ethernet. 
+In the example below, a host with the IP address 192.168.66.89 wants to communicate with another system with the IP address 192.168.66.1. 
+It sends an ARP Request asking the host with the IP address 192.168.66.1 to respond. The ARP Request is sent from the MAC address of the requester to the broadcast MAC address, ff:ff:ff:ff:ff:ff as shown in the first packet. 
+The ARP Reply arrived shortly afterwards, and the host with the IP address 192.168.66.1 responded with its MAC address. From this point, the two hosts can exchange data link layer frames.
+           
+user@TryHackMe$ tshark -r arp.pcapng -Nn
+    1 0.000000000 cc:5e:f8:02:21:a7 → ff:ff:ff:ff:ff:ff ARP 42 Who has 192.168.66.1? Tell 192.168.66.89
+    2 0.003566632 44:df:65:d8:fe:6c → cc:5e:f8:02:21:a7 ARP 42 192.168.66.1 is at 44:df:65:d8:fe:6c
+           
+user@TryHackMe$ tcpdump -r arp.pcapng -n -v
+17:23:44.506615 ARP, Ethernet (len 6), IPv4 (len 4), Request who-has 192.168.66.1 tell 192.168.66.89, length 28
+17:23:44.510182 ARP, Ethernet (len 6), IPv4 (len 4), Reply 192.168.66.1 is-at 44:df:65:d8:fe:6c, length 28
+
+An ARP Request or ARP Reply is not encapsulated within a UDP or even IP packet; it is encapsulated directly within an Ethernet frame.         
+
+The Ethernet frame header contains:
+• Destination MAC address
+• Source MAC address
+• Type (IPv4 in this case)
 
 
 -- ICMP: Troubleshooting Networks --
 
+Internet Control Message Protocol (ICMP) is mainly used for network diagnostics and error reporting. Two popular commands rely on ICMP, and they are instrumental in network troubleshooting and network security. The commands are:
 
--- Routing --
+• ping: This command uses ICMP to test connectivity to a target system and measures the round-trip time (RTT). In other words, it can be used to learn that the target is alive and that its reply can reach our system.
+• traceroute: This command is called traceroute on Linux and UNIX-like systems and tracert on MS Windows systems. It uses ICMP to discover the route from your host to the target.
+
+➜ Ping
+
+The ping command sends an ICMP Echo Request (ICMP Type 8). The computer on the receiving end responds with an ICMP Echo Reply (ICMP Type 0).
+
+user@TryHackMe$ ping 192.168.11.1
+user@TryHackMe$ ping 192.168.11.1 -c 4
+
+➜ Traceroute
+
+The Internet protocol has a field called Time-to-Live (TTL) that indicates the maximum number of routers a packet can travel through before it is dropped. 
+The router decrements the packet’s TTL by one before it sends it across. When the TTL reaches zero, the router drops the packet and sends an ICMP Time Exceeded message (ICMP Type 11). 
+In this context, “time” is measured in the number of routers, not seconds.
+
+user@TryHackMe$ traceroute example.com
 
 
 -- NAT --
+
+The idea behind NAT lies in using one public IP address to provide Internet access to many private IP addresses. 
+In other words, if you are connecting a company with twenty computers, you can provide Internet access to all twenty computers by using a single public IP address instead of twenty public IP addresses. 
+(Note: Technically speaking, the number of IP addresses is always expressed as a power of two. To be technically accurate, with NAT, you reserve two public IP addresses instead of thirty-two. 
+Consequently, you would have saved thirty public IP addresses.)
+
+
+*
