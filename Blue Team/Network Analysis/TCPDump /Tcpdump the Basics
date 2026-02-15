@@ -1,11 +1,191 @@
 
 --- Tcpdump the Basics ---
 
+• Introduction
+• Basic Packet Capture
+• Filtering Expressions
+• Advanced Filtering
+• Displaying Packets
+• Conclusion
 
 
-Introduction
-Basic Packet Capture
-Filtering Expressions
-Advanced Filtering
-Displaying Packets
-Conclusion
+-- Introduction --
+
+The main challenge when studying networking protocols is that we don’t get a chance to see the protocol “conversations” taking place. All the technical complexities are hidden behind friendly and elegant user interfaces. 
+You access resources on your local network without ever seeing an ARP query. Similarly, you would access Internet services for years without seeing a single three-way handshake till you check a networking book or inspect a network traffic capture. 
+The best study aid would be capturing network traffic and taking a closer look at the various protocols; this helps us better understand how networks work.
+
+The Tcpdump tool and its libpcap library are written in C and C++ and were released for Unix-like systems in the late 1980s or early 1990s. 
+Consequently, they are very stable and offer optimal speed. The libpcap library is the foundation for various other networking tools today. Moreover, it was ported to MS Windows as winpcap.
+
+
+-- Basic Packet Capture --
+
+You can run tcpdump without providing any arguments; however, this is only useful to test that you have it installed! In any real scenario, we must be specific about what to listen to, where to write, and how to display the packets.
+
+• Specify the Network Interface
+• Save the Captured Packets
+• Read Captured Packets from a File
+• Limit the Number of Captured Packets
+• Don’t Resolve IP Addresses and Port Numbers
+• Produce (More) Verbose Output
+• Summary and Examples
+
+➜ Specify the Network Interface
+
+The first thing to decide is which network interface to listen to using -i INTERFACE. 
+You can choose to listen on all available interfaces using -i any; alternatively, you can specify an interface you want to listen on, such as -i eth0.
+
+$ sudo tcpdump
+$ sudo tcpdump -i any
+$ sudo tcpdump -i ens5 
+
+➜ Save the Captured Packets
+
+In many cases, you should check the captured packets again later. This can be achieved by saving to a file using -w FILE. The file extension is most commonly set to .pcap. 
+The saved packets can be inspected later using another program, such as Wireshark. You won’t see the packets scrolling when you choose the -w option.
+
+$ sudo tcpdump -i ens5 -w capture.pcap
+$ sudo tcpdump -i any -w traffic.pcap
+
+➜ Read Captured Packets from a File
+
+You can use Tcpdump to read packets from a file by using -r FILE. This is very useful for learning about protocol behaviour. 
+You can capture network traffic over a suitable time frame to inspect a specific protocol, then read the captured file while applying filters to display the packets you are interested in. 
+Furthermore, it might be a packet capture file that contains a network attack that took place, and you inspect it to analyze the attack.
+
+$ sudo tcpdump -r capture.pcap
+$ sudo tcpdump -r traffic.pcap port 80
+
+➜ Limit the Number of Captured Packets
+
+You can specify the number of packets to capture by specifying the count using -c COUNT. Without specifying a count, the packet capture will continue till you interrupt it, for example, by pressing CTRL-C. 
+Depending on your goal, you only need a limited number of packets.
+
+$ sudo tcpdump -i ens5 -c 10
+$ sudo tcpdump -i ens5 -c 5 -n
+$ sudo tcpdump -i any -c 50 -w sample.pcap
+
+➜ Don’t Resolve IP Addresses and Port Numbers
+
+Tcpdump will resolve IP addresses and print friendly domain names where possible. To avoid making such DNS lookups, you can use the -n argument. 
+Similarly, if you don’t want port numbers to be resolved, such as 80 being resolved to http, you can use the -nn to stop both DNS and port number lookups
+
+$ sudo tcpdump -i ens5 -n
+$ sudo tcpdump -i ens5 -nn
+$ sudo tcpdump -i ens5 -c 5 -n
+
+➜ Produce (More) Verbose Output
+
+If you want to print more details about the packets, you can use -v to produce a slightly more verbose output. 
+According to the Tcpdump manual page (man tcpdump), the addition of -v will print “the time to live, identification, total length and options in an IP packet” among other checks. 
+The -vv will produce more verbose output; the -vvv will provide even more verbosity; check the manual page for details.
+
+$ sudo tcpdump -i ens5 -v
+$ sudo tcpdump -i ens5 -vv
+$ sudo tcpdump -i ens5 -vvv
+
+➜ Summary and Examples
+
++-------------------------------+--------------------------------------------------------------+
+| Command                       | Explanation                                                  |
++-------------------------------+--------------------------------------------------------------+
+| tcpdump -i INTERFACE          | Captures packets on a specific network interface             |
+| tcpdump -w FILE               | Writes captured packets to a file                            |
+| tcpdump -r FILE               | Reads captured packets from a file                           |
+| tcpdump -c COUNT              | Captures a specific number of packets                        |
+| tcpdump -n                    | Don’t resolve IP addresses                                   |
+| tcpdump -nn                   | Don’t resolve IP addresses or protocol/port numbers          |
+| tcpdump -v                    | Verbose output (-vv and -vvv increase verbosity further)     |
++-------------------------------+--------------------------------------------------------------+
+
+$ tcpdump -i ens5 -c 50 -v
+$ tcpdump -i wlo1 -w data.pcap
+$ tcpdump -i any -nn
+$ tcpdump -i ens5 port 80
+$ tcpdump -i ens5 host 192.168.1.10
+$ tcpdump -i ens5 net 192.168.1.0/24
+$ tcpdump -r data.pcap
+$ tcpdump -i ens5 -c 100 -w sample.pcap
+
+
+➜ Commands Summary
+
+$ sudo tcpdump
+$ sudo tcpdump -i any
+$ sudo tcpdump -i eth0
+$ sudo tcpdump -i eth0 -c 5 -n
+
+$ sudo tcpdump -i eth0 -w capture.pcap
+$ sudo tcpdump -i any -w traffic.pcap
+
+$ sudo tcpdump -r capture.pcap
+$ sudo tcpdump -r traffic.pcap port 80
+
+$ sudo tcpdump -i eth0 -c 10
+$ sudo tcpdump -i eth0 -c 5 -n
+$ sudo tcpdump -i any -c 50 -w sample.pcap
+
+$ sudo tcpdump -i eth0 -n
+$ sudo tcpdump -i eth0 -nn
+$ sudo tcpdump -i eth0 -c 5 -n
+
+$ sudo tcpdump -i eth0 -v
+$ sudo tcpdump -i eth0 -vv
+$ sudo tcpdump -i eth0 -vvv
+
+$ sudo tcpdump -i eth0 -c 50 -v
+$ sudo tcpdump -i wlo1 -w data.pcap
+$ sudo tcpdump -i any -nn
+$ sudo tcpdump -i eth0 port 80
+$ sudo tcpdump -i eth0 host 192.168.1.10
+$ sudo tcpdump -i eth0 net 192.168.1.0/24
+$ sudo tcpdump -r data.pcap
+$ sudo tcpdump -i eth0 -c 100 -w sample.pcap
+
+
+-- Filtering Expressions --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Advanced Filtering --
+
+
+
+-- Displaying Packets --
+
+
+
+-- Conclusion --
+
+
+
+
+
+
+
+
+
+
+
+
