@@ -12,6 +12,9 @@ nmap -O -sV scanme.nmap.org
 nmap -O -sn scanme.nmap.org
 sudo nmap -A scanme.nmap.org
 
+nmap -O -sS 192.168.124.211
+
+
 
 -- Tips for OS Detection --
 
