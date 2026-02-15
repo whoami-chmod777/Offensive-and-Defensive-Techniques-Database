@@ -31,6 +31,7 @@ You can run tcpdump without providing any arguments; however, this is only usefu
 • Produce (More) Verbose Output
 • Summary and Examples
 
+
 ➜ Specify the Network Interface
 
 The first thing to decide is which network interface to listen to using -i INTERFACE. 
@@ -108,7 +109,6 @@ $ tcpdump -i ens5 net 192.168.1.0/24
 $ tcpdump -r data.pcap
 $ tcpdump -i ens5 -c 100 -w sample.pcap
 
-
 ➜ Commands Summary
 
 $ sudo tcpdump
@@ -146,29 +146,193 @@ $ sudo tcpdump -i eth0 -c 100 -w sample.pcap
 
 -- Filtering Expressions --
 
+Although you can run tcpdump without providing any filtering expressions, this won’t be useful. 
+Just like in a social gathering, you don’t try to listen to everyone at the same time; you would rather give your attention to a specific person or conversation. 
+Considering the number of packets seen by our network card, it is impossible to see everything at once; we need to be specific and capture what we are interested in inspecting.
+
+• Filtering by Host
+• Filtering by Port
+• Filtering by Protocol
+• Logical Operators
+• Summary and Examples
+• Commands Summary
 
 
+➜ Filtering by Host
+
+Let’s say you are only interested in IP packets exchanged with your network printer or a specific game server. You can easily limit the captured packets to this host using host IP or host HOSTNAME.
+It is important to note that capturing packets requires you to be logged-in as root or to use sudo.
+
+If you want to limit the packets to those from a particular source IP address or hostname, you must use src host IP or src host HOSTNAME. 
+Similarly, you can limit packets to those sent to a specific destination using dst host IP or dst host HOSTNAME.
+
+$ sudo tcpdump host example.com -w http.pcap
+$ sudo tcpdump src host 192.168.1.50
+$ sudo tcpdump src host example.com -c 20
+$ sudo tcpdump dst host 8.8.8.8
+$ sudo tcpdump dst host game.server.com -w game.pcap
+
+➜ Filtering by Port
+
+If you want to capture all DNS traffic, you can limit the captured packets to those on port 53. Remember that DNS uses UDP and TCP ports 53 by default. 
+You can limit the packets to those from a particular source port number or to a particular destination port number using src port PORT_NUMBER and dst port PORT_NUMBER, respectively.
+
+$ sudo tcpdump src port 53
+$ sudo tcpdump dst port 53
+$ sudo tcpdump -i ens5 port 53 -n
+$ sudo tcpdump -i ens5 udp port 53
+$ sudo tcpdump -i ens5 tcp port 53 -c 20
+$ sudo tcpdump src port 443 -w https_src.pcap
+$ sudo tcpdump dst port 22 -nn
+
+➜ Filtering by Protocol
+
+You can limit your packet capture to a specific protocol; examples include: ip, ip6, udp, tcp, and icmp. 
+
+$ sudo tcpdump -i ens5 icmp -n
+$ sudo tcpdump -i ens5 tcp
+$ sudo tcpdump -i ens5 udp
+$ sudo tcpdump -i ens5 ip
+$ sudo tcpdump -i ens5 ip6
+$ sudo tcpdump icmp -c 10
+$ sudo tcpdump icmp -c 10 -vv
+$ sudo tcpdump tcp -w tcp_traffic.pcap
+$ sudo tcpdump udp port 53 -nn
+
+➜ Logical Operators
+
+Three logical operators that can be handy
+
+• and: Captures packets where both conditions are true. For example, tcpdump host 1.1.1.1 and tcp captures tcp traffic with host 1.1.1.1.
+• or: Captures packets when either one of the conditions is true. For instance, tcpdump udp or icmp captures UDP or ICMP traffic.
+• not: Captures packets when the condition is not true. For example, tcpdump not tcp captures all packets except TCP segments; we expect to find UDP, ICMP, and ARP packets among the results.
+
+$ sudo tcpdump host 1.1.1.1 and tcp
+$ sudo tcpdump udp or icmp
+$ sudo tcpdump not tcp
+$ sudo tcpdump tcp and port 80
+$ sudo tcpdump host 192.168.1.10 and not icmp
+$ sudo tcpdump (udp or icmp) and host 8.8.8.8
+$ sudo tcpdump not (port 22)
+
+➜ Summary and Examples
+
+Remember that you can count the lines by piping the output via the wc command
+
+$ sudo tcpdump -r traffic.pcap src host 192.168.124.1 -n | wc
+
++--------------------------------------+--------------------------------------------------------------+
+| Command                              | Explanation                                                  |
++--------------------------------------+--------------------------------------------------------------+
+| tcpdump host IP                      | Filters packets by IP address or hostname                    |
+| tcpdump host HOSTNAME                | Filters packets by IP address or hostname                    |
+| tcpdump src host IP                  | Filters packets by a specific source host                    |
+| tcpdump dst host IP                  | Filters packets by a specific destination host               |
+| tcpdump port PORT_NUMBER             | Filters packets by port number                               |
+| tcpdump src port PORT_NUMBER         | Filters packets by the specified source port number          |
+| tcpdump dst port PORT_NUMBER         | Filters packets by the specified destination port number     |
+| tcpdump PROTOCOL                     | Filters packets by protocol; examples include ip, ip6, icmp  |
++--------------------------------------+--------------------------------------------------------------+
+
+$ sudo tcpdump -i any tcp port 22
+$ sudo tcpdump -i wlo1 udp port 123
+$ sudo tcpdump -i eth0 host example.com and tcp port 443 -w https.pcap
+
+$ sudo tcpdump -r traffic.pcap -c 5 -n
+$ sudo tcpdump -r traffic.pcap src host 192.168.124.1 -n
+$ sudo tcpdump -r traffic.pcap src host 192.168.124.1 -n | wc
+
+$ sudo tcpdump -r traffic.pcap dst port 80 -n
+$ sudo tcpdump -r traffic.pcap tcp port 443 -n | wc -l
+
+$ sudo tcpdump -r traffic.pcap udp -n
+$ sudo tcpdump -r traffic.pcap icmp -n
+$ sudo tcpdump -r traffic.pcap host 10.0.0.5 and tcp -n
+
+➜ Commands Summary
+
+$ sudo tcpdump host example.com -w http.pcap
+$ sudo tcpdump src host 192.168.1.50
+$ sudo tcpdump src host example.com -c 20
+$ sudo tcpdump dst host 8.8.8.8
+$ sudo tcpdump dst host game.server.com -w game.pcap
+
+$ sudo tcpdump src port 53
+$ sudo tcpdump dst port 53
+$ sudo tcpdump -i eth0 port 53 -n
+$ sudo tcpdump -i eth0 udp port 53
+$ sudo tcpdump -i eth0 tcp port 53 -c 20
+$ sudo tcpdump src port 443 -w https_src.pcap
+$ sudo tcpdump dst port 22 -nn
+
+$ sudo tcpdump -i eth0 icmp -n
+$ sudo tcpdump -i eth0 tcp
+$ sudo tcpdump -i eth0 udp
+$ sudo tcpdump -i eth0 ip
+$ sudo tcpdump -i eth0 ip6
+$ sudo tcpdump icmp -c 10
+$ sudo tcpdump icmp -c 10 -vv
+$ sudo tcpdump tcp -w tcp_traffic.pcap
+$ sudo tcpdump udp port 53 -nn
+
+$ sudo tcpdump host 1.1.1.1 and tcp
+$ sudo tcpdump udp or icmp
+$ sudo tcpdump not tcp
+$ sudo tcpdump tcp and port 80
+$ sudo tcpdump host 192.168.1.10 and not icmp
+$ sudo tcpdump (udp or icmp) and host 8.8.8.8
+$ sudo tcpdump not (port 22)
 
 
+$ sudo tcpdump -i any tcp port 22
+$ sudo tcpdump -i wlo1 udp port 123
+$ sudo tcpdump -i eth0 host example.com and tcp port 443 -w https.pcap
 
+$ sudo tcpdump -r traffic.pcap -c 5 -n
+$ sudo tcpdump -r traffic.pcap src host 192.168.124.1 -n
+$ sudo tcpdump -r traffic.pcap src host 192.168.124.1 -n | wc
 
+$ sudo tcpdump -r traffic.pcap dst port 80 -n
+$ sudo tcpdump -r traffic.pcap tcp port 443 -n | wc -l
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+$ sudo tcpdump -r traffic.pcap udp -n
+$ sudo tcpdump -r traffic.pcap icmp -n
+$ sudo tcpdump -r traffic.pcap host 10.0.0.5 and tcp -n
 
 
 -- Advanced Filtering --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
