@@ -6,7 +6,6 @@
 • Filtering Expressions
 • Advanced Filtering
 • Displaying Packets
-• Conclusion
 
 
 -- Introduction --
@@ -549,18 +548,10 @@ $ tcpdump -r TwoPackets.pcap -xx
 $ tcpdump -r TwoPackets.pcap -X
 
 
--- Conclusion --
-
-
-
-
-
-
-
-
 
 https://www.tcpdump.org/manpages/pcap-filter.7.html
 https://www.tcpdump.org/manpages/tcpdump.1.html
+https://danielmiessler.com/blog/tcpdump
 
 
 *
