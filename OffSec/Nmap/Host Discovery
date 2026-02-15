@@ -276,7 +276,7 @@ nmap -sn stanford.edu/24
 nmap -Pn scanme.nmap.org
 
 
-
+*
 
 
 
