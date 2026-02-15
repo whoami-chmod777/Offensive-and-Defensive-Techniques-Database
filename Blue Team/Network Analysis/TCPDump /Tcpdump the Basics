@@ -395,38 +395,40 @@ Based on the above, we can write:
 
 ➜ Commands Summary
 
-tcpdump "tcp[tcpflags] == 0"
-tcpdump "tcp[tcpflags] == tcp-syn"
+$ sudo tcpdump "tcp[tcpflags] == 0"
+$ sudo tcpdump "tcp[tcpflags] == tcp-syn"
+$ sudo tcpdump -r traffic.pcap "tcp[tcpflags] == tcp-rst"
+$ sudo tcpdump -r traffic.pcap greater 15000 -n
+$ sudo tcpdump -r traffic.pcap "ip[2:2] > 15000" -n
 
-tcpdump -i eth0 "tcp[tcpflags] == tcp-syn"
-tcpdump -i eth0 "tcp[tcpflags] == (tcp-syn|tcp-ack)"
+$ sudo tcpdump -i eth0 "tcp[tcpflags] == tcp-syn"
+$ sudo tcpdump -i eth0 "tcp[tcpflags] == (tcp-syn|tcp-ack)"
 
-tcpdump "tcp[tcpflags] & (tcp-syn|tcp-ack) != 0"
-tcpdump "tcp[tcpflags] & tcp-ack != 0 and tcp[tcpflags] & tcp-syn == 0"
+$ sudo tcpdump "tcp[tcpflags] & (tcp-syn|tcp-ack) != 0"
+$ sudo tcpdump "tcp[tcpflags] & tcp-ack != 0 and tcp[tcpflags] & tcp-syn == 0"
 
+$ sudo tcpdump "tcp[tcpflags] & tcp-syn != 0"
+$ sudo tcpdump "tcp[tcpflags] & tcp-fin != 0"
+$ sudo tcpdump "tcp[tcpflags] & tcp-rst != 0"
+$ sudo tcpdump "tcp[tcpflags] & tcp-push != 0"
 
-tcpdump "tcp[tcpflags] & tcp-syn != 0"
-tcpdump "tcp[tcpflags] & tcp-fin != 0"
-tcpdump "tcp[tcpflags] & tcp-rst != 0"
-tcpdump "tcp[tcpflags] & tcp-push != 0"
+$ sudo tcpdump "tcp[tcpflags] & tcp-fin != 0"
+$ sudo tcpdump "tcp[tcpflags] & tcp-rst != 0"
+$ sudo tcpdump "tcp[tcpflags] & tcp-push != 0"
 
-tcpdump "tcp[tcpflags] & tcp-fin != 0"
-tcpdump "tcp[tcpflags] & tcp-rst != 0"
-tcpdump "tcp[tcpflags] & tcp-push != 0"
+$ sudo tcpdump "ip[6:2] & 0x1fff != 0"
+$ sudo tcpdump "ip[8] < 5"
+$ sudo tcpdump "ip[0] & 0xf != 5"
+$ sudo tcpdump "icmp[0] == 8"
+$ sudo tcpdump "icmp[0] == 0"
 
-tcpdump "ip[6:2] & 0x1fff != 0"
-tcpdump "ip[8] < 5"
-tcpdump "ip[0] & 0xf != 5"
-tcpdump "icmp[0] == 8"
-tcpdump "icmp[0] == 0"
+$ sudo tcpdump "udp[8:2] > 512"
+$ sudo tcpdump "tcp[13] == 2"
+$ sudo tcpdump "tcp[13] == 18"
+$ sudo tcpdump "tcp[13] & 4 != 0"
 
-tcpdump "udp[8:2] > 512"
-tcpdump "tcp[13] == 2"
-tcpdump "tcp[13] == 18"
-tcpdump "tcp[13] & 4 != 0"
-
-tcpdump -i any "tcp[tcpflags] & tcp-syn != 0"
-tcpdump -r traffic.pcap "tcp[tcpflags] & tcp-ack != 0"
+$ sudo tcpdump -i any "tcp[tcpflags] & tcp-syn != 0"
+$ sudo tcpdump -r traffic.pcap "tcp[tcpflags] & tcp-ack != 0"
 
 
 -- Displaying Packets --
