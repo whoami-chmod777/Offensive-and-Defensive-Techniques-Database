@@ -4,6 +4,7 @@
 • Timing Templates
 • Parallelism
 • Host Timeout
+• Rates of Sends Packets
 • Scan Delay
 • Timing Template Modes
 • Recommendations
@@ -56,6 +57,19 @@ nmap -Pn -v 192.168.0-255.0-100
 nmap -Pn 192.168.199.0-255 -T4
 nmap -Pn -v -p21-100 192.168.199.0-255
 nmap -Pn -v -p21-100 192.168.199.0-255 --host-timeout 25s
+
+
+-- Rates of Sends Packets --
+
+nmap -sS -F scanme.nmap.org --min-rate 100
+nmap -sS 192.168.1.0/24 -T4 --min-rate 500
+nmap -Pn -p1-1000 10.0.0.0/24 --min-rate 2000
+
+nmap -sS scanme.nmap.org --max-rate 50
+nmap -sS 192.168.1.0/24 --max-rate 100
+nmap -Pn -p21-100 192.168.199.0/24 --max-rate 30
+
+nmap -sS 192.168.1.0/24 --min-rate 100 --max-rate 300
 
 
 -- Scan Delay --
