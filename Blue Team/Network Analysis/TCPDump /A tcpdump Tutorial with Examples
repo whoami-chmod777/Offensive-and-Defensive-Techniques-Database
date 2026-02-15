@@ -1,0 +1,96 @@
+
+--- A tcpdump Tutorial with Examples ---
+
+tcpdump is the world's premier network analysis tool—combining both power and simplicity into a single command-line interface. This guide will show you how to use it.
+
+tcpdump [options] [expression]
+
+tcpdump -i eth0
+tcpdump -D
+tcpdump host 192.168.1.100
+tcpdump port 80
+tcpdump host 192.168.1.100 and port 80
+tcpdump src host 192.168.1.100 and \( port 80 or port 443 \)
+
+tcpdump tcp
+tcpdump udp
+tcpdump src host 192.168.1.100
+tcpdump dst port 443
+
+tcpdump net 192.168.1.0/24
+tcpdump -w capture.pcap -i eth0
+tcpdump -r capture.pcap
+
+tcpdump -v -i eth0
+tcpdump -vv -i eth0
+tcpdump -vvv -i eth0
+
+tcpdump -i eth0
+tcpdump -i wlan0
+tcpdump host 192.168.1.100
+tcpdump host example.com
+tcpdump port 80
+tcpdump port 443
+tcpdump port 22
+tcpdump port 21
+tcpdump port 25
+tcpdump port 53
+
+tcpdump src host 192.168.1.100
+tcpdump dst host 192.168.1.100
+tcpdump src port 80
+tcpdump dst port 443
+tcpdump tcp
+tcpdump udp
+tcpdump icmp
+
+tcpdump net 192.168.1.0/24
+tcpdump src net 192.168.1.0/24
+tcpdump dst net 192.168.1.0/24
+tcpdump dst host 192.168.1.100 and dst port 80
+tcpdump src host 192.168.1.100 and src port 443
+tcpdump host 192.168.1.100 and \( port 80 or port 443 \)
+
+tcpdump not icmp
+tcpdump not port 80
+
+tcpdump 'tcp[tcpflags] & tcp-syn != 0'
+tcpdump 'tcp[tcpflags] & tcp-ack != 0'
+tcpdump 'tcp[tcpflags] & tcp-rst != 0'
+tcpdump 'tcp[tcpflags] & tcp-fin != 0'
+tcpdump 'tcp[tcpflags] & tcp-urg != 0'
+tcpdump 'tcp[tcpflags] & tcp-push != 0'
+
+tcpdump 'tcp[tcpflags] = 0x01'
+tcpdump 'tcp[tcpflags] = 0x00'
+tcpdump 'tcp[tcpflags] = 0x12'
+tcpdump 'tcp[tcpflags] = 0x14'
+tcpdump 'tcp[tcpflags] = 0x11'
+tcpdump 'tcp[tcpflags] = 0x18'
+
+tcpdump 'ip[6:2] & 0x1fff != 0'
+tcpdump 'ip[8] = 128'
+tcpdump 'ip[1] & 0xfc >> 2 = 46'
+tcpdump 'ip[1] & 0x03 = 3'
+
+tcpdump 'tcp[4:4] = 12345678'
+tcpdump 'tcp[8:4] = 87654321'
+tcpdump 'tcp[0:2] > 1023 and tcp[0:2] < 65536'
+tcpdump 'tcp[2:2] > 1023 and tcp[2:2] < 65536'
+
+
+
+https://danielmiessler.com/blog/tcpdump
+
+*
+
+
+
+
+
+
+
+
+
+
+
