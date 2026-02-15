@@ -198,6 +198,11 @@ $ sudo tcpdump icmp -c 10
 $ sudo tcpdump icmp -c 10 -vv
 $ sudo tcpdump tcp -w tcp_traffic.pcap
 $ sudo tcpdump udp port 53 -nn
+$ sudo tcpdump -r traffic.pcap arp -n
+$ sudo tcpdump -r traffic.pcap arp and host 192.168.124.137 -n
+$ sudo tcpdump -r traffic.pcap arp and host 192.168.124.137 -n -vv
+$ sudo tcpdump -r traffic.pcap arp and dst host 192.168.124.137 -n -vv
+
 
 ➜ Logical Operators
 
@@ -274,6 +279,10 @@ $ sudo tcpdump icmp -c 10
 $ sudo tcpdump icmp -c 10 -vv
 $ sudo tcpdump tcp -w tcp_traffic.pcap
 $ sudo tcpdump udp port 53 -nn
+$ sudo tcpdump -r traffic.pcap arp -n
+$ sudo tcpdump -r traffic.pcap arp and host 192.168.124.137 -n
+$ sudo tcpdump -r traffic.pcap arp and host 192.168.124.137 -n -vv
+$ sudo tcpdump -r traffic.pcap arp and dst host 192.168.124.137 -n -vv
 
 $ sudo tcpdump host 1.1.1.1 and tcp
 $ sudo tcpdump udp or icmp
@@ -302,38 +311,122 @@ $ sudo tcpdump -r traffic.pcap host 10.0.0.5 and tcp -n
 
 -- Advanced Filtering --
 
+There are many more ways to filter packets. After all, in any real-life situation, we would need to filter through thousands or even millions of packets. It is indispensable to be able to express the exact packets to display. For example, we can limit the displayed packets to those smaller or larger than a certain length:
+
+• greater LENGTH: Filters packets that have a length greater than or equal to the specified length
+• less LENGTH: Filters packets that have a length less than or equal to the specified length
+
+We recommend you check the pcap-filter manual page by issuing the command man pcap-filter;
+
+• Binary Operations
+• Header Bytes
+• Commands Summary
+
+➜ Binary Operations
+
+A binary operation works on bits, i.e., zeroes and ones. An operation takes one or two bits and returns one bit. Consider the following three binary operations: &, |, and !.
+
+& (And) takes two bits and returns 0 unless both inputs are 1
+
++---------+---------+------------------+
+| Input 1 | Input 2 | Input1 & Input 2 |
++---------+---------+------------------+
+|    0    |    0    |        0         |
+|    0    |    1    |        0         |
+|    1    |    0    |        0         |
+|    1    |    1    |        1         |
++---------+---------+------------------+
+
+| (Or) takes two bits and returns 1 unless both inputs are 0.
+
++---------+---------+------------------+
+| Input 1 | Input 2 | Input1 | Input 2 |
++---------+---------+------------------+
+|    0    |    0    |        0         |
+|    0    |    1    |        1         |
+|    1    |    0    |        1         |
+|    1    |    1    |        1         |
++---------+---------+------------------+
+
+! (Not) takes one bit and inverts it; an input of 1 gives 0, and an input of 0 gives 1.
+
++---------+----------+
+| Input 1 | !Input 1 |
++---------+----------+
+|    0    |    1     |
+|    1    |    0     |
++---------+----------+
+
+➜ Header Bytes
+
+The purpose of this section is to be able to filter packets based on the contents of a header byte. Consider the following protocols: ARP, Ethernet, ICMP, IP, TCP, and UDP. 
+
+How can we tell Tcpdump to filter packets based on the contents of protocol header bytes? 
+
+Using pcap-filter, Tcpdump allows you to refer to the contents of any byte in the header using the following syntax proto[expr:size], where:
+
+• proto refers to the protocol. For example, arp, ether, icmp, ip, ip6, tcp, and udp refer to ARP, Ethernet, ICMP, IPv4, IPv6, TCP, and UDP respectively.
+• expr indicates the byte offset, where 0 refers to the first byte.
+• size indicates the number of bytes that interest us, which can be one, two, or four. It is optional and is one by default.
+
+To better understand this, consider the following two examples from the pcap-filter manual page:
+
+• ether[0] & 1 != 0 takes the first byte in the Ethernet header and the decimal number 1 (i.e., 0000 0001 in binary) and applies the & (the And binary operation). 
+It will return true if the result is not equal to the number 0 (i.e., 0000 0000). The purpose of this filter is to show packets sent to a multicast address. 
+A multicast Ethernet address is a particular address that identifies a group of devices intended to receive the same data.
+
+• ip[0] & 0xf != 5 takes the first byte in the IP header and compares it with the hexadecimal number F (i.e., 0000 1111 in binary). 
+It will return true if the result is not equal to the (decimal) number 5 (i.e., 0000 0101 in binary). The purpose of this filter is to catch all IP packets with options.
+
+You can use tcp[tcpflags] to refer to the TCP flags field. The following TCP flags are available to compare with:
+
+• tcp-syn TCP SYN (Synchronize)
+• tcp-ack TCP ACK (Acknowledge)
+• tcp-fin TCP FIN (Finish)
+• tcp-rst TCP RST (Reset)
+• tcp-push TCP Push
+
+Based on the above, we can write:
+
+• tcpdump "tcp[tcpflags] == tcp-syn" to capture TCP packets with only the SYN (Synchronize) flag set, while all the other flags are unset.
+• tcpdump "tcp[tcpflags] & tcp-syn != 0" to capture TCP packets with at least the SYN (Synchronize) flag set.
+• tcpdump "tcp[tcpflags] & (tcp-syn|tcp-ack) != 0" to capture TCP packets with at least the SYN (Synchronize) or ACK (Acknowledge) flags set.
 
 
+➜ Commands Summary
+
+tcpdump "tcp[tcpflags] == 0"
+tcpdump "tcp[tcpflags] == tcp-syn"
+
+tcpdump -i eth0 "tcp[tcpflags] == tcp-syn"
+tcpdump -i eth0 "tcp[tcpflags] == (tcp-syn|tcp-ack)"
+
+tcpdump "tcp[tcpflags] & (tcp-syn|tcp-ack) != 0"
+tcpdump "tcp[tcpflags] & tcp-ack != 0 and tcp[tcpflags] & tcp-syn == 0"
 
 
+tcpdump "tcp[tcpflags] & tcp-syn != 0"
+tcpdump "tcp[tcpflags] & tcp-fin != 0"
+tcpdump "tcp[tcpflags] & tcp-rst != 0"
+tcpdump "tcp[tcpflags] & tcp-push != 0"
 
+tcpdump "tcp[tcpflags] & tcp-fin != 0"
+tcpdump "tcp[tcpflags] & tcp-rst != 0"
+tcpdump "tcp[tcpflags] & tcp-push != 0"
 
+tcpdump "ip[6:2] & 0x1fff != 0"
+tcpdump "ip[8] < 5"
+tcpdump "ip[0] & 0xf != 5"
+tcpdump "icmp[0] == 8"
+tcpdump "icmp[0] == 0"
 
+tcpdump "udp[8:2] > 512"
+tcpdump "tcp[13] == 2"
+tcpdump "tcp[13] == 18"
+tcpdump "tcp[13] & 4 != 0"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+tcpdump -i any "tcp[tcpflags] & tcp-syn != 0"
+tcpdump -r traffic.pcap "tcp[tcpflags] & tcp-ack != 0"
 
 
 -- Displaying Packets --
@@ -350,6 +443,10 @@ $ sudo tcpdump -r traffic.pcap host 10.0.0.5 and tcp -n
 
 
 
+https://www.tcpdump.org/manpages/pcap-filter.7.html
+https://www.tcpdump.org/manpages/tcpdump.1.html
 
+
+*
 
 
