@@ -1,8 +1,24 @@
 
 Hashcat is the world’s fastest and most advanced password recovery tool. 
 
+Hashcat uses the following basic syntax: hashcat -m <hash_type> -a <attack_mode> hashfile wordlist
 
-Hashcat uses the following basic syntax: hashcat -m <hash_type> -a <attack_mode> hashfile wordlist, where:
+0 = Straight Dictionary Attack
+Example: hashcat -m 500 -a 0 hash.txt dict.txt
 
+1 = Combination Attack
+Example: hashcat -m 500 -a 1 hash.txt dict1.txt dict2.txt
+
+3 = Brute Force Attack
+Example: hashcat -m 500 -a 3 hash.txt ?l?d?u
+
+6 = Hybrid Wordlist + Mask
+Example: hashcat -m 500 -a 6 hash.txt wordlist.txt ?d?s
+
+7 = Mask + Wordlist
+Example: hashcat -m 500 -a 7 hash.txt ?d?s wordlist.txt
+
+
+-- Examples --
 
 $ hashcat -m 3200 -a 0 hash1.txt /usr/share/wordlists/rockyou.txt
