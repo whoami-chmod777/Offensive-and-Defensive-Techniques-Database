@@ -1,1 +1,193 @@
 
+--- Fuff ---
+
+FFUF (Fuzz Faster U Fool) is a powerful and fast fuzzing tool used during web application penetration testing. Developed in the Go language, this tool can be used to rapidly test web directories, files, and parameter values for different types of fuzzing tests, revealing potential vulnerabilities.
+
+• Features
+• Help Menu
+• Directory Scanning
+• File Extension Scanning
+• File/Page Scanning
+• Command Summary
+
+
+➜ Features
+
+• Speed: Thanks to the advantages provided by the Go language, FFUF is very fast compared to similar tools.
+• Flexibility: It can work with various HTTP methods (GET, POST, etc.) and allows customization of user-agent, cookies, and HTTP headers.
+• Multi-Purpose Use: Besides directory and file fuzzing, it can also be used to fuzz form data entries in web applications.
+
+
+➜ Help Menu
+
+root💀hackerbox:~# ffuf -h
+
+Fuzz Faster U Fool - v1.1.0
+
+HTTP OPTIONS:
+  -H               Header `"Name: Value"`, separated by colon. Multiple -H flags are accepted.
+  -X               HTTP method to use (default: GET)
+  -b               Cookie data `"NAME1=VALUE1; NAME2=VALUE2"` for copy as curl functionality.
+  -d               POST data
+  -ignore-body     Do not fetch the response content. (default: false)
+  -r               Follow redirects (default: false)
+  -recursion       Scan recursively. Only FUZZ keyword is supported, and URL (-u) has to end in it. (default: false)
+  -recursion-depth Maximum recursion depth. (default: 0)
+  -replay-proxy    Replay matched requests using this proxy.
+  -timeout         HTTP request timeout in seconds. (default: 10)
+  -u               Target URL
+  -x               HTTP Proxy URL
+
+GENERAL OPTIONS:
+  -V               Show version information. (default: false)
+  -ac              Automatically calibrate filtering options (default: false)
+  -acc             Custom auto-calibration string. Can be used multiple times. Implies -ac
+  -c               Colorize output. (default: false)
+  -maxtime         Maximum running time in seconds for entire process. (default: 0)
+  -maxtime-job     Maximum running time in seconds per job. (default: 0)
+  -p               Seconds of `delay` between requests, or a range of random delay. For example "0.1" or "0.1-2.0"
+  -s               Do not print additional information (silent mode) (default: false)
+  -sa              Stop on all error cases. Implies -sf and -se. (default: false)
+  -se              Stop on spurious errors (default: false)
+  -sf              Stop when > 95% of responses return 403 Forbidden (default: false)
+  -t               Number of concurrent threads. (default: 40)
+  -v               Verbose output, printing full URL and redirect location (if any) with the results. (default: false)
+
+MATCHER OPTIONS:
+  -mc              Match HTTP status codes, or "all" for everything. (default: 200,204,301,302,307,401,403)
+  -ml              Match amount of lines in response
+  -mr              Match regexp
+  -ms              Match HTTP response size
+  -mw              Match amount of words in response
+
+FILTER OPTIONS:
+  -fc              Filter HTTP status codes from response. Comma separated list of codes and ranges
+  -fl              Filter by amount of lines in response. Comma separated list of line counts and ranges
+  -fr              Filter regexp
+  -fs              Filter HTTP response size. Comma separated list of sizes and ranges
+  -fw              Filter by amount of words in response. Comma separated list of word counts and ranges
+
+INPUT OPTIONS:
+  -D               DirSearch wordlist compatibility mode. Used in conjunction with -e flag. (default: false)
+  -e               Comma separated list of extensions. Extends FUZZ keyword.
+  -ic              Ignore wordlist comments (default: false)
+  -input-cmd       Command producing the input. --input-num is required when using this input method. Overrides -w.
+  -input-num       Number of inputs to test. Used in conjunction with --input-cmd. (default: 100)
+  -mode            Multi-wordlist operation mode. Available modes: clusterbomb, pitchfork (default: clusterbomb)
+  -request         File containing the raw http request
+  -request-proto   Protocol to use along with raw request (default: https)
+  -w               Wordlist file path and (optional) keyword separated by colon. eg. '/path/to/wordlist:KEYWORD'
+
+OUTPUT OPTIONS:
+  -debug-log       Write all of the internal logging to the specified file.
+  -o               Write output to file
+  -od              Directory path to store matched results to.
+  -of              Output file format. Available formats: json, ejson, html, md, csv, ecsv (or, 'all' for all formats) (default: json)
+
+EXAMPLE USAGE:
+  Fuzz file paths from wordlist.txt, match all responses but filter out those with content-size 42.
+  Colored, verbose output.
+    ffuf -w wordlist.txt -u https://example.org/FUZZ -mc all -fs 42 -c -v
+
+  Fuzz Host-header, match HTTP 200 responses.
+    ffuf -w hosts.txt -u https://example.org/ -H "Host: FUZZ" -mc 200
+
+  Fuzz POST JSON data. Match all responses not containing text "error".
+    ffuf -w entries.txt -u https://example.org/ -X POST -H "Content-Type: application/json" \
+      -d '{"name": "FUZZ", "anotherkey": "anothervalue"}' -fr "error"
+
+  Fuzz multiple locations. Match only responses reflecting the value of "VAL" keyword. Colored.
+    ffuf -w params.txt:PARAM -w values.txt:VAL -u https://example.org/?PARAM=VAL -mr "VAL" -c
+
+  More information and examples: https://github.com/ffuf/ffuf
+
+ffuf -u http://example.com/FUZZ -w /path/to/wordlist.txt
+
+Note: When using the ffuf tool, the keyword FUZZ should be placed where fuzzing will occur.
+
+
+➜ Directory Scanning
+
+Let's perform a directory scan on a target system with the command below. We specify the wordlist with the -w parameter and the target with the -u parameter. In this scan, we used the directory-list-1.0.txt list as the wordlist and used the FUZZ keyword to specify where fuzzing will occur.
+
+ffuf -u http://172.20.3.144/FUZZ -w /root/Desktop/misc/SecLists/Discovery/Web-Content/directory-list-1.0.txt
+
+
+➜ File Extension Scanning
+
+With the ffuf tool, we can scan for various file extensions such as .php, .html, .aspx on a website. To do this, we can first determine which file extensions the website uses.
+
+To identify the file extensions used by a web site, there are several methods. One common method is to learn the server type from HTTP responses and speculate on the extension. For example, if the server is Apache, it might use .php, if it is IIS, it might use .asp or .aspx. However, this method is not always practical. By systematically testing each extension in a wordlist with FFUF, we can determine which extensions the site supports.
+
+Let's perform a file extension scan on a target system with the command below. We specify the wordlist with the -w parameter and the target with the -u parameter. In this scan, we used the web-extensions.txt list as the wordlist and used indexFUZZ as the keyword to systematically test each extension such as "index.html", "index.php".
+
+root💀hackerbox:~# cat /root/Desktop/misc/SecLists/Discovery/Web-Content/web-extensions.txt
+
+.asp
+.aspx
+.bat
+.c
+.cfm
+.cgi
+.css
+.com
+.dll
+.exe
+.htm
+.html
+.inc
+.jhtml
+.js
+.jsa
+.jsp
+.log
+.mdb
+.nsf
+.pcap
+.php
+.php2
+.php3
+.php4
+.php5
+.php6
+.php7
+.phps
+.pht
+.phtml
+.pl
+.reg
+.sh
+.shtml
+.sql
+.swf
+.txt
+.xml
+
+ffuf -u http://172.20.3.144/indexFUZZ -w /root/Desktop/misc/SecLists/Discovery/Web-Content/web-extensions.txt
+
+
+➜ File/Page Scanning
+
+Assuming that when we performed an extension scan on a website, we discovered that the site's pages have the .html extension. Using this information, let's detect .html files on a web site.
+
+ffuf -u http://172.20.3.144/FUZZ.html -w /root/Desktop/misc/SecLists/Discovery/Web-Content/common.txt -v
+
+
+➜ Command Summary
+
+root💀hackerbox:~# ffuf -h
+root💀hackerbox:~# ffuf -u http://172.20.3.144/FUZZ -w /root/Desktop/misc/SecLists/Discovery/Web-Content/directory-list-1.0.txt
+
+root💀hackerbox:~# cat /root/Desktop/misc/SecLists/Discovery/Web-Content/web-extensions.txt
+root💀hackerbox:~# ffuf -u http://172.20.3.144/indexFUZZ -w /root/Desktop/misc/SecLists/Discovery/Web-Content/web-extensions.txt
+
+root💀hackerbox:~# ffuf -u http://172.20.3.144/FUZZ.html -w /root/Desktop/misc/SecLists/Discovery/Web-Content/common.txt -v
+
+ffuf -u http://example.com/FUZZ -w /path/to/wordlist.txt
+ffuf -w wordlist.txt -u https://example.org/FUZZ -mc all -fs 42 -c -v
+ffuf -w hosts.txt -u https://example.org/ -H "Host: FUZZ" -mc 200
+ffuf -w entries.txt -u https://example.org/ -X POST -H "Content-Type: application/json" \ -d '{"name": "FUZZ", "anotherkey": "anothervalue"}' -fr "error"
+ffuf -w params.txt:PARAM -w values.txt:VAL -u https://example.org/?PARAM=VAL -mr "VAL" -c
+
+
+*
