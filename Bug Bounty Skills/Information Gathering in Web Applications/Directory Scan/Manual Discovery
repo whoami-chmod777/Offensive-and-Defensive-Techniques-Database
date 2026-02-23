@@ -1,1 +1,70 @@
 
+--- Manual Discovery ---
+
+Before starting file/directory scanning with automated tools, we can manually check some commonly used files.
+
+• robots.txt
+• sitemap.xml
+
+
+➜ robots.txt
+
+The robots.txt file is a standard used on websites to indicate which pages search engine robots can visit and index or which they should avoid. Essentially, this file helps control which parts of a website should be "visible" or "hidden." Site owners can use the robots.txt file to "disallow" certain pages or directories from appearing in search engine results, such as those containing private user information or unpublished content.
+
+For penetration testers, the robots.txt file is a resource to discover potential vulnerabilities and hidden directories or files. Many site administrators disallow sensitive or should-not-be-discovered directories and files in this file. However, this can draw the attention of security experts and malicious individuals, as these "disallowed" directories and files often signal areas worth investigating.
+
+During a penetration test, an expert can examine the target site's robots.txt file to gain important clues about the site's configuration. For example, a disallowed "/admin" directory could indicate the presence of an admin interface, warranting further investigation.
+
+https://target.com/robots.txt
+
+User-agent: *
+Disallow: /admin
+Disallow: /private_data
+Disallow: /temp
+
+➜ sitemap.xml
+
+The sitemap.xml file is an XML-formatted file that provides a structural map of a website. This file contains a list of all important pages on a website and helps search engines more effectively crawl and index the site. Sitemap.xml informs search engines about which pages exist on a website and how they are related, thereby improving the site's visibility in search engine results.
+
+Sitemap.xml files are particularly important for large websites, those that are frequently updated, or those with complex link structures. They clearly indicate which pages search engines should index, helping new content be discovered more quickly. This can directly impact the site's SEO (Search Engine Optimization) performance.
+
+For penetration testers, the sitemap.xml file is an important resource to obtain a comprehensive view of the target website. This file can provide clues during penetration tests about which pages to focus on and potentially uncover neglected or forgotten pages.
+
+During the penetration testing process, experts can analyze this file as a starting point to identify security vulnerabilities related to hidden or lesser-known pages within the target site. Pages listed in the sitemap.xml file but not accessible to regular users should be examined in detail for security concerns.
+
+https://target.com/sitemap.xml
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+   <url>
+      <loc>http://www.example.com/</loc>
+      <lastmod>2024-01-01</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>1.0</priority>
+   </url>
+   <url>
+      <loc>http://www.example.com/about</loc>
+   </url>
+   <url>
+      <loc>http://www.example.com/contact</loc>
+   </url>
+</urlset>
+
+
+*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
