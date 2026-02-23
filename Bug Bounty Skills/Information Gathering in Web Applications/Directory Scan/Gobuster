@@ -1,1 +1,107 @@
 
+--- Gobuster ---
+
+• Features
+• dir Mode
+• Directory Scanning
+• File/Page Scanning
+• Command Summary
+
+Gobuster is a popular tool among cybersecurity professionals. This tool uses brute-force and dictionary attack methods to discover hidden directories, files, and subdomains on web servers. Written in the Go language, Gobuster is extremely fast and efficient. It also has a practical interface that can be run from the command line.
+
+Gobuster sends HTTP/HTTPS requests to potential file and directory names on the target website using a predefined wordlist. Based on how the server responds to these requests, it determines which files or directories actually exist and are accessible.
+
+➜ Features
+
+Fast Performance: It runs very quickly because it is written in Go.
+Multiple Modes: Different modes are available for directory scanning, subdomain discovery, and more.
+Flexibility: Users can customize various parameters such as the number of threads per request, timeout duration, user-agent, and cookies.
+
+➜ dir Mode
+
+Let's examine the dir mode of Gobuster, which we can use for directory scanning.
+
+root💀hackerbox:~# gobuster dir --help
+Uses directory/file enumeration mode
+
+Usage:
+  gobuster dir [flags]
+
+Flags:
+  -f, --add-slash                         Append / to each request
+      --client-cert-p12 string            a p12 file to use for options TLS client certificates
+      --client-cert-p12-password string   the password to the p12 file
+      --client-cert-pem string            public key in PEM format for optional TLS client certificates
+      --client-cert-pem-key string        private key in PEM format for optional TLS client certificates (this key needs to have no password)
+  -c, --cookies string                    Cookies to use for the requests
+  -d, --discover-backup                   Also search for backup files by appending multiple backup extensions
+      --exclude-length string             exclude the following content lengths (completely ignores the status). You can separate multiple lengths by comma and it also supports ranges like 203-206
+  -e, --expanded                          Expanded mode, print full URLs
+  -x, --extensions string                 File extension(s) to search for
+  -X, --extensions-file string            Read file extension(s) to search from the file
+  -r, --follow-redirect                   Follow redirects
+  -H, --headers stringArray               Specify HTTP headers, -H 'Header1: val1' -H 'Header2: val2'
+  -h, --help                              help for dir
+      --hide-length                       Hide the length of the body in the output
+  -m, --method string                     Use the following HTTP method (default "GET")
+      --no-canonicalize-headers           Do not canonicalize HTTP header names. If set header names are sent as is.
+  -n, --no-status                         Don't print status codes
+  -k, --no-tls-validation                 Skip TLS certificate verification
+  -P, --password string                   Password for Basic Auth
+      --proxy string                      Proxy to use for requests [http(s)://host:port] or [socks5://host:port]
+      --random-agent                      Use a random User-Agent string
+      --retry                             Should retry on request timeout
+      --retry-attempts int                Times to retry on request timeout (default 3)
+  -s, --status-codes string               Positive status codes (will be overwritten with status-codes-blacklist if set). Can also handle ranges like 200,300-400,404.
+  -b, --status-codes-blacklist string     Negative status codes (will override status-codes if set). Can also handle ranges like 200,300-400,404. (default "404")
+      --timeout duration                  HTTP Timeout (default 10s)
+  -u, --url string                        The target URL
+  -a, --useragent string                  Set the User-Agent string (default "gobuster/3.6")
+  -U, --username string                   Username for Basic Auth
+
+Global Flags:
+      --debug                 Enable debug output
+      --delay duration        Time each thread waits between requests (e.g. 1500ms)
+      --no-color              Disable color output
+      --no-error              Don't display errors
+  -z, --no-progress           Don't display progress
+  -o, --output string         Output file to write results to (defaults to stdout)
+  -p, --pattern string        File containing replacement patterns
+  -q, --quiet                 Don't print the banner and other noise
+  -t, --threads int           Number of concurrent threads (default 10)
+  -v, --verbose               Verbose output (errors)
+  -w, --wordlist string       Path to the wordlist. Set to - to use STDIN.
+      --wordlist-offset int   Resume from a given position in the wordlist (defaults to 0)
+
+As seen in the help menu, Gobuster offers a lot of flexibility for customization.
+
+gobuster dir -u http://example.com -w /path/to/wordlist.txt
+
+
+➜ Directory Scanning
+
+Let's perform a directory scan on a target system with the command below. We specify the wordlist with the -w parameter and the target with the -u parameter. In this scan, we used the directory-list-1.0.txt list as the wordlist.
+
+gobuster dir -u 172.20.8.56 -w /root/Desktop/misc/SecLists/Discovery/Web-Content/directory-list-1.0.txt
+
+
+➜ File/Page Scanning
+
+Let's perform a file/page scan on a target system with the command below. We specify the wordlist with the -w parameter, the target with the -u parameter, and the extensions with the --extensions parameter. The -v parameter is used for verbose output.
+
+gobuster dir -u 172.20.8.56 -w /root/Desktop/misc/SecLists/Discovery/Web-Content/common.txt --extensions php -v
+
+
+➜ Command Summary
+
+gobuster dir -u http://example.com -w /path/to/wordlist.txt
+gobuster dir -u 172.20.8.56 -w /root/Desktop/misc/SecLists/Discovery/Web-Content/directory-list-1.0.txt
+gobuster dir -u 172.20.8.56 -w /root/Desktop/misc/SecLists/Discovery/Web-Content/common.txt --extensions php -v
+
+
+*
+
+
+
+
+
