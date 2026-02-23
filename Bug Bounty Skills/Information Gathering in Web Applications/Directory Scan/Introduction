@@ -1,6 +1,12 @@
 
 --- Introduction ---
 
+• Directory Scanning
+• Content Discovery
+• Fuzzing
+• Wordlist
+• Tools
+
 Directory scan can provide us with critical data during penetration testing processes and may even be the key to accessing a system. This method allows security experts to discover hidden or forgotten files, directories, and potentially vulnerable configuration errors in web applications. Directory scanning, an essential part of testing the security of web applications, is often considered one of the first steps to identify potential breach points.
 
 In brief, directory scanning allows for a thorough and deep analysis of web applications during penetration testing processes, offering cybersecurity experts valuable insights.
@@ -36,7 +42,6 @@ There are many effective tools available for directory and page scanning. Let's 
 Gobuster is a directory scanning tool written in Go. It is presented as a convenient command-line application. Gobuster's main advantage over other directory scanners is its speed. Additionally, it has good concurrency support, allowing Gobuster to utilize multiple threads to complete operations more quickly. One disadvantage of Gobuster is that it does not support recursive directory scanning.
 
 Gobuster is used to perform brute-force attacks on:
-
 • URIs (directories and files) on websites,
 • DNS subdomains (with wildcard support),
 • Virtual hostnames on the target web server (vhosts),
@@ -44,8 +49,7 @@ Gobuster is used to perform brute-force attacks on:
 • Open Google Cloud buckets,
 • TFTP servers.
 
-Modes
-
+Modes:
 • dir - Classic directory brute force mode. Used to quickly discover specific directories and files on websites.
 • dns - DNS subdomain brute force mode. Used to identify potential subdomains for a targeted domain.
 • s3 - Enumeration of open S3 buckets, checking and enumerating assets.
@@ -65,7 +69,6 @@ FFUF executes this process by sending a large number of requests containing vari
 FFUF is also fast and flexible, allowing us to specify the inputs for fuzzing and the parameters of the requests sent to the target web application.
 
 Applications:
-
 • Directory discovery,
 • Virtual host discovery,
 • Fuzzing GET parameters,
