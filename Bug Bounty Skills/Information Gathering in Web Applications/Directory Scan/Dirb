@@ -1,14 +1,13 @@
 
 --- Dirb ---
 
+Dirb is a popular security tool designed to discover hidden or forgotten files and directories on web servers. This command-line tool uses brute-force and wordlist methods. Written in languages like C and Perl, Dirb comes pre-installed on HackerBox.
+
 • Features
 • Help Menu
 • Directory Scanning
 • File/Page Scanning
 • Commands Summary
-
-
-Dirb is a popular security tool designed to discover hidden or forgotten files and directories on web servers. This command-line tool uses brute-force and wordlist methods. Written in languages like C and Perl, Dirb comes pre-installed on HackerBox.
 
 
 ➜ Features
