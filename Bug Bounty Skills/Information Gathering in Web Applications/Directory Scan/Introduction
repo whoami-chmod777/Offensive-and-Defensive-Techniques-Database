@@ -1,1 +1,115 @@
 
+--- Introduction ---
+
+Directory scan can provide us with critical data during penetration testing processes and may even be the key to accessing a system. This method allows security experts to discover hidden or forgotten files, directories, and potentially vulnerable configuration errors in web applications. Directory scanning, an essential part of testing the security of web applications, is often considered one of the first steps to identify potential breach points.
+
+In brief, directory scanning allows for a thorough and deep analysis of web applications during penetration testing processes, offering cybersecurity experts valuable insights.
+
+➜ Directory Scanning
+
+Directory scanning is a technique used to discover the structure of a website. This process is carried out to identify security vulnerabilities. It is often used by hackers for malicious purposes. Directory scanning reveals hidden files and directories in web applications.
+
+➜ Content Discovery
+
+Content discovery is a part of the information gathering process in web applications. This method aims to discover hidden or forgotten pages, files, and other resources for a specific target.
+
+➜ Fuzzing
+
+Let's first define what fuzzing is. Fuzzing is a technique used to find vulnerabilities in software. Fuzzing involves sending unexpected or invalid data to a program or system. Through fuzzing, we can gain more information about how an application will behave and where potential security vulnerabilities might be.
+
+For example, it involves creating a random list of file names and checking through fuzzing to see if they exist on the website. Another example is using fuzzing on a login form with random inputs to see how the web application behaves.
+
+With fuzzing, we perform a brute-force attack on the software with a large quantity of randomly generated data. Then we observe how the software responds to these inputs
+
+➜ Wordlist
+
+To perform directory and page scanning on websites, we use wordlists composed of commonly used words. This method is similar to dictionary attacks. Although these lists often fail to find uniquely named pages or directories composed of random characters, they can usually reveal a large portion of a website's directory structure.
+
+Instead of creating wordlists from scratch, we can utilize extensive published wordlists available. Through web research, the most commonly used words for any type of fuzzing operation have been identified and made easily accessible. Some of the most popular wordlists are gathered in the SecLists repository on GitHub. This repository contains wordlists organized for various types of fuzzing and includes common passwords that can be used in password cracking operations.
+
+➜ Tools
+
+There are many effective tools available for directory and page scanning. Let's briefly discuss these tools.
+
+⇒ gobuster
+
+Gobuster is a directory scanning tool written in Go. It is presented as a convenient command-line application. Gobuster's main advantage over other directory scanners is its speed. Additionally, it has good concurrency support, allowing Gobuster to utilize multiple threads to complete operations more quickly. One disadvantage of Gobuster is that it does not support recursive directory scanning.
+
+Gobuster is used to perform brute-force attacks on:
+
+• URIs (directories and files) on websites,
+• DNS subdomains (with wildcard support),
+• Virtual hostnames on the target web server (vhosts),
+• Open Amazon S3 buckets,
+• Open Google Cloud buckets,
+• TFTP servers.
+
+Modes
+
+• dir - Classic directory brute force mode. Used to quickly discover specific directories and files on websites.
+• dns - DNS subdomain brute force mode. Used to identify potential subdomains for a targeted domain.
+• s3 - Enumeration of open S3 buckets, checking and enumerating assets.
+• gcs - Enumeration of open Google Cloud buckets.
+• vhost - Virtual host brute-force mode. Takes a different approach than DNS brute-forcing.
+• fuzz - Used for some basic fuzzing operations. You can scan a specific place using the FUZZ keyword.
+• tftp - Brute-force mode for TFTP files.
+
+gobuster [mode][options]
+
+⇒ ffuf
+
+FFUF (Fuzz Faster U Fool) is a tool that automates the fuzzing process. It is designed for cybersecurity experts to find vulnerabilities in web applications. FFUF is an open-source, free tool developed using the Go language.
+
+FFUF executes this process by sending a large number of requests containing various payloads. It then analyzes the responses and informs us of which techniques worked and which did not.
+
+FFUF is also fast and flexible, allowing us to specify the inputs for fuzzing and the parameters of the requests sent to the target web application.
+
+Applications:
+
+• Directory discovery,
+• Virtual host discovery,
+• Fuzzing GET parameters,
+• Fuzzing POST data.
+
+ffuf  -u http://target.com/FUZZ -w <wordlist>
+
+⇒ dirb
+
+Dirb is a directory scanning tool that scans websites for files, directories, and pages. Dirb can be used to detect typical web server folders and files, such as admin pages, backup files, and configuration files. It determines the existence of a directory or file by sending HTTP requests to the server and analyzing the responses.
+
+Dirb has an internal wordlist file containing approximately 4,000 words for brute-force attacks.
+
+dirb <url_base> [<wordlist_file(s)>] [options]
+
+⇒ feroxbuster
+
+Feroxbuster is a powerful and effective tool designed to help cybersecurity experts discover hidden directories and files on web servers. Being written in the Rust programming language, it is both fast and efficient. Feroxbuster utilizes various techniques to find files and directories, including brute-force, recursive scanning, and wordlist-based discovery. It allows users to specify various options such as the number of threads, wordlist, user agent, and cookie.
+
+feroxbuster -u <url> -w <wordlist>
+
+
+*
+
+
+
+
+
+
+
+
+
+
+
+
+root💀hackerbox:~# find / -name "directory-list-2.3-big.txt"
+/root/Desktop/misc/SecLists/Discovery/Web-Content/directory-list-2.3-big.txt
+
+
+
+
+
+
+
+
+
+
