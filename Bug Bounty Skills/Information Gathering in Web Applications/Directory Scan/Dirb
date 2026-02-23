@@ -1,1 +1,163 @@
 
+--- Dirb ---
+
+• Features
+• Help Menu
+• Directory Scanning
+• File/Page Scanning
+• Commands Summary
+
+
+Dirb is a popular security tool designed to discover hidden or forgotten files and directories on web servers. This command-line tool uses brute-force and wordlist methods. Written in languages like C and Perl, Dirb comes pre-installed on HackerBox.
+
+
+➜ Features
+
+• Brute-force and Wordlist Methods: Dirb uses predefined wordlists to send HTTP GET requests to potential directories and files on the target web server.
+• Flexibility: Different wordlists can be used; users can create their own wordlists or use existing ones.
+• Multi-purpose Use: It can discover static files and directories as well as dynamic content like CGI scripts.
+
+➜ Help Menu
+
+root💀hackerbox:~# dirb
+
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+
+dirb <url_base> [<wordlist_file(s)>] [options]
+
+========================= NOTES =========================
+ <url_base> : Base URL to scan. (Use -resume for session resuming)
+ <wordlist_file(s)> : List of wordfiles. (wordfile1,wordfile2,wordfile3...)
+
+======================== HOTKEYS ========================
+ 'n' -> Go to next directory.
+ 'q' -> Stop scan. (Saving state for resume)
+ 'r' -> Remaining scan stats.
+
+======================== OPTIONS ========================
+ -a <agent_string> : Specify your custom USER_AGENT.
+ -b : Use path as is.
+ -c <cookie_string> : Set a cookie for the HTTP request.
+ -E <certificate> : path to the client certificate.
+ -f : Fine tunning of NOT_FOUND (404) detection.
+ -H <header_string> : Add a custom header to the HTTP request.
+ -i : Use case-insensitive search.
+ -l : Print "Location" header when found.
+ -N <nf_code>: Ignore responses with this HTTP code.
+ -o <output_file> : Save output to disk.
+ -p <proxy[:port]> : Use this proxy. (Default port is 1080)
+ -P <proxy_username:proxy_password> : Proxy Authentication.
+ -r : Don't search recursively.
+ -R : Interactive recursion. (Asks for each directory)
+ -S : Silent Mode. Don't show tested words. (For dumb terminals)
+ -t : Don't force an ending '/' on URLs.
+ -u <username:password> : HTTP Authentication.
+ -v : Show also NOT_FOUND pages.
+ -w : Don't stop on WARNING messages.
+ -X <extensions> / -x <exts_file> : Append each word with this extensions.
+ -z <millisecs> : Add a milliseconds delay to not cause excessive Flood.
+
+======================== EXAMPLES =======================
+ dirb http://url/directory/ (Simple Test)
+ dirb http://url/ -X .html (Test files with '.html' extension)
+ dirb http://url/ /usr/share/dirb/wordlists/vulns/apache.txt (Test with apache.txt wordlist)
+ dirb https://secure_url/ (Simple Test with SSL)
+
+
+➜ Directory Scanning
+
+You can run the following command to perform a directory scan with Dirb. If no wordlist is specified, Dirb uses its default wordlist.
+
+root💀hackerbox:~# dirb http://172.20.8.56/
+
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+
+START_TIME: Fri Mar 22 14:54:08 2024
+URL_BASE: http://172.20.8.56/
+WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt
+
+-----------------
+
+GENERATED WORDS: 4612                                                          
+
+---- Scanning URL: http://172.20.8.56/ ----
+==> DIRECTORY: http://172.20.8.56/filemanager/                                                              
++ http://172.20.8.56/index.html (CODE:200|SIZE:10701)                                                       
++ http://172.20.8.56/server-status (CODE:403|SIZE:276)                                                      
+                                                                                                            
+---- Entering directory: http://172.20.8.56/filemanager/ ----
+==> DIRECTORY: http://172.20.8.56/filemanager/assets/                                                       
++ http://172.20.8.56/filemanager/index.php (CODE:200|SIZE:11558)                                            
+                                                                                                            
+---- Entering directory: http://172.20.8.56/filemanager/assets/ ----
+(!) WARNING: Directory IS LISTABLE. No need to scan it.                        
+    (Use mode '-w' if you want to scan it anyway)
+                                                                               
+-----------------
+END_TIME: Fri Mar 22 14:54:24 2024
+DOWNLOADED: 9224 - FOUND: 3
+
+
+➜ File/Page Scanning
+
+You can run the following command to perform a file/page scan with Dirb. If no wordlist is specified, Dirb uses its default wordlist. The -X parameter specifies that we are looking for files with the .html extension.
+
+root💀hackerbox:~# dirb http://172.20.8.56/ -X .html
+
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+
+START_TIME: Fri Mar 22 14:58:28 2024
+URL_BASE: http://172.20.8.56/
+WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt
+EXTENSIONS_LIST: (.html) | (.html) [NUM = 1]
+
+-----------------
+
+GENERATED WORDS: 4612                                                          
+
+---- Scanning URL: http://172.20.8.56/ ----
++ http://172.20.8.56/index.html (CODE:200|SIZE:10701)                                                       
+                                                                                                            
+-----------------
+END_TIME: Fri Mar 22 14:58:36 2024
+DOWNLOADED: 4612 - FOUND: 1
+
+
+➜ Commands Summary
+
+dirb http://url/directory/ (Simple Test)
+dirb http://url/ -X .html (Test files with '.html' extension)
+dirb http://url/ /usr/share/dirb/wordlists/vulns/apache.txt (Test with apache.txt wordlist)
+dirb https://secure_url/ (Simple Test with SSL)
+
+root💀hackerbox:~# dirb http://172.20.8.56/
+root💀hackerbox:~# dirb http://172.20.8.56/ -X .html
+
+
+*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
