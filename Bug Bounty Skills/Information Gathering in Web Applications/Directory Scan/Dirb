@@ -139,6 +139,7 @@ dirb http://url/ -X .html (Test files with '.html' extension)
 dirb http://url/ /usr/share/dirb/wordlists/vulns/apache.txt (Test with apache.txt wordlist)
 dirb https://secure_url/ (Simple Test with SSL)
 
+root💀hackerbox:~# dirb
 root💀hackerbox:~# dirb http://172.20.8.56/
 root💀hackerbox:~# dirb http://172.20.8.56/ -X .html
 
