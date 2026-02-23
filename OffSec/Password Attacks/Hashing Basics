@@ -165,7 +165,6 @@ You can find many good guides online that promote best security practices when s
 
 Considering the problem of saving passwords for authentication, why don’t we encrypt passwords instead of all these cumbersome steps? The reason is that even if we select a secure hashing algorithm to encrypt the passwords before storing them, we still need to store the used key. Consequently, if someone gets the key, they can easily decrypt all the passwords.
 
-
 https://crackstation.net/
 https://hashes.com/en/decrypt/hash
 
@@ -277,16 +276,11 @@ Hashcat uses the following basic syntax: hashcat -m <hash_type> -a <attack_mode>
 • wordlist is the security word list you want to use in your attack.
 
 
-
 ⇒ Commands Summary
 
 man hashcat
-
 hashcat -m <hash_type> -a <attack_mode> hashfile wordlist
-
 hashcat -m 3200 -a 0 hash.txt /usr/share/wordlists/rockyou.txt
-
-
 
 https://hashcat.net/hashcat/
 https://www.openwall.com/john/
@@ -294,6 +288,37 @@ https://hashes.com/en/decrypt/hash
 
 
 -- Hashing for Integrity Checking --
+
+As I mentioned we would focus on two uses of hashing: password storage and data integrity. We have extensively discussed how hashing secures passwords in authentication systems. In this task, we will discuss how we can use hash functions to check the integrity of files.
+
+• Integrity Checking
+• HMACs
+
+
+➜ Integrity Checking
+
+
+
+➜ HMACs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 -- Conclusion --
