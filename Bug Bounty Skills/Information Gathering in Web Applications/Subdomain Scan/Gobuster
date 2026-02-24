@@ -1,1 +1,35 @@
 
+--- Gobuster ---
+
+• DNS Mode
+• Vhost Mode
+
+With the Gobuster scanning tool, we can discover hidden directories, files, subdomains, and much more on web servers.
+
+
+-- DNS Mode --
+
+The DNS mode is designed to discover subdomains under a specific domain. This mode is used to try possible subdomain names for a given target domain and determine if these subdomains are active.
+When using Gobuster's DNS mode, a wordlist and a target domain are required. This mode performs DNS queries by combining each word in the wordlist with the target domain and determines which subdomains can be resolved based on the results of these queries.
+Using Gobuster's DNS mode is simple and can be easily executed from the terminal.
+
+Syntax: gobuster dns -d example.com -w /path/to/wordlist
+
+# gobuster dns -h
+# gobuster dns -w /root/Desktop/misc/SecLists/Discovery/DNS/subdomains-top1million-5000.txt -d facebook.com
+
+
+-- Vhost Mode --
+
+The Vhost mode targets multiple websites hosted under different names on the same server. Many organizations host multiple sites on a single server using virtual hosts to efficiently utilize resources. 
+Using the Vhost mode requires a target and a wordlist, similar to Gobuster's other modes. However, in this mode, fuzzing is specifically done in the HTTP Host header. This way, it tests for the presence of different sites hosted on the same IP address.
+Filtering HTTP response size is a common method. The parameter we can use in Gobuster to filter HTTP response size is --exclude-length.
+
+Syntax: gobuster vhost -u https://example.com -w /path/to/wordlist
+
+# gobuster vhost -h
+# gobuster vhost -w /root/Desktop/misc/SecLists/Discovery/DNS/subdomains-top1million-5000.txt -u https://facebook.com
+# gobuster vhost -u https://example.com -w /path/to/wordlist --exclude-length 1542
+
+
+*
