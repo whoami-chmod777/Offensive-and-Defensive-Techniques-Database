@@ -158,9 +158,7 @@ gobuster [mode] [options]
 ➜ ffuf
 
 FFUF (Fuzz Faster U Fool) is a tool for automating fuzzing operations. It is designed for cybersecurity experts to find vulnerabilities in web applications. FFUF is an open-source and free tool developed using the Go language.
-
 FFUF performs scanning operations by sending large amounts of requests containing various payloads. It then analyzes the responses and reports which methods worked and which didn't.
-
 FFUF is also fast and flexible, allowing us to specify the inputs for fuzzing and the parameters of requests sent to the target web application.
 
 ⇒ Application areas:
