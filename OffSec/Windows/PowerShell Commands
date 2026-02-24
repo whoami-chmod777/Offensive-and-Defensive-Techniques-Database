@@ -48,9 +48,12 @@ Get-MyProcess -ProcessName "chrome"
 
 -- Basic Commands to Get Started --
 
+Get-Help -Name Get-Command -Detailed
+
 Get-Help
 Get-Help Get-ChildItem
 Get-Help Get-ChildItem -examples
+Get-Help New-Item -examples
 Get-Command *Service*
 
 
@@ -77,6 +80,7 @@ Get-NetAdapterStatistics -Name "Wi-fi"
 -- Navigating Directories: Set-Location and Get-ChildItem --
 
 Set-Location -Path "D:\Office\Project"
+Set-Location .\Documents\
 Get-ChildItem, dir, ls
 Get-ChildItem "D:\Office\Project"dir  "D:\Office\Project"
 Get-ChildItem "D:\Office\Project" -file
@@ -85,6 +89,8 @@ dir  "D:\Office\Project" -directory
 
 -- Creating, Copying and Deleting Files: New-Item, Copy-Item, Remove-Item --
 
+New-Item file.txt
+New-Item -ItemType Directory logs
 New-Item -Path "D:\Office \Project\myfile.txt" -ItemType File
 Copy-Item -Path "D:\Office \Project\myfile.txt" -Destination "D:\Office \Project\startup\myfile.txt"
 Remove-Item -Path "D:\Office \Project\myfile.txt"
