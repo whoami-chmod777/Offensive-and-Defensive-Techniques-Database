@@ -1,0 +1,184 @@
+
+--- Introduction ---
+
+• Introduction
+• Subdomain
+• Vhost
+• Subdomain vs Vhost
+• Passive Subdomain Enumeration
+• Active Subdomain Enumeration
+• Wordlist
+• Tools
+• Commands Summary
+
+
+-- Introduction --
+
+Subdomain scanning is an important part of the penetration testing process for a website. This method aims to discover subdomains under a main domain that often serve different sections, services, or applications of the main website. With subdomain scanning, penetration testers can identify potential security vulnerabilities, information leaks, and sensitive points such as administrative panels.
+
+Various tools and techniques are available for subdomain scanning. These methods include:
+
+Brute Force Scanning: One of the most commonly used methods is attempting possible subdomain names for the target domain using wordlists.
+
+DNS Querying: By querying DNS records or performing DNS zone transfer attempts, a list of existing subdomains can be obtained.
+
+Search Engines: Using search engines like Google and Bing to find subdomains related to the target domain.
+
+Third-Party Tools and Services: Third-party tools and services such as Shodan, Censys, or VirusTotal can provide useful information for subdomain discovery.
+
+
+-- Subdomain --
+
+A subdomain is a domain that is part of a main domain and typically serves a different section or a sub-project of the main site. It is generally expressed in the format subdomain.domain.com. For example, blog.example.com is a subdomain and usually offers different content or services than the main site, example.com.
+
+➜ Subdomain Use Cases
+
+• Content Separation: To separate different types of content or services, for example, blog.example.com, support.example.com.
+• Multilingual Support: For versions in different languages, for example, en.example.com, es.example.com
+• Application Separation: For different applications and services, for example, app.example.com, api.example.com.
+
+
+-- Vhost --
+
+Vhost or Virtual Host is a technique that allows hosting multiple websites on a single physical server. Virtual hosting can host different domain names (websites) using the same server resources, making it a cost-effective solution especially for web hosting providers.
+
+➜ Vhost Use Cases
+
+• Cost Efficiency: Reducing costs by hosting multiple sites on the same server.
+• Ease of Management: Managing and maintaining multiple sites through a single server.
+• Resource Sharing: Sharing resources like CPU, memory, and storage among multiple sites.
+
+
+-- Subdomain vs Vhost --
+
+Subdomain and Vhost are different techniques used to manage websites and applications, each offering unique advantages.
+
+• Structural Difference: While a subdomain functions as a subdivision of the main domain, Vhost allows a server to serve multiple sites using the same resources.
+• Usage Purpose: Subdomains are generally used for separating content, language, or services, while Vhost technology arose from the need for multi-site hosting.
+
+Note: Both domain and subdomains as vhosts can be served on the same web server.
+
+➜ Example Apache Vhost Configuration
+
+In the example below, example.com and the subdomain api.example.com are served as vhosts on the same server.
+
+<VirtualHost *:80>
+    ServerName example.com
+    DocumentRoot "/www/example"
+</VirtualHost>
+
+<VirtualHost *:80>
+    ServerName api.example.com
+    DocumentRoot "/www/api_example"
+</VirtualHost>
+
+➜ Example Nginx Vhost Configuration
+
+In the example below, example.com and the subdomain api.example.com are served as vhosts on the same server.
+
+server {
+    listen 80;
+    server_name example.com;
+
+    location / {
+        root /www/example;
+        index index.html index.htm;
+    }
+}
+
+server {
+    listen 80;
+    server_name api.example.com;
+
+    location / {
+        root /www/api_example;
+        index index.html index.htm;
+    }
+}
+
+
+-- Passive Subdomain Enumeration --
+
+Passive Subdomain Enumeration is a method of discovering subdomains without sending any network traffic to the target or directly querying the target system. This method gathers information that is already available from various sources.
+
+➜ Methods and Tools Used
+
+• Search Engine Dorks: Search engines like Google and Bing can be scanned using operators such as site: and inurl: to discover subdomains.
+• DNS Records: Public databases and services containing records of previously made DNS queries.
+• Third-Party Databases and Tools: Services like VirusTotal, crt.sh (for SSL/TLS certificates), and Shodan can contain subdomain information.
+
+
+-- Active Subdomain Enumeration --
+
+Active Subdomain Enumeration works by performing direct queries to discover subdomains under a target domain. This method includes more aggressive techniques such as sending queries to DNS servers and performing brute-force attempts on the target domain.
+
+➜ Methods and Tools Used
+
+• DNS Brute-Force: Possible subdomain names for the target domain can be attempted using wordlists.
+• DNS Zone Transfer: Pulling all DNS records from a DNS server that has a DNS Zone Transfer vulnerability.
+• DNS Recursive Querying: Sending recursive queries to the authoritative DNS servers of the target domain to discover subdomains.
+
+
+-- Wordlist --
+
+We use wordlists composed of commonly used words on websites for subdomain scanning. This method is similar to dictionary attacks for passwords. These lists may fail to find subdomains with random characters or unique names, but they can usually uncover a large portion of a website's subdomains.
+
+Instead of creating wordlists from scratch, we can benefit from extensive wordlists published in this field. Through web research, the most frequently used words for all kinds of fuzzing operations have been identified and made easily accessible. One of the most popular wordlists of this kind is collected in the SecLists repository on GitHub. This repository houses wordlists categorized according to various types of fuzzing.
+
+
+-- Tools --
+
+There are many effective tools available for subdomain scanning. Let's briefly touch upon these tools.
+
+➜ gobuster
+
+Gobuster is a scanning tool written in Go language. Gobuster is presented as a handy command-line application.
+
+⇒ Gobuster is a tool used for brute-force attacks to:
+
+• Discover URLs (directories and files) on websites,
+• DNS subdomains (with wildcard support),
+• Virtual hostnames (vhosts) on target web servers,
+• Open Amazon S3 buckets,
+• Open Google Cloud buckets,
+• TFTP servers.
+
+⇒ Operating Modes
+
+• dir - Classic directory brute-force mode. Used to quickly discover specific directories and files on websites.
+• dns - Brute-force mode on DNS subdomains. Used to identify potential subdomains for a targeted domain.
+• s3 - Enumerate open S3 buckets and check for the existence of assets and buckets.
+• gcs - Enumerate open Google Cloud buckets.
+• vhost - Brute-force mode on virtual hostnames. It takes a different approach than DNS brute-forcing.
+• fuzz - Used for some basic fuzzing operations. Scanning can be performed in specific places using the FUZZ keyword.
+• tftp - Brute-force operations on TFTP files.
+
+gobuster [mode] [options]
+
+➜ ffuf
+
+FFUF (Fuzz Faster U Fool) is a tool for automating fuzzing operations. It is designed for cybersecurity experts to find vulnerabilities in web applications. FFUF is an open-source and free tool developed using the Go language.
+
+FFUF performs scanning operations by sending large amounts of requests containing various payloads. It then analyzes the responses and reports which methods worked and which didn't.
+
+FFUF is also fast and flexible, allowing us to specify the inputs for fuzzing and the parameters of requests sent to the target web application.
+
+⇒ Application areas:
+
+• Directory discovery,
+• Vhost discovery,
+• Fuzzing GET parameters,
+• Fuzzing POST data,
+
+ffuf -u http://FUZZ.target.com/ -w <wordlist>
+ffuf -u http://target.com/ -w <wordlist> -H 'Host: FUZZ.target.com'
+
+
+-- Commands Summary --
+
+$ gobuster [mode] [options]
+$ ffuf -u http://FUZZ.target.com/ -w <wordlist>
+$ ffuf -u http://target.com/ -w <wordlist> -H 'Host: FUZZ.target.com'
+
+
+*
