@@ -1,27 +1,189 @@
 
 --- John the Ripper ---
 
-Introduction
-Basic Terms
-Cracking Basic Hashes
-Cracking Windows Authentication Hashes
-Cracking /etc/shadow Hashes
-Single Crack Mode
-Custom Rules
-Cracking Password Protected Zip Files
-Cracking Password-Protected RAR Archives
-Cracking SSH Keys with John
-Further Reading
+• Basic Terms
+• Setting Up Your System
+• Cracking Basic Hashes
+• Cracking Windows Authentication Hashes
+• Cracking /etc/shadow Hashes
+• Single Crack Mode
+• Custom Rules
+• Cracking Password Protected Zip Files
+• Cracking Password-Protected RAR Archives
+• Cracking SSH Keys with John
+• Further Reading
+• Commands Summarization
 
 
-Introduction
-Basic Terms
-Cracking Basic Hashes
-Cracking Windows Authentication Hashes
-Cracking /etc/shadow Hashes
-Single Crack Mode
-Custom Rules
-Cracking Password Protected Zip Files
-Cracking Password-Protected RAR Archives
-Cracking SSH Keys with John
-Further Reading
+-- Basic Terms --
+
+John the Ripper is a well-known, well-loved, and versatile hash-cracking tool. It combines a fast cracking speed with an extraordinary range of compatible hash types.
+
+➜ What are Hashes
+
+A hash is a way of taking a piece of data of any length and representing it in another fixed-length form. This process masks the original value of the data. The hash value is obtained by running the original data through a hashing algorithm. Many popular hashing algorithms exist, such as MD4, MD5, SHA1 and NTLM. 
+
+If we take “polo”, a string of four characters, and run it through an MD5 hashing algorithm, we end up with an output of b53759f3ce692de7aff1b5779d3964da, a standard 32-character MD5 hash.
+If we take “polomints”, a string of 9 characters, and run it through the same MD5 hashing algorithm, we end up with an output of 584b6e4f4586e136bc280f27f9c64f3b, another standard 32-character MD5 hash.
+
+➜ What Makes Hashes Secure
+
+Hashing functions are designed as one-way functions. In other words, it is easy to calculate the hash value of a given input; however, it is a hard problem to find the original input given the hash value. In simple terms, a hard problem quickly becomes computationally infeasible in computer science. This computational problem has its roots in mathematics as P vs NP.
+
+In computer science, P and NP are two classes of problems that help us understand the efficiency of algorithms:
+
+• P (Polynomial Time): Class P covers the problems whose solution can be found in polynomial time. Consider sorting a list in increasing order. The longer the list, the longer it would take to sort; however, the increase in time is not exponential.
+• NP (Non-deterministic Polynomial Time): Problems in the class NP are those for which a given solution can be checked quickly, even though finding the solution itself might be hard. In fact, we don’t know if there is a fast algorithm to find the solution in the first place.
+
+Abstractly, the algorithm to hash the value will be “P” and can, therefore, be calculated reasonably. However, an “un-hashing” algorithm would be “NP” and intractable to solve, meaning that it cannot be computed in a reasonable time using standard computers.
+
+➜ Where John Comes in
+
+Even though the algorithm is not feasibly reversible, that doesn’t mean cracking the hashes is impossible. If you have the hashed version of a password, for example, and you know the hashing algorithm, you can use that hashing algorithm to hash a large number of words, called a dictionary. You can then compare these hashes to the one you’re trying to crack to see if they match. If they do, you know what word corresponds to that hash- you’ve cracked it!
+This process is called a dictionary attack, and John the Ripper, or John as it’s commonly shortened, is a tool for conducting fast brute force attacks on various hash types.
+
+
+-- Setting Up Your System --
+
+➜ Installation
+
+⇒ Kali
+
+John the Ripper is supported on many Operating Systems, not just Linux Distributions. Before we go through this, there are multiple versions of John, the standard “core” distribution, and multiple community editions, which extend the feature set of the original John distribution. The most popular of these distributions is the “Jumbo John,” which we will use specific features of later.
+Offensive Linux distributions like Kali are shipped with Jumbo John installed.You can double-check this by typing john into the terminal. 
+You should be met with a usage guide for John, with the first line reading “John the Ripper 1.9.0-jumbo-1” or something similar with a different version number.
+
+⇒ Other Linux Distributions
+
+Many Linux distributions have John the Ripper available for installation from their official repositories. For instance, on Fedora Linux, you can install John the Ripper with sudo dnf install john, while on Ubuntu, you can install it with sudo apt install john. Unfortunately, at the time of writing, these versions provided core functionality and missed some of the tools available through Jumbo John.
+Consequently, you need to consider building from the source to access all the tools available via Jumbo John. The official installation guide provides detailed installation and build configuration instructions.
+
+⇒ Installing on Windows
+
+To install Jumbo John the Ripper on Windows, you need to download and install the zipped binary for either 64-bit systems here https://www.openwall.com/john/k/john-1.9.0-jumbo-1-win64.zip or for 32-bit systems here https://www.openwall.com/john/k/john-1.9.0-jumbo-1-win32.zip.
+
+➜ Wordlists
+
+Now that we have john ready, we must consider another indispensable component: wordlists.
+To use a dictionary attack against hashes, you need a list of words to hash and compare; unsurprisingly, this is called a wordlist. There are many different wordlists out there, and a good collection can be found in the SecLists repository. There are a few places you can look for wordlists for attacking the system of choice; we will quickly run through where you can find them.
+
+On Kali Linux distributions, the /usr/share/wordlists directory contains a series of great wordlists.
+
+⇒ RockYou
+
+We will use the infamous rockyou.txt wordlist, a very large common password wordlist obtained from a data breach on a website called rockyou.com in 2009. If you are not using any of the above distributions, you can get the rockyou.txt wordlist from the SecLists repository under the /Passwords/Leaked-Databases subsection. You may need to extract it from the .tar.gz format using tar xvzf rockyou.txt.tar.gz.
+
+Now that we have our hash cracker and wordlists all set up, let’s move on to some hash cracking!
+
+$ tar xvzf rockyou.txt.tar.gz.
+
+
+-- Cracking Basic Hashes --
+
+➜ John Basic Syntax
+
+The basic syntax of John the Ripper commands is as follows. 
+
+john [options] [file path]
+
+• john: Invokes the John the Ripper program
+• [options]: Specifies the options you want to use
+• [file path]: The file containing the hash you’re trying to crack; if it’s in the same directory, you won’t need to name a path, just the file.
+
+➜ Automatic Cracking
+
+John has built-in features to detect what type of hash it’s being given and to select appropriate rules and formats to crack it for you; this isn’t always the best idea as it can be unreliable, but if you can’t identify what hash type you’re working with and want to try cracking it, it can be a good option! To do this, we use the following syntax:
+
+john --wordlist=[path to wordlist] [path to file]
+
+• --wordlist=: Specifies using wordlist mode, reading from the file that you supply in the provided path
+• [path to wordlist]: The path to the wordlist you’re using, as described in the previous task
+
+Example: john --wordlist=/usr/share/wordlists/rockyou.txt hash_to_crack.txt
+
+➜ Identifying Hashes
+
+Sometimes, John won’t play nicely with automatically recognising and loading hashes, but that’s okay! We can use other tools to identify the hash and then set John to a specific format. There are multiple ways to do this, such as using an online hash identifier. I like to use a tool called hash-identifier, a Python tool that is super easy to use and will tell you what different types of hashes the one you enter is likely to be, giving you more options if the first one fails.
+
+$ wget https://gitlab.com/kalilinux/packages/hash-identifier/-/raw/kali/master/hash-id.py
+$ python3 hash-id.py
+
+➜ Format-Specific Cracking
+
+Once you have identified the hash that you’re dealing with, you can tell John to use it while cracking the provided hash using the following syntax:
+
+john --format=[format] --wordlist=[path to wordlist] [path to file]
+
+• --format=: This is the flag to tell John that you’re giving it a hash of a specific format and to use the following format to crack it
+• [format]: The format that the hash is in
+
+Example: john --format=raw-md5 --wordlist=/usr/share/wordlists/rockyou.txt hash_to_crack.txt
+
+⇒ A Note on Formats:
+
+
+
+-- Cracking Windows Authentication Hashes --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Cracking /etc/shadow Hashes --
+-- Single Crack Mode --
+-- Custom Rules --
+-- Cracking Password Protected Zip Files --
+-- Cracking Password-Protected RAR Archives --
+-- Cracking SSH Keys with John --
+-- Further Reading --
+
+
+
+-- Commands Summarization --
+
+$ wget https://gitlab.com/kalilinux/packages/hash-identifier/-/raw/kali/master/hash-id.py
+$ python3 hash-id.py
+
+$ john --list=formats
+$ john --list=formats | grep -iF "md5"
+$ john --wordlist=/usr/share/wordlists/rockyou.txt hash_to_crack.txt
+$ john --format=raw-md5 --wordlist=/usr/share/wordlists/rockyou.txt hash_to_crack.txt
+
+
+
+https://github.com/openwall/john/blob/bleeding-jumbo/doc/INSTALL
+https://www.openwall.com/john/k/john-1.9.0-jumbo-1-win64.zip
+https://www.openwall.com/john/k/john-1.9.0-jumbo-1-win32.zip
+https://github.com/danielmiessler/SecLists
+
+https://hashes.com/en/tools/hash_identifier
+https://gitlab.com/kalilinux/packages/hash-identifier/-/tree/kali/master
+
+*
