@@ -1,6 +1,63 @@
 
+--- FFUF ---
+
+• Subdomain Fuzzing
+• Vhost Fuzzing
 
 
 FFUF (Fuzz Faster U Fool) is a tool for automating fuzzing operations. It is designed for cybersecurity experts to find vulnerabilities in web applications. FFUF is an open-source and free tool developed using the Go language.
 FFUF performs scanning operations by sending large amounts of requests containing various payloads. It then analyzes the responses and reports which methods worked and which didn't.
 FFUF is also fast and flexible, allowing us to specify the inputs for fuzzing and the parameters of requests sent to the target web application.
+
+
+-- Subdomain Fuzzing --
+
+With the scan we'll perform, we will check whether different subdomains exist, whether they have a public DNS record, and whether this record directs us to a working server IP.
+
+In the SecLists repository, there is a dedicated section for sub-domain wordlists composed of commonly used words for subdomains. 
+
+Syntax: ffuf -w /path/to/wordlist -u https://FUZZ.example.com/
+
+# head -n 20 /root/Desktop/misc/SecLists/Discovery/DNS/subdomains-top1million-20000.txt
+
+# ffuf -w /root/Desktop/misc/SecLists/Discovery/DNS/subdomains-top1million-5000.txt -u https://FUZZ.google.com/
+
+
+--  Vhost Fuzzing --
+
+We know how we could fuzz public subdomains using public DNS records. However, the same method doesn't work when we're trying to fuzz subdomains that don't have a public DNS record.
+
+To scan VHosts, instead of manually adding the wordlist to our local DNS file /etc/hosts, we will use the Host: header from HTTP headers to fuzz.
+
+We notice that most attempts in the wordlist return a status 200 OK. This is expected, as we're only changing the header each time while visiting https://youtube.com/. Therefore, we always expect to receive 200 OK. However, if a VHost actually exists and we provide the correct one in the header, we should receive a different response size, indicating that we are being served a page from that VHost, which would likely show a different page.
+
+Filtering HTTP response size is a common method. The parameter used in ffuf to filter HTTP response size is -fs. 
+
+Syntax: ffuf -w /path/to/wordlist -u https://example.com -H 'Host: FUZZ.example.com'
+
+# ffuf -w /root/Desktop/misc/SecLists/Discovery/DNS/subdomains-top1million-5000.txt -u https://youtube.com -H 'Host: FUZZ.youtube.com'
+# ffuf -w /path/to/vhost/wordlist -u http://example.com -H 'Host: FUZZ.example.com' -fs 4242
+
+
+*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
