@@ -5,3 +5,14 @@ Vhost fuzzing is a type of attack aimed at guessing virtual host (Vhost) configu
 
 Vhost fuzzing is carried out by guessing the names of the virtual spaces hosted on the main machine. Tools generally use dictionary files containing common Vhost names to attempt access to different virtual host configurations on the server.
 
+Example Output: Vhosts such as dev.example.com, staging.example.com, admin.example.com, api.example.com, admin.example.com, test.example.com can be detected.
+
+
+-- Commands --
+
+$ ffuf -w /path/to/wordlist.txt -u https://example.com -H "Host: FUZZ.example.com" 
+$ ffuf -w /path/to/vhost/wordlist -u http://example.com -H 'Host: FUZZ.example.com' -fs 4242
+$ gobuster vhost -u https://example.com -w /path/to/wordlist.txt
+
+
+*
