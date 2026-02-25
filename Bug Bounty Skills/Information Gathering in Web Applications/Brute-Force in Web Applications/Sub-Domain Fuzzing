@@ -1,0 +1,38 @@
+
+--- Sub-Domain Fuzzing ---
+
+Sub-domain fuzzing is a brute-force attack technique aimed at identifying the sub-domains of a primary domain. Sub-domains are often used for different services, admin panels, or hidden applications. Attackers, upon discovering these sub-domains, might search for various vulnerabilities to gain access to sensitive information.
+Sub-domain fuzzing is performed by trying out guessed or commonly used sub-domain names. Tools employed for this task typically use DNS querying and common sub-domain lists. Attackers try different sub-domain names for the target domain and verify their existence based on the responses from DNS servers.
+Example Output: Sub-domains such as admin.example.com, api.example.com, test.example.com, admin.example.com, mail.example.com, vpn.example.com can be detected.
+
+https://blog.example.com
+    https
+└─────┬─────┘
+      ↓
+   Protocol
+              blog
+        └───────┬───────┘
+                ↓
+            Subdomain
+                             example
+                └───────────────┬───────────────┘
+                                ↓
+                            Domain name
+                                              com
+                                        └──────┬──────┘
+                                               ↓
+                                              TLD
+                                       (Top-Level Domain)
+
+
+
+-- Commands --
+
+$ ffuf -w /path/to/wordlist.txt -u https://ffuf.io.fi/FUZZ 
+$ ffuf -w /path/to/wordlist.txt -u https://FUZZ.example.com -H "Host: FUZZ.example.com"
+$ ffuf -w /path/to/vhost/wordlist -u https://target -H "Host: FUZZ" -fs 4242
+
+$ sublist3r -d example.com -o subdomains.txt
+
+
+*
