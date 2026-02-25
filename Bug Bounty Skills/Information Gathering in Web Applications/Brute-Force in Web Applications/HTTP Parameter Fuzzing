@@ -1,0 +1,62 @@
+
+--- HTTP Parameter Fuzzing ---
+
+• GET Parameter Fuzzing
+• POST Parameter Fuzzing
+
+
+-- GET Parameter Fuzzing --
+
+GET parameter fuzzing is a testing method aimed at identifying security vulnerabilities and unexpected behaviors in web applications by manipulating GET parameters received via the URL using random or specially crafted inputs. This type of attack primarily focuses on analyzing whether the application directly processes URL parameters, how it responds to various inputs, and whether potentially sensitive information is leaked.
+
+GET parameter fuzzing is carried out using wordlists or custom-crafted payloads. Tools send various combinations of data to parameter points in the target URL and evaluate the server's HTTP responses. This evaluation is based on specific status codes, response times, or server error messages.
+
+➜ Burp Suite Intruder
+
+Burp Suite Intruder is a powerful security testing tool that can be used for parameter fuzzing and other types of attacks in web applications.
+
+1. Capture the request to the application via proxy and send it to Intruder.
+2. Mark the GET parameters to be tested.
+3. Specify the wordlist and start the attack.
+
+-- Commands --
+
+$ ffuf -u "https://example.com/page.php?param=FUZZ" -w /path/to/wordlist.txt
+
+
+-- POST Parameter Fuzzing --
+
+POST parameter fuzzing is a type of testing aimed at discovering security vulnerabilities by altering the parameters sent in POST requests with different values. This type of attack seeks to uncover whether critical data sent through POST requests can manipulate various functions of the application or gain access to sensitive information.
+
+POST parameter fuzzing is typically performed using wordlists or randomly generated character combinations. Tools send POST requests to the application to understand how the parameters are evaluated. Responses are analyzed to determine if the application returns unexpected data or leaks information through error messages.
+
+➜ Burp Suite Intruder
+
+Burp Suite Intruder is a widely used comprehensive security testing tool for POST parameter fuzzing.
+
+1. Capture the request with a proxy and send it to Intruder.
+2. Mark the POST parameters and specify the attack type.
+3. Add the wordlist and start the attack.
+4. Analyze the responses based on HTTP status codes, response time, and content.
+
+POST /login.php HTTP/1.1
+Host: example.com
+Content-Type: application/x-www-form-urlencoded
+
+username=admin&password=123456
+
+$ ffuf -u "https://example.com/login.php" -X POST -d "username=admin&password=FUZZ" -w /usr/share/wordlists/rockyou.txt -H "Content-Type: application/x-www-form-urlencoded"
+
+• -u: Specifies the target URL.
+• -X: Specifies the request method (POST).
+• -d: Specifies the form data to be sent; the FUZZ placeholder indicates where different values will be tried for the password.
+• -w: Specifies the path to the wordlist.
+• -H: Adds header information to the HTTP request. "Content-Type" specifies the type of the submitted form.
+
+-- Commands --
+
+$ ffuf -u "https://example.com/login.php" -X POST -d "username=admin&password=FUZZ" -w /usr/share/wordlists/rockyou.txt -H "Content-Type: application/x-www-form-urlencoded"
+
+
+
+*
