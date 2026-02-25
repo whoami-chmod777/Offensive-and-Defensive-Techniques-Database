@@ -10,3 +10,7 @@ Attackers use dictionary files or tools containing common directory names for di
 
 $ ffuf -u https://example.com/FUZZ -w /path/to/wordlist.txt
 $ gobuster dir -u https://example.com -w /path/to/wordlist.txt
+
+
+
+*
