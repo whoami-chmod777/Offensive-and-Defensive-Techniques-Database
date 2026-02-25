@@ -1,0 +1,27 @@
+
+--- Captcha Bypass Brute Force ---
+
+Captcha is a security mechanism used in web applications to distinguish between humans and bots. However, when captchas are improperly implemented or weakly designed, they can be bypassed with brute-force attacks.
+
+Brute-force attacks aimed at bypassing captcha protection can be carried out using several different methods.
+
+1. Predictable Codes: Some captcha systems rely on certain algorithms, making the codes predictable. For example, they may operate within a specific range of numbers or follow a pattern. In this case, attackers can brute-force predictable codes.
+2. Repeated Codes: If captcha codes in a system are repeatedly reused, attackers can identify these codes through brute-force attacks.
+3. Machine Learning Recognition: More advanced attacks may use machine learning or OCR (optical character recognition) technology to recognize captcha images.
+
+POST /login.php HTTP/1.1
+Host: example.com
+Content-Type: application/x-www-form-urlencoded
+
+username=testuser&password=password123&captcha=1234
+
+➜ Captcha Solver: Machine learning-based recognition tools are used to bypass advanced captcha systems.
+
+➜ Burp Suite Intruder: Burp Suite Intruder is a flexible security testing tool used to brute-force web forms.
+
+1. Capture the relevant request via proxy and send it to Intruder.
+2. Select the captcha field as the target and add suitable guessed values to the payload list.
+3. Start the attack and analyze the responses.
+
+
+*
