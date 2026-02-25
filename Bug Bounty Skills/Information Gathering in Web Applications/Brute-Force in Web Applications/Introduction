@@ -1,0 +1,67 @@
+
+--- Introduction ---
+
+• Common Types of Brute Force Attacks
+
+
+Brute Force attacks are a common and straightforward yet effective type of attack encountered in cybersecurity. It involves systematically trying many different combinations to find the correct credentials or configuration settings on a target system.
+
+
+-- Common Types of Brute Force Attacks --
+
+➜ Dictionary Attack
+
+Definition: In this type of attack, attackers use commonly used password lists (dictionaries) systematically to find the correct password. For example, common passwords like "123456", "password", or "admin" are tried from the list.
+
+Mechanism: The attacker uses the list or database sequentially to guess the target's password. For example, a password attack for the username "admin" can be attempted via a URL like this.
+
+Defense Methods: Implement strong password policies, multi-factor authentication (MFA), and limit password attempts.
+
+https://example.com/login?username=admin&password=123456
+
+➜ Exhaustive Search
+
+Definition: The attacker tries to find the correct username and password by using all possible character combinations. This method is a time-consuming type of attack.
+
+Mechanism: The attacker generates and attempts different combinations of each character set. For example, starting with "a" and trying all letters, numbers, and special characters through "z".
+
+Defense Methods: Increase password length and complexity, implement session limits for failed attempts, and use CAPTCHA.
+
+➜ Credential Stuffing
+
+Definition: Trying to log into different websites using credentials leaked from previous data breaches.
+
+Mechanism: The attacker uses username-password combinations obtained from data breaches on other websites.
+
+For example, trying to log in to different sites using previously leaked "john@example.com" email address and "password123" password.
+
+Defense Methods: Use multi-factor authentication (MFA), alert systems to prevent password reuse, and notifications for successful logins.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
