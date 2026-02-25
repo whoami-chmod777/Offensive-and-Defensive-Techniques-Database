@@ -1,0 +1,12 @@
+
+--- Directory Fuzzing ---
+
+Directory fuzzing, also known as directory brute-forcing, is a type of attack aimed at identifying hidden or unsecured directories in web applications. Attackers attempt to find weaknesses in the target system by trying out guessed directory names or commonly used directory structures. The directories found can provide insights into the content of the application or sensitive files, potentially opening opportunities for further attacks.
+
+Attackers use dictionary files or tools containing common directory names for directory fuzzing. During the scanning process, they consecutively attempt different paths and filenames to access existing directories or files in the target application.
+
+
+-- Commands --
+
+$ ffuf -u https://example.com/FUZZ -w /path/to/wordlist.txt
+$ gobuster dir -u https://example.com -w /path/to/wordlist.txt
