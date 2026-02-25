@@ -179,6 +179,10 @@ $ john --format=raw-md5 --wordlist=/usr/share/wordlists/rockyou.txt hash_to_crac
 $ john --format=raw-sha1 --wordlist=/usr/share/wordlists/rockyou.txt hash_to_crack.txt
 $ john --format=raw-sha256 --wordlist=/usr/share/wordlists/rockyou.txt hash_to_crack.txt
 
+$ john --format=whirlpool --wordlist=/usr/share/wordlists/rockyou.txt hash_to_crack.txt
+
+
+
 
 
 https://github.com/openwall/john/blob/bleeding-jumbo/doc/INSTALL
