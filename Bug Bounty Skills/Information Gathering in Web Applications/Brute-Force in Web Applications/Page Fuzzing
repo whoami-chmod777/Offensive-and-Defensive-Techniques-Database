@@ -5,8 +5,14 @@ Page fuzzing, or page brute-forcing, is a brute-force attack technique used to d
 
 Attackers use fuzzing tools to try out common page names or endpoints. These tools typically rely on dictionary files to attempt various URL paths and detect successful attempts based on HTTP status codes or content size.
 
+Example Output: Pages such as admin.php, login.jsp, private.html, index.asp, dashboard.html can be detected.
+
 
 -- Commands --
 
 $ ffuf -u https://example.com/FUZZ -w /path/to/wordlist.txt
 $ gobuster dir -u https://example.com -w /path/to/wordlist.txt -x php,html,asp
+
+
+
+*
