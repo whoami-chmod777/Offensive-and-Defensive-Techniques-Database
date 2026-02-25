@@ -1,0 +1,12 @@
+
+--- Page Fuzzing ---
+
+Page fuzzing, or page brute-forcing, is a brute-force attack technique used to discover non-existent or restricted access pages in web applications. The goal of this attack is to identify hidden or unsecured pages and endpoints on the target server using guessed or commonly used names. Successfully identifying these pages can enable attackers to obtain sensitive information or perform further attacks.
+
+Attackers use fuzzing tools to try out common page names or endpoints. These tools typically rely on dictionary files to attempt various URL paths and detect successful attempts based on HTTP status codes or content size.
+
+
+-- Commands --
+
+$ ffuf -u https://example.com/FUZZ -w /path/to/wordlist.txt
+$ gobuster dir -u https://example.com -w /path/to/wordlist.txt -x php,html,asp
