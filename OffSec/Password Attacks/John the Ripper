@@ -174,7 +174,10 @@ $ python3 hash-id.py
 $ john --list=formats
 $ john --list=formats | grep -iF "md5"
 $ john --wordlist=/usr/share/wordlists/rockyou.txt hash_to_crack.txt
+
 $ john --format=raw-md5 --wordlist=/usr/share/wordlists/rockyou.txt hash_to_crack.txt
+$ john --format=raw-sha1 --wordlist=/usr/share/wordlists/rockyou.txt hash_to_crack.txt
+$ john --format=raw-sha256 --wordlist=/usr/share/wordlists/rockyou.txt hash_to_crack.txt
 
 
 
