@@ -1,0 +1,7 @@
+
+--- Vhost Fuzzing ---
+
+Vhost fuzzing is a type of attack aimed at guessing virtual host (Vhost) configurations hosted on a server and identifying unauthorized access points. Virtual hosts are used to host multiple websites on the same server infrastructure. Attackers try to gain access to hidden or unauthorized areas by finding the correct Vhost names.
+
+Vhost fuzzing is carried out by guessing the names of the virtual spaces hosted on the main machine. Tools generally use dictionary files containing common Vhost names to attempt access to different virtual host configurations on the server.
+
