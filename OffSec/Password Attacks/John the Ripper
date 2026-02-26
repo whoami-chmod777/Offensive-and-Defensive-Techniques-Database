@@ -193,8 +193,12 @@ john --single --format=[format] [path to file]
 • --single: This flag lets John know you want to use the single hash-cracking mode
 • --format=[format]: As always, it is vital to identify the proper format.
 
+If you’re cracking hashes in single crack mode, you need to change the file format that you’re feeding John for it to understand what data to create a wordlist from. You do this by prepending the hash with the username that the hash belongs to, so according to the above example, we would change the file hashes.txt
 
+From 1efee03cdcb96d90ad48ccc7b8666033
+To mike:1efee03cdcb96d90ad48ccc7b8666033
 
+john --single --format=raw-sha256 hashes.txt
 
 
 
@@ -244,8 +248,11 @@ $ john --format=NT --wordlist=/usr/share/wordlists/rockyou.txt hash_to_crack.txt
 $ unshadow /etc/passwd /etc/shadow > unshadowed.txt
 $ john --format=sha512crypt --wordlist=/usr/share/wordlists/rockyou.txt unshadowed.txt
 
+
 $ john --single --format=raw-sha1 hash_to_crack.txt
 
+From 1efee03cdcb96d90ad48ccc7b8666033
+To mike:1efee03cdcb96d90ad48ccc7b8666033
 
 
 
