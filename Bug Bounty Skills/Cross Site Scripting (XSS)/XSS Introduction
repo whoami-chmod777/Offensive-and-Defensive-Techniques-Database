@@ -1,68 +1,153 @@
 
 --- Cross-site scripting ---
 
-Cross-site scripting
-What is cross-site scripting (XSS)?
-How does XSS work?
-XSS proof of concept
-What are the types of XSS attacks?
-Reflected cross-site scripting
+• What is Cross-site Scripting (XSS)
+• Effects of XSS Attacks
+• Types of XSS Attacks
+• Key Concepts
+• Commonly Used JavaScript Functions and Objects in XSS Attacks
+• Commonly Used HTML Tags in XSS Attacks
+
+
+-- What is Cross-site Scripting (XSS) --
+
+Cross-site Scripting (XSS) is a type of security vulnerability commonly found in web-based applications and this vulnerability primarily relies on client-side code injection attacks. Attackers aim to execute malicious JavaScript code in the browsers of users visiting the web pages or applications by embedding these code snippets.
+
+The attack is triggered when users visit a web page or application containing the malicious code. The web page or application acts as a medium to execute the malicious scripts in the user's browser. XSS vulnerabilities are frequently detected on platforms that include forums, messaging interfaces, and comment fields where users provide input.
+
+
+-- Effects of XSS Attacks --
+
+Cross-site Scripting (XSS) attacks can lead to serious security threats such as stealing user session cookies, leaking sensitive data, altering web page content, or performing unauthorized actions on the application.
+
+➜ Session Cookie Theft
+
+XSS attacks allow attackers to steal users' session cookies. Cookies store session information of users and are commonly used for automatic login to websites. When attackers gain access to these cookies, they can unauthorizedly access users' accounts and perform actions on their behalf.
+
+➜ Leakage of Sensitive Data
+
+XSS attacks can lead to the leakage of sensitive information. Attackers can capture form data, credit card information, and other personal details through malicious scripts. Such data leaks can result in serious consequences such as fraud and identity theft.
+
+➜ Modification of Web Page Content
+
+Attackers can use XSS to change the appearance and content of a web page. This can negatively impact users' experiences by presenting fake or malicious content to users, potentially misleading them. Additionally, it can harm corporate image and customer trust.
+
+➜ Execution of Unauthorized Operations
+
+XSS attacks allow attackers to misuse users' permissions within web applications. For example, an attacker can use the victim's account to harm other users, add new administrators, delete or modify data, and perform unauthorized operations.
+
+➜ Social Engineering Attacks
+
+XSS attacks can be used as part of broader social engineering campaigns. Attackers may try to deceive users by sending malicious links or messages that appear to come from a trusted source.
+
+➜ Triggering of Other Security Vulnerabilities
+
+XSS vulnerabilities jeopardize the overall security of a website or application. These vulnerabilities can act as a gateway for other types of attacks, such as Cross-Site Request Forgery (CSRF).
+
+
+-- Types of XSS Attacks --
+
+• Reflected XSS (Non-Persistent XSS): Occurs when data sent from a user is immediately reflected by a web application without proper filtering and then executed by the user's browser. Malicious scripts are usually sent via URL parameters and executed when the user opens the URL.
+• Stored XSS (Persistent XSS): Happens when malicious scripts are stored in the web application's database and executed when other users view the affected content.
+• DOM-based XSS (DOM XSS): Malicious scripts are executed directly by manipulating the Document Object Model (DOM) in the user's browser. Here, the attacker triggers the execution of a web application's client-side scripts by altering the DOM.
+
+
+-- Key Concepts --
+
+➜ HTML (Hyper Text Markup Language)
+
+A standard markup language used to create web pages.
+
+<html>
+    <head>
+        <title>Home</title>
+    </head>
+    <body>
+        <h1>Hello World!</h1>
+    </body>
+</html>
+
+➜ JavaScript
+
+A programming language used to make web pages interactive. JavaScript plays a central role in writing and executing malicious scripts in XSS attacks.
+
+alert('Hello World!');
+
+➜ DOM (Document Object Model)
+
+A programming interface that represents an HTML document as a hierarchical tree structure, which allows interaction with the document using languages like JavaScript.
+
+➜ Payload
+
+In an XSS attack, the piece of malicious code intended to be executed by the browser.
+
+<script>alert(1)</script>
+
+➜ Content Security Policy (CSP)
+
+A security protocol that restricts the sources from which a web page can load scripts, helping to prevent XSS attacks.
+
+This CSP rule allows loading scripts only from the same origin (self) and https://apis.example.com, thus preventing the loading of external malicious scripts.
+
+Content-Security-Policy: script-src 'self' https://apis.example.com
+
+
+-- Commonly Used JavaScript Functions and Objects in XSS Attacks --
+
++-------------------+--------------------------------------------------------------------------+
+| JavaScript Object | Description                                                              |
++-------------------+--------------------------------------------------------------------------+
+| alert()           | Displays a message box to the user.                                      |
++-------------------+--------------------------------------------------------------------------+
+| prompt()          | Prompts the user for input and returns the entered value.                |
++-------------------+--------------------------------------------------------------------------+
+| confirm()         | Displays a confirmation box. User can choose "OK" or "Cancel".           |
++-------------------+--------------------------------------------------------------------------+
+| eval()            | Evaluates a string as JavaScript code and executes it.                   |
+|                   | Unsafe for user inputs and may lead to vulnerabilities.                  |
++-------------------+--------------------------------------------------------------------------+
+| fetch()           | Sends an HTTP request to a URL and returns a Promise.                    |
+|                   | Result can be handled in the Promise chain.                              |
++-------------------+--------------------------------------------------------------------------+
+| document.cookie   | Provides access to the browser's cookies.                                |
++-------------------+--------------------------------------------------------------------------+
+| innerHTML         | Used to change the content of an HTML element.                           |
++-------------------+--------------------------------------------------------------------------+
+| setTimeout()      | Executes a function after a specified time interval.                     |
++-------------------+--------------------------------------------------------------------------+
+| setInterval()     | Repeatedly executes a function at specified time intervals.              |
++-------------------+--------------------------------------------------------------------------+
+| XMLHttpRequest    | Used to exchange data with a server in the background.                   |
++-------------------+--------------------------------------------------------------------------+
+| localStorage      | Used to store persistent data in the browser.                            |
++-------------------+--------------------------------------------------------------------------+
+| sessionStorage    | Provides access to the browser's session storage.                        |
++-------------------+--------------------------------------------------------------------------+
+
+
+-- Commonly Used HTML Tags in XSS Attacks --
+
++------------+-------------------------------------------------------------------+
+| HTML Tag   | Description                                                       |
++------------+-------------------------------------------------------------------+
+| <script>   | Used to include JavaScript code in the page.                      |
++------------+-------------------------------------------------------------------+
+| <img>      | Used to embed an image.                                           |
++------------+-------------------------------------------------------------------+
+| <iframe>   | Used to embed another web page into the current page.             |
++------------+-------------------------------------------------------------------+
+| <a>        | Used to create a hyperlink.                                       |
++------------+-------------------------------------------------------------------+
+| <input>    | Used to get user input.                                           |
++------------+-------------------------------------------------------------------+
+| <textarea> | Used to get multi-line user input.                                |
++------------+-------------------------------------------------------------------+
+| <svg>      | Used to create vector graphics.                                   |
++------------+-------------------------------------------------------------------+
 
 
 
--- Cross-site scripting --
-
-In this section, we'll explain what cross-site scripting is, describe the different varieties of cross-site scripting vulnerabilities, and spell out how to find and prevent cross-site scripting. 
-
-
--- What is cross-site scripting (XSS)? --
-
-Cross-site scripting (also known as XSS) is a web security vulnerability that allows an attacker to compromise the interactions that users have with a vulnerable application. 
-It allows an attacker to circumvent the same origin policy, which is designed to segregate different websites from each other. 
-Cross-site scripting vulnerabilities normally allow an attacker to masquerade as a victim user, to carry out any actions that the user is able to perform, and to access any of the user's data. 
-If the victim user has privileged access within the application, then the attacker might be able to gain full control over all of the application's functionality and data. 
-
-
--- How does XSS work? --
-
-Cross-site scripting works by manipulating a vulnerable web site so that it returns malicious JavaScript to users. When the malicious code executes inside a victim's browser, the attacker can fully compromise their interaction with the application. 
-
-
--- XSS proof of concept --
-
-You can confirm most kinds of XSS vulnerability by injecting a payload that causes your own browser to execute some arbitrary JavaScript. 
-It's long been common practice to use the alert() function for this purpose because it's short, harmless, and pretty hard to miss when it's successfully called. 
-In fact, you solve the majority of our XSS labs by invoking alert() in a simulated victim's browser.
-
-Unfortunately, there's a slight hitch if you use Chrome. From version 92 onward (July 20th, 2021), cross-origin iframes are prevented from calling alert(). 
-As these are used to construct some of the more advanced XSS attacks, you'll sometimes need to use an alternative PoC payload. 
-In this scenario, we recommend the print() function. If you're interested in learning more about this change and why we like print(), check out our blog post on the subject.
-
-As the simulated victim in our labs uses Chrome, we've amended the affected labs so that they can also be solved using print(). We've indicated this in the instructions wherever relevant. 
-
-
--- What are the types of XSS attacks? --
-
-There are three main types of XSS attacks. These are:
-
-• Reflected XSS, where the malicious script comes from the current HTTP request.
-• Stored XSS, where the malicious script comes from the website's database.
-• DOM-based XSS, where the vulnerability exists in client-side code rather than server-side code.
-
-
--- Reflected cross-site scripting --
-
-
-
-
-
-
-
-
-
-
-
-
+*
 
 
 
