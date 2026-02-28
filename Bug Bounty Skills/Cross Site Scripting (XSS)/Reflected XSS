@@ -44,7 +44,7 @@ The following PHP code snippet displays user input directly into an HTML context
 ?>
 
 
--- Code Summarization --
+-- Payload Summarization --
 
 ?q=<script>alert(1)</script>
 https://example.com/home?search=<script>alert(1)</script>
