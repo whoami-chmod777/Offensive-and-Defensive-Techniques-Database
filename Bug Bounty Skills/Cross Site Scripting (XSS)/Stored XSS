@@ -1,1 +1,30 @@
 
+Stored XSS is a type of attack where malicious scripts are stored in a web application's database and then executed in the user's browser whenever the affected page is viewed. These attacks usually occur in scenarios where user-provided data is stored, such as messaging apps, forum posts, comments, or user profiles. The key difference from Reflected XSS is that the payload is stored in the database.
+
+In a web application with this vulnerability, the user's interaction with the XSS payload link is not necessary. Since the payloads are permanently embedded in the page, they can be triggered easily and can have a larger impact. Rather than making thousands of users click on a link, the attacker can execute code in the browsers of all users visiting the affected page through a script coming from the database, making Stored XSS more critical than Reflected XSS.
+
+➜ Stored XSS Attack Example
+
+It is possible to find Stored XSS vulnerabilities in messaging applications. Messages are processed and stored on the server to be displayed to other users, and the same messages can be viewed again when the page is refreshed or visited at a different time.
+
+POST /index.php HTTP/1.1
+Host: example.com
+Cookie: PHPSESSID=jl5kamgcplionfan0kkjhcujh3
+Content-Length: 19
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.6367.60 Safari/537.36
+
+message=Hello+World
+
+<script>alert(document.cookie)</script>
+
+
+
+
+
+
+
+
+-- Pay<lopad Summary --
+
+<script>alert(document.cookie)</script>
