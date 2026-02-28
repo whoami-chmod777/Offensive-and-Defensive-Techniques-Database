@@ -16,15 +16,40 @@ User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 
 message=Hello+World
 
+POST /index.php HTTP/1.1
+Host: example.com
+Cookie: PHPSESSID=jl5kamgcplionfan0kkjhcujh3
+Content-Length: 19
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.6367.60 Safari/537.36
+
+message=<script>alert(document.cookie)</script>
+
+➜ Vulnerable Code Example
+
+<?php 
+    $messages = $db->query("SELECT * FROM messages");
+    if ($messages) {
+        while ($row = $messages->fetch(PDO::FETCH_ASSOC)) {
+            echo "<div>" . $row['message'] . "</div>";
+        }
+    }
+?>
+
+➜ Secure Code Example
+
+<?php 
+    $messages = $db->query("SELECT * FROM messages");
+    if ($messages) {
+        while ($row = $messages->fetch(PDO::FETCH_ASSOC)) {
+            echo "<div>" .  htmlspecialchars($row['message']) . "</div>";
+        }
+    }
+?>
+
+
+-- Payload Summarization --
+
 <script>alert(document.cookie)</script>
 
-
-
-
-
-
-
-
--- Pay<lopad Summary --
-
-<script>alert(document.cookie)</script>
+*
