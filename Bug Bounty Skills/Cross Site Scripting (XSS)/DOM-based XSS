@@ -1,1 +1,34 @@
 
+DOM-based XSS is a type of attack that occurs when a web page's client-side scripts (JavaScript) manipulate the Document Object Model (DOM) in an unsafe way. Unlike other XSS types, malicious scripts are not directly placed in the HTML code of the page but are instead executed through client-side interactions, modifying the DOM. The triggering and execution method is similar to Reflected and Stored XSS, with the primary difference being the manipulation of the DOM.
+
+These attacks occur when client-side JavaScript processes data from untrusted sources and then interprets that data in a way that allows code execution. This typically involves functions such as eval() or innerHTML, which can execute or modify HTML and JavaScript code.
+
+var userInput = 'console.log(1)';
+eval(userInput); // output : 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var userInput = 'console.log(1)';
+eval(userInput); // output : 1
+
+
+
+*
