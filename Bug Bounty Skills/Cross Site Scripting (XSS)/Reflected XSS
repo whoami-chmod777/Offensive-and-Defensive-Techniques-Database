@@ -1,1 +1,59 @@
 
+➜ Reflected XSS
+
+Reflected XSS is a type of attack where a malicious script is sent to a web application and reflected back to the user's browser. These attacks usually occur when users are tricked by social engineering tactics into clicking on a link containing the XSS payload. These links trigger an HTTP request containing malicious code, which the server mirrors back in the HTTP response, executing within the user's browser. It is called Reflected XSS because the attack relies on each victim triggering the attack afresh, completing in a single request/response cycle and requiring user interaction.
+
+On this page, we see a search box. By searching for the word "cars", the response is observed. The search term is shown in an alert box. The data is sent to the server with the "q" GET parameter.
+https://example.com/home?search=<script>alert(1)</script>
+
+A simple XSS payload was entered into the search box to trigger a JavaScript alert displaying the number "1". The payload successfully executed, confirming the vulnerability.
+?q=<script>alert(1)</script>
+
+?q=<script>alert(1)</script>
+https://example.com/home?search=<script>alert(1)</script>
+https://example.com/home?search=<script>alert('XSS')</script>
+
+➜ HTML Injection
+
+HTML code can also be injected into the page, altering the page's design. This can turn into a deceptive social engineering attack designed according to the attacker's intentions. This type of attack is known as HTML Injection.
+
+?q=<h1 style="color:green;">TEST</h1>
+
+➜ Vulnerable Code Example
+
+The following PHP code snippet displays user input directly into an HTML context without proper validation, creating an opportunity for XSS attacks.
+
+<?php 
+    if (isset($_GET['q'])) {
+        $q = $_GET['q'];
+        echo '<div class="alert alert-danger" role="alert">
+            No Result Found for <b>' . $q . '</b> 
+        </div>';
+    } 
+?>
+
+➜ Secure Code Example
+
+<?php 
+    if (isset($_GET['q'])) {
+        $q = $_GET['q'];
+        echo '<div class="alert alert-danger" role="alert">
+            No Result Found for <b>' . htmlspecialchars($q) . '</b> 
+        </div>';
+    } 
+?>
+
+
+-- Code Summarization --
+
+?q=<script>alert(1)</script>
+https://example.com/home?search=<script>alert(1)</script>
+https://example.com/home?search=<script>alert('XSS')</script>
+
+?q=<h1 style="color:green;">TEST</h1>
+
+
+*
+
+
+
