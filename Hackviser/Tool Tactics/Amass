@@ -60,9 +60,9 @@ It is widely used among security professionals and researchers to discover asset
 3. Output to File - This command saves the discovered subdomains in a specified output file. This gives the Amass tool the ability for post-test analysis: amass enum -d <target_domain> -o <output_file>
 4. Brute Force Subdomain Enumeration - Use brute forcing to discover subdomains with a wordlist: amass enum -d <target_domain> -brute -w <wordlist>
 5. DNS Resolution - Resolve discovered subdomains to their respective IP addresses: amass resolve -d <target_domain>
-6. Verbose Output: amass enum -d <target_domain> -v
-7. Data Sources: amass enum -d <target_domain> -src
-8. Help and Usage Information: amass -h, amass --help
+6. Verbose Output - This command enables verbose output for detailed information about the enumeration process: amass enum -d <target_domain> -v
+7. Data Sources - Specify data sources to use during enumeration: amass enum -d <target_domain> -src
+8. Help and Usage Information - Displays help information, including available commands and options for using Amass: amass -h, amass --help
 
 
 -- Output Examples of Amass Commands --
@@ -92,11 +92,11 @@ It is widely used among security professionals and researchers to discover asset
 +-------------------------------+-------------------------------------------+
 | Exclude Specific Domain       | amass enum -d example.com -exclude sub    |
 +-------------------------------+-------------------------------------------+
-| Rate Limit                    | amass enum -d example.com -rl 100          |
+| Rate Limit                    | amass enum -d example.com -rl 100         |
 +-------------------------------+-------------------------------------------+
 | Timeout Configuration         | amass enum -d example.com -timeout 10     |
 +-------------------------------+-------------------------------------------+
-| Data Sources                  | amass enum -d example.com -src             |
+| Data Sources                  | amass enum -d example.com -src            |
 +-------------------------------+-------------------------------------------+
 | Passive Mode                  | amass enum -passive -d example.com        |
 +-------------------------------+-------------------------------------------+
