@@ -1,1 +1,64 @@
 
+-- Blind XSS --
+
+• Application Areas Prone to Blind XSS
+• XSS Attacks Through HTTP Headers
+
+
+Blind XSS is a type of Cross-Site Scripting (XSS) attack that occurs when a web application processes and stores user input but does not reflect it immediately on the visible/frontend of the application. The malicious input may be processed and viewed later in different parts of the application, such as admin panels, reporting tools, or other backend functionalities. Essentially, it can be considered a form of Stored XSS
+
+In a Blind XSS attack, an attacker provides input containing an XSS payload to the application. This input could be in the form of an error message, a user comment, or any information that the system logs. The data is then stored in the application's database or a similar storage location before being utilized in output. The malicious script is executed when an administrator or another user views that data at a later time, for instance, when a system administrator reviews user comments or error reports.
+
+
+-- Application Areas Prone to Blind XSS --
+
+• Contact Forms: Information entered by users in contact form fields, usually reviewed by the support team.
+• Comment Sections: Comments on blogs, news sites, or product pages, viewed by other visitors or site administrators.
+• User Profile Fields: Sections where users introduce themselves, like biography or "about me" areas, generally visible to other users.
+• Order Forms: Details entered by users like name, address, etc., reviewed during order processing and by customer service.
+• Support Ticket Systems: Information entered in support or issue reporting forms, examined by the technical support team.
+• Product Reviews: Reviews on e-commerce sites, typically visible to other customers and site administrators.
+• Forum Posts: Discussion forums where user messages are read by other members.
+• Surveys and Feedback Forms: Input from users in survey or feedback fields, analyzed and reported on later.
+
+
+-- XSS Attacks Through HTTP Headers --
+
+➜ User-Agent Header: The User-Agent header contains a string used by a client (usually a web browser) to identify itself to a web server. This information typically includes details about the browser type, operating system, and versions. Servers may use this information for content delivery or compatibility purposes. Attackers can inject JavaScript into this header, and if viewed by the admin panel without filtering, the script is executed upon rendering.
+
+User-Agent: Mozilla/5.0 <script>alert('XSS')</script>
+
+➜ Referer Header: The Referer HTTP header indicates the URL of the resource from which the request was initiated. It is often used for analysis, logging, or security purposes. Attackers can inject JavaScript code into this header, which can be executed if viewed by the admin panel without proper sanitization.
+
+Referer: http://other-site.com <script>alert('XSS')</script>
+
+➜ X-Forwarded-For Header: The X-Forwarded-For header specifies the original IP address from which a request was made. This header is commonly used by load balancers and proxy servers. Attackers can inject JavaScript into this header, and if viewed without filtering, for instance, by an admin panel, the script can be executed.
+
+X-Forwarded-For: 198.51.100.15 <script>alert('XSS');</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
