@@ -47,11 +47,6 @@ onmouseover="alert('XSS')"
 
 
 
-
-
-
-
-
 -- Links --
 
 https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XSS%20Injection
