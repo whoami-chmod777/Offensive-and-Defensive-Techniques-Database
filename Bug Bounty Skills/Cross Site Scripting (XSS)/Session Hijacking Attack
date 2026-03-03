@@ -1,1 +1,5 @@
 
+Session hijacking refers to gaining access to a user's account in an application without knowing the username and password. When a user logs into an application, they are authenticated for a certain period without the need to continuously provide their credentials. This is possible because the server maintains an active session for the user.
+
+
+
