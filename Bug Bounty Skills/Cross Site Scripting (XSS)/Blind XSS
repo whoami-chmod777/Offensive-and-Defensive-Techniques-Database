@@ -4,9 +4,7 @@
 • Application Areas Prone to Blind XSS
 • XSS Attacks Through HTTP Headers
 
-
 Blind XSS is a type of Cross-Site Scripting (XSS) attack that occurs when a web application processes and stores user input but does not reflect it immediately on the visible/frontend of the application. The malicious input may be processed and viewed later in different parts of the application, such as admin panels, reporting tools, or other backend functionalities. Essentially, it can be considered a form of Stored XSS
-
 In a Blind XSS attack, an attacker provides input containing an XSS payload to the application. This input could be in the form of an error message, a user comment, or any information that the system logs. The data is then stored in the application's database or a similar storage location before being utilized in output. The malicious script is executed when an administrator or another user views that data at a later time, for instance, when a system administrator reviews user comments or error reports.
 
 
@@ -40,8 +38,14 @@ X-Forwarded-For: 198.51.100.15 <script>alert('XSS');</script>
 
 
 
+-- Payload Summarization --
+
+User-Agent: Mozilla/5.0 <script>alert('XSS')</script>
+Referer: http://other-site.com <script>alert('XSS')</script>
+X-Forwarded-For: 198.51.100.15 <script>alert('XSS');</script>
 
 
+*
 
 
 
