@@ -25,3 +25,5 @@ Find all log files in the /var/log directory, commonly used in forensic investig
 
 find . -type f -size 144557c
 Search for a file with a size of 144557 bytes
+
+find ~ -name findme.txt
