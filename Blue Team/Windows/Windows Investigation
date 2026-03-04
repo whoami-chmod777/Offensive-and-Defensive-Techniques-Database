@@ -72,3 +72,6 @@
 4. Regularly scan for malware and rootkits using reputable security software.
 5. Be cautious when downloading and executing software from untrusted sources, as this is a common way rootkits gain access to a system.
 6. Periodically check the integrity of the MBR to ensure it hasn't been tampered with. Some tools can help with this task.
+
+
+*
