@@ -1,0 +1,18 @@
+
+--- Windows CLI Basics ---
+
+Where Am I: cd
+What's Around Me: dir
+Show Hidden Files: dir /a
+
+Moving Around the Filesystem: cd folder_name
+Finding the File on the Disk: dir /s task_brief.txt
+
+Navigate to the File: cd <path_to_the task_brief.txt>
+Read the File: type task_brief.txt
+
+Who Am I Logged In As: whoami
+What Is the Name of This Computer: hostname
+What Version of Windows Is This: systeminfo
+
+Network Connectivity: ipconfig
