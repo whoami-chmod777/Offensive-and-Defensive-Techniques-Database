@@ -6,6 +6,8 @@
 • Public Key Infrastructure (PKI)
 • Digital Signatures
 • Applications of Asymmetric Encryption
+• Real-world Use: HTTPS
+• Viewing a Certificate In Your Browser
 
 
                       +------------------------------------+
@@ -119,6 +121,63 @@ Digital signatures are used to verify the identity of the sender and ensure the 
 
 5. File and Data Encryption
 • Ensures the secure storage and transmission of sensitive data.
+
+
+-- Real-world Use: HTTPS --
+
+The most common everyday use of asymmetric encryption is in HTTPS—the secure protocol you use whenever you see that padlock in your browser.
+
+Here's what happens when you visit https://google.com:
+
+1. Your browser requests the website's public key.
+2. The website sends back its public key wrapped in a certificate (more on this shortly).
+3. Your browser and the website use asymmetric encryption to agree on a shared secret (a symmetric key) without anyone else being able to see it.
+4. From there on, they switch to fast symmetric encryption using that shared secret for the rest of the session.
+
+This combo is sometimes called a hybrid approach:
+
+• Asymmetric encryption solves the problem of key distribution.
+• Symmetric encryption handles the heavy lifting because it's way faster.
+
+You might wonder: how does Alice know the public key really belongs to Bob, and not to an attacker pretending to be Bob? That's where certificates come in.
+
+A certificate is a digital document that:
+
+• Contains someone's public key.
+• States who that key belongs to (like example.com).
+• A trusted authority digitally signs it, called a Certificate Authority (CA).
+
+Your browser and operating system come preloaded with a list of trusted CAs. When a website hands over a certificate:
+
+• Your browser checks that a trusted CA signed it.
+• Your browser checks that it's still valid (not expired or revoked).
+• If everything looks good, your browser shows the padlock and trusts the public key.
+
+If something's off—perhaps the certificate has expired or was signed by an untrusted authority—your browser displays a warning and may refuse to connect.
+
+
+-- Viewing a Certificate In Your Browser --
+
+You can peek at the certificate for any HTTPS site right now. These steps can guide you to view certificates:
+
+1. Visit any HTTPS site (try https://www.tryhackme.com).
+2. Click the padlock icon in the address bar.
+3. Look for something like "Certificate", "Connection is secure", or "View certificate".
+4. A window opens showing details like:
+  • Issued to: The website's domain.
+  • Issued by: The CA that signed it.
+  • Valid from / Valid until: The certificate's expiration dates.
+
+This is how your browser knows it's talking to the real website and not an attacker's fake version.
+
+
+*
+
+
+
+
+
+
 
 
 
