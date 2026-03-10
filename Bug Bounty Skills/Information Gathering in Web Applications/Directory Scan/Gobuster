@@ -98,6 +98,8 @@ gobuster dir -u http://example.com -w /path/to/wordlist.txt
 gobuster dir -u 172.20.8.56 -w /root/Desktop/misc/SecLists/Discovery/Web-Content/directory-list-1.0.txt
 gobuster dir -u 172.20.8.56 -w /root/Desktop/misc/SecLists/Discovery/Web-Content/common.txt --extensions php -v
 
+gobuster dir --url http://www.onlineshop.thm/ -w /usr/share/wordlists/dirbuster/directory-list.txt
+
 
 *
 
