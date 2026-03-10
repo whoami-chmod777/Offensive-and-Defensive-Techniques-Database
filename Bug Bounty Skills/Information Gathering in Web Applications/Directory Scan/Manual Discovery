@@ -5,6 +5,7 @@ Before starting file/directory scanning with automated tools, we can manually ch
 
 • robots.txt
 • sitemap.xml
+• Other Examples
 
 
 ➜ robots.txt
@@ -48,6 +49,15 @@ https://target.com/sitemap.xml
       <loc>http://www.example.com/contact</loc>
    </url>
 </urlset>
+
+
+➜ Other Examples
+
+http://www.onlineshop.thm/sitemap.xml
+http://www.onlineshop.thm/mail
+http://www.onlineshop.thm/register
+http://www.onlineshop.thm/login
+http://www.onlineshop.thm/admin
 
 
 *
