@@ -1,0 +1,116 @@
+
+--- Tool Overview ---
+
+Landing Page
+File Menu
+Tools Menu
+Help Menu
+Case Panel
+Hosts
+Sessions
+DNS
+Credentials
+
+
+➜ Landing Page 
+
+The landing page of the NetworkMiner. Once you open the application, this screen loads up.
+
+➜ File Menu
+
+The file menu helps you load a Pcap file or receive Pcap over IP. You can also drag and drop pcap files as well. NetworkMiner also can receive Pcaps over IP. This room suggests using NetworkMiner as an initial investigation tool for low hanging fruit grabbing and traffic overview. 
+
+➜ Tools Menu
+
+The tools menu helps you clear the dashboard and remove the captured data. 
+
+➜ Help Menu
+
+The help menu provides information on updates and the current version. 
+
+➜ Case Panel
+
+The case panel shows the list of the investigated pcap files. You can reload/refresh, view metadata details and remove loaded files from this panel.
+
+➜ Hosts
+
+The "hosts" menu shows the identified hosts in the pcap file. This section provides information on:
+
+• IP address
+• MAC address
+• OS type
+• Open ports
+• Sent/Received packets
+• Incoming/Outgoing sessions
+• Host details
+
+OS fingerprinting uses the Satori GitHub repo and p0f, and the MAC address database uses the mac-ages GitHub repo.
+
+You can sort the identified hosts by using the sort menu. You can change the colour of the hosts as well. Some of the features (OSINT lookup) are available only in premium mode. The right-click menu also helps you to copy the selected value.
+
+➜ Sessions
+
+The session menu shows detected sessions in the pcap file. This section provides information on:
+
+• Frame number
+• Client and server address
+• Source and destination port
+• Protocol
+• Start time
+
+You can search for keywords inside frames with the help of the filtering bar. It is possible to filter specific columns of the session menu as well. This menu accepts four types of inputs;
+
+• "ExactPhrase"
+• "AllWords"
+• "AnyWord"
+• "RegExe
+
+➜ DNS
+
+The DNS menu shows DNS queries with details. This section provides information on:
+
+• Frame number
+• Timestamp
+• Client and server
+• Source and destination port 
+• IP TTL
+• DNS time
+• Transaction ID and type
+• DNS query and answer
+• Alexa Top 1M
+
+Some of the features (Alexa Top 1M) are available only in premium mode.
+
+➜ Credentials
+
+The credentials menu shows extracted credentials and password hashes from investigated pcaps. You can use Hashcat (GitHub) and John the Ripper (GitHub) to decrypt extracted credentials. NetworkMiner can extract credentials including:
+
+• Kerberos hashes
+• NTLM hashes
+• RDP cookies
+• HTTP cookies
+• HTTP requests
+• IMAP
+• FTP
+• SMTP
+• MS SQL
+
+The right-click menu is helpful in this part as well. You can easily copy the username and password values.
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Links --
+
+https://www.netresec.com/?page=Blog&month=2011-09&post=Pcap-over-IP-in-NetworkMiner
+https://www.gavinhollinger.com/2016/10/pcap-over-ip-to-networkminer.html
+
