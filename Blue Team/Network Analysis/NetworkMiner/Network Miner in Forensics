@@ -1,0 +1,22 @@
+
+--- Network Miner in Forensics ---
+
+The ultimate goal of network forensics is to provide sufficient information to detect malicious activities, security breaches, and network anomalies based on the network traffic. And NetworkMiner is a great tool to help, as it provides quick and useful hints on where to start from, specifically:
+
+• Context of captured hosts like their IP and MAC, hostnames, or OS information
+• List of potential attack indicators or anomalies like traffic spikes or port scans
+• Tools or toolkits used to perform the potential attacks like Nmap
+
+There are three main data types investigated in Network Forensics:
+
+• Live Traffic
+• Traffic Captures
+• Log Files
+
+NetworkMiner is capable of processing and handling both packet pictures (PCAP) and live traffic.
+
+
+
+
+
+*
