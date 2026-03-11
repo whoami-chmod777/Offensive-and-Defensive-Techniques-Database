@@ -1,15 +1,22 @@
 
 --- Tool Overview ---
 
-Landing Page
-File Menu
-Tools Menu
-Help Menu
-Case Panel
-Hosts
-Sessions
-DNS
-Credentials
+• Landing Page
+• File Menu
+• Tools Menu
+• Help Menu
+• Case Panel
+• Hosts
+• Sessions
+• DNS
+• Credentials
+• Files
+• Images
+• Parameters
+• Keywords
+• Messages
+• Anomalies
+• Links
 
 
 ➜ Landing Page 
@@ -97,15 +104,77 @@ The credentials menu shows extracted credentials and password hashes from invest
 
 The right-click menu is helpful in this part as well. You can easily copy the username and password values.
 
+➜ Files
 
+The file menu shows extracted files from investigated pcaps. This section provides information on:
 
+• Frame number
+• Filename
+• Extension
+• Size
+• Source and destination address
+• Source and destination port
+• Protocol
+• Timestamp
+• Reconstructed path
+• Details
 
+Some features (OSINT hash lookup and sample submission) are available only in premium mode. The right-click menu is helpful in this part as well. You can easily open files and folders and view the file details in-depth.
 
+➜ Images
 
+The file menu shows extracted images from investigated pcaps. The right-click menu is helpful in this part as well. You can open files and zoom in & out easily.
+Once you hover over the image, it shows the file's detailed information (source & destination address and file path).
 
+➜ Parameters
 
+The file menu shows extracted parameters from investigated pcaps. This section provides information on:
 
+• Parameter name
+• Parameter value
+• Frame number
+• Source and destination host
+• Source and destination port
+• Timestamp
+• Details
 
+The right-click menu is helpful in this part as well. You can copy the parameters and values easily.
+
+➜ Keywords
+
+The file menu shows extracted keywords from investigated pcaps. This section provides information on:
+
+• Frame number
+• Timestamp
+• Keyword
+• Context
+• Source and destination host
+• source and destination port
+
+How to filter keywords:
+
+• Add keywords
+• Reload case files!
+
+Note: You can filter multiple keywords; however, you must reload the case files after updating the search keywords. Keyword search investigates all possible data in the processed pcaps.
+
+➜ Messages
+
+The messages menu shows extracted emails, chats and messages from investigated pcaps. This section provides information on:
+
+• Frame number
+• Source and destination host 
+• Protocol
+• Sender (From)
+• Receiver (To)
+• Timestamp
+• Size
+
+Once you filter the traffic and get a hit, you will discover additional details like attachments and attributes on the selected message. You can use the built-in viewer to investigate overall information and the "open file" option to explore attachments.
+
+➜ Anomalies
+
+The anomalies menu shows detected anomalies in the processed pcap. Note that NetworkMiner isn't designated as an IDS. However, developers added some detections for EternalBlue exploit and spoofing attempts.
 
 
 
@@ -113,4 +182,7 @@ The right-click menu is helpful in this part as well. You can easily copy the us
 
 https://www.netresec.com/?page=Blog&month=2011-09&post=Pcap-over-IP-in-NetworkMiner
 https://www.gavinhollinger.com/2016/10/pcap-over-ip-to-networkminer.html
+
+
+*
 
