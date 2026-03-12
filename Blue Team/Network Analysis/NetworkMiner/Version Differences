@@ -1,0 +1,53 @@
+
+--- Version Differences ---
+
+• Mac Address Processing
+• Frame Processing
+• Parameter Processing
+
+
+As always, it wouldn't be surprising to see a feature improvement as the version goes up. Unsurprisingly version upgrades provide stability, security fixes and features. Here the feature part is quite tricky. Feature upgrades can represent implementing new features and updating the existing feature (optimisation, alteration or operation mode modification). You can always check the changelog here .
+
+
+➜ Mac Address Processing
+
+NetworkMiner versions after version 2 can process MAC address specific correlation. This option will help you identify if there is a MAC Address conflict. This feature is not available before version 2.
+
+NetworkMiner versions up to version 1.6. can handle packets in much detail. These options will help you investigate the sent/received packets in a more detailed format. This feature is not available after version 1.6.
+
+➜ Frame Processing
+
+NetworkMiner versions up to version 1.6. can handle frames. This option provides the number of frames and essential details about the frames. This feature is not available after version 1.6.
+
+➜ Parameter Processing
+
+NetworkMiner versions after version 2 can handle parameters in a much more extensive form. Therefore version 1.6.xx catches fewer parameters than version 2.
+
+NetworkMiner versions up to version 1.6. can handle cleartext data. This option provides all extracted cleartext data in a single tab; it is beneficial to investigate cleartext data about the traffic data. However, it is impossible to match the cleartext data and packets. This feature is not available after version 1.6
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://www.netresec.com/?page=NetworkMiner
+
+
+*
