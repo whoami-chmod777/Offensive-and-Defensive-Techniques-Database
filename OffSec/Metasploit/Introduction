@@ -1,11 +1,31 @@
 
 --- Introduction ---
 
+• Introduction
 • Basic Terminology and Components
+• Main Components of Metasploit
+• Msfconsole
+• Working with modules
 
 
+➜ Introduction
 
--- Basic Terminology and Components --
+Metasploit is the most widely used exploitation framework. Metasploit is a powerful tool that can support all phases of a penetration testing engagement, from information gathering to post-exploitation.
+
+Metasploit has two main versions:
+
+• Metasploit Pro: The commercial version that facilitates the automation and management of tasks. This version has a graphical user interface (GUI).
+• Metasploit Framework: The open-source version that works from the command line.
+
+The Metasploit Framework is a set of tools that allow information gathering, scanning, exploitation, exploit development, post-exploitation, and more. While the primary usage of the Metasploit Framework focuses on the penetration testing domain, it is also useful for vulnerability research and exploit development.
+
+The main components of the Metasploit Framework can be summarized as follows;
+
+• msfconsole: The main command-line interface.
+• Modules: supporting modules such as exploits, scanners, payloads, etc.
+• Tools: Stand-alone tools that will help vulnerability research, vulnerability assessment, or penetration testing. Some of these tools are msfvenom, pattern_create and pattern_offset. We will cover msfvenom within this module, but pattern_create and pattern_offset are tools useful in exploit development which is beyond the scope of this module. 
+
+➜ Basic Terminology and Components --
 
 Module: Independent components designed to perform various tasks. Exploits, auxiliary modules, post-exploitation modules, and payloads fall into this category.
 Exploit: A program that takes advantage of a vulnerability and provides the attacker access to the target system. Exploits typically carry a payload and execute it on the target system.
@@ -16,6 +36,21 @@ Meterpreter: An advanced, multifunctional payload that provides an interactive s
 Bind Shell Payload: Starts a listener on the exploited system and waits for the attacker's machine to connect to this listener.
 Reverse Shell Payload: Connects back to the attacker's machine as a command prompt.
 
+➜ Main Components of Metasploit
+
+
+
+
+
+➜ Msfconsole
+
+
+
+➜ Working with modules
+
+
 
 
 *
+
+
