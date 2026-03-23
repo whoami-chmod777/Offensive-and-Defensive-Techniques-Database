@@ -190,25 +190,6 @@ Once any additional tool is loaded using the load command, you will see new opti
 meterpreter > load kiwi
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 -- Commands Summarization --
 
 meterpreter > getpid 
