@@ -5,7 +5,7 @@
 • Meterpreter Flavors
 • Meterpreter Commands
 • Post-Exploitation with Meterpreter
-• Post-Exploitation Challenge
+• Post-Exploitation
 • Commands Summarization
 
 
@@ -175,6 +175,39 @@ The search command is useful to locate files with potentially juicy information:
 
 The shell command will launch a regular command-line shell on the target system. Pressing CTRL+Z will help you go back to the Meterpreter shell: meterpreter > shell
 
+Meterpreter is also a good base you can use to run post-exploitation modules available on the Metasploit framework. Finally, you can also use the load command to leverage additional tools such as Kiwi or even the whole Python language.
+meterpreter > load python
+
+The post-exploitation phase will have several goals; has functions that can assist all of them.
+
+• Gathering further information about the target system.
+• Looking for interesting files, user credentials, additional network interfaces, and generally interesting information on the target system.
+• Privilege escalation.
+• Lateral movement.
+
+Once any additional tool is loaded using the load command, you will see new options on the help menu. The example below shows commands added for the Kiwi module (using the load kiwi command).
+
+meterpreter > load kiwi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 -- Commands Summarization --
 
@@ -198,8 +231,9 @@ meterpreter > hashdump
 meterpreter > search -f flag2.txt
 meterpreter > shell
 
+meterpreter > load python
+meterpreter > load kiwi
 
--- Meterpreter Commands --
 
 ➜ Core commands
 
