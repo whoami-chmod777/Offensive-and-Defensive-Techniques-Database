@@ -1,7 +1,6 @@
 
 --- Web Application Basics ---
 
-• Introduction
 • Web Application Overview
 • Uniform Resource Locator
 • HTTP Messages
@@ -13,44 +12,263 @@
 • Practical Task: Making HTTP Requests
 
 
--- Introduction --
-
-
-
 -- Web Application Overview --
 
+• Frontend
+• Backend
 
+
+
+➜ Front End: Front End components like HTML, CSS, and JavaScript focus on the experience inside the browser. 
+
+⇒ HTML (Hypertext Markup Language) is a foundational aspect of web applications. It is a set of instructions or code that instructs a web browser on what to display and how to display it.
+⇒ CSS (Cascading Style Sheets) in web applications describes a standard appearance, such as certain colours, types of text, and layouts. 
+⇒ JS (JavaScript) is part of a web application front end that enables more complex activity in the web browser. Whereas HTML can be considered a simple set of instructions on what to display, JavaScript is a more advanced set of instructions that allows choices and decisions to be made on what to display. 
+
+➜ Back End: Back End components such as the Web Server, Database, or WAF are the engine under the surface that enable the web application to function.
+
+⇒ A Database is where information can be stored, modified, and retrieved. A web application may want to store and retrieve information about a visitor's preferences on what to show or not; this would be stored in a database. 
+⇒ There are many other Infrastructure components underpinning Web Applications, such as web servers, application servers, storage, various networking devices, and other software that support the web application.
+⇒ WAF (Web Application Firewall) is an optional component for web applications. It helps filter out dangerous requests away from the Web Server and provides an element of protection.
 
 
 -- Uniform Resource Locator --
 
+A Uniform Resource Locator (URL) is a web address that lets you access all kinds of online content—whether it’s a webpage, a video, a photo, or other media. It guides your browser to the right place on the Internet.
+
+➜ Anatomy of a URL
+
+http://user:password@tryhackme.com:80/view-room?id=1#task3
+
+• Scheme: http
+• User: user:password
+• Host/Domain: tryhackme.com
+• Port: 80
+• Path: /view-room
+• Query String: ?id=1
+• Fragment: #task3
+
+Think of a URL as being made up of several parts, each playing a different role in helping you find the right resource. Understanding how these parts fit together is important for browsing the web, developing web applications, and even troubleshooting problems.
+
+• Scheme: The scheme is the protocol used to access the website. The most common are HTTP (HyperText Transfer Protocol) and HTTPS (Hypertext Transfer Protocol Secure).
+• User: Some URLs can include a user’s login details (usually a username) for sites that require authentication. This happens mostly in URLs that need credentials to access certain resources.
+• Host/Domain: The host or domain is the most important part of the URL because it tells you which website you’re accessing. Every domain name has to be unique and is registered through domain registrars. 
+• Port: The port number helps direct your browser to the right service on the web server. It’s like telling the server which doorway to use for communication. Port numbers range from 1 to 65,535, but the most common are 80 for HTTP and 443 for HTTPS.
+• Path: The path points to the specific file or page on the server that you’re trying to access. It’s like a roadmap that shows the browser where to go. Websites need to secure these paths to make sure only authorised users can access sensitive resources.
+• Query String: The query string is the part of the URL that starts with a question mark (?). It’s often used for things like search terms or form inputs.
+• Fragment: The fragment starts with a hash symbol (#) and helps point to a specific section of a webpage—like jumping directly to a particular heading or table.
 
 
 -- HTTP Messages --
 
+HTTP messages are packets of data exchanged between a user (the client) and the web server. These messages are very important for understanding how web applications work because they show how users' requests and the server's responses are communicated.
+
+• HTTP Requests: Sent by the user to trigger actions on the web application.
+• HTTP Responses: Sent by the server in response to the user’s request.
+
+➜ HTTP Request
+
+POST /login HTTP/1.1
+Host: tryhackme.com
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 43
+
+username=aleksandra&password=securepassword
+
+➜ HTTP Response
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 56
+Date: Wed, 29 Aug 2024 12:00:00 GMT
+
+{
+  "message": "Login successful!",
+  "status": "success"
+}
+
+⇒ Start Line
+The start line is like the introduction of the message. It tells you what kind of message is being sent—whether it's a request from the user or a response from the server. This line also gives important details about how the message should be handled.
+
+⇒ Headers
+Headers are made up of key-value pairs that provide extra information about the HTTP message. They give instructions to both the client and the server handling the request or response. These headers cover all sorts of things, like security, content types, and more, making sure everything goes smoothly in the communication.
+
+⇒ Empty Line
+The empty line is a little divider that separates the header from the body. It’s essential because it shows where the headers stop and where the actual content of the message begins. Without this empty line, the message might get messed up, and the client or server could misinterpret it, causing errors.
+
+⇒ Body
+The body is where the actual data is stored. In a request, the body might include data the user wants to send to the server (like form data). In a response, it’s where the server puts the content that the user requested (like a webpage or API data).
 
 
 -- HTTP Request: Request Line and Methods --
 
+An HTTP request is what a user sends to a web server to interact with a web application and make something happen. 
+An HTTP request showing the key parts like the method (e.g., GET or POST), path (e.g., /login), and version (e.g., /1.1). These elements make up the basics of how a client (user) communicates with a server.
+
+GET /user/login.html HTTP/1.1
+
+Host: tryhackme.com
+User-Agent: Mozilla/5.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Connection: keep-alive
+
+➜ Request Line
+
+The request line (or start line) is the first part of an request and tells the server what kind of request it’s dealing with. It has three main parts: the HTTP method, the URL path, and the HTTP version.
+Example: METHOD /path HTTP/version
+
+➜ HTTP Methods: The HTTP method tells the server what action the user wants to perform on the resource identified by the URL path. 
+
+• GET: Used to fetch data from the server without making any changes. Make sure you’re only exposing data the user is allowed to see. Avoid putting sensitive info like tokens or passwords in GET requests since they can show up as plaintext.
+• POST: Sends data to the server, usually to create or update something. Reminder! Always validate and clean the input to avoid attacks like SQL injection or XSS.
+• PUT: Replaces or updates something on the server. Reminder! Make sure the user is authorised to make changes before accepting the request.
+• DELETE: Removes something from the server. Reminder! Just like with PUT, make sure only authorised users can delete resources.
+• PATCH: Updates part of a resource. It’s useful for making small changes without replacing the whole thing, but always validate the data to avoid inconsistencies.
+• HEAD: Works like GET but only retrieves headers, not the full content. It’s handy for checking metadata without downloading the full response.
+• OPTIONS: Tells you what methods are available for a specific resource, helping clients understand what they can do with the server.
+• TRACE: Similar to OPTIONS, it shows which methods are allowed, often for debugging. Many servers disable it for security reasons.
+• CONNECT: Used to create a secure connection, like for HTTPS. It’s not as common but is critical for encrypted communication.
+
+➜ URL Path: The URL path tells the server where to find the resource the user is asking for. For instance, in the URL https://tryhackme.com/api/users/123, the path /api/users/123 identifies a specific user.
+
+• Validate the URL path to prevent unauthorised access
+• Sanitise the path to avoid injection attacks
+• Protect sensitive data by conducting privacy and risk assessments
+
+➜ HTTP Version: The HTTP version shows the protocol version used to communicate between the client and server. 
 
 
 -- HTTP Request: Headers and Body --
 
+➜ Request Headers
+
+Request Headers allow extra information to be conveyed to the web server about the request.
+
+• Host: tryhackme.com > Specifies the name of the web server the request is for.
+• User-Agent: Mozilla/5.0 > Shares information about the web browser the request is coming from.
+• Referer: https://www.google.com/ > Indicates the URL from which the request came from.
+• Cookie: user_type=student; room=introtowebapplication; room_status=in_progress > Information the web server previously asked the web browser to store is held in cookies. 
+• Content-Type: application/json > Describes what type or format of data is in the request.
+
+➜ Request Body
+
+In HTTP requests such as POST and PUT, where data is sent to the web server as opposed to requested from the web server, the data is located inside the HTTP Request Body. The formatting of the data can take many forms, but some common ones are URL Encoded, Form Data, JSON, or XML.
+
+• URL Encoded (application/x-www-form-urlencoded). A format where data is structured in pairs of key and value where (key=value). Multiple pairs are separated by an (&) symbol, such as key1=value1&key2=value2. Special characters are percent-encoded.
+
+POST /profile HTTP/1.1
+Host: tryhackme.com
+User-Agent: Mozilla/5.0
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 33
+name=Aleksandra&age=27&country=US
+
+• Form Data (multipart/form-data). Allows multiple data blocks to be sent where each block is separated by a boundary string. The boundary string is the defined header of the request itself. This type of formatting can be used to send binary data, such as when uploading files or images to a web server. 
+
+POST /upload HTTP/1.1
+Host: tryhackme.com
+User-Agent: Mozilla/5.0
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="username"
+
+aleksandra
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="profile_pic"; filename="aleksandra.jpg"
+Content-Type: image/jpeg
+
+[Binary Data Here representing the image]
+----WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+• JSON (application/json).  In this format, the data can be sent using the JSON (JavaScript Object Notation) structure. Data is formatted in pairs of name : value. Multiple pairs are separated by commas, all contained within curly braces { }.
+
+POST /api/user HTTP/1.1
+Host: tryhackme.com
+User-Agent: Mozilla/5.0
+Content-Type: application/json
+Content-Length: 62
+
+{
+    "name": "Aleksandra",
+    "age": 27,
+    "country": "US"
+}
+
+• XML (application/xml). In XML formatting, data is structured inside labels called tags, which have an opening and closing. These labels can be nested within each other. You can see in the example below the opening and closing of the tags to send details about a user called Aleksandra.
+
+POST /api/user HTTP/1.1
+Host: tryhackme.com
+User-Agent: Mozilla/5.0
+Content-Type: application/xml
+Content-Length: 124
+
+<user>
+    <name>Aleksandra</name>
+    <age>27</age>
+    <country>US</country>
+</user>
 
 
 -- HTTP Response: Status Line and Status Codes --
 
+When you interact with a web application, the server sends back an response to let you know whether your request was successful or something went wrong. These responses include a status code that gives insight into how the server handled your request.
 
+➜ Status Line
+
+The first line in every response is called the Status Line. It gives you three key pieces of info:
+
+• Version: This tells you which version of is being used.
+• Status Code: A three-digit number showing the outcome of your request.
+• Reason Phrase: A short message explaining the status code in human-readable terms.
+
+➜ Status Codes and Reason Phrases
+
+• Informational Responses (100-199): These codes mean the server has received part of the request and is waiting for the . It’s a "keep going" signal.
+• Successful Responses (200-299): These codes mean everything worked as expected. The server processed the request and sent back the requested data.
+• Redirection Messages (300-399): These codes tell you that the resource you requested has moved to a different location, usually providing the new URL.
+• Client Error Responses (400-499): These codes indicate a problem with the request. Maybe the URL is wrong, or you’re missing some required info, like authentication.
+• Server Error Responses (500-599): These codes mean the server encountered an error while trying to fulfil the request. These are usually server-side issues and not the client’s fault.
+
+➜ Common Status Codes
+
+• 100 (Continue): The server got the first part of the request and is ready for the .
+• 200 (OK): The request was successful, and the server is sending back the requested resource.
+• 301 (Moved Permanently): The resource you’re requesting has been permanently moved to a new URL. Use the new URL from now on.
+• 404 (Not Found): The server couldn’t find the resource at the given URL. Double-check that you’ve got the right address.
+• 500 (Internal Server Error): Something went wrong on the server’s end, and it couldn’t process your request.
 
 
 -- HTTP Response: Headers and Body --
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 -- Security Headers --
-
-
-
 
 -- Practical Task: Making HTTP Requests --
 
