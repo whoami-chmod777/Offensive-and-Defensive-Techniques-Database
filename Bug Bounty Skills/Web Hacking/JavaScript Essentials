@@ -188,6 +188,7 @@ One of the main objectives of JS is to provide dialogue boxes for interaction wi
 • Alert
 • Prompt
 • Confirm
+• How Hackers Exploit the Functionality
 
 
 ➜ Alert
@@ -207,10 +208,61 @@ Once you paste the code and hit Enter, a dialogue box will appear, and the value
 
 ➜ Confirm
 
+The confirm function displays a dialogue box with a message and two buttons: "OK" and "Cancel". It returns true if the user clicks "OK" and false if the user clicks "Cancel". For example, to ask the user for confirmation, we would use confirm("Are you sure?");. To try this out, open the Chrome console, type confirm("Do you want to proceed?"), and press Enter.
 
+➜ How Hackers Exploit the Functionality
+
+Imagine receiving an email from a stranger with an attached HTML file. The file looks harmless, but when you open it, it contains JS that disrupts your browsing experience. For example, the following code will show an alert box with the message "Hacked" three times:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Hacked</title>
+</head>
+<body>
+    <script>
+        for (let i = 0; i < 3; i++) {
+            alert("Hacked");
+        }
+    </script>
+</body>
+</html>
+
+This is a simple example of how malicious JS can be used to create an inconvenience or worse. Therefore, ensuring you only execute JS files from trusted sources is crucial to avoid such an undesired experience.
 
 
 -- Bypassing Control Flow Statements -- 
+
+Control flow in JS refers to the order in which statements and code blocks are executed based on certain conditions. JS provides several control flow structures such as if-else, switch statements to make decisions, and loops like for, while, and do...while to repeat actions. Proper use of control flow ensures that a program can handle various conditions effectively.
+
+➜ Conditional Statements in Action
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 -- Exploring Minified Files -- 
 -- Best Practices -- 
 -- Conclusion --
