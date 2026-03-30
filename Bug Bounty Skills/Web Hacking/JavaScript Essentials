@@ -13,11 +13,210 @@
 
 
 -- Introduction -- 
+
+JavaScript (JS) is a popular scripting language that allows web developers to add interactive features to websites containing HTML and CSS (styling). Once the HTML elements are created, you can add interactiveness like validation, onClick actions, animations, etc, through JS. Learning the language is equally important as that of HTML and CSS. The JS scripts are used primarily with HTML.
+
 -- Essential Concepts -- 
+
+• Variables
+• Data Types
+• Functions
+• Loops
+• Request-Response Cycle
+
+➜ Variables
+
+Variables in JS are similar to containers to store data. In JS, each variable has a name; when we store a certain value in a variable, we assign a name to it to reference it later.
+There are three ways to declare variables in JS: var, let, and const. While var is function-scoped, both let, and const are block-scoped, offering better control over variable visibility within specific code blocks.
+
+➜ Data Types
+
+In JS, data types define the type of value a variable can hold. Examples include string (text), number, boolean (true/false), null, undefined, and object (for more complex data like arrays or objects).
+
+➜ Functions
+
+A function represents a block of code designed to perform a specific task. Inside a function, you group code that needs to perform a similar task.
+
+➜ Loops
+
+Loops allow you to run a code block multiple times as long as a condition is true. Common loops in JS are for, while, and do...while, which are used to repeat tasks, like going through a list of items.
+
+➜ Request-Response Cycle
+
+In web development, the request-response cycle is when a user's browser (the client) sends a request to a web server, and the server responds with the requested information. This could be a webpage, data, or other resources.
+
+   <script>
+        function PrintResult(rollNum) {
+            alert("Username with roll number " + rollNum + " has passed the exam");
+            // any other logic to display the result
+        }
+
+        // prepare an array of roll numbers (data)
+        const rollNumbers = [101, 102, 103];
+
+        // Note: We only have 3 roll numbers, so after i = 2, rollNumbers[i] becomes undefined
+
+        for (let i = 0; i < 100; i++) {
+            PrintResult(rollNumbers[i]);
+        }
+    </script>
+
+
 -- JavaScript Overview -- 
+
+JS is an interpreted language, meaning the code is executed directly in the browser without prior compilation. 
+Below is a sample JS code demonstrating key concepts, such as defining a variable, understanding data types, using control flow statements, and writing simple functions.
+
+ // Hello, World! program
+console.log("Hello, World!");
+
+// Variable and Data Type
+let age = 25; // Number type
+
+// Control Flow Statement
+if (age >= 18) {
+    console.log("You are an adult.");
+} else {
+    console.log("You are a minor.");
+}
+
+// Function
+function greet(name) {
+    console.log("Hello, " + name + "!");
+}
+
+// Calling the function
+greet("Bob");
+
+
+JS is primarily executed on the client side, which makes it easy to inspect and interact with HTML directly within the browser. 
+
+• Open Google Chrome
+• Once Chrome is open, press Ctrl + Shift + I to open the Console or right-click anywhere on the page and select Inspect.
+• Then, click on the Console tab. This console allows you to run JS code directly in the browser without installing additional software.
+• Let's create a simple JS program that adds two numbers and displays the result. 
+
+let x = 5;
+let y = 10;
+let result = x + y;
+console.log("The result is: " + result);
+
+• In the code above, x and y are variables holding the numbers. x + y is an expression that adds the two numbers together, whereas console.log  is a function used to print the result to the console.
+• Copy the above code and paste it into the console by pressing the key Ctrl + V. Once pasted, press Enter.
+
+
 -- Integrating JavaScript in HTML -- 
+
+There are two main ways to integrate JS into HTML: internally and externally.
+
+• Internal JavaScript
+• External JavaScript
+• Verifying Internal or External JS
+
+➜ Internal JavaScript
+
+Internal JS refers to the JS code directly within an HTML document. This method is preferable for beginners because it allows them to see how the script interacts with the HTML. The script is inserted between <script> tags. These tags can be placed inside the <head> section, typically used for scripts that need to be loaded before the page content is rendered, or inside the <body> section, where the script can be utilised to interact with elements as they are loaded on the web page.
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Internal JS</title>
+</head>
+<body>
+    <h1>Addition of Two Numbers</h1>
+    <p id="result"></p>
+
+    <script>
+        let x = 5;
+        let y = 10;
+        let result = x + y;
+        document.getElementById("result").innerHTML = "The result is: " + result;
+    </script>
+</body>
+</html>
+
+After pasting the code, click File and select Save, which will save the file to internal.html.Double-click the file to open it in Chrome browser
+
+➜ External JavaScript
+
+External JS involves creating and storing JS code in a separate file ending with a .js file extension. The external JS file can be stored or hosted on the same web server as the HTML document or stored on an external web server such as the cloud.
+
+• First, create a new file named script.js
+• Next, create a new file named external.html and paste the following code
+
+⇒ script.js
+
+let x = 5;
+let y = 10;
+let result = x + y;
+document.getElementById("result").innerHTML = "The result is: " + result;
+
+⇒ external.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>External JS</title>
+</head>
+<body>
+    <h1>Addition of Two Numbers</h1>
+    <p id="result"></p>
+
+    <!-- Link to the external JS file -->
+    <script src="script.js"></script>
+</body>
+</html>
+
+Now, double-click the external.html file and check the results.
+
+What we did differently is use the src attribute in the <script> tag to load the JS from an external file. When the browser loads the page, it looks for the script.js file and loads its content into the HTML document. 
+This approach allows us to keep the JS code separate from the HTML, making the code more organised and easier to maintain, especially when working on larger projects.
+
+➜ Verifying Internal or External JS
+
+When pen-testing a web application, it is important to check whether the website uses internal or external JS. This can be easily verified by viewing the page's source code. To do this, open the page external_test.html located in the exercise folder in Chrome, right-click anywhere on the page, and select View Page Source.
+
+This will display the HTML code of the rendered page. Inside the source code, any JS written directly on the page will appear between <script> tags without the src attribute. If you see a <script> tag with a src attribute, it indicates that the page is loading external JS from a separate file.
+
+
 -- Abusing Dialogue Functions -- 
+
+One of the main objectives of JS is to provide dialogue boxes for interaction with users and dynamically update content on web pages. JS provides built-in functions like alert, prompt, and confirm to facilitate this interaction. These functions allow developers to display messages, gather input, and obtain user confirmation.
+
+• Alert
+• Prompt
+• Confirm
+
+
+➜ Alert
+
+The alert function displays a message in a dialogue box with an "OK" button, typically used to convey information or warnings to users.
+For example, if we want to display "Hello THM" to the user, we would use an alert("HelloTHM");. To try it out, open the Chrome console, type alert("Hello THM"), and press Enter. 
+A dialogue box with the message will appear on the screen.
+
+➜ Prompt
+
+The prompt function displays a dialogue box that asks the user for input. It returns the entered value when the user clicks "OK", or null if the user clicks "Cancel". For example, to ask the user for their name, we would use prompt("What is your name?");. 
+
+name = prompt("What is your name?");
+    alert("Hello " + name);
+
+Once you paste the code and hit Enter, a dialogue box will appear, and the value entered by the user will be returned to the console. 
+
+➜ Confirm
+
+
+
+
 -- Bypassing Control Flow Statements -- 
 -- Exploring Minified Files -- 
 -- Best Practices -- 
 -- Conclusion --
+
+
+
+
+
+*
